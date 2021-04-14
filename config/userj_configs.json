@@ -14,8 +14,8 @@
 		},
 		{
 			"url": "https://github.com/jorge-sduel/jorgesduelbanlist",
-			"repo_name": "jorge-sduels",
-			"repo_path": "./repositories/jorge-sduels/lflists",
+			"repo_name": "jorgesduelbanlist",
+			"repo_path": "./repositories/jorge-sduel/lflists",
 			"lflist_path": ".",
 			"should_update": true,
 			"should_read": true
