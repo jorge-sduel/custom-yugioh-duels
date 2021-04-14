@@ -14,7 +14,7 @@
 		},
 		{
 			"url": "https://github.com/jorge-sduel/jorgesduelbanlist",
-			"repo_name": "Yoshi Duels Banlist",
+			"repo_name": "jorge-sduels",
 			"repo_path": "./repositories/jorge-sduels/lflists",
 			"lflist_path": ".",
 			"should_update": true,
