@@ -2,7 +2,7 @@
 	"repos": [
 		{
 			"url": "https://github.com/jorge-sduel/custom-yugioh-duels",
-			"repo_name": "Yoshi Duels custom cards",
+			"repo_name": "jorge-sduel custom-yugioh-duels",
 			"repo_path": "./repositories/jorge-sduel",
 			"has_core": false,
 			"data_path": "",
@@ -23,7 +23,7 @@
 	],
 	"urls": [
 		{
-            "url": "https://raw.githubusercontent.com/Yoshi80/jorge-sduel/master/pics/field/{}.png",
+            "url": "https://raw.githubusercontent.com/jorge-sduel/master/pics/field/{}.png",
             "type": "field"
         },
 	],
