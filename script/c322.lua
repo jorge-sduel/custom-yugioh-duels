@@ -27,7 +27,7 @@ local e1=Effect.CreateEffect(e:GetHandler())
 end
 function c322.op(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(c322.filter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA,0,nil)
-	Duel.MoveToGrave(sg,POS_FACEDOWN,REASON_EFFECT)
+	Duel.Remove(sg,POS_FACEDOWN,REASON_EFFECT)
 	local ac=Duel.CreateToken(tp,71413901)
 	local bc=Duel.CreateToken(tp,82108372)
 	local cc=Duel.CreateToken(tp,39168895)
