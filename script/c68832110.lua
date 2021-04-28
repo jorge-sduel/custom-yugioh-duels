@@ -1,0 +1,78 @@
+--Crystal Savior
+function c68832110.initial_effect(c)
+	--limit
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_IGNITION)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCountLimit(1,68832110)
+	e1:SetCost(c68832110.codcost)
+	e1:SetOperation(c68832110.codop)
+	c:RegisterEffect(e1)
+	--to grave
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e2:SetCode(EVENT_TO_GRAVE)
+	e2:SetOperation(c68832110.regop)
+	c:RegisterEffect(e2)
+end
+function c68832110.codfil(c)
+	return c:IsAbleToGraveAsCost()
+end
+function c68832110.codcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():IsReleasable()
+		and Duel.IsExistingMatchingCard(c68832110.codfil,tp,LOCATION_HAND,0,1,nil)end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	Duel.Release(e:GetHandler(),REASON_COST)
+	local g=Duel.SelectMatchingCard(tp,c68832110.codfil,tp,LOCATION_HAND,0,1,1,nil)
+	Duel.SendtoGrave(g,REASON_COST)
+	e:SetLabelObject(g:GetFirst())
+end
+function c68832110.codop(e,tp,eg,ep,ev,re,r,rp)
+	local code=e:GetLabelObject():GetCode()
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_CANNOT_TO_HAND)
+	e1:SetTargetRange(0,LOCATION_DECK)
+	e1:SetValue(code)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e1,tp)
+	local e2=Effect.CreateEffect(e:GetHandler())
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e2:SetCode(EFFECT_CANNOT_DRAW)
+	e2:SetValue(code)
+	e2:SetTargetRange(0,1)
+	e2:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e2,tp)
+end
+function c68832110.regop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(68832110,0))
+	e1:SetCategory(CATEGORY_DRAW)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e1:SetCode(EVENT_PHASE+PHASE_END)
+	e1:SetRange(LOCATION_GRAVE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetCountLimit(1,68832110)
+	e1:SetTarget(c68832110.drtg)
+	e1:SetOperation(c68832110.drop)
+	e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
+	c:RegisterEffect(e1)
+end
+function c68832110.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetParam(2)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
+end
+function c68832110.drop(e,tp,eg,ep,ev,re,r,rp)
+	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	if Duel.Draw(p,2,REASON_EFFECT)==2 then
+		Duel.ShuffleHand(tp)
+		Duel.BreakEffect()
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToRemove,tp,LOCATION_HAND,0,1,1,nil)
+		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
+	end
+end
