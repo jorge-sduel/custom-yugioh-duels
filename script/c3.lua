@@ -1,0 +1,142 @@
+--深海の戦士 (DM)
+function c3.initial_effect(c)
+	--pendulum summon
+	Pendulum.AddProcedure(c)
+	--immune spell
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_IMMUNE_EFFECT)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCondition(c3.econ)
+	e1:SetValue(c3.efilter)
+	c:RegisterEffect(e1)
+	--special summon
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(3,1))
+	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e3:SetType(EFFECT_TYPE_QUICK_O)
+	e3:SetRange(LOCATION_PZONE)
+	e3:SetCode(EVENT_FREE_CHAIN)
+	e3:SetTarget(c3.sptg)
+	e3:SetOperation(c3.spop)
+	c:RegisterEffect(e3)
+	--Return
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(3,2))
+	e4:SetType(EFFECT_TYPE_QUICK_O)
+	e4:SetCode(EVENT_FREE_CHAIN)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetTarget(c3.rtg)
+	e4:SetOperation(c3.rop)
+	c:RegisterEffect(e4)
+	--battle target
+	local e5=Effect.CreateEffect(c)
+	e5:SetCategory(CATEGORY_DAMAGE)
+	e5:SetDescription(aux.Stringid(3,0))
+	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e5:SetCode(EVENT_BE_BATTLE_TARGET)
+	e5:SetRange(LOCATION_PZONE)
+	e5:SetCost(c3.cbcost)
+	e5:SetCondition(c3.cbcon)
+	e5:SetOperation(c3.cbop)
+	c:RegisterEffect(e5)
+end
+function c3.filter(c)
+	return c:IsFaceup() and c:IsCode(22702055)
+end
+function c3.econ(e)
+	return Duel.IsExistingMatchingCard(c511000562.filter,0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil)
+		or Duel.IsEnvironment(22702055)
+end
+function c3.efilter(e,te)
+	return te:IsActiveType(TYPE_SPELL)
+end
+function c3.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) and not e:GetHandler():IsStatus(STATUS_CHAINING) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
+end
+function c3.spop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_CANNOT_ATTACK)
+		e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
+		c:RegisterEffect(e1)
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_CANNOT_BE_FUSION_MATERIAL)
+		e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+		e2:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
+		e2:SetValue(1)
+		c:RegisterEffect(e2)
+		local e3=Effect.CreateEffect(c)
+		e3:SetType(EFFECT_TYPE_SINGLE)
+		e3:SetCode(EFFECT_UNRELEASABLE_SUM)
+		e3:SetValue(1)
+		e3:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
+		c:RegisterEffect(e3,true)
+		local e4=e3:Clone()
+		e4:SetCode(EFFECT_UNRELEASABLE_NONSUM)
+		c:RegisterEffect(e4,true)
+		local e6=Effect.CreateEffect(c)
+		e6:SetType(EFFECT_TYPE_SINGLE)
+		e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+		e6:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
+		e6:SetValue(1)
+		e6:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
+		c:RegisterEffect(e6)
+		local e7=Effect.CreateEffect(c)
+		e7:SetType(EFFECT_TYPE_SINGLE)
+		e7:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
+		e7:SetCode(EFFECT_CANNOT_BE_XYZ_MATERIAL)
+		e7:SetValue(1)
+		e7:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
+		c:RegisterEffect(e7)
+	end
+end
+function c3.rtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local tc1=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,6)
+	local tc2=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,7)
+	if chk==0 then return e:GetHandler():CheckActivateEffect(false,false,false)~=nil and (not tc1 or not tc2) 
+		and not e:GetHandler():IsStatus(STATUS_CHAINING) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,e:GetHandler(),1,0,0)
+end
+function c3.rop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	local tpe=c:GetType()
+	local te=c:GetActivateEffect()
+	local tg=te:GetTarget()
+	local co=te:GetCost()
+	local op=te:GetOperation()
+	e:SetCategory(te:GetCategory())
+	e:SetProperty(te:GetProperty())
+	Duel.ClearTargetCard()
+	Duel.Hint(HINT_CARD,0,c:GetCode())
+	c:CreateEffectRelation(te)
+	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
+	if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end
+	Duel.BreakEffect()
+	if op then op(te,tp,eg,ep,ev,re,r,rp) end
+	c:ReleaseEffectRelation(te)
+end
+function c3.cbcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckReleaseGroup(tp,nil,2,nil) end
+	local g=Duel.SelectReleaseGroup(tp,nil,2,2,nil)
+	Duel.Release(g,REASON_COST)
+end
+function c3.cbcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local bt=eg:GetFirst()
+	return bt:GetControler()==c:GetControler()
+end
+function c3.cbop(e,tp,eg,ep,ev,re,r,rp)
+	local tg=Duel.GetAttacker()
+	if Duel.NegateAttack() then
+		Duel.Damage(1-tp,tg:GetAttack(),REASON_EFFECT)
+	end
+end
