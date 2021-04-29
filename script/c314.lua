@@ -60,6 +60,27 @@ function c314.initial_effect(c)
 	e6:SetCode(EFFECT_ADD_LINKMARKER)
 	e6:SetValue(LINK_MARKER_TOP+LINK_MARKER_TOP_RIGTH+LINK_MARKER_TOP_LEFT)
 	c:RegisterEffect(e6)
+	--add Linkmarker
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e6:SetCode(EFFECT_ADD_LINKMARKER)
+	e6:SetValue(LINK_MARKER_TOP)
+	c:RegisterEffect(e6)
+	--add Linkmarker
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_SINGLE)
+	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e7:SetCode(EFFECT_ADD_LINKMARKER)
+	e7:SetValue(LINK_MARKER_TOP_RIGTH)
+	c:RegisterEffect(e7)
+	--add Linkmarker
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e8:SetCode(EFFECT_ADD_LINKMARKER)
+	e8:SetValue(LINK_MARKER_TOP_LEFT)
+	c:RegisterEffect(e8)
 end
 function c314.zones(e,tp,eg,ep,ev,re,r,rp)
 	return (Duel.GetLinkedZone(tp)>>8) & 0xff
