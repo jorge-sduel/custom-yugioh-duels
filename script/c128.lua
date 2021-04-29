@@ -39,7 +39,8 @@ function c128.initial_effect(c)
 	e4:SetTarget(c128.eftg)
 	e4:SetLabelObject(e3)
 	c:RegisterEffect(e4)
-	--to pendulum
+
+	--to pendulum
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(128,2))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -97,6 +98,6 @@ function c128.penop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.CheckLocation(tp,LOCATION_PZONE,0) and not Duel.CheckLocation(tp,LOCATION_PZONE,1) then return end
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
