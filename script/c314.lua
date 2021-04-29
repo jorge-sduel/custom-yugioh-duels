@@ -58,7 +58,7 @@ function c314.initial_effect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
 	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e7:SetCode(EFFECT_ADD_LINKMARKER)
-	e7:SetValue(LINK_MARKER_TOP_RIGTH)
+	e7:SetValue(LINK_MARKER_TOP_LEFT)
 	c:RegisterEffect(e7)
 	--add Linkmarker
 	local e8=Effect.CreateEffect(c)
