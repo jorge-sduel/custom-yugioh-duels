@@ -54,13 +54,6 @@ function c314.initial_effect(c)
 	e5:SetValue(300)
 	c:RegisterEffect(e5)
 	--add Linkmarker
-	local e6=Effect.CreateEffect(c)
-	e6:SetType(EFFECT_TYPE_SINGLE)
-	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e6:SetCode(EFFECT_ADD_LINKMARKER)
-	e6:SetValue(LINK_MARKER_TOP+LINK_MARKER_TOP_RIGTH+LINK_MARKER_TOP_LEFT)
-	c:RegisterEffect(e6)
-	--add Linkmarker
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
 	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
