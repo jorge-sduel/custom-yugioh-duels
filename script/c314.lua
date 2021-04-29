@@ -1,5 +1,12 @@
 --link trap 1
 function c314.initial_effect(c)
+	--add type
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e0:SetCode(EFFECT_ADD_TYPE)
+	e0:SetValue(TYPE_LINK)
+	c:RegisterEffect(e0)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -46,18 +53,27 @@ function c314.initial_effect(c)
 	e5:SetCode(EFFECT_UPDATE_ATTACK)
 	e5:SetValue(300)
 	c:RegisterEffect(e5)
-	--to deck
+	--add Linkmarker
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e6:SetCode(EFFECT_ADD_LINKMARKER)
+	e6:SetValue(LINK_MARKER_TOP)
+	c:RegisterEffect(e6)
+	--add Linkmarker
 	local e7=Effect.CreateEffect(c)
-	e7:SetDescription(aux.Stringid(314,1))
-	e7:SetCategory(CATEGORY_TODECK)
-	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e7:SetCode(EVENT_PREDRAW)
-	e7:SetProperty(EFFECT_FLAG_REPEAT)
-	e7:SetCountLimit(1)
-	e7:SetRange(LOCATION_EXTRA)
-	e7:SetTarget(c314.tdtg)
-	e7:SetOperation(c314.tdop)
+	e7:SetType(EFFECT_TYPE_SINGLE)
+	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e7:SetCode(EFFECT_ADD_LINKMARKER)
+	e7:SetValue(LINK_MARKER_TOP_LEFT)
 	c:RegisterEffect(e7)
+	--add Linkmarker
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e8:SetCode(EFFECT_ADD_LINKMARKER)
+	e8:SetValue(LINK_MARKER_TOP_RIGTH)
+	c:RegisterEffect(e8)
 end
 function c314.zones(e,tp,eg,ep,ev,re,r,rp)
 	return (Duel.GetLinkedZone(tp)>>8) & 0xff
@@ -110,15 +126,5 @@ function c314.recop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c314.tgtg(e,c)
 	return e:GetHandler():GetLinkedGroup():IsContains(c)
-end
-function c314.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,0,0)
-end
-function c314.tdop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsAbleToDeck() then
-		Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
-	end
 end
 
