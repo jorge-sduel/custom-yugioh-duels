@@ -65,7 +65,7 @@ function c314.initial_effect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
 	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e8:SetCode(EFFECT_ADD_LINKMARKER)
-	e8:SetValue(LINK_MARKER_TOP_LEFT)
+	e8:SetValue(LINK_MARKER_TOP)
 	c:RegisterEffect(e8)
 end
 function c314.zones(e,tp,eg,ep,ev,re,r,rp)
