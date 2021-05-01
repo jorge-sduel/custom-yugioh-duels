@@ -16,7 +16,7 @@ function c86123677.initial_effect(c)
 	c:RegisterEffect(e2,false,1)
 end
 function c86123677.xyzfilter(c,xyz,sumtype,tp)
-	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(2) or c:IsLevel(4)) or c:IsHasEffect(511001225)
+	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(2) or c:IsLevel(4))
 end
 function c86123677.xyzcheck(g,tp,xyz)
 	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
