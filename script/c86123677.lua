@@ -20,7 +20,7 @@ function c86123677.xyzfilter(c,xyz,sumtype,tp)
 end
 function c86123677.xyzcheck(g,tp,xyz)
 	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
-	return mg:GetClassCount(Card.GetXyzLevel)~=1 or c:IsHasEffect(511001225)
+	return mg:GetClassCount(Card.GetLevel)~=1 or c:IsHasEffect(511001225)
 end
 function c86123677.condition(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
