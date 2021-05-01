@@ -24,7 +24,7 @@ function c12340323.initial_effect(c)
 	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function c12340323.xyzfilter(c,xyz,sumtype,tp)
-	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(3) and c:IsAttribute(ATTRIBUTE_DARK) or c:IsLevel(6) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_RITUAL))
+	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and ((c:IsLevel(3) and c:IsAttribute(ATTRIBUTE_DARK)) or (c:IsLevel(6) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_RITUAL)))
 end
 function c12341310.xyzcheck(g,tp,xyz)
 	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
