@@ -1,10 +1,7 @@
 --Raging Fighter
-if not REVERSE_XYZ_IMPORTED then
-  dofile "script/proc_reverse_xyz.lua"
-end
 function c86123677.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddReverseXyzProcedure(c)
+	Xyz.AddProcedure(c,c86123677.xyzfilter,nil,2,nil,nil,nil,nil,false,c86123677.xyzcheck)
 	--attack
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(86123677,0))
@@ -18,7 +15,13 @@ function c86123677.initial_effect(c)
 	e2:SetOperation(c86123677.operation)
 	c:RegisterEffect(e2,false,1)
 end
-
+function c86123677.xyzfilter(c,xyz,sumtype,tp)
+	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(2) or c:IsLevel(4))
+end
+function c86123677.xyzcheck(g,tp,xyz)
+	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
+	return mg:GetClassCount(Card.GetLevel)~=1
+end
 function c86123677.condition(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
 	local at=Duel.GetAttackTarget()
