@@ -3,7 +3,7 @@
 function c224.initial_effect(c)
 	--xyz summon
 	c:EnableReviveLimit()
-	c224.xyz_filter=function(mc,ignoretoken,xyz,tp) return mc and mc:IsType(TYPE_LINK,xyz,SUMMON_TYPE_XYZ,tp) and (not mc:IsType(TYPE_TOKEN) or ignoretoken) end
+	c224.xyz_filter=function(mc,ignoretoken,xyz,tp) return mc and mc:IsType(TYPE_LINK) and (not mc:IsType(TYPE_TOKEN) or ignoretoken) end
 	c224.xyz_parameters={c224.xyz_filter,nil,2,nil,nil,2}
 	c224.minxyzct=ct
 	c224.maxxyzct=maxct
