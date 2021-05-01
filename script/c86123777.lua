@@ -1,10 +1,7 @@
 --Shining Reverse Dragon
-if not REVERSE_XYZ_IMPORTED then
-  dofile "script/proc_reverse_xyz.lua"
-end
 function c86123777.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddReverseXyzProcedure(c)
+	Xyz.AddProcedure(c,c86123777.xyzfilter,nil,2,nil,nil,nil,nil,false,c86123777.xyzcheck)
 	--atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(86123777,0))
@@ -18,7 +15,13 @@ function c86123777.initial_effect(c)
 	e2:SetOperation(c86123777.atkop)
 	c:RegisterEffect(e2,false,2)
 end
-
+function c86123777.xyzfilter(c,xyz,sumtype,tp)
+	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(4) or c:IsLevel(8))
+end
+function c12341310.xyzcheck(g,tp,xyz)
+	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
+	return mg:GetClassCount(Card.GetLevel)~=1
+end
 function c86123777.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,2,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,2,2,REASON_COST)
