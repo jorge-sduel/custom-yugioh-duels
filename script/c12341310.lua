@@ -1,10 +1,7 @@
 --Shining Reverse Dragon
-if not REVERSE_XYZ_IMPORTED then
-  dofile "script/proc_reverse_xyz.lua"
-end
 function c12341310.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddReverseXyzProcedure(c)
+	Xyz.AddProcedure(c,c12341310.xyzfilter,nil,2,nil,nil,nil,nil,false,c12341310.xyzcheck)
 	--atk change
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(79491903,0))
@@ -32,6 +29,13 @@ function c12341310.initial_effect(c)
 	e3:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e3:SetValue(aux.tgoval)
 	c:RegisterEffect(e3)
+end
+function c12341310.xyzfilter(c,xyz,sumtype,tp)
+	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(4) or c:IsLevel(8))
+end
+function s.xyzcheck(g,tp,xyz)
+	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
+	return not mg:GetClassCount(Card.GetLevel)==1
 end
 function c12341310.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
