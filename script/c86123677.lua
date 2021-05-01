@@ -16,11 +16,11 @@ function c86123677.initial_effect(c)
 	c:RegisterEffect(e2,false,1)
 end
 function c86123677.xyzfilter(c,xyz,sumtype,tp)
-	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(3) or c:IsLevel(6))
+	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsXyzLevel(3) or c:IsXyzLevel(6))
 end
 function c86123677.xyzcheck(g,tp,xyz)
 	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
-	return mg:GetClassCount(Card.GetLevel)~=1 or (c:IsHasEffect(511001225) and mg:GetClassCount(Card.GetLevel)==1)
+	return mg:GetClassCount(Card.GetLevel)~=1
 end
 function c86123677.condition(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
