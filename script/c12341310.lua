@@ -33,9 +33,9 @@ end
 function c12341310.xyzfilter(c,xyz,sumtype,tp)
 	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(1) or c:IsLevel(3))
 end
-function s.xyzcheck(g,tp,xyz)
+function c12341310.xyzcheck(g,tp,xyz)
 	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
-	return mg:GetClassCount(Card.GetLevel)==1
+	return not mg:GetClassCount(Card.GetLevel)==1
 end
 function c12341310.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
