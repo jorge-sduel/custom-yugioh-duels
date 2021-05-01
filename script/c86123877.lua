@@ -1,8 +1,15 @@
---Earthbound
+--Silent Feather Dragon
 function c86123877.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,false,true,c86123877.fusfilter1,c86123877.fusfilter2,c86123877.fusfilter3,c86123877.fusfilter4)
+	s.max_material_count=0
+	--level/rank
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e0:SetCode(EFFECT_RANK_LEVEL_S)
+	c:RegisterEffect(e0)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -53,20 +60,6 @@ function c86123877.initial_effect(c)
 	e6:SetTarget(c86123877.rectg)
 	e6:SetOperation(c86123877.recop)
 	c:RegisterEffect(e6)
-	--Xyz
-	local e7=Effect.CreateEffect(c)
-	e7:SetType(EFFECT_TYPE_SINGLE)
-	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e7:SetCode(EFFECT_ADD_TYPE)
-	e7:SetValue(TYPE_XYZ)
-	c:RegisterEffect(e7)
-	--SYNCHRO
-	local e8=Effect.CreateEffect(c)
-	e8:SetType(EFFECT_TYPE_SINGLE)
-	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e8:SetCode(EFFECT_ADD_TYPE)
-	e8:SetValue(TYPE_SYNCHRO)
-	c:RegisterEffect(e8)
 	--PENDULUM
 	local e9=Effect.CreateEffect(c)
 	e9:SetType(EFFECT_TYPE_SINGLE)
