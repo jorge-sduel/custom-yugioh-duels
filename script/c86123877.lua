@@ -3,7 +3,6 @@ function c86123877.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,false,true,c86123877.fusfilter1,c86123877.fusfilter2,c86123877.fusfilter3,c86123877.fusfilter4)
-	s.max_material_count=0
 	--level/rank
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
