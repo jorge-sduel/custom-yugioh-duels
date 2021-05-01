@@ -1,10 +1,7 @@
 --Reverse-Xyz
-if not REVERSE_XYZ_IMPORTED then
-  dofile "script/proc_reverse_xyz.lua"
-end
 function c12340323.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddReverseXyzProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),c12340323.rifilter)
+	Xyz.AddProcedure(c,c12340323.xyzfilter,nil,2,nil,nil,nil,nil,false,c12340323.xyzcheck)
 	--attack
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -26,7 +23,13 @@ function c12340323.initial_effect(c)
 	e3:SetOperation(c12340323.operation)
 	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
 end
-
+function c12340323.xyzfilter(c,xyz,sumtype,tp)
+	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(3) and c:IsAttribute(ATTRIBUTE_DARK) or c:IsLevel(6) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_RITUAL))
+end
+function c12341310.xyzcheck(g,tp,xyz)
+	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
+	return mg:GetClassCount(Card.GetLevel)~=1
+end
 function c12340323.rifilter(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_RITUAL)
 end
