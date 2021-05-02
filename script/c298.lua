@@ -219,8 +219,8 @@ function c298.operation(e,tp,eg,ev,ep,re,r,rp)
 		Duel.SpecialSummon(c,SUMMON_TYPE_SPECIAL,tp,tp,true,false,POS_FACEUP)
 	end
 end
-function c298.filter1(c)
-	return c:IsAbleToHand() and c:IsCode(298)
+function c298.filter(c)
+	return c:IsCode(298)
 end
 function c298.tgval(e,c)
 	return c:IsType(TYPE_XYZ)
