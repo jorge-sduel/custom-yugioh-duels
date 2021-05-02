@@ -185,8 +185,9 @@ function c298.initial_effect(c)
 	e23:SetCode(EFFECT_SPSUMMON_PROC)
 	e23:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e23:SetRange(LOCATION_EXTRA)
-	e23:SetTarget(c298.target)
-	e23:SetOperation(c298.operation)
+	e23:SetCondition(c298.conditionov)
+	e23:SetOperation(c298.operationov)
+	e23:SetValue(SUMMON_TYPE_XYZ)
 	local e24=Effect.CreateEffect(c)
 	e24:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_GRANT)
 	e24:SetRange(LOCATION_MZONE)
@@ -198,29 +199,19 @@ end
 function c298.eftg(e,c)
 	return c:IsType(TYPE_XYZ)
 end
-function c298.target(e,tp,eg,ev,ep,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c298.filter,tp,LOCATION_MZONE,0,1,nil,e:GetHandler()) and e:GetHandler():IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL,tp,true,false) end
-	local tg=Duel.SelectMatchingCard(tp,c298.filter,tp,LOCATION_MZONE,0,1,1,nil,e:GetHandler())
-	Duel.SetTargetCard(tg)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
-end
-function c298.operation(e,tp,eg,ev,ep,re,r,rp)
-	local c=e:GetHandler()
-	local tg=Duel.GetTargetCards(e)
-	if c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL,tp,true,true) and tg and #tg>0 then
-		local mg=tg:Clone()
-		local tc=tg:GetFirst()
-		while tc do
-			if tc:GetOverlayCount()~=0 then Duel.SendtoGrave(tc:GetOverlayGroup(),REASON_RULE) end
-			tc=tg:GetNext()
-		end
-		c:SetMaterial(mg)
-		Duel.Overlay(c,mg)
-		Duel.SpecialSummon(c,SUMMON_TYPE_SPECIAL,tp,tp,true,true,POS_FACEUP)
-	end
-end
-function c298.filter(c)
+function c298.hspfilter(c)
 	return c:IsCode(298)
+end
+function c298.conditionov(e,c)
+	if c==nil then return true end
+	return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)+Duel.GetLocationCountFromEx(e:GetHandlerPlayer(),e:GetHandlerPlayer(),nil,c)>0
+        and Duel.IsExistingMatchingCard(c298.hspfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+end
+function c298.operationov(e,tp,eg,ep,ev,re,r,rp)
+    local c=e:GetHandler()
+	local g=Duel.SelectMatchingCard(tp,c298.hspfilter,tp,LOCATION_MZONE,0,1,1,nil)
+    Duel.Overlay(c,g)
+    c:SetMaterial(g)
 end
 function c298.tgval(e,c)
 	return c:IsType(TYPE_XYZ)
