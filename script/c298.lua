@@ -179,11 +179,14 @@ function c298.initial_effect(c)
 	e22:SetOperation(c298.spop)
 	c:RegisterEffect(e22)
   --effect gain
+	--special summon
 	local e23=Effect.CreateEffect(c)
-	e23:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e23:SetCode(EVENT_ATTACK_ANNOUNCE)
+	e23:SetType(EFFECT_TYPE_FIELD)
+	e23:SetCode(EFFECT_SPSUMMON_PROC)
+	e23:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e23:SetRange(LOCATION_EXTRA)
-	e23:SetOperation(c298.negop)
+	e23:SetTarget(c298.target)
+	e23:SetOperation(c298.operation)
 	local e24=Effect.CreateEffect(c)
 	e24:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_GRANT)
 	e24:SetRange(LOCATION_MZONE)
@@ -195,13 +198,13 @@ end
 function c298.eftg(e,c)
 	return c:IsType(TYPE_XYZ)
 end
-function s.target(e,tp,eg,ev,ep,re,r,rp,chk)
+function c298.target(e,tp,eg,ev,ep,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil,e:GetHandler()) and e:GetHandler():IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL,tp,true,false) end
 	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil,e:GetHandler())
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
-function s.operation(e,tp,eg,ev,ep,re,r,rp)
+function c298.operation(e,tp,eg,ev,ep,re,r,rp)
 	local c=e:GetHandler()
 	local tg=Duel.GetTargetCards(e)
 	if c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL,tp,true,false) and tg and #tg>0 then
