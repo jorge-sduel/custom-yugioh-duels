@@ -207,7 +207,7 @@ end
 function c298.operation(e,tp,eg,ev,ep,re,r,rp)
 	local c=e:GetHandler()
 	local tg=Duel.GetTargetCards(e)
-	if c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL,tp,true,false) and tg and #tg>0 then
+	if c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL,tp,true,true) and tg and #tg>0 then
 		local mg=tg:Clone()
 		local tc=tg:GetFirst()
 		while tc do
@@ -216,7 +216,7 @@ function c298.operation(e,tp,eg,ev,ep,re,r,rp)
 		end
 		c:SetMaterial(mg)
 		Duel.Overlay(c,mg)
-		Duel.SpecialSummon(c,SUMMON_TYPE_SPECIAL,tp,tp,true,false,POS_FACEUP)
+		Duel.SpecialSummon(c,SUMMON_TYPE_SPECIAL,tp,tp,true,true,POS_FACEUP)
 	end
 end
 function c298.filter(c)
