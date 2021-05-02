@@ -199,8 +199,8 @@ function c298.eftg(e,c)
 	return c:IsType(TYPE_XYZ)
 end
 function c298.target(e,tp,eg,ev,ep,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil,e:GetHandler()) and e:GetHandler():IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL,tp,true,false) end
-	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil,e:GetHandler())
+	if chk==0 then return Duel.IsExistingMatchingCard(c298.filter,tp,LOCATION_MZONE,0,1,nil,e:GetHandler()) and e:GetHandler():IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL,tp,true,false) end
+	local tg=Duel.SelectMatchingCard(tp,c298.filter,tp,LOCATION_MZONE,0,1,1,nil,e:GetHandler())
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
@@ -219,8 +219,8 @@ function c298.operation(e,tp,eg,ev,ep,re,r,rp)
 		Duel.SpecialSummon(c,SUMMON_TYPE_SPECIAL,tp,tp,true,false,POS_FACEUP)
 	end
 end
-function s.filter1(c)
-	return c:IsAbleToHand() and c:IsCode(78509901)
+function c298.filter1(c)
+	return c:IsAbleToHand() and c:IsCode(298)
 end
 function c298.tgval(e,c)
 	return c:IsType(TYPE_XYZ)
