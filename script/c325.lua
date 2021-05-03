@@ -19,7 +19,7 @@ function s.cfilter(c,e,tp,g,maxc)
 		and g:CheckWithSumEqual(Card.GetLevel,c:GetLevel(),1,maxc)
 end
 function s.spfilter(c,e,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
