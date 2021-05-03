@@ -18,7 +18,7 @@ function c325.cfilter(c,e,tp,g,maxc)
 		and g:CheckWithSumEqual(Card.GetLevel,c:GetLevel(),1,maxc)
 end
 function c325.spfilter(c,e,tp)
-	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c325.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
@@ -28,11 +28,11 @@ function c325.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then
 		if e:GetLabel()==0 then return false end
 		e:SetLabel(0)
-		local spg=Duel.GetMatchingGroup(c325.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp)
+		local spg=Duel.GetMatchingGroup(c325.spfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,nil,e,tp)
 		return Duel.IsExistingMatchingCard(c325.cfilter,tp,LOCATION_MZONE,0,1,nil,e,tp,spg,maxc)
 	end
 	e:SetLabel(0)
-	local spg=Duel.GetMatchingGroup(c325.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp)
+	local spg=Duel.GetMatchingGroup(c325.spfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,nil,e,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local cg=Duel.SelectMatchingCard(tp,c325.cfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp,spg,maxc)
 	local lv=cg:GetFirst():GetLevel()
@@ -42,10 +42,10 @@ function c325.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetTargetCard(sg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,#sg,0,0)
 end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
+function c325.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	local ct=#g
-	if ct==0 or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
+	if ct==0 or (ct>1)
 		or ct>Duel.GetLocationCount(tp,LOCATION_MZONE) then return end
 	Duel.SpecialSummon(g,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
 end
