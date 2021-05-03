@@ -14,7 +14,7 @@ function s.spfilter(c,e,tp,mc)
 	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,true)
 end
 function s.rfilter(c,mc)
-	local mlv=mc:GetSynchroLevel(c)
+	local mlv=mc:GetLevel(c)
 	if mlv==mc:GetLevel() then return false end
 	local lv=c:GetLevel()
 	return lv==(mlv&0xffff) or lv==(mlv>>16)
@@ -87,7 +87,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			tc:SetMaterial(mat)
 		end
 		if not mc:IsLocation(LOCATION_MZONE) then
-			Duel.ReleaseRitualMaterial(mat)
+			Duel.ReleaseMaterial(mat)
 		else
 			Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)
 		end
