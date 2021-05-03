@@ -20,7 +20,7 @@ function s.rfilter(c,mc)
 	return lv==(mlv&0xffff) or lv==(mlv>>16)
 end
 function s.filter(c,e,tp)
-	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,c,e,tp,c)
+	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA,0,c,e,tp,c)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if c:IsLocation(LOCATION_MZONE) then ft=ft+1 end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
@@ -36,7 +36,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if ft<0 then return false end
-		local mg=Duel.GetRitualMaterial(tp)
+		local mg=Duel.GetSynchroMaterial(tp)
 		if ft>0 then
 			local mg2=Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_MZONE,0,nil)
 			mg:Merge(mg2)
@@ -61,7 +61,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mat=mg:FilterSelect(tp,s.filter,1,1,nil,e,tp)
 	local mc=mat:GetFirst()
 	if not mc then return end
-	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,mc,e,tp,mc)
+	local sg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_EXTRA,0,mc,e,tp,mc)
 	if mc:IsLocation(LOCATION_MZONE) then ft=ft+1 end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	local b1=sg:IsExists(s.rfilter,1,nil,mc)
@@ -86,7 +86,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		for tc in aux.Next(tg) do
 			tc:SetMaterial(mat)
 		end
-		if not mc:IsLocation(LOCATION_EXTRA) then
+		if not mc:IsLocation(LOCATION_MZONE) then
 			Duel.ReleaseRitualMaterial(mat)
 		else
 			Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)
