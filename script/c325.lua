@@ -44,7 +44,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	local ct=#g
 	if ct==0 or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
-		or ct>Duel.GetLocationCount(tp,LOCATION_MZONE) then
-		Duel.SpecialSummon(g,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
+		or ct>Duel.GetLocationCount(tp,LOCATION_MZONE) return end
+	Duel.SpecialSummon(g,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
+		g:GetFirst():CompleteProcedure()
 	end
 end
