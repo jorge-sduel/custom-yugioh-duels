@@ -11,9 +11,6 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-function s.splimit(e,c,tp,sumtp,sumpos)
-	return sumtp&SUMMON_TYPE_SYNCHRO==SUMMON_TYPE_SYNCHRO
-end
 function s.cfilter(c,e,tp,g,maxc)
 	local tmax=maxc
 	if c:GetSequence()<5 then tmax=tmax-1 end
@@ -22,7 +19,7 @@ function s.cfilter(c,e,tp,g,maxc)
 		and g:CheckWithSumEqual(Card.GetLevel,c:GetLevel(),1,maxc)
 end
 function s.spfilter(c,e,tp)
-	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
