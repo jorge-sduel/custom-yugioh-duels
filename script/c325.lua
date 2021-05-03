@@ -41,9 +41,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,#sg,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetTargetCards(e)
+local g=Duel.GetTargetCards(e)
 	local ct=#g
 	if ct==0 or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
-		or ct>Duel.GetLocationCount(tp,LOCATION_MZONE) return end
-	Duel.SpecialSummon(g,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
+		or ct>Duel.GetLocationCount(tp,LOCATION_MZONE) then return end
+	Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 end
