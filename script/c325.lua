@@ -72,7 +72,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tc=tg:GetFirst()
 		tc:SetMaterial(mat)
 		if not mc:IsLocation(LOCATION_EXTRA) then
-			Duel.ReleaseSynchroMaterial(mat)
+			Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)
 		else
 			Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)
 		end
@@ -87,7 +87,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			tc:SetMaterial(mat)
 		end
 		if not mc:IsLocation(LOCATION_MZONE) then
-			Duel.Release(mat)
+			Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)
 		else
 			Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)
 		end
