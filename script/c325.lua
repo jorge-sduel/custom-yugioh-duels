@@ -45,8 +45,8 @@ local g=Duel.GetTargetCards(e)
 	local ct=#g
 	if ct==0 or (ct>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT))
 		or ct>Duel.GetLocationCount(tp,LOCATION_MZONE) then return end
-	Duel.SpecialSummonStep(tc,SUMMON_TYPE_SYNCHRO,tp,tp,false,true,POS_FACEUP)
-			tc:CompleteProcedure()
+	Duel.SpecialSummonStep(g,SUMMON_TYPE_SYNCHRO,tp,tp,false,true,POS_FACEUP)
+			g:CompleteProcedure()
 		end
 		Duel.SpecialSummonComplete()
 	end
