@@ -17,6 +17,13 @@ function c23.initial_effect(c)
 	e2:SetTarget(c23.sptg)
 	e2:SetOperation(c23.spop)
 	c:RegisterEffect(e2)
+	--add setcode
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e4:SetCode(EFFECT_ADD_CODE)
+	e4:SetValue(511030025)
+	c:RegisterEffect(e4)
 end
 function c23.thfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x578) and c:IsAbleToHand()
