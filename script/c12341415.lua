@@ -6,6 +6,7 @@ function c12341415.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(c12341415.target)
+	e1:SetOperation(c12341415.operation)
 	c:RegisterEffect(e1)
     --undes
 	local e2=Effect.CreateEffect(c)
@@ -40,11 +41,18 @@ function c12341415.filter(c)
 	return c:IsFaceup() and not c:IsCode(12341415)
 end
 function c12341415.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_SZONE) and c12341415.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(c12341415.filter,tp,LOCATION_SZONE,LOCATION_SZONE,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local g=Duel.SelectTarget(tp,c12341415.filter,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,nil)
-	e:SetLabelObject(g:GetFirst())
+	local c=e:GetHandler()
+	if chkc then return chkc:IsLocation(LOCATION_SZONE) and s.filter(chkc) and chkc~=c end
+	if chk==0 then return Duel.IsExistingTarget(c12341415.filter,tp,LOCATION_SZONE,LOCATION_SZONE,1,c) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
+	Duel.SelectTarget(tp,c12341415.filter,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,c)
+end
+function c12341415.operation(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local tc=Duel.GetFirstTarget()
+	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) and tc:IsFaceup() then
+		c:SetCardTarget(tc)
+	end
 end
 
 function c12341415.indval(e,re,rp,c)
