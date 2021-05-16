@@ -89,7 +89,7 @@ function c279.disop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c279.spcon(e,c)
 	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and c:GetTurnCounter()>=e:GetHandler():GetLevel()
+	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and c:GetTurnCounter()>=e:GetHandler():GetLevel() and  c:IsPublic()
 end
 function c279.rev(e,re,r,rp,rc)
 	local c=e:GetHandler()
