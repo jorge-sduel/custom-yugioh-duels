@@ -8,21 +8,18 @@ function c82353467.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCondition(c82353467.condition)
+	e1:SetTarget(c82353467.target)
 	e1:SetOperation(c82353467.operation)
-	e1:SetCountLimit(1)
 	c:RegisterEffect(e1)
 end
-
---Negate Attack condition
-function c82353467.condition(e,tp,eg,ep,ev,re,r,rp)
-	return c:e:GetHandler():IsPosition(POS_FACEUP_ATTACK)
+function c82353467.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():IsAttackPos() end
+	Duel.SetOperationInfo(0,CATEGORY_POSITION,e:GetHandler(),1,0,0)
 end
-
---Negate Attack operation
 function c82353467.operation(e,tp,eg,ep,ev,re,r,rp)
-	local c = e:GetHandler()
-	if not c:IsRelateToEffect(e) or not c:IsPosition(POS_FACEUP_ATTACK) then return end
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and c:IsPosition(POS_FACEUP_ATTACK) then
 	Duel.ChangePosition(c,POS_FACEUP_DEFENCE,POS_FACEDOWN_DEFENCE,0,0)
 	Duel.NegateAttack()
+	end
 end
