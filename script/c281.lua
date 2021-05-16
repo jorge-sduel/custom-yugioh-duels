@@ -78,7 +78,9 @@ function c281.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c281.recop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-end
+			e:GetHandler():SetTurnCounter(0)
+end
+
 function c281.discon(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
 end
