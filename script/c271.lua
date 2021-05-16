@@ -83,7 +83,8 @@ function c271.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c271.recop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-end
+end
+
 function c271.discon(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
 end
@@ -99,7 +100,7 @@ function c271.disop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c271.spcon(e,c)
 	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and c:GetTurnCounter()>=e:GetHandler():GetLevel()
+	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and c:GetTurnCounter()>=e:GetHandler():GetLevel() and  c:IsPublic()
 end
 function c271.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
