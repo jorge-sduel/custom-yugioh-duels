@@ -8,9 +8,15 @@ function c82353467.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)
+	e1:SetCondition(c82353467.condition)
 	e1:SetTarget(c82353467.target)
 	e1:SetOperation(c82353467.operation)
 	c:RegisterEffect(e1)
+end
+function c82353467.condition(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetCurrentPhase()==PHASE_BATTLE and
+			(Duel.GetAttackTarget() == e:GetHandler() or Duel.GetAttacker() == e:GetHandler()) and
+			e:GetHandler():IsPosition(POS_FACEUP_ATTACK)
 end
 function c82353467.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAttackPos() end
