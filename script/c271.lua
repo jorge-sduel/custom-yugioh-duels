@@ -124,7 +124,7 @@ function c271.tgop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c271.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_GRAVE,0,nil,ATTRIBUTE_LIGHT)*1000
+	return Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_GRAVE,0,nil,ATTRIBUTE_LIGHT)*500
 end
 function c271.spfilter1(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) and not c:IsCode(271) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
