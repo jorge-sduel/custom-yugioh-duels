@@ -147,6 +147,6 @@ function c326.operation3(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterFlagEffect(326,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 	end
 end
-function c326.condition(e)
+function c326.condex(e)
 	return e:GetHandler():IsFaceup()
 end
