@@ -53,7 +53,6 @@ function c12341415.operation(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		c:SetCardTarget(tc)
 	end
-		--Cannot be targeted by opponent's card effects
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
@@ -64,9 +63,7 @@ function c12341415.operation(e,tp,eg,ep,ev,re,r,rp)
 		local e2=e1:Clone()
 		c:RegisterEffect(e2)
 		e:SetLabelObject(tc)
-		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
-	end
-end
+		tc:RegisterFlagEffect(12341415,RESET_EVENT+RESETS_STANDARD,0,1)
 end
 
 function c12341415.indval(e,re,rp,c)
