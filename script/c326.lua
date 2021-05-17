@@ -44,6 +44,7 @@ function c326.initial_effect(c)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetRange(LOCATION_EXTRA)
 	e4:SetCost(c326.cost1)
+	e4:SetCondition(c326.condex)
 	e4:SetOperation(c326.rop)
 	c:RegisterEffect(e4)
 	--special summon
@@ -145,4 +146,7 @@ function c326.operation3(e,tp,eg,ep,ev,re,r,rp)
 		end
 		tc:RegisterFlagEffect(326,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 	end
+end
+function c326.condition(e)
+	return e:GetHandler():IsFaceup()
 end
