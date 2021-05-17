@@ -48,7 +48,7 @@ function c326.initial_effect(c)
 	c:RegisterEffect(e4)
 	--special summon
 	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(326,3))
+	e5:SetDescription(aux.Stringid(326,2))
 	e5:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e5:SetType(EFFECT_TYPE_QUICK_O)
 	e5:SetCode(EVENT_FREE_CHAIN)
