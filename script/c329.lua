@@ -7,6 +7,7 @@ function c329.initial_effect(c)
 	e1:SetDescription(aux.Stringid(26593852,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_BATTLE_START)
+	e1:SetCondition(c329.condition)
 	e1:SetTarget(c329.atktg)
 	e1:SetOperation(c329.atkop)
 	c:RegisterEffect(e1)
@@ -23,6 +24,10 @@ end
 function c329.ctop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,100100090) then return end
 	e:GetHandler():AddCounter(0x1106,1)
+end
+function c329.condtion(e)
+	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
+		and Duel.GetAttacker()==e:GetHandler() and Duel.GetAttackTarget()~=nil
 end
 function c329.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
