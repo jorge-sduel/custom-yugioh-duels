@@ -28,7 +28,7 @@ function c329.con(e,tp,eg,ep,ev,re,r,rp)
 	return g:IsExists(c45.filter,1,nil,1)
 end
 function c329.filter(c,ct)
-	return c:GetCounter(0x1106)==ct and c:IsFaceup() and c:IsCode(329)
+	return c:IsFaceup() and c:IsCode(329)
 end
 function c329.op(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
