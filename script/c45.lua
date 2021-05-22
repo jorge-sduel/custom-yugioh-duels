@@ -10,24 +10,6 @@ function c45.initial_effect(c)
 	e1:SetTarget(c45.sptg)
 	e1:SetOperation(c45.spop)
 	c:RegisterEffect(e1)
-	--counter
-	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(63253763,0))
-	e2:SetCategory(CATEGORY_COUNTER)
-	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_MZONE)
-	e2:SetCountLimit(1)
-	e2:SetTarget(c45.cttg)
-	e2:SetOperation(c45.ctop)
-	c:RegisterEffect(e2)
-	--Activate
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e3:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e3:SetCondition(c45.con)
-	e3:SetOperation(c45.op)
-	e3:SetRange(LOCATION_MZONE)
-	c:RegisterEffect(e3)
 end
 function c45.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(e:GetHandler():GetSummonType(),SUMMON_TYPE_RITUAL)==SUMMON_TYPE_RITUAL
@@ -57,46 +39,4 @@ function c45.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not e:GetHandler():IsReason(REASON_REPLACE) and e:GetHandler():GetCounter(0x1106)>0 end
 	e:GetHandler():RemoveCounter(tp,0x1106,1,REASON_EFFECT)
 	return true
-end
-function c45.filter(c,ct)
-	return c:GetCounter(0x1106)==ct and c:IsFaceup() and (c:IsCode(329) or c:IsCode(330) or c:IsCode(331) or c:IsCode(332))
-end
-function c45.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c45.filter,tp,LOCATION_MZONE,0,1,nil,0) end
-end
-function c45.ctop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(c45.filter,tp,LOCATION_MZONE,0,nil,0)
-	local tc=g:GetFirst()
-	while tc do
-		tc:AddCounter(0x1106,1)
-		tc=g:GetNext()
-	end
-end
-function c45.con(e,tp,eg,ep,ev,re,r,rp)
-	local a=Duel.GetAttacker()
-	local d=Duel.GetAttackTarget()
-	if not d then return false end
-	local g=Group.FromCards(a,d)
-	return g:IsExists(c45.filter,1,nil,1)
-end
-function c45.op(e,tp,eg,ep,ev,re,r,rp)
-	local a=Duel.GetAttacker()
-	local d=Duel.GetAttackTarget()
-	if not d then return end
-	local g=Group.FromCards(a,d)
-	g=g:Filter(c45.filter,nil,1)
-	local tc=g:GetFirst()
-	while tc do
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
-		if tc==a then
-			e1:SetValue(d:GetAttack())
-		else
-			e1:SetValue(a:GetAttack())
-		end
-		e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE)
-		tc:RegisterEffect(e1)
-		tc=g:GetNext()
-	end
 end
