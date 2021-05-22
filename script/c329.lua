@@ -27,11 +27,13 @@ end
 function c329.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local tc=Duel.GetAttacker()
+	if tc==c then tc=Duel.GetAttackTarget() end
 	if chk==0 then return tc and tc:IsFaceup() end
 end
-function c329.atkop(e,tp,eg,ep,ev,re,r,rp)
+function 329.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetAttacker()
+	if tc==c then tc=Duel.GetAttackTarget() end
 	if tc:IsRelateToBattle() and c:IsRelateToBattle() then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
