@@ -8,7 +8,7 @@ function c329.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCode(EFFECT_SET_ATTACK)
-
+	e2:SetCondition(c329.condition)
 	e2:SetValue(c329.atkval)
 	c:RegisterEffect(e2)
 	--add counter
