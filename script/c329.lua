@@ -27,7 +27,6 @@ end
 function c329.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local tc=Duel.GetAttacker()
-	if tc==c then tc=Duel.GetAttackTarget() end
 	if chk==0 then return tc and tc:IsFaceup() end
 end
 function c329.atkop(e,tp,eg,ep,ev,re,r,rp)
