@@ -41,7 +41,7 @@ function c45.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 or Duel.IsPlayerAffectedByEffect(tp,59822133) then return end
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,113,0x530,0x4011,0,0,1,RACE_WARRIOR,ATTRIBUTE_DARK) then return end
 	for i=1,4 do
-		local token=Duel.CreateToken(tp,113)
+		local token=Duel.CreateToken(tp,328+i)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		token:AddCounter(0x1106,1)
 		local e1=Effect.CreateEffect(e:GetHandler())
@@ -59,7 +59,7 @@ function c45.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function c45.filter(c,ct)
-	return c:GetCounter(0x1106)==ct and c:IsFaceup() and c:IsCode(112)
+	return c:GetCounter(0x1106)==ct and c:IsFaceup() and (c:IsCode(329) or c:IsCode(330) or c:IsCode(331) or c:IsCode(332))
 end
 function c45.cttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c45.filter,tp,LOCATION_MZONE,0,1,nil,0) end
