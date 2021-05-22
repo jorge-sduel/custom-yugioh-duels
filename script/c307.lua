@@ -36,7 +36,7 @@ function c307.initial_effect(c)
 	e3:SetDescription(aux.Stringid(51,2))
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_HAND)
+	e3:SetRange(LOCATION_HAND)
 	e3:SetOperation(c62.rop)
 	c:RegisterEffect(e3)
 	--indes
@@ -165,10 +165,12 @@ function c307.regop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c307.rop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+
 end
 function c307.ffilter(c,tp)
-	return (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
+	return
+ (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
 end
 function c307.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
