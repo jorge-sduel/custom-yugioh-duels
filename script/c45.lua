@@ -39,7 +39,7 @@ function c45.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c45.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 or Duel.IsPlayerAffectedByEffect(tp,59822133) then return end
-	if not Duel.IsPlayerCanSpecialSummonMonster(tp,113,0x530,0x4011,0,0,1,RACE_WARRIOR,ATTRIBUTE_DARK) then return end
+	if not Duel.IsPlayerCanSpecialSummonMonster(tp,329,0x530,0x4011,0,0,1,RACE_WARRIOR,ATTRIBUTE_DARK) then return end
 	for i=1,4 do
 		local token=Duel.CreateToken(tp,328+i)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
