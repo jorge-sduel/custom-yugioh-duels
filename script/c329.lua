@@ -11,6 +11,16 @@ function c329.initial_effect(c)
 	e1:SetCondition(c329.atkcon)
 	e1:SetValue(c329.atkval)
 	c:RegisterEffect(e1)
+	--destroy replace
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_DESTROY_REPLACE)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetCountLimit(1)
+	e2:SetTarget(c329.destg)
+	e2:SetValue(c329.value)
+	e2:SetOperation(c329.desop)
+	c:RegisterEffect(e2)
 --
 	local e3=Effect.CreateEffect(c)
 e3:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE)
@@ -32,3 +42,22 @@ function c329.ctop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,100100090) then return end
 	e:GetHandler():AddCounter(0x1106,1)
 end
+function c329.dfilter(c)
+	return not c:IsReason(REASON_REPLACE) and c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and (c:IsCode(330) or c:IsCode(331) or c:IsCode(332))
+end
+function c329.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then
+		local count=eg:FilterCount(c329.dfilter,nil)
+		e:SetLabel(count)
+		return count>0 and Duel.IsCanRemoveCounter(tp,1,0,0x1106,count,REASON_COST)
+	end
+	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
+end
+function c329.value(e,c)
+	return c:IsFaceup() and c:GetLocation()==LOCATION_MZONE and c:IsRace(RACE_SPELLCASTER)
+end
+function c329.desop(e,tp,eg,ep,ev,re,r,rp)
+	local count=e:GetLabel()
+	Duel.RemoveCounter(tp,1,0,0x1106,count,REASON_COST)
+end
+
