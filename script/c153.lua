@@ -11,7 +11,7 @@ function c153.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e1:SetProperty(EFFECT_FLAG_REPEAT)
-	e1:SetCountLimit(1)
+	e1:SetCountLimit(1)
 	e1:SetOperation(c153.damop)
 	c:RegisterEffect(e1)
 	--register
@@ -26,11 +26,10 @@ function c153.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_ATKCHANGE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e3:SetProperty(EFFECT_FLAG_DELAY)
+e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetCountLimit(1)
-	e3:SetCode(153)
+	e3:SetCode(511000883)
 	e3:SetCondition(c153.atkcon)
 	e3:SetTarget(c153.atktg)
 	e3:SetOperation(c153.atkop)
@@ -56,57 +55,61 @@ function c153.damop(e,tp,eg,ep,ev,re,r,rp)
 	local dam=g:GetCount()*100
 	Duel.Damage(1-tp,dam,REASON_EFFECT)
 end
-function c153.operation(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()	
-	local g=Duel.GetMatchingGroup(Card.IsFaceup,c:GetControler(),LOCATION_MZONE,0,nil)
-	local tc=g:GetFirst()
-	while tc do
-		if tc:IsFaceup() and tc:GetFlagEffect(153)==0 then
-			local e1=Effect.CreateEffect(c)	
-			e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
-			e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-			e1:SetCode(EVENT_CHAIN_SOLVED)
-			e1:SetRange(LOCATION_MZONE)
-			e1:SetLabel(tc:GetAttack())
-			e1:SetOperation(c153.op)
-			e1:SetReset(RESET_EVENT+0x1fe0000)
-			tc:RegisterEffect(e1)
-			tc:RegisterFlagEffect(153,RESET_EVENT+0x1fe0000,0,1) 	
-		end	
-		tc=g:GetNext()
-	end		
-end
-function c153.op(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if e:GetLabel()==c:GetAttack() then return end
-	if e:GetLabel()>c:GetAttack() then
-		local val=e:GetLabel()-c:GetAttack()
-		Duel.RaiseEvent(c,153,re,REASON_EFFECT,rp,tp,val)
-	end
-	e:SetLabel(c:GetAttack())
+function c153.cfilter(c,tp)
+	local val=0
+	if c:GetFlagEffect(284)>0 then val=c:GetFlagEffectLabel(284) end
+	return c:IsControler(tp) and c:GetAttack()~=val
 end
 function c153.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	local ec=eg:GetFirst()
-	e:SetLabel(ev)
-	return ec:IsControler(tp) and ev>0
+	return eg:IsExists(c153.cfilter,1,nil,tp)
+end
+function c153.diffilter1(c,g)
+	local dif=0
+	local val=0
+	if c:GetFlagEffect(284)>0 then val=c:GetFlagEffectLabel(284) end
+	if c:GetAttack()>val then dif=c:GetAttack()-val
+	else dif=val-c:GetAttack() end
+	return g:IsExists(c153.diffilter2,1,c,dif)
+end
+function c153.diffilter2(c,dif)
+	local dif2=0
+	local val=0
+	if c:GetFlagEffect(284)>0 then val=c:GetFlagEffectLabel(284) end
+	if c:GetAttack()>val then dif2=c:GetAttack()-val
+	else dif2=val-c:GetAttack() end
+	return dif~=dif2
 end
 function c153.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) end
+	local ec=eg:GetFirst()
+	local g=eg:Filter(c153.diffilter1,nil,eg)
+	local g2=Group.CreateGroup()
+	if #g>0 then g2=g:Select(tp,1,1,nil) ec=g2:GetFirst() end
+	if #g2>0 then Duel.HintSelection(g2) end
+	local dam=0
+	local val=0
+	if ec:GetFlagEffect(284)>0 then val=ec:GetFlagEffectLabel(284) end
+	if ec:GetAttack()>val then dam=ec:GetAttack()-val
+	else dam=val-ec:GetAttack() end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SetTargetParam(dam)
 end
 function c153.atkop(e,tp,eg,ep,ev,re,r,rp)
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	local atk=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
+	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+RESET_END)
-		e1:SetValue(e:GetLabel())
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		e1:SetValue(atk)
 		tc:RegisterEffect(e1)
 	end
 end
+
 function c153.filter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
