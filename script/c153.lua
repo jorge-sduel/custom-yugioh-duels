@@ -30,7 +30,6 @@ e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCode(511000883)
-	e3:SetCondition(c153.atkcon)
 	e3:SetTarget(c153.atktg)
 	e3:SetOperation(c153.atkop)
 	c:RegisterEffect(e3)
