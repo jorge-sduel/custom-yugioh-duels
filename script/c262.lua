@@ -16,6 +16,7 @@ function c262.initial_effect(c)
 	e5:SetRange(LOCATION_MZONE)
 	c:RegisterEffect(e5)
 end
+
 function c262.efilter(e,te)
 	return te:IsActiveType(TYPE_SPELL)
 end
