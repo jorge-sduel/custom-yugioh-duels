@@ -57,7 +57,7 @@ e4:SetDescription(aux.Stringid(267,2))
 	c:RegisterEffect(e6)
 end
 function c267.spcon(e,c)
-	return not Duel.IsExistingMatchingCard(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,1,nil,TYPE_MONSTER)
+	return not Duel.IsExistingMatchingCard(Card.IsType,c:GetControler(),0,LOCATION_GRAVE,1,nil,TYPE_MONSTER)
 end
 function c267.spfilter(c,e,tp)
 	return c:IsCode(34022290) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
