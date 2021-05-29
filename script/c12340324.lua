@@ -135,6 +135,11 @@ function c12340324.spop(e,tp,eg,ep,ev,re,r,rp)
 		e6:SetValue(ATTRIBUTE_DARK)
 		e6:SetReset(RESET_EVENT+0x1fe0000)
 		tc:RegisterEffect(e6)
+		local e7=Effect.CreateEffect(e:GetHandler())
+		e7:SetType(EFFECT_TYPE_SINGLE)
+		e7:SetCode(EFFECT_ALLOW_NEGATIVE)
+		e7:SetReset(RESET_EVENT+RESETS_STANDARD)
+		tc:RegisterEffect(e7)
 end
 		Duel.SpecialSummonComplete()
 		local ct=#g+1
