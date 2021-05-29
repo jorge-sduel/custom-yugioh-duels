@@ -39,6 +39,17 @@ Fusion.AddProcFunRep(c,aux.FilterBoolFunction(Card.IsType,TYPE_RITUAL),3,true)
 	e4:SetTargetRange(0,LOCATION_MZONE)
 	e4:SetTarget(c12340324.distg)
 	c:RegisterEffect(e4)
+	--immune
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(12340324,0))
+	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e2:SetType(EFFECT_TYPE_QUICK_O)
+	e2:SetCode(EVENT_FREE_CHAIN)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetCountLimit(1)
+	e2:SetTarget(c12340324.sptg)
+	e2:SetOperation(c12340324.spop)
+	c:RegisterEffect(e2)
 end
 
 function c12340324.afilter(c)
@@ -87,4 +98,41 @@ end
 
 function c12340324.distg(e,c)
 	return c:IsType(TYPE_MONSTER) and c:IsAttackBelow(e:GetHandler():GetAttack())
+end
+function c12340324.filter(c,e,tp)
+	return c:IsType(TYPE_RITUAL) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+end
+function c12340324.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(c12340324.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+end
+function c12340324.spop(e,tp,eg,ep,ev,re,r,rp)
+	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+	if ft<=0 then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,c12340324.filter,tp,LOCATION_GRAVE,0,1,ft,nil,e,tp)
+	if #g>0 then
+		Duel.HintSelection(g)
+		local tc=g:GetFirst()
+		for tc in aux.Next(g) do
+			Duel.SpecialSummonStep(tc,0,tp,tp,true,true,POS_FACEUP)
+			local e1=Effect.CreateEffect(e:GetHandler())
+			e1:SetType(EFFECT_TYPE_SINGLE)
+			e1:SetCode(EFFECT_CANNOT_ATTACK)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+			tc:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(e:GetHandler())
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_SET_ATTACK)
+		e2:SetValue(3500)
+		e2:SetReset(RESET_EVENT+0x1fe0000)
+		tc:RegisterEffect(e2)
+end
+		Duel.SpecialSummonComplete()
+		local ct=#g
+		Duel.BreakEffect()
+	Duel.SetLP(tp,Duel.GetLP(tp)/ct)
+	end
 end
