@@ -136,7 +136,7 @@ function c12340324.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummonComplete()
 		local ct=#g
 		Duel.BreakEffect()
-		Duel.Damage(tp,ct,REASON_EFFECT)
+	Duel.PayLPCost(tp,math.floor(Duel.GetLP(tp)/ct))
 	end
 end
 
