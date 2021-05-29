@@ -39,6 +39,18 @@ Fusion.AddProcFunRep(c,aux.FilterBoolFunction(Card.IsType,TYPE_RITUAL),3,true)
 	e4:SetTargetRange(0,LOCATION_MZONE)
 	e4:SetTarget(c12340324.distg)
 	c:RegisterEffect(e4)
+	--immune
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(12340324,0))
+	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e5:SetType(EFFECT_TYPE_QUICK_O)
+	e5:SetCode(EVENT_FREE_CHAIN)
+	e5:SetRange(LOCATION_GRAVE)
+	e5:SetCountLimit(1)
+	e5:SetCost(c12340324.cost)
+	e5:SetTarget(c12340324.sptg)
+	e5:SetOperation(c12340324.spop)
+	c:RegisterEffect(e5)
 end
 
 function c12340324.ritualfilter(c)
@@ -91,3 +103,36 @@ end
 function c12340324.distg(e,c)
 	return c:IsType(TYPE_MONSTER) and c:IsAttackBelow(e:GetHandler():GetAttack())
 end
+function c12340324.filter(c,e,tp)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+end
+function c12340324.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(c12340324.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,500)
+end
+function c12340324.spop(e,tp,eg,ep,ev,re,r,rp)
+	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+	if ft<=0 then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,c12340324.filter,tp,LOCATION_GRAVE,0,1,ft,nil,e,tp)
+	if #g>0 then
+		Duel.HintSelection(g)
+		local tc=g:GetFirst()
+		for tc in aux.Next(g) do
+			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
+			local e1=Effect.CreateEffect(e:GetHandler())
+			e1:SetType(EFFECT_TYPE_SINGLE)
+			e1:SetCode(EFFECT_CANNOT_ATTACK)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+			tc:RegisterEffect(e1)
+		end
+		Duel.SpecialSummonComplete()
+		local ct=#g
+		Duel.BreakEffect()
+		Duel.Damage(tp,ct,REASON_EFFECT)
+	end
+end
+
