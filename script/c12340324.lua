@@ -49,7 +49,7 @@ function c12340324.afilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function c12340324.atkval(e,c)
-	return Duel.GetMatchingGroupCount(c12340324.afilter,c:GetControler(),LOCATION_REMOVED+LOCATION_GRAVE,0,nil)*500
+	return Duel.GetMatchingGroupCount(c12340324.afilter,c:GetControler(),LOCATION_REMOVED+LOCATION_GRAVE,LOCATION_REMOVED+LOCATION_GRAVE,nil)*500
 end
 
 function c12340324.disfilter(c)
