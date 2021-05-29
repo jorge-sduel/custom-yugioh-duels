@@ -31,10 +31,8 @@ Fusion.AddProcFunRep(c,aux.FilterBoolFunction(Card.IsType,TYPE_RITUAL),3,true)
 	e3:SetCode(EFFECT_ADD_TYPE)
 	e3:SetValue(TYPE_RITUAL)
 	c:RegisterEffect(e3)
-end
-function c12340324.reunionfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK)
 end
+
 function c12340324.ritualfilter(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_RITUAL)
 end
@@ -43,16 +41,16 @@ function c12340324.filter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function c12340324.atkval(e,c)
-	return Duel.GetMatchingGroupCount(c12340324.filter,c:GetControler(),LOCATION_REMOVED,0,nil)*500
+	return Duel.GetMatchingGroupCount(c12340324.filter,c:GetControler(),LOCATION_REMOVED+LOCATION_GRAVE,0,nil)*500
 end
 
 function c12340324.disfilter(c)
 	return c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeckAsCost()
 end
 function c12340324.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c12340324.disfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(c12340324.disfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,c12340324.disfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c12340324.disfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
 	Duel.SendtoDeck(g,nil,2,REASON_COST)
 end
 function c12340324.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -70,6 +68,12 @@ function c12340324.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(c12340324.efilter)
 		e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e1)
+		local e2=Effect.CreateEffect(e:GetHandler())
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_UPDATE_ATTACK)
+		e2:SetValue(1000)
+		e2:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
+		tc:RegisterEffect(e2)
 	end
 end
 function c12340324.efilter(e,re)
