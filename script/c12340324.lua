@@ -55,11 +55,11 @@ function c12340324.ritualfilter(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsType(TYPE_RITUAL)
 end
 
-function c12340324.filter(c)
+function c12340324.afilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function c12340324.atkval(e,c)
-	return Duel.GetMatchingGroupCount(c12340324.filter,c:GetControler(),LOCATION_REMOVED+LOCATION_GRAVE,0,nil)*500
+	return Duel.GetMatchingGroupCount(c12340324.afilter,c:GetControler(),LOCATION_REMOVED+LOCATION_GRAVE,0,nil)*500
 end
 
 function c12340324.disfilter(c)
@@ -136,7 +136,7 @@ function c12340324.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummonComplete()
 		local ct=#g
 		Duel.BreakEffect()
-	Duel.PayLPCost(tp,math.floor(Duel.GetLP(tp)/ct))
+	Duel.SetLP(tp,Duel.GetLP(tp)/ct)
 	end
 end
 
