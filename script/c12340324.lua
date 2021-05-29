@@ -44,3 +44,22 @@ end
 function c12340324.afilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK)
 end
+function c12340324.atkval(e,c)
+	return Duel.GetMatchingGroupCount(c12340324.afilter,c:GetControler(),LOCATION_REMOVED+LOCATION_GRAVE,0,nil)*500
+end
+
+function c12340324.disfilter(c)
+	return c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeckAsCost()
+end
+function c12340324.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(c12340324.disfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
+	local g=Duel.SelectMatchingCard(tp,c12340324.disfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
+	Duel.SendtoDeck(g,nil,2,REASON_COST)
+end
+function c12340324.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
+end
