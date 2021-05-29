@@ -137,12 +137,7 @@ function c12340324.spop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetValue(3500)
 		e2:SetReset(RESET_EVENT+0x1fe0000)
 		tc:RegisterEffect(e2)
-	local e3=Effect.CreateEffect(e:GetHandler())
-		e3:SetType(EFFECT_TYPE_SINGLE)
-		e3:SetCode(EFFECT_SET_DEFENDESE)
-		e3:SetValue(3500)
-		e3:SetReset(RESET_EVENT+0x1fe0000)
-		tc:RegisterEffect(e3)
+end
 		Duel.SpecialSummonComplete()
 		local ct=#g
 		Duel.BreakEffect()
