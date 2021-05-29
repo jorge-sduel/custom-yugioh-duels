@@ -39,17 +39,6 @@ Fusion.AddProcFunRep(c,aux.FilterBoolFunction(Card.IsType,TYPE_RITUAL),3,true)
 	e4:SetTargetRange(0,LOCATION_MZONE)
 	e4:SetTarget(c12340324.distg)
 	c:RegisterEffect(e4)
-	--immune
-	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(12340324,0))
-	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e5:SetType(EFFECT_TYPE_QUICK_O)
-	e5:SetCode(EVENT_FREE_CHAIN)
-	e5:SetRange(LOCATION_GRAVE)
-	e5:SetCost(aux.bfgcost)
-	e5:SetTarget(c12340324.sptg)
-	e5:SetOperation(c12340324.spop)
-	c:RegisterEffect(e5)
 end
 
 function c12340324.ritualfilter(c)
