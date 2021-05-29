@@ -31,6 +31,14 @@ Fusion.AddProcFunRep(c,aux.FilterBoolFunction(Card.IsType,TYPE_RITUAL),3,true)
 	e3:SetCode(EFFECT_ADD_TYPE)
 	e3:SetValue(TYPE_RITUAL)
 	c:RegisterEffect(e3)
+	--disable
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetCode(EFFECT_DISABLE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetTargetRange(0,LOCATION_MZONE)
+	e4:SetTarget(c12340324.distg)
+	c:RegisterEffect(e4)
 end
 
 function c12340324.ritualfilter(c)
@@ -78,4 +86,8 @@ function c12340324.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function c12340324.efilter(e,re)
 	return e:GetHandler()~=re:GetOwner()
+end
+
+function c12340324.distg(e,c)
+	return c:IsType(TYPE_MONSTER) and c:IsAttackBelow(e:GetHandler():GetAttack())
 end
