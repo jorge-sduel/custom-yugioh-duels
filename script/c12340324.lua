@@ -112,7 +112,8 @@ end
 function c12340324.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(c12340324.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,500)
 end
 function c12340324.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -138,7 +139,7 @@ function c12340324.spop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e2)
 	local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetType(EFFECT_TYPE_SINGLE)
-		e3:SetCode(EFFECT_SET_DEFENDECE)
+		e3:SetCode(EFFECT_SET_DEFENDESE)
 		e3:SetValue(3500)
 		e3:SetReset(RESET_EVENT+0x1fe0000)
 		tc:RegisterEffect(e3)
