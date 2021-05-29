@@ -106,12 +106,3 @@ end
 function c12340324.distg(e,c)
 	return c:IsType(TYPE_MONSTER) and c:IsAttackBelow(e:GetHandler():GetAttack())
 end
-function c12340324.filter(c,e,tp)
-	return c:IsType(TYPE_RITUAL) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
-end
-function c12340324.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(c12340324.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
-Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,500)
-end
