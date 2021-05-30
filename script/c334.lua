@@ -10,7 +10,7 @@ function c334.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c334.filter1(c,e)
-	return not c:IsImmuneToEffect(e) and c:IsLocation(LOCATION_MZONE+LOCATION_GRAVE)
+	return not c:IsImmuneToEffect(e)
 end
 function c334.filter2(c,e,tp,m,f,chkf)
 	return c:IsType(TYPE_RITUAL+TYPE_FUSION) and (not f or f(c))
