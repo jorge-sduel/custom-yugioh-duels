@@ -17,10 +17,10 @@ function s.filter(c,e,tp,m)
 	m:Merge(mg2)
 	if m:IsContains(c) then
 		m:RemoveCard(c)
-		result=m:IsExists(Card.IsCode,3,nil,12340324)
+		result=m:IsExists(Card.IsType,3,nil,TYPE_RITUAL)
 		m:AddCard(c)
 	else
-		result=m:IsExists(Card.IsCode,3,nil,12340324)
+		result=m:IsExists(Card.IsCode,3,nil,TYPE_RITUAL)
 	end
 	m:Sub(mg2)
 	return result
@@ -45,7 +45,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		mg:Merge(mg2)
 		mg:RemoveCard(tc)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-		local mat=mg:FilterSelect(tp,Card.IsCode,3,3,nil,12340324)
+		local mat=mg:FilterSelect(tp,Card.IsType,3,3,nil,TYPE_RITUAL)
 		tc:SetMaterial(mat)
 		local mat1=mat:Filter(Card.IsLocation,nil,LOCATION_GRAVE+LOCATION_MZONE)
 		mat:Sub(mat1)
