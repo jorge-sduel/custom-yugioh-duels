@@ -12,7 +12,7 @@ function s.initial_effect(c)
 end
 function s.filter(c,e,tp,m)
 	local cd=c:GetCode()
-	if cd~=12340324 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
+	if cd~=12340324 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) then return false end
 	local mg2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,c)
 	m:Merge(mg2)
 	if m:IsContains(c) then
@@ -52,7 +52,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ReleaseRitualMaterial(mat)
 		Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_RELEASE+REASON_MATERIAL+REASON_RITUAL)
 		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,true,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
 end
