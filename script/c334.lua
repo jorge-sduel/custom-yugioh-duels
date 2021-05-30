@@ -1,59 +1,17 @@
 --Ultimate
 local s,id=GetID()
 function s.initial_effect(c)
-	--Activate
-	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetTarget(s.target)
-	e1:SetOperation(s.activate)
-	c:RegisterEffect(e1)
+	local e1=Ritual.AddProcGreater({handler=c,filter=s.ritualfil,extrafil=s.extrafil,location=LOCATION_EXTRA})
+	if not GhostBelleTable then GhostBelleTable={} end
+	table.insert(GhostBelleTable,e1)
 end
-s.fit_monster={12340324}
-function s.filter(c,e,tp,m)
-	local cd=c:GetCode()
-	if cd~=12340324 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
-	local mg2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,c)
-	m:Merge(mg2)
-	if m:IsContains(c) then
-		m:RemoveCard(c)
-		result=m:IsExists(Card.IsType,3,nil,TYPE_RITUAL)
-		m:AddCard(c)
-	else
-		result=m:IsExists(Card.IsType,3,nil,TYPE_RITUAL)
-	end
-	m:Sub(mg2)
-	return result
+function s.ritualfil(c)
+	return c:IsRitualMonster()
 end
-function s.filter2(c,rc)
-	return c:IsCanBeRitualMaterial(rc) and c:GetLevel()>0
+function s.mfilter(c)
+	return not Duel.IsPlayerAffectedByEffect(c:GetControler(),69832741) and c:HasLevel() and c:IsType(TYPE_RITUAL)
+		and c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		local mg=Duel.GetRitualMaterial(tp)
-		return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp,mg)
-	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
-end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local mg=Duel.GetRitualMaterial(tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,mg)
-	if #tg>0 then
-		local tc=tg:GetFirst()
-		local mg2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,tc)
-		mg:Merge(mg2)
-		mg:RemoveCard(tc)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-		local mat=mg:FilterSelect(tp,Card.IsType,3,3,nil,TYPE_RITUAL)
-		tc:SetMaterial(mat)
-		local mat1=mat:Filter(Card.IsLocation,nil,LOCATION_GRAVE+LOCATION_MZONE)
-		mat:Sub(mat1)
-		Duel.ReleaseRitualMaterial(mat)
-		Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_RELEASE+REASON_MATERIAL+REASON_RITUAL)
-		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
-		tc:CompleteProcedure()
-	end
+function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
+	return Duel.GetMatchingGroup(s.mfilter,tp,LOCATION_GRAVE,0,nil)
 end
