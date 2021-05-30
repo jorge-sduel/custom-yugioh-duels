@@ -13,7 +13,7 @@ function c86123777.initial_effect(c)
 	e2:SetCost(c86123777.cost)
 	e2:SetTarget(c86123777.atktg)
 	e2:SetOperation(c86123777.atkop)
-	c:RegisterEffect(e2,false,2)
+	c:RegisterEffect(e2)
 end
 function c86123777.xyzfilter(c,xyz,sumtype,tp)
 	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(4) or c:IsLevel(8))
