@@ -10,17 +10,18 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
+s.fit_monster={12340324}
 function s.filter(c,e,tp,m)
 	local cd=c:GetCode()
-	if cd~=12340324 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) then return false end
-	local mg2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,c)
+	if cd~=12340324 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
+	local mg2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_DECK,0,nil,c)
 	m:Merge(mg2)
 	if m:IsContains(c) then
 		m:RemoveCard(c)
 		result=m:IsExists(Card.IsType,3,nil,TYPE_RITUAL)
 		m:AddCard(c)
 	else
-		result=m:IsExists(Card.IsCode,3,nil,TYPE_RITUAL)
+		result=m:IsExists(Card.IsType,3,nil,TYPE_RITUAL)
 	end
 	m:Sub(mg2)
 	return result
@@ -41,18 +42,18 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,mg)
 	if #tg>0 then
 		local tc=tg:GetFirst()
-		local mg2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,tc)
+		local mg2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_DECK,0,nil,tc)
 		mg:Merge(mg2)
 		mg:RemoveCard(tc)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 		local mat=mg:FilterSelect(tp,Card.IsType,3,3,nil,TYPE_RITUAL)
 		tc:SetMaterial(mat)
-		local mat1=mat:Filter(Card.IsLocation,nil,LOCATION_GRAVE+LOCATION_MZONE)
+		local mat1=mat:Filter(Card.IsLocation,nil,LOCATION_DECK)
 		mat:Sub(mat1)
 		Duel.ReleaseRitualMaterial(mat)
 		Duel.SendtoGrave(mat1,REASON_EFFECT+REASON_RELEASE+REASON_MATERIAL+REASON_RITUAL)
 		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,true,POS_FACEUP)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
 end
