@@ -43,6 +43,13 @@ Fusion.AddProcFunRep(c,aux.FilterBoolFunction(Card.IsType,TYPE_RITUAL),3,true)
 	e5:SetTarget(c12340324.sptg)
 	e5:SetOperation(c12340324.spop)
 	c:RegisterEffect(e5)
+	--splimit
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
+	e1:SetValue(c12340324.splimit)
+	c:RegisterEffect(e1)
 end
 
 function c12340324.afilter(c)
@@ -157,4 +164,8 @@ end
 		Duel.BreakEffect()
 	Duel.SetLP(tp,Duel.GetLP(tp)/ct)
 	end
+end
+function c12340324.splimit(e,se,sp,st)
+	local code=Duel.GetChainInfo(0,CHAININFO_TRIGGERING_CODE)
+	return se:GetHandler():IsCode(76794549) or code==76794549
 end
