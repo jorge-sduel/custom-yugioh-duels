@@ -10,6 +10,16 @@ function c333.initial_effect(c)
 	e1:SetCondition(c333.con)
 	e1:SetOperation(c333.desop)
 	c:RegisterEffect(e1)
+	--pendulum summon
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_SPSUMMON_PROC_G)
+	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
+	e2:SetRange(LOCATION_PZONE)
+	e2:SetCountLimit(1,10000000)
+	e2:SetOperation(c333.penop)
+	e2:SetValue(SUMMON_TYPE_PENDULUM)
+	c:RegisterEffect(e2)
 end
 function c333.con(e)
 	local tp=e:GetHandler():GetControler()
@@ -33,5 +43,23 @@ function c333.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoGrave(g,REASON_RULE)
 	c:SetMaterial(g)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	Duel.Overlay(c,g)
+	Duel.Overlay(c,g)
+
+end
+function c333.penfilter(c,e,tp,lscale,rscale)
+	local lv=c:GetLevel()
+	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsType(TYPE_MONSTER)
+		and lv>0 and lv<5 and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
+		and not c:IsForbidden() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true)
+end
+function c333.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
+	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,c333.penfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,ft,nil,e,tp,lscale,rscale)
+	og:Merge(g)
+	local tc=og:GetFirst()
+	if og:GetCount()>0 then
+		og:KeepAlive()
+		tc=og:GetNext()
+	end
 end
