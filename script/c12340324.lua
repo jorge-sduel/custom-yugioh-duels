@@ -167,5 +167,5 @@ end
 end
 function c12340324.splimit(e,se,sp,st)
 	local code=Duel.GetChainInfo(0,CHAININFO_TRIGGERING_CODE)
-	return se:GetHandler():IsCode(76794549) or code==76794549
+	return se:GetHandler():IsCode(334) or code==334
 end
