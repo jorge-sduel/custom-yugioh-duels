@@ -7,8 +7,16 @@ function c333.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_EXTRA)
+	e1:SetCondition(c333.con)
 	e1:SetOperation(c333.desop)
 	c:RegisterEffect(e1)
+end
+function c333.con(e)
+	local tp=e:GetHandler():GetControler()
+	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
+	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+	if not tc1 or not tc2 then return false end
+	return tc1:GetLeftScale()==tc2:GetRightScale()
 end
 function c333.cfilter(c)
 	return c:IsType(TYPE_PENDULUM)
