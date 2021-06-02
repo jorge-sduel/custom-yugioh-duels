@@ -49,7 +49,7 @@ end
 function c333.penfilter(c,e,tp,lscale,rscale)
 	local lv=c:GetLevel()
 	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsType(TYPE_MONSTER)
-		and (lv>0 and lv<5) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
+		and (lv>e:GetHandler():GetRightScale() and lv<5) or (lv>e:GetHandler():GetLeftScale() and lv>0) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
 		and not c:IsForbidden() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,true)
 end
 function c333.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
