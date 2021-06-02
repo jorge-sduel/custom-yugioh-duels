@@ -48,9 +48,11 @@ Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
 function c333.penfilter(c,e,tp,lscale,rscale)
 	local lv=c:GetLevel()
+	local Rk=c:GetRank()
+	local p=e:GetHandler()
 	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsType(TYPE_MONSTER)
-		and (lv>e:GetHandler():GetRightScale() and lv<5) or (lv>e:GetHandler():GetLeftScale() and lv>0) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
-		and not c:IsForbidden() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,true)
+		and ((lv>p:GetRightScale() and lv<5) or (lv<p:GetLeftScale() and lv>0) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
+		and not c:IsForbidden() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,true))
 end
 function c333.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
