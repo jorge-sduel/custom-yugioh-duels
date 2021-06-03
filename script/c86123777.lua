@@ -18,7 +18,7 @@ end
 function c86123777.xyzfilter(c,xyz,sumtype,tp)
 	return c:IsType(TYPE_MONSTER,xyz,sumtype,tp) and (c:IsLevel(4) or c:IsLevel(8))
 end
-function c12341310.xyzcheck(g,tp,xyz)
+function c86123777.xyzcheck(g,tp,xyz)
 	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
 	return mg:GetClassCount(Card.GetLevel)~=1
 end
