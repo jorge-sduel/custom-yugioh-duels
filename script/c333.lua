@@ -62,7 +62,7 @@ function c333.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_BECOME_LINKED_ZONE)
 	e1:SetValue(0xffffff)
-	Duel.RegisterEffect(e1,tp)
+	Duel.RegisterEffect(e1)
 	og:Merge(g)
 	local tc=og:GetFirst()
 	if og:GetCount()>0 then
