@@ -22,6 +22,10 @@ function c86123777.xyzcheck(g,tp,xyz)
 	local mg=g:Filter(function(c) return not c:IsHasEffect(511001175) end,nil)
 	return mg:GetClassCount(Card.GetLevel)~=1
 end
+function c86123777.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,2,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,2,2,REASON_COST)
+end
 function c86123777.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and aux.nzatk(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(aux.nzatk,tp,0,LOCATION_MZONE,1,nil) end
