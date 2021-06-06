@@ -25,11 +25,7 @@ function c137.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c137.filter(c)
-	return c:IsFaceup() and c:IsAttackBelow(1000)
-end
-function c137.con(e,c)
-	if c==nil then return true end
-	return Duel.IsExistingMatchingCard(c137.filter,c:GetControler(),0,LOCATION_MZONE,1,nil)
+	return c:IsFaceup() and not c:IsAttackBelow(1000)
 end
 function c137.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
