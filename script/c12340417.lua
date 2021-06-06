@@ -16,7 +16,7 @@ function c12340417.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_GRAVE)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetCountLimit(1,12340417,EFFECT_COUNT_CODE_DUEL
+	e2:SetCountLimit(1,12340417,EFFECT_COUNT_CODE_DUEL)
 	e2:SetTarget(c12340417.xyztg)
 	e2:SetOperation(c12340417.xyzop)
 	c:RegisterEffect(e2)
