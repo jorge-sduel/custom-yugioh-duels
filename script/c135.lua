@@ -22,7 +22,7 @@ function c135.spfilter(c,e,tp)
 end
 function c135.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(c136.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp) end
+		and Duel.IsExistingMatchingCard(c135.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function c135.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -38,9 +38,9 @@ function c135.spop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ChangeAttackTarget(tc)
 			local e3=Effect.CreateEffect(c)
 			e3:SetType(EFFECT_TYPE_SINGLE)
-			e3:SetCode(EFFECT_SET_ATTACK_FINAL)
+			e3:SetCode(EFFECT_UPDATE_ATTACK)
 			e3:SetReset(RESET_EVENT+0x1fe0000)
-			e3:SetValue(math.ceil(at:GetAttack()-1000))
+			e3:SetValue(-1000)
 			at:RegisterEffect(e3)
 		end
 	end
