@@ -36,12 +36,12 @@ function c135.spop(e,tp,eg,ep,ev,re,r,rp)
 		if a:CanAttack() and not a:IsImmuneToEffect(e) and ag:IsContains(tc) then
 			Duel.BreakEffect()
 			Duel.ChangeAttackTarget(tc)
-			local e1=Effect.CreateEffect(e:GetHandler())
-			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetCode(EFFECT_SET_ATTACK_FINAL)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-			e1:SetValue(math.ceil(a:GetAttack()/2))
-			a:RegisterEffect(e1)
+			local e3=Effect.CreateEffect(c)
+			e3:SetType(EFFECT_TYPE_SINGLE)
+			e3:SetCode(EFFECT_SET_ATTACK_FINAL)
+			e3:SetReset(RESET_EVENT+0x1fe0000)
+			e3:SetValue(math.ceil(at:GetAttack()-1000))
+			at:RegisterEffect(e3)
 		end
 	end
 end
