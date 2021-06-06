@@ -20,7 +20,7 @@ end
 function c136.spfilter(c,e,tp)
 	return c:IsCode(137) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
-function c316.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+function c136.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(c136.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
