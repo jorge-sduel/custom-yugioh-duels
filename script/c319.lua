@@ -42,7 +42,8 @@ e2:SetCountLimit(1,319)
 	e4:SetDescription(aux.Stringid(51,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetCode(EVENT_FREE_CHAIN)
-	e4:SetRange(LOCATION_HAND)
+	e4:SetRange(LOCATION_HAND)
+
 	e4:SetOperation(c319.rop)
 	c:RegisterEffect(e4)
 	--lose atk 2
@@ -100,11 +101,13 @@ e10:SetCountLimit(1,10000000)
 	c:RegisterEffect(e10)
 end
 function c319.ffilter(c,tp)
-	return (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
+	return
+ (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
 end
 function c319.rop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+
 end
 function c319.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
@@ -165,7 +168,7 @@ function c319.plop(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetCode(EFFECT_CHANGE_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_OPPO_TURN,1)
 			e1:SetValue(TYPE_MONSTER)
 			tc:RegisterEffect(e1)
 			tc=g:GetNext()
