@@ -1,5 +1,7 @@
---Ancient Oracle
-function c12341407.initial_effect(c)
+--Ancient Oracle Samurai
+--Scripted by Secuter
+local s,id=GetID()
+function s.initial_effect(c)
 	--must attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -11,63 +13,77 @@ function c12341407.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCode(EFFECT_SELF_DESTROY)
-	e2:SetCondition(c12341407.sdcon)
-	c:RegisterEffect(e2)
-	--discard deck
+	e2:SetCondition(s.sdcon)
+	c:RegisterEffect(e2)    
+	--discard deck + send to grave
 	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(12341407,0))
-	e3:SetCategory(CATEGORY_DECKDES)
+	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetCategory(CATEGORY_DECKDES+CATEGORY_TOGRAVE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e3:SetCode(EVENT_BATTLED)
-	e3:SetCondition(c12341407.con)
-	e3:SetTarget(c12341407.tg)
-	e3:SetOperation(c12341407.op)
+	e3:SetCode(EVENT_BATTLE_CONFIRM)
+	e3:SetCountLimit(1,id)
+	e3:SetCondition(s.con)
+	e3:SetTarget(s.tg)
+	e3:SetOperation(s.op)
 	c:RegisterEffect(e3)
 	--atk up
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(12341407,1))
+	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_ATKCHANGE)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DELAY)
 	e4:SetCode(EVENT_TO_GRAVE)
-	e4:SetCountLimit(1,12341407)
-	e4:SetCondition(c12341407.con2)
-	e4:SetTarget(c12341407.tg2)
-	e4:SetOperation(c12341407.op2)
+	e4:SetCountLimit(1,id+50)
+	e4:SetCondition(s.con2)
+	e4:SetTarget(s.tg2)
+	e4:SetOperation(s.op2)
 	c:RegisterEffect(e4)
 end
-
-function c12341407.sdcon(e)
+s.listed_names={12341414}
+s.listed_series={0x211}
+function s.sdcon(e)
 	return e:GetHandler():IsPosition(POS_FACEUP_DEFENSE)
 end
 
-function c12341407.cfilter(c)
+function s.cfilter(c)
 	return c:IsFaceup() and c:IsCode(12341414)
 end
-function c12341407.con(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler()==Duel.GetAttacker()
+function s.con(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():GetBattleTarget()
 end
-function c12341407.tg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return not Duel.IsExistingMatchingCard(c12341407.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil) end
+function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,3) end
+	e:GetHandler():GetBattleTarget():CreateEffectRelation(e)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,3)
 end
-function c12341407.op(e,tp,eg,ep,ev,re,r,rp)
+function s.op(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) then return end
+	local c=e:GetHandler()
+	local tc=c:GetBattleTarget()
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
+	local dg=Duel.GetOperatedGroup()
+	local ct=dg:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)
+	if ct>0 and c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e)
+		and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+        Duel.BreakEffect()
+		Duel.SendtoGrave(tc,REASON_EFFECT)
+	end
 end
 
-function c12341407.con2(e,tp,eg,ep,ev,re,r,rp)
+function s.con2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetPreviousLocation()==LOCATION_DECK
 end
-function c12341407.atkfilter(c)
+function s.atkfilter(c)
 	return c:IsFaceup() and  c:IsSetCard(0x211)
 end
-function c12341407.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and c12341407.atkfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(c12341407.atkfilter,tp,LOCATION_MZONE,0,1,nil) end
+function s.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.atkfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.atkfilter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,c12341407.atkfilter,tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,s.atkfilter,tp,LOCATION_MZONE,0,1,1,nil)
 end
-function c12341407.op2(e,tp,eg,ep,ev,re,r,rp)
+function s.op2(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if tc:IsFaceup() and tc:IsRelateToEffect(e) then
@@ -75,7 +91,7 @@ function c12341407.op2(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(800)
+		e1:SetValue(1000)
 		e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e1)
 	end
