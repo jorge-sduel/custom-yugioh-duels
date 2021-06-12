@@ -1,8 +1,10 @@
 --Ancient Oracle Extra
-function c12341423.initial_effect(c)
+--Scripted by Secuter
+local s,id=GetID()
+function s.initial_effect(c)
 	--link summon
 	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsLinkSetCard,0x211),2,2)
+	Link.AddProcedure(c,aux.True,2,2,s.lcheck)
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -10,8 +12,8 @@ function c12341423.initial_effect(c)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(1,0)
-	e1:SetTarget(c12341423.tgtg)
-	e1:SetCondition(c12341423.effcon)
+	e1:SetTarget(s.tgtg)
+	e1:SetCondition(s.effcon)
 	c:RegisterEffect(e1)
 	--spsummon
 	local e2=Effect.CreateEffect(c)
@@ -20,36 +22,42 @@ function c12341423.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
 	e2:SetCountLimit(1)
-	e2:SetTarget(c12341423.sptg)
-	e2:SetOperation(c12341423.spop)
+	e2:SetTarget(s.sptg)
+	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
+s.listed_names={12341414}
+s.listed_series={0x211}
+s.material_setcode={0x211}
+function s.lcheck(g,lc)
+	return g:IsExists(Card.IsSetCard,1,nil,0x211)
+end
 
-function c12341423.tgtg(e,c)
+function s.tgtg(e,c)
 	return e:GetHandler():GetLinkedGroup():IsContains(c)
 end
-function c12341423.cfilter(c)
+function s.cfilter(c)
 	return c:IsFaceup() and c:IsCode(12341414)
 end
-function c12341423.effcon(e)
-	return not Duel.IsExistingMatchingCard(c12341423.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
+function s.effcon(e)
+	return not Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 
-function c12341423.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,2) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(2)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,2)
 end
-function c12341423.spfilter(c,e,tp)
+function s.spfilter(c,e,tp)
 	return c:IsLocation(LOCATION_GRAVE) and c:IsSetCard(0x211) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
-function c12341423.spop(e,tp,eg,ep,ev,re,r,rp)
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.DiscardDeck(p,d,REASON_EFFECT)
-	local g=Duel.GetOperatedGroup():Filter(c12341423.spfilter,nil,e,tp)
+	local g=Duel.GetOperatedGroup():Filter(s.spfilter,nil,e,tp)
 	local ct=math.min(g:GetCount(),Duel.GetLocationCount(tp,LOCATION_MZONE))
-	if ct~=0 and Duel.SelectYesNo(tp,aux.Stringid(12341423,0)) then
+	if ct~=0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local tg=g:Select(tp,1,ct,nil)
