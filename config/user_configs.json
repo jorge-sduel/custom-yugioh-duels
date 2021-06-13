@@ -1,0 +1,33 @@
+{
+	"repos": [
+		{
+			"url": "https://github.com/jorge-sduel/custom-yugioh-duels",
+			"repo_name": "jorge-sduel custom-yugioh-duels",
+			"repo_path": "./repositories/jorge-sduel",
+			"has_core": false,
+			"core_path": "bin",
+			"data_path": "",
+			"script_path": "script",
+			"pics_path": "pics",
+			"expansions_path": "expansions",
+			"should_update": true,
+			"should_read": true
+		},
+		{
+			"url": "https://github.com/jorge-sduel/jorgesduelbanlist",
+			"repo_name": "jorgesduelbanlist",
+			"repo_path": "./repositories/jorge-sduel/lflists",
+			"lflist_path": ".",
+			"should_update": true,
+			"should_read": true
+		}
+	],
+	"urls": [
+		{
+            "url": "https://raw.githubusercontent.com/jorge-sduel/master/pics/field/{}.png",
+            "type": "field"
+        },
+	],
+	"servers": [],
+	"posixPathExtension": "/usr/local/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands"
+}
