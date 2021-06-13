@@ -1,7 +1,7 @@
 {
 	"repos": [
 		{
-			"url": "https://github.com/jorge-sduel/custom-yugioh-duels",
+			"url": "https://github.com/jorge-sduel/custom-yugioh-duels.git",
 			"repo_name": "jorge-sduel custom-yugioh-duels",
 			"repo_path": "./repositories/jorge-sduel",
 			"has_core": false,
@@ -13,7 +13,7 @@
 			"should_read": true
 		},
 		{
-			"url": "https://github.com/jorge-sduel/jorgesduelbanlist",
+			"url": "https://github.com/jorge-sduel/jorgesduelbanlist.git",
 			"repo_name": "jorgesduelbanlist",
 			"repo_path": "./repositories/jorge-sduel/lflists",
 			"lflist_path": ".",
