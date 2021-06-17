@@ -56,13 +56,17 @@ function s.penfilter(c,e,tp,lscale,rscale)
 		and not c:IsForbidden() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,true))
 end
 function s.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
-	local ft=Duel.GetLocationCountFromEx(tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.penfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,ft,nil,e,tp,lscale,rscale)
-	og:Merge(g)
-	local tc=og:GetFirst()
-	if og:GetCount()>0 then
-		og:KeepAlive()
-		tc=og:GetNext()
+	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+	if ft<=0 then return end
+	if Duel.IsPlayerAffectedByEffect(tp,59822133) then ft=1 end
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	local g=Duel.SelectMatchingCard(tp,s.ffilter,tp,LOCATION_EXTRA,0,1,ft,nil)
+	if g:GetCount()>0 then
+		local tc=g:GetFirst()
+		while tc do
+			Duel.MoveToField(tc,tp,tp,LOCATION_MZONE,POS_FACEUP,true)
+			tc=g:GetNext()
+		end
+		Duel.RaiseEvent(g,EVENT_CUSTOM+47408488,e,0,tp,0,0)
 	end
 end
