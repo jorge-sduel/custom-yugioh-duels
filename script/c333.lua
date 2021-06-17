@@ -44,25 +44,25 @@ function c333.desop(e,tp,eg,ep,ev,re,r,rp)
 	c:SetMaterial(g)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,g)
-
 end
-function c333.penfilter(c,e,tp,lscale,rscale)
-	local lv=c:GetLevel()
-	local Rk=c:GetRank()
-	local p=e:GetHandler()
-	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsType(TYPE_MONSTER)
-		and ((lv>p:GetRightScale() and lv<5) or (lv<p:GetLeftScale() and lv>0) or (Rk>p:GetRightScale() and Rk<5) or (Rk<p:GetLeftScale() and Rk>0) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
-		and not c:IsForbidden() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,true))
-end
-function c333.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
-	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+function c333.penop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
+	local tp=e:GetOwnerPlayer()
+	local rpz=Duel.GetFieldCard(1-tp,LOCATION_PZONE,1)
+	if end
+	local ft=Duel.GetLocationCountFromEx(tp)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c333.penfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,ft,nil,e,tp,lscale,rscale)
-	og:Merge(g)
-	local tc=og:GetFirst()
-	if og:GetCount()>0 then
-		og:KeepAlive()
-		tc=og:GetNext()
+	local g=Duel.SelectMatchingCard(tp,Pendulum.Filter,tp,LOCATION_EXTRA,0,Duel.IsSummonCancelable() and 0 or 1,ft,nil,e,tp,lscale,rscale)
+	if g then
+		sg:Merge(g)
 	end
-	e1:Reset()
+	if #sg>0 then
+		Duel.Hint(HINT_CARD,0,id)
+		if not inchain then
+			Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
+		end
+		Duel.HintSelection(Group.FromCards(c))
+		Duel.HintSelection(Group.FromCards(rpz))
+	end
 end
