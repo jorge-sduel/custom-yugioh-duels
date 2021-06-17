@@ -60,7 +60,7 @@ Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
 function s.penfilter(c)
 	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsType(TYPE_MONSTER)
-		and ((c:IsLevelAbove(1) and c:IsLevelBelow(4)) or (c:IsRankAbove(1) and c:IsRankBelow(4)) or (c:IsLinkAbove(1) and c:IsLinkBelow(4)) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
+		and ((c:IsLevelAbove(2) and c:IsLevelBelow(8)) or (c:IsRankAbove(2) and c:IsRankBelow(8)) or (c:IsLinkAbove(2) and c:IsLinkBelow(8)) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
 		and not c:IsForbidden() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,true))
 end
 function s.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
