@@ -1,5 +1,6 @@
 --ovtra
-function c333.initial_effect(c)
+local s,id=GetID()
+function s.initial_effect(c)
 	--destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(97268402,0))
@@ -7,8 +8,8 @@ function c333.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_EXTRA)
-	e1:SetCondition(c333.con)
-	e1:SetOperation(c333.desop)
+	e1:SetCondition(s.con)
+	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
 	--pendulum summon
 	local e2=Effect.CreateEffect(c)
@@ -17,27 +18,27 @@ function c333.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetRange(LOCATION_PZONE)
 	e2:SetCountLimit(1,10000000)
-	e2:SetOperation(c333.penop)
+	e2:SetOperation(s.penop)
 	e2:SetValue(SUMMON_TYPE_PENDULUM)
 	c:RegisterEffect(e2)
 end
-function c333.con(e)
+function s.con(e)
 	local tp=e:GetHandler():GetControler()
 	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
 	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 	if not tc1 or not tc2 then return false end
 	return tc1:GetLeftScale()==tc2:GetRightScale()
 end
-function c333.cfilter(c)
+function s.cfilter(c)
 	return c:IsType(TYPE_PENDULUM)
 end
-function c333.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c333.cfilter,tp,LOCATION_PZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
-	local g=Duel.SelectMatchingCard(tp,c333.cfilter,tp,LOCATION_PZONE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_PZONE,0,1,1,nil)
 	Duel.Overlay(e:GetHandler(),g)
 end
-function c333.desop(e,tp,eg,ep,ev,re,r,rp)
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,c333.cfilter,tp,LOCATION_PZONE,0,2,2,nil)
 	Duel.SendtoGrave(g,REASON_RULE)
@@ -46,7 +47,7 @@ Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,g)
 
 end
-function c333.penfilter(c,e,tp,lscale,rscale)
+function s.penfilter(c,e,tp,lscale,rscale)
 	local lv=c:GetLevel()
 	local Rk=c:GetRank()
 	local p=e:GetHandler()
@@ -56,11 +57,17 @@ function c333.penfilter(c,e,tp,lscale,rscale)
 end
 function c333.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
 	local ft=Duel.GetLocationCountFromEx(tp)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c333.penfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,ft,nil,e,tp,lscale,rscale)
-	og:Merge(g)
-	local tc=og:GetFirst()
-	if og:GetCount()>0 then
-		og:KeepAlive()
+	local g=Duel.SelectMatchingCard(tp,Pendulum.Filter,tp,LOCATION_EXTRA,0,Duel.IsSummonCancelable() and 0 or 1,ft,nil,e,tp,lscale,rscale)
+	if g then
+		sg:Merge(g)
+	end
+	if #sg>0 then
+		Duel.Hint(HINT_CARD,0,id)
+		if not inchain then
+			Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
+		end
 	end
 end
