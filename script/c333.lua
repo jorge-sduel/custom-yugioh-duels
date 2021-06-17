@@ -60,7 +60,7 @@ function s.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
 	if ft<=0 then return end
 	if Duel.IsPlayerAffectedByEffect(tp,59822133) then ft=1 end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,s.ffilter,tp,LOCATION_EXTRA,0,1,ft,nil)
+	local g=Duel.SelectMatchingCard(tp,s.penfilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,1,ft,nil)
 	if g:GetCount()>0 then
 		local tc=g:GetFirst()
 		while tc do
