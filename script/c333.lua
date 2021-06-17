@@ -47,7 +47,7 @@ Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,g)
 
 end
-function s.penfilter(c,e,tp,lscale,rscale)
+function s.penfilter(c)
 	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsType(TYPE_MONSTER)
 		and ((c:IsLevelAbove(e:GetHandler():GetRightScale()) and IsLevelBelow(4)) or (c:IsLevelBelow(e:GetHandler():GetRightScale()) and IsLevelAbove(1)) or (c:IsRankAbove(e:GetHandler():GetRightScale()) and IsRankBelow(4)) or (c:IsRankBelow(e:GetHandler():GetRightScale()) and IsRankAbove(4)) or (c:IsLinkAbove(e:GetHandler():GetRightScale()) and IsLinkBelow(4)) or (c:IsLinkBelow(e:GetHandler():GetRightScale()) and IsLinkAbove(1)) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
 		and not c:IsForbidden() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,true))
