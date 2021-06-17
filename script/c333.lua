@@ -48,11 +48,8 @@ Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 
 end
 function s.penfilter(c,e,tp,lscale,rscale)
-	local lv=c:GetLevel()
-	local Rk=c:GetRank()
-	local p=e:GetHandler()
 	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsType(TYPE_MONSTER)
-		and ((lv>p:GetRightScale() and lv<5) or (lv<p:GetLeftScale() and lv>0) or (Rk>p:GetRightScale() and Rk<5) or (Rk<p:GetLeftScale() and Rk>0) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
+		and ((c:IsLevelAbove(e:GetHandler():GetRightScale()) and IsLevelBelow(4)) or (c:IsLevelBelow(e:GetHandler():GetRightScale()) and IsLevelAbove(1)) or (c:IsRankAbove(e:GetHandler():GetRightScale()) and IsRankBelow(4)) or (c:IsRankBelow(e:GetHandler():GetRightScale()) and IsRankAbove(4)) or (c:IsLinkAbove(e:GetHandler():GetRightScale()) and IsLinkBelow(4)) or (c:IsLinkBelow(e:GetHandler():GetRightScale()) and IsLinkAbove(1)) or c:IsHasEffect(511004423) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,false)
 		and not c:IsForbidden() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,true))
 end
 function s.penop(e,tp,eg,ep,ev,re,r,rp,c,og)
