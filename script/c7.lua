@@ -108,7 +108,7 @@ function c7.rtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c7.rop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	local tpe=c:GetType()
 	local te=c:GetActivateEffect()
 	local tg=te:GetTarget()
