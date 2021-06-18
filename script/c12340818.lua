@@ -22,7 +22,6 @@ end
 
 function c12340818.filter(c,tp)
 	return c:GetPreviousControler()==tp and c:IsPreviousLocation(LOCATION_MZONE)
-		and bit.band(c:GetPreviousAttributeOnField(),ATTRIBUTE_WIND)~=0
 		and bit.band(c:GetPreviousRaceOnField(),RACE_WINDBEAST)~=0
 		and c:IsPreviousPosition(POS_FACEUP)
 end
@@ -30,7 +29,7 @@ function c12340818.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c12340818.filter,1,nil,tp)
 end
 function c12340818.spfilter(c,e,tp)
-	return c:IsLevelBelow(4) and c:IsAttribute(ATTRIBUTE_WIND) and c:IsRace(RACE_WINDBEAST)
+	return c:IsLevelBelow(4) and c:IsRace(RACE_WINDBEAST)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c12340818.target(e,tp,eg,ep,ev,re,r,rp,chk)
