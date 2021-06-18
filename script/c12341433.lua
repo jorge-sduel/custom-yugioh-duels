@@ -55,7 +55,7 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DECKDES,nil,0,tp,10)
 end
 function s.filter(c)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsSetCard(0x211)
+	return c:IsLocation(LOCATION_GRAVE) and c:IsType(TYPE_MONSTER)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -85,7 +85,7 @@ function s.quickcon(e,tp,eg,ep,ev,re,r,rp)
     return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsCode,12341414),tp,LOCATION_ONFIELD,0,1,nil)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x211) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetFlagEffect(id)==0
