@@ -3,15 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
-	--splimit
-	local p1=Effect.CreateEffect(c)
-	p1:SetType(EFFECT_TYPE_FIELD)
-	p1:SetRange(LOCATION_PZONE)
-	p1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	p1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
-	p1:SetTargetRange(1,0)
-	p1:SetTarget(s.splimit)
-	c:RegisterEffect(p1)
 	--atk/def up
 	local p2=Effect.CreateEffect(c)
 	p2:SetType(EFFECT_TYPE_FIELD)
@@ -60,7 +51,7 @@ function s.splimit(e,c,sump,sumtype,sumpos,targetp)
 end
 
 function s.thfilter(c)
-	return c:IsSetCard(0x201) and c:IsFaceup() and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsFaceup() and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and s.thfilter(chkc) end
@@ -79,7 +70,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.thfilter2(c)
-	return c:IsSetCard(0x201) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsType(TYPE_MONSTER) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter2,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,nil) end
