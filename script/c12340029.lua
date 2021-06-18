@@ -3,15 +3,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
-	--splimit
-	local p1=Effect.CreateEffect(c)
-	p1:SetType(EFFECT_TYPE_FIELD)
-	p1:SetRange(LOCATION_PZONE)
-	p1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	p1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
-	p1:SetTargetRange(1,0)
-	p1:SetTarget(s.splimit)
-	c:RegisterEffect(p1)
 	--atk/def up
 	local p2=Effect.CreateEffect(c)
 	p2:SetType(EFFECT_TYPE_FIELD)
@@ -66,7 +57,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x201) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
