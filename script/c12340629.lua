@@ -32,10 +32,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.ffilter1(c,fc,sumtype,tp)
-	return c:IsSetCard(0x208,fc,sumtype,tp) and c:IsAttribute(ATTRIBUTE_LIGHT,fc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_LIGHT,fc,sumtype,tp)
 end
 function s.ffilter2(c,fc,sumtype,tp)
-	return c:IsSetCard(0x208,fc,sumtype,tp) and c:IsAttribute(ATTRIBUTE_DARK,fc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_DARK,fc,sumtype,tp)
 end
 
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
