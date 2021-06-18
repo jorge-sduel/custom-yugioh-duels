@@ -33,17 +33,17 @@ end
 s.listed_series={0x208}
 s.material_setcode={0x208}
 function s.linkcheck(c,scard,sumtype,tp)
-	return c:IsSetCard(0x208,scard,sumtype,tp) and not c:IsType(TYPE_LINK,scard,sumtype,tp)
+	return not c:IsType(TYPE_LINK,scard,sumtype,tp)
 end
 
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.thfilter(c,attr)
-	return c:IsSetCard(0x208) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand() and c:GetAttribute()~=attr
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToHand() and c:GetAttribute()~=attr
 end
 function s.cfilter(c,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsAttribute(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK) and c:IsDiscardable()
+	return c:IsType(TYPE_MONSTER) and c:IsDiscardable()
 		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c:GetAttribute()) 
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -65,13 +65,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	e1:SetCondition(s.spcon)
-	e1:SetOperation(s.spop)
-	Duel.RegisterEffect(e1,tp)
 end
 function s.spfilter(c,tp)
 	return c:IsSummonPlayer(tp) and c:IsPreviousLocation(LOCATION_EXTRA) and not c:IsAttribute(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK)
@@ -95,7 +88,7 @@ function s.splimit(e,c)
 end
 
 function s.setfilter(c)
-	return c:IsSetCard(0x208) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable()
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.setfilter(chkc) end
