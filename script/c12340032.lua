@@ -40,8 +40,8 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_REMOVE)
 	e4:SetProperty(EFFECT_FLAG_DELAY)
 	e4:SetCountLimit(1,id+50)
-	e4:SetTarget(s.thtg)
-	e4:SetOperation(s.thop)
+	e4:SetTarget(s.thtg2)
+	e4:SetOperation(s.thop2)
 	c:RegisterEffect(e4)
 end
 s.listed_names={id}
