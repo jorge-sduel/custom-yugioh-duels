@@ -42,10 +42,10 @@ end
 s.listed_series={0x208}
 s.material_setcode={0x208}
 function s.linkcheck(g,lc)
-	return g:IsExists(Card.IsSetCard,1,nil,0x208,lc,SUMMON_TYPE_LINK,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK,lc,SUMMON_TYPE_LINK,tp)
 end
 function s.atktg(e,c)
-	return c:IsSetCard(0x208) and c~=e:GetHandler()
+	return c:IsType(TYPE_MONSTER) and c~=e:GetHandler()
 end
 
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
@@ -71,7 +71,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.acfilter(c,tp)
-	return c:IsSetCard(0x208) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsType(TYPE_CONTINUOUS) and c:GetActivateEffect():IsActivatable(tp,true)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and (c:IsType(TYPE_CONTINUOUS) or c:IsType(TYPE_LINK)) and c:GetActivateEffect():IsActivatable(tp,true)
 end
 function s.actg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.IsExistingMatchingCard(s.acfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,tp)
