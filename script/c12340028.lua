@@ -44,7 +44,7 @@ function s.thfilter(c,ft)
 	return c:IsFaceup() and not c:IsCode(id) and c:IsAbleToHand() and (ft>0 or c:IsLocation(LOCATION_MZONE))
 end
 function s.spfilter(c,e,tp)
-	return c:IsType(TYPE_PENDULUM) and c:IsLevel(4) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+	return c:IsType(TYPE_PENDULUM) and (c:IsLevel(4) or c:IsLevel(3)) and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
