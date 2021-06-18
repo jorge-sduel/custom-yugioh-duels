@@ -56,7 +56,7 @@ s.listed_series={0x211}
 s.listed_names={12341413,12341414}
 s.material_setcode={0x211}
 function s.matcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsSetCard,1,nil,0x211,lc,sumtype,tp)
+	return g:IsExists(Card.IsRace,1,nil,RACE_SPELLCASTER,lc,sumtype,tp)
 end
 function s.immcon(e,tp,eg,ep,ev,re,r,rp)
 	if not tp then tp=e:GetHandlerPlayer() end
@@ -70,7 +70,7 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.tdfilter(c)
-	return c:IsSetCard(0x211) and c:IsAbleToDeck()
+	return c:IsAbleToDeck()
 end
 function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc) end
@@ -89,7 +89,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.rmcfilter(c,tp)
-	return c:IsSetCard(0x211) and c:IsControler(tp) and c:GetPreviousLocation()==LOCATION_DECK
+	return c:IsType(TYPE_MONSTER) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsControler(tp) and c:GetPreviousLocation()==LOCATION_DECK
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.rmcfilter,1,nil,tp)
@@ -116,7 +116,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.spfilter(c,e,tp)
-	return c:IsCode(12341413) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
