@@ -3,22 +3,13 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Pendulum.AddProcedure(c)
-	--splimit
-	local p1=Effect.CreateEffect(c)
-	p1:SetType(EFFECT_TYPE_FIELD)
-	p1:SetRange(LOCATION_PZONE)
-	p1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	p1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
-	p1:SetTargetRange(1,0)
-	p1:SetTarget(s.splimit)
-	c:RegisterEffect(p1)
 	--atk/def up
 	local p2=Effect.CreateEffect(c)
 	p2:SetType(EFFECT_TYPE_FIELD)
 	p2:SetRange(LOCATION_PZONE)
 	p2:SetCode(EFFECT_UPDATE_ATTACK)
 	p2:SetTargetRange(LOCATION_MZONE,0)
-	p2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x201))
+	p2:SetTarget(aux.TargetBoolFunction(Card.IsAttribute,ATTRIBUTE_EARTH))
 	p2:SetValue(200)
 	c:RegisterEffect(p2)
     local p3=p2:Clone()
@@ -61,7 +52,7 @@ function s.splimit(e,c,sump,sumtype,sumpos,targetp)
 end
 
 function s.rfilter(c)
-	return c:IsSetCard(0x201) and c:IsType(TYPE_MONSTER)  and c:IsAbleToRemoveAsCost()
+	return (c:IsLevel(4) or c:IsLevel(3))and c:IsType(TYPE_PENDULUM)  and c:IsAbleToRemoveAsCost()
         and (aux.SpElimFilter(c,true) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup()))
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -71,7 +62,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0x201) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
+	return (c:IsLevel(4) or c:IsLevel(3)) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE))
         and not c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -95,7 +86,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.thfilter(c)
-	return c:IsSetCard(0x1201) and c:IsType(TYPE_MONSTER) and not c:IsCode(id) and c:IsAbleToHand()
+	return (c:IsLevel(4) or c:IsLevel(3)) and c:IsType(TYPE_PENDULUM) and not c:IsCode(id) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
