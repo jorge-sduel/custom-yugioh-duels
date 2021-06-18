@@ -30,7 +30,7 @@ end
 s.listed_series={0x208}
 s.material_setcode={0x208}
 function s.matfilter1(c,syncard)
-	return c:IsSetCard(0x208)
+	return c:IsType(TYPE_MONSTER)
 end
 function s.matfilter2(c,syncard)
 	return c:IsAttribute(ATTRIBUTE_LIGHT+ATTRIBUTE_DARK)
