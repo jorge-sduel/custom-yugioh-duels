@@ -2,14 +2,6 @@
 function c27000301.initial_effect(c)
 	Pendulum.AddProcedure(c,false)
 	--pendulum summon limit
-	local p1=Effect.CreateEffect(c)
-		p1:SetType(EFFECT_TYPE_FIELD)
-		p1:SetRange(LOCATION_PZONE)
-		p1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-		p1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
-		p1:SetTargetRange(1,0)
-		p1:SetTarget(c27000301.PENDLimit)
-	c:RegisterEffect(p1)
 	--Activate
 	local p2=Effect.CreateEffect(c)
 		p2:SetDescription(1160)
