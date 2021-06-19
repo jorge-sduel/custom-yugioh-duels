@@ -58,7 +58,7 @@ function c27000301.initial_effect(c)
 		e5:SetTargetRange(1,0)
 		e5:SetValue(c27000301.REFCon)
 	c:RegisterEffect(e5)
---end
+end
  -- {Pendulum Summon Limit: Charmers & Familiar-Possessed}
  function c27000301.PENDLimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsSetCard(0xbf) or c:IsSetCard(0xc0) then return false end
