@@ -1,6 +1,15 @@
 ---CCG: Familiar-Possessed Blazing Charmer - Hitta
 function c27000301.initial_effect(c)
 	Pendulum.AddProcedure(c,false)
+	--pendulum summon limit
+	local p1=Effect.CreateEffect(c)
+		p1:SetType(EFFECT_TYPE_FIELD)
+		p1:SetRange(LOCATION_PZONE)
+		p1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+		p1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
+		p1:SetTargetRange(1,0)
+		p1:SetTarget(c27000301.PENDLimit)
+	c:RegisterEffect(p1)
 	--Activate
 	local p2=Effect.CreateEffect(c)
 		p2:SetDescription(1160)
@@ -9,6 +18,13 @@ function c27000301.initial_effect(c)
 		p2:SetTarget(c27000301.SCTarg)
 		p2:SetOperation(c27000301.SCOpe)
 	c:RegisterEffect(p2)
+	--special summon condition
+	local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+		e1:SetCode(EFFECT_SPSUMMON_CONDITION)
+		e1:SetValue(c27000301.SPLimit)
+	c:RegisterEffect(e1)
 	--special summon proc
 	local e2=Effect.CreateEffect(c)
 		e2:SetDescription(aux.Stringid(27000301,3))
@@ -49,6 +65,20 @@ function c27000301.initial_effect(c)
 		e5:SetTargetRange(1,0)
 		e5:SetValue(c27000301.REFCon)
 	c:RegisterEffect(e5)
+	--Duel.AddCustomActivityCounter(27000301,ACTIVITY_SPSUMMON,c27000301.counterfilter)
+end
+-- [Global Check: Special Summon Check]
+--function c27000301.counterfilter(c)
+--	if not (c:IsSetCard(0xbf) or c:IsSetCard(0xc0)) then
+--		return false
+--	else
+--		return true
+--	end
+--end
+ -- {Pendulum Summon Limit: Charmers & Familiar-Possessed}
+ function c27000301.PENDLimit(e,c,sump,sumtype,sumpos,targetp)
+	if c:IsSetCard(0xbf) or c:IsSetCard(0xc0) then return false end
+	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 -- {Pendulum Search: Unpossessed}
 function c27000301.SCFilter(c)
