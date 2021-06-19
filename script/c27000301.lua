@@ -1,5 +1,6 @@
 ---CCG: Familiar-Possessed Blazing Charmer - Hitta
-function c27000301.initial_effect(c)
+function c27000301.initial_effect(c)
+
 	c:SetSPSummonOnce(27000301)
 	Pendulum.AddProcedure(c,false)
 	--pendulum summon limit
@@ -19,13 +20,6 @@ function c27000301.initial_effect(c)
 		p2:SetTarget(c27000301.SCTarg)
 		p2:SetOperation(c27000301.SCOpe)
 	c:RegisterEffect(p2)
-	--special summon condition
-	local e1=Effect.CreateEffect(c)
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-		e1:SetCode(EFFECT_SPSUMMON_CONDITION)
-		e1:SetValue(c27000301.SPLimit)
-	c:RegisterEffect(e1)
 	--special summon proc
 	local e2=Effect.CreateEffect(c)
 		e2:SetDescription(aux.Stringid(27000301,3))
