@@ -68,7 +68,7 @@ function c27000301.initial_effect(c)
 end
  -- {Pendulum Summon Limit: Charmers & Familiar-Possessed}
  function c27000301.PENDLimit(e,c,sump,sumtype,sumpos,targetp)
-	if c:IsSetCard(0xbf) or c:IsSetCard(0xc0) then return false end
+	if c:IsSetCard(0xbf) or c:IsSetCard(0xc0) or c:IsSetCard(0x10c0) then return false end
 	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 -- {Pendulum Search: Unpossessed}
