@@ -1,7 +1,7 @@
 --ADE Drakonis
 function c70649914.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,nil,4,2)
+	Xyz.AddProcedure(c,nil,4,2)
 	c:EnableReviveLimit()
 	--spsummon
 	local e1=Effect.CreateEffect(c)
