@@ -13,7 +13,7 @@ function c70649914.initial_effect(c)
 	e1:SetCost(c70649914.cost)
 	e1:SetTarget(c70649914.sptg)
 	e1:SetOperation(c70649914.spop)
-	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
+	c:RegisterEffect(e1)
 end
 function c70649914.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
