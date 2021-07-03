@@ -10,7 +10,7 @@ function s.WorldStart()
 	e3:SetValue(0xffffff)
 	Duel.RegisterEffect(e3,0)
 	--Lose counter
-	local e4=Effect.CreateEffect(e:GetHandler())
+	local e4=Effect.GlobalEffect()
 	e4:SetCategory(CATEGORY_DRAW)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
