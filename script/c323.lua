@@ -11,15 +11,26 @@ function s.WorldStart()
 	Duel.RegisterEffect(e3,0)
 	--Lose counter
 	local e4=Effect.CreateEffect(e:GetHandler())
-	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e4:SetCategory(CATEGORY_DRAW)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e4:SetCode(EVENT_DAMAGE)
-	e4:SetOperation(s.ctxop)
+	e4:SetCondition(s.drcon)
+	e4:SetTarget(s.drtg)
+	e4:SetOperation(s.drop)
 	Duel.RegisterEffect(e4,0)
 end
-function s.ctxop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if ep==1-tp then return end
-	local ct=math.floor(ev/500)
-	Duel.Draw(ep,ct, REASON_RULE)
+function s.drcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetBattleDamage(tp)>=1000
+end
+function s.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local ct=math.floor(Duel.GetBattleDamage(tp)/1000)
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,ct) end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct)
+end
+function s.drop(e,tp,eg,ep,ev,re,r,rp)
+	local ct=math.floor(Duel.GetBattleDamage(tp)/1000)
+	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	Duel.Draw(p,ct,REASON_EFFECT)
 end
