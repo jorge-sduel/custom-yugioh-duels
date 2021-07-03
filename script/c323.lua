@@ -4,7 +4,6 @@ function s.initial_effect(c)
 	aux.EnableExtraRules(c,s,s.WorldStart)
 end
 function s.WorldStart()
-	local c=e:GetHandler()
 	local e3=Effect.GlobalEffect()
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_BECOME_LINKED_ZONE)
