@@ -7,10 +7,11 @@ function c213.initial_effect(c)
 	e0:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetRange(LOCATION_HAND)
-	e0:SetCode(EVENT_FREE_CHAIN)
+	e0:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e0)
 	--Activate
 	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(213,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetDescription(1160)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -22,7 +23,7 @@ function c213.initial_effect(c)
 	c:RegisterEffect(e1)
 --Reduce damage
 	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(213,0))
+	e3:SetDescription(aux.Stringid(213,1))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_PRE_BATTLE_DAMAGE)
 	e3:SetRange(LOCATION_PZONE)
@@ -30,7 +31,8 @@ function c213.initial_effect(c)
 	e3:SetOperation(c213.rdop)
 	c:RegisterEffect(e3)
 end
-function c213.filter1(c,e,tp)
+function c213.filter1(c,e,tp)
+
 	local rk=c:GetRank()
 	if not c:IsType(TYPE_XYZ) or rk<=0 then return false end
 	if c:IsLocation(LOCATION_GRAVE|LOCATION_EXTRA) then
