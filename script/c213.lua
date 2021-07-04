@@ -4,6 +4,7 @@ function c213.initial_effect(c)
 	Pendulum.AddProcedure(c,false)
 	--Activate
 	local e0=Effect.CreateEffect(c)
+	e0:SetDescription(aux.Stringid(213,2))
 	e0:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetRange(LOCATION_HAND)
