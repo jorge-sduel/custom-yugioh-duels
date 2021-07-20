@@ -46,7 +46,7 @@ function c219.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_DISABLE_EFFECT)
 		tc:RegisterEffect(e2)
-		if tc:IsType(TYPE_SYNCHRO) or tc:IsType(TYPE_XYZ) then
+		if tc:IsType(TYPE_MONSTER) then
 	local ac=Duel.AnnounceLevel(tp,0,8)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -59,6 +59,9 @@ function c219.activate(e,tp,eg,ep,ev,re,r,rp)
 			e2:SetValue(ac)
 			e2:SetReset(RESET_EVENT+0x1fe0000)
 			tc:RegisterEffect(e2)
+		end
+		if Duel.GetMatchingGroupCount(Card.IsType,tp,LOCATION_MZONE,0,nil,TYPE_TUNER)>=0 and
+Duel.SelectYesNo(tp,aux.Stringid(219,3)) then
 			local e3=Effect.CreateEffect(e:GetHandler())
 			e3:SetType(EFFECT_TYPE_SINGLE)
 			e3:SetCode(EFFECT_ADD_TYPE)
