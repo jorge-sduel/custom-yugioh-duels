@@ -126,6 +126,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP)
+		local c=e:GetHandler()
 		local e0=Effect.CreateEffect(c)
 		e0:SetType(EFFECT_TYPE_SINGLE)
 		e0:SetCode(EFFECT_SET_BASE_ATTACK)
