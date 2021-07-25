@@ -43,6 +43,16 @@ function s.initial_effect(c)
 	e4:SetLabel(4)
 	e4:SetOperation(s.activate)
 	c:RegisterEffect(e4)
+	--Special summon
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,0))
+	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e5:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e5:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
+	e5:SetCode(EVENT_DESTROYED)
+	e5:SetTarget(s.sptg)
+	e5:SetOperation(s.spop)
+	c:RegisterEffect(e5)
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
@@ -100,4 +110,21 @@ end
 
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(1-tp,Duel.GetLP(1-tp)/2)
+end
+function s.spfilter(c,e,tp)
+	return c:IsSetCard(0xe3) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+end
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_DECK+LOCATION_HAND) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingTarget(s.spfilter,tp,LOCATION_GRAVE+LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE+LOCATION_DECK+LOCATION_HAND,0,1,1,nil,e,tp)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
+end
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc and tc:IsRelateToEffect(e) then
+		Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP)
+	end
 end
