@@ -57,7 +57,7 @@ function s.initial_effect(c)
 	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e8:SetRange(LOCATION_FZONE)
 	e8:SetOperation(s.damop)
-	C:RegisterEffect(e8)
+	c:RegisterEffect(e8)
 end
 function s.dop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetAttackTarget()==nil then return false end
