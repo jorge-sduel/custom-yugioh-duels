@@ -52,12 +52,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e7)
 	--destroy replace/Damage when destroy
 	local e8=Effect.CreateEffect(c)
-	e8:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
-	e8:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e8:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e8:SetCode(EVENT_DESTROYED)
+	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e8:SetRange(LOCATION_FZONE)
-	e8:SetTarget(s.damtg)
-	c:RegisterEffect(e8)
+	e8:SetOperation(s.damop)
+	C:RegisterEffect(e8)
 end
 function s.dop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetAttackTarget()==nil then return false end
@@ -111,12 +111,9 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	for tc in aux.Next(g) do
 		local ctl=tc:GetControler()
 		if tc:IsPreviousPosition(POS_ATTACK) then
-			Duel.SetLP(ctl,tc:GetPreviousAttackOnField(),REASON_RULE,true)
+			Duel.Damage(ctl,tc:GetPreviousAttackOnField(),REASON_RULE,true)
 		elseif tc:IsPreviousPosition(POS_DEFENSE) then
-			Duel.SetLP(ctl,tc:GetPreviousDefenseOnField(),REASON_RULE,true)
+			Duel.Damage(ctl,tc:GetPreviousDefenseOnField(),REASON_RULE,true)
 		end
 	end
-end
-function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SetLP(tp,Duel.GetLP(tp)-e:GetLabel())
 end
