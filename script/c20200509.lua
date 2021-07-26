@@ -51,13 +51,14 @@ function s.initial_effect(c)
 	e7:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e7)
 	--destroy replace/Damage when destroy
-	local e8=Effect.CreateEffect(c)
-	e8:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e8:SetCode(EVENT_DESTROYED)
-	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e8:SetRange(LOCATION_FZONE)
-	e8:SetOperation(s.damop)
-	c:RegisterEffect(e8)
+		local e8=Effect.CreateEffect(c)
+		e8:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e8:SetCode(EVENT_DESTROYED)
+		e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CANNOT_DISABLE
+			+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+		e8:SetTarget(s.damcon)
+		e8:SetOperation(s.damop)
+		c:RegisterEffect(e8)
 end
 function s.dop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetAttackTarget()==nil then return false end
@@ -104,16 +105,27 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.damfilter(c)
-	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP)
+	return c:IsType(TYPE_MONSTER+TYPE_TRAPMONSTER+TYPE_TOKEN) and c:IsPreviousLocation(LOCATION_ONFIELD)
+end
+function s.damcon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(s.damfilter,1,nil)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.damfilter,nil)
-	for tc in aux.Next(g) do
+	local dam1=0
+	local dam2=0
+	if g:GetCount()<1 then return end
+	local tc=g:GetFirst()
+	while tc do 
+		local def=tc:GetPreviousDefenseOnField()
+		local atk=tc:GetPreviousAttackOnField()
 		local ctl=tc:GetControler()
 		if tc:IsPreviousPosition(POS_ATTACK) then
-			Duel.Damage(ctl,tc:GetPreviousAttackOnField(),REASON_RULE,true)
+			Duel.Damage(ctl,atk,REASON_RULE,true)
 		elseif tc:IsPreviousPosition(POS_DEFENSE) then
-			Duel.Damage(ctl,tc:GetPreviousDefenseOnField(),REASON_RULE,true)
+			Duel.Damage(ctl,def,REASON_RULE,true)
 		end
+		tc=g:GetNext()
 	end
+	Duel.RDComplete()
 end
