@@ -54,16 +54,10 @@ function s.initial_effect(c)
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e8:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e8:SetCode(EFFECT_DESTROY_REPLACE)
-	e8:SetRange(LOCATION_MZONE)
+	e8:SetCode(EVENT_DESTROYED)
+	e8:SetRange(LOCATION_FZONE)
 	e8:SetTarget(s.damtg)
 	c:RegisterEffect(e8)
-	local e9=Effect.CreateEffect(c)
-	e9:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_GRANT)
-	e9:SetRange(LOCATION_FZONE)
-	e9:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e9:SetLabelObject(e8)
-	c:RegisterEffect(e9)
 end
 function s.dop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetAttackTarget()==nil then return false end
@@ -109,18 +103,19 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 
-function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local c=e:GetHandler()
-	if chk==0 then return c:IsReason(REASON_BATTLE) end
-	if c:IsAttackPos() then dam=c:GetAttack() else dam=c:GetDefense() end
-	if dam==0 then return false end
-		local e4=Effect.CreateEffect(c)
-		e4:SetDescription(aux.Stringid(id,0))
-		e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-		e4:SetCode(EVENT_BATTLE_DESTROYED)
-		e4:SetLabel(dam)
-		e4:SetOperation(s.damop)
-		c:RegisterEffect(e4)
+function s.damfilter(c)
+	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousPosition(POS_FACEUP)
+end
+function s.damop(e,tp,eg,ep,ev,re,r,rp)
+	local g=eg:Filter(s.damfilter,nil)
+	for tc in aux.Next(g) do
+		local ctl=tc:GetControler()
+		if tc:IsPreviousPosition(POS_ATTACK) then
+			Duel.SetLP(ctl,tc:GetPreviousAttackOnField(),REASON_RULE,true)
+		elseif tc:IsPreviousPosition(POS_DEFENSE) then
+			Duel.SetLP(ctl,tc:GetPreviousDefenseOnField(),REASON_RULE,true)
+		end
+	end
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(tp,Duel.GetLP(tp)-e:GetLabel())
