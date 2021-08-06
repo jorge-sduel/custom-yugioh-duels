@@ -74,12 +74,6 @@ function c91.lvop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(1)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE)
 	c:RegisterEffect(e1)
-	local sg=Duel.GetMatchingGroup(c91.rmfilter,tp,0,LOCATION_MZONE,nil)
-	if sg:GetCount()>0 and Duel.SelectYesNo(tp,aux.Stringid(91,8)) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local tg=sg:Select(tp,1,1,nil)
-		Duel.BreakEffect()
-	end
 end
 function c91.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp
