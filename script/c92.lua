@@ -52,12 +52,6 @@ function c92.lvop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(1)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE)
 	c:RegisterEffect(e1)
-	local sg=Duel.GetMatchingGroup(c92.rmfilter,tp,0,LOCATION_MZONE,nil)
-	if sg:GetCount()>0 and Duel.SelectYesNo(tp,aux.Stringid(92,2)) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local tg=sg:Select(tp,1,1,nil)
-		Duel.BreakEffect()
-	end
 end
 function c92.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
