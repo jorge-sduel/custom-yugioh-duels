@@ -66,12 +66,12 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():SetTurnCounter(ct+1)
 	if ct==0 then
 		Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT)
-Duel.Draw(p,2,REASON_EFFECT)
+Duel.Draw(tp,2,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,e:GetHandler())
 	else e:SetLabel(1) end
 end
 function s.filter2(c)
-	return c:IsFaceup() and c:IsRace(RACE_SPELLCASTER) and not c:IsType(TYPE_TUNER)
+	return c:IsFaceup() and not c:IsType(TYPE_TUNER)
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter2(chkc) end
