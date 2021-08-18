@@ -93,6 +93,15 @@ function c9999996.initial_effect(c)
 	local e18=e17:Clone()
 	e18:SetCode(EFFECT_UNRELEASABLE_NONSUM)
 	c:RegisterEffect(e18)
+	--synchro hand
+	local e19=Effect.CreateEffect(c)
+	e19:SetType(EFFECT_TYPE_FIELD)
+	e19:SetCode(EFFECT_HAND_SYNCHRO)
+	e19:SetRange(LOCATION_MZONE)
+	e19:SetTargetRange(LOCATION_HAND,0)
+	e19:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_MONSTER))
+	e19:SetValue(1)
+	c:RegisterEffect(e19)
 end
 function c9999996.splimit(e,se,sp,st)
 	return bit.band(st,SUMMON_TYPE_SYNCHRO)==SUMMON_TYPE_SYNCHRO
