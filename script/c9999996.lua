@@ -96,7 +96,7 @@ function c9999996.initial_effect(c)
 	--synchro hand
 	local e19=Effect.CreateEffect(c)
 	e19:SetType(EFFECT_TYPE_FIELD)
-	e19:SetCode(EFFECT_HAND_SYNCHRO)
+	e19:SetCode(EFFECT_SYNCHRO_MATERIAL)
 	e19:SetRange(LOCATION_MZONE)
 	e19:SetTargetRange(LOCATION_HAND,0)
 	e19:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_MONSTER))
