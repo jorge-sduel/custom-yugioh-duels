@@ -1,133 +1,68 @@
---External Worlds Link 3
+--External Worlds Last Gate
 --Scripted by Secuter
 local s,id=GetID()
 function s.initial_effect(c)
-	--link summon
-	c:EnableReviveLimit()
-	Link.AddProcedure(c,nil,3,nil,s.linkcheck)
-	--spsummon
+    --Activate
+    local e1=Effect.CreateEffect(c)
+    e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
+    e1:SetType(EFFECT_TYPE_ACTIVATE)
+    e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetCountLimit(1,id)
+    e1:SetTarget(s.target)
+    e1:SetOperation(s.activate)
+    c:RegisterEffect(e1)
+	--pendulum scale
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetType(EFFECT_TYPE_QUICK_O)
-	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetRange(LOCATION_MZONE)
-	e2:SetCost(s.spcost)
-	e2:SetTarget(s.sptg)
-	e2:SetOperation(s.spop)
+	e2:SetRange(LOCATION_GRAVE)
+	e2:SetCountLimit(1,id+50)
+	e2:SetCost(aux.bfgcost)
+	e2:SetTarget(s.pstg)
+	e2:SetOperation(s.psop)
 	c:RegisterEffect(e2)
-	--material check
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_MATERIAL_CHECK)
-	e3:SetValue(s.val)
-	e3:SetLabelObject(e1)
-	e3:SetLabelObject(e2)
-	c:RegisterEffect(e3)
 end
-function s.linkcheck(g,lc,tp)
-	return g:GetClassCount(Card.GetAttribute)==g:GetCount()
+s.listed_series={0x2201}
+function s.filter(c)
+    return c:IsSetCard(0x2201) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
-
-function s.attrfilter(c,e,tp,attr)
-    return c:IsFaceup() and c:IsAttribute(attr) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+    if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
+    Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsReleasable() end
-	Duel.Release(e:GetHandler(),REASON_COST)
-end
-function s.spfilter(c,e,tp)
-	return c:IsFaceup() and c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-end
-function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return false end
-	if chk==0 and (Duel.GetLocationCount(tp,LOCATION_MZONE)<3 or Duel.IsPlayerAffectedByEffect(tp,59822133)) then return false end
-    local attr={}
-	local cc=0
-	local res=e:GetLabel()
-	for i=0,6 do
-		local t = 2^i
-		if bit.band(res,t)==t then
-			if chk==0 and not Duel.IsExistingMatchingCard(s.attrfilter,tp,LOCATION_REMOVED,0,1,nil,e,tp,t) then return false end
-			attr[cc]=t
-			cc=cc+1
-		end
-	end
-    if chk==0 then return cc>=3 end
-	local sg=Group.CreateGroup()
-    for i=0,cc-1 do
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g1=Duel.SelectMatchingCard(tp,s.attrfilter,tp,LOCATION_REMOVED,0,1,1,nil,e,tp,attr[i])
-		sg:Merge(g1)
-	end
-	Duel.SetTargetCard(sg)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,sg,cc,0,0)
-end
-function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
-	if ft<=0 or g:GetCount()==0 or (g:GetCount()>1 and Duel.IsPlayerAffectedByEffect(tp,59822133)) then return end
-	if g:GetCount()<=ft then
-		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
-	else
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=g:Select(tp,ft,ft,nil)
-		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
-		g:Sub(sg)
-		Duel.SendtoGrave(g,REASON_RULE)
-	end
-end
-
-function s.con(e,tp,eg,ep,ev,re,r,rp)
-	return bit.band(e:GetHandler():GetSummonType(),SUMMON_TYPE_LINK)==SUMMON_TYPE_LINK
-end
-function s.op(e,tp,eg,ep,ev,re,r,rp)
-	local res=e:GetLabel()
-	for i=0,6 do
-		local t = 2^i
-		if bit.band(res,t)==t then
-			local e1=Effect.CreateEffect(e:GetHandler())
-			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetCode(EFFECT_IMMUNE_EFFECT)
-			e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-			e1:SetRange(LOCATION_MZONE)
-			e1:SetValue(s.immfilter)
-			e1:SetLabel(t)
-			e:GetHandler():RegisterEffect(e1)
-		end
+function s.activate(e,tp,eg,ep,ev,re,r,rp)
+    Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+    local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
+    if #g>0 then
+        Duel.SendtoHand(g,nil,REASON_EFFECT)
+        Duel.ConfirmCards(1-tp,g)
     end
 end
-function s.immfilter(e,te)
-	return te:IsActiveType(TYPE_MONSTER) and te:GetHandler():IsAttribute(e:GetLabel())
-end
 
-function s.val(e,c)
-	local attr=0
-	local g=c:GetMaterial()
-	for i=0,6 do
-		local t = 2^i
-		if g:IsExists(Card.IsAttribute,1,nil,t) then
-			attr=attr+t
-			
-			local e1=Effect.CreateEffect(e:GetHandler())
-			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetCode(EFFECT_IMMUNE_EFFECT)
-			e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-			e1:SetRange(LOCATION_MZONE)
-			e1:SetValue(s.immfilter)
-			e1:SetLabel(t)
-			e:GetHandler():RegisterEffect(e1)
-		end
+function s.rfilter(c)
+	return c:IsSetCard(0x201) and c:IsType(TYPE_PENDULUM) and c:IsAbleToRemove()
+        and Duel.IsExistingMatchingCard(s.psfilter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
+end
+function s.psfilter(c,code)
+	return c:IsSetCard(0x201) and c:IsType(TYPE_PENDULUM) and not c:IsCode(code) and not c:IsForbidden()
+end
+function s.pstg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chkc then return chkc:IsLocation(LOCATION_PZONE) and chkc:IsControler(tp) and s.rmfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.rmfilter,tp,LOCATION_PZONE,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	local g=Duel.SelectTarget(tp,s.rmfilter,tp,LOCATION_PZONE,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)    
+end
+function s.psop(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+        if tc and tc:IsRelateToEffect(e) and Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)>0 then
+        if not Duel.CheckLocation(tp,LOCATION_PZONE,0) and not Duel.CheckLocation(tp,LOCATION_PZONE,1) then return end
+        Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+        local g=Duel.SelectMatchingCard(tp,s.psfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetCode())
+        if #g>0 then
+            Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+        end
 	end
-	e:GetLabelObject():SetLabel(attr)
-	local str=c:GetCode()..":SummonAttributes:"
-	if attr & ATTRIBUTE_EARTH == ATTRIBUTE_EARTH then str=str.."ATTRIBUTE_EARTH|" end
-	if attr & ATTRIBUTE_WATER == ATTRIBUTE_WATER then str=str.."ATTRIBUTE_WATER|" end
-	if attr & ATTRIBUTE_FIRE == ATTRIBUTE_FIRE then str=str.."ATTRIBUTE_FIRE|" end
-	if attr & ATTRIBUTE_WIND == ATTRIBUTE_WIND then str=str.."ATTRIBUTE_WIND|" end
-	if attr & ATTRIBUTE_LIGHT == ATTRIBUTE_LIGHT then str=str.."ATTRIBUTE_LIGHT|" end
-	if attr & ATTRIBUTE_DARK == ATTRIBUTE_DARK then str=str.."ATTRIBUTE_DARK|" end
-	if attr & ATTRIBUTE_DIVINE == ATTRIBUTE_DIVINE then str=str.."ATTRIBUTE_DIVINE|" end
-	Debug.Message(str)
 end

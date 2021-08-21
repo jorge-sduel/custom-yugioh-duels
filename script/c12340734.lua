@@ -1,7 +1,7 @@
 --Morhai Spawn Dark Onslaught
 --Scripted by Secuter
 local s,id=GetID()
-s.is_ignition=true
+s.IsIgnition=true
 if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") end
 function s.initial_effect(c)
 	c:EnableReviveLimit()
