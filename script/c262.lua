@@ -14,7 +14,7 @@ function c262.initial_effect(c)
 	e5:SetCode(EFFECT_CANNOT_BE_BATTLE_TARGET)
 	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e5:SetRange(LOCATION_MZONE)
-	e5:SetValue(1)
+	e5:SetValue(aux.imval2)
 	c:RegisterEffect(e5)
 end
 c262.listed_names={95515060}
