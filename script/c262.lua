@@ -16,6 +16,7 @@ function c262.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	c:RegisterEffect(e2)
 end
+s.listed_names={95515060}
 function c262.efilter(e,te)
 	return te:IsActiveType(TYPE_SPELL)
 end
