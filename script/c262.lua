@@ -8,15 +8,19 @@ function c262.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(c262.efilter)
 	c:RegisterEffect(e1)
-	--atk
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_IGNORE_BATTLE_TARGET)
-	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e2:SetRange(LOCATION_MZONE)
-	c:RegisterEffect(e2)
+	--negate attack
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetCategory(CATEGORY_POSITION)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e3:SetCode(EVENT_BE_BATTLE_TARGET)
+	e3:SetOperation(c262.negop)
+	c:RegisterEffect(e3)
 end
-s.listed_names={95515060}
+c262.listed_names={95515060}
 function c262.efilter(e,te)
 	return te:IsActiveType(TYPE_SPELL)
+end
+function c262.negop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.NegateAttack()
 end
