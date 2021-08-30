@@ -11,7 +11,7 @@ function c260.initial_effect(c)
 	e4:SetOperation(c260.spop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={21900719}
+c260.listed_names={21900719}
 function c260.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_DESTROY)
 end
