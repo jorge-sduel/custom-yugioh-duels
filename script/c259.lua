@@ -12,7 +12,7 @@ function c259.initial_effect(c)
 	e4:SetOperation(c259.desop)
 	c:RegisterEffect(e4)
 end
-s.listed_names={95638658}
+c259.listed_names={95638658}
 function c259.costfilter(c,ec)
 	return c:IsFaceup() and c:GetEquipTarget()==ec and c:IsAbleToGraveAsCost()
 end
