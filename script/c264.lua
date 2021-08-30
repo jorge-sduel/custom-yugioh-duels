@@ -16,7 +16,7 @@ function c264.initial_effect(c)
 	e5:SetOperation(c264.atkop)
 	c:RegisterEffect(e5)
 end
-s.listed_names={68427465}
+c264.listed_names={68427465}
 function c264.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
