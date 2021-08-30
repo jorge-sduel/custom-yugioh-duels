@@ -8,14 +8,14 @@ function c262.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(c262.efilter)
 	c:RegisterEffect(e1)
-	--negate attack
-	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_POSITION)
-	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e3:SetCode(EVENT_BE_BATTLE_TARGET)
-	e3:SetOperation(c262.negop)
-	c:RegisterEffect(e3)
+	--battle target
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetCode(EFFECT_CANNOT_BE_BATTLE_TARGET)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetValue(1)
+	c:RegisterEffect(e5)
 end
 c262.listed_names={95515060}
 function c262.efilter(e,te)
