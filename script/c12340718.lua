@@ -1,5 +1,4 @@
 --Morhai Ignition Fusion
-function c12340718.initial_effect(c)
 c12340718.is_ignition=true
 if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") end
 function c12340718.initial_effect(c)
@@ -68,24 +67,6 @@ end
 function c12340718.ignfilter(c)
 	return c:IsType(TYPE_MONSTER)
 end
-function c12340718.igncon(e,c)
-	if c==nil then return true end
-	return Duel.IsExistingMatchingCard(c12340718.exfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil,c,e:GetHandlerPlayer())
-		and Duel.IsExistingMatchingCard(c12340718.ignfilter,e:GetHandlerPlayer(),LOCATION_HAND,0,2,nil)
-end
-function c12340718.ignop(e,tp,eg,ep,ev,re,r,rp)
-    local c=e:GetHandler()
-	local g=Duel.SelectMatchingCard(tp,c12340718.exfilter,tp,LOCATION_MZONE,0,1,1,nil,c,tp)
-	if g:GetCount()>0 then
-		local mg=Duel.SelectMatchingCard(tp,c12340718.ignfilter,tp,LOCATION_HAND,0,2,2,nil)
-		if mg:GetCount()>0 then
-			g:Merge(mg)
-			Duel.SendtoGrave(g,REASON_MATERIAL)
-			c:SetMaterial(g)
-		end
-	end
-end
-
 function c12340718.cfilter(c,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsAbleToGraveAsCost() and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
 end
