@@ -1,16 +1,17 @@
 --Morhai Ignition Fusion
 function c12340718.initial_effect(c)
-	--fusion material
+c12340718.is_ignition=true
+if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") end
+function c12340718.initial_effect(c)
 	c:EnableReviveLimit()
-	--ignition
+	Ignition.AddProcedure(c,c12340718.exfilter,c12340718.ignfilter,2,2)
+	--remove fusion type
 	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetRange(LOCATION_EXTRA)
-	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetCondition(c12340718.igncon)
-	e1:SetOperation(c12340718.ignop)
-	e1:SetValue(SUMMON_TYPE_SPECIAL)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetRange(0xee)
+	e1:SetCode(EFFECT_REMOVE_TYPE)
+	e1:SetValue(TYPE_FUSION)
 	c:RegisterEffect(e1)
 	--pierce
 	local e2=Effect.CreateEffect(c)
