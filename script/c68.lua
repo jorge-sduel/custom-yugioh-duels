@@ -199,6 +199,13 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local lp=0
 	for tc in aux.Next(g) do
 		Duel.SpecialSummonStep(tc,0,tp,tp,true,true,POS_FACEUP)
+			local e1=Effect.CreateEffect(c)
+			e1:SetCode(EFFECT_CHANGE_TYPE)
+			e1:SetType(EFFECT_TYPE_SINGLE)
+			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+			e1:SetValue(TYPE_MONSTER)
+			tc:RegisterEffect(e1)
 	end
 	Duel.SpecialSummonComplete()
 	if lp>0 then
