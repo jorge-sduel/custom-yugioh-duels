@@ -36,7 +36,8 @@ function c68.initial_effect(c)
 	e4:SetDescription(aux.Stringid(51,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetCode(EVENT_FREE_CHAIN)
-	e4:SetRange(LOCATION_HAND)
+	e4:SetRange(LOCATION_HAND)
+
 	e4:SetOperation(c68.rop)
 	c:RegisterEffect(e4)
 	local e5=Effect.CreateEffect(c)
@@ -94,7 +95,8 @@ e10:SetCountLimit(1,10000000)
 	c:RegisterEffect(e10)
 end
 function c68.ffilter(c,tp)
-	return (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
+	return
+ (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
 end
 function c68.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
@@ -131,7 +133,8 @@ function c68.groperation(e,tp,eg,ep,ev,re,r,rp)
 end
 function c68.rop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+
 end
 function c68.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
@@ -149,6 +152,7 @@ function c68.activate3(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(EFFECT_SPSUMMON_PROC_G)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_BOTH_SIDE)
 	e1:SetRange(LOCATION_PZONE)
+e1:SetCountLimit(1)
 	e1:SetCondition(c68.plcon)
 	e1:SetTarget(c68.pltg)
 	e1:SetOperation(c68.plop)
@@ -178,25 +182,26 @@ function c68.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(c68.ffilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
 end
-function c68.plop(e,tp,eg,ep,ev,re,r,rp)
-	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft<=0 then return end
-	if Duel.IsPlayerAffectedByEffect(tp,59822133) then ft=1 end
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,c68.ffilter,tp,LOCATION_EXTRA,0,1,ft,nil)
-	if g:GetCount()>0 then
-		local tc=g:GetFirst()
-		while tc do
-			Duel.MoveToField(tc,tp,tp,LOCATION_MZONE,POS_FACEUP,true)
-			local e1=Effect.CreateEffect(e:GetHandler())
-			e1:SetCode(EFFECT_CHANGE_TYPE)
-			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-			e1:SetValue(TYPE_MONSTER)
-			tc:RegisterEffect(e1)
-			tc=g:GetNext()
+function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
+	local tp=e:GetOwnerPlayer()
+	local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+	local lscale=c:GetLeftScale()
+	local rscale=rpz:GetRightScale()
+	if lscale>rscale then lscale,rscale=rscale,lscale end
+	local ft=Duel.GetLocationCountFromEx(tp)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,c68.ffilter,tp,LOCATION_EXTRA,0,Duel.IsSummonCancelable() and 0 or 1,ft,nil,e,tp,lscale,rscale)
+	if g then
+		sg:Merge(g)
+	end
+	if #sg>0 then
+		Duel.Hint(HINT_CARD,0,id)
+		if not inchain then
+			Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 		end
-		Duel.RaiseEvent(g,EVENT_CUSTOM+47408488,e,0,tp,0,0)
+		Duel.HintSelection(Group.FromCards(c))
+		Duel.HintSelection(Group.FromCards(rpz))
 	end
 end
