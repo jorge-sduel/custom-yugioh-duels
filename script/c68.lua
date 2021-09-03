@@ -193,7 +193,7 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,c68.ffilter,tp,LOCATION_EXTRA,0,Duel.IsSummonCancelable() and 0 or 1,ft,nil,e,tp,lscale,rscale)
-Duel.SpecialSummonStep(g,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+			Duel.MoveToField(tc,tp,tp,LOCATION_MZONE,POS_FACEUP,true)
 	if g then
 		sg:Merge(g)
 	end
