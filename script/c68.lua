@@ -93,14 +93,6 @@ e10:SetCountLimit(1,10000000)
 	e10:SetOperation(c68.activate3)
 	e10:SetValue(SUMMON_TYPE_PENDULUM)
 	c:RegisterEffect(e10)
-	--indes
-	local e11=Effect.CreateEffect(c)
-	e11:SetType(EFFECT_TYPE_SINGLE)
-	e11:SetProperty(EFFECT_TYPE_SINGLE)
-	e11:SetRange(0x3ff)
-	e11:SetCode(EFFECT_ADD_TYPE)
-	e11:SetValue(TYPE_MONSTER)
-	c:RegisterEffect(e11)
 end
 c68.pendulum_level=4
 function c68.ffilter(c,tp)
@@ -198,7 +190,7 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local rscale=rpz:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local ft=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)
-	local tg=Duel.GetMatchingGroup(c68.ffilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,nil,e,tp)
+	local tg=Duel.SelectMatchingCard(tp,c68.ffilter,tp,LOCATION_EXTRA,0,Duel.IsSummonCancelable() and 0 or 1,ft,nil,e,tp,lscale,rscale)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -206,7 +198,7 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local c=e:GetHandler()
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
-		Duel.SpecialSummonStep(tc,0,tp,tp,true,true,POS_FACEUP)
+		Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 			local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
