@@ -197,7 +197,7 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local lscale=c:GetLeftScale()
 	local rscale=rpz:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
-	local ft=Duel.GetLocationCountFromEx(tp)
+	local ft=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)
 	local tg=Duel.GetMatchingGroup(c68.ffilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,nil,e,tp)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
