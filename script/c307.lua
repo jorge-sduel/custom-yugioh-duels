@@ -37,7 +37,7 @@ function c307.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetRange(LOCATION_HAND)
-	e3:SetOperation(c62.rop)
+	e3:SetOperation(c307.rop)
 	c:RegisterEffect(e3)
 	--indes
 	local e4=Effect.CreateEffect(c)
