@@ -96,7 +96,7 @@ e10:SetCountLimit(1,10000000)
 end
 function c68.ffilter(c,tp)
 	return
- (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
+ (c:IsType(TYPE_PENDULUM) and c:IsLocation(LOCATION_HAND)) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup())
 end
 function c68.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
@@ -189,7 +189,7 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local rscale=rpz:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local ft=Duel.GetLocationCountFromEx(tp)
-	local tg=Duel.GetMatchingGroup(c68.ffilter,tp,LOCATION_EXTRA,0,nil,e,tp)
+	local tg=Duel.GetMatchingGroup(c68.ffilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,nil,e,tp)
 	if ft<=0 or #tg==0 then return end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
