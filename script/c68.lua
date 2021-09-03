@@ -192,8 +192,9 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local tg=Duel.GetMatchingGroup(c68.ffilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,nil,e,tp)
 	if ft<=0 or #tg==0 then return end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=tg:Select(tp,ft,ft,nil)
+	local g=tg:Select(tp,1,ft,nil)
 	local c=e:GetHandler()
 	local tc=g:GetFirst()
 	local lp=0
