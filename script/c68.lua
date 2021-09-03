@@ -102,6 +102,7 @@ e10:SetCountLimit(1,10000000)
 	e11:SetValue(TYPE_MONSTER)
 	c:RegisterEffect(e11)
 end
+c68.pendulum_level=4
 function c68.ffilter(c,tp)
 	return
  (c:IsType(TYPE_PENDULUM) and c:IsLocation(LOCATION_HAND)) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup())
