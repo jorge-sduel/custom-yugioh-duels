@@ -189,20 +189,31 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local rscale=rpz:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local ft=Duel.GetLocationCountFromEx(tp)
+	local tg=Duel.GetMatchingGroup(c68.ffilter,tp,LOCATION_EXTRA,0,nil,e,tp)
+	if ft<=0 or #tg==0 then return end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c68.ffilter,tp,LOCATION_EXTRA,0,Duel.IsSummonCancelable() and 0 or 1,ft,nil,e,tp,lscale,rscale)
-			Duel.MoveToField(tc,tp,tp,LOCATION_MZONE,POS_FACEUP,true)
-	if g then
-		sg:Merge(g)
+	local g=tg:Select(tp,ft,ft,nil)
+	local c=e:GetHandler()
+	local tc=g:GetFirst()
+	local lp=0
+	for tc in aux.Next(g) do
+		Duel.SpecialSummonStep(tc,0,tp,tp,true,true,POS_FACEUP)
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_DISABLE)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		tc:RegisterEffect(e1)
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_DISABLE_EFFECT)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+		tc:RegisterEffect(e2)
+		lp=lp+tc:GetBaseAttack()
 	end
-	if #sg>0 then
-		Duel.Hint(HINT_CARD,0,id)
-		if not inchain then
-			Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
-		end
-		Duel.HintSelection(Group.FromCards(c))
-		Duel.HintSelection(Group.FromCards(rpz))
+	Duel.SpecialSummonComplete()
+	if lp>0 then
+		Duel.BreakEffect()
+		Duel.Recover(1-tp,lp,REASON_EFFECT)
 	end
 end
