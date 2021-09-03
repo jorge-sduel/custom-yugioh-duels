@@ -93,6 +93,14 @@ e10:SetCountLimit(1,10000000)
 	e10:SetOperation(c68.activate3)
 	e10:SetValue(SUMMON_TYPE_PENDULUM)
 	c:RegisterEffect(e10)
+	--indes
+	local e11=Effect.CreateEffect(c)
+	e11:SetType(EFFECT_TYPE_SINGLE)
+	e11:SetProperty(EFFECT_TYPE_SINGLE)
+	e11:SetRange(0x3ff)
+	e11:SetCode(EFFECT_ADD_TYPE)
+	e11:SetValue(TYPE_MONSTER)
+	c:RegisterEffect(e11)
 end
 function c68.ffilter(c,tp)
 	return
