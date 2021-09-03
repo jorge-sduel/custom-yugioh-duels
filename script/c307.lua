@@ -91,17 +91,6 @@ e5:SetCountLimit(1,10000000)
 	e9:SetCode(EFFECT_ADD_ATTRIBUTE)
 	e9:SetValue(ATTRIBUTE_EARTH)
 	c:RegisterEffect(e9)
-	--Tuner
-	local ea=Effect.CreateEffect(c)
-	ea:SetDescription(aux.Stringid(307,1))
-	ea:SetType(EFFECT_TYPE_QUICK_O)
-	ea:SetCode(EVENT_FREE_CHAIN)
-	ea:SetRange(LOCATION_MZONE)
-	ea:SetProperty(EFFECT_FLAG_DELAY)
-	ea:SetCountLimit(1)
-	ea:SetCondition(c307.tncon)
-	ea:SetOperation(c307.tnop)
-	c:RegisterEffect(ea)
 end
 function c307.sctg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -323,19 +312,4 @@ function c307.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(LOCATION_REMOVED)
 		c:RegisterEffect(e1,true)
 	Duel.SpecialSummonComplete()
-end
-function c307.tncon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_EXTRA)
-end
-function c307.tnop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) then
-		local e1=Effect.CreateEffect(c)
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetCode(EFFECT_ADD_TYPE)
-		e1:SetValue(TYPE_TUNER)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		c:RegisterEffect(e1)
-	end
 end
