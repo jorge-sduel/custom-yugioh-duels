@@ -36,6 +36,6 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=g:FilterCount(Card.IsLocation,nil,LOCATION_DECK)
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		Duel.BreakEffect()
-		Duel.Recover(tp,2000,REASON_EFFECT)
+		Duel.Recover(tp,ct*2000,REASON_EFFECT)
 	end
 end
