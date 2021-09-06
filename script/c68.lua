@@ -96,7 +96,7 @@ e10:SetCountLimit(1,10000000)
 	c:RegisterEffect(e11)
 end
 c68.pendulum_level=4
-function c68.ffilter(c,tp)
+function c68.ffilter(c,e,tp,lscale,rscale,lvchk)
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local lv=0
 	if c.pendulum_level then
