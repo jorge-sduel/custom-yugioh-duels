@@ -78,7 +78,7 @@ e5:SetCountLimit(1,10000000)
 	e11:SetValue(2)
 	c:RegisterEffect(e11)
 end
-c68.pendulum_level=2
+c69.pendulum_level=2
 function c69.ffilter(c,tp)
 	return
  (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
