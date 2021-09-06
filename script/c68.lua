@@ -235,7 +235,7 @@ if not tc then break end
 					else
 						sg:AddCard(tc)
 						if c:IsHasEffect(511007000)~=nil or rpz:IsHasEffect(511007000)~=nil then
-							if not Pendulum.Filter(tc,e,tp,lscale,rscale) then
+							if not c68.ffilter(tc,e,tp,lscale,rscale) then
 								local pg=sg:Filter(aux.TRUE,tc)
 								local ct0,ct3,ct4=#pg,pg:FilterCount(Card.IsLocation,nil,LOCATION_HAND),pg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
 								sg:Sub(pg)
@@ -269,7 +269,7 @@ if not tc then break end
 					end
 					Duel.HintSelection(Group.FromCards(c))
 					Duel.HintSelection(Group.FromCards(rpz))
-		Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+		Duel.SpecialSummonStep(g,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 			local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
