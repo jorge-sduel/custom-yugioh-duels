@@ -261,10 +261,10 @@ if not tc then break end
 							ft2=ft2-1
 						end
 						ft=ft-1
+		Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 					end
 				end
 				if #sg>0 then
-		Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 					if not inchain then
 						Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 					end
