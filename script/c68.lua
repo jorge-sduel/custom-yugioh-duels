@@ -161,26 +161,21 @@ function c68.activate3(e,tp,eg,ep,ev,re,r,rp)
 	tc1:RegisterFlagEffect(68,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1,tc2:GetFieldID())
 	tc2:RegisterFlagEffect(68,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1,tc1:GetFieldID())
 end
-function c68.plcon(e,c,ischain,re,rp)
-	return	function(e,c,ischain,re,rp)
-				if c==nil then return true end
-				local tp=c:GetControler()
-				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
-				if rpz==nil or c==rpz or (not inchain and Duel.GetFlagEffect(tp,10000000)>0) then return false end
-				local lscale=c:GetLeftScale()
-				local rscale=rpz:GetRightScale()
-				local loc=0
-				if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then loc=loc+LOCATION_HAND end
-				if Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)>0 then loc=loc+LOCATION_EXTRA end
-				if loc==0 then return false end
-				local g=nil
-				if og then
-					g=og:Filter(Card.IsLocation,nil,loc)
-				else
-					g=Duel.GetFieldGroup(tp,loc,0)
-				end
-				return g:IsExists(Pendulum.Filter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
-			end
+function c69.plcon(e,c,og)
+	if c==nil then return true end
+	local tp=e:GetOwnerPlayer()
+	local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+	if rpz==nil or rpz:GetFieldID()~=c:GetFlagEffectLabel(68) or Duel.GetFlagEffect(tp,10000000)>0 then return false end
+	local lscale=c:GetLeftScale()
+	local rscale=rpz:GetRightScale()
+	if lscale>rscale then lscale,rscale=rscale,lscale end
+	local ft=Duel.GetLocationCountFromEx(tp)
+	if ft<=0 then return false end
+	if og then
+		return og:IsExists(c69.ffilter,1,nil,e,tp,lscale,rscale)
+	else
+		return Duel.IsExistingMatchingCard(c69.ffilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,lscale,rscale)
+	end
 end
 function c68.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
