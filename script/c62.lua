@@ -23,12 +23,14 @@ function c62.initial_effect(c)
 	e3:SetDescription(aux.Stringid(51,2))
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_HAND)
+	e3:SetRange(LOCATION_HAND)
+
 	e3:SetOperation(c62.rop)
 	c:RegisterEffect(e3)
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(90036274,0))
-	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+
 	e4:SetCode(EVENT_LEAVE_FIELD)
 e4:SetCondition(c62.pencon)
 	e4:SetTarget(c62.pentg)
@@ -79,11 +81,13 @@ e5:SetCountLimit(1,10000000)
 	e9:SetValue(ATTRIBUTE_LIGHT)
 	c:RegisterEffect(e9)
 end
+c62.pendulum_level=8
 function c62.filter(c,tp)
 	return c:IsLocation(LOCATION_GRAVE) and c:GetPreviousControler()==tp and c:IsReason(REASON_BATTLE) and c:GetAttack()>0
 end
 function c62.ffilter(c,tp)
-	return (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
+	return
+ (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
 end
 function c62.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return eg:IsContains(chkc,tp) and c62.filter(chkc,tp) end
@@ -104,10 +108,12 @@ function c62.activate(e,tp,eg,ep,ev,re,r,rp)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		Duel.RaiseEvent(c,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
 	end
-end
+end
+
 function c62.rop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+
 end
 function c62.pencon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
