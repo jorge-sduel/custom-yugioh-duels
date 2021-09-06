@@ -22,7 +22,8 @@ function c69.initial_effect(c)
 	e4:SetDescription(aux.Stringid(51,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetCode(EVENT_FREE_CHAIN)
-	e4:SetRange(LOCATION_HAND)
+	e4:SetRange(LOCATION_HAND)
+
 	e4:SetOperation(c69.rop)
 	c:RegisterEffect(e4)
 	--place
@@ -47,34 +48,40 @@ e5:SetCountLimit(1,10000000)
 	--indes
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
-	e7:SetProperty(EFFECT_TYPE_SINGLE)
+	e7:SetProperty(EFFECT_TYPE_SINGLE)
+
 	e7:SetCode(EFFECT_SET_BASE_ATTACK)
 	e7:SetValue(1800)
 	c:RegisterEffect(e7)
 	--indes
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
-	e8:SetProperty(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_TYPE_SINGLE)
+
 	e8:SetCode(EFFECT_SET_BASE_DEFENSE)
 	e8:SetValue(1600)
 	c:RegisterEffect(e8)
 	--indes
 	local e9=Effect.CreateEffect(c)
 	e9:SetType(EFFECT_TYPE_SINGLE)
-	e9:SetProperty(EFFECT_TYPE_SINGLE)
+	e9:SetProperty(EFFECT_TYPE_SINGLE)
+
 	e9:SetCode(EFFECT_ADD_ATTRIBUTE)
 	e9:SetValue(ATTRIBUTE_WIND)
 	c:RegisterEffect(e9)
 	--indes
 	local e11=Effect.CreateEffect(c)
 	e11:SetType(EFFECT_TYPE_SINGLE)
-	e11:SetProperty(EFFECT_TYPE_SINGLE)
+	e11:SetProperty(EFFECT_TYPE_SINGLE)
+
 	e11:SetCode(EFFECT_CHANGE_LEVEL)
 	e11:SetValue(2)
 	c:RegisterEffect(e11)
 end
+c68.pendulum_level=2
 function c69.ffilter(c,tp)
-	return (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
+	return
+ (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
 end
 function c69.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -96,7 +103,8 @@ function c69.op(e,tp,eg,ep,ev,re,r,rp)
 end
 function c69.rop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+
 end
 function c69.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
