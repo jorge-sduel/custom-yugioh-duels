@@ -37,7 +37,8 @@ function c67.initial_effect(c)
 	e4:SetDescription(aux.Stringid(51,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetCode(EVENT_FREE_CHAIN)
-	e4:SetRange(LOCATION_HAND)
+	e4:SetRange(LOCATION_HAND)
+
 	e4:SetOperation(c67.rop)
 	c:RegisterEffect(e4)
 	--place
@@ -85,8 +86,10 @@ e5:SetCountLimit(1,10000000)
 	e9:SetValue(ATTRIBUTE_LIGHT)
 	c:RegisterEffect(e9)
 end
+c67.pendulum_level=6
 function c67.ffilter(c,tp)
-	return (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
+	return
+ (c:IsType(TYPE_TRAP) and c:IsType(TYPE_PENDULUM))
 end
 function c67.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
@@ -150,7 +153,8 @@ function c67.mtop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c67.rop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
+
 end
 function c67.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
