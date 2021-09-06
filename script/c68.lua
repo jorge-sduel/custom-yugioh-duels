@@ -161,7 +161,7 @@ function c68.activate3(e,tp,eg,ep,ev,re,r,rp)
 	tc1:RegisterFlagEffect(68,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1,tc2:GetFieldID())
 	tc2:RegisterFlagEffect(68,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1,tc1:GetFieldID())
 end
-function c69.plcon(e,c,og)
+function c68.plcon(e,c,og)
 	if c==nil then return true end
 	local tp=e:GetOwnerPlayer()
 	local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
