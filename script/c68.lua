@@ -186,7 +186,7 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 	local tp=e:GetOwnerPlayer()
 	local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 	local lscale=c:GetLeftScale()
-	local rscale=rpz:GetRightScale()
+	local rscale=c:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local ft=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)
 	local tg=Duel.SelectMatchingCard(tp,c68.ffilter,tp,LOCATION_EXTRA,0,Duel.IsSummonCancelable() and 0 or 1,ft,nil,e,tp,lscale,rscale)
