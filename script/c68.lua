@@ -93,7 +93,6 @@ e10:SetCountLimit(1,10000000)
 	e11:SetTarget(c68.pltg)
 	e11:SetOperation(c68.plop)
 	e11:SetValue(SUMMON_TYPE_PENDULUM)
-	e11:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e11)
 end
 c68.pendulum_level=4
