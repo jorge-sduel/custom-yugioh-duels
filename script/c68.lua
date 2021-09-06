@@ -170,8 +170,7 @@ function c68.activate3(e,tp,eg,ep,ev,re,r,rp)
 	tc1:RegisterFlagEffect(68,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1,tc2:GetFieldID())
 	tc2:RegisterFlagEffect(68,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1,tc1:GetFieldID())
 end
-function c68.plcon(e,c,og)
-	return	function(e,c,ischain,re,rp)
+function c68.plcon(e,c,ischain,re,rp)
 				if c==nil then return true end
 				local tp=c:GetControler()
 				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
