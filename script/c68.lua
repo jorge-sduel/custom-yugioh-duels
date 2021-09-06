@@ -89,9 +89,7 @@ e10:SetCountLimit(1,10000000)
 	e11:SetCode(EFFECT_SPSUMMON_PROC_G)
 	e11:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_BOTH_SIDE)
 	e11:SetRange(LOCATION_PZONE)
-e11:SetCountLimit(1,10000000)
 	e11:SetCondition(c68.plcon)
-	e11:SetTarget(c68.pltg)
 	e11:SetOperation(c68.plop)
 	e11:SetValue(SUMMON_TYPE_PENDULUM)
 	c:RegisterEffect(e11)
@@ -99,7 +97,7 @@ end
 c68.pendulum_level=4
 function c68.ffilter(c,tp)
 	return
- c:IsType(TYPE_PENDULUM) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup())
+ c:IsType(TYPE_PENDULUM) and c:IsFaceup()
 end
 function c68.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
@@ -156,7 +154,6 @@ function c68.activate3(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_BOTH_SIDE)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCondition(c68.plcon)
-	e1:SetTarget(c68.pltg)
 	e1:SetOperation(c68.plop)
 	e1:SetValue(SUMMON_TYPE_PENDULUM)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
@@ -165,38 +162,113 @@ function c68.activate3(e,tp,eg,ep,ev,re,r,rp)
 	tc2:RegisterFlagEffect(68,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1,tc1:GetFieldID())
 end
 function c68.plcon(e,c,og)
-	if c==nil then return true end
-	local tp=e:GetOwnerPlayer()
-	local lscale=c:GetLeftScale()
-	local rscale=c:GetRightScale()
-	if lscale>rscale then lscale,rscale=rscale,lscale end
-	local ft=Duel.GetLocationCountFromEx(tp)
-	if ft<=0 then return false end
-	if og then
-		return og:IsExists(c68.ffilter,1,nil,e,tp,lscale,rscale)
-	else
-		return Duel.IsExistingMatchingCard(c68.ffilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,lscale,rscale)
-	end
+	return	function(e,c,ischain,re,rp)
+				if c==nil then return true end
+				local tp=c:GetControler()
+				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+				if rpz==nil or c==rpz or (not inchain and Duel.GetFlagEffect(tp,10000000)>0) then return false end
+				local lscale=c:GetLeftScale()
+				local rscale=rpz:GetRightScale()
+				local loc=0
+				if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then loc=loc+LOCATION_HAND end
+				if Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)>0 then loc=loc+LOCATION_EXTRA end
+				if loc==0 then return false end
+				local g=nil
+				if og then
+					g=og:Filter(Card.IsLocation,nil,loc)
+				else
+					g=Duel.GetFieldGroup(tp,loc,0)
+				end
+				return g:IsExists(Pendulum.Filter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+			end
 end
 function c68.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(c68.ffilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
 end
 function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
-	local tp=e:GetOwnerPlayer()
-	local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
-	local lscale=c:GetLeftScale()
-	local rscale=c:GetRightScale()
-	if lscale>rscale then lscale,rscale=rscale,lscale end
-	local ft=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)
-	local tg=Duel.SelectMatchingCard(tp,c68.ffilter,tp,LOCATION_EXTRA,0,Duel.IsSummonCancelable() and 0 or 1,ft,nil,e,tp,lscale,rscale)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	ft=math.min(ft,aux.CheckSummonGate(tp) or ft)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=tg:Select(tp,1,ft,nil)
-	local c=e:GetHandler()
-	local tc=g:GetFirst()
-	for tc in aux.Next(g) do
+				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+				local lscale=c:GetLeftScale()
+				local rscale=rpz:GetRightScale()
+				local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
+				local ft2=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)
+				local ft=Duel.GetUsableMZoneCount(tp)
+				if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then
+					if ft1>0 then ft1=1 end
+					if ft2>0 then ft2=1 end
+					ft=1
+				end
+				local loc=0
+				if ft1>0 then loc=loc+LOCATION_HAND end
+				if ft2>0 then loc=loc+LOCATION_EXTRA end
+				local tg=nil
+				if og then
+					tg=og:Filter(Card.IsLocation,nil,loc):Filter(Pendulum.Filter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+				else
+					tg=Duel.GetMatchingGroup(Pendulum.Filter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+				end
+				ft1=math.min(ft1,tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND))
+				ft2=math.min(ft2,tg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA))
+				ft2=math.min(ft2,aux.CheckSummonGate(tp) or ft2)
+				while true do
+					local ct1=tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND)
+					local ct2=tg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
+					local ct=ft
+					if ct1>ft1 then ct=math.min(ct,ft1) end
+					if ct2>ft2 then ct=math.min(ct,ft2) end
+					local loc=0
+					if ft1>0 then loc=loc+LOCATION_HAND end
+					if ft2>0 then loc=loc+LOCATION_EXTRA end
+					local g=tg:Filter(Card.IsLocation,sg,loc)
+					if #g==0 or ft==0 then break end
+					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+					local tc=Group.SelectUnselect(g,sg,tp,#sg>0,Duel.IsSummonCancelable())
+if not tc then break end
+					if sg:IsContains(tc) then
+						sg:RemoveCard(tc)
+						if tc:IsLocation(LOCATION_HAND) then
+							ft1=ft1+1
+						else
+							ft2=ft2+1
+						end
+						ft=ft+1
+					else
+						sg:AddCard(tc)
+						if c:IsHasEffect(511007000)~=nil or rpz:IsHasEffect(511007000)~=nil then
+							if not Pendulum.Filter(tc,e,tp,lscale,rscale) then
+								local pg=sg:Filter(aux.TRUE,tc)
+								local ct0,ct3,ct4=#pg,pg:FilterCount(Card.IsLocation,nil,LOCATION_HAND),pg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
+								sg:Sub(pg)
+								ft1=ft1+ct3
+								ft2=ft2+ct4
+								ft=ft+ct0
+							else
+								local pg=sg:Filter(aux.NOT(Pendulum.Filter),nil,e,tp,lscale,rscale)
+								sg:Sub(pg)
+								if #pg>0 then
+									if pg:GetFirst():IsLocation(LOCATION_HAND) then
+										ft1=ft1+1
+									else
+										ft2=ft2+1
+									end
+									ft=ft+1
+								end
+							end
+						end
+						if tc:IsLocation(LOCATION_HAND) then
+							ft1=ft1-1
+						else
+							ft2=ft2-1
+						end
+						ft=ft-1
+					end
+				end
+				if #sg>0 then
+					if not inchain then
+						Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
+					end
+					Duel.HintSelection(Group.FromCards(c))
+					Duel.HintSelection(Group.FromCards(rpz))
 		Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 			local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
