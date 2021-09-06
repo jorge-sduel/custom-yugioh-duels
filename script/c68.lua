@@ -168,7 +168,7 @@ function c68.plcon(e,c,og)
 	if c==nil then return true end
 	local tp=e:GetOwnerPlayer()
 	local lscale=c:GetLeftScale()
-	local rscale=rpz:GetRightScale()
+	local rscale=c:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local ft=Duel.GetLocationCountFromEx(tp)
 	if ft<=0 then return false end
