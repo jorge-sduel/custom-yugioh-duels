@@ -174,7 +174,7 @@ function c68.plcon(e,c,og)
 	if c==nil then return true end
 	local tp=e:GetOwnerPlayer()
 	local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
-	if rpz==nil or rpz:GetFieldID()~=c:GetFlagEffectLabel(68) or Duel.GetFlagEffect(tp,10000000)>0 then return false end
+	if rpz==nil or Duel.GetFlagEffect(tp,10000000)>0 then return false end
 	local lscale=c:GetLeftScale()
 	local rscale=rpz:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
