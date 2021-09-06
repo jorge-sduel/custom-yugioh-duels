@@ -92,6 +92,7 @@ e5:SetCountLimit(1,10000000)
 	e9:SetValue(ATTRIBUTE_EARTH)
 	c:RegisterEffect(e9)
 end
+c307.pendulum_level=3
 function c307.sctg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local mg=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),tp,LOCATION_MZONE,0,nil)
