@@ -216,5 +216,7 @@ function c68.plop(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 			tc:RegisterEffect(e2)
 	end
 	Duel.SpecialSummonComplete()
+	if lp>0 then
+		Duel.BreakEffect()
 	end
 end
