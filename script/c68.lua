@@ -98,7 +98,7 @@ end
 c68.pendulum_level=4
 function c68.ffilter(c,e,tp,lscale,rscale,lvchk)
 	if lscale>rscale then lscale,rscale=rscale,lscale end
-	local lv=0
+	local lv=c:GetLevel()
 	if c.pendulum_level then
 		lv=c.pendulum_level
 	else
