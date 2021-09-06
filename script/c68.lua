@@ -269,7 +269,7 @@ if not tc then break end
 					end
 					Duel.HintSelection(Group.FromCards(c))
 					Duel.HintSelection(Group.FromCards(rpz))
-		Duel.SpecialSummonStep(g,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+		Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 			local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
