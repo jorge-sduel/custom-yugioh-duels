@@ -97,7 +97,7 @@ end
 c68.pendulum_level=4
 function c68.ffilter(c,tp)
 	return
- (c:IsType(TYPE_PENDULUM) and c:IsLocation(LOCATION_HAND)) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup())
+ c:IsType(TYPE_PENDULUM) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup())
 end
 function c68.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
@@ -165,8 +165,6 @@ end
 function c68.plcon(e,c,og)
 	if c==nil then return true end
 	local tp=e:GetOwnerPlayer()
-	local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
-	if rpz==nil or rpz:GetFieldID()~=c:GetFlagEffectLabel(68) or Duel.GetFlagEffect(tp,10000000)>0 then return false end
 	local lscale=c:GetLeftScale()
 	local rscale=rpz:GetRightScale()
 	if lscale>rscale then lscale,rscale=rscale,lscale end
