@@ -104,7 +104,7 @@ function c68.ffilter(c,e,tp,lscale,rscale,lvchk)
 	else
 		lv=c:GetLevel()
 	end
-	return ((c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM))) or ((c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)) and not (c:IsLocation(LOCATION_EXTRA) and c:IsFacedown()) and c:IsCanBeSpecialSummoned(e,0,tp,true,true))
+	return ((c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM))) or ((c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true))
 		and (lvchk or (lv>lscale and lv<rscale) or c:IsHasEffect(511004423)) and c:IsCanBeSpecialSummoned(e,SUMON_TYPE_PENDULUM,tp,false,false)
 		and not c:IsForbidden()
 end
