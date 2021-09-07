@@ -105,7 +105,8 @@ function c68.ffilter(c,e,tp,lscale,rscale,lvchk)
 		lv=c:GetLevel()
 	end
 	return (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM)))
-		and (lvchk or (lv>lscale and lv<rscale) or c:IsHasEffect(511004423)) and not c:IsForbidden() and (c:IsType(TYPE_MONSTER) c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,true,true) or (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)))
+		and (lvchk or (lv>lscale and lv<rscale) or c:IsHasEffect(511004423)) and (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false) or c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP))
+		and not c:IsForbidden()
 end
 function c68.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp~=Duel.GetTurnPlayer()
