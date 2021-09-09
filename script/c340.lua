@@ -1,5 +1,4 @@
---早すぎた埋葬
---Premature Burial
+--Forbidem requien
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
