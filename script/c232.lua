@@ -3,7 +3,13 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	c:EnableReviveLimit()
-		s.xyz_filter=function(mc,ignoretoken,xyz,tp) return mc and (not f or f(mc,xyz,SUMMON_TYPE_XYZ|MATERIAL_XYZ,tp)) and (not 7 or mc:IsXyzLevel(c,7)) and (not mc:IsType(TYPE_TOKEN) or ignoretoken) end
+		s.xyz_filter=function(mc,ignoretoken,xyz,tp) return (mc and (not f or f(mc,xyz,SUMMON_TYPE_XYZ|MATERIAL_XYZ,tp)) and (not 7 or mc:IsXyzLevel(c,7)) and (not mc:IsType(TYPE_TOKEN) or ignoretoken)) or (	local te=c:GetCardEffect(511000189)
+	if not te then return false end
+	local f=te:GetValue()
+	if type(f)=='function' then
+		if f(te)~=lv then return false end
+	else
+		if f~=lv then return false) end
 		s.xyz_parameters={s.xyz_filter,nil,2,nil,nil,2}
 		s.minxyzct=ct
 		s.maxxyzct=maxct
