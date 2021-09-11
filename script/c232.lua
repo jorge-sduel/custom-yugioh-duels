@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	c:EnableReviveLimit()
-	s.xyz_filter=function(mc,ignoretoken,xyz,tp) return mc and mc:IsLevel(7) and (not mc:IsType(TYPE_TOKEN) or ignoretoken) end
+	s.xyz_filter=function(mc,ignoretoken,xyz,tp) return mc and mc:IsXyzLevel(7) and (not mc:IsType(TYPE_TOKEN) or ignoretoken) end
 	s.xyz_parameters={s.xyz_filter,nil,2,nil,nil,2}
 	s.minxyzct=ct
 	s.maxxyzct=maxct
@@ -11,8 +11,8 @@ function s.initial_effect(c)
 	chk1:SetType(EFFECT_TYPE_SINGLE)
 	chk1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
 	chk1:SetCode(946)
-	chk1:SetCondition(Xyz.Condition(aux.FilterBoolFunctionEx(Card.IsType,TYPE_XYZ),nil,2,2))
-	chk1:SetTarget(Xyz.Target(aux.FilterBoolFunctionEx(Card.IsType,TYPE_XYZ),nil,2,2))
+	chk1:SetCondition(Xyz.Condition(aux.FilterBoolFunctionEx(Card.IsXyzLevel,7),nil,2,2))
+	chk1:SetTarget(Xyz.Target(aux.FilterBoolFunctionEx(Card.IsXyzLevel,7),nil,2,2))
 	chk1:SetOperation(s.xyzop)
 	c:RegisterEffect(chk1)
 	local e0=Effect.CreateEffect(c)
@@ -21,8 +21,8 @@ function s.initial_effect(c)
 	e0:SetCode(EFFECT_SPSUMMON_PROC)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetRange(LOCATION_EXTRA)
-	e0:SetCondition(Xyz.Condition(aux.FilterBoolFunctionEx(Card.IsType,TYPE_XYZ),nil,2,2))
-	e0:SetTarget(Xyz.Target(aux.FilterBoolFunctionEx(Card.IsType,TYPE_XYZ),nil,2,2))
+	e0:SetCondition(Xyz.Condition(aux.FilterBoolFunctionEx(Card.IsXyzLevel,7),nil,2,2))
+	e0:SetTarget(Xyz.Target(aux.FilterBoolFunctionEx(Card.IsXyzLevel,7),nil,2,2))
 	e0:SetOperation(s.xyzop)
 	e0:SetValue(SUMMON_TYPE_XYZ)
 	e0:SetLabelObject(chk1)
