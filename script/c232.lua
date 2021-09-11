@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	--xyz summon
 	c:EnableReviveLimit()
 		s.xyz_filter=function(mc,ignoretoken,xyz,tp) return mc and (not f or f(mc,xyz,SUMMON_TYPE_XYZ|MATERIAL_XYZ,tp)) and (not 7 or mc:IsXyzLevel(c,7) or (mc:IsHasEffect(511000189):GetValue()=7) and (not mc:IsType(TYPE_TOKEN) or ignoretoken) end
-		s.xyz_parameters={s.xyz_filter,nil,2,nil,nil,2}
+		s.xyz_parameters={s.xyz_filter,2}
 		s.minxyzct=ct
 		s.maxxyzct=maxct
 	local chk1=Effect.CreateEffect(c)
