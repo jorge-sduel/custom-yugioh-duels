@@ -3,10 +3,10 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	c:EnableReviveLimit()
-	s.xyz_filter=function(mc,ignoretoken,xyz,tp) return mc and mc:IsLevel(7) and (not mc:IsType(TYPE_TOKEN) or ignoretoken) end
-	s.xyz_parameters={s.xyz_filter,nil,2,nil,nil,2}
-	s.minxyzct=ct
-	s.maxxyzct=maxct
+		s.xyz_filter=function(mc,ignoretoken,xyz,tp) return mc and (not f or f(mc,xyz,SUMMON_TYPE_XYZ|MATERIAL_XYZ,tp)) and (not 7 or mc:IsXyzLevel(c,7)) and (not mc:IsType(TYPE_TOKEN) or ignoretoken) end
+		s.xyz_parameters={s.xyz_filter,nil,2,nil,nil,2}
+		s.minxyzct=ct
+		s.maxxyzct=maxct
 	local chk1=Effect.CreateEffect(c)
 	chk1:SetType(EFFECT_TYPE_SINGLE)
 	chk1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
