@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(0,LOCATION_MZONE)
 	e4:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_MONSTER))
-	e4:SetValue(800)
+	e4:SetValue(-800)
 	c:RegisterEffect(e4)
 end
 s.xyz_number=28
