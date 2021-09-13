@@ -26,6 +26,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_EXTRA_ATTACK)
+	e3:SetCondition(s.con)
 	e3:SetValue(s.val)
 	c:RegisterEffect(e3)
 	--boost
@@ -41,6 +42,9 @@ end
 s.xyz_number=28
 function s.atfilter(c)
 	return c:IsLocation(LOCATION_HAND)
+end
+function s.con(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsCode,1,nil,53701457)
 end
 function s.val(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(s.atfilter,e:GetHandlerPlayer(),0,LOCATION_HAND,nil)-1
