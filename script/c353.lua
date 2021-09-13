@@ -71,3 +71,6 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_HAND,LOCATION_HAND)
 	Duel.Damage(p,ct*400,REASON_EFFECT)
 end
+function s.indes(e,c)
+	return not c:IsSetCard(0x48)
+end
