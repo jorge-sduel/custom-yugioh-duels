@@ -20,7 +20,7 @@ function c86123277.initial_effect(c)
 end
 
 function c86123277.hspfilter(c)
-	return c:IsType(TYPE_FUSION) and aux.IsMaterialListCode(c,70095154)
+	return c:IsType(TYPE_FUSION) and aux.IsMaterialListCode(c,70095154) or aux.IsMaterialListSetCard(c,0x1093)
 end
 function c86123277.hspcon(e,c)
 	if c==nil then return true end
