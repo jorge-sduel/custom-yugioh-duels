@@ -5,10 +5,9 @@ if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
 s.ArmorAtk=300
 s.ArmorDef=0
 s.IsArmor=true
-s.AttachFilter=function(c) return c:IsRace(RACE_WARRIOR) end
 function s.initial_effect(c)
 	--Armor
-	Armor.AddProcedure(c)
+	aux.AddArmorProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_WARRIOR),nil,CATEGORY_ATKCHANGE)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
