@@ -106,7 +106,7 @@ function s.tgfilter(c,e,tp,chk)
 		and (chk or Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil,c))
 end
 function s.cfilter(c,tc)
-	return c:IsSetCard(0x21a) and c:IsType(TYPE_MONSTER) and Armor.AttachCheck(c,tc)
+	return c:IsSetCard(0x21a) and c:IsType(TYPE_MONSTER)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=eg:Filter(s.tgfilter,nil,e,tp,false)
@@ -145,10 +145,10 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local tc=Duel.GetFirstTarget()
 	if tc and  tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsControler(tp) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACHARMOR)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH_ARMOR)
 		local sg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,tc)
 		local ec=sg:GetFirst()
-		if ec and Armor.AttachCheck(ec,tc) then
+		if ec then
 			Auxiliary.AttachArmor(tc,ec)
 		end
 	end
