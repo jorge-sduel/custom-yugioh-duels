@@ -7,13 +7,13 @@ s.ArmorDef=0
 s.IsArmor=true
 function s.initial_effect(c)
 	--Armor
-	Armor.AddProcedure(c)
+	aux.AddArmorProcedure(c,aux.FilterBoolFunction(Card.IsFaceup),nil,CATEGORY_ATKCHANGE)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetType(EFFECT_TYPE_XMATERIAL)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e1:SetCondition(Armor.Condition)
+	e1:SetCondition(aux.ArmorCondition)
 	e1:SetValue(s.ArmorAtk)
 	c:RegisterEffect(e1)
 	--add
@@ -21,7 +21,6 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_TOHAND)
 	e2:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_IGNITION)
-	e2:SetProperty(EFFECT_FLAG_NO_TURN_RESET+EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_ARMOR)
 	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.thcon)
 	e2:SetTarget(s.thtg)
@@ -31,7 +30,7 @@ end
 s.listed_names={id}
 s.listed_series={0x21a}
 function s.thcon(e)
-	return Armor.Condition(e) and e:GetHandler():IsSetCard(0x21a)
+	return aux.ArmorCondition(e) and e:GetHandler():IsSetCard(0x21a)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0x21a) and not c:IsCode(id) and c:IsAbleToHand()
