@@ -7,13 +7,13 @@ s.ArmorDef=0
 s.IsArmor=true
 function s.initial_effect(c)
 	--Armor
-	Armor.AddProcedure(c)
+	aux.AddArmorProcedure(c,aux.FilterBoolFunction(Card.IsFaceup),nil,CATEGORY_ATKCHANGE)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetType(EFFECT_TYPE_XMATERIAL)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e1:SetCondition(Armor.Condition)
+	e1:SetCondition(aux.ArmorCondition)
 	e1:SetValue(s.ArmorAtk)
 	c:RegisterEffect(e1)
 	--search
@@ -31,7 +31,7 @@ end
 s.listed_names={id}
 s.listed_series={0x21a}
 function s.thcon(e)
-	return Armor.Condition(e) and e:GetHandler():IsSetCard(0x21a)
+	return aux.ArmorCondition(e) and e:GetHandler():IsSetCard(0x21a)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0x21a) and c:IsType(TYPE_MONSTER) and not c:IsCode(id) and c:IsAbleToHand()
