@@ -30,7 +30,7 @@ end
 s.listed_names={id}
 s.listed_series={0x21a}
 function s.spcon(e)
-	return Armor.Condition(e) and e:GetHandler():IsSetCard(0x21a)
+	return aux.ArmorCondition(e) and e:GetHandler():IsSetCard(0x21a)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(id) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
