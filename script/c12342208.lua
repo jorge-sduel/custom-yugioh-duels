@@ -63,7 +63,7 @@ function s.atcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,500)
 end
 function s.atfilter(c,sc)
-	return c:IsFaceup() and c.IsArmorizing and Armor.AttachCheck(sc,c)
+	return c:IsFaceup() and c.is_armorizing and Armor.AttachCheck(sc,c)
 end
 function s.attg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
