@@ -2,15 +2,15 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.ArmorAtk=0
-s.ArmorDef=0
-s.IsArmor=true
+s.Armor_Atk=0
+s.Armor_Def=0
+s.Is_Armor=true
 function s.initial_effect(c)
 	--Armor
 	aux.AddArmorProcedure(c,aux.FilterBoolFunction(Card.IsFaceup),nil,CATEGORY_ATKCHANGE)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetDescription(aux.Stringid(12,0))
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
