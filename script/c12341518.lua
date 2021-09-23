@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	a3:SetOperation(s.spop)
 	c:RegisterEffect(a3)
 	--Ritual
-	aux.AddRitualProcGreaterCode(c,12341511)
+	Ritual.AddProcGreaterCode(c,7,nil,12341511)
 end
 s.listed_names={12341511}
 
