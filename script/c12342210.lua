@@ -2,27 +2,27 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.ArmorAtk=600
-s.ArmorDef=0
-s.IsArmor=true
-s.IsArmorizing=true
+s.Armor_Atk=600
+s.Armor_Def=0
+s.Is_Armor=true
+s.Is_Armorizing=true
 function s.initial_effect(c)
 	--armorizing summon
 	c:EnableReviveLimit()
-	Armorizing.AddProcedure(c,s.matfilter,2)
+	aux.AddArmorizingProcedure(c,s.matfilter,2)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetType(EFFECT_TYPE_XMATERIAL)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e1:SetCondition(Armor.Condition)
-	e1:SetValue(s.ArmorAtk)
+	e1:SetCondition(aux.ArmorCondition)
+	e1:SetValue(s.Armor_Atk)
 	c:RegisterEffect(e1)
 	--lv
 	local e2=Effect.CreateEffect(c)
 	e2:SetCode(EFFECT_UPDATE_LEVEL)
 	e2:SetType(EFFECT_TYPE_XMATERIAL)
-	e2:SetCondition(Armor.Condition)
+	e2:SetCondition(aux.ArmorCondition)
 	e2:SetValue(2)
 	c:RegisterEffect(e2)
 	--armor:attach
@@ -30,9 +30,8 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_ATTACH_ARMOR)
 	e3:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_IGNITION)
-	e3:SetProperty(EFFECT_FLAG_NO_TURN_RESET+EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_ARMOR)
 	e3:SetCountLimit(1,id)
-	e3:SetCondition(Armor.Condition)
+	e3:SetCondition(aux.ArmorCondition)
 	e3:SetTarget(s.attg)
 	e3:SetOperation(s.atop)
 	c:RegisterEffect(e3)
@@ -81,19 +80,19 @@ function s.matfilter(c,lc,sumtype,tp)
 end
 
 function s.atfilter(c,tc)
-	return c:IsSetCard(0x21a) and not c:IsCode(id) and Armor.AttachCheck(c,tc)
+	return c:IsSetCard(0x21a) and not c:IsCode(id)
 end
 function s.attg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.atfilter(chkc,e:GetHandler()) end
 	if chk==0 then return Duel.IsExistingTarget(s.atfilter,tp,LOCATION_GRAVE,0,1,nil,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACHARMOR)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH_ARMOR)
 	local g=Duel.SelectTarget(tp,s.atfilter,tp,LOCATION_GRAVE,0,1,1,nil,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_ATTACH_ARMOR,g,1,0,0)
 end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Armor.Attach(e:GetHandler(),tc)
+		Auxiliary.AttachArmor(e:GetHandler(),tc)
 	end
 end
 
@@ -101,7 +100,7 @@ function s.atcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_ARMORIZING
 end
 function s.atfilter2(c,tc)
-	return c:IsSetCard(0x21a) and Armor.AttachCheck(c,tc)
+	return c:IsSetCard(0x21a)
 end
 function s.attg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atfilter2,tp,LOCATION_GRAVE,0,1,nil,e:GetHandler()) end
@@ -114,10 +113,10 @@ function s.atop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
 		local rg=Duel.GetMatchingGroup(s.atfilter2,tp,LOCATION_GRAVE,0,nil,c)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACHARMOR)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH_ARMOR)
 		local g=aux.SelectUnselectGroup(rg,e,tp,1,5,s.rescon,1,tp,HINTMSG_SELECT,nil,nil,true)
 		if #g>0 then
-			Armor.Attach(c,g)
+			Auxiliary.AttachArmor(c,g)
 		end
 	end
 end
@@ -139,7 +138,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.atfilter3(c,sc)
-	return c:IsFaceup() and Armor.AttachCheck(sc,c)
+	return c:IsFaceup()
 end
 function s.attg3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
@@ -151,7 +150,7 @@ end
 function s.atop3(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Armor.Attach(tc,e:GetHandler())
+		Auxiliary.AttachArmor(tc,e:GetHandler())
 	end
 end
 
@@ -164,7 +163,6 @@ end
 function s.spfilter(c,e,tp,ar)
 	return c:IsSetCard(0x21a) and c:IsRace(RACE_WARRIOR) and c:IsLevelBelow(4)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
-		and Armor.AttachCheck(ar,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -183,7 +181,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local c=e:GetHandler()
 		if c and c:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and Armor.AttachCheck(c,tc) then
 			Duel.BreakEffect()
-			Armor.Attach(tc,c)
+			Auxiliary.AttachArmor(tc,c)
 		end
 	end
 end
