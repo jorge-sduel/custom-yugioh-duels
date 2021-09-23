@@ -46,7 +46,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 
 function s.atfilter(c,tc)
-	return c:IsSetCard(0x21a) and c.is_armor
+	return c.is_armor
 end
 function s.attg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atfilter,tp,LOCATION_DECK,0,1,nil,e:GetHandler()) end
