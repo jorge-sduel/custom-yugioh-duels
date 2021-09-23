@@ -46,7 +46,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 
 function s.atfilter(c,tc)
-	return c:IsSetCard(0x21a) and Armor.AttachCheck(c,tc)
+	return c:IsSetCard(0x21a) and c.is_Armor
 end
 function s.attg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atfilter,tp,LOCATION_DECK,0,1,nil,e:GetHandler()) end
@@ -58,7 +58,7 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACHARMOR)
 		local g=Duel.SelectMatchingCard(tp,s.atfilter,tp,LOCATION_DECK,0,1,1,nil,c)
 		if #g>0 then
-			Armor.Attach(c,g)
+			Auxiliary.AttachArmor(e:GetHandler(),g)
 		end
 	end
 end
