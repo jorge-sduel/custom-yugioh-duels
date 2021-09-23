@@ -75,7 +75,7 @@ end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Armor.Attach(tc,e:GetHandler())
+		Auxiliary.AttachArmor(e:GetHandler(),tc)
 	end
 end
 
