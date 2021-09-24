@@ -2,9 +2,9 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.ArmorAtk=0
-s.ArmorDef=0
-s.IsArmor=true
+s.armor_Atk=0
+s.armor_Def=0
+s.is_armor=true
 function s.initial_effect(c)
 	--Armor
 	Armor.AddProcedure(c)
@@ -24,7 +24,6 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_TOGRAVE)
 	e2:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_IGNITION)
-	e2:SetProperty(EFFECT_FLAG_NO_TURN_RESET+EFFECT_FLAG_ARMOR)
 	e2:SetCountLimit(1,id+30)
 	e2:SetCondition(s.tgcon)
 	e2:SetCost(s.tgcost)
@@ -34,10 +33,10 @@ function s.initial_effect(c)
 end
 s.listed_series={0x21a}
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0x21a) and c.IsArmor and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+	return c:IsSetCard(0x21a) and c.is_armor and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function s.filter(c,e,tp)
-	return c:IsSetCard(0x21a) and c.IsArmorizing and not c:IsType(TYPE_XYZ)
+	return c:IsSetCard(0x21a) and c.is_armorizing and not c:IsType(TYPE_XYZ)
 		and c:GetOverlayGroup():IsExists(s.spfilter,1,nil,e,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -107,7 +106,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.tgcon(e)
-	return Armor.Condition(e) and e:GetHandler():IsSetCard(0x21a)
+	return aux.ArmorCondition(e) and e:GetHandler():IsSetCard(0x21a)
 end
 function s.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
