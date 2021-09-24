@@ -2,10 +2,10 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.Armor_Atk=600
-s.Armor_Def=0
-s.Is_Armor=true
-s.Is_Armorizing=true
+s.armor_Atk=600
+s.armor_Def=0
+s.is_armor=true
+s.is_armorizing=true
 function s.initial_effect(c)
 	--armorizing summon
 	c:EnableReviveLimit()
@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_XMATERIAL)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetCondition(aux.ArmorCondition)
-	e1:SetValue(s.Armor_Atk)
+	e1:SetValue(s.armor_Atk)
 	c:RegisterEffect(e1)
 	--lv
 	local e2=Effect.CreateEffect(c)
@@ -99,8 +99,8 @@ end
 function s.atcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_ARMORIZING
 end
-function s.atfilter2(c,tc)
-	return c:IsSetCard(0x21a)
+function s.atfilter2(c)
+	return c:IsSetCard(0x21a) and c.is_armor
 end
 function s.attg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.atfilter2,tp,LOCATION_GRAVE,0,1,nil,e:GetHandler()) end
