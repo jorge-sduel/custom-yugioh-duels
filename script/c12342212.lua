@@ -2,12 +2,12 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.ArmorAtk=0
-s.ArmorDef=0
+s.Armor_Atk=0
+s.Armor_Def=0
 s.IsArmor=true
 function s.initial_effect(c)
 	--Armor
-	Armor.AddProcedure(c)
+	aux.AddArmorProcedure(c,aux.FilterBoolFunction(Card.IsFaceup),nil,CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -23,7 +23,6 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_IGNITION)
-	e2:SetProperty(EFFECT_FLAG_NO_TURN_RESET+EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_ARMOR)
 	e2:SetCountLimit(1,id+30)
 	e2:SetCondition(s.spcon)
 	e2:SetCost(s.spcost)
@@ -44,7 +43,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function s.atfilter(c,tc)
-	return c:IsSetCard(0x21a) and Armor.AttachCheck(c,tc)
+	return c:IsSetCard(0x21a) and c.is_armor
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -53,18 +52,18 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		tc:CompleteProcedure()
 		if Duel.IsExistingMatchingCard(s.atfilter,tp,LOCATION_GRAVE,0,1,nil,tc)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACHARMOR)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH_ARMOR)
 			local g=Duel.SelectMatchingCard(tp,s.atfilter,tp,LOCATION_GRAVE,0,1,1,nil,tc)
 			Duel.BreakEffect()			
 			if #g>0 then
-				Armor.Attach(tc,g)
+				Auxiliary.AttachArmor(tc,g)
 			end
 		end
 	end
 end
 
 function s.spcon(e)
-	return Armor.Condition(e) and e:GetHandler():IsSetCard(0x21a)
+	return aux.ArmorCondition(e) and e:GetHandler():IsSetCard(0x21a)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
