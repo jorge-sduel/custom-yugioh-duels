@@ -2,8 +2,8 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.armor_Atk=300
-s.armor_Def=0
+s.armor_atk=300
+s.armor_def=0
 s.is_armor=true
 function s.initial_effect(c)
 	--Armor
@@ -13,8 +13,8 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetType(EFFECT_TYPE_XMATERIAL)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e1:SetCondition(aux.ArmorCondition)
-	e1:SetValue(s.armor_Atk)
+	e1:SetCondition(aux.armorCondition)
+	e1:SetValue(s.armor_atk)
 	c:RegisterEffect(e1)
 	--indes
 	local e2=Effect.CreateEffect(c)
@@ -62,7 +62,7 @@ function s.atcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,500)
 end
 function s.atfilter(c,sc)
-	return c:IsFaceup() and c.IsArmorizing and Armor.AttachCheck(sc,c)
+	return c:IsFaceup() and c.is_armorizing
 end
 function s.attg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
@@ -74,7 +74,7 @@ end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Armor.Attach(tc,e:GetHandler())
+		Auxiliary.AttachArmor(tc,e:GetHandler())
 	end
 end
 
