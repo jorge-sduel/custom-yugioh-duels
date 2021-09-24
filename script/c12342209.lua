@@ -2,11 +2,11 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.IsArmorizing=true
+s.Is_Armorizing=true
 function s.initial_effect(c)
 	--armorizing summon
 	c:EnableReviveLimit()
-	Armorizing.AddProcedure(c,s.matfilter,1)
+	aux.AddArmorizingProcedure(c,s.matfilter,1)
 	--splimit
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -75,7 +75,7 @@ function s.sumsuc(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.tgtg(e,c)
-	return c:IsSetCard(0x21a) and c.IsArmorizing
+	return c:IsSetCard(0x21a) and c.Is_Armorizing
 end
 
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
@@ -95,10 +95,10 @@ end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACHARMOR)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH_ARMOR)
 		local g=Duel.SelectMatchingCard(tp,s.atfilter,tp,LOCATION_DECK,0,1,1,nil,c)
 		if #g>0 then
-			Armor.Attach(c,g)
+			Auxiliary.AttachArmor(c,g)
 		end
 	end
 end
