@@ -2,9 +2,9 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.ArmorAtk=300
-s.ArmorDef=0
-s.IsArmor=true
+s.armor_Atk=300
+s.armor_Def=0
+s.is_armor=true
 function s.initial_effect(c)
 	--Armor
 	aux.AddArmorProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_WARRIOR),nil,CATEGORY_ATKCHANGE)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_XMATERIAL)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetCondition(aux.ArmorCondition)
-	e1:SetValue(s.ArmorAtk)
+	e1:SetValue(s.armor_Atk)
 	c:RegisterEffect(e1)
 	--indes
 	local e2=Effect.CreateEffect(c)
