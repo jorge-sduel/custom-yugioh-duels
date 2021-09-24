@@ -85,7 +85,6 @@ end
 function s.attg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.atfilter(chkc,e:GetHandler()) end
 	if chk==0 then return Duel.IsExistingTarget(s.atfilter,tp,LOCATION_GRAVE,0,1,nil,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH_ARMOR)
 	local g=Duel.SelectTarget(tp,s.atfilter,tp,LOCATION_GRAVE,0,1,1,nil,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_ATTACH_ARMOR,g,1,0,0)
 end
@@ -113,7 +112,6 @@ function s.atop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
 		local rg=Duel.GetMatchingGroup(s.atfilter2,tp,LOCATION_GRAVE,0,nil,c)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH_ARMOR)
 		local g=aux.SelectUnselectGroup(rg,e,tp,1,5,s.rescon,1,tp,HINTMSG_SELECT,nil,nil,true)
 		if #g>0 then
 			Auxiliary.AttachArmor(c,g)
