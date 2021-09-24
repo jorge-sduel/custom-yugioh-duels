@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsHasProperty(EFFECT_FLAG_ARMOR) and Duel.IsChainNegatable(ev) and Duel.GetTurnPlayer()~=tp
+	return Duel.IsChainNegatable(ev) and Duel.GetTurnPlayer()~=tp
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not e:GetHandler():IsStatus(STATUS_CHAINING)
