@@ -31,11 +31,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 and Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
-		local g=re:GetHandler():GetOverlayGroup():Filter(Armor.AttachCheck,nil,c)
+		local g=re:GetHandler():GetOverlayGroup()
 		if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACHARMOR)
 			local sg=g:Select(tp,1,1,nil)
-			Armor.Attach(c,sg)
+			Auxiliary.AttachArmor(c,sg)
 		end
 	end
 end
