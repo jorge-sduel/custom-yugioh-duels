@@ -2,12 +2,12 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.ArmorAtk=0
-s.ArmorDef=0
-s.IsArmor=true
+s.armor_Atk=0
+s.armor_Def=0
+s.is_armor=true
 function s.initial_effect(c)
 	--Armor
-	Armor.AddProcedure(c)
+	aux.AddArmorProcedure(c,aux.FilterBoolFunction(Card.IsFaceup),nil,CATEGORY_ATKCHANGE)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -26,7 +26,6 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_CHAINING)
-	e2:SetProperty(EFFECT_FLAG_NO_TURN_RESET+EFFECT_FLAG_ARMOR+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e2:SetCountLimit(1,id+30)
 	e2:SetCondition(s.con2)
 	e2:SetCost(s.cost2)
@@ -62,7 +61,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.con2(e,tp,eg,ep,ev,re,r,rp)
-	return Armor.Condition(e) and e:GetHandler():IsSetCard(0x21a)
+	return aux.ArmorCondition(e) and e:GetHandler():IsSetCard(0x21a)
 		and Duel.IsChainNegatable(ev) and (re:IsActiveType(TYPE_MONSTER) or re:IsHasType(EFFECT_TYPE_ACTIVATE))
 end
 function s.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
