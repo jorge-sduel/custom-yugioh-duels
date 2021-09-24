@@ -2,7 +2,7 @@
 --Scripted by Secuter
 local s,id=GetID()
 if not ARMOR_IMPORTED then Duel.LoadScript("proc_armor.lua") end
-s.Is_Armorizing=true
+s.is_armorizing=true
 function s.initial_effect(c)
 	--armorizing summon
 	c:EnableReviveLimit()
@@ -75,7 +75,7 @@ function s.sumsuc(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.tgtg(e,c)
-	return c:IsSetCard(0x21a) and c.Is_Armorizing
+	return c:IsSetCard(0x21a) and c.is_armorizing
 end
 
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
