@@ -32,8 +32,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x21a}
-function s.atfilter(c,tc)
-	return c:IsSetCard(0x21a) and not c:IsCode(id)
+function s.atfilter(c)
+	return c:IsSetCard(0x21a) and not c:IsCode(id) and c.is_armor
 end
 function s.filter(c,tp)
 	return c:IsSetCard(0x21a) and not c:IsType(TYPE_XYZ) and Duel.IsExistingMatchingCard(s.atfilter,tp,LOCATION_DECK,0,1,nil,c)
@@ -41,14 +41,14 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc,tp) end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ARMORTARGET)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ARMOR_TARGET)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_ATTACH_ARMOR,g,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACHARMOR)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH_ARMOR)
 		local g=Duel.SelectMatchingCard(tp,s.atfilter,tp,LOCATION_DECK,0,1,1,nil,tc)
 		if #g>0 then
 			Auxiliary.AttachArmor(tc,g)
