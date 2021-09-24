@@ -138,7 +138,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.atfilter3(c,sc)
-	return c:IsFaceup()
+	return c:IsFaceup() and c.is_armor
 end
 function s.attg3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
