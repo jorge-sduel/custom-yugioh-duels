@@ -55,7 +55,6 @@ end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTACH_ARMOR)
 		local g=Duel.SelectMatchingCard(tp,s.atfilter,tp,LOCATION_DECK,0,1,1,nil,c)
 		if #g>0 then
 			Auxiliary.AttachArmor(e:GetHandler(),g)
