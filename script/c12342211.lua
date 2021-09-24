@@ -7,7 +7,7 @@ s.armor_Def=0
 s.is_armor=true
 function s.initial_effect(c)
 	--Armor
-	Armor.AddProcedure(c)
+	aux.AddArmorProcedure(c,aux.FilterBoolFunction(Card.IsFaceup),nil,CATEGORY_ATKCHANGE)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
