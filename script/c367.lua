@@ -48,7 +48,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return (r&REASON_EFFECT)~=0
 end
 function s.filter2(c)
-	return c:IsRitualMonster() and c:IsLevelBelow(7) and c:IsAbleToHand()
+	return c:IsRitualMonster() and c:IsAbleToHand()
 end
 function s.filter(c)
 	return c:IsRitualSpell() and c:IsAbleToHand()
