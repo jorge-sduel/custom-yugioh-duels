@@ -15,7 +15,7 @@ function c240.initial_effect(c)
 	e2:SetTargetRange(0,LOCATION_HAND)
 	e2:SetCode(EFFECT_DISABLE)
 	c:RegisterEffect(e2)
-	--battle indestructable
+	--battle indestructabl
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
