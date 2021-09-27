@@ -64,8 +64,9 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
-	end
+		Duel.ConfirmCards(1-tp,tc)
 	local g2=Duel.SelectTarget(tp,s.thfilter2,tp,LOCATION_DECK,0,1,1,nil)
 		Duel.SendtoHand(g2,nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,tc)
+		Duel.ConfirmCards(1-tp,g2)
+	end
 end
