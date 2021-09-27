@@ -55,7 +55,7 @@ function c240.initial_effect(c)
 		c:RegisterEffect(e7)
 end
 c240.xyz_number=23
-function s.indes(e,c)
+function c240.indes(e,c)
 	return not c:IsSetCard(0x48)
 end
 
