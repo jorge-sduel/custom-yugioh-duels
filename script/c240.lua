@@ -55,9 +55,10 @@ function c240.initial_effect(c)
 		c:RegisterEffect(e7)
 end
 c240.xyz_number=23
-function c240.indes(e,c)
+function s.indes(e,c)
 	return not c:IsSetCard(0x48)
 end
+
 function c240.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
