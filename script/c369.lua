@@ -52,7 +52,7 @@ function s.reccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.recfilter(c)
-	return c:IsSetCard(0xc9) and c:GetAttack()>0
+	return c:IsSetCard(0xb4) and c:GetAttack()>0
 end
 function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.recfilter(chkc) end
