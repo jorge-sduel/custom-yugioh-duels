@@ -30,8 +30,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c,e,tp)
 	if not c:IsType(TYPE_MONSTER)
-		and (c:IsFaceup() or not c:IsLocation(LOCATION_REMOVED))
-		and c:IsAbleToDeck() then 
+		and c:IsFaceup() and c:IsAbleToDeck() then 
 		return false
 	end
 	local eff={c:GetCardEffect(id)}
