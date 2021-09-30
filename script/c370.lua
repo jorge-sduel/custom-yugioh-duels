@@ -33,15 +33,6 @@ function s.filter(c,e,tp)
 		and c:IsFaceup() and c:IsAbleToDeck() then 
 		return false
 	end
-	local eff={c:GetCardEffect(id)}
-	for _,teh in ipairs(eff) do
-		local te=teh:GetLabelObject()
-		local con=te:GetCondition()
-		local tg=te:GetTarget()
-		if (not con or con(te,tp,Group.CreateGroup(),PLAYER_NONE,0,teh,REASON_EFFECT,PLAYER_NONE,0)) 
-			and (not tg or tg(te,tp,Group.CreateGroup(),PLAYER_NONE,0,teh,REASON_EFFECT,PLAYER_NONE,0)) then return true end
-	end
-	return false
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
