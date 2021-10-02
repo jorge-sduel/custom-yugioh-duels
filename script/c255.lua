@@ -34,6 +34,9 @@ local e4=Effect.CreateEffect(c)
 	e7:SetOperation(c255.spop)
 	c:RegisterEffect(e7)
 end
+function c255.efilter(e,te)
+	return te:GetOwnerPlayer()~=e:GetHandlerPlayer()
+end
 function c255.ffilter(c)
 	return c:IsCode(8491308)
 end
