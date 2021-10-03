@@ -25,14 +25,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
-	--disable
+--
 	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetRange(LOCATION_PZONE)
-	e2:SetCode(EVENT_CHAIN_SOLVING)
-	e2:SetCountLimit(1)
-	e2:SetCondition(s.discon)
-	e2:SetOperation(s.disop)
+	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_QUICK_O)
+	e2:SetCode(EVENT_CHAINING)
+	e2:SetRange(LOCATION_HAND)
+	e2:SetCondition(s.con2)
+	e2:SetOperation(s.op2)
 	c:RegisterEffect(e2)
 	--pendulum
 	local e7=Effect.CreateEffect(c)
@@ -47,14 +47,20 @@ function s.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 s.pendulum_level=7
-function s.discon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsChainNegatable(ev) and aux.damcon1(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():GetFlagEffect(id)==0
+function s.con2(e,tp,eg,ep,ev,re,r,rp)
+	return aux.damcon1(e,tp,eg,ep,ev,re,r,rp)
 end
-function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.SelectEffectYesNo(tp,e:GetHandler()) then return end
-	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
-	if not Duel.NegateEffect(ev) then return end
-	Duel.BreakEffect()
+function s.op2(e,tp,eg,ep,ev,re,r,rp,val,r,rc)
+	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_CHANGE_DAMAGE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(1,0)
+	e1:SetLabel(cid)
+	e1:SetValue(s.refcon)
+	e1:SetReset(RESET_CHAIN)
+	Duel.RegisterEffect(e1,tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
