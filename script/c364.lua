@@ -1,4 +1,4 @@
---Tribute Ticket
+--odd eyes rise dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon
@@ -23,6 +23,7 @@ function s.initial_effect(c)
 	--
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCondition(s.con)
 	e3:SetCode(511001225)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetValue(1)
@@ -40,6 +41,10 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
 	return a:IsControler(tp) and a:IsOnField() and d and d:IsDefensePos()
+end
+function s.con(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:IsLocation(LOCATION_MZONE)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
