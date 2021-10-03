@@ -25,6 +25,15 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
+	--disable
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e2:SetRange(LOCATION_PZONE)
+	e2:SetCode(EVENT_CHAIN_SOLVING)
+	e2:SetCountLimit(1)
+	e2:SetCondition(s.discon)
+	e2:SetOperation(s.disop)
+	c:RegisterEffect(e2)
 	--pendulum
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(90036274,0))
@@ -38,6 +47,15 @@ function s.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 s.pendulum_level=7
+function s.discon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsChainNegatable(ev) and aux.damcon1(e,tp,eg,ep,ev,re,r,rp) and e:GetHandler():GetFlagEffect(id)==0
+end
+function s.disop(e,tp,eg,ep,ev,re,r,rp)
+	if not Duel.SelectEffectYesNo(tp,e:GetHandler()) then return end
+	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
+	if not Duel.NegateEffect(ev) then return end
+	Duel.BreakEffect()
+end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) end
