@@ -1,3 +1,4 @@
+SUMMON_TYPE_EQUILIBRIUM = 0x4000000000000000000000
 EQUILIBRIUM_IMPORTED=true
 if not aux.EquilibriumProcedure then
 	aux.EquilibriumProcedure = {}
