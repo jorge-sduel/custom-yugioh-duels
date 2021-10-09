@@ -153,7 +153,6 @@ function Equilibrium.Operation()
 			end
 end
 function Equilibrium.attachcond()
-	local tp=e:GetHandler():GetControler()
 	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
 	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 	if not tc1 or not tc2 then return false end
