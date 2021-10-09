@@ -28,7 +28,6 @@ if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_HAND)
 	c:RegisterEffect(e2)
-end
 function Equilibrium.Filter(c,e,tp,lscale,rscale,lvchk)
 	local lv=0
 	if c.pendulum_level then
