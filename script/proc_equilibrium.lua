@@ -37,7 +37,7 @@ function(c,reg,desc)
 		e2:SetRange(LOCATION_HAND)
 		c:RegisterEffect(e2)
 	end
-end
+end)
 function Equilibrium.Filter(c,e,tp,lscale,rscale,lvchk)
 	local lv=0
 	if c.pendulum_level then
