@@ -51,7 +51,7 @@ function Equilibrium.Condition()
 				if c==nil then return true end
 				local tp=c:GetControler()
 				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
-				if rpz==nil or c==rpz or (not inchain and Duel.GetFlagEffect(tp,10000000)>0) then return false end
+				if not inchain and Duel.GetFlagEffect(tp,10000000)>0 then return false end
 				local lscale=c:GetLeftScale()
 				local rscale=c:GetRightScale()
 				local loc=0
