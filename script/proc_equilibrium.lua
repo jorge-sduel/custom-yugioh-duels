@@ -159,7 +159,7 @@ function Equilibrium.attachcond()
 	if not tc1 or not tc2 then return false end
 	return tc1:GetLeftScale()==tc2:GetRightScale()
 end
-function Equilibrium.cfilter()
+function Equilibrium.cfilter(c,e)
 	return c:IsType(TYPE_PENDULUM)
 end
 function Equilibrium.attachop()
