@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 s.pendulum_level=7
-function s.condition(e,tp,eg,ep,ev,re,r,rp)
+function s.con2(e,tp,eg,ep,ev,re,r,rp)
 	local ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_DAMAGE)
 	if ex then return true end
 	ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_RECOVER)
@@ -57,7 +57,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 		or Duel.IsPlayerAffectedByEffect(1,EFFECT_REVERSE_RECOVER)
 	end
 end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
+function s.op2(e,tp,eg,ep,ev,re,r,rp)
 	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
