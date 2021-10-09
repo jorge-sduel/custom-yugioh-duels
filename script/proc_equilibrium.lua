@@ -69,7 +69,6 @@ function Equilibrium.Condition()
 end
 function Equilibrium.Operation()
 	return	function(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
-				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 				local lscale=c:GetLeftScale()
 				local rscale=c:GetRightScale()
 				local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
