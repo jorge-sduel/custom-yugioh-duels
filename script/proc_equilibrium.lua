@@ -28,9 +28,10 @@ function(c,reg,desc)
 	if reg==nil or reg then
 		local e2=Effect.CreateEffect(c)
 		e2:SetDescription(1160)
-		e2:SetType(EFFECT_TYPE_ACTIVATE)
-		e2:SetCode(EVENT_FREE_CHAIN)
+		e2:SetType(EFFECT_TYPE_IGNITION)
 		e2:SetRange(LOCATION_HAND)
+		e2:SetCondition(Equilibrium.attachcond)
+		e2:SetOperation(Equilibrium.attachop)
 		c:RegisterEffect(e2)
 	end
 end,"handler","register","desc")
@@ -150,4 +151,23 @@ function Equilibrium.Operation()
 					Duel.HintSelection(Group.FromCards(c))
 				end
 			end
+end
+function Equilibrium.attachcond()
+	local tp=e:GetHandler():GetControler()
+	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
+	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+	if not tc1 or not tc2 then return false end
+	return tc1:GetLeftScale()==tc2:GetRightScale()
+end
+function Equilibrium.cfilter()
+	return c:IsType(TYPE_PENDULUM)
+end
+function Equilibrium.attachop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local g=Duel.SelectMatchingCard(tp,Equilibrium.cfilter,tp,LOCATION_PZONE,0,2,2,nil)
+	Duel.SendtoGrave(g,REASON_RULE)
+	c:SetMaterial(g)
+Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	Duel.Overlay(c,g)
+
 end
