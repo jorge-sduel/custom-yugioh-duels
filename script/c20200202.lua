@@ -38,8 +38,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=g:GetClassCount(Card.GetCode)	
 	local g1=Duel.GetDecktopGroup(tp,ct)
 	local g2=Duel.GetDecktopGroup(1-tp,ct)
-		Duel.SendtoGrave(g1,nil,REASON_EFFECT)
-		Duel.SendtoGrave(g2,nil,REASON_EFFECT)
+		Duel.SendtoGrave(g1,REASON_EFFECT)
+		Duel.SendtoGrave(g2,REASON_EFFECT)
 	
 	
 	local g=Duel.GetOperatedGroup()
