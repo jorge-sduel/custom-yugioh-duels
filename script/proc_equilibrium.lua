@@ -114,7 +114,7 @@ function Equilibrium.Operation()
 						ft=ft+1
 					else
 						sg:AddCard(tc)
-						if c:IsHasEffect(511007000)~=nil or rpz:IsHasEffect(511007000)~=nil then
+						if c:IsHasEffect(511007000)~=nil or c:IsHasEffect(511007000)~=nil then
 							if not Pendulum.Filter(tc,e,tp,lscale,rscale) then
 								local pg=sg:Filter(aux.TRUE,tc)
 								local ct0,ct3,ct4=#pg,pg:FilterCount(Card.IsLocation,nil,LOCATION_HAND),pg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
@@ -148,7 +148,6 @@ function Equilibrium.Operation()
 						Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 					end
 					Duel.HintSelection(Group.FromCards(c))
-					Duel.HintSelection(Group.FromCards(rpz))
 				end
 			end
 end
