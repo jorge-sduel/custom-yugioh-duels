@@ -59,21 +59,14 @@ function s.con2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.op2(e,tp,eg,ep,ev,re,r,rp)
-	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CHANGE_DAMAGE)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetTargetRange(1,1)
-	e1:SetLabel(cid)
 	e1:SetValue(s.refcon)
 	e1:SetReset(RESET_CHAIN)
 	Duel.RegisterEffect(e1,tp)
-		end
-	end
-end
-function s.filter(c)
-	return c:IsFaceup() and c:IsAbleToDeck()
 end
 function s.refcon(e,re,val,r,rp,rc)
 	local cc=Duel.GetCurrentChain()
