@@ -21,13 +21,14 @@ if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 	e1:SetOperation(Equilibrium.Operation())
 	e1:SetValue(SUMMON_TYPE_EQUILIBRIUM)
 	c:RegisterEffect(e1)
+end
 	--register by default
-		local e2=Effect.CreateEffect(c)
-		e2:SetDescription(1160)
-		e2:SetType(EFFECT_TYPE_ACTIVATE)
-		e2:SetCode(EVENT_FREE_CHAIN)
-		e2:SetRange(LOCATION_HAND)
-		c:RegisterEffect(e2)
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(1160)
+	e2:SetType(EFFECT_TYPE_ACTIVATE)
+	e2:SetCode(EVENT_FREE_CHAIN)
+	e2:SetRange(LOCATION_HAND)
+	c:RegisterEffect(e2)
 end
 function Equilibrium.Filter(c,e,tp,lscale,rscale,lvchk)
 	local lv=0
