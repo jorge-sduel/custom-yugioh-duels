@@ -21,7 +21,6 @@ if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 	e1:SetOperation(Equilibrium.Operation())
 	e1:SetValue(SUMMON_TYPE_EQUILIBRIUM)
 	c:RegisterEffect(e1)
-end
 	--register by default
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(1160)
