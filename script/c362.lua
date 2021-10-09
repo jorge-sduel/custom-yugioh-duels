@@ -31,6 +31,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_CHAINING)
 	e2:SetRange(LOCATION_PZONE)
+	e2:SetCountLimit(1)
 	e2:SetCondition(s.con2)
 	e2:SetOperation(s.op2)
 	c:RegisterEffect(e2)
@@ -68,13 +69,6 @@ function s.op2(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(s.refcon)
 	e1:SetReset(RESET_CHAIN)
 	Duel.RegisterEffect(e1,tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	if #g>0 then
-		Duel.HintSelection(g)
-		if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT) then
-			local tc=g:GetFirst()
-			local atk=tc:GetTextAttack()
-			if atk<0 then atk=0 end
 		end
 	end
 end
