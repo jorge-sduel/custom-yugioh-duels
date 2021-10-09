@@ -11,6 +11,9 @@ add at the start of the script to add Ingition procedure
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 ]]
 --Equilibrium Summon
+--add procedure to Pendulum monster, also allows registeration of activation effect
+Equlibrium.AddProcedure = aux.FunctionWithNamedArgs(
+function(c,reg,desc)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	if desc then
@@ -26,12 +29,15 @@ if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 	e1:SetValue(SUMMON_TYPE_EQUILIBRIUM)
 	c:RegisterEffect(e1)
 	--register by default
+	if reg==nil or reg then
 		local e2=Effect.CreateEffect(c)
 		e2:SetDescription(1160)
 		e2:SetType(EFFECT_TYPE_ACTIVATE)
 		e2:SetCode(EVENT_FREE_CHAIN)
 		e2:SetRange(LOCATION_HAND)
 		c:RegisterEffect(e2)
+	end
+end,"handler","register","desc")
 function Equilibrium.Filter(c,e,tp,lscale,rscale,lvchk)
 	local lv=0
 	if c.pendulum_level then
