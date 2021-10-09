@@ -37,8 +37,8 @@ end,"handler","register","desc")
 function Equilibrium.Filter(c,e,tp,lscale,rscale,lvchk)
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local lv=0
-	if c:GetRank()>0 or c:GetLink()>0 then
-		lv=c:GetRank()+c:GetLink()
+	if c.pendulum_level then
+		lv=c.pendulum_level
 	else
 		lv=c:GetLevel()
 	end
