@@ -21,7 +21,7 @@ function(c,reg,desc)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCondition(Equilibrium.Condition())
-	e1:SetOperation(Pendulum.Operation())
+	e1:SetOperation(Equilibrium.Operation())
 	e1:SetValue(SUMMON_TYPE_EQUILIBRIUM)
 	c:RegisterEffect(e1)
 	--register by default
