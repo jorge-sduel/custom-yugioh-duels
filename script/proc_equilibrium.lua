@@ -34,11 +34,11 @@ function(c,reg,desc)
 		c:RegisterEffect(e2)
 	end
 end,"handler","register","desc")
-function Pendulum.Filter(c,e,tp,lscale,rscale,lvchk)
+function Equilibrium.Filter(c,e,tp,lscale,rscale,lvchk)
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local lv=0
-	if c.pendulum_level then
-		lv=c.pendulum_level
+	if c:GetRank()>0 or c:GetLink()>0 then
+		lv=c:GetRank() or lv=c:GetLink()
 	else
 		lv=c:GetLevel()
 	end
