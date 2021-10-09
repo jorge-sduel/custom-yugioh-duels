@@ -19,9 +19,9 @@ function(c,reg,desc)
 	e1:SetCode(EFFECT_SPSUMMON_PROC_G)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetRange(LOCATION_PZONE)
-	e1:SetCondition(Pendulum.Condition())
+	e1:SetCondition(Equilibrium.Condition())
 	e1:SetOperation(Pendulum.Operation())
-	e1:SetValue(SUMMON_TYPE_PENDULUM)
+	e1:SetValue(SUMMON_TYPE_EQUILIBRIUM)
 	c:RegisterEffect(e1)
 	--register by default
 	if reg==nil or reg then
@@ -45,7 +45,7 @@ function Pendulum.Filter(c,e,tp,lscale,rscale,lvchk)
 		and (lvchk or (lv>lscale and lv<rscale) or c:IsHasEffect(511004423)) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
 		and not c:IsForbidden()
 end
-function Pendulum.Condition()
+function Equilibrium.Condition()
 	return	function(e,c,ischain,re,rp)
 				if c==nil then return true end
 				local tp=c:GetControler()
@@ -66,7 +66,7 @@ function Pendulum.Condition()
 				return g:IsExists(Pendulum.Filter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 			end
 end
-function Pendulum.Operation()
+function Equilibrium.Operation()
 	return	function(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 				local lscale=c:GetLeftScale()
