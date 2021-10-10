@@ -152,7 +152,7 @@ function Equilibrium.Operation()
 				end
 			end
 end
-function Equilibrium.attachcond(e)
+function Equilibrium.attachcond(e,tc1,tc2)
 	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
 	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 	if not tc1 or not tc2 then return false end
@@ -161,7 +161,7 @@ end
 function Equilibrium.Filter(c)
 	return c:IsType(TYPE_PENDULUM)
 end
-function Equilibrium.attachop(e,tp,eg,ep,ev,re,r,rp)
+function Equilibrium.attachop(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 	local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,Equilibrium.Filter,tp,LOCATION_PZONE,0,2,2,nil)
 	Duel.SendtoGrave(g,REASON_RULE)
