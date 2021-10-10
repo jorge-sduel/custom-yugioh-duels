@@ -163,7 +163,7 @@ function Equilibrium.Filter(c)
 end
 function Equilibrium.attachop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.SelectMatchingCard(tp,Equilibrium.cfilter,tp,LOCATION_PZONE,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,Equilibrium.Filter,tp,LOCATION_PZONE,0,2,2,nil)
 	Duel.SendtoGrave(g,REASON_RULE)
 	c:SetMaterial(g)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
