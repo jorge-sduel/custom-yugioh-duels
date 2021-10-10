@@ -24,6 +24,13 @@ function(c,reg,desc)
 	e1:SetOperation(Equilibrium.Operation())
 	e1:SetValue(SUMMON_TYPE_EQUILIBRIUM)
 	c:RegisterEffect(e1)
+	--register by default
+	if reg==nil or reg then
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_REMOVE_TYPE)
+		e2:SetValue(TYPE_SPELL)
+		e2:SetRange(LOCATION_PZONE)
+		c:RegisterEffect(e2)
 	end
 end,"handler","register","desc")
 function Equilibrium.Filter(c,e,tp,lscale,rscale,lvchk)
