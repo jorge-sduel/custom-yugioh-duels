@@ -43,8 +43,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 		if Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP_ATTACK)==0 then return end
-	local ec=Duel.SelectMatchingCard(tp,s.swfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	local fc=Duel.SelectMatchingCard(tp,s.gdfilter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
+	local ec=Duel.SelectMatchingCard(tp,s.swfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
+	local fc=Duel.SelectMatchingCard(tp,s.gdfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
 	Duel.Equip(tp,ec,tc)
 	Duel.Equip(tp,fc,tc)
 		local e1=Effect.CreateEffect(e:GetHandler())
