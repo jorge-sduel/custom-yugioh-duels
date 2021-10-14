@@ -10,11 +10,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	--Destroy
+	--Can activate from hand during opponent's turn
 	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
-	e2:SetCode(EVENT_LEAVE_FIELD)
-	e2:SetOperation(s.desop)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_QP_ACT_IN_NTPHAND)
+	e2:SetRange(LOCATION_HAND)
+	e2:SetCondition(s.handcon)
 	c:RegisterEffect(e2)
 end
 function s.spfilter(c,e,tp)
@@ -69,10 +70,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		fc:RegisterEffect(e4)
 	end
 end
-function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local tc=c:GetFirstCardTarget()
-	if c:IsReason(REASON_DESTROY) and tc and tc:IsLocation(LOCATION_MZONE) then
-		Duel.Destroy(tc,REASON_EFFECT)
-	end
+function s.cfilter(c)
+	return c:IsSetCard(0x52)
+end
+function s.handcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,6,nil)
 end
