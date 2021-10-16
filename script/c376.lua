@@ -49,5 +49,4 @@ function s.hnop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
 		c:CancelToGrave()
 		Duel.Overlay(g,mg1)
-	end
 end
