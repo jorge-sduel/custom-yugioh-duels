@@ -12,6 +12,22 @@ function s.initial_effect(c)
 	e1:SetTarget(s.hntg)
 	e1:SetOperation(s.hnop)
 	c:RegisterEffect(e1)
+	--special summon
+	local e23=Effect.CreateEffect(c)
+	e23:SetType(EFFECT_TYPE_FIELD)
+	e23:SetCode(EFFECT_SPSUMMON_PROC)
+	e23:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e23:SetRange(LOCATION_EXTRA)
+	e23:SetCondition(s.conditionov)
+	e23:SetOperation(s.operationov)
+	e23:SetValue(SUMMON_TYPE_XYZ)
+	local e24=Effect.CreateEffect(c)
+	e24:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_GRANT)
+	e24:SetRange(LOCATION_SZONE)
+	e24:SetTargetRange(LOCATION_EXTRA,0)
+	e24:SetTarget(s.eftg)
+	e24:SetLabelObject(e23)
+	c:RegisterEffect(e24)
 end
 function s.cfilter(c)
 	return (c:IsType(TYPE_FUSION) or (c:IsType(TYPE_XYZ) or c:IsType(TYPE_SYNCHRO) or c:IsType(TYPE_PENDULUM))) and c:IsType(TYPE_MONSTER)
@@ -46,4 +62,23 @@ function s.hnop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
 		c:CancelToGrave()
 	end
+end
+function s.eftg(e,c)
+	return c:IsCode(13331639) or c:IsCode(12341305) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+end
+function s.hspfilter(c)
+	return c:IsCode(id)
+end
+function s.conditionov(e,c)
+	if c==nil then return true end
+	return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)+Duel.GetLocationCountFromEx(e:GetHandlerPlayer(),e:GetHandlerPlayer(),nil,c)>0
+        and Duel.IsExistingMatchingCard(s.hspfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+end
+function s.operationov(e,tp,eg,ep,ev,re,r,rp)
+    local c=e:GetHandler()
+	local g=Duel.SelectMatchingCard(tp,s.hspfilter,tp,LOCATION_MZONE,0,1,1,nil)
+		local mg1=g:GetFirst():GetOverlayGroup()
+			Duel.Overlay(c,mg1)
+    Duel.Overlay(c,g)
+    c:SetMaterial(g)
 end
