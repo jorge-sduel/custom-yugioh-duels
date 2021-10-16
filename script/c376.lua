@@ -9,8 +9,6 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
         e1:SetCost(s.hncost)
-	e1:SetTarget(s.hntg)
-	e1:SetOperation(s.hnop)
 	c:RegisterEffect(e1)
 	--special summon
 	local e23=Effect.CreateEffect(c)
@@ -49,6 +47,7 @@ function s.hncost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return aux.SelectUnselectGroup(mg,e,tp,4,4,s.rescon(checkfunc),0) end
 	local sg=aux.SelectUnselectGroup(mg,e,tp,4,4,s.rescon(checkfunc),1,tp,HINTMSG_REMOVE,s.rescon(checkfunc))
 	Duel.Overlay(c,sg)
+	c:CancelToGrave()
 end
 function s.hntg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
