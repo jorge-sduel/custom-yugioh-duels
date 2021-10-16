@@ -45,9 +45,11 @@ function s.hnop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.hnfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+		local mg1=c:GetOverlayGroup()
 	if #g>0 then
-		Duel.SpecialSummon(g,SUMMON_TYPE_FUSION,tp,tp,true,true,POS_FACEUP)
+		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
+		Duel.Overlay(g,mg1)
 	end
 		c:CancelToGrave()
-		Duel.Overlay(g,c:GetOverlayGroup())
+		Duel.Overlay(g,mg1)
 end
