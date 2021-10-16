@@ -14,11 +14,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c)
-	return c:IsType(TYPE_FUSION) or c:IsType(TYPE_XYZ) or c:IsType(TYPE_SYNCHRO) or c:IsType(TYPE_PENDULUM) and c:IsType(TYPE_MONSTER)
+	return c:IsType(TYPE_FUSION) or (c:IsType(TYPE_XYZ) or c:IsType(TYPE_SYNCHRO) or c:IsType(TYPE_PENDULUM)) and c:IsType(TYPE_MONSTER)
 end
 function s.cfilter(c)
-	return (c:IsSetCard(0x10f2) or c:IsSetCard(0x2073) or c:IsSetCard(0x2017) or c:IsSetCard(0x1046)) and c:IsType(TYPE_MONSTER)
-		and c:IsAbleToRemoveAsCost()
+	return (c:IsType(TYPE_FUSION) or c:IsType(TYPE_SYNCHRO) or c:IsType(TYPE_XYZ) or c:IsType(TYPE_PENDULUM)) and c:IsType(TYPE_MONSTER)
 end
 function s.rescon(checkfunc)
 	return function(sg,e,tp,mg)
@@ -36,7 +35,7 @@ function s.hncost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local checkfunc=aux.PropertyTableFilter(Card.GetSetCard,0x10f2,0x2073,0x2017,0x1046)
 	if chk==0 then return c:IsAbleToRemoveAsCost() and aux.SelectUnselectGroup(mg,e,tp,4,4,s.rescon(checkfunc),0) end
 	local sg=aux.SelectUnselectGroup(mg,e,tp,4,4,s.rescon(checkfunc),1,tp,HINTMSG_REMOVE,s.rescon(checkfunc))
-	Duel.Remove(sg,POS_FACEUP,REASON_COST)
+	Duel.Overlay(c,sg)
 end
 function s.hntg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
