@@ -48,5 +48,5 @@ function s.hnop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.SpecialSummon(g,SUMMON_TYPE_FUSION,tp,tp,true,true,POS_FACEUP)
 	end
-		Duel.Overlay(g,c)
+		Duel.Overlay(g,c:GetOverlayGroup())
 end
