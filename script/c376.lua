@@ -41,11 +41,14 @@ function s.hntg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
-function s.hnop(e,tp,eg,ep,ev,re,r,rp)
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.SelectMatchingCard(tp,s.hnfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
-	local mg1=c:GetOverlayGroup()
-		Duel.Overlay(g,mg1)
-		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
-		c:CancelToGrave()
+	local tc=Duel.GetFirstTarget()
+	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
+		if Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP_ATTACK)==0 then return end
+		local mg1=g:GetFirst():GetOverlayGroup()
+    Duel.Overlay(tc,mg1)
+    Duel.Overlay(tc,c)
+    c:SetMaterial(mg1)
+	end
 end
