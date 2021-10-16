@@ -48,8 +48,7 @@ function s.hnop(e,tp,eg,ep,ev,re,r,rp)
 		local mg1=c:GetOverlayGroup()
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
-		Duel.Overlay(g,mg1)
-	end
 		c:CancelToGrave()
 		Duel.Overlay(g,mg1)
+	end
 end
