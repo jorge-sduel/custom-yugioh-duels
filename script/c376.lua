@@ -50,8 +50,6 @@ function s.hnop(e,tp,eg,ep,ev,re,r,rp)
 		local mg1=c:GetOverlayGroup()
     Duel.Overlay(g,mg1)
 		Duel.SpecialSummon(g,SUMMON_TYPE_FUSION,tp,tp,true,true,POS_FACEUP)
-		local mg1=c:GetOverlayGroup()
-    Duel.Overlay(g,mg1)
     Duel.Overlay(g,c)
     c:SetMaterial(c)
 	end
