@@ -71,12 +71,12 @@ function s.hspfilter(c)
 end
 function s.conditionov(e,c)
 	if c==nil then return true end
-	return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)+Duel.GetLocationCountFromEx(e:GetHandlerPlayer(),e:GetHandlerPlayer(),nil,c)>0
-        and Duel.IsExistingMatchingCard(s.hspfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+	return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_SZONE)+Duel.GetLocationCountFromEx(e:GetHandlerPlayer(),e:GetHandlerPlayer(),nil,c)>0
+        and Duel.IsExistingMatchingCard(s.hspfilter,e:GetHandlerPlayer(),LOCATION_SZONE,0,1,nil)
 end
 function s.operationov(e,tp,eg,ep,ev,re,r,rp)
     local c=e:GetHandler()
-	local g=Duel.SelectMatchingCard(tp,s.hspfilter,tp,LOCATION_MZONE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.hspfilter,tp,LOCATION_SZONE,0,1,1,nil)
 		local mg1=g:GetFirst():GetOverlayGroup()
 			Duel.Overlay(c,mg1)
     Duel.Overlay(c,g)
