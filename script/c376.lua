@@ -10,6 +10,11 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
         e1:SetCost(s.hncost)
 	c:RegisterEffect(e1)
+	--remain field
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_REMAIN_FIELD)
+	c:RegisterEffect(e3)
 	--special summon
 	local e23=Effect.CreateEffect(c)
 	e23:SetType(EFFECT_TYPE_FIELD)
