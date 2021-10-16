@@ -47,9 +47,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 		if Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP_ATTACK)==0 then return end
-		local mg1=g:GetFirst():GetOverlayGroup()
-    Duel.Overlay(tc,mg1)
-    Duel.Overlay(tc,c)
-    c:SetMaterial(mg1)
 	end
 end
