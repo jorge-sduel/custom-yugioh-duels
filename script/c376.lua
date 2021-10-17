@@ -105,7 +105,7 @@ function s.eftg2(e,c)
 	return c:IsCode(12341305) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_LINK)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.eftg3(e,c)
-	return c:IsCode(0000000) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_RITUAL)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return c:IsCode(99999) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_RITUAL)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.hspfilter(c)
 	return c:IsCode(id)
@@ -157,7 +157,7 @@ function s.rescon3(checkfunc)
 	end
 end
 function s.hnfilter3(c,e,tp,sg)
-	return c:IsCode(0000) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_LINK)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true) and c:CheckFusionMaterial()
+	return c:IsCode(999999) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_LINK)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true) and c:CheckFusionMaterial()
 			and Duel.GetLocationCountFromEx(tp,tp,sg and (sg+e:GetHandler()) or nil,c)>0
 end
 function s.hncost3(e,tp,eg,ep,ev,re,r,rp,chk)
