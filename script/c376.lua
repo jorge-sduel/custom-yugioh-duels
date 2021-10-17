@@ -55,6 +55,7 @@ function s.hncost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.hntg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
+Duel.IsExistingTarget(s.hnfilter,tp,LOCATION_MZONE,0,4,nil)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.hnop(e,tp,eg,ep,ev,re,r,rp)
