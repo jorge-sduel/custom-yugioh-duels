@@ -47,7 +47,7 @@ end
 function s.hncost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local mg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE+LOCATION_SZONE+LOCATION_PZONE+LOCATION_OVERLAY+LOCATION_DECK+LOCATION_EXTRA,0,c)
-	local checkfunc=aux.PropertyTableFilter(Card.GetType,TYPE_PENDULUM,TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ)
+	local checkfunc=aux.PropertyTableFilter(Card.IsType,TYPE_PENDULUM,TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ)
 	if chk==0 then return aux.SelectUnselectGroup(mg,e,tp,4,4,s.rescon(checkfunc),0) end
 	local sg=aux.SelectUnselectGroup(mg,e,tp,4,4,s.rescon(checkfunc),1,tp,HINTMSG_REMOVE,s.rescon(checkfunc))
 	Duel.Overlay(c,sg)
