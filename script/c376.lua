@@ -90,11 +90,11 @@ function s.operationov(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter2(c,e,tp)
 	return (c:IsCode(12341305) or (c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ)))
-		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.filter(c,e,tp)
 	return c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ)
-		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.envfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_LINK)
