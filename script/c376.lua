@@ -99,6 +99,21 @@ end
 function s.envfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_LINK)
 end
+function s.ffilter(c)
+	return c:IsType(TYPE_FUSION)
+end
+function s.sfilter(c)
+	return c:IsType(TYPE_SYNCHRO)
+end
+function s.xfilter(c)
+	return c:IsType(TYPE_XYZ)
+end
+function s.lfilter(c)
+	return c:IsType(TYPE_LINK)
+end
+function s.pfilter(c)
+	return c:IsType(TYPE_PENDULUM)
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<-1 then return false end
@@ -116,10 +131,25 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	if not (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_SANCTUARY_SKY)) then
 		g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+		g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+		f=Duel.SelectMatchingCard(tp,s.ffilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
+		s=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
+		x=Duel.SelectMatchingCard(tp,s.xfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
+		x=Duel.SelectMatchingCard(tp,s.pfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
 	else
 		g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+		f=Duel.SelectMatchingCard(tp,s.ffilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
+		s=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
+		x=Duel.SelectMatchingCard(tp,s.xfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
+		p=Duel.SelectMatchingCard(tp,s.pfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
+		l=Duel.SelectMatchingCard(tp,s.lfilter,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
 	end
 	if #g>0 then
+		Duel.Overlay(g,f)
+		Duel.Overlay(g,s)
+		Duel.Overlay(g,x)
+		Duel.Overlay(g,p)
+		Duel.Overlay(g,l)
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
 	end
 end
