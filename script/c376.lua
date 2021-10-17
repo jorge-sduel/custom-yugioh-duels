@@ -120,6 +120,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	end
 	if #g>0 then
-		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
 	end
 end
