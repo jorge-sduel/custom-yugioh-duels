@@ -86,3 +86,38 @@ function s.operationov(e,tp,eg,ep,ev,re,r,rp)
     Duel.Overlay(c,g)
     c:SetMaterial(g)
 end
+function s.filter2(c,e,tp)
+	return (c:IsCode(12341305) or (c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ)))
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+end
+function s.filter(c,e,tp)
+	return c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ)
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+end
+function s.envfilter(c)
+	return c:IsFaceup() and c:IsType(TYPE_LINK)
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then
+		if Duel.GetLocationCount(tp,LOCATION_MZONE)<-1 then return false end
+		if not (Duel.IsExistingMatchingCard(s.envfilter,0,LOCATION_ONFIELD,0,1,nil) or Duel.IsEnvironment(TYPE_LINK)) then
+			return Duel.IsExistingMatchingCard(s.filter1,tp,LOCATION_EXTRA,0,1,nil,e,tp)
+		else
+			return Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp)
+		end
+	end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-1 then return end
+	local g=nil
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	if not (Duel.IsExistingMatchingCard(s.envfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) or Duel.IsEnvironment(CARD_SANCTUARY_SKY)) then
+		g=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+	else
+		g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+	end
+	if #g>0 then
+		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+	end
+end
