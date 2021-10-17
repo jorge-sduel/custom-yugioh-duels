@@ -41,7 +41,7 @@ function s.rescon(checkfunc)
 	end
 end
 function s.hnfilter(c,e,tp,sg)
-	return c:IsCode(13331639) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true) and c:CheckFusionMaterial()
+	return c:IsCode(13331639) or c:IsCode(12341305) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true) and c:CheckFusionMaterial()
 			and Duel.GetLocationCountFromEx(tp,tp,sg and (sg+e:GetHandler()) or nil,c)>0
 end
 function s.hncost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -67,10 +67,21 @@ function s.hnop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.eftg(e,c)
-	return c:IsCode(13331639) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return c:IsCode(13331639) or c:IsCode(12341305) or (c:IsType(TYPE_FUSION) and c:IsType(TYPE_XYZ) and c:IsType(TYPE_SYNCHRO)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+end
+function s.hspfilter(c)
+	return c:IsCode(id)
 end
 function s.conditionov(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_SZONE)+Duel.GetLocationCountFromEx(e:GetHandlerPlayer(),e:GetHandlerPlayer(),nil,c)>0
-        and Duel.IsExistingMatchingCard(s.cspfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+        and Duel.IsExistingMatchingCard(s.hspfilter,e:GetHandlerPlayer(),LOCATION_SZONE,0,1,nil)
+end
+function s.operationov(e,tp,eg,ep,ev,re,r,rp)
+    local c=e:GetHandler()
+	local g=Duel.SelectMatchingCard(tp,s.hspfilter,tp,LOCATION_SZONE,0,1,1,nil)
+		local mg1=g:GetFirst():GetOverlayGroup()
+			Duel.Overlay(c,mg1)
+    Duel.Overlay(c,g)
+    c:SetMaterial(g)
 end
