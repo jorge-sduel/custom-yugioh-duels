@@ -142,7 +142,7 @@ function s.hspfilter(c)
 	return c:IsType(TYPE_XYZ) and c:IsRace(RACE_DRAGON) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsRankAbove(7)
 end
 function s.penfilter(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsRace(RACE_DRAGON) and c:IsAttribute(ATTRIBUTE_DARK)
+	return c:IsType(TYPE_PENDULUM) and c:IsRace(RACE_DRAGON) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(7)
 end
 function s.hspcon(e,c)
 	if c==nil then return true end
