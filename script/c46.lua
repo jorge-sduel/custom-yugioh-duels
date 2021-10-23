@@ -1,6 +1,7 @@
 --Starving Venemy Dragon
 function c46.initial_effect(c)
 	c:EnableReviveLimit()
+	Pendulum.AddProcedure(c)
 	--fusion material
 Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
 	--reduce
