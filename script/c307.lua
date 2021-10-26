@@ -1,7 +1,7 @@
 --Extra tuning
 function c307.initial_effect(c)
 	--pendulum summon
-	Pendulum.AddProcedure(c)
+	Trampula.AddProcedure(c)
 	--synchro effect
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(307,0))
@@ -31,14 +31,6 @@ function c307.initial_effect(c)
 	e2:SetTarget(c307.target)
 	e2:SetOperation(c307.activate)
 	c:RegisterEffect(e2)
-	--Return
-	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(51,2))
-	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_HAND)
-	e3:SetOperation(c307.rop)
-	c:RegisterEffect(e3)
 	--indes
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
@@ -152,11 +144,6 @@ function c307.regop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e2,true)
 	e:Reset()
-end
-function c307.rop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
-
 end
 function c307.ffilter(c,tp)
 	return
