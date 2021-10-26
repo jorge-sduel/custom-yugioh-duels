@@ -1,13 +1,13 @@
 TRAMPULA_IMPORTED=true
 if not aux.TrampulaProcedure then
 	aux.TrampulaProcedure = {}
-	Trampula = aux.trampulaProcedure
+	Trampula = aux.TrampulaProcedure
 end
 if not Trampula then
-	trampula = aux.trampulaProcedure
+	Trampula = aux.TrampulaProcedure
 end
 --add procedure to Pendulum monster, also allows registeration of activation effect
-Trampula.AddProcedure = aux.FunctionWithNamedArgs(
+Equilibrium.AddProcedure = aux.FunctionWithNamedArgs(
 function(c,reg,desc)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
