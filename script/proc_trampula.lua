@@ -1,4 +1,3 @@
-SUMMON_TYPE_EQUILIBRIUM = 0x4000000000000000000000
 TRAMPULA_IMPORTED=true
 if not aux.TrampulaProcedure then
 	aux.TrampulaProcedure = {}
