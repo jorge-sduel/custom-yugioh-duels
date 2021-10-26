@@ -9,6 +9,12 @@ end
 --add procedure to Pendulum monster, also allows registeration of activation effect
 Trampula.AddProcedure = aux.FunctionWithNamedArgs(
 function(c,reg,desc)
+		local ea=Effect.CreateEffect(c)
+ 		ea:SetType(EFFECT_TYPE_ACTIVATE)
+ 		ea:SetCode(EVENT_FREE_CHAIN)
+ 		ea:SetRange(LOCATION_HAND)
+ 		ea:SetOperation(Trampula.SetOp)
+ 		c:RegisterEffect(ea)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	if desc then
