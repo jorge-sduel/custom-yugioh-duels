@@ -45,7 +45,7 @@ function Trampula.Filter(c,e,tp,lscale,rscale,lvchk)
 		and (lvchk or (lv>lscale and lv<rscale) or c:IsHasEffect(511004423)) and (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false) or c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP))
 		and not c:IsForbidden()
 end
-function Equilibrium.Condition()
+function Trampula.Condition()
 	return	function(e,c,ischain,re,rp)
 				if c==nil then return true end
 				local tp=c:GetControler()
@@ -65,7 +65,7 @@ function Equilibrium.Condition()
 				return g:IsExists(Pendulum.Filter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 			end
 end
-function Equilibrium.Operation()
+function Trampula.Operation()
 	return	function(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 				local lscale=c:GetLeftScale()
 				local rscale=c:GetRightScale()
