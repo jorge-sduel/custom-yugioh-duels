@@ -73,6 +73,7 @@ function Trampula.Condition()
 			end
 end
 function Trampula.Operation()
+	return	function(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 				local lscale=c:GetLeftScale()
 				local rscale=rpz:GetRightScale()
@@ -89,9 +90,9 @@ function Trampula.Operation()
 				if ft2>0 then loc=loc+LOCATION_EXTRA end
 				local tg=nil
 				if og then
-					tg=og:Filter(Card.IsLocation,nil,loc):Filter(Trampula.Filter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=og:Filter(Card.IsLocation,nil,loc):Filter(Pendulum.Filter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				else
-					tg=Duel.GetMatchingGroup(Trampula.Filter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=Duel.GetMatchingGroup(Pendulum.Filter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				end
 				ft1=math.min(ft1,tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND))
 				ft2=math.min(ft2,tg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA))
@@ -109,7 +110,7 @@ function Trampula.Operation()
 					if #g==0 or ft==0 then break end
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 					local tc=Group.SelectUnselect(g,sg,tp,#sg>0,Duel.IsSummonCancelable())
-if not tc then break end
+					if not tc then break end
 					if sg:IsContains(tc) then
 						sg:RemoveCard(tc)
 						if tc:IsLocation(LOCATION_HAND) then
@@ -121,7 +122,7 @@ if not tc then break end
 					else
 						sg:AddCard(tc)
 						if c:IsHasEffect(511007000)~=nil or rpz:IsHasEffect(511007000)~=nil then
-							if not c68.ffilter(tc,e,tp,lscale,rscale) then
+							if not Pendulum.Filter(tc,e,tp,lscale,rscale) then
 								local pg=sg:Filter(aux.TRUE,tc)
 								local ct0,ct3,ct4=#pg,pg:FilterCount(Card.IsLocation,nil,LOCATION_HAND),pg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
 								sg:Sub(pg)
@@ -129,7 +130,7 @@ if not tc then break end
 								ft2=ft2+ct4
 								ft=ft+ct0
 							else
-								local pg=sg:Filter(aux.NOT(Trampula.Filter),nil,e,tp,lscale,rscale)
+								local pg=sg:Filter(aux.NOT(Pendulum.Filter),nil,e,tp,lscale,rscale)
 								sg:Sub(pg)
 								if #pg>0 then
 									if pg:GetFirst():IsLocation(LOCATION_HAND) then
@@ -147,21 +148,6 @@ if not tc then break end
 							ft2=ft2-1
 						end
 						ft=ft-1
-		Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
-		local e1=Effect.CreateEffect(c)
-			e1:SetCode(EFFECT_ADD_TYPE)
-			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-			e1:SetValue(TYPE_MONSTER)
-			tc:RegisterEffect(e1)
-			local e2=Effect.CreateEffect(c)
-			e2:SetCode(EFFECT_REMOVE_TYPE)
-			e2:SetType(EFFECT_TYPE_SINGLE)
-			e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-			e2:SetValue(TYPE_TRAP)
-			tc:RegisterEffect(e2)
 					end
 				end
 				if #sg>0 then
@@ -170,11 +156,8 @@ if not tc then break end
 					end
 					Duel.HintSelection(Group.FromCards(c))
 					Duel.HintSelection(Group.FromCards(rpz))
-	end
-	Duel.SpecialSummonComplete()
-	if lp>0 then
-		Duel.BreakEffect()
-	end
+				end
+			end
 end
 function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
