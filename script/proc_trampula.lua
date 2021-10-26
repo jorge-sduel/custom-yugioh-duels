@@ -30,11 +30,6 @@ function(c,reg,desc)
 	c:RegisterEffect(e1)
 	--register by default
 	if reg==nil or reg then
-		local e2=Effect.CreateEffect(c)
-		e2:SetDescription(1160)
-		e2:SetType(EFFECT_TYPE_IGNITION)
-		e2:SetRange(LOCATION_HAND)
-		c:RegisterEffect(e2)
 		local e3=Effect.CreateEffect(c)
  		e3:SetDescription(1160)
  		e3:SetType(EFFECT_TYPE_ACTIVATE)
