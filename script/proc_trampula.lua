@@ -55,9 +55,10 @@ function Trampula.Condition()
 	return	function(e,c,ischain,re,rp)
 				if c==nil then return true end
 				local tp=c:GetControler()
-				if not inchain and Duel.GetFlagEffect(tp,10000000)>0 then return false end
+				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+				if rpz==nil or c==rpz or (not inchain and Duel.GetFlagEffect(tp,10000000)>0) then return false end
 				local lscale=c:GetLeftScale()
-				local rscale=c:GetRightScale()
+				local rscale=rpz:GetRightScale()
 				local loc=0
 				if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then loc=loc+LOCATION_HAND end
 				if Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)>0 then loc=loc+LOCATION_EXTRA end
@@ -72,9 +73,9 @@ function Trampula.Condition()
 			end
 end
 function Trampula.Operation()
-	return	function(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
+				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 				local lscale=c:GetLeftScale()
-				local rscale=c:GetRightScale()
+				local rscale=rpz:GetRightScale()
 				local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 				local ft2=Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)
 				local ft=Duel.GetUsableMZoneCount(tp)
@@ -88,9 +89,9 @@ function Trampula.Operation()
 				if ft2>0 then loc=loc+LOCATION_EXTRA end
 				local tg=nil
 				if og then
-					tg=og:Filter(Card.IsLocation,nil,loc):Filter(Pendulum.Filter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=og:Filter(Card.IsLocation,nil,loc):Filter(c68.ffilter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				else
-					tg=Duel.GetMatchingGroup(Pendulum.Filter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=Duel.GetMatchingGroup(c68.ffilter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				end
 				ft1=math.min(ft1,tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND))
 				ft2=math.min(ft2,tg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA))
@@ -108,7 +109,7 @@ function Trampula.Operation()
 					if #g==0 or ft==0 then break end
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 					local tc=Group.SelectUnselect(g,sg,tp,#sg>0,Duel.IsSummonCancelable())
-					if not tc then break end
+if not tc then break end
 					if sg:IsContains(tc) then
 						sg:RemoveCard(tc)
 						if tc:IsLocation(LOCATION_HAND) then
@@ -119,8 +120,8 @@ function Trampula.Operation()
 						ft=ft+1
 					else
 						sg:AddCard(tc)
-						if c:IsHasEffect(511007000)~=nil or c:IsHasEffect(511007000)~=nil then
-							if not Pendulum.Filter(tc,e,tp,lscale,rscale) then
+						if c:IsHasEffect(511007000)~=nil or rpz:IsHasEffect(511007000)~=nil then
+							if not c68.ffilter(tc,e,tp,lscale,rscale) then
 								local pg=sg:Filter(aux.TRUE,tc)
 								local ct0,ct3,ct4=#pg,pg:FilterCount(Card.IsLocation,nil,LOCATION_HAND),pg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
 								sg:Sub(pg)
@@ -128,7 +129,7 @@ function Trampula.Operation()
 								ft2=ft2+ct4
 								ft=ft+ct0
 							else
-								local pg=sg:Filter(aux.NOT(Pendulum.Filter),nil,e,tp,lscale,rscale)
+								local pg=sg:Filter(aux.NOT(c68.ffilter),nil,e,tp,lscale,rscale)
 								sg:Sub(pg)
 								if #pg>0 then
 									if pg:GetFirst():IsLocation(LOCATION_HAND) then
@@ -146,7 +147,7 @@ function Trampula.Operation()
 							ft2=ft2-1
 						end
 						ft=ft-1
-Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+		Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 		local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
@@ -168,8 +169,12 @@ Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 						Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 					end
 					Duel.HintSelection(Group.FromCards(c))
-				end
-			end
+					Duel.HintSelection(Group.FromCards(rpz))
+	end
+	Duel.SpecialSummonComplete()
+	if lp>0 then
+		Duel.BreakEffect()
+	end
 end
 function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
