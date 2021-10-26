@@ -89,9 +89,9 @@ function Trampula.Operation()
 				if ft2>0 then loc=loc+LOCATION_EXTRA end
 				local tg=nil
 				if og then
-					tg=og:Filter(Card.IsLocation,nil,loc):Filter(c68.ffilter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=og:Filter(Card.IsLocation,nil,loc):Filter(Trampula.Filter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				else
-					tg=Duel.GetMatchingGroup(c68.ffilter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=Duel.GetMatchingGroup(Trampula.Filter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				end
 				ft1=math.min(ft1,tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND))
 				ft2=math.min(ft2,tg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA))
@@ -129,7 +129,7 @@ if not tc then break end
 								ft2=ft2+ct4
 								ft=ft+ct0
 							else
-								local pg=sg:Filter(aux.NOT(c68.ffilter),nil,e,tp,lscale,rscale)
+								local pg=sg:Filter(aux.NOT(Trampula.Filter),nil,e,tp,lscale,rscale)
 								sg:Sub(pg)
 								if #pg>0 then
 									if pg:GetFirst():IsLocation(LOCATION_HAND) then
