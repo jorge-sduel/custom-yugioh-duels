@@ -148,6 +148,9 @@ if not tc then break end
 							ft2=ft2-1
 						end
 						ft=ft-1
+					end
+				end
+				if #sg>0 then
 		Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 		local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
@@ -163,9 +166,6 @@ if not tc then break end
 			e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
 			e2:SetValue(TYPE_TRAP)
 			tc:RegisterEffect(e2)
-					end
-				end
-				if #sg>0 then
 					if not inchain then
 						Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 					end
