@@ -155,7 +155,7 @@ function Trampula.Operation()
 						Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 					end
 					Duel.HintSelection(Group.FromCards(c))
-Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+Duel.SpecialSummonStep(sg,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 		local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
