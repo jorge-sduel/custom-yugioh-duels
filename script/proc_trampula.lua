@@ -177,6 +177,7 @@ if not tc then break end
 		Duel.BreakEffect()
 	end
 end
+end
 function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
