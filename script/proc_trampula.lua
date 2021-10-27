@@ -148,9 +148,10 @@ if not tc then break end
 							ft2=ft2-1
 						end
 						ft=ft-1
+				g:Sub(tc)
 					end
 				end
-		Duel.SpecialSummonStep(Card,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+		Duel.SpecialSummonStep(g,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 		local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
