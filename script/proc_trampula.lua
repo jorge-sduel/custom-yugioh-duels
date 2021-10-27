@@ -151,22 +151,8 @@ function Trampula.Operation()
 					end
 				end
 				if #sg>0 then
-Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
-		local e1=Effect.CreateEffect(c)
-			e1:SetCode(EFFECT_ADD_TYPE)
-			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-			e1:SetValue(TYPE_MONSTER)
-			tc:RegisterEffect(e1)
-			local e2=Effect.CreateEffect(c)
-			e2:SetCode(EFFECT_REMOVE_TYPE)
-			e2:SetType(EFFECT_TYPE_SINGLE)
-			e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
-			e2:SetValue(TYPE_TRAP)
-			tc:RegisterEffect(e2)
 					if not inchain then
+Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 						Duel.RegisterFlagEffect(tp,10000000,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 					end
 					Duel.HintSelection(Group.FromCards(c))
