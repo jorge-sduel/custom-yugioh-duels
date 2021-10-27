@@ -10,6 +10,7 @@ end
 Trampula.AddProcedure = aux.FunctionWithNamedArgs(
 function(c,reg,desc)
 		local ea=Effect.CreateEffect(c)
+ 		ea:SetDescription(69,1)
  		ea:SetType(EFFECT_TYPE_IGNITION)
  		ea:SetRange(LOCATION_HAND)
  		ea:SetOperation(Trampula.SetOp)
@@ -31,12 +32,18 @@ function(c,reg,desc)
 	--register by default
 	if reg==nil or reg then
 		local e3=Effect.CreateEffect(c)
- 		e3:SetDescription(1160)
- 		e3:SetType(EFFECT_TYPE_ACTIVATE)
- 		e3:SetCode(EVENT_FREE_CHAIN)
- 		e3:SetRange(LOCATION_HAND)
- 		e3:SetOperation(Trampula.SetOp)
- 		c:RegisterEffect(e3)
+ 		e3:SetDescription(69,3)
+ 		e3:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
+ 		e3:SetRange(LOCATION_PZONE)
+ 		e3:SetCondition(Trampula.Condition)
+ 		e3:SetOperation(Trampula.Operation)
+	        local e4=Effect.CreateEffect(c)
+	        e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_GRANT)
+	        e4:SetRange(LOCATION_MZONE)
+	        e4:SetTargetRange(LOCATION_PZONE,0)
+	        e4:SetTarget(Trampula.Efpendulum)
+	        e4:SetLabelObject(e3)
+	        c:RegisterEffect(e4)
 	end
 end,"handler","register","desc")
 function Trampula.Filter(c,e,tp,lscale,rscale,lvchk)
@@ -182,4 +189,7 @@ function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
 
+end
+function Trampula.Efpendulum(e,c)
+	return c:IsType(TYPE_PENDULUM)
 end
