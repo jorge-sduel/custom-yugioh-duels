@@ -148,7 +148,7 @@ function Trampula.Operation()
 							ft2=ft2-1
 						end
 						ft=ft-1
-Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+			Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 		local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
@@ -171,8 +171,11 @@ Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 					end
 					Duel.HintSelection(Group.FromCards(c))
 					Duel.HintSelection(Group.FromCards(rpz))
-				end
-			end
+	end
+	Duel.SpecialSummonComplete()
+	if lp>0 then
+		Duel.BreakEffect()
+	end
 end
 function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
