@@ -17,7 +17,7 @@ function c202.initial_effect(c)
 	e1:SetCost(c202.cost)
 	e1:SetTarget(c202.target)
 	e1:SetOperation(c202.op)
-	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
+	c:RegisterEffect(e1)
 	--cannot disable summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
@@ -46,7 +46,7 @@ function c202.initial_effect(c)
 	e4:SetCountLimit(1)
 	e4:SetCost(c202.descost)
 	e4:SetOperation(c202.desop)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
 end
 c202.pendulum_level=6
 function c202.ovfilter(c)
