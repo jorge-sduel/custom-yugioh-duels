@@ -27,6 +27,7 @@ e3:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGN
 	e3:SetCountLimit(1)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCode(EVENT_PHASE_START+PHASE_END)
+	e3:SetCondition(c329.ctcon)
 	e3:SetOperation(c329.ctop)
 	c:RegisterEffect(e3)
 end
@@ -36,6 +37,12 @@ function c329.atkcon(e)
 end
 function c329.atkval(e,c)
 	return Duel.GetAttackTarget():GetAttack()
+end
+function c329.filter(c)
+	return c:IsFaceup() and c:IsCode(45) or c:IsCode(170000174)
+end
+function c329.ctcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsExistingMatchingCard(c329.filter,e:GetHandlerPlayer(),0,LOCATION_MZONE,1,nil)
 end
 function c329.ctop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,100100090) then return end
