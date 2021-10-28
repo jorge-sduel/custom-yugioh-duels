@@ -44,7 +44,7 @@ function s.target(e,tp,eg,ev,ep,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	local g=Duel.GetTargetCards(e)
-	if #g~=2 then return end
+	if #g>=2 then return end
 	local xc=g:GetFirst()
 	local mc=g:GetNext()
 	if not s.filter2chk(mc,e,tp,xc) then
