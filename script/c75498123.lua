@@ -12,10 +12,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter1(c,e,tp)
-	return c:IsType(TYPE_SYNCHRO) and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,c,e,tp,c)
+	return not c:IsType(TYPE_SYNCHRO) and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,c,e,tp,c)
 end
 function s.filter2(c,e,tp,mc)
-	return not c:IsType(TYPE_SYNCHRO) and c:HasLevel() and c:IsLevelAbove(mc:GetLevel())
+	return c:IsType(TYPE_SYNCHRO) and c:HasLevel() and c:IsLevelAbove(mc:GetLevel())
 		and Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_EXTRA,0,1,nil,e,tp,c,mc)
 end
 function s.filter2chk(c,e,tp,mc)
@@ -39,7 +39,7 @@ function s.target(e,tp,eg,ev,ep,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	local xc=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	Duel.SelectTarget(tp,s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,xc,e,tp,xc)
+	Duel.SelectTarget(tp,s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,99,xc,e,tp,xc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.operation(e,tp,eg,ev,ep,re,r,rp)
