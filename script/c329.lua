@@ -42,7 +42,7 @@ function c329.ctop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():AddCounter(0x1106,1)
 end
 function c329.dfilter(c)
-	return not c:IsReason(REASON_REPLACE) and c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and (c:IsCode(330) or c:IsCode(331) or c:IsCode(332))
+	return not c:IsReason(REASON_REPLACE) and c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and (c:IsCode(330) or c:IsCode(331) or c:IsCode(332) or c:IsCode(329))
 end
 function c329.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
