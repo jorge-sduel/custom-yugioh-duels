@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter1(c,e,tp)
-	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE,0,1,c,e,tp,c)
+	return c:IsType(TYPE_SYNCHRO) and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,c,e,tp,c)
 end
 function s.filter2(c,e,tp,mc)
 	return not c:IsType(TYPE_SYNCHRO) and c:HasLevel() and c:IsLevelAbove(mc:GetLevel())
