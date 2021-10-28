@@ -38,11 +38,8 @@ end
 function c329.atkval(e,c)
 	return Duel.GetAttackTarget():GetAttack()
 end
-function c329.filter(c)
-	return c:IsFaceup() and c:IsCode(45) or c:IsCode(170000174)
-end
 function c329.ctcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(c329.filter,e:GetHandlerPlayer(),0,LOCATION_MZONE,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsCode,45),Duel.GetTurnPlayer(),LOCATION_MZONE,0,1,nil) or Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsCode,170000174),Duel.GetTurnPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function c329.ctop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,100100090) then return end
