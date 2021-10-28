@@ -27,6 +27,7 @@ e3:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGN
 	e3:SetCountLimit(1)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCode(EVENT_PHASE_START+PHASE_END)
+	e3:SetCondition(c329.ctcon)
 	e3:SetOperation(c330.ctop)
 	c:RegisterEffect(e3)
 end
