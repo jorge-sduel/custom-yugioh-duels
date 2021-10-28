@@ -53,7 +53,7 @@ function c330.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
 end
 function c330.value(e,c)
-	return c:IsFaceup() and c:GetLocation()==LOCATION_MZONE and (c:IsCode(330) or c:IsCode(331) or c:IsCode(332))
+	return c:IsFaceup() and c:GetLocation()==LOCATION_MZONE and (c:IsCode(330) or c:IsCode(331) or c:IsCode(332) or c:IsCode(329))
 end
 function c330.desop(e,tp,eg,ep,ev,re,r,rp)
 	local count=e:GetLabel()
