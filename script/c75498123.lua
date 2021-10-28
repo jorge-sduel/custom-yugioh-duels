@@ -46,7 +46,7 @@ function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	if #g>=2 then return end
 	local xc=g:GetFirst()
-	local mc=g:GetNext()
+	local mc=Duel.SelectTarget(tp,s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,99,xc,e,tp,xc)
 	if not s.filter2chk(mc,e,tp,xc) then
 		xc,mc=mc,xc
 	end
