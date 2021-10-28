@@ -10,6 +10,9 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
+function s.xyzfilter(c,mg)
+	return c:IsXyzSummonable(nil,mg)
+end
 function s.filter1(c)
 	return c:IsFaceup() and c:IsLevelAbove(0)
 end
@@ -36,6 +39,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(lv)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			lc:RegisterEffect(e1)
+	local xyzg=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_EXTRA,0,nil,mg)
+	if #xyzg>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local xyz=xyzg:Select(tp,1,1,nil)
+		Duel.XyzSummon(tp,xyz,nil,mg,99,99)
 		end
 	end
 end
