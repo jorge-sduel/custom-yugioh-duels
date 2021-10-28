@@ -39,19 +39,18 @@ function s.target(e,tp,eg,ev,ep,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	local xc=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,e,tp):GetFirst()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	Duel.SelectTarget(tp,s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,99,xc,e,tp,xc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.operation(e,tp,eg,ev,ep,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	if #g~=2 then return end
 	local xc=g:GetFirst()
-	local mc=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,99,xc,e,tp,xc)
 	if not s.filter2chk(mc,e,tp,xc) then
-		xc,mc=mc,xc
+		xc=xc
 	end
 	if not s.filter2chk(mc,e,tp,xc) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local mc=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,99,xc,e,tp,xc)
 	local tc=Duel.SelectMatchingCard(tp,s.filter3,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,mc,xc):GetFirst()
 	if tc then
 		local e1=Effect.CreateEffect(e:GetHandler())
