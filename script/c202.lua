@@ -6,17 +6,16 @@ function c202.initial_effect(c)
 --pendulum summon
 	Pendulum.AddProcedure(c)
 	--destroy & summon
+	--spsummon
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(12340002,0))
-	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetRange(LOCATION_PZONE)
-	e1:SetValue(SUMMON_TYPE_SYNCHRO)
+	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,202)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCost(c202.cost)
-	e1:SetTarget(c202.target)
-	e1:SetOperation(c202.op)
+	e1:SetTarget(c202.sptg)
+	e1:SetOperation(c202.spop)
 	c:RegisterEffect(e1)
 	--cannot disable summon
 	local e2=Effect.CreateEffect(c)
@@ -62,21 +61,17 @@ end
 function c202.filter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsLevelBelow(7)
 end
-function c202.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsDestructable()	and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(c202.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
+function c202.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(c202.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
-function c202.op(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.Destroy(c,REASON_EFFECT)~=0 then
-		if Duel.GetLocationCount(tp,LOCATION_MZONE)<1 then return end
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c202.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
-		if g:GetCount()>0 then
-			Duel.SpecialSummon(g,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
-		end
+function c202.spop(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c202.filter),tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+	if g:GetCount()>0 then
+		Duel.SpecialSummon(g,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
 	end
 end
 function c202.repcondition(e,tp,eg,ep,ev,re,r,rp)
