@@ -39,6 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(lv)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			lc:RegisterEffect(e1)
+	local mg=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,TYPE_MONSTER)
 	local xyzg=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_EXTRA,0,nil,mg)
 	if #xyzg>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
