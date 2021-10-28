@@ -1,96 +1,44 @@
 --Overlay-Magic Startune Force
 function c75498123.initial_effect(c)
-	
-	--Special Summon
+	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(75498123,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetTarget(c75498123.target)
-	e1:SetOperation(c75498123.operation)
+	e1:SetTarget(s.target)
+	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-	
 end
-
---Gets the number of XYZ Materials on the card
-function c75498123.numMaterials(c)
-	if not _G then return 0 end
-	local mt=_G["c" .. c:GetOriginalCode()]
-	if mt and mt.xyz_count then return mt.xyz_count else return 0 end
+function s.filter(c,e,tp)
+	if not c:IsType(TYPE_XYZ) then return false end
+	return Duel.IsExistingMatchingCard(s.matfilter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,tp,c)
 end
-
---Returns true if the card meets the non-synchro condition
-function c75498123.nonSynchroCondition(c)
-	return not c:IsType(TYPE_SYNCHRO) and c:GetLevel() > 0
+function s.matfilter1(c,tp,syncard)
+	local loc
+	if c:IsLocation(LOCATION_MZONE) then loc=LOCATION_GRAVE else loc=LOCATION_MZONE end
+	return Duel.IsExistingMatchingCard(s.matfilter2,tp,loc,0,1,c,syncard,c)
 end
-
---Filter for non-synchro targets
-function c75498123.nonSynchroTargetFilter(c,e,tp)
-	if not c75498123.nonSynchroCondition(c) or not c:IsFaceup() then return false end
-	local count = Duel.GetMatchingGroup(c75498123.synchroTargetFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,c,e,tp,c:GetLevel()):GetCount()
-	return count > 0 and Duel.IsExistingMatchingCard(c75498123.xyzFilter,tp,LOCATION_EXTRA,0,1,c,e,tp,c:GetLevel(),count+1)
+function s.matfilter2(c,xyz,mc)
+	return xyz:IsXyzSummonable(nil,Group.FromCards(c,mc))
 end
-
---Filter for synchro targets of a certain level or higher
-function c75498123.synchroTargetFilter(c,e,tp,lvl)
-	return c:IsType(TYPE_SYNCHRO) and c:IsFaceup() and c:GetLevel() >= lvl
-end
-
---Filter for XYZ monsters of a certain rank, that require a certain number of XYZ materials or lower
-function c75498123.xyzFilter(c,e,tp,rank,count)
-	if c:IsType(TYPE_XYZ) and c:GetRank() == rank and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false) then
-		local mats = c75498123.numMaterials(c)
-		if mats > 0 and mats <= count then return true end
-	end	
-	return false
-end
-
---Special Summon target
-function c75498123.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsFaceup() and (chkc:IsLocation(LOCATION_MZONE) or chkc:IsLocation(LOCATION_GRAVE)) end
-	if chk==0 then return Duel.IsExistingMatchingCard(c75498123.nonSynchroTargetFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,e,tp) end
-	
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g1=Duel.SelectTarget(tp,c75498123.nonSynchroTargetFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,e,tp)
-	local tc = g1:GetFirst()
-	
-	local count = Duel.GetMatchingGroup(c75498123.synchroTargetFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,tc,e,tp,tc:GetLevel()):GetCount()
-	local g2 = Duel.GetMatchingGroup(c75498123.xyzFilter,tp,LOCATION_EXTRA,0,tc,e,tp,tc:GetLevel(),count+1)
-	local minimum = count
-	local num = 0
-	local xyz = g2:GetFirst()
-	while xyz do
-		num = c75498123.numMaterials(xyz)
-		if num > 0 and num-1 < minimum then minimum = num-1 end
-		xyz = g2:GetNext()
-	end
-	if minimum <= 0 then minimum = 1 end
-	
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,c75498123.synchroTargetFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,minimum,count,tc,e,tp,tc:GetLevel())
-	
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-1
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
-
---Special Summon operation
-function c75498123.operation(e,tp,eg,ep,ev,re,r,rp)
-
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
-	count = g:GetCount()
-	if count < 2 then return end
-	
-	local tc = g:Filter(c75498123.nonSynchroCondition,nil):GetFirst()
-	if not tc then return end
-	
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 and g:Filter(Card.IsLocation,nil,LOCATION_MZONE):GetCount() <= 0 then return end
-	
-	local sg=Duel.SelectMatchingCard(tp,c75498123.xyzFilter,tp,LOCATION_EXTRA,0,1,1,tc,e,tp,tc:GetLevel(),count)
-	local sc = sg:GetFirst()
-	if not sc then return end
-	
-	Duel.Overlay(sc,g)
-	Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
-	sc:CompleteProcedure()
+function s.activate(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-1 then return end
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_EXTRA,0,nil,e,tp)
+	if #g>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local tc=g:Select(tp,1,1,nil):GetFirst()
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
+		local g1=Duel.SelectMatchingCard(tp,s.matfilter1,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,tp,tc)
+		local loc
+		if g1:GetFirst():IsLocation(LOCATION_MZONE) then loc=LOCATION_GRAVE else loc=LOCATION_MZONE end
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
+		local g2=Duel.SelectMatchingCard(tp,s.matfilter2,tp,loc,0,1,1,nil,tc,g1:GetFirst())
+		g2:Merge(g1)
+		Duel.XyzSummon(tp,tc,nil,g2)
+	end
 end
