@@ -29,7 +29,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE,0,1,nil)
- and Duel.GetLocationCount(tp,LOCATION_MZONE)>-1 end
+ and Duel.GetLocationCount(tp,LOCATION_MZONE)>-2 end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(57421866,1))
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
