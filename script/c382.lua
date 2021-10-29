@@ -1,4 +1,4 @@
---Level Eater (Anime)
+--odd-eyes fast wing dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
