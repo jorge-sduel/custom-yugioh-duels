@@ -14,6 +14,13 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
+	--Destroy monsters with 0 ATK
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e2:SetCode(EVENT_ADJUST)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetOperation(s.desop)
+	c:RegisterEffect(e2)
 end
 function s.matfilter(c,scard,sumtype,tp)
 	return c:IsType(TYPE_PENDULUM,scard,sumtype,tp) and c:IsType(TYPE_SYNCHRO,scard,sumtype,tp)
@@ -53,5 +60,15 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	tc:RegisterEffect(e2)
 	if c:IsRelateToEffect(e) then
 		Duel.SynchroSummon(tp,c,nil)
+	end
+end
+function s.filter1(c,e)
+	return c:GetAttack()==0 and c:IsPosition(POS_FACEUP) and c:IsDestructable(e) and not c:IsImmuneToEffect(e)
+end
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_MZONE,0,nil,e)
+	if #g>0 then
+		Duel.Hint(HINT_CARD,1-tp,id)
+		Duel.Destroy(g,REASON_EFFECT)
 	end
 end
