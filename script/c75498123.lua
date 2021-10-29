@@ -39,8 +39,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(lv)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			lc:RegisterEffect(e1)
-		local sc=Duel.SelectMatchingCard(tp,s.xyzfilter,tp,LOCATION_EXTRA,0,1,1,nil):GetFirst()
-		Duel.XyzSummon(tp,sc)
 		end
 	end
 end
