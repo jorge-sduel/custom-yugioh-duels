@@ -19,7 +19,7 @@ function s.matfilter(c,scard,sumtype,tp)
 	return c:IsType(TYPE_PENDULUM,scard,sumtype,tp) and c:IsType(TYPE_SYNCHRO,scard,sumtype,tp)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and c:GetLevel()>0 and c:IsCanBeSynchroMaterial() and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,0,1,nil,tp,c)
+	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and c:GetLevel()>0 and c:IsCanBeSynchroMaterial()
 end
 function s.filter2(c)
 	return c:IsFaceup() and c:IsLevel(7) and c:IsType(TYPE_PENDULUM) and not c:IsType(TYPE_SYNCHRO) and c:IsCanBeSynchroMaterial()
