@@ -29,7 +29,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,tc)
+		local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE,0,tc)
 		local lc=g:GetFirst()
 		local lv=tc:GetLevel()
 		for lc in aux.Next(g) do
