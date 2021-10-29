@@ -66,7 +66,7 @@ function s.filter1(c,e)
 	return c:GetAttack()==0 and c:IsPosition(POS_FACEUP) and c:IsDestructable(e) and not c:IsImmuneToEffect(e)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_MZONE,0,nil,e)
+	local g=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_MZONE,LOCATION_MZONE,nil,e)
 	if #g>0 then
 		Duel.Hint(HINT_CARD,1-tp,id)
 		Duel.Destroy(g,REASON_EFFECT)
