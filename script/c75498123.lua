@@ -10,8 +10,8 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-function s.xyzfilter(c,mg)
-	return c:IsXyzSummonable(nil,mg)
+function s.xyzfilter(c)
+	return c:IsXyzSummonable()
 end
 function s.filter1(c)
 	return c:IsFaceup() and c:IsLevelAbove(0)
@@ -35,16 +35,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		for lc in aux.Next(g) do
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetCode(EFFECT_XYZ_LEVEL)
+			e1:SetCode(511000189)
 			e1:SetValue(lv)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			lc:RegisterEffect(e1)
-	local mg=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_GRAVE+LOCATION_MZONE,0,nil,TYPE_MONSTER)
-	local xyzg=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_EXTRA,0,nil,mg)
-	if #xyzg>0 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local xyz=xyzg:Select(tp,1,1,nil)
-		Duel.XyzSummon(tp,xyz,nil,mg,99,99)
+		local sc=Duel.SelectMatchingCard(tp,s.xyzfilter,tp,LOCATION_EXTRA,0,1,1,nil):GetFirst()
+		Duel.XyzSummon(tp,sc)
 		end
 	end
 end
