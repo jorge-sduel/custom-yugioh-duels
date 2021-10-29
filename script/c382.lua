@@ -31,6 +31,15 @@ function s.initial_effect(c)
 	e3:SetTarget(s.destg)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
+	--damage
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(id,2))
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e4:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
+	e4:SetCountLimit(1,id)
+	e4:SetCondition(s.damcon)
+	e4:SetOperation(s.surop)
+	c:RegisterEffect(e4)
 end
 function s.matfilter(c,scard,sumtype,tp)
 	return c:IsType(TYPE_PENDULUM,scard,sumtype,tp) and c:IsType(TYPE_SYNCHRO,scard,sumtype,tp)
@@ -97,4 +106,24 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_ONFIELD,nil)
 	Duel.Destroy(g,REASON_EFFECT)
+end
+function s.damcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetBattleDamage(tp)>=Duel.GetLP(tp)
+end
+function s.damcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	c:RemoveOverlayCard(tp,1,1,REASON_COST)
+end
+function s.surop(e,tp,eg,ep,ev,re,r,rp)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	e1:SetOperation(s.damopx)
+	e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
+	Duel.RegisterEffect(e1,tp)
+	Duel.SetLP(tp,100,REASON_EFFECT)
+end
+function s.damopx(e,tp,eg,ep,ev,re,r,rp)
+	Duel.ChangeBattleDamage(tp,0)
 end
