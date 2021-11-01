@@ -107,7 +107,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter1(c,e)
-	return c:GetAttack()==0 and c:IsPosition(POS_FACEUP) and c:IsDestructable(e) and not c:IsImmuneToEffect(e)
+	return c:GetAttack()==0 and c:IsPosition(POS_FACEUP) and c:IsType(TYPE_MONSTER) and c:IsDestructable(e) and not c:IsImmuneToEffect(e)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter1,tp,0,LOCATION_MZONE,nil,e)
