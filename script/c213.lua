@@ -4,7 +4,7 @@ function c213.initial_effect(c)
 	Pendulum.AddProcedure(c,false)
 	--Activate
 	local e0=Effect.CreateEffect(c)
-	e0:SetDescription(aux.Stringid(213,2))
+	e0:SetDescription(aux.Stringid(213,0))
 	e0:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetRange(LOCATION_HAND)
@@ -12,7 +12,6 @@ function c213.initial_effect(c)
 	c:RegisterEffect(e0)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(213,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetDescription(1160)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -31,9 +30,17 @@ function c213.initial_effect(c)
 	e3:SetCondition(c213.rdcon)
 	e3:SetOperation(c213.rdop)
 	c:RegisterEffect(e3)
+	--indes
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetProperty(EFFECT_TYPE_SINGLE)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetCode(EFFECT_CHANGE_LEVEL)
+	e6:SetValue(2)
+	c:RegisterEffect(e6)
 end
+c213.pendulum_level=2
 function c213.filter1(c,e,tp)
-
 	local rk=c:GetRank()
 	if not c:IsType(TYPE_XYZ) or rk<=0 then return false end
 	if c:IsLocation(LOCATION_GRAVE|LOCATION_EXTRA) then
