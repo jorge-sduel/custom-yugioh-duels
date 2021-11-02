@@ -67,7 +67,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 	--spsummon
 	local e7=Effect.CreateEffect(c)
-	e7:SetDescription(aux.Stringid(id,0))
+	e7:SetDescription(aux.Stringid(id,5))
 	e7:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e7:SetRange(LOCATION_PZONE)
