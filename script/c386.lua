@@ -24,7 +24,7 @@ function s.sumcon(e,c,minc)
 	return ma>0 and Duel.IsExistingMatchingCard(Card.IsCanChangePosition,tp,LOCATION_MZONE,LOCATION_MZONE,mi,nil) and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp,c)
-	local sg=e:GetLabelObject()
-	local g=Duel.SelectTarget(tp,Card.IsCanChangePosition,tp,LOCATION_MZONE,LOCATION_MZONE,sg,sg,nil)
+	local mi,ma=c:GetTributeRequirement()
+	local g=Duel.SelectTarget(tp,Card.IsCanChangePosition,tp,LOCATION_MZONE,LOCATION_MZONE,mi,mi,nil)
 Duel.ChangePosition(g,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)
 end
