@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_SET_PROC)
-	Duel.RegisterEffect(e2)
+	c:RegisterEffect(e2)
 end
 function s.rmfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsCanChangePosition()
