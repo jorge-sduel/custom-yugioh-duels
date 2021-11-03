@@ -14,6 +14,9 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_SET_PROC)
 	c:RegisterEffect(e3)
 end
+function s.filter(c)
+	return c:IsType(TYPE_MONSTER)
+end
 function s.sumcon(e,c,minc)
 	if c==nil then return true end
 	local mi,ma=c:GetTributeRequirement()
