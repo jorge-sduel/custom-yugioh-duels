@@ -19,11 +19,9 @@ function s.filter(c)
 end
 function s.sumcon(e,c,minc)
 	if c==nil then return true end
-	local mi,ma=c:GetTributeRequirement()
-	if mi<minc then mi=minc end
-	if ma<mi then return false end
-	e:SetLabel(mi)
-	return ma>0 and Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,mi,nil,e,tp) and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+	local tp=c:GetControler()
+	return minc<=2 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp,c)
 	local ct=e:GetLabelObject()
