@@ -20,7 +20,7 @@ function s.sumcon(e,c,minc)
 	if mi<minc then mi=minc end
 	if ma<mi then return false end
 	e:SetLabel(mi)
-	return ma>0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+	return Duel.IsExistingMatchingCard(Card.IsCanChangePosition,tp,LOCATION_MZONE,LOCATION_MZONE,mi,nil) and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp,c)
 	local mi,ma=c:GetTributeRequirement()
