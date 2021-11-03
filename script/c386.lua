@@ -25,6 +25,7 @@ function s.sumcon(e,c,minc)
 end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp,c)
 	local mi,ma=c:GetTributeRequirement()
-	local g=Duel.SelectTarget(tp,Card.IsCanChangePosition,tp,LOCATION_MZONE,LOCATION_MZONE,mi,mi,nil)
-Duel.ChangePosition(g,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)
+		local g=Duel.GetMatchingGroup(Card.IsCanChangePosition,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	local g1=g:Select(tp,mi,mi,true,nil)
+Duel.ChangePosition(g1,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)
 end
