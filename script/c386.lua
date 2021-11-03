@@ -27,6 +27,9 @@ function s.sumcon(e,c,minc)
 end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp,c)
 	local mi,ma=c:GetTributeRequirement()
+	if mi<minc then mi=minc end
+	if ma<mi then return false end
+	e:SetLabel(mi)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,mi,mi,nil)
 	local tc=g:GetFirst()
 Duel.ChangePosition(tc,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)
