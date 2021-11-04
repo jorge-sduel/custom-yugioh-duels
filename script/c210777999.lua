@@ -68,7 +68,7 @@ ban_trap={
 }
 function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+	Duel.MoveToField(c,tp,tp,LOCATION_FZONE,POS_FACEUP,true)
 end
 function s.filter(e,te,c)
 	if not te then return false end
