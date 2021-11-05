@@ -27,6 +27,16 @@ function s.efop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetOperation(s.atkop)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	rc:RegisterEffect(e1,true)
+	local e2=Effect.CreateEffect(rc)
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e2:SetCode(EFFECT_CANNOT_ACTIVATE)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetTargetRange(0,1)
+	e2:SetValue(s.aclimit)
+	e2:SetCondition(s.actcon)
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+	rc:RegisterEffect(e2,true)
 	if not rc:IsType(TYPE_EFFECT) then
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
@@ -49,4 +59,10 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 		c:RegisterEffect(e1)
 	end
+end
+function s.aclimit(e,re,tp)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
+end
+function s.actcon(e)
+	return Duel.GetAttacker()==e:GetHandler()
 end
