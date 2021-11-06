@@ -32,8 +32,7 @@ end
 function s.attval(e,c)
 	local atk=0
 	local og=e:GetHandler():GetOverlayGroup()
-	for tc in aux.Next(og) do
-		atk=tc:GetSum(Card.GetAttack)
+		atk=og:GetSum(Card.GetAttack)
 	end
 	return atk
 end
