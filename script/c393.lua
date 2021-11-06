@@ -30,10 +30,8 @@ function s.xyzfilter(c,xyz,sumtype,tp)
 	return c:IsRace(RACE_DINOSAUR)
 end
 function s.attval(e,c)
-	local atk=0
 	local og=e:GetHandler():GetOverlayGroup()
 		atk=og:GetSum(Card.GetAttack)
-	end
 	return atk
 end
 function s.repfilter(c,tp)
