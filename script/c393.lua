@@ -31,9 +31,9 @@ function s.xyzfilter(c,xyz,sumtype,tp)
 end
 function s.attval(e,c)
 	local att=0
-	local og=e:GetHandler():GetOverlayGroup():GetSum(Card.GetAttack)
+	local og=e:GetHandler():GetOverlayGroup()
 	for tc in aux.Next(og) do
-		akt=tc:GetAttack()
+		akt=tc:GetSum(Card.GetAttack)
 	end
 	return akt
 end
