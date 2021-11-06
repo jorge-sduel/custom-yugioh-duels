@@ -1,4 +1,4 @@
---Titanic Combat Unit TCU-3000
+--Mechanisect dino
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
