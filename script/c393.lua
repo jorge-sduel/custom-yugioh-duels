@@ -30,12 +30,12 @@ function s.xyzfilter(c,xyz,sumtype,tp)
 	return c:IsRace(RACE_DINOSAUR)
 end
 function s.attval(e,c)
-	local att=0
+	local atk=0
 	local og=e:GetHandler():GetOverlayGroup()
 	for tc in aux.Next(og) do
-		akt=tc:GetSum(Card.GetAttack)
+		atk=tc:GetSum(Card.GetAttack)
 	end
-	return akt
+	return atk
 end
 function s.repfilter(c,tp)
 	return c:IsControler(tp) and c:IsLocation(LOCATION_ONFIELD)
