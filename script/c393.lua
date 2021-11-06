@@ -33,9 +33,9 @@ function s.attval(e,c)
 	local att=0
 	local og=e:GetHandler():GetOverlayGroup()
 	for tc in aux.Next(og) do
-		att=att|tc:GetAttack()
+		akt=tc:GetAttack()
 	end
-	return att
+	return akt
 end
 function s.repfilter(c,tp)
 	return c:IsControler(tp) and c:IsLocation(LOCATION_ONFIELD)
