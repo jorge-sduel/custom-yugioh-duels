@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.xyzfilter(c,xyz,sumtype,tp)
-	return c:IsRace(RACE_DINOSAUR)
+	return c:IsRace(RACE_DINOSAUR) and c:IsLevelAbove(5)
 end
 function s.attval(e,c)
 	local og=e:GetHandler():GetOverlayGroup()
