@@ -16,13 +16,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(a2)
 	local e3=Effect.CreateEffect(rc)
 	e3:SetType(EFFECT_TYPE_XMATERIAL)
-	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e3:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e3:SetTargetRange(0,1)
 	e3:SetValue(s.aclimit)
 	e3:SetCondition(s.actcon)
 	c:RegisterEffect(e3)
-
 end
 function s.efcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_XYZ
