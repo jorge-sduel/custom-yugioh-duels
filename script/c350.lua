@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(a1)
 	local a2=a1:Clone()
 	a2:SetCode(EFFECT_UPDATE_DEFENSE)
-	a2:SetValue(s.armor_def)
+	a2:SetValue(300)
 	c:RegisterEffect(a2)
 	--sp summon
 	--Grant effect
