@@ -14,13 +14,15 @@ function s.initial_effect(c)
 	a2:SetCode(EFFECT_UPDATE_DEFENSE)
 	a2:SetValue(300)
 	c:RegisterEffect(a2)
-	--sp summon
-	--Grant effect
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_BE_MATERIAL)
-	e2:SetOperation(s.efop)
-	c:RegisterEffect(e2)
+	local e3=Effect.CreateEffect(rc)
+	e3:SetType(EFFECT_TYPE_XMATERIAL)
+	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e3:SetCode(EFFECT_CANNOT_ACTIVATE)
+	e3:SetTargetRange(0,1)
+	e3:SetValue(s.aclimit)
+	e3:SetCondition(s.actcon)
+	c:RegisterEffect(e3)
+
 end
 function s.efcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_XYZ
