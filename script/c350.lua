@@ -4,6 +4,17 @@ function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,2)
 	c:EnableReviveLimit()
+	local a1=Effect.CreateEffect(c)
+	a1:SetType(EFFECT_TYPE_XMATERIAL)
+	a1:SetCode(EFFECT_UPDATE_ATTACK)
+	a1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	a1:SetValue(300)
+	c:RegisterEffect(a1)
+	local a2=a1:Clone()
+	a2:SetCode(EFFECT_UPDATE_DEFENSE)
+	a2:SetValue(s.armor_def)
+	c:RegisterEffect(a2)
+	--sp summon
 	--Grant effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
