@@ -14,7 +14,12 @@ function s.initial_effect(c)
 	a2:SetCode(EFFECT_UPDATE_DEFENSE)
 	a2:SetValue(300)
 	c:RegisterEffect(a2)
-	local a3=a1:Clone()
+	--atk up
+﻿ 	local a3=Effect.CreateEffect(c)﻿
+ 	a3:SetDescription(aux.Stringid(id,2))
+﻿ 	a3:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
+﻿ 	a3:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_TRIGGER_F)
+﻿ 	a3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	a3:SetCode(EFFECT_CANNOT_ACTIVATE)
 	a3:SetTargetRange(0,1)
 	a3:SetValue(s.aclimit)
