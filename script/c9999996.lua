@@ -50,17 +50,9 @@ function c9999996.initial_effect(c)
 	e9:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	c:RegisterEffect(e9)
 	local e10=e8:Clone()
-	e10:SetCode(EFFECT_CANNOT_REMOVE)
+	e10:SetCode(EFFECT_IMMUNE_EFFECT)
+	e10:SetValue(c9999996.imfilter)
 	c:RegisterEffect(e10)
-	local e11=e8:Clone()
-	e11:SetCode(EFFECT_CANNOT_TO_GRAVE)
-	c:RegisterEffect(e11)
-	local e12=e8:Clone()
-	e12:SetCode(EFFECT_CANNOT_TO_DECK)
-	c:RegisterEffect(e12)
-	local e13=e8:Clone()
-	e13:SetCode(EFFECT_CANNOT_TO_EXTRA)
-	c:RegisterEffect(e13)
 	--Cannot be Material
 	local e14=Effect.CreateEffect(c)
 	e14:SetType(EFFECT_TYPE_SINGLE)
@@ -146,4 +138,8 @@ function c9999996.leavefilter(c)
 end
 function c9999996.leavecon(e)
 	return Duel.IsExistingMatchingCard(c9999996.leavefilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,e:GetHandler())
+end
+function c9999996.imfilter(e,te)
+	if not te then return false end
+	return te:IsHasCategory(CATEGORY_TOHAND+CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_TODECK+CATEGORY_RELEASE+CATEGORY_TOGRAVE)
 end
