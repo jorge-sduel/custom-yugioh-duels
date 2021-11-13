@@ -99,7 +99,6 @@ function c9999996.initial_effect(c)
 	e19:SetCode(EFFECT_SYNCHRO_MATERIAL)
 	e19:SetRange(LOCATION_MZONE)
 	e19:SetTargetRange(LOCATION_HAND,0)
-	e19:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_MONSTER))
 	c:RegisterEffect(e19)
 end
 function c9999996.splimit(e,se,sp,st)
