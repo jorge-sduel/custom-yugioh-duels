@@ -259,6 +259,8 @@ function c9999996.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function c9999996.spop(e,tp,eg,ep,ev,re,r,rp)
+	local tg=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
+	Duel.ConfirmCards(tp,tg)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,c9999996.spfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,1,nil,e,tp)
 	local tc=g:GetFirst()
