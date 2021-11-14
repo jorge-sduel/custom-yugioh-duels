@@ -21,7 +21,6 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
-	e1:SetCost(aux.dxmcostgen(1,1,nil))
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_END_PHASE)
@@ -81,8 +80,8 @@ end
 function s.actcon(e)
 	return Duel.GetAttacker()==e:GetHandler()
 end
-function s.spfilter(c,e,tp,mc,pg)
-	return c:IsType(TYPE_XYZ) and not c:IsRank(e:GetHandler():GetRank()+1) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
+function s.spfilter1(c,e,tp,mc,pg)
+	return c:IsType(TYPE_XYZ) and c:IsRank(e:GetHandler():GetRank()+1) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 		and mc:IsCanBeXyzMaterial(c,tp) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
 end
 	--Activation legality
