@@ -80,7 +80,7 @@ end
 function s.actcon(e)
 	return Duel.GetAttacker()==e:GetHandler()
 end
-function s.spfilter1(c,e,tp,mc,pg)
+function s.spfilter(c,e,tp,mc,pg)
 	return c:IsType(TYPE_XYZ) and c:IsRank(e:GetHandler():GetRank()+1) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 		and mc:IsCanBeXyzMaterial(c,tp) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
 end
