@@ -5,7 +5,6 @@
 			"repo_name": "jorge-sduel custom-yugioh-duels",
 			"repo_path": "./repositories/jorge-sduel",
 			"has_core": false,
-			"core_path": "bin",
 			"data_path": "",
 			"script_path": "script",
 			"pics_path": "pics",
