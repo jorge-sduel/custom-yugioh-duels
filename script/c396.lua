@@ -13,7 +13,6 @@ function s.spfilter1(c,e,tp)
 	return c:IsSetCard(0x1115) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
-		local g=Duel.SelectMatchingCard(tp,s.spfilter1,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,nil,e,tp)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CHANGE_DAMAGE)
@@ -26,9 +25,8 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCode(EFFECT_NO_EFFECT_DAMAGE)
 	e2:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e2,tp)
-			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.damval(e,re,val,r,rp,rc)
-	if (r&REASON_EFFECT)~=0 then return 1500
+	if (r&REASON_EFFECT)~=0 then return 0
 	else return val end
 end
