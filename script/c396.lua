@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_CHAINING)
-	e1:SetOperation(s.op2)
+	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
 end
 function s.spfilter1(c,e,tp)
