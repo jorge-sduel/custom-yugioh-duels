@@ -54,7 +54,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,val,r,rc)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		end
-	end
 end
 function s.chdmgcon(e,re,val,r,rp,rc)
 	local cc=Duel.GetCurrentChain()
