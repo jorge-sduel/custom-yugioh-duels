@@ -25,7 +25,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCode(EFFECT_NO_EFFECT_DAMAGE)
 	e2:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e2,tp)
-		local g=Duel.SelectMatchingCard(tp,s.spfilter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+		local g=Duel.SelectMatchingCard(tp,s.spfilter1,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,nil,e,tp)
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.damval(e,re,val,r,rp,rc)
