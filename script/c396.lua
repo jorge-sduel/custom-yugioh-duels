@@ -63,6 +63,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:Reset()
 end
 function s.damval(e,re,val,r,rp,rc)
-	if bit.band(r,REASON_EFFECT)~=0 then return 0
+	if bit.band(r,REASON_EFFECT)~=0 then return 1000
 	else return val end
 end
