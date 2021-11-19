@@ -32,21 +32,18 @@ function c232.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_QUICK_O)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e4:SetCode(EVENT_FREE_CHAIN)
-
 	e4:SetRange(LOCATION_EXTRA)
 	e4:SetCountLimit(1)
 	e4:SetCondition(c232.condition)
 	e4:SetTarget(c232.destg)
 	e4:SetOperation(c232.desop)
 	c:RegisterEffect(e4)
-
 	--to pendulum
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(128,2))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetProperty(EFFECT_FLAG_DELAY)
 	e5:SetCode(EVENT_DESTROYED)
-
 	e5:SetCondition(c232.pencon)
 	e5:SetTarget(c232.pentg)
 	e5:SetOperation(c232.penop)
@@ -88,7 +85,7 @@ function c232.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og)
 end
 function c232.condition(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttacker()
-	return at:GetControler()~=tp and Duel.GetAttackTarget()==nil
+	return Duel.GetAttackTarget()==nil
 end
 function c232.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,2,REASON_COST) end
