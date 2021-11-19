@@ -1,7 +1,7 @@
 --Dark Antelion Fast Dragon
-function c232.initial_effect(c)
+function c232.initial_effect(c)
 --pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	Xyz.AddProcedure(c,nil,7,2)
 	--xyz summon
 	local e0=Effect.CreateEffect(c)
@@ -10,7 +10,7 @@ function c232.initial_effect(c)
 	e0:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e0:SetRange(LOCATION_EXTRA)
 	e0:SetCondition(c232.xyzcon)
-	e0:SetOperation(c232.xyzop)
+	e0:SetOperation(c232.xyzop)
 	c:RegisterEffect(e0)
 	local e1=e0:Clone()
 	e1:SetRange(LOCATION_PZONE)
@@ -31,19 +31,22 @@ function c232.initial_effect(c)
 	e4:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
 	e4:SetType(EFFECT_TYPE_QUICK_O)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e4:SetCode(EVENT_FREE_CHAIN)
+	e4:SetCode(EVENT_FREE_CHAIN)
+
 	e4:SetRange(LOCATION_EXTRA)
 	e4:SetCountLimit(1)
 	e4:SetCondition(c232.condition)
 	e4:SetTarget(c232.destg)
 	e4:SetOperation(c232.desop)
 	c:RegisterEffect(e4)
-	--to pendulum
+
+	--to pendulum
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(128,2))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetProperty(EFFECT_FLAG_DELAY)
-	e5:SetCode(EVENT_DESTROYED)
+	e5:SetCode(EVENT_DESTROYED)
+
 	e5:SetCondition(c232.pencon)
 	e5:SetTarget(c232.pentg)
 	e5:SetOperation(c232.penop)
@@ -157,7 +160,9 @@ end
 function c232.tglimit(e,c)
 	return c~=e:GetHandler()
 end
-function c232.count(e,c)
+function c232.count(e,c)
+
+
 	return Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)-Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)
 end
 function c232.pencon(e,tp,eg,ep,ev,re,r,rp)
