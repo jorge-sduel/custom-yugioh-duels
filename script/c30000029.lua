@@ -25,14 +25,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
-		local lv=tc:GetLevel()
-		for lc in aux.Next(g) do
+		local g2=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE,0,g)
 		local sc=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
+		for lc in aux.Next(g2) do
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_ADD_ATTRIBUTE)
 			e1:SetValue(sc)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-			c:RegisterEffect(e1)
+			lc:RegisterEffect(e1)
 	end
 end
