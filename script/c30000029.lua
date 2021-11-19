@@ -28,12 +28,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	local c=e:GetHandler()
+		for lc in aux.Next(g) do
 		local sc=Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_MZONE,g)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetCode(EFFECT_CHANGE_LEVEL_FINAL)
+			e1:SetCode(EFFECT_ADD_ATTRIBUTE)
 			e1:SetValue(e:GetLabel())
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-			sc:RegisterEffect(e1)
+			lc:RegisterEffect(e1)
 	end
 end
