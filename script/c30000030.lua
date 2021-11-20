@@ -62,7 +62,7 @@ function s.indval(e,re,tp)
 	return tp~=e:GetHandlerPlayer()
 end
 function s.atkval(e,c)
-	local g=Duel.GetMatchingGroup(Card.IsType,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,nil,TYPE_MONSTER)
+	local g=Duel.GetMatchingGroup(Card.IsType,e:GetHandlerPlayer(),0,LOCATION_MZONE,nil,TYPE_MONSTER)
 	return g:GetClassCount(Card.GetAttribute)*300
 end
 function s.spfilter(c)
