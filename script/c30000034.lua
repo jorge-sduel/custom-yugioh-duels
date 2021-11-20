@@ -36,12 +36,10 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetHintTiming(0,TIMING_BATTLE_START+TIMING_BATTLE_END)
 	e4:SetRange(LOCATION_MZONE)
+	e4:SetCondition(s.sccon)
 	e4:SetTarget(s.sctg)
 	e4:SetOperation(s.scop)
 	c:RegisterEffect(e4)
-end
-function s.filter(c)
-	return c:IsLevelBelow(4) and c:IsType(TYPE_MONSTER)
 end
 function s.filter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -95,29 +93,18 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-function s.mfilter(c)
-	return c:IsType(TYPE_MONSTER)
-end
-function s.checkaddition(tp,sg,sc)
-	return sg:IsExists(s.mfilter,1,nil)
+function s.sccon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnPlayer()~=tp
 end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		Synchro.CheckAdditional=s.checkaddition
-		local res=Duel.IsExistingMatchingCard(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,1,nil)
-		Synchro.CheckAdditional=nil
-		return res
-	end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
-	Synchro.CheckAdditional=s.checkaddition
-	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:Select(tp,1,1,nil)
-		Duel.SynchroSummon(tp,sg:GetFirst())
-	else
-		Synchro.CheckAdditional=nil
+		Duel.XyzSummon(tp,sg:GetFirst(),nil)
 	end
 end
