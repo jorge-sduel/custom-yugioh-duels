@@ -62,23 +62,8 @@ function s.indval(e,re,tp)
 	return tp~=e:GetHandlerPlayer()
 end
 function s.atkval(e,c)
-	return s.attcount(e:GetHandler():GetControler(),0,LOCATION_MZONE)*300
-end
-
---att count function
-function s.attfilter(c,att)
-	return c:IsFaceup() and c:IsAttribute(att)
-end
-function s.attcount(tp,loc1,loc2)
-	local att=0
-	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_LIGHT) then att=att+1 end
-	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DARK) then att=att+1 end
-	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_WATER) then att=att+1 end
-	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_FIRE) then att=att+1 end
-	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_EARTH) then att=att+1 end
-	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_WIND) then att=att+1 end
-	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DIVINE) then att=att+1 end
-	return att
+	local g=Duel.GetMatchingGroup(Card.IsType,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,nil,TYPE_MONSTER)
+	return g:GetClassCount(Card.GetAttribute)*300
 end
 function s.spfilter(c)
 	return c:IsSetCard(0x306) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
