@@ -35,6 +35,6 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 	if #g2>0 then
-		Duel.SendtoHand(g2,REASON_EFFECT)
+		Duel.SendtoHand(g2,nil,REASON_EFFECT)
 	end
 end
