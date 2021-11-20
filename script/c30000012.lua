@@ -64,15 +64,12 @@ Fusion.AddProcMixN(c,true,true,c30000012.ffilter,3)
 	e7:SetOperation(c30000012.operation)
 	c:RegisterEffect(e7)
 end
-function c30000012.ffilter(c,fc,sumtype,sp,sub,mg,sg)
-	return (c:IsSetCard(0x306,fc,sumtype,sp) and c:IsType(TYPE_FUSION)) and (not sg or sg:FilterCount(aux.TRUE,c)==0 or not sg:IsExists(Card.IsCode,1,c,c:GetCode(),fc,sumtype,sp))
-end
-s.listed_series={0x306}
-s.material_setcode=0x306
-function s.ffilter(c,fc,sumtype,tp,sub,mg,sg)
+c30000012.listed_series={0x306}
+c30000012.material_setcode=0x306
+function c30000012.ffilter(c,fc,sumtype,tp,sub,mg,sg)
 	return c:IsSetCard(0x306,fc,sumtype,tp) and c:IsType(TYPE_FUSION) and (not sg or not sg:IsExists(s.fusfilter,1,c,c:GetCode(fc,sumtype,tp),fc,sumtype,tp))
 end
-function s.fusfilter(c,code,fc,sumtype,tp)
+function c30000012.fusfilter(c,code,fc,sumtype,tp)
 	return c:IsSummonCode(fc,sumtype,tp,code) and not c:IsHasEffect(511002961)
 end
 function c30000012.indval(e,re,tp)
