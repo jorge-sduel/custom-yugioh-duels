@@ -67,7 +67,8 @@ end
 
 --att count function
 function s.attfilter(c,att)
-	return c:IsFaceup()
+	local att=GetAttribute()
+	return c:IsFaceup() and c:IsAttribute(att)
 end
 function s.attcount(tp,loc1,loc2)
 	local att=0
