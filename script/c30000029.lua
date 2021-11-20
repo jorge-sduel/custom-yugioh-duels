@@ -15,7 +15,7 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
 end
 function s.filter2(c)
-	return c:IsFaceup() and c:IsSetCard(0x306)
+	return c:IsSetCard(0x306)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil) end
