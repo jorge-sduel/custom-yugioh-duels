@@ -26,7 +26,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(ATTRIBUTE_DARK)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
-		tc=sg:GetNext()
-		end
 	end
 end
