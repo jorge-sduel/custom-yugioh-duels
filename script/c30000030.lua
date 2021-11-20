@@ -1,7 +1,8 @@
 --clear hellfiend
 local s,id=GetID()
 function s.initial_effect(c)
-Fusion.AddProcMixN(c,true,true,s.ffilter,3)
+	c:EnableReviveLimit()
+	Fusion.AddProcMixN(c,true,true,s.ffilter,3)
 	--remove att
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -49,8 +50,10 @@ Fusion.AddProcMixN(c,true,true,s.ffilter,3)
 	e5:SetOperation(s.negop)
 	c:RegisterEffect(e5)
 end
-function s.ffilter(c,fc,sumtype,sp,sub,mg,sg)
-	return (c:IsSetCard(0x306,fc,sumtype,sp)) and (not sg or sg:FilterCount(aux.TRUE,c)==0 or not sg:IsExists(Card.IsCode,1,c,c:GetCode(),fc,sumtype,sp))
+s.listed_series={0x306}
+s.material_setcode=0x306
+function s.ffilter(c,fc,sumtype,tp,sub,mg,sg)
+	return c:IsSetCard(0x306,fc,sumtype,tp) and (not sg or not sg:IsExists(s.fusfilter,1,c,c:GetCode(fc,sumtype,tp),fc,sumtype,tp))
 end
 function s.indval(e,re,tp)
 	return tp~=e:GetHandlerPlayer()
@@ -99,4 +102,4 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 		Duel.Destroy(eg,REASON_EFFECT)
 	end
-end
+end
