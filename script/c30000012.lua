@@ -1,14 +1,6 @@
 --クリアー・プライマル・コーア
 function c30000012.initial_effect(c)
 Fusion.AddProcMixN(c,true,true,c30000012.ffilter,3)
-	--fusion material
-	local e0=Effect.CreateEffect(c)
-	e0:SetType(EFFECT_TYPE_SINGLE)
-	e0:SetCode(EFFECT_FUSION_MATERIAL)
-	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e0:SetCondition(c30000012.fscon)
-	e0:SetOperation(c30000012.fsop)
-	c:RegisterEffect(e0)
 	--remove att
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -83,47 +75,6 @@ end
 function s.fusfilter(c,code,fc,sumtype,tp)
 	return c:IsSummonCode(fc,sumtype,tp,code) and not c:IsHasEffect(511002961)
 end
-function c30000012.fscon(e,g,gc,chkf)
-	if g==nil then return true end
-	if gc then
-		local mg=g:Filter(c30000012.ffilter,nil)
-		mg:AddCard(gc)
-		return gc:IsSetCard(0x306) and gc:IsType(TYPE_FUSION) and mg:GetClassCount(Card.GetCode)>=3
-	end
-	local fs=false
-	local mg=g:Filter(c30000012.ffilter,nil)
-	if mg:IsExists(aux.FConditionCheckF,1,nil,chkf) then fs=true end
-	return mg:GetClassCount(Card.GetCode)>=3 and (fs or chkf==PLAYER_NONE)
-end
-function c30000012.fsop(e,tp,eg,ep,ev,re,r,rp,gc,chkf)
-	if gc then
-		local sg=eg:Filter(c30000012.ffilter,gc)
-		sg:Remove(Card.IsCode,nil,gc:GetCode())
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FMATERIAL)
-		local g1=sg:Select(tp,1,1,nil)
-		sg:Remove(Card.IsCode,nil,g1:GetFirst():GetCode())
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FMATERIAL)
-		local g2=sg:Select(tp,1,1,nil)
-		g1:Merge(g2)
-		Duel.SetFusionMaterial(g1)
-		return
-	end
-	local sg=eg:Filter(c30000012.ffilter,nil)
-	local g1=nil
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FMATERIAL)
-	if chkf~=PLAYER_NONE then g1=sg:FilterSelect(tp,aux.FConditionCheckF,1,1,nil,chkf)
-	else g1=sg:Select(tp,1,1,nil) end
-	sg:Remove(Card.IsCode,nil,g1:GetFirst():GetCode())
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FMATERIAL)
-	local g2=sg:Select(tp,1,1,nil)
-	sg:Remove(Card.IsCode,nil,g2:GetFirst():GetCode())
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FMATERIAL)
-	local g3=sg:Select(tp,1,1,nil)
-	g1:Merge(g2)
-	g1:Merge(g3)
-	Duel.SetFusionMaterial(g1)
-end
-
 function c30000012.indval(e,re,tp)
 	return tp~=e:GetHandlerPlayer()
 end
