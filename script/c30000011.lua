@@ -38,25 +38,9 @@ function c30000011.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c30000011.atkval(e,c)
-	return c30000011.attcount(e:GetHandler():GetControler(),0,LOCATION_MZONE)*1000
+	local g=Duel.GetMatchingGroup(Card.IsType,e:GetHandlerPlayer(),0,LOCATION_MZONE,nil,TYPE_MONSTER)
+	return g:GetClassCount(Card.GetAttribute)*1000
 end
-
---att count function
-function c30000011.attfilter(c,att)
-	return c:IsFaceup() and c:IsAttribute(att)
-end
-function c30000011.attcount(tp,loc1,loc2)
-	local att=0
-	if Duel.IsExistingMatchingCard(c30000011.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_LIGHT) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000011.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DARK) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000011.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_WATER) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000011.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_FIRE) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000011.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_EARTH) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000011.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_WIND) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000011.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DEVINE) then att=att+1 end
-	return att
-end
-
 --attribute
 function c30000011.atttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
