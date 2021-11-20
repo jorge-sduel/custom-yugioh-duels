@@ -67,7 +67,7 @@ end
 
 --att count function
 function s.attfilter(c,att)
-	return c:IsFaceup() and c:IsAttribute(att)
+	return c:IsFaceup()
 end
 function s.attcount(tp,loc1,loc2)
 	local att=0
@@ -77,7 +77,7 @@ function s.attcount(tp,loc1,loc2)
 	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_FIRE) then att=att+1 end
 	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_EARTH) then att=att+1 end
 	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_WIND) then att=att+1 end
-	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DEVINE) then att=att+1 end
+	if Duel.IsExistingMatchingCard(s.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DIVINE) then att=att+1 end
 	return att
 end
 function s.spfilter(c)
