@@ -2,7 +2,7 @@
 function c12340911.initial_effect(c)
 		c:EnableReviveLimit()
 	--fusion material	
-Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttackAbove,2000,2)
+Fusion.AddProcMixN(c,false,false,aux.FilterBoolFunction(Card.IsAttackAbove,2000),2)
 	--remove fusion type
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
