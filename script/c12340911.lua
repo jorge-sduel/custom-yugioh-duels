@@ -2,7 +2,7 @@
 function c12340911.initial_effect(c)
 		c:EnableReviveLimit()
 	--fusion material	
-Fusion.AddProcFunRep(c,c12340911.ffilter,2,false)
+Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttackAbove,2000,2)
 	--remove fusion type
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -47,9 +47,6 @@ Fusion.AddProcFunRep(c,c12340911.ffilter,2,false)
 	e4:SetTarget(c12340911.sptg)
 	e4:SetOperation(c12340911.spop)
 	c:RegisterEffect(e4)
-end
-function c12340911.ffilter(c)
-	return c:IsAttackAbove(2000)
 end
 function c12340911.matcheck(e,c)
 	local g=c:GetMaterial()
