@@ -71,155 +71,84 @@ e3:SetDescription(aux.Stringid(12340417,15))	e3:SetProperty(EFFECT_FLAG_CANNOT_D
 	c:RegisterEffect(e5)
 end
 function c95.otcon1(e,c)
-
 	if c==nil then return true end
-
 	local g=Duel.GetTributeGroup(c)
-
 	return Duel.GetTributeCount(c)>=1 and g:IsExists(Card.IsFaceup,1,nil)
-
 end
-
 function c95.otop1(e,tp,eg,ep,ev,re,r,rp,c)
-
 	local g=Duel.GetTributeGroup(c)
-
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-
 	local sg=g:FilterSelect(tp,Card.IsFaceup,1,1,nil)
-
 	c:SetMaterial(sg)
-
 	Duel.Release(sg, REASON_SUMMON+REASON_MATERIAL)
-
 	--direct attack
-
 	local e1=Effect.CreateEffect(c)
-
 	e1:SetType(EFFECT_TYPE_SINGLE)
-
 	e1:SetCode(EFFECT_DIRECT_ATTACK)
-
 	c:RegisterEffect(e1)
-
 end
-
 function c95.otcon2(e,c)
-
 	if c==nil then return true end
-
 	local g=Duel.GetTributeGroup(c)
-
 	return Duel.GetTributeCount(c)>=2 and g:IsExists(Card.IsFaceup,2,nil)
-
 end
-
 function c95.otop2(e,tp,eg,ep,ev,re,r,rp,c)
-
 	local g=Duel.GetTributeGroup(c)
-
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-
 	local sg=g:FilterSelect(tp,Card.IsFaceup,2,2,nil)
-
 	c:SetMaterial(sg)
-
 	Duel.Release(sg, REASON_SUMMON+REASON_MATERIAL)
-
 	--atkup
-
 	local e2=Effect.CreateEffect(c)
-
 	e2:SetType(EFFECT_TYPE_SINGLE)
-
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-
 	e2:SetRange(LOCATION_MZONE)
-
 	e2:SetCode(EFFECT_SET_ATTACK_FINAL)
-
 	e2:SetValue(c95.atkval)
-
 	c:RegisterEffect(e2)
-
 end
-
 function c95.atkval(e,c)
-
 	return c:GetAttack()*2
-
 end
 
 function c95.otcon3(e,c)
-
 	if c==nil then return true end
-
 	local g=Duel.GetTributeGroup(c)
-
 	return Duel.GetTributeCount(c)>=3 and g:IsExists(Card.IsFaceup,3,nil)
-
 end
 
 function c95.otop3(e,tp,eg,ep,ev,re,r,rp,c)
-
+	local c=e:GetHandler()
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,3) end
-
 	local g=Duel.GetTributeGroup(c)
-
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-
 	local sg=g:FilterSelect(tp,Card.IsFaceup,3,3,nil)
-
 	c:SetMaterial(sg)
-
 	Duel.Release(sg, REASON_SUMMON+REASON_MATERIAL)
-
 	--draw
-
 	local e3=Effect.CreateEffect(c)
-
 	e3:SetCategory(CATEGORY_DRAW)
-
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
-
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
-
 	e3:SetCondition(c95.descon)
-
 	e3:SetTarget(c95.target)
-
 	e3:SetOperation(c95.activate)
-
 	c:RegisterEffect(e3)
-
 end
 
 function c95.target(e,tp,eg,ep,ev,re,r,rp,chk)
-
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,3) end
-
 	Duel.SetTargetPlayer(tp)
-
 	Duel.SetTargetParam(3)
-
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,3)
-
 end
-
 function c95.activate(e,tp,eg,ep,ev,re,r,rp)
-
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-
 	Duel.Draw(p,d,REASON_EFFECT)
-
 end
-
 function c95.descon(e,tp,eg,ep,ev,re,r,rp)
-
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_ADVANCE
-
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_TRIBUTE
 end
 
 function c95.otcon4(e,c)
