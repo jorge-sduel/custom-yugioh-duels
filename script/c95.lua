@@ -17,7 +17,7 @@ function c95.initial_effect(c)
 	e11:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	c:RegisterEffect(e11)
 	local e12=e9:Clone()
-	e12:SetCode(EFFECT_DEVINE_LIGHT)
+	e12:SetCode(EFFECT_LIGHT_OF_INTERVENTION)
 	e12:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	c:RegisterEffect(e12)
 	--summon with 1 tribute
@@ -70,7 +70,6 @@ e3:SetDescription(aux.Stringid(12340417,15))	e3:SetProperty(EFFECT_FLAG_CANNOT_D
 	e5:SetValue(SUMMON_TYPE_ADVANCE)
 	c:RegisterEffect(e5)
 end
-
 function c95.otcon1(e,c)
 
 	if c==nil then return true end
