@@ -59,7 +59,7 @@ end
 s.listed_series={0x20f8}
 s.listed_names={13331639}
 function s.spfilter(c,tp)
-	return c:IsControler(1-tp) and c:IsType(TYPE_FUSION) and c:IsSummonType(SUMMON_TYPE_FUSION)
+	return c:IsType(TYPE_FUSION) and c:IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.spfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_FUSION)
