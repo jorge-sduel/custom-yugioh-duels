@@ -2,7 +2,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
- 	c:EnableReviveLimit()
 	Link.AddProcedure(c,s.matfilter,1,1)
 	--act qp in hand
 	local e1=Effect.CreateEffect(c)
