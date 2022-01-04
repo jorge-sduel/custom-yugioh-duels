@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_BECOME_QUICK)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_HAND,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x115))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_SPELL))
 	c:RegisterEffect(e2)
 --Take no battle damage involving this card
 	local e3=Effect.CreateEffect(c)
