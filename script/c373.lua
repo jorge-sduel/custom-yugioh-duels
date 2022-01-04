@@ -31,6 +31,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_NO_BATTLE_DAMAGE)
 	c:RegisterEffect(e4)
 end
+s.listed_series={0x115}
 function s.matfilter(c,scard,sumtype,tp)
-	return c:IsSetCard(0x115,scard,sumtype,tp)
+	return c:IsSetCard(0x1115,scard,sumtype,tp)
 end
