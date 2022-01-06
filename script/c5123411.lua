@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsRace,RACE_SPELLCASTER),1,99)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99,s.matfilter)
 	c:EnableReviveLimit()
 	--atk,def
 	local e1=Effect.CreateEffect(c)
@@ -45,6 +45,9 @@ function s.initial_effect(c)
 	e5:SetCondition(s.atkcon)
 	e5:SetValue(s.atkval)
 	c:RegisterEffect(e5)
+end
+function s.matfilter(c,scard,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_FIRE,scard,sumtype,tp) and c:IsRace(RACE_SPELLCASTER,scard,sumtype,tp)
 end
 function s.value(e,c)
 	return c:GetLevel()*400
