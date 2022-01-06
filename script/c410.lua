@@ -47,5 +47,5 @@ function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.recop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)
-	Duel.Damage(tp,ct*100,REASON_EFFECT)
+	Duel.Damage(1-tp,ct*100,REASON_EFFECT)
 end
