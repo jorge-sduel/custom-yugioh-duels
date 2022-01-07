@@ -8,11 +8,11 @@ c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsCode,414),LOCATION_SZONE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetOperation(c414.activate)
 	c:RegisterEffect(e1)
-	--Atk
+	--Atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
-	e2:SetRange(LOCATION_FZONE)
+	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_FAIRY))
 	e2:SetValue(500)
@@ -30,4 +30,4 @@ function c414.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(sg,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,sg)
 	end
-end
+end
