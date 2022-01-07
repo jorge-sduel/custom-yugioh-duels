@@ -1,13 +1,6 @@
 --光天使スローネ
 local s,id=GetID()
 function s.initial_effect(c)
-	--xyz
-	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(91110378)
-	e1:SetValue(0x30003) --0x1 >, 0x2 =, 0x4 <, value == last digit(s)
-	c:RegisterEffect(e1)
 	--spsummon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
@@ -29,14 +22,6 @@ function s.initial_effect(c)
 	e4:SetCode(EVENT_BE_MATERIAL)
 	e4:SetCondition(s.effcon)
 	e4:SetOperation(s.effop)
-	c:RegisterEffect(e4)
-	--Provide effect to a DARK Xyz monster
-	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_XMATERIAL)
-	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e4:SetRange(LOCATION_MZONE)
-	e4:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
-	e4:SetValue(aux.tgoval)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x86}
