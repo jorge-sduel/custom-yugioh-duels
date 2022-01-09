@@ -21,7 +21,8 @@ function c412.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
+	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
+
 	e2:SetTarget(c412.atktg)
 	e2:SetOperation(c412.atkop)
 	c:RegisterEffect(e2)
@@ -49,7 +50,7 @@ function c412.initial_effect(c)
 	e4:SetOperation(c412.negop)	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function c412.con1(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
+	local c=e:GetHandler()
 	return e:GetHandler():GetOverlayCount()=1
 end
 function c412.cost(e,tp,eg,ep,ev,re,r,rp,chk)
