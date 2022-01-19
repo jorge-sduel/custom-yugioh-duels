@@ -1,5 +1,4 @@
---ミラーフォース・ドラゴン
---Mirror Force Dragon
+--metalmorphasis Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
@@ -21,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.atkval)
 	c:RegisterEffect(e2)
 end
-s.material_trap=44095762
+s.material_trap=68540058
 function s.atkcon(e)
 	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
 		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil
