@@ -9,12 +9,9 @@ function c387.initial_effect(c)
 	e1:SetOperation(c387.activate)
 	c:RegisterEffect(e1)
 end
-function c387.filter1(c,e)
-	return not c:IsImmuneToEffect(e)
-end
 function c387.filter2(c,e,tp,m,f,chkf)
 	return c:IsType(TYPE_FUSION) and (not f or f(c))
-		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,true) and c:CheckFusionMaterial(m,nil,chkf)
+		and c:IsCanBeSpecialSummoned(e,0,tp,true,true) and c:CheckFusionMaterial(m,nil,chkf)
 end
 function c387.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
