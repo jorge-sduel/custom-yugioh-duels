@@ -86,7 +86,7 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
 local num=Duel.GetRandomNumber(1,announce_filter)
 		add_number_id=announce_filter[num]
-		g1=Duel.CreateToken(tp,add_number_id)
+		g1=Duel.CreateToken(tp,num)
 		Duel.SendtoHand(g1,tp,REASON_RULE)
 	end
 end
