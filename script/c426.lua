@@ -46,11 +46,19 @@ function s.initial_effect(c)
 	e5:SetCode(EVENT_FREE_CHAIN)
 	--e5:SetCountLimit(1,EFFECT_COUNT_CODE_SINGLE)
 	--e5:SetCountLimit(1,id)
-	e5:SetTarget(s.nametg)
 	e5:SetOperation(s.nameop)
 	c:RegisterEffect(e5)
 end
-ban_number={1,2,3,4,5}
+ban_number={48995978,2978414,28400508,63767246,88177324,75433814
+, 8165596
+, 23085002
+, 66547759
+, 95474755
+, 16037007, 
+88120966, 
+80117527, 
+53701457, 
+92015800}
 function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	Duel.MoveToField(c,tp,tp,LOCATION_FZONE,POS_FACEUP,true)
@@ -72,17 +80,7 @@ function s.cond1(e,tp,eg,ep,ev,re,r,rp)
 	--return Duel.GetFlagEffect(e:GetHandlerPlayer(),id)==0 and not e:GetHandler():IsStatus(STATUS_CHAINING)
 	return e:GetHandler():GetFlagEffect(id+ep)==0
 end
-function s.nametg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
-	local code=e:GetHandler():GetCode()
-	--"Gadget" monster, except this card's current name
-	announce_filter={0x48,OPCODE_ISSETCARD,code,OPCODE_ISCODE,OPCODE_NOT,OPCODE_AND,TYPE_MONSTER,OPCODE_ISTYPE,OPCODE_AND}
-	local 		ac=Duel.GetRandomNumber(1,announce_filter)
-	Duel.SetTargetParam(ac)
-	Duel.SetOperationInfo(0,CATEGORY_ANNOUNCE,nil,0,tp,ANNOUNCE_CARD_FILTER)
-end
 function s.nameop(e,tp,eg,ep,ev,re,r,rp)
-	local ac=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
 		local num=Duel.GetRandomNumber(1,#ban_number)
