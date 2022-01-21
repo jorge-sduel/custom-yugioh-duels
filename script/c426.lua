@@ -75,7 +75,7 @@ function s.nametg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local code=e:GetHandler():GetCode()
 	--"Gadget" monster, except this card's current name
-	s.announce_filter={0x48,OPCODE_ISSETCARD,code,OPCODE_ISCODE,OPCODE_NOT,OPCODE_AND,TYPE_MONSTER,OPCODE_ISTYPE,OPCODE_AND}
+	announce_filter={0x48,OPCODE_ISSETCARD,code,OPCODE_ISCODE,OPCODE_NOT,OPCODE_AND,TYPE_MONSTER,OPCODE_ISTYPE,OPCODE_AND}
 	local 		ac=Duel.GetRandomNumber(1,s.announce_filter)
 	Duel.SetTargetParam(ac)
 	Duel.SetOperationInfo(0,CATEGORY_ANNOUNCE,nil,0,tp,ANNOUNCE_CARD_FILTER)
@@ -84,7 +84,9 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 	local ac=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
-token=Duel.CreateToken(tp,ac)
-				Duel.SendtoHand(ac,tp,REASON_RULE)
+local num=Duel.GetRandomNumber(1,announce_filter)
+		add_number_id=announce_filter[num]
+		g1=Duel.CreateToken(tp,add_number_id)
+		Duel.SendtoHand(g1,tp,REASON_RULE)
 	end
 end
