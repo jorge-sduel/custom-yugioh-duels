@@ -50,6 +50,7 @@ function s.initial_effect(c)
 	e5:SetOperation(s.nameop)
 	c:RegisterEffect(e5)
 end
+ban_number={1,2,3,4,5}
 function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	Duel.MoveToField(c,tp,tp,LOCATION_FZONE,POS_FACEUP,true)
@@ -84,9 +85,9 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 	local ac=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
-local num=Duel.GetRandomNumber(1,announce_filter)
-		add_number_id=announce_filter[num]
-		g1=Duel.CreateToken(tp,ac)
+		local num=Duel.GetRandomNumber(1,#ban_number)
+		add_number_id=ban_number[num]
+		g1=Duel.CreateToken(tp,add_number_id)
 		Duel.SendtoHand(g1,tp,REASON_RULE)
 	end
 end
