@@ -110,7 +110,7 @@ function s.con(e,tp,eg,ep,ev,re,r,rp)
 		or (bit.band(e:GetHandler():GetReason(),0x40)==0x40 and rp~=tp)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x20ec) and c:IsType(TYPE_SPELL) and c:IsSSetable()
+	return c:IsType(TYPE_SPELL) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.cfilter(chkc) end
