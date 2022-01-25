@@ -33,6 +33,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_CHANGE_DAMAGE)
 	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e5:SetTargetRange(1,0)
+	e5:SetCondition(s.damcon)
 	e5:SetValue(s.val)
 	c:RegisterEffect(e5)
 end
@@ -44,7 +45,7 @@ function s.matfilter(c,scard,sumtype,tp)
 	return c:IsSetCard(0x1115,scard,sumtype,tp) and not c:IsAttribute(ATTRIBUTE_EARTH,scard,sumtype,tp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetBattleDamage(tp)>=1500
+	return Duel.GetBattleDamage(tp)>=1500 or Duel.GetEffectDamage(tp)>=1500
 end
 function s.val(e,re,dam,r,rp,rc)
 	return math.floor(dam-1500)
