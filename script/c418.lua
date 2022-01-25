@@ -23,7 +23,6 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_CHANGE_DAMAGE)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetTargetRange(1,0)
-	e4:SetCondition(s.damcon)
 	e4:SetValue(s.val)
 	c:RegisterEffect(e4)
 	--Halve damage
@@ -33,7 +32,6 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_CHANGE_DAMAGE)
 	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e5:SetTargetRange(1,0)
-	e5:SetCondition(s.damcon)
 	e5:SetValue(s.val)
 	c:RegisterEffect(e5) 
 	--Halve damage
@@ -43,7 +41,6 @@ function s.initial_effect(c)
 	e6:SetCode(EFFECT_CHANGE_DAMAGE)
 	e6:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e6:SetTargetRange(1,0)
-	e6:SetCondition(s.damcon2)
 	e6:SetValue(s.val2)
 	c:RegisterEffect(e6)
 	--Halve damage
@@ -53,7 +50,6 @@ function s.initial_effect(c)
 	e7:SetCode(EFFECT_CHANGE_DAMAGE)
 	e7:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e7:SetTargetRange(1,0)
-	e7:SetCondition(s.damcon2)
 	e7:SetValue(s.val2)
 	c:RegisterEffect(e7)
 end
@@ -67,12 +63,12 @@ end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetBattleDamage(tp)>=1500 or Duel.GetEffectDamage(tp)>=1500
 end
-function s.val(e,re,dam,r,rp,rc)
-	return math.floor(dam-1500)
+function s.val(e,re,val,r,rp,rc)
+	if val<=1500 then return 0 else return val end
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetBattleDamage(tp)<=1500 or Duel.GetEffectDamage(tp)<=1500
 end
-function s.val2(e,re,dam,r,rp,rc)
-	return math.floor(0)
+function s.val2(e,re,val,r,rp,rc)
+	if val>=1501 then return val-1500 else return val end
 end
