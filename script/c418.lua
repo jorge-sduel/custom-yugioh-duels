@@ -1,7 +1,4 @@
---閃刀姫-カイナ
 --Sky Striker Ace - Khamuy
---Scripted by AlphaKretin
-
 local s,id=GetID()
 function s.initial_effect(c)
 	--Can only be special summoned once per turn
@@ -26,6 +23,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_CHANGE_DAMAGE)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e4:SetTargetRange(1,0)
+	e4:SetCondition(s.damcon)
 	e4:SetValue(s.val)
 	c:RegisterEffect(e4)
 	--Halve damage
@@ -44,6 +42,9 @@ function s.indct(e,re,r,rp)
 end
 function s.matfilter(c,scard,sumtype,tp)
 	return c:IsSetCard(0x1115,scard,sumtype,tp) and not c:IsAttribute(ATTRIBUTE_EARTH,scard,sumtype,tp)
+end
+function s.damcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetBattleDamage(tp)>=1500
 end
 function s.val(e,re,dam,r,rp,rc)
 	return math.floor(dam-1500)
