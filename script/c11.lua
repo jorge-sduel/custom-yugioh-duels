@@ -127,7 +127,7 @@ function c11.op(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterFlagEffect(11,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,0)
 		Duel.MoveSequence(tc,seq)
 		local e1=Effect.CreateEffect(tc)
-		e1:SetCode(EFFECT_CHANGE_TYPE)
+		e1:SetCode(EFFECT_ADD_TYPE)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+0x1fc0000)
@@ -149,5 +149,5 @@ function c11.con(e)
 	return e:GetHandler():IsLocation(LOCATION_SZONE)
 end
 function c11.val(e,c)
-	return TYPE_SPELL+TYPE_CONTINUOUS
+	return TYPE_MONSTER
 end
