@@ -146,12 +146,12 @@ function c11.op(e,tp,eg,ep,ev,re,r,rp)
 
 	e3:SetDescription(aux.Stringid(888000027,0))
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_MZONE)
+	e3:SetRange(LOCATION_SZONE)
 	e3:SetCountLimit(1)
-
 	e3:SetTarget(c11.attg)
 	e3:SetOperation(c11.atop)
-	tc:RegisterEffect(e3)		Duel.RaiseEvent(tc,47408488,e,0,tp,0,0)
+	tc:RegisterEffect(e3)
+		Duel.RaiseEvent(tc,47408488,e,0,tp,0,0)
 	end
 end
 function c11.con(e)
