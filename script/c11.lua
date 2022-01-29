@@ -142,7 +142,16 @@ function c11.op(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCondition(c11.con)
 		e2:SetValue(aux.TRUE)
 		tc:RegisterEffect(e2)
-		Duel.RaiseEvent(tc,47408488,e,0,tp,0,0)
+	local e3=Effect.CreateEffect(tc)
+
+	e3:SetDescription(aux.Stringid(888000027,0))
+	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetCountLimit(1)
+
+	e3:SetTarget(c11.attg)
+	e3:SetOperation(c11.atop)
+	tc:RegisterEffect(e3)		Duel.RaiseEvent(tc,47408488,e,0,tp,0,0)
 	end
 end
 function c11.con(e)
@@ -150,4 +159,50 @@ function c11.con(e)
 end
 function c11.val(e,c)
 	return TYPE_MONSTER
+end
+function c11.attg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(nil,tp,0,LOCATION_MZONE,1,nil) end
+end
+function c11.atop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local sg=Duel.GetMatchingGroup(nil,tp,0,LOCATION_MZONE,nil)
+	local tc=sg:GetFirst()
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(1,1)
+	e1:SetValue(1)
+	e1:SetReset(RESET_CHAIN)
+	Duel.RegisterEffect(e1,tp)
+	while tc do
+		Duel.CalculateDamage(c,tc)
+		if tc:IsDefencePos() then
+			if c:GetAttack()>tc:GetAttack() then
+				tc:RegisterFlagEffect(11,RESET_CHAIN,0,1)
+			elseif c:GetAttack()<tc:GetAttack() then
+				local dif=tc:GetAttack()-c:GetAttack()
+				Duel.Damage(c:GetControler(),dif,REASON_BATTLE)
+			end
+		else
+			if c:GetAttack()>tc:GetAttack() then
+				tc:RegisterFlagEffect(11,RESET_CHAIN,0,1)
+				local dif=c:GetAttack()-tc:GetAttack()
+				Duel.Damage(tc:GetControler(),dif,REASON_BATTLE)
+			elseif c:GetAttack()<tc:GetAttack() then
+				c:RegisterFlagEffect(11,RESET_CHAIN,0,1)
+				local dif=tc:GetAttack()-c:GetAttack()
+				Duel.Damage(c:GetControler(),dif,REASON_BATTLE)
+			else
+				c:RegisterFlagEffect(11,RESET_CHAIN,0,1)
+				tc:RegisterFlagEffect(11,RESET_CHAIN,0,1)
+			end
+		end
+		tc=sg:GetNext()
+	end
+	local des=Duel.GetMatchingGroup(c11.desfilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	Duel.Destroy(des,REASON_BATTLE)
+end
+function c11.desfilter(c)
+	return c:GetFlagEffect(11)>0
 end
