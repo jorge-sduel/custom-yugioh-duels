@@ -1,96 +1,57 @@
---Overlay-Magic Connect Force
-function c402.initial_effect(c)
-	
-	--Special Summon
+--リ・エクシーズ
+--Re-Xyz
+local s,id=GetID()
+function s.initial_effect(c)
+	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(402,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetTarget(c402.target)
-	e1:SetOperation(c402.operation)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetTarget(s.target)
+	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
-	
 end
-
---Gets the number of XYZ Materials on the card
-function c402.numMaterials(c)
-	if not _G then return 0 end
-	local mt=_G["c" .. c:GetOriginalCode()]
-	if mt and mt.xyz_count then return mt.xyz_count else return 0 end
+function s.rescon(pg)
+	return  function(sg,e,tp,mg)
+				return sg:Includes(pg) and sg:GetClassCount(Card.GetLevel)==1
+			end
 end
-
---First Target
-function c402.Condition1(c)
-    return c:GetLevel() > 0
+function s.filter(c,e,tp,g,pg)
+	local ct=c.minxyzct
+	local sg=g:Clone()
+	sg:RemoveCard(c)
+	return ct and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,true) and c:IsType(TYPE_XYZ)
+		and aux.SelectUnselectGroup(sg,e,tp,ct,ct,s.rescon(pg),0)
 end
-
---Filter for first targets
-function c402.fFilter(c,e,tp)
-	if not c402.Condition1(c) or not c:IsFaceup() then return false end
-	local count = Duel.GetMatchingGroup(c402.sFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,c,e,tp,c:GetLevel()):GetCount()
-	return count > 0 and Duel.IsExistingMatchingCard(c402.xyzFilter,tp,LOCATION_EXTRA,0,1,c,e,tp,c:GetLevel(),count+1)
+function s.matfilter(c,e)
+	return c:GetLevel()>0 and c:IsCanBeEffectTarget(e)
 end
-
---Filter for second or more targets
-function c402.sFilter(c,e,tp,lvl)
-    return c:GetLevel() == lvl
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return false end
+	local g=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_GRAVE+LOCATION_ONFIELD,0,nil,e)
+	local pg=aux.GetMustBeMaterialGroup(tp,g,tp,nil,nil,REASON_XYZ)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
+		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE+LOCATION_ONFIELD,0,1,nil,e,tp,g,pg) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local tc=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,g,pg):GetFirst()
+	tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_CHAIN,0,0)
+	local ct=tc.minxyzct
+	local ct2=tc.maxxyzct
+	g:RemoveCard(tc)
+	local sg=aux.SelectUnselectGroup(g,e,tp,ct,ct2,s.rescon(pg),1,tp,HINTMSG_XMATERIAL,s.rescon(pg))
+	Duel.SetTargetCard(sg)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
-
---Filter for XYZ monsters of a certain rank, that require a certain number of XYZ materials or lower
-function c402.xyzFilter(c,e,tp,rank,count)
-	if c:IsType(TYPE_XYZ) and c:GetRank() == rank then
-		local mats = c402.numMaterials(c)
-		if mats > 0 and mats <= count then return true end
-	end	
-	return false
-end
-
---Special Summon target
-function c402.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsFaceup() and (chkc:IsLocation(LOCATION_MZONE) or chkc:IsLocation(LOCATION_GRAVE)) end
-	if chk==0 then return Duel.IsExistingMatchingCard(c402.fFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil,e,tp) end
-	
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g1=Duel.SelectTarget(tp,c402.fFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,e,tp)
-	local tc = g1:GetFirst()
-	
-	local count = Duel.GetMatchingGroup(c402.sFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,tc,e,tp,tc:GetLevel()):GetCount()
-	local g2 = Duel.GetMatchingGroup(c402.xyzFilter,tp,LOCATION_EXTRA,0,tc,e,tp,tc:GetLevel(),count+1)
-	local minimum = count
-	local num = 0
-	local xyz = g2:GetFirst()
-	while xyz do
-		num = c402.numMaterials(xyz)
-		if num > 0 and num-1 < minimum then minimum = num-1 end
-		xyz = g2:GetNext()
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetTargetCards(e)
+	local sg=g:Filter(aux.FilterEqualFunction(Card.GetFlagEffect,0,id),nil)
+	local tc=g:Filter(aux.TRUE,sg):GetFirst()
+	local pg=aux.GetMustBeMaterialGroup(tp,g,tp,nil,nil,REASON_XYZ)
+	if tc and tc:IsRelateToEffect(e) and #sg>0 and sg:Includes(pg) then
+		tc:SetMaterial(sg)
+		Duel.Overlay(tc,sg)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_XYZ,tp,tp,false,true,POS_FACEUP)
+		tc:CompleteProcedure()
 	end
-	if minimum <= 0 then minimum = 1 end
-	
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,c402.sFilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,minimum,count,tc,e,tp,tc:GetLevel())
-	
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
-end
-
---Special Summon operation
-function c402.operation(e,tp,eg,ep,ev,re,r,rp)
-
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
-	count = g:GetCount()
-	if count < 2 then return end
-	
-	local tc = g:Filter(c402.Condition1,nil):GetFirst()
-	if not tc then return end
-	
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 and g:Filter(Card.IsLocation,nil,LOCATION_MZONE):GetCount() <= 0 then return end
-	
-	local sg=Duel.SelectMatchingCard(tp,c402.xyzFilter,tp,LOCATION_EXTRA,0,1,1,tc,e,tp,tc:GetLevel(),count)
-	local sc = sg:GetFirst()
-	if not sc then return end
-	
-	Duel.Overlay(sc,g)
-	Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,true,true,POS_FACEUP)
-	sc:CompleteProcedure()
 end
