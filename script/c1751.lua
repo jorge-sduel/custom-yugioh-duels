@@ -1,7 +1,7 @@
 --シューティング・スター・ドラゴン
 function c1751.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure2(c,aux.FilterBoolFunction(Card.IsType,TYPE_SYNCHRO),aux.FilterBoolFunction(Card.IsCode,83994433))
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,aux.FilterBoolFunction(Card.IsCode,83994433),1,1)
 	c:EnableReviveLimit()
 	--indes
 	local e1=Effect.CreateEffect(c)
