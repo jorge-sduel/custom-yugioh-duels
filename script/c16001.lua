@@ -39,10 +39,10 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp) and Duel.GetAttackTarget()==nil
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x308) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_INSECT) and c:IsAbleToGraveAsCost()
 end
 function s.costfilter(c)
-	return c:IsSetCard(0x308) and not c:IsPublic()
+	return c:IsRace(RACE_INSECT) and not c:IsPublic()
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -74,7 +74,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x308) and c:IsAbleToHand()
+	return c:IsRace(RACE_INSECT) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
