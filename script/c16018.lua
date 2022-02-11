@@ -11,13 +11,14 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e1:SetCondition(s.thcon)
 	e1:SetCost(s.thcost)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
 end
 function s.ffilter(c,fc,sumtype,tp,sub,mg,sg)
 
-	return c:IsRace(RACE_INSECT,fc,sumtype,tp) and (not sg or not sg:IsExists(s.fusfilter,1,c,c:GetCode(fc,sumtype,tp),fc,sumtype,tp))
+	return c:IsRace(RACE_INSECT,fc,sumtype,tp) and c:IsLevelAbove(8) and (not sg or not sg:IsExists(s.fusfilter,1,c,c:GetCode(fc,sumtype,tp),fc,sumtype,tp))
 end
 function s.splimit(e,se,sp,st)
 	return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
@@ -32,7 +33,8 @@ function s.fusfilter(c,code,fc,sumtype,tp)
 	return c:IsSummonCode(fc,sumtype,tp,code) and not c:IsHasEffect(511002961)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
+	local c=e:GetHandler()
+	return c:GetSummonType()==SUMMON_TYPE_PENDULUM and c:IsPreviousLocation(LOCATION_EXTRA)
 end
 function s.cfilter(c)
 	return c:IsRace(RACE_INSECT) and c:IsAbleToGraveAsCost()
