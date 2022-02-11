@@ -1,19 +1,9 @@
 --Paracyclissavior Legion, Infinite Sting
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcFunRep(c,s.matfilter,2,true)
+	Fusion.AddProcMixN(c,false,false,aux.FilterBoolFunction(Card.IsLevelBelow,5),2)
 	--special summon rule
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -49,10 +39,10 @@ function s.initial_effect(c)
 end
 s.material_setcode=0x308
 function s.matfilter(c)
-	return c:IsFusionSetCard(0x308) and c:IsLevelBelow(5)
+	return c:IsRace(RACE_INSECT) and c:IsLevelBelow(5)
 end
 function s.spfilter(c)
-	return c:IsFusionSetCard(0x308) and c:IsCanBeFusionMaterial() and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_INSECT) and c:IsCanBeFusionMaterial() and c:IsAbleToGraveAsCost()
 		and c:GetLevel()<=5
 end
 function s.spfilter1(c,tp,g)
@@ -103,7 +93,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x308) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_INSECT) and c:IsAbleToGraveAsCost()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_EXTRA,0,1,nil) end
