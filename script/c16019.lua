@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.matfilter(c,lc,sumtype,tp)
-	return c:IsRace(RACE_INSECT,lc,sumtype,tp)
+	return c:IsRace(RACE_INSECT,lc,sumtype,tp) and c:IsLevelAbove(8)
 end
 function s.cfilter(c)
 	return (c:IsRace(RACE_INSECT) and c:IsType(TYPE_MONSTER))
