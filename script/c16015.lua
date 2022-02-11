@@ -1,19 +1,9 @@
 --Paracyclisavior of Life, Relishing Shield
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcFunRep(c,s.matfilter,2,true)
+	Fusion.AddProcMixN(c,false,false,aux.FilterBoolFunction(Card.IsLevelBelow,5),2)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -38,7 +28,7 @@ function s.initial_effect(c)
 end
 s.material_setcode=0x308
 function s.matfilter(c)
-	return c:IsFusionSetCard(0x308) and c:GetLevel()<=5
+	return c:IsRace(RACE_INSECT) and c:GetLevel()<=5
 end
 function s.hspcon(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
