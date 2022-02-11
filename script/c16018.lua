@@ -1,20 +1,10 @@
 --Paracyclissavior of Future, Starrain
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	c:SetSPSummonOnce(id)
 	--fusion summon
 	c:EnableReviveLimit()
-	aux.AddFusionProcFunRep(c,s.ffilter,3,false)
+	Fusion.AddProcMixN(c,true,true,s.ffilter,3)
 	aux.AddContactFusionProcedure(c,s.cfilter,LOCATION_MZONE,0,Duel.SendtoDeck,nil,1,REASON_COST+REASON_FUSION+REASON_MATERIAL)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
@@ -26,14 +16,15 @@ function s.initial_effect(c)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
 end
-s.material_setcode=0x308
-function s.ffilter(c,fc,sub,mg,sg)
-	return c:IsFusionSetCard(0x308) and (c:GetLevel()>=8)
-		and (not sg or not sg:IsExists(Card.IsFusionCode,1,c,c:GetFusionCode()))
-end
-function s.cfilter(c,fc)
+function s.ffilter(c,fc,sumtype,tp,sub,mg,sg)
+
+	return c:IsRace(RACE_INSECT,fc,sumtype,tp) and (not sg or not sg:IsExists(s.fusfilter,1,c,c:GetCode(fc,sumtype,tp),fc,sumtype,tp))
+endfunction s.cfilter(c,fc)
 	return c:IsAbleToDeckAsCost() and c:IsCanBeFusionMaterial(fc)
-		and c:IsFusionSetCard(0x308) and (c:GetLevel()>=8)
+		and c:IsRace(RACE_INSECT) and (c:GetLevel()>=8)
+end
+function s.fusfilter(c,code,fc,sumtype,tp)
+	return c:IsSummonCode(fc,sumtype,tp,code) and not c:IsHasEffect(511002961)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
