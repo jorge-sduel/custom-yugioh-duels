@@ -37,7 +37,6 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1,id+200)
 	c:RegisterEffect(e2)
 end
-s.material_setcode=0x308
 function s.matfilter(c)
 	return c:IsRace(RACE_INSECT) and c:IsLevelBelow(5)
 end
@@ -83,9 +82,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetRange(LOCATION_MZONE)
-		e2:SetCode(EFFECT_UPDATE_DEFENSE)
+		e2:SetCode(EFFECT_SET_DEFENSE)
 		e2:SetReset(RESET_PHASE+PHASE_DAMAGE+RESET_EVENT+RESETS_STANDARD)
-		e2:SetValue(math.floor(tc:GetDefense()/2))
+		e2:SetValue(tc:GetDefense()/2)
 		tc:RegisterEffect(e2)
 	end
 end
