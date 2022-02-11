@@ -1,19 +1,9 @@
 --Paracyclis Emperor, Ultimate Paralyze
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcFun2(c,aux.FilterBoolFunction(Card.IsFusionSetCard,0x3308),aux.FilterBoolFunction(Card.IsFusionSetCard,0x5308),true)
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_INSECT),s.matfilter)
 	--special summon rule
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -47,19 +37,22 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
+function s.matfilter(c,lc,sumtype,tp)
+	return c:IsRace(RACE_INSECT,lc,sumtype,tp)
+end
 function s.cfilter(c)
-	return (c:IsFusionSetCard(0x3308) or c:IsFusionSetCard(0x5308) and c:IsType(TYPE_MONSTER))
+	return (c:IsRace(RACE_INSECT) and c:IsType(TYPE_MONSTER))
 		and c:IsCanBeFusionMaterial() and c:IsAbleToDeckOrExtraAsCost()
 end
 function s.spfilter1(c,tp,g)
 	return g:IsExists(s.spfilter2,1,c,tp,c)
 end
 function s.spfilter2(c,tp,mc)
-	if mc:IsFusionSetCard(0x5308) then
-		return c:IsFusionSetCard(0x3308) and mc:IsType(TYPE_MONSTER)
+	if mc:IsRace(RACE_INSECT) then
+		return c:IsRace(RACE_INSECT) and mc:IsType(TYPE_MONSTER)
 			and Duel.GetLocationCountFromEx(tp,tp,Group.FromCards(c,mc))>0
-	elseif mc:IsFusionSetCard(0x3308) then
-		return c:IsFusionSetCard(0x5308) and mc:IsType(TYPE_MONSTER)
+	elseif mc:IsRace(RACE_INSECT) then
+		return mc:IsRace(RACE_INSECT) and mc:IsType(TYPE_MONSTER)
 			and Duel.GetLocationCountFromEx(tp,tp,Group.FromCards(c,mc))>0
 	else
 		return false
