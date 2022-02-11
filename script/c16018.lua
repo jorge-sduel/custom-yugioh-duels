@@ -36,7 +36,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0x308) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_INSECT) and c:IsAbleToGraveAsCost()
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetFieldGroup(tp,0,LOCATION_MZONE):FilterCount(Card.IsFaceup,nil)
