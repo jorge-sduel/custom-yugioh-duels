@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	--fusion summon
 	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,s.ffilter,3)
-	aux.AddContactFusionProcedure(c,s.cfilter,LOCATION_MZONE,0,Duel.SendtoDeck,nil,1,REASON_COST+REASON_FUSION+REASON_MATERIAL)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit,nil,nil,nil,false)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -19,9 +19,15 @@ end
 function s.ffilter(c,fc,sumtype,tp,sub,mg,sg)
 
 	return c:IsRace(RACE_INSECT,fc,sumtype,tp) and (not sg or not sg:IsExists(s.fusfilter,1,c,c:GetCode(fc,sumtype,tp),fc,sumtype,tp))
-endfunction s.cfilter(c,fc)
-	return c:IsAbleToDeckAsCost() and c:IsCanBeFusionMaterial(fc)
-		and c:IsRace(RACE_INSECT) and (c:GetLevel()>=8)
+end
+function s.splimit(e,se,sp,st)
+	return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_MZONE,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
 end
 function s.fusfilter(c,code,fc,sumtype,tp)
 	return c:IsSummonCode(fc,sumtype,tp,code) and not c:IsHasEffect(511002961)
