@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsLinkRace,RACE_INSECT),3,99,s.lcheck)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,ATTRIBUTE_INSECT),3,nil,s.matcheck)
 	--direct attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -38,8 +38,9 @@ function s.initial_effect(c)
 	e4:SetOperation(s.tdop)
 	c:RegisterEffect(e4)
 end
-function s.lcheck(g,lg)
-	return g:IsExists(Card.IsLinkType,1,nil,TYPE_LINK)
+function s.matcheck(g,lc,sumtype,tp)
+
+	return g:IsExists(Card.IsType,1,nil,TYPE_LINK,lc,sumtype,tp)
 end
 function s.dircon(e)
 	local tp=e:GetHandlerPlayer()
