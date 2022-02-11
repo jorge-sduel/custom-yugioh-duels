@@ -52,7 +52,7 @@ function s.spfilter2(c,tp,mc)
 		return c:IsRace(RACE_INSECT) and mc:IsType(TYPE_MONSTER)
 			and Duel.GetLocationCountFromEx(tp,tp,Group.FromCards(c,mc))>0
 	elseif mc:IsRace(RACE_INSECT) then
-		return mc:IsRace(RACE_INSECT) and mc:IsType(TYPE_MONSTER)
+		return (mc:IsRace(RACE_INSECT) and mc:IsLevelAbove(8)) and mc:IsType(TYPE_MONSTER)
 			and Duel.GetLocationCountFromEx(tp,tp,Group.FromCards(c,mc))>0
 	else
 		return false
