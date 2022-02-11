@@ -1,18 +1,8 @@
 --Paracyclisity Meteor Impact, Stagdominator
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsLinkRace,RACE_INSECT),3,99,s.lcheck)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsLinkRace,RACE_INSECT),3,99,s.lcheck)
 	--direct attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -82,7 +72,7 @@ function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsSummonType(SUMMON_TYPE_LINK)
 end
 function s.cfilter(c)
-	return c:IsSetCard(0X5308) and c:IsAbleToGraveAsCost()
+	return c:IsRace(RACE_INSECT) and c:IsAbleToGraveAsCost()
 end
 function s.tdcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_EXTRA,0,1,nil) end
