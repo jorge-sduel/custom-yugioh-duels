@@ -1,19 +1,9 @@
 --Number i39: Utopia Lucidia
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--xyz summon
-	aux.AddXyzProcedure(c,nil,6,2)
+	Xyz.AddProcedure(c,nil,6,2)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DISABLE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
