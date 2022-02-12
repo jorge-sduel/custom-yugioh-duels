@@ -1,19 +1,9 @@
 --Number i39: Utopia Havebound
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--xyz summon
-	aux.AddXyzProcedure(c,s.matfilter,8,3)
+	Xyz.AddProcedure(c,s.matfilter,8,3)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -41,7 +31,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local og=e:GetHandler():GetOverlayGroup()
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
-		and re and re:GetHandler():IsCode(id+1) and og:IsExists(Card.IsSetCard,2,nil,0x107f)
+		and re and re:GetHandler():IsSetCard(0x95) and og:IsExists(Card.IsSetCard,2,nil,0x107f)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
