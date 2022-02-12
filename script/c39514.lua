@@ -1,19 +1,9 @@
 --iZA - Lucidiapprentice
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	c:EnableReviveLimit()
-	aux.AddXyzProcedureLevelFree(c,s.mfilter,s.xyzcheck,1,99)
+	Xyz.AddProcedureLevelFree(c,s.mfilter,s.xyzcheck,1,99)
 	--change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
