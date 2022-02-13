@@ -121,7 +121,7 @@ if cm then
 function cm.initial_effect(c)
 	--link summon
 	c:EnableReviveLimit()
-	--aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsLinkType,TYPE_EFFECT),3,99)
+	--Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsLinkType,TYPE_EFFECT),3,99)
 	aux.AddLinkProcedure(c,cm.matfilter,2,99)
 	rsukv.UnLinkProcedure(c,2,7)
 	--spsummon
