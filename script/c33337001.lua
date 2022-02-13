@@ -122,7 +122,7 @@ function cm.initial_effect(c)
 	--link summon
 	c:EnableReviveLimit()
 	--Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsLinkType,TYPE_EFFECT),3,99)
-	aux.AddLinkProcedure(c,cm.matfilter,2,99)
+	Link.AddProcedure(c,cm.matfilter,2,99)
 	rsukv.UnLinkProcedure(c,2,7)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
