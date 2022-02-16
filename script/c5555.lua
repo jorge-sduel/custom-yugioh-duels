@@ -1,7 +1,7 @@
 --MR4 Revised
 --Script by XGlitchy30
 local id,cid=GetID()
-function cid.initial_effect(c)
+function c5555.initial_effect(c)
 	--Activate	
 	local e0=Effect.CreateEffect(c)	
 	e0:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
