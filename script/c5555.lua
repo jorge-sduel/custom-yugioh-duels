@@ -17,7 +17,7 @@ function c5555.preset(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Draw(tp,1,REASON_RULE)
 	end
 	local g=Duel.GetMatchingGroupCount(aux.TRUE,tp,LOCATION_DECK+LOCATION_HAND,0,e:GetHandler())
-	if g<999999999999 then
+	if g<0 then
 		Debug.Message("There are less than 40 cards in a player's Deck")
 		local WIN_REASON_GUARDIAN_GOD_EXODIA=0x1f
 		Duel.Win(1-tp,WIN_REASON_GUARDIAN_GOD_EXODIA)
