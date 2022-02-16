@@ -29,7 +29,6 @@ function c5555.preset(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTargetRange(0xff,0xff)
 	e1:SetTarget(c5555.val)
 	Duel.RegisterEffect(e1,0)
-	Duel.SentToGrave(e:GetHandler(),REASON_RULE)
 end
 function c5555.val(e,c)
 	return c:IsLocation(LOCATION_EXTRA) and ((c:IsFacedown() and bit.band(c:GetType(),TYPE_LINK)<=0) or (c:IsFaceup() and not c:IsType(TYPE_PENDULUM) and not c:IsType(TYPE_PANDEMONIUM)))
