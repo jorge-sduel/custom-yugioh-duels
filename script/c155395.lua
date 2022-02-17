@@ -1,7 +1,7 @@
 --暗黒方界邪神クリムソン・ノヴァ・トリニティ
 function c155395.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddFusionProcFunFunRep(c,c155395.mfilter1,c155395.mfilter1,2,2,true)
+	Fusion.AddProcFunFunRep(c,c155395.mfilter1,c155395.mfilter1,2,2,true)
 	--spsummon condition
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
