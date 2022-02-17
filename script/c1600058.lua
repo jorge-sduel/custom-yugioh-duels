@@ -1,6 +1,6 @@
 --Mysterious Water Fairy
 local s,id=GetID()
-if not Evolute_IMPORTED then dofile Duel.LoadScript("script\proc_evolute.lua") end
+if not EVOLUTE_IMPORTED then dofile Duel.LoadScript("script\proc_evolute.lua") end
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
