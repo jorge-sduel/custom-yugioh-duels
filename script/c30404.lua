@@ -1,19 +1,9 @@
 --Ｚ・ＨＥＲＯ　デビルロード
 --Zero HERO Devil Lord
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local scard,s_id=getID()
-
+local scard,s_id=GetID()
 function scard.initial_effect(c)
 	Card.IsZHERO=Card.IsZHERO or (function(tc) return (tc:GetCode()>30400 and tc:GetCode()<30420) and tc:IsSetCard(0x8) end)
-	aux.AddFusionProcFun2(c,aux.FilterBoolFunction(Card.IsSetCard,0x8),Card.IsZHERO,true)
+	Fusion.AddProcFun2(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x8),Card.IsZHERO,true)
 	c:EnableReviveLimit()
 	--spsummon condition
 	local e0=Effect.CreateEffect(c)
