@@ -1,7 +1,7 @@
 --D/D/D Archfiend Emperor's Right Hand
 function c155300.initial_effect(c)
 	--Synchro Summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_FIEND),aux.NonTuner(Card.IsRace,RACE_FIEND),1)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),aux.NonTuner(Card.IsRace,RACE_FIEND),1, 99)
 	c:EnableReviveLimit()
 	--Activate
 	local e1=Effect.CreateEffect(c)
