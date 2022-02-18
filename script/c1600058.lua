@@ -2,6 +2,7 @@
 local s,id=GetID()
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function s.initial_effect(c)
+	c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	  --synchro summon
    Evolute.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_MONSTER),2,99)
