@@ -50,8 +50,8 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e2:SetCategory(CATEGORY_COUNTER)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
-	e2:SetTarget(Evcounter.addct)
-	e2:SetOperation(Evcounter.addc)
+	e2:SetTarget(Evolute.addct)
+	e2:SetOperation(Evolute.addc)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -247,12 +247,13 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
 			end
+		e:GetHandler():AddCounter(0x88,2)
 end
-function Evcounter.addct(e,tp,eg,ep,ev,re,r,rp,chk)
+function Evolute.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x27)
 end
-function Evcounter.addc(e,tp,eg,ep,ev,re,r,rp)
+function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
 		e:GetHandler():AddCounter(0x88,2)
 	end
