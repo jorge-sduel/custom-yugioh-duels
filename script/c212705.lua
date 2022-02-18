@@ -1,7 +1,7 @@
 --Cyberdark Core
 function c212705.initial_effect(c)
 	--link summon
-	aux.AddLinkProcedure(c,c212705.mfilter,1,1)
+	Link.AddProcedure(c,c212705.mfilter,1,1)
 	c:EnableReviveLimit()
 	--tohand
 	local e1=Effect.CreateEffect(c)
