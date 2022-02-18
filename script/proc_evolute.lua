@@ -348,12 +348,6 @@ function Auxiliary.EvoluteCheckGoal(tp,sg,ec,minc,ct,...)
 	end
 	return ct>=minc and (ec:IsHasEffect(EFFECT_CONVERGENT_EVOLUTE) or sg:CheckWithSumEqual(Auxiliary.EvoluteValue,ec:GetStage(),ct,ct,ec)) and Duel.GetLocationCountFromEx(tp,tp,sg,ec)>0
 end
-function Auxiliary.EvoluteCondition(outdate1,outdate2,min,max,gcheck,...)
-	local funs={...}
-	return  function(e,c)
-				if c==nil then return true end
-				if c:IsType(TYPE_PENDULUM)
-end
 function Auxiliary.GetEvoluteMaterials(ec,tp)
 	return Duel.GetMatchingGroup(Card.IsCanBeEvoluteMaterial,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_GRAVE+LOCATION_SZONE+LOCATION_FZONE,LOCATION_MZONE+LOCATION_HAND+LOCATION_GRAVE+LOCATION_SZONE+LOCATION_FZONE,nil,ec)
 end
