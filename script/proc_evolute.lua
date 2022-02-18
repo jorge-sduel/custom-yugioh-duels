@@ -10,8 +10,8 @@ EFFECT_CONVERGENT_EVOLUTE			=393
 TYPE_EVOLUTE						=0x100000000
 CTYPE_EVOLUTE						=0x1
 SUMMON_TYPE_EVOLUTE					=SUMMON_TYPE_SPECIAL+388
-
 REASON_EVOLUTE						=0x10000000
+EVOLUTE_IMPORTED         = true
 
 --Custom Type Table
 Auxiliary.Evolutes={} --number as index = card, card as index = function() is_xyz
@@ -243,7 +243,6 @@ function Auxiliary.AddEvoluteProc(c,echeck,stage,...)
 	e2:SetCode(EFFECT_SPSUMMON_PROC)
 	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetRange(LOCATION_EXTRA)
-	e2:SetCondition(Auxiliary.EvoluteCondition(echeck,extramat,min,max,gcheck,table.unpack(t)))
 	e2:SetTarget(Auxiliary.EvoluteTarget(echeck,extramat,min,max,gcheck,table.unpack(t)))
 	e2:SetOperation(Auxiliary.EvoluteOperation)
 	e2:SetValue(SUMMON_TYPE_EVOLUTE)
