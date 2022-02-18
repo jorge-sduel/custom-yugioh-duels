@@ -217,6 +217,7 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 					end
 				end
 				c:SetMaterial(g)
+e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
 				if send==1 then
 					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE+REASON_RETURN)
 				elseif send==2 then
@@ -234,6 +235,5 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
-e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
 			end
 end
