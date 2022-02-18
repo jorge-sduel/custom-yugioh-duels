@@ -8,18 +8,24 @@ EFFECT_EXTRA_TIMELEAP_MATERIAL		=828
 EFFECT_EXTRA_TIMELEAP_SUMMON		=829
 EFFECT_IGNORE_TIMELEAP_HOPT			=830
 TYPE_TIMELEAP						=0x10000000000
-TYPE_CUSTOM							=TYPE_CUSTOM|TYPE_TIMELEAP
 CTYPE_TIMELEAP						=0x100
-CTYPE_CUSTOM						=CTYPE_CUSTOM|CTYPE_TIMELEAP
-
 SUMMON_TYPE_TIMELEAP				=SUMMON_TYPE_SPECIAL+825
 
 REASON_TIMELEAP	=0x10000000000
 
---Custom Type Table
-Auxiliary.Timeleaps={} --number as index = card, card as index = function() is_synchro
-table.insert(aux.CannotBeEDMatCodes,EFFECT_CANNOT_BE_TIMELEAP_MATERIAL)
-
+if not aux.TimeleapProcedure then
+	aux.TimeleapProcedure = {}
+	Reunion = aux.TimeleapProcedure
+end
+if not timeleap then
+	Timeleap = aux.TimeleapProcedure
+end
+--[[
+add at the start of the script to add timeleap procedure
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
+condition if Timeleap summoned
+    return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE
+]]
 --overwrite constants
 TYPE_EXTRA							=TYPE_EXTRA|TYPE_TIMELEAP
 
