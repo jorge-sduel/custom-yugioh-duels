@@ -44,6 +44,18 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e1:SetOperation(Evolute.Operation(f,min,max,specialchk,opp,loc,send))
     e1:SetValue(SUMMON_TYPE_EVOLUTE)
 	c:RegisterEffect(e1)
+	--summon success
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(1600058,0))
+	e2:SetCategory(CATEGORY_COUNTER)
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e2:SetCode(EVENT_SUMMON_SUCCESS)
+	e2:SetTarget(Ec.addct)
+	e2:SetOperation(Ec.addc)
+	c:RegisterEffect(e2)
+	local e3=e2:Clone()
+	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
+	c:RegisterEffect(e3)
 end
 function Card.IsEvolute(c)
 	return c.IsEvolute
@@ -217,7 +229,6 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 					end
 				end
 				c:SetMaterial(g)
-e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
 				if send==1 then
 					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE+REASON_RETURN)
 				elseif send==2 then
@@ -236,4 +247,13 @@ e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
 			end
+end
+function Ec.addct(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x27)
+end
+function Ec.addc(e,tp,eg,ep,ev,re,r,rp)
+	if e:GetHandler():IsRelateToEffect(e) then
+		e:GetHandler():AddCounter(0x88,2)
+	end
 end
