@@ -353,8 +353,7 @@ function Auxiliary.EvoluteCondition(outdate1,outdate2,min,max,gcheck,...)
 	local funs={...}
 	return  function(e,c)
 				if c==nil then return true end
-				if (c:IsType(TYPE_PENDULUM) or c:IsType(TYPE_PANDEMONIUM)) and c:IsFaceup() then return false end
-				local tp=c:GetControler()
+				if c:IsType(TYPE_PENDULUM)
 				local mg=Auxiliary.GetEvoluteMaterials(c,tp)
 				return mg:IsExists(Auxiliary.EvoluteRecursiveFilter,1,nil,tp,Group.CreateGroup(),mg,c,0,min,max,gcheck,table.unpack(funs))
 			end
