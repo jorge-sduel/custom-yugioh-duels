@@ -234,5 +234,6 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
+e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
 			end
 end
