@@ -2,7 +2,6 @@
 --Made and Scripted by Swaggy
 local cid,id=GetID()
 if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
-function s.initial_effect(c)
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
