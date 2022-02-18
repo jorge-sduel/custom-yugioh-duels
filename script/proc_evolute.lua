@@ -369,7 +369,7 @@ function Auxiliary.EvoluteTarget(outdate1,outdate2,minc,maxc,gcheck,...)
 				local finish=false
 				while not (sg:GetCount()>=maxc) do
 					finish=Auxiliary.EvoluteCheckGoal(tp,sg,c,minc,#sg,table.unpack(funs))
-					if #g==0 then break end
+					if #sg==0 then break end
 					local cancel=not finish
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 					local tc=cg:SelectUnselect(sg,tp,finish,cancel,minc,maxc)
