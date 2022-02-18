@@ -1,7 +1,7 @@
 --Peerless Assault Dragoon
 --Made and Scripted by Swaggy
 local id,cid=GetID()
-function cid.initial_effect(c)
+function id.initial_effect(c)
 	--time leap procedure
 	aux.AddOrigTimeleapType(c,false)
 	aux.AddTimeleapProc(c,5,cid.sumcon,cid.tlfilter,nil)
