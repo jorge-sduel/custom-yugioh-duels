@@ -251,7 +251,7 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 end
 function Evolute.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x27)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x88)
 end
 function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
