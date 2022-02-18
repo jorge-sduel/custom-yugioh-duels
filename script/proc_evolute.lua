@@ -354,7 +354,6 @@ function Auxiliary.EvoluteCondition(outdate1,outdate2,min,max,gcheck,...)
 	return  function(e,c)
 				if c==nil then return true end
 				if c:IsType(TYPE_PENDULUM)
-				return mg:IsExists(Auxiliary.EvoluteRecursiveFilter,1,nil,tp,Group.CreateGroup(),mg,c,0,min,max,gcheck,table.unpack(funs))
 			end
 end
 function Auxiliary.GetEvoluteMaterials(ec,tp)
