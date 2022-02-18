@@ -354,7 +354,6 @@ function Auxiliary.EvoluteCondition(outdate1,outdate2,min,max,gcheck,...)
 	return  function(e,c)
 				if c==nil then return true end
 				if c:IsType(TYPE_PENDULUM)
-			end
 end
 function Auxiliary.GetEvoluteMaterials(ec,tp)
 	return Duel.GetMatchingGroup(Card.IsCanBeEvoluteMaterial,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_GRAVE+LOCATION_SZONE+LOCATION_FZONE,LOCATION_MZONE+LOCATION_HAND+LOCATION_GRAVE+LOCATION_SZONE+LOCATION_FZONE,nil,ec)
