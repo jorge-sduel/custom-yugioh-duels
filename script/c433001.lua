@@ -1,9 +1,13 @@
 --Peerless Assault Dragoon
 --Made and Scripted by Swaggy
 local cid,id=GetID()
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
+function s.initial_effect(c)
 function cid.initial_effect(c)
+	c:EnableReviveLimit()
+	  --synchro summon
 	--time leap procedure
-	aux.AddTimeleapProc(c,5,cid.sumcon,cid.tlfilter,nil)
+	Timeleap.AddProcedure(c,5,cid.sumcon,cid.tlfilter,nil)
 	c:EnableReviveLimit() 
 	--Pierce dat booteh
 		local e0=Effect.CreateEffect(c)
