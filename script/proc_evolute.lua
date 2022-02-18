@@ -255,6 +255,6 @@ function Evolute.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(0x88,2)
+		e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
 	end
 end
