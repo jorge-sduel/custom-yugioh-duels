@@ -4,7 +4,6 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
-	aux.AddOrigEvoluteType(c)
    aux.AddEvoluteProc(c,nil,8,aux.TRUE,aux.TRUE,1,99)
 	   --mat check
 	local e0=Effect.CreateEffect(c)
