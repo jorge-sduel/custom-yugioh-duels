@@ -4,7 +4,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
-   aux.AddEvoluteProc(c,nil,8,aux.TRUE,aux.TRUE,1,99)
+   Evolute.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_MONSTER),2,99,s.rcheck)
 	   --mat check
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -102,6 +102,9 @@ function s.initial_effect(c)
 	e8:SetOperation(s.tdop)
 	e8:SetLabelObject(e0)
 	c:RegisterEffect(e8)
+end
+function s.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
 end
 function s.valcheck(e,c)
 	local g=c:GetMaterial()
