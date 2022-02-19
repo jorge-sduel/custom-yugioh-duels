@@ -16,7 +16,7 @@ if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 condition if Timeleap summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_TIMELEAP
 ]]
-Aux.TIMELP=function(e,c,must,g,min,max)
+AUX.TIMELP=function(e,c,must,g,min,max)
 				if c==nil then return true end
 				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
 				local tp=c:GetControler()
