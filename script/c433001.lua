@@ -55,7 +55,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function cid.splimit(e,se,sp,st)
-	return (st&SUMMON_TYPE_SPECIAL)==SUMMON_TYPE_SPECIAL or ((st&SUMMON_TYPE_TIMELEAP)==SUMMON_TYPE_TIMELEAP
+	return ((st&SUMMON_TYPE_SPECIAL)==SUMMON_TYPE_SPECIAL and not (st&SUMMON_TYPE_TIMELEAP)==SUMMON_TYPE_TIMELEAP) or ((st&SUMMON_TYPE_TIMELEAP)==SUMMON_TYPE_TIMELEAP
 		and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0)
 end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
