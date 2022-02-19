@@ -26,7 +26,7 @@ if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 condition if Timeleap summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE
 ]]
-
+end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
@@ -49,6 +49,7 @@ condition if Timeleap summoned
 	e3:SetCode(EFFECT_CANNOT_BE_XYZ_MATERIAL)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
+end
 function Auxiliary.TimeleapCondition(sumcon,filter,...)
 	local funs={...}
 	return  function(e,c)
