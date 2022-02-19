@@ -30,7 +30,7 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	if loc==nil then loc=LOCATION_MZONE end
 	if c.timeleap_type==nil then
 		local mt=c:GetMetatable()
-		mt.timeleap_type=1
+		mt.timeleap_type=2
 		mt.timeleap_parameters={c,f,min,max,control,location,operation}
 	end
 	local e1=Effect.CreateEffect(c)
