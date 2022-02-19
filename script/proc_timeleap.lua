@@ -26,137 +26,7 @@ if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 condition if Timeleap summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE
 ]]
---overwrite constants
-TYPE_EXTRA							=TYPE_EXTRA|TYPE_TIMELEAP
 
---overwrite functions
-local get_type, get_orig_type, get_prev_type_field, get_level, get_syn_level, get_rit_level, get_orig_level, is_xyz_level, 
-	get_prev_level_field, is_level, is_level_below, is_level_above, get_reason = 
-	Card.GetType, Card.GetOriginalType, Card.GetPreviousTypeOnField, Card.GetLevel, 
-	Card.GetSynchroLevel, Card.GetRitualLevel, Card.GetOriginalLevel, Card.IsXyzLevel, Card.GetPreviousLevelOnField, Card.IsLevel, Card.IsLevelBelow, Card.IsLevelAbove, Card.GetReason
-
-Card.GetType=function(c,scard,sumtype,p)
-	local tpe=scard and get_type(c,scard,sumtype,p) or get_type(c)
-	if Auxiliary.Timeleaps[c] then
-		tpe=tpe|TYPE_TIMELEAP
-		if not Auxiliary.Timeleaps[c]() then
-			tpe=tpe&~TYPE_SYNCHRO
-		end
-	end
-	return tpe
-end
-Card.GetOriginalType=function(c)
-	local tpe=get_orig_type(c)
-	if Auxiliary.Timeleaps[c] then
-		tpe=tpe|TYPE_TIMELEAP
-		if not Auxiliary.Timeleaps[c]() then
-			tpe=tpe&~TYPE_SYNCHRO
-		end
-	end
-	return tpe
-end
-Card.GetPreviousTypeOnField=function(c)
-	local tpe=get_prev_type_field(c)
-	if Auxiliary.Timeleaps[c] then
-		tpe=tpe|TYPE_TIMELEAP
-		if not Auxiliary.Timeleaps[c]() then
-			tpe=tpe&~TYPE_SYNCHRO
-		end
-	end
-	return tpe
-end
-Card.GetLevel=function(c)
-	if Auxiliary.Timeleaps[c] and not Auxiliary.Timeleaps[c]() then return 0 end
-	return get_level(c)
-end
-Card.GetRitualLevel=function(c,rc)
-	if Auxiliary.Timeleaps[c] and not Auxiliary.Timeleaps[c]() then return 0 end
-	return get_rit_level(c,rc)
-end
-GetSynchroLevel=function(c,sc)
-	if Auxiliary.Timeleaps[c] and not Auxiliary.Timeleaps[c]() then return 0 end
-	return get_syn_level(c,sc)
-end
-Card.GetOriginalLevel=function(c)
-	if Auxiliary.Timeleaps[c] and not Auxiliary.Timeleaps[c]() then return 0 end
-	return get_orig_level(c)
-end
-Card.IsXyzLevel=function(c,xyz,lv)
-	if Auxiliary.Timeleaps[c] and not Auxiliary.Timeleaps[c]() then return false end
-	return is_xyz_level(c,xyz,lv)
-end
-Card.GetPreviousLevelOnField=function(c)
-	if Auxiliary.Timeleaps[c] and not Auxiliary.Timeleaps[c]() then return 0 end
-	return get_prev_level_field(c)
-end
-Card.IsLevel=function(c,...)
-	if Auxiliary.Timeleaps[c] and not Auxiliary.Timeleaps[c]() then return false end
-	local funs={...}
-	for key,value in pairs(funs) do
-		if c:GetLevel()==value then return true end
-	end
-	return false
-end
-Card.IsLevelBelow=function(c,lv)
-	if Auxiliary.Timeleaps[c] and not Auxiliary.Timeleaps[c]() then return false end
-	return is_level_below(c,lv)
-end
-Card.IsLevelAbove=function(c,lv)
-	if Auxiliary.Timeleaps[c] and not Auxiliary.Timeleaps[c]() then return false end
-	return is_level_above(c,lv)
-end
-Card.GetReason=function(c)
-	local rs=get_reason(c)
-	local rc=c:GetReasonCard()
-	if rc and Auxiliary.Timeleaps[rc] then
-		rs=rs|REASON_TIMELEAP
-	end
-	return rs
-end
-
---Custom Functions
-function Card.IsCanBeTimeleapMaterial(c,ec,...)
-	local funs={...}
-	local exctyp=funs[1]
-	if not exctyp then
-		if c:IsType(TYPE_LINK) or c:IsType(TYPE_EVOLUTE) or c:IsType(TYPE_XYZ) then return false end
-	end
-	local tef={c:IsHasEffect(EFFECT_CANNOT_BE_TIMELEAP_MATERIAL)}
-	for _,te in ipairs(tef) do
-		if (type(te:GetValue())=="function" and te:GetValue()(te,ec)) or te:GetValue()==1 then return false end
-	end
-	return true
-end
-function Auxiliary.AddOrigTimeleapType(c,issynchro)
-	table.insert(Auxiliary.Timeleaps,c)
-	Auxiliary.Customs[c]=true
-	local issynchro=issynchro==nil and false or issynchro
-	Auxiliary.Timeleaps[c]=function() return issynchro end
-end
-function Auxiliary.AddTimeleapProc(c,futureval,sumcon,filter,customop,...)
-	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
-	local t={...}
-	local list={}
-	local min,max=1,1
-	if #t>0 then
-		for i=1,#t do
-			if type(t[#t])=='number' then
-				max=t[#t]
-				table.remove(t)
-				if type(t[#t])=='number' then
-					min=t[#t]
-					table.remove(t)
-				else
-					min=max
-					max=99
-				end
-				table.insert(list,{t[#t],min,max})
-				table.remove(t)
-			end
-		end
-	else
-		table.insert(list,{999,min,max})
-	end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
@@ -184,7 +54,7 @@ function Auxiliary.TimeleapCondition(sumcon,filter,...)
 	local funs={...}
 	return  function(e,c)
 				if c==nil then return true end
-				if (c:IsType(TYPE_PENDULUM) or c:IsType(TYPE_PANDEMONIUM)) and c:IsFaceup() then return false end
+				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
 				local tp=c:GetControler()
 				
 				local eset={Duel.IsPlayerAffectedByEffect(tp,EFFECT_EXTRA_TIMELEAP_SUMMON)}
