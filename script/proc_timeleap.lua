@@ -16,6 +16,37 @@ if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 condition if Timeleap summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_TIMELEAP
 ]]
+Aux.TIMELP=function(e,c,must,g,min,max)
+				if c==nil then return true end
+				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
+				local tp=c:GetControler()
+				local loc2=0
+				if opp then loc2=loc end
+				if not g then
+					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+				end
+				local mg=g:Filter(Timeleap.ConditionFilter,nil,f,c,tp)
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_TIMELEAP)
+				if must then mustg:Merge(must) end
+				if min and min < minc then return false end
+				if max and max > maxc then return false end
+				min = min or minc
+				max = max or maxc
+				if mustg:IsExists(aux.NOT(Timeleap.ConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_TIMELEAP)
+				tg=tg:Filter(Timeleap.ConditionFilter,nil,f,c,tp)
+				local res=(mg+tg):Includes(mustg) and #mustg<=max
+				if res then
+					if #mustg==max then
+						local sg=Group.CreateGroup()
+						res=mustg:IsExists(Timeleap.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
+					elseif #mustg<max then
+						local sg=mustg
+						res=(mg+tg):IsExists(Timeleap.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
+					end
+				end
+				aux.DeleteExtraMaterialGroups(emt)
+				return res
 --Reunion Summon
 function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
     -- opp==true >> you can use opponent monsters as materials (default false)
