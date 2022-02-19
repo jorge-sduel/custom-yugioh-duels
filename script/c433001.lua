@@ -52,7 +52,7 @@ function cid.TimeCost1(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.TimeCost(e,tp,chk,mc)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 end
-	return true
+	return false
 end
 function cid.sumcon(e,c)
 	local tp=c:GetControler()
