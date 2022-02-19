@@ -6,7 +6,7 @@ function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-	Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_MONSTER),1,99)
+	Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),1,1)
 	c:EnableReviveLimit() 
 	--Pierce dat booteh
 		local e0=Effect.CreateEffect(c)
