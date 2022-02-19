@@ -49,7 +49,6 @@ condition if Timeleap summoned
 	e3:SetCode(EFFECT_CANNOT_BE_XYZ_MATERIAL)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
-end
 function Auxiliary.TimeleapCondition(sumcon,filter,...)
 	local funs={...}
 	return  function(e,c)
