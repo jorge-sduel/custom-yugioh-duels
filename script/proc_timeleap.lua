@@ -136,7 +136,7 @@ function Timeleap.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				max = max or maxc
 				if mustg:IsExists(aux.NOT(Timeleap.ConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
 				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_TIMELEAP)
-				tg=tg:Filter(Reunion.ConditionFilter,nil,f,c,tp)
+				tg=tg:Filter(Timeleap.ConditionFilter,nil,f,c,tp)
 				local res=(mg+tg):Includes(mustg) and #mustg<=max
 				if res then
 					if #mustg==max then
