@@ -16,7 +16,6 @@ if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 condition if Timeleap summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_TIMELEAP
 ]]
-AUX.TIMELP=function Timeleap.Condition(f,minc,maxc,specialchk,opp,loc,send)
 --Reunion Summon
 function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
     -- opp==true >> you can use opponent monsters as materials (default false)
