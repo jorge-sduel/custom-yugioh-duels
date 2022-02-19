@@ -6,7 +6,7 @@ function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-	Timeleap.AddProc(c,5,cid.sumcon,cid.tlfilter,nil)
+	Timeleap.AddProcedure(c,1,1)
 	c:EnableReviveLimit() 
 	--Pierce dat booteh
 		local e0=Effect.CreateEffect(c)
