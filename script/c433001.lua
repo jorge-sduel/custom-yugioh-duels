@@ -47,7 +47,7 @@ function cid.initial_effect(c)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
 end
-function s.TimeCost(e,tp,eg,ep,ev,re,r,rp)
+function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
 function cid.sumcon(e,c)
