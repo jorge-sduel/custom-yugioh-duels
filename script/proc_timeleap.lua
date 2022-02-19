@@ -51,7 +51,7 @@ end
 function Timeleap.ConditionFilter(c,f,lc,tp)
 	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
-function Timeleap.GetEvoluteCount(c)
+function Timeleap.GetTimeleapCount(c)
     if c:GetLevel()>0 then return c:GetLevel()
     elseif c:GetRank()>0 then return c:GetRank()
     elseif c:GetLink()>0 then return c:GetLink() end
@@ -75,7 +75,7 @@ function Timeleap.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,fil
 		end
 	end
 	local res=Timeleap.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
-		or (#sg<maxc and mg:IsExists(Evolute.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
+		or (#sg<maxc and mg:IsExists(Timeleap.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
 	sg:RemoveCard(c)
 	return res
 end
@@ -116,7 +116,7 @@ function Timeleap.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 			return false
 		end
 	end
-	return #sg>=minc and sg:CheckWithSumEqual(Timeleap.GetEvoluteCount,lc:GetLevel()-1,#sg,#sg)
+	return #sg>=minc and sg:CheckWithSumEqual(Timeleap.GetTimeleapCount,lc:GetLevel()-1,#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Timeleap.Condition(f,minc,maxc,specialchk,opp,loc,send)
