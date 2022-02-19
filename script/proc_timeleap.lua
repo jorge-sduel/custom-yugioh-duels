@@ -30,7 +30,7 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	if loc==nil then loc=LOCATION_MZONE end
 	if c.timeleap_type==nil then
 		local mt=c:GetMetatable()
-		mt.timeleap_type=2
+		mt.timeleap_type=1
 		mt.timeleap_parameters={c,f,min,max,control,location,operation}
 	end
 	local e1=Effect.CreateEffect(c)
@@ -220,7 +220,7 @@ function Timeleap.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				if send==1 then
 					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_TIMELEAP+REASON_RETURN)
 				elseif send==2 then
-					Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
+					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_TIMELEAP)
 				elseif send==3 then
 					Duel.Remove(g,POS_FACEDOWN,REASON_MATERIAL+REASON_TIMELEAP)
 				elseif send==4 then
@@ -230,7 +230,7 @@ function Timeleap.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				elseif send==6 then
 					Duel.Destroy(g,REASON_MATERIAL+REASON_TIMELEAP)
 				else
-					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_TIMELEAP)
+					Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
