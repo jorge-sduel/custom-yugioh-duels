@@ -9,7 +9,7 @@ if not aux.TimeleapProcedure then
 	Reunion = aux.TimeleapProcedure
 end
 if not Timeleap then
-	Reunion = aux.ReunionProcedure
+	Reunion = aux.TimeleapProcedure
 end
 --[[
 add at the start of the script to add Timeleap procedure
