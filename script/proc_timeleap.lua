@@ -1,10 +1,9 @@
-EFFECT_HAND_TIMELEAP	= 600001
-REASON_TIMELEAP		= 0x8000000000
-SUMMON_TYPE_TIMELEAP	= 0x80000000000000
-HINTMSG_TLMATERIAL	= 800000
-EFFECT_TLEAP_LEVEL	= 80001
+EFFECT_HAND_TIMELP	= 601100000
+REASON_TIMELP		= 0x40000000000
+SUMMON_TYPE_TIMELP	= 0x400000000
+HINTMSG_TLPMATERIAL	= 400000000
 TIMELEAP_IMPORTED	= true
-if not aux.TimeleapProcedure then
+if not aux.TIMELEAPProcedure then
 	aux.TimeleapProcedure = {}
 	Timeleap = aux.TimeleapProcedure
 end
@@ -17,7 +16,7 @@ if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 condition if Timeleap summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_TIMELEAP
 ]]
---Timeleap Summon
+--Reunion Summon
 function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
     -- opp==true >> you can use opponent monsters as materials (default false)
     -- loc default LOCATION_MZONE
@@ -31,7 +30,7 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	if loc==nil then loc=LOCATION_MZONE end
 	if c.timeleap_type==nil then
 		local mt=c:GetMetatable()
-		mt.timeleap_type=2
+		mt.timeleap_type=1
 		mt.timeleap_parameters={c,f,min,max,control,location,operation}
 	end
 	local e1=Effect.CreateEffect(c)
@@ -40,6 +39,7 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(LOCATION_EXTRA)
+	e1:SetCondition(Timeleap.Condition(f,min,max,specialchk,opp,loc,send))
 	e1:SetTarget(Timeleap.Target(f,min,max,specialchk,opp,loc,send))
 	e1:SetOperation(Timeleap.Operation(f,min,max,specialchk,opp,loc,send))
     e1:SetValue(SUMMON_TYPE_TIMELEAP)
@@ -51,8 +51,11 @@ end
 function Timeleap.ConditionFilter(c,f,lc,tp)
 	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
-function Timeleap.GetTimeleapCount(c)
-    return c:GetLevel()
+function Timeleap.GetEvoluteCount(c)
+    if c:GetLevel()>0 then return c:GetLevel()
+    elseif c:GetRank()>0 then return c:GetRank()
+    elseif c:GetLink()>0 then return c:GetLink() end
+    return 0
 end
 function Timeleap.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	if #sg>maxc then return false end
@@ -72,7 +75,7 @@ function Timeleap.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,fil
 		end
 	end
 	local res=Timeleap.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
-		or (#sg<maxc and mg:IsExists(Timeleap.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
+		or (#sg<maxc and mg:IsExists(Evolute.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
 	sg:RemoveCard(c)
 	return res
 end
@@ -98,7 +101,7 @@ function Timeleap.CheckRecursive2(c,tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialc
 			sg:RemoveCard(c)
 			return res
 		else
-			local res=Timeleap.CheckGoal(tp,sg,lc,minc,f,specialchk,{table.unpack(filt)})
+			local res=TimeLeap.CheckGoal(tp,sg,lc,minc,f,specialchk,{table.unpack(filt)})
 			sg:RemoveCard(c)
 			return res
 		end
@@ -113,7 +116,7 @@ function Timeleap.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 			return false
 		end
 	end
-	return #sg>=minc and sg:CheckWithSumEqual(Timeleap.GetTimeleapCount,lc:GetLevel()-1,#sg,#sg)
+	return #sg>=minc and sg:CheckWithSumEqual(Timeleap.GetEvoluteCount,lc:GetLevel()-1,#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Timeleap.Condition(f,minc,maxc,specialchk,opp,loc,send)
