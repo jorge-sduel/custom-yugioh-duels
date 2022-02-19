@@ -58,7 +58,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
-	return  function Timeleap.Condition(f,min,max,specialchk,opp,loc,send) and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
+	return   AUX.TIMELP and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
 function cid.sumcon(e,c)
 	local tp=c:GetControler()
