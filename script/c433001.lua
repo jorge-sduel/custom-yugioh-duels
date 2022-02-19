@@ -47,13 +47,8 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
 end
-function cid.TimeCost1(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
-end
-function cid.TimeCost(e,tp,chk,mc)
-	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 end
-	mc:IsAttribute(ATTRIBUTE_FIRE) and mc:IsLevel(e:GetHandler() - 1)
-	return true
+function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsLevel(e:GetHandler() - 1)
 end
 function cid.sumcon(e,c)
 	local tp=c:GetControler()
