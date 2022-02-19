@@ -48,7 +48,8 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE
 	c:RegisterEffect(e3)
 end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
+	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 end
+	return true
 end
 function cid.sumcon(e,c)
 	local tp=c:GetControler()
