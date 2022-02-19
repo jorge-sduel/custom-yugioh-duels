@@ -6,10 +6,10 @@ EFFECT_TLEAP_LEVEL	= 80001
 TIMELEAP_IMPORTED	= true
 if not aux.TimeleapProcedure then
 	aux.TimeleapProcedure = {}
-	Reunion = aux.TimeleapProcedure
+	Timeleap = aux.TimeleapProcedure
 end
 if not Timeleap then
-	Reunion = aux.TimeleapProcedure
+	Timeleap = aux.TimeleapProcedure
 end
 --[[
 add at the start of the script to add Timeleap procedure
@@ -53,8 +53,7 @@ function Timeleap.ConditionFilter(c,f,lc,tp)
 	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
 function Timeleap.GetTimeleapCount(c)
-    if c:GetLevel()>0 then return c:GetLevel()
-    return 0
+    return c:GetLevel()
 end
 function Timeleap.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	if #sg>maxc then return false end
