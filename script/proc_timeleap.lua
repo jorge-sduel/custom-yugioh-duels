@@ -15,7 +15,7 @@ REASON_TIMELEAP	=0x10000000000
 
 if not aux.TimeleapProcedure then
 	aux.TimeleapProcedure = {}
-	Reunion = aux.TimeleapProcedure
+	Timeleap = aux.TimeleapProcedure
 end
 if not timeleap then
 	Timeleap = aux.TimeleapProcedure
