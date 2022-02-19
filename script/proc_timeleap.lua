@@ -193,7 +193,7 @@ function Timeleap.Target(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				if #sg>0 then
 					local filters={}
-					Reunion.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg+tg,mg+tg,c,min,max,f,specialchk,mg,emt,filters)
+					Timeleap.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg+tg,mg+tg,c,min,max,f,specialchk,mg,emt,filters)
 					sg:KeepAlive()
 					local reteff=Effect.GlobalEffect()
 					reteff:SetTarget(function()return sg,filters,emt end)
