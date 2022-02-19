@@ -114,7 +114,7 @@ function Timeleap.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 			return false
 		end
 	end
-	return #sg>=minc and sg:CheckWithSumEqual(Timeleap.GetTimeleapCount,lc:GetLevel()*2,#sg,#sg)
+	return #sg>=minc and sg:CheckWithSumEqual(Timeleap.GetTimeleapCount,lc:GetLevel()-1,#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Timeleap.Condition(f,minc,maxc,specialchk,opp,loc,send)
