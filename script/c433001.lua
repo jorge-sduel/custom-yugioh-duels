@@ -8,6 +8,13 @@ function cid.initial_effect(c)
 	--time leap procedure
 	Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),1,1)
 	c:EnableReviveLimit() 
+	--Special Summon condition
+	local etl=Effect.CreateEffect(c)
+	etl:SetType(EFFECT_TYPE_SINGLE)
+	etl:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	etl:SetCode(EFFECT_SPSUMMON_CONDITION)
+	etl:SetValue(cid.splimit)
+	c:RegisterEffect(etl)
 	--Pierce dat booteh
 		local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -46,6 +53,10 @@ function cid.initial_effect(c)
 	e3:SetTarget(cid.revtg)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
+end
+function cid.splimit(e,se,sp,st)
+	return (st&SUMMON_TYPE_SPECIAL)==SUMMON_TYPE_SPECIAL or ((st&SUMMON_TYPE_TIMELEAP)==SUMMON_TYPE_TIMELEAP
+		and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0)
 end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
