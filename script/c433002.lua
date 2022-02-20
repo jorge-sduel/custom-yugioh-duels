@@ -1,17 +1,11 @@
 --Relentless Domination Commander
---Created and Scripted by Swaggy
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local id,cid=GetID()
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
+	c:EnableReviveLimit()
+	  --synchro summon
 	--time leap procedure
-	aux.AddOrigTimeleapType(c,false)
-	aux.AddTimeleapProc(c,5,cid.sumcon,cid.tlfilter,nil)
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),1,1,cid.TimeCost)
 	c:EnableReviveLimit() 
 	--Smack dat ass TWICE
 		local e0=Effect.CreateEffect(c)
@@ -58,6 +52,9 @@ function cid.initial_effect(c)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
 	end
+function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)=>3
+end
 function cid.sumcon(e,c)
 	local tp=c:GetControler()
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>=3
