@@ -53,19 +53,12 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATE
 	c:RegisterEffect(e3)
 	end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)=>3
-end
-function cid.sumcon(e,c)
-	local tp=c:GetControler()
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>=3
 end
-	function cid.tlfilter(c,e,mg)
-	return c:IsAttribute(ATTRIBUTE_WATER) and c:GetLevel()==e:GetHandler():GetFuture()-1
-end
-	function cid.buffcon(e,tp,eg,ep,ev,re,r,rp)
+function cid.buffcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
 end
-	function cid.buffop(e,tp,eg,ep,ev,re,r,rp)
+function cid.buffop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(function (c) return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER) end,tp,LOCATION_MZONE,0,nil)
 	local tc=g:GetFirst()
 	while tc do
