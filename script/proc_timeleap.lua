@@ -65,7 +65,7 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e6:SetType(EFFECT_TYPE_SINGLE)
 	e6:SetProperty(EFFECT_TYPE_SINGLE)
 	e6:SetCode(EFFECT_REMOVE_TYPE)
-	e3:SetCondition(Timeleap.Removecon)
+	e6:SetCondition(Timeleap.Removecon)
 	e6:SetValue(TYPE_SYNCHRO)
 	c:RegisterEffect(e6)end
 function Card.IsTimeleap(c)
