@@ -13,7 +13,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_PIERCE)
 	c:RegisterEffect(e0)
-	--SALAMANGUREITO SANCTUARRYYYY
+	--SUMMON FIRE MONSTER
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(433001,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -23,7 +23,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE
 	e1:SetTarget(cid.sstg)
 	e1:SetOperation(cid.ssop)
 	c:RegisterEffect(e1)
-	--Oooh yeah, feel dat burn HMMMMMMMMMMM
+	--Burn
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(433001,1))
 	e2:SetCategory(CATEGORY_DAMAGE)
@@ -40,7 +40,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE
 	e3:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_REMOVE)
 	e3:SetCode(EVENT_LEAVE_FIELD)
 	e3:SetCondition(cid.revcon)
 	e3:SetTarget(cid.revtg)
@@ -50,15 +50,8 @@ end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
-function cid.sumcon(e,c)
-	local tp=c:GetControler()
-	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
-end
-	function cid.tlfilter(c,e,mg)
-	return c:IsAttribute(ATTRIBUTE_FIRE) and c:GetLevel()==e:GetHandler():GetFuture()-1
-end
 function cid.sscon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
+	return c:GetSummonType()==SUMMON_TYPE_TIMELEAP
 end
 function cid.ssfilter(c,e,tp)
 return c:IsLevelBelow(6) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
@@ -95,6 +88,8 @@ function cid.bucost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cid.butg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
+	Duel.CheckReleaseGroup(tp,Card.IsAttribute,1,e:GetHandler(),ATTRIBUTE_FIRE)
+	local g=Duel.SelectReleaseGroup(tp,Card.IsAttribute,1,1,e:GetHandler(),ATTRIBUTE_FIRE)
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(1000)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1000)
