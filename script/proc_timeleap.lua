@@ -50,7 +50,6 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_REMOVED)
-	e2:SetCondition(Timeleap.spcon)
 	e2:SetOperation(Timeleap.spop)
 	c:RegisterEffect(e2)
 	--redirect
