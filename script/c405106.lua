@@ -1,7 +1,7 @@
 --Galaxy-Eyes Tachyon Dual Lance & Halberd
 function c405106.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(c405106.mfilter),aux.NonTuner(c405106.mfilter2),1)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(c405106.mfilter),aux.NonTuner(c405106.mfilter2),1,99)
 	c:EnableReviveLimit()
 	--add
 	local e1=Effect.CreateEffect(c)
