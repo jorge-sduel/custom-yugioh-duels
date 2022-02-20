@@ -15,7 +15,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATE
 	e0:SetCode(EFFECT_EXTRA_ATTACK_MONSTER)
 	e0:SetValue(1)
 	c:RegisterEffect(e0)
-	--Slap my Nuts and call me buffed
+	--boss wather
 		local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(433002,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
@@ -23,7 +23,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATE
 	e1:SetCondition(cid.buffcon)
 	e1:SetOperation(cid.buffop)
 	c:RegisterEffect(e1)
-	--Is this a Peach Beach card?
+	--life boss
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
@@ -51,6 +51,15 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATE
 	e3:SetTarget(cid.revtg)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
+--
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(433002,0))
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetCondition(Timeleap.Future)
+	e4:SetTarget(cid.drawtg)
+	e4:SetOperation(cid.drawop)
+	c:RegisterEffect(e4)
 	end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>=3
@@ -124,5 +133,19 @@ function cid.revop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(LOCATION_REMOVED)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		c:RegisterEffect(e1,true)
+	end
+end
+function cid.drawtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local ct=6-Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
+	if chk==0 then return ct>0 and Duel.IsPlayerCanDraw(tp,ct) end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetParam(ct)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct)
+end
+function cid.drawop(e,tp,eg,ep,ev,re,r,rp)
+	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	local ct=6-Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
+	if ct>0 then
+		Duel.Draw(p,ct,REASON_EFFECT)
 	end
 end
