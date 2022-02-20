@@ -254,7 +254,7 @@ function Timeleap.Operation(f,minc,maxc,specialchk,opp,loc,send)
 			end
 end
 function Timeleap.recon(e)
-	return e:GetHandler():IsFaceup()
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
 end
 function Timeleap.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
