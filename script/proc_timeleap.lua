@@ -61,7 +61,13 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e3:SetCondition(Timeleap.recon)
 	e3:SetValue(LOCATION_REMOVED)
 	c:RegisterEffect(e3)
-end
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetProperty(EFFECT_TYPE_SINGLE)
+	e6:SetCode(EFFECT_REMOVE_TYPE)
+	e3:SetCondition(Timeleap.Removecon)
+	e6:SetValue(TYPE_SYNCHRO)
+	c:RegisterEffect(e6)end
 function Card.IsTimeleap(c)
 	return c.IsTimeleap
 end
@@ -294,4 +300,7 @@ function Timeleap.sumcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function Timeleap.Future(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP2)
+end
+function Timeleap.Removecon(e,tp,eg,ep,ev,re,r,rp)
+	return not c:IsHasEffect(395)
 end
