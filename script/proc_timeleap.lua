@@ -65,6 +65,7 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e6:SetType(EFFECT_TYPE_SINGLE)
 	e6:SetProperty(EFFECT_TYPE_SINGLE)
 	e6:SetCode(EFFECT_REMOVE_TYPE)
+	e6:SetRange(0x3ff)
 	e6:SetCondition(Timeleap.Removecon)
 	e6:SetValue(TYPE_SYNCHRO)
 	c:RegisterEffect(e6)end
