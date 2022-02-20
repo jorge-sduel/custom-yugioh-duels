@@ -51,7 +51,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e4:SetCondition(Timeleap.Future)
-	e4:SetOperation(cid.futureop)
+	e4:SetOperation(cid.Futureop)
 	c:RegisterEffect(e4)
 end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
@@ -139,5 +139,6 @@ function cid.revop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.Futureop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SetLP(1-tp,math.ceil(Duel.GetLP(1-tp)/2)) 
+	Duel.SetLP(1-tp,math.ceil(Duel.GetLP(1-tp)/2))
+	Duel.SetLP(tp,math.ceil(Duel.GetLP(tp)*2))
 end
