@@ -45,6 +45,16 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE
 	e3:SetTarget(cid.revtg)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
+	--Future
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(433001,0))
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e2:SetCondition(Timeleap.Future)
+	e2:SetTarget(cid.future)
+	e2:SetOperation(cid.future)
+	c:RegisterEffect(e2)
 end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
