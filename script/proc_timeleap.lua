@@ -259,7 +259,7 @@ end
 function Timeleap.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsPreviousLocation(LOCATION_MZONE)
-		and c:IsCanBeSpecialSummoned(e,SUMMON_TIMELEAP2,tp,false,false)
+		and e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP) and c:IsCanBeSpecialSummoned(e,SUMMON_TIMELEAP2,tp,false,false)
 end
 function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
