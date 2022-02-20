@@ -288,6 +288,5 @@ function Timeleap.spop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummonComplete()
 end
 function Timeleap.sumcon(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
