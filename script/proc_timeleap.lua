@@ -1,6 +1,7 @@
 EFFECT_HAND_TIMELP	= 601100000
 REASON_TIMELEAP		= 0x40000000000
 SUMMON_TYPE_TIMELEAP	= 0x400000000
+SUMMON_TYPE_TIMELEAP2	= 0x800000000
 HINTMSG_TLPMATERIAL	= 400000000
 TIMELEAP_IMPORTED	= true
 if not aux.TimeleapProcedure then
@@ -44,6 +45,15 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e1:SetOperation(Timeleap.Operation(f,min,max,specialchk,opp,loc,send))
     e1:SetValue(SUMMON_TYPE_TIMELEAP)
 	c:RegisterEffect(e1)
+	--Special summon
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,1))
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
+	e2:SetCode(EVENT_DESTROYED)
+	e2:SetCondition(Timeleap.spcon)
+	e2:SetOperation(Timeleap.spop)
+	c:RegisterEffect(e2)
 	--redirect
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
@@ -246,4 +256,40 @@ function Timeleap.Operation(f,minc,maxc,specialchk,opp,loc,send)
 end
 function Timeleap.recon(e)
 	return e:GetHandler():IsFaceup()
+end
+function Timeleap.spcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:IsPreviousControler(tp) and rp~=tp and c:IsReason(REASON_EFFECT)
+		and c:IsPreviousLocation(LOCATION_MZONE)
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+end
+function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetRange(LOCATION_REMOVED+LOCATION_GRAVE)
+	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
+	if Duel.GetCurrentPhase()==PHASE_STANDBY and Duel.GetTurnPlayer()==tp then
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,3)
+	else
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,2)
+	end
+	e1:SetCountLimit(1)
+	e1:SetCondition(Timeleap.spcon2)
+	e1:SetOperation(Timeleap.spop2)
+	c:RegisterEffect(e1)
+	c:SetTurnCounter(0)
+end
+function Timeleap.spcon2(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnPlayer()==tp
+end
+function Timeleap.spop2(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local ct=c:GetTurnCounter()
+	ct=ct+1
+	c:SetTurnCounter(ct)
+	if ct==e:GetHandler():GetLevel() then
+		Duel.SpecialSummonStep(c,SUMMON_TYPE_TIMELEAP2,tp,tp,false,false,POS_FACEUP)
+	end
+	Duel.SpecialSummonComplete()
 end
