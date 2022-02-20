@@ -47,7 +47,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE
 	c:RegisterEffect(e3)
 	--Future
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(433001,0))
+	e4:SetDescription(aux.Stringid(433001,2))
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e4:SetCondition(Timeleap.Future)
