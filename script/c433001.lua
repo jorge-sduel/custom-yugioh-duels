@@ -139,6 +139,5 @@ function cid.revop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.Futureop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SetLP(1-tp,math.ceil(Duel.GetLP(1-tp)/2))
-	Duel.SetLP(tp,Duel.GetLP(tp)*2) 
+	Duel.SetLP(1-tp,math.ceil(Duel.GetLP(1-tp)/2)) 
 end
