@@ -259,20 +259,20 @@ function Timeleap.recon(e)
 end
 function Timeleap.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousControler(tp) and rp~=tp and c:IsReason(REASON_EFFECT)
+	return c:IsReason(REASON_EFFECT)
 		and c:IsPreviousLocation(LOCATION_MZONE)
-		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_TIMELEAP2,tp,false,false)
 end
 function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetRange(LOCATION_REMOVED+LOCATION_GRAVE)
+	e1:SetRange(LOCATION_REMOVED)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	if Duel.GetCurrentPhase()==PHASE_STANDBY and Duel.GetTurnPlayer()==tp then
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,3)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,99)
 	else
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,2)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,99)
 	end
 	e1:SetCountLimit(1)
 	e1:SetCondition(Timeleap.spcon2)
