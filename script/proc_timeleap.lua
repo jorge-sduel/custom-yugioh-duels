@@ -47,7 +47,6 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	c:RegisterEffect(e1)
 	--Special summon
 	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(433001,1))
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_REMOVED)
@@ -261,7 +260,7 @@ function Timeleap.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsReason(REASON_EFFECT)
 		and c:IsPreviousLocation(LOCATION_MZONE)
-		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_TIMELEAP2,tp,false,false)
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -289,7 +288,7 @@ function Timeleap.spop2(e,tp,eg,ep,ev,re,r,rp)
 	ct=ct+1
 	c:SetTurnCounter(ct)
 	if ct==e:GetHandler():GetLevel() then
-		Duel.SpecialSummonStep(c,SUMMON_TYPE_TIMELEAP2,tp,tp,false,false,POS_FACEUP)
+		Duel.SpecialSummonStep(c,0,tp,tp,false,false,POS_FACEUP)
 	end
 	Duel.SpecialSummonComplete()
 end
