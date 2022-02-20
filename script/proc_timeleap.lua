@@ -52,6 +52,14 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e2:SetCode(EVENT_REMOVED)
 	e2:SetOperation(Timeleap.spop)
 	c:RegisterEffect(e2)
+	--redirect
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
+	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e3:SetCondition(Timeleap.recon)
+	e3:SetValue(LOCATION_REMOVED)
+	c:RegisterEffect(e3)
 end
 function Card.IsTimeleap(c)
 	return c.IsTimeleap
@@ -259,11 +267,7 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetRange(LOCATION_REMOVED)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	if Duel.GetCurrentPhase()==PHASE_STANDBY and Duel.GetTurnPlayer()==tp then
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,6)
-	else
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,5)
-	end
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,5)
 	e1:SetCountLimit(1)
 	e1:SetCondition(Timeleap.spcon2)
 	e1:SetOperation(Timeleap.spop2)
