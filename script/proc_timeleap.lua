@@ -68,7 +68,8 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e6:SetRange(0x3ff)
 	e6:SetCondition(Timeleap.Removecon)
 	e6:SetValue(TYPE_SYNCHRO)
-	c:RegisterEffect(e6)end
+	c:RegisterEffect(e6)
+end
 function Card.IsTimeleap(c)
 	return c.IsTimeleap
 end
