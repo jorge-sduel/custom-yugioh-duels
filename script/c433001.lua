@@ -51,6 +51,7 @@ function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
 end
 function cid.sscon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	return c:GetSummonType()==SUMMON_TYPE_TIMELEAP
 end
 function cid.ssfilter(c,e,tp)
