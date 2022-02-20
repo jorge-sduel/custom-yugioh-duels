@@ -40,7 +40,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE
 	e3:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_FIELD)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
-	e3:SetRange(LOCATION_REMOVE)
+	e3:SetRange(LOCATION_REMOVED)
 	e3:SetCode(EVENT_LEAVE_FIELD)
 	e3:SetCondition(cid.revcon)
 	e3:SetTarget(cid.revtg)
