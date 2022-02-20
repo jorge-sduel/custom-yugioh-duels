@@ -257,9 +257,8 @@ function Timeleap.recon(e)
 end
 function Timeleap.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsReason(REASON_EFFECT)
-		and c:IsPreviousLocation(LOCATION_MZONE)
-		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsPreviousLocation(LOCATION_MZONE)
+		and c:IsCanBeSpecialSummoned(e,SUMMON_TIMELEAP2,tp,false,false)
 end
 function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -283,7 +282,7 @@ function Timeleap.spop2(e,tp,eg,ep,ev,re,r,rp)
 	ct=ct+1
 	c:SetTurnCounter(ct)
 	if ct==e:GetHandler():GetLevel() then
-		Duel.SpecialSummonStep(c,0,tp,tp,false,false,POS_FACEUP)
+		Duel.SpecialSummonStep(c,SUMMON_TYPE_TIMELEAP2,tp,tp,false,false,POS_FACEUP)
 	end
 	Duel.SpecialSummonComplete()
 end
