@@ -52,14 +52,6 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e2:SetCode(EVENT_REMOVED)
 	e2:SetOperation(Timeleap.spop)
 	c:RegisterEffect(e2)
-	--redirect
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
-	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e3:SetCondition(Timeleap.recon)
-	e3:SetValue(LOCATION_REMOVED)
-	c:RegisterEffect(e3)
 end
 function Card.IsTimeleap(c)
 	return c.IsTimeleap
