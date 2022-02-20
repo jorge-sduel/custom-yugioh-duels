@@ -1,7 +1,7 @@
 EFFECT_HAND_TIMELP	= 601100000
 REASON_TIMELEAP		= 0x40000000000
-SUMMON_TYPE_TIMELEAP	= 0x400000000
-SUMMON_TYPE_TIMELEAP2	= 0x800000000
+SUMMON_TYPE_TIMELEAP	= 0x400
+SUMMON_TYPE_TIMELEAP2	= 0x800
 HINTMSG_TLPMATERIAL	= 400000000
 TIMELEAP_IMPORTED	= true
 if not aux.TimeleapProcedure then
@@ -289,5 +289,5 @@ function Timeleap.spop2(e,tp,eg,ep,ev,re,r,rp)
 end
 function Timeleap.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_TIMELEAP
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
 end
