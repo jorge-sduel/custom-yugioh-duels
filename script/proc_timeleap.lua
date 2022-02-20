@@ -264,9 +264,6 @@ end
 function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local mg=e:GetHandler():GetMaterial()
-	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	if #mg<=ft and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,e:GetHandler())==#mg then
 		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
