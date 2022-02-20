@@ -52,7 +52,7 @@ function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.sscon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:GetSummonType()==SUMMON_TYPE_TIMELEAP
+	return c:GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_TIMELEAP
 end
 function cid.ssfilter(c,e,tp)
 return c:IsLevelBelow(6) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
