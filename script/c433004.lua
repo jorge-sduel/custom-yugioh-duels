@@ -91,14 +91,10 @@ function cid.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function cid.thop(e,tp,eg,ep,ev,re,r,rp)
-	local ct=e:GetLabel()
-	e:GetHandler():SetTurnCounter(ct)
-	if ct==1 then
-		Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,e:GetHandler())
-		end
-		end
-	function cid.cairncon(e,tp,eg,ep,ev,re,r,rp)
+	Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT)
+	Duel.ConfirmCards(1-tp,e:GetHandler())
+end
+function cid.cairncon(e,tp,eg,ep,ev,re,r,rp)
 	if e==re or not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or g:GetCount()~=1 then return false end
