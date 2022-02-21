@@ -1,17 +1,11 @@
 --Liberated Storm Buster
---Made and Scripted by Swaggy
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
+	c:EnableReviveLimit()
+	  --synchro summon
 	--time leap procedure
-	aux.AddOrigTimeleapType(c,false)
-	aux.AddTimeleapProc(c,5,cid.sumcon,cid.tlfilter,nil)
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),1,1,cid.TimeCost)
 	c:EnableReviveLimit() 
 	--Look at me mom I'm Armades
 	local e0=Effect.CreateEffect(c)
@@ -56,14 +50,9 @@ function cid.initial_effect(c)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
 	end
-	function cid.sumcon(e,c)
-	if c==nil then return true end
-	local tp=c:GetControler()
+function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)-Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)>=3
-end
-	function cid.tlfilter(c,e,mg)
-	return c:IsAttribute(ATTRIBUTE_WIND) and c:GetLevel()==e:GetHandler():GetFuture()-1
 end
 function cid.armacon(e)
      return Duel.GetAttacker()==e:GetHandler()
