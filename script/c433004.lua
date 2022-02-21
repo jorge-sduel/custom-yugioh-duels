@@ -1,17 +1,11 @@
 --Indomitable Nature Defender
---Made and Scripted by Swaggy
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
+	c:EnableReviveLimit()
+	  --synchro summon
 	--time leap procedure
-	aux.AddOrigTimeleapType(c,false)
-	aux.AddTimeleapProc(c,5,cid.sumcon,cid.tlfilter,nil)
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EARTH),1,1,cid.TimeCost)
 	c:EnableReviveLimit() 
 	--Real World Dino Wrestling Hours
 	local e0=Effect.CreateEffect(c)
@@ -54,7 +48,7 @@ function cid.initial_effect(c)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
 	end
-	function cid.sumcon(e,c)
+function cid.TimeCost(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
