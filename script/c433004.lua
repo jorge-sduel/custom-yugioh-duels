@@ -71,7 +71,7 @@ function cid.bantg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
 end
 function cid.banop(e,tp,eg,ep,ev,re,r,rp)
-	local=e:GetHandler()
+	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,cid.banfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	local tg=g:GetFirst()
