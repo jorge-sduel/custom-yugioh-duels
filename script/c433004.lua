@@ -50,8 +50,18 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EART
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_ATTACK_ALL)
+	e4:SetCondition(Timeleap.Future)
 	e4:SetValue(1)
 	c:RegisterEffect(e4)
+--Destroy
+	local e5=Effect.CreateEffect(c)
+	e5:SetCategory(CATEGORY_DESTROY)
+	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e5:SetCode(EVENT_BATTLE_START)
+	e5:SetCondition(Timeleap.Future)
+	e5:SetTarget(cid.destg)
+	e5:SetOperation(cid.desop)
+	c:RegisterEffect(e5)
 end
 function cid.TimeCost(e,c)
 	if c==nil then return true end
@@ -169,4 +179,18 @@ function cid.revop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		c:RegisterEffect(e1,true)
 	end
+end
+function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	local tc=Duel.GetAttacker()
+	if tc==c then tc=Duel.GetAttackTarget() end
+	if chk==0 then return tc end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,tc,1,0,0)
+end
+function cid.desop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local tc=Duel.GetAttacker()
+	if not tc then return end
+	if tc==c then tc=Duel.GetAttackTarget() end
+	if tc:IsRelateToBattle() then Duel.Destroy(tc,REASON_EFFECT) end
 end
