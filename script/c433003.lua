@@ -51,7 +51,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND
 	c:RegisterEffect(e3)
 	local e4=Effect.CreateEffect(c)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SUMMON)
+	e4:SetCategory(CATEGORY_DESTROY)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
     e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e4:SetCondition(Timeleap.Future)
@@ -59,7 +59,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND
 	e4:SetTarget(cid.destg)
 	e4:SetOperation(cid.desop)
 	c:RegisterEffect(e4)
-	end
+end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)-Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)>=3
