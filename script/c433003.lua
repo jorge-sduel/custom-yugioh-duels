@@ -55,7 +55,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
     e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e4:SetCondition(Timeleap.Future)
-	e4:SetCondition(cid.descost)
+	e4:SetCost(cid.descost)
 	e4:SetTarget(cid.destg)
 	e4:SetOperation(cid.desop)
 	c:RegisterEffect(e4)
