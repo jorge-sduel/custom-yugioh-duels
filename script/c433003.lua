@@ -18,7 +18,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND
 	e0:SetCondition(cid.armacon)
 	c:RegisterEffect(e0)
 	--Is this Harpie Dancer?
-		local e1=Effect.CreateEffect(c)
+	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -49,6 +49,16 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND
 	e3:SetTarget(cid.revtg)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
+	local e4=Effect.CreateEffect(c)
+	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SUMMON)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+    e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetCondition(Timeleap.Future)
+	e4:SetCondition(cid.descost)
+	e4:SetTarget(cid.destg)
+	e4:SetOperation(cid.desop)
+	c:RegisterEffect(e4)
 	end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -137,4 +147,19 @@ function cid.revop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		c:RegisterEffect(e1,true)
 	end
+end
+function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,0,1,1,nil)
+	Duel.SendtoGrave(g,REASON_COST)
+end
+function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
+	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
+end
+function cid.desop(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
+	Duel.Destroy(g,REASON_EFFECT)
 end
