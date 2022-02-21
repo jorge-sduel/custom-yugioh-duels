@@ -47,7 +47,12 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_EART
 	e3:SetTarget(cid.revtg)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
-	end
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_ATTACK_ALL)
+	e4:SetValue(1)
+	c:RegisterEffect(e4)
+end
 function cid.TimeCost(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
