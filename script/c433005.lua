@@ -52,10 +52,17 @@ cid.drawcount=0
 cid.maxval=0
 --Other Tom Lipsia garbage
 function cid.sumcon(e,c)
-	local tp=c:GetControler()
-	local g=Duel.GetFieldGroup(tp,LOCATION_MZONE,0):Filter(Card.IsType,nil,TYPE_MONSTER)
-	local sg=g:Filter(cid.sumconfilter,nil)
-	return #g>1 and sg:GetClassCount(Card.GetRace)==#g
+	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
+	local races=0
+	for tc in aux.Next(g) do
+		races=races|tc:GetRace()
+	end
+	local pop,count=races,0
+	while pop>0 do
+		if (pop&1)>0 then count=count+1 end
+		pop=pop>>1
+	end
+	return races,count
 end
 function cid.sumconfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
