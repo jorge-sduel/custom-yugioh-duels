@@ -1,18 +1,12 @@
 --Saintly Paragon Scholar 
---Scripted by: XGlitchy30 and Swag, created by Swag
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
-	--time leap procedure
-	aux.AddOrigTimeleapType(c,false)
-	aux.AddTimeleapProc(c,5,cid.sumcon,cid.tlfilter,nil)
 	c:EnableReviveLimit()
+	  --synchro summon
+	--time leap procedure
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),1,1,cid.sumcon)
+	c:EnableReviveLimit() 
 	--cannot draw
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
