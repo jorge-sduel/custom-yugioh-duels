@@ -51,7 +51,7 @@ end
 cid.drawcount=0
 cid.maxval=0
 --Other Tom Lipsia garbage
-function cid.sumcon(e,tp,eg,ep,ev,re,r,rp,chk)
+function cid.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	if #eg~=1 then return false end
 	local tc=eg:GetFirst()
 	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),tp,LOCATION_MZONE,0,nil)
