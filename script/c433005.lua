@@ -151,7 +151,7 @@ function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
-	e4:SetValue(tc1)
+	e4:SetValue(tc1:GetAttack())
 	c:RegisterEffect(e4)
 	end
 end
