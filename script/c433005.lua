@@ -1,19 +1,12 @@
 --Saintly Rainbow MOMMY (a.k.a. GODTIER AORG SUPPORT GIRL)
---Scripted by: XGlitchy30, Made By Swaggy
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
----------------------------
+local cid,id=GetID()
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
-	--Time Loop Shizzle
 	c:EnableReviveLimit()
-	aux.AddOrigTimeleapType(c,false)
-	aux.AddTimeleapProc(c,5,cid.sumcon,cid.tlfilter,nil)
+	  --synchro summon
+	--time leap procedure
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),1,1,cid.Sumcon)
+	c:EnableReviveLimit() 
 	--Big Milk Draw
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
