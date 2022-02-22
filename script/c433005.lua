@@ -148,6 +148,11 @@ function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		e3:SetValue(1)
 		tc2:RegisterEffect(e3)
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_UPDATE_ATTACK)
+	e4:SetValue(tc1)
+	c:RegisterEffect(e4)
 	end
 end
 function cid.attg(e,c)
