@@ -51,7 +51,7 @@ end
 cid.drawcount=0
 cid.maxval=0
 --Other Tom Lipsia garbage
-function cid.sumcon(e,c)
+function cid.getfieldraces(tp)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 	local races=0
 	for tc in aux.Next(g) do
@@ -63,6 +63,18 @@ function cid.sumcon(e,c)
 		pop=pop>>1
 	end
 	return races,count
+end
+function cid.thspfilter(c,e,tp,ft,races)
+	return c:IsRace(races) and (c:IsAbleToHand() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)))
+end
+function cid.thsprescon(sg)
+	return sg:GetClassCount(Card.GetRace)==#sg
+end
+function cid.sumcon(e,tp,eg,ep,ev,re,r,rp,chk)
+	local races,count=cid.getfieldraces(tp)
+	if count<2 then return false end
+	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+	return aux.SelectUnselectGroup(g,e,tp,2,2,cid.thsprescon,0)
 end
 function cid.sumconfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
