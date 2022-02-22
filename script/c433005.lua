@@ -152,6 +152,7 @@ function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
 	e4:SetValue(tc1:GetAttack())
+	e4:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e4)
 	end
 end
