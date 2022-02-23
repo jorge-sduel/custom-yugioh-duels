@@ -46,7 +46,6 @@ function cid.initial_effect(c)
 		local c=e:GetHandler()
 		local tcode=c.dfc_front_side
 		if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
-		c:SetEntityCode(tcode,true)
 		c:ReplaceEffect(tcode,0,0)
 		Duel.SetMetatable(c,_G["c"..tcode])
 	end)
