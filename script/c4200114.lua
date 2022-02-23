@@ -46,6 +46,29 @@ function cid.initial_effect(c)
 		local c=e:GetHandler()
 		local tcode=c.dfc_front_side
 		if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
+	Duel.ChangePosition(c,POS_FACEDOWN_ATTACK)
+	
+	--change name
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	e1:SetCode(EFFECT_CHANGE_CODE)
+	e1:SetValue(id+1)
+	c:RegisterEffect(e1)
+	--change def
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_SET_BASE_DEFENSE)
+	e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	e3:SetValue(500)
+	c:RegisterEffect(e3)
+	--token type
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_ADD_TYPE)
+	e4:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	e4:SetValue(TYPE_TOKEN)
+	c:RegisterEffect(e4)
 	end)
 	c:RegisterEffect(e4)
 end
