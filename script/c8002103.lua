@@ -2,10 +2,12 @@
 --Created and Scripted by Swaggy, published by Slick
 local m=8002103
 local cm=_G["c"..m]
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cm.initial_effect(c)
+	c:EnableReviveLimit()
+	  --synchro summon
 	--time leap procedure
-	aux.AddOrigTimeleapType(c,false)
-	aux.AddTimeleapProc(c,5,cm.sumcon,cm.tlfilter,nil)
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),1,1,cm.sumcon)
 	c:EnableReviveLimit()
 	--I am protecc by sword
 	local e1=Effect.CreateEffect(c)
