@@ -6,6 +6,7 @@ cm.dfc_back_side=m-1
 cm.card_code_list={33700056}
 xpcall(function() require("expansions/script/c37564765") end,function() require("script/c37564765") end)
 function cm.initial_effect(c)
+	Senya.DFCBackSideCommonEffect(c)
 		c:SetUniqueOnField(1,0,4200115)
 --Double Attribute
 local e1=Effect.CreateEffect(c)
