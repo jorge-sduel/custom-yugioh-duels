@@ -57,6 +57,15 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e1)
 	end)
 	c:RegisterEffect(e4)
+--place
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,1))
+	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e5:SetCode(EVENT_SUMMON_SUCCESS)
+	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
+	e5:SetTarget(s.targetf)
+	e5:SetOperation(s.operationf)
+	c:RegisterEffect(e5)
 end
 function cid.lcheck(g)
 	return g:GetClassCount(Card.GetLinkAttribute)==g:GetCount() and g:GetClassCount(Card.GetLinkRace)==g:GetCount()
@@ -106,5 +115,20 @@ function cid.synop(e,tp,eg,ep,ev,re,r,rp)
 		if g:GetCount()>0 then
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP,zone)
 		end
+	end
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND,0,1,nil)
+		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND,0,1,1,nil)
+	local tc=g:GetFirst()
+	if tc then
+		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+Duel.MoveToField(tc,tp,tp,LOCATION_MZONE,POS_FACEDOWN_DEFENSE,true)
+			tc:SetStatus(STATUS_SUMMON_TURN,true)
 	end
 end
