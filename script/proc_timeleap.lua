@@ -55,10 +55,10 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	c:RegisterEffect(e2)
 	--redirect
 	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
-	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_RANGE)
 	e3:SetCondition(Timeleap.recon)
+	e3:SetCode(EFFECT_TO_GRAVE_REDIRECT)
 	e3:SetValue(LOCATION_REMOVED)
 	c:RegisterEffect(e3)
 --remove fusion type
