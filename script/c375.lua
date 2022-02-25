@@ -58,7 +58,6 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_PZONE,0,2,2,nil)
 Duel.SendtoExtraP(g,tp,REASON_EFFECT)
-	Duel.Overlay(c,g)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
