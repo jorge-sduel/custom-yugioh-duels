@@ -5,6 +5,18 @@ if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function cid.initial_effect(c)
   Equilibrium.AddProcedure(c)
 	--MONSTER EFFECTS
+--destroy and spsummon
+	local p1=Effect.CreateEffect(c)
+	p1:SetDescription(aux.Stringid(id,0))
+	p1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
+	p1:SetType(EFFECT_TYPE_QUICK_O)
+	p1:SetRange(LOCATION_SZONE)
+	p1:SetCode(EVENT_FREE_CHAIN)
+	p1:SetCountLimit(1)
+	p1:SetCondition(cid.dpcon)
+	p1:SetTarget(cid.dptg)
+	p1:SetOperation(cid.dpop)
+	c:RegisterEffect(p1)
 	--protection
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
