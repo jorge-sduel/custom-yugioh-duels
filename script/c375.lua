@@ -57,7 +57,7 @@ end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
-	if #g>0 and Duel.SentToExtrap(g,tp,REASON_EFFECT)>0 then
+	if #g>0 and Duel.SentToExtraP(g,tp,REASON_EFFECT)>0 then
 	local c=e:GetHandler()
 	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,g)
