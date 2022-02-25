@@ -56,7 +56,7 @@ function s.cfilter(c)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_PZONE,0,e:GetHandler())
-	Duel.SendToExtraP(sg,tp,REASON_EFFECT)
+	Duel.SendtoExtraP(sg,tp,REASON_EFFECT)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
