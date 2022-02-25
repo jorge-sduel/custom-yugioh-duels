@@ -1,15 +1,8 @@
 --Pandelumiere Cartografo
 --Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=getID()
 function cid.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+Pendulum.AddProcedure(c)
 	local p0=Effect.CreateEffect(c)
 	p0:SetType(EFFECT_TYPE_SINGLE)
 	p0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
