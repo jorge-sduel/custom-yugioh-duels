@@ -13,7 +13,8 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCondition(s.con)
-	e1:SetOperation(s.disop1)
+	e1:SetTarget(s.targetdes)
+	e1:SetOperation(s.activatedes)
 	c:RegisterEffect(e1)
 	--attack up
 	local e2=Effect.CreateEffect(c)
@@ -54,9 +55,15 @@ end
 function s.cfilter(c)
 	return c:IsType(TYPE_PENDULUM)
 end
-function s.disop1(e,tp,eg,ep,ev,re,r,rp)
-	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_PZONE,0,e:GetHandler())
-	Duel.SendtoExtraP(sg,REASON_EFFECT)
+function s.targetdes(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_ONFIELD,1,c) end
+	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_PZONE,0,c)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,sg,#sg,0,0)
+end
+function s.activatedes(e,tp,eg,ep,ev,re,r,rp)
+	local sg=Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_ONFIELD,e:GetHandler())
+	Duel.SendtoExtraP(sg,tp,REASON_EFFECT)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
