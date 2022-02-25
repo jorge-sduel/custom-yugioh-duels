@@ -57,7 +57,7 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_PZONE,0,2,2,nil)
-	Duel.SendtoExtraP(g,REASON_RULE)
+Duel.SendtoExtraP(g,tp,REASON_EFFECT)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,g)
 end
