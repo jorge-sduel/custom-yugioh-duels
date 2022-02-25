@@ -56,8 +56,12 @@ function s.cfilter(c)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local dg=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_PZONE,0,nil,id)
-	if Duel.Destroy(#dg==2 and dg or dg:Select(tp,2,2,nil),REASON_EFFECT)==2
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
+	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0 then
+	local c=e:GetHandker()
+		if #sg>0 then
+			Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
+		end
 	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
