@@ -62,7 +62,7 @@ function s.targetdes(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,sg,#sg,0,0)
 end
 function s.activatedes(e,tp,eg,ep,ev,re,r,rp)
-	local sg=Duel.GetMatchingGroup(s.cfilter,tp,0,LOCATION_ONFIELD,e:GetHandler())
+	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_PZONE,0,e:GetHandler())
 	Duel.SendtoExtraP(sg,tp,REASON_EFFECT)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
