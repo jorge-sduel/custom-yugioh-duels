@@ -160,3 +160,10 @@ function Equilibrium.Operation()
 				end
 			end
 end
+function Equilibrium.desop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local g=Duel.GetFieldGroup(tp,LOCATION_PZONE,LOCATION_PZONE)
+	Duel.SendtoExtraP(g,tp,REASON_EFFECT)
+Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	Duel.Overlay(c,g)
+end
