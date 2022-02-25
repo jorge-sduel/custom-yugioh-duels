@@ -56,7 +56,7 @@ function s.cfilter(c)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.SelectMatchingCard(tp,c333.cfilter,tp,LOCATION_PZONE,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_PZONE,0,2,2,nil)
 	Duel.SendtoGrave(g,REASON_RULE)
 	c:SetMaterial(g)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
