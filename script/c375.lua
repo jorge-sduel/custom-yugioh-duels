@@ -57,6 +57,7 @@ end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_PZONE,0,e:GetHandler())
 	Duel.Overlay(c,sg)
+Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,sg)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
