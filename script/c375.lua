@@ -59,7 +59,6 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
 	Duel.Destroy(g,REASON_EFFECT)
 	Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-		end
 	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
