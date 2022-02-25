@@ -59,12 +59,8 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_PZONE,LOCATION_PZONE)
 	if Duel.Destroy(g,REASON_EFFECT)~=0 then
 		local dg=Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_ONFIELD,nil)
-		if #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+		if #dg>0 then
 			Duel.BreakEffect()
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-			local sg=dg:Select(tp,1,1,nil)
-			Duel.HintSelection(sg)
-			Duel.Destroy(sg,REASON_EFFECT)
 Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
