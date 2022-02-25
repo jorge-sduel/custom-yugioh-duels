@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCondition(s.con)
-	e1:SetOperation(s.desop)
+	e1:SetOperation(Equilibrium.desop)
 	c:RegisterEffect(e1)
 	--attack up
 	local e2=Effect.CreateEffect(c)
@@ -53,13 +53,6 @@ function s.con(e)
 end
 function s.cfilter(c)
 	return c:IsType(TYPE_PENDULUM)
-end
-function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local g=Duel.GetFieldGroup(tp,LOCATION_PZONE,LOCATION_PZONE)
-	Duel.SendtoExtraP(g,tp,REASON_EFFECT)
-Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	Duel.Overlay(c,g)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
