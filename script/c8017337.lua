@@ -58,11 +58,11 @@ function cid.dpfilter(c)
 end
 --------
 function cid.dpcon(e,tp,eg,ep,ev,re,r,rp)
-	return aux.PandActCheck(e) and not Duel.IsExistingMatchingCard(cid.doubtfilter,tp,LOCATION_MZONE,0,1,nil)
+	return  not Duel.IsExistingMatchingCard(cid.doubtfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function cid.dptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.dpfilter,tp,LOCATION_SZONE,0,1,e:GetHandler())
-		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPE_MONSTER+TYPE_EFFECT+TYPE_PANDEMONIUM,2000,0,4,RACE_THUNDER,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE)
+		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPE_MONSTER+TYPE_EFFECT,2000,0,4,RACE_THUNDER,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE)
 	end
 	local g=Duel.GetMatchingGroup(cid.dpfilter,tp,LOCATION_SZONE,0,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
@@ -76,7 +76,7 @@ function cid.dpop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.HintSelection(g)
 		if Duel.Destroy(g,REASON_EFFECT)~=0 then
 			if not e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,true,false,POS_FACEUP_DEFENSE) or not Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPE_MONSTER+TYPE_EFFECT+TYPE_PANDEMONIUM,2000,0,4,RACE_THUNDER,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE) then return end
-			e:GetHandler():AddMonsterAttribute(TYPE_EFFECT+TYPE_PANDEMONIUM)
+			e:GetHandler():AddMonsterAttribute(TYPE_EFFECT)
 			Duel.SpecialSummon(e:GetHandler(),0,tp,tp,true,false,POS_FACEUP_DEFENSE)
 		end
 	end
