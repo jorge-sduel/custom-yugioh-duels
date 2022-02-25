@@ -57,7 +57,7 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetFieldGroup(tp,LOCATION_PZONE,LOCATION_PZONE)
-	Duel.Destroy(g,REASON_EFFECT)
+	Duel.SendToExtraP(g,tp,REASON_EFFECT)
 Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
