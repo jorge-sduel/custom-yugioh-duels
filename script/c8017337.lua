@@ -71,11 +71,11 @@ end
 function cid.dpop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectMatchingCard(tp,cid.dpfilter,tp,LOCATION_SZONE,0,1,1,aux.ExceptThisCard(e))
+	local g=Duel.SelectMatchingCard(tp,cid.dpfilter,tp,LOCATION_SZONE,0,1,1,aux.TRUE)
 	if g:GetCount()>0 then
 		Duel.HintSelection(g)
 		if Duel.Destroy(g,REASON_EFFECT)~=0 then
-			if not e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,true,false,POS_FACEUP_DEFENSE) or not Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPE_MONSTER+TYPE_EFFECT+TYPE_PANDEMONIUM,2000,0,4,RACE_THUNDER,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE) then return end
+			if not e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,true,false,POS_FACEUP_DEFENSE) or not Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPE_MONSTER+TYPE_EFFECT,2000,0,4,RACE_THUNDER,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE) then return end
 			e:GetHandler():AddMonsterAttribute(TYPE_EFFECT)
 			Duel.SpecialSummon(e:GetHandler(),0,tp,tp,true,false,POS_FACEUP_DEFENSE)
 		end
