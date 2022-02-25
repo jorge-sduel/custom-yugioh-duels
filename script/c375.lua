@@ -58,9 +58,6 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetFieldGroup(tp,LOCATION_PZONE,LOCATION_PZONE)
 	if Duel.Destroy(g,REASON_EFFECT)~=0 then
-		local dg=Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_ONFIELD,nil)
-		if #dg>0 then
-			Duel.BreakEffect()
 Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
