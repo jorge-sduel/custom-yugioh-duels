@@ -55,10 +55,10 @@ function s.cfilter(c)
 	return c:IsType(TYPE_PENDULUM)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
-	if #g>0 and Duel.SentToGrave(g,tp,REASON_EFFECT)>0 then
 	local c=e:GetHandler()
+	return
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
+	Duel.SentToGrave(g,tp,REASON_EFFECT)
 	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,g)
 	end
