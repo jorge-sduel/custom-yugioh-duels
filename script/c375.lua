@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCondition(s.con)
-	e1:SetOperation(s.activatedes)
+	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
 	--attack up
 	local e2=Effect.CreateEffect(c)
@@ -54,15 +54,16 @@ end
 function s.cfilter(c)
 	return c:IsType(TYPE_PENDULUM)
 end
-function s.targetdes(e,tp,eg,ep,ev,re,r,rp,chk)
-	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_ONFIELD,1,c) end
-	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_PZONE,0,c)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,sg,#sg,0,0)
-end
-function s.activatedes(e,tp,eg,ep,ev,re,r,rp)
-	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_PZONE,0,e:GetHandler())
-	Duel.Destroy(sg,REASON_EFFECT)
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
+	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local sg=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
+		if #sg>0 then
+			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
+		end
+	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
