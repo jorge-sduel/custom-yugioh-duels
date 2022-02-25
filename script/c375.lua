@@ -13,7 +13,6 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCondition(s.con)
-	e1:SetTarget(s.targetdes)
 	e1:SetOperation(s.activatedes)
 	c:RegisterEffect(e1)
 	--attack up
