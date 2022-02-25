@@ -65,7 +65,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 			local sg=dg:Select(tp,1,1,nil)
 			Duel.HintSelection(sg)
 			Duel.Destroy(sg,REASON_EFFECT)
-Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
 end
