@@ -60,7 +60,6 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0 then
 	local c=e:GetHandler()
 	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-		end
 	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
