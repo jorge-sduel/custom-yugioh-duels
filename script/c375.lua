@@ -55,10 +55,18 @@ function s.cfilter(c)
 	return c:IsType(TYPE_PENDULUM)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
-	Duel.Destroy(g,REASON_EFFECT)
-	Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	local c=e:GetHandler()
+	local g=Duel.GetFieldGroup(tp,LOCATION_PZONE,LOCATION_PZONE)
+	if Duel.Destroy(g,REASON_EFFECT)~=0 then
+		local dg=Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_ONFIELD,nil)
+		if #dg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+			Duel.BreakEffect()
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+			local sg=dg:Select(tp,1,1,nil)
+			Duel.HintSelection(sg)
+			Duel.Destroy(sg,REASON_EFFECT)
+Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+		end
 	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
