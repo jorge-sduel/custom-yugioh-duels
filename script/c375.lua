@@ -55,13 +55,8 @@ function s.cfilter(c)
 	return c:IsType(TYPE_PENDULUM)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	return
-	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
-	Duel.SentToGrave(g,tp,REASON_EFFECT)
-	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	Duel.Overlay(c,g)
-	end
+	local sg=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_PZONE,0,e:GetHandler())
+	Duel.SentToExtraP(sg,tp,REASON_EFFECT)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
