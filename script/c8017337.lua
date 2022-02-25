@@ -1,6 +1,6 @@
 --Pandelumiere Cartografo
 --Scripted by: XGlitchy30
-local cid,id=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 Pendulum.AddProcedure(c)
 	local p0=Effect.CreateEffect(c)
