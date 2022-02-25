@@ -57,7 +57,7 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
-	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0
+	Duel.Destroy(g,REASON_EFFECT)
 	Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
