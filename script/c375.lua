@@ -59,8 +59,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
 	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0 then
 	local c=e:GetHandler()
-		if #sg>0 then
-			Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
 end
