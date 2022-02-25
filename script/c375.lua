@@ -58,9 +58,9 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_PZONE,0,nil)
 	if #g>0 and Duel.Destroy(g,REASON_EFFECT)>0 then
-	local c=e:GetHandker()
+	local c=e:GetHandler()
 		if #sg>0 then
-			Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
+			Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
 end
