@@ -2,10 +2,20 @@
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function c217.initial_effect(c)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_MONSTER),2,99)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),1,99,c217.sssmatfilter)
 	c:EnableReviveLimit()
+	--spsummon
+	local e0=Effect.CreateEffect(c)
+	e0:SetDescription(aux.Stringid(80896940,1))
+	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e0:SetType(EFFECT_TYPE_FIELD)
+	e0:SetRange(LOCATION_EXTRA)
+	e0:SetCode(EFFECT_SPSUMMON_PROC)
+	e0:SetValue(SUMMON_TYPE_SYNCHRO)
+	e0:SetCondition(XyzSyn.con)
+	e0:SetOperation(XyzSyn.op)
+	c:RegisterEffect(e0)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(80896940,1))
