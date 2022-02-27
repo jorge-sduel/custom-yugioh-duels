@@ -98,7 +98,7 @@ c217.material_type=TYPE_SYNCHRO
 function c217.sssmatfilter(c)
 	return c:IsType(TYPE_XYZ)
 end
-function s.rcheck(g,lc,sumtype,tp)
+function c217.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsType,1,nil,TYPE_XYZ)
 		and g:IsExists(CARD.IsType,1,nil,TYPE_SYNCHRO)
 end
