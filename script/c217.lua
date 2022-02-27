@@ -1,21 +1,9 @@
 --syn xyz supreme king
-if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function c217.initial_effect(c)
 	c:EnableReviveLimit()
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),1,99,c217.sssmatfilter)
 	c:EnableReviveLimit()
-	--spsummon
-	local e0=Effect.CreateEffect(c)
-	e0:SetDescription(aux.Stringid(80896940,1))
-	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e0:SetType(EFFECT_TYPE_FIELD)
-	e0:SetRange(LOCATION_EXTRA)
-	e0:SetCode(EFFECT_SPSUMMON_PROC)
-	e0:SetValue(SUMMON_TYPE_SYNCHRO)
-	e0:SetCondition(XyzSyn.con)
-	e0:SetOperation(XyzSyn.op)
-	c:RegisterEffect(e0)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(80896940,1))
@@ -104,13 +92,14 @@ function c217.initial_effect(c)
 	c:RegisterEffect(e8)
 end
 c217.material_type=TYPE_SYNCHRO
-
+function c217.xyzsyn(c)
+    if c:GetLevel()>0 then return c:GetLevel()
+    elseif c:GetRank()>0 then return c:GetRank()
+ end
+    return 0
+end
 function c217.sssmatfilter(c)
 	return c:IsType(TYPE_XYZ)
-end
-function c217.rcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsType,1,nil,TYPE_XYZ)
-		and g:IsExists(CARD.IsType,1,nil,TYPE_SYNCHRO)
 end
 function c217.sfilter(c,tp,sc)
 	local rg=Duel.GetMatchingGroup(c217.pfilter,tp,LOCATION_MZONE,0,c)
@@ -124,7 +113,7 @@ function c217.filterchk(c,g,sg,tp,sync,sc)
 	sg:AddCard(c)
 	sg:AddCard(sync)
 	local res=Duel.GetLocationCountFromEx(tp,tp,sg,sc)>0 
-		and sg:CheckWithSumEqual(Card.GetLevel,11,#sg,#sg)
+		and sg:CheckWithSumEqual(c217.xyzsyn,11,#sg,#sg)
 	sg:RemoveCard(sync)
 	if not res then
 		res=g:IsExists(c217.filterchk,1,sg,g,sg,tp,sync,sc)
@@ -149,7 +138,7 @@ function c217.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 		if #tg<=0 then break end
 		mg:AddCard(sync)
 		local cancel=#mg>1 and Duel.GetLocationCountFromEx(tp,tp,mg,c)>0 
-			and mg:CheckWithSumEqual(Card.GetLevel,11,#mg,#mg)
+			and mg:CheckWithSumEqual(c217.xyzsyn,11,#mg,#mg)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 		tc=Group.SelectUnselect(tg,mg,tp,cancel,cancel)
 		if not tc then break end
