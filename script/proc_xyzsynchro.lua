@@ -135,7 +135,7 @@ function XyzSynchro.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				min = min or minc
 				max = max or maxc
 				if mustg:IsExists(aux.NOT(XyzSynchro.ConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
-				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_SYNCHRO)
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_SPECIAL)
 				tg=tg:Filter(XyzSynchro.ConditionFilter,nil,f,c,tp)
 				local res=(mg+tg):Includes(mustg) and #mustg<=max
 				if res then
@@ -165,7 +165,7 @@ function XyzSynchro.Target(f,minc,maxc,specialchk,opp,loc,send)
 				local mg=g:Filter(XyzSynchro.ConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_XYZSYNCHRO)
 				if must then mustg:Merge(must) end
-				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_SYNCHRO)
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_SPECIAL)
 				tg=tg:Filter(XyzSynchro.ConditionFilter,nil,f,c,tp)
 				local sg=Group.CreateGroup()
 				local finish=false
