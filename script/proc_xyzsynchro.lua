@@ -214,19 +214,19 @@ function XyzSynchro.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				c:SetMaterial(g)
 				if send==1 then
-					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_SYNCHRO+REASON_RETURN)
+					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RETURN)
 				elseif send==2 then
-					Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_SYNCHRO)
+					Duel.Remove(g,POS_FACEUP,REASON_MATERIAL)
 				elseif send==3 then
-					Duel.Remove(g,POS_FACEDOWN,REASON_MATERIAL+REASON_SYNCHRO)
+					Duel.Remove(g,POS_FACEDOWN,REASON_MATERIAL)
 				elseif send==4 then
-					Duel.SendtoHand(g,nil,REASON_MATERIAL+REASON_SYNCHRO)
+					Duel.SendtoHand(g,nil,REASON_MATERIAL)
 				elseif send==5 then
-					Duel.SendtoDeck(g,nil,2,REASON_MATERIAL+REASON_SYNCHRO)
+					Duel.SendtoDeck(g,nil,2,REASON_MATERIAL)
 				elseif send==6 then
-					Duel.Destroy(g,REASON_MATERIAL+REASON_SYNCHRO)
+					Duel.Destroy(g,REASON_MATERIAL)
 				else
-					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_SYNCHRO)
+					Duel.SendtoGrave(g,REASON_MATERIAL)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
