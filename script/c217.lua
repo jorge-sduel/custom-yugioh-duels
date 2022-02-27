@@ -1,5 +1,8 @@
 --syn xyz supreme king
+if not XYZSYNCHRO_IMPORTED then Duel.LoadScript("proc_xyzsynchro.lua") end
 function c217.initial_effect(c)
+	c:EnableReviveLimit()
+	XyzSynchro.AddProcedure(c,nil,2,99,c217.rcheck)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),1,99,c217.sssmatfilter)
 	c:EnableReviveLimit()
@@ -50,7 +53,8 @@ function c217.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetCountLimit(1)
-	e5:SetCondition(c217.negcon)
+	e5:SetCondition(c217.negcon)
+
 	e5:SetTarget(c217.negtg)
 	e5:SetOperation(c217.negop)
 	c:RegisterEffect(e5)
@@ -63,7 +67,8 @@ function c217.initial_effect(c)
 	e6:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCountLimit(1)
-	e6:SetCondition(c217.negcon2)
+	e6:SetCondition(c217.negcon2)
+
 	e6:SetTarget(c217.negtg)
 	e6:SetOperation(c217.negop)
 	c:RegisterEffect(e6)
@@ -88,11 +93,15 @@ function c217.initial_effect(c)
 	e8:SetOperation(c217.matop)
 	c:RegisterEffect(e8)
 end
-c217.material_type=TYPE_SYNCHRO
+c217.material_type=TYPE_SYNCHRO
+
 function c217.sssmatfilter(c)
 	return c:IsType(TYPE_XYZ)
 end
-
+function s.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsType,1,nil,TYPE_XYZ)
+		and g:IsExists(CARD.IsType,1,nil,TYPE_SYNCHRO)
+end
 function c217.sfilter(c,tp,sc)
 	local rg=Duel.GetMatchingGroup(c217.pfilter,tp,LOCATION_MZONE,0,c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsReleasable() and c:IsLevelBelow(2147483647)
@@ -145,7 +154,8 @@ function c217.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 	end
 	mg:Merge(g)
 	Duel.Release(mg,REASON_COST)
-	local c=e:GetHandler()
+	local c=e:GetHandler()
+
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -153,7 +163,8 @@ function c217.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCondition(c217.atkcon)
 	e1:SetValue(c217.atkval)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)
+
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_DISABLE)
@@ -174,7 +185,8 @@ function c217.tncon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO) and e:GetLabel()==1
 end
 function c217.tnop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
+	local c=e:GetHandler()
+
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -182,7 +194,8 @@ function c217.tnop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCondition(c217.atkcon)
 	e1:SetValue(c217.atkval)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)
+
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_DISABLE)
