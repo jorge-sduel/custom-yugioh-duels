@@ -2,7 +2,7 @@
 if not XYZSYNCHRO_IMPORTED then Duel.LoadScript("proc_xyzsynchro.lua") end
 function c217.initial_effect(c)
 	c:EnableReviveLimit()
-	XyzSynchro.AddProcedure(c,nil,2,99)
+	XyzSynchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_MONSTER),2,99)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),1,99,c217.sssmatfilter)
 	c:EnableReviveLimit()
