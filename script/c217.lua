@@ -107,7 +107,7 @@ function c217.sfilter(c,tp,sc)
 		and rg:IsExists(c217.filterchk,1,nil,rg,Group.CreateGroup(),tp,c,sc)
 end
 function c217.pfilter(c)
-	return c:IsLevelBelow(2147483647) and c:IsType(TYPE_XYZ) and c:IsReleasable()
+	return  c:IsType(TYPE_XYZ) and c:IsReleasable()
 end
 function c217.filterchk(c,g,sg,tp,sync,sc)
 	sg:AddCard(c)
