@@ -1,3 +1,5 @@
+REASON_XYZSYNCHRO		= 0x1600000000
+HINTMSG_XSMATERIAL	= 4000000
  XYZSYNCHRO_IMPORTED	= true
 if not aux.XyzSynchroProcedure then
 	aux.XyzSynchroProcedure = {}
@@ -126,7 +128,7 @@ function XyzSynchro.Condition(f,minc,maxc,specialchk,opp,loc,send)
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
 				end
 				local mg=g:Filter(XyzSynchro.ConditionFilter,nil,f,c,tp)
-				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_SYNCHRO)
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_XYZSYNCHRO)
 				if must then mustg:Merge(must) end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
@@ -161,7 +163,7 @@ function XyzSynchro.Target(f,minc,maxc,specialchk,opp,loc,send)
 				min = min or minc
 				max = max or maxc
 				local mg=g:Filter(XyzSynchro.ConditionFilter,nil,f,c,tp)
-				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_SYNCHRO)
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_XYZSYNCHRO)
 				if must then mustg:Merge(must) end
 				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_SYNCHRO)
 				tg=tg:Filter(XyzSynchro.ConditionFilter,nil,f,c,tp)
