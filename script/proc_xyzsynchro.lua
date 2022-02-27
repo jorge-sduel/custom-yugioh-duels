@@ -3,8 +3,8 @@ if not aux.XyzSynchroProcedure then
 	aux.XyzSynchroProcedure = {}
 	XyzSynchro = aux.XyzSynchroProcedure
 end
-if not Reunion then
-	Reunion = aux.XyzSynchroProcedure
+if not Xyzsynchro then
+	XyzSynchro = aux.XyzSynchroProcedure
 end
 --[[
 add at the start of the script to add Xyzsynchro procedure
@@ -24,10 +24,10 @@ function XyzSynchro.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	-- 5 >> deck
 	-- 6 >> destroy
 	if loc==nil then loc=LOCATION_MZONE end
-	if c.reunion_type==nil then
+	if c.XyzSynchro_type==nil then
 		local mt=c:GetMetatable()
-		mt.reunion_type=1
-		mt.synchro_parameters={c,f,min,max,control,location,operation}
+		mt.XyzSynchro_type=1
+		mt.xyzsynchro_parameters={c,f,min,max,control,location,operation}
 	end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -42,7 +42,7 @@ function XyzSynchro.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	c:RegisterEffect(e1)
 end
 function Card.IsXyzSynchro(c)
-	return c.IsReunion
+	return c.IsXyzSynchro
 end
 function XyzSynchro.ConditionFilter(c,f,lc,tp)
 	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
@@ -71,7 +71,7 @@ function XyzSynchro.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,f
 		end
 	end
 	local res=XyzSynchro.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
-		or (#sg<maxc and mg:IsExists(Reunion.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
+		or (#sg<maxc and mg:IsExists(XyzSynchro.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
 	sg:RemoveCard(c)
 	return res
 end
@@ -112,7 +112,7 @@ function XyzSynchro.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 			return false
 		end
 	end
-	return #sg>=minc and sg:CheckWithSumEqual(XyzSynchro.GetReunionCount,lc:GetLevel()*2,#sg,#sg)
+	return #sg>=minc and sg:CheckWithSumEqual(XyzSynchro.GetXyzSynchroCount,lc:GetLevel()*2,#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function XyzSynchro.Condition(f,minc,maxc,specialchk,opp,loc,send)
