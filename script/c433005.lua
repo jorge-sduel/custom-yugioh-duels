@@ -61,8 +61,9 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGH
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e6:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e6:SetRange(LOCATION_MZONE)
-	e6:SetCondition(s.atkcon)
-	e6:SetOperation(s.atkop)
+	e6:SetCondition(Future.con)
+	e6:SetCondition(cid.atkcon)
+	e6:SetOperation(cid.atkop)
 	c:RegisterEffect(e6)
 end
 cid.drawcount=0
