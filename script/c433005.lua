@@ -64,7 +64,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGH
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCondition(Timeleap.Future)
 	e6:SetCondition(cid.atkcon)
-	e6:SetOperation(cid.atkop2)
+	e6:SetOperation(cid.atop)
 	c:RegisterEffect(e6)
 end
 cid.drawcount=0
@@ -226,7 +226,7 @@ function cid.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	return d and a:GetControler()~=d:GetControler()
 end
-function cid.atkop2(e,tp,eg,ep,ev,re,r,rp)
+function cid.atop2(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
 	if a:IsFaceup() and a:IsRelateToBattle() and d:IsFaceup() and d:IsRelateToBattle() then
