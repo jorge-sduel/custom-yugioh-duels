@@ -1,4 +1,5 @@
 SUMMON_TYPE_EQUILIBRIUM = 0x4000000000000000000000
+CATEGORY_ATTACH_EQUILIBRIUM  = 0x4000000000
 EQUILIBRIUM_IMPORTED=true
 if not aux.EquilibriumProcedure then
 	aux.EquilibriumProcedure = {}
@@ -166,50 +167,6 @@ function Equilibrium.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoExtraP(g,tp,REASON_EFFECT)
 Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,g)
-end
-function Auxiliary.AddEquilibriumProcedure(c,f,efftype,category,property,zone,hint1,hint2,con,cost,tg)
-	--Attach
-	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(c:GetCode(),0))
-	if efftype then
-		e1:SetType(efftype)
-	--elseif c:IsType(TYPE_SPELL) then
-		--e1:SetType(EFFECT_TYPE_ACTIVATE)
-	else
-		e1:SetType(EFFECT_TYPE_IGNITION)
-	end
-	e1:SetCode(EVENT_FREE_CHAIN)
-	if zone then
-		e1:SetRange(zone)
-	else--if not c:IsType(TYPE_SPELL) then
-		e1:SetRange(LOCATION_HAND)
-	end
-	if hint1 or hint2 then
-		if hint1==hint2 then
-			e1:SetHintTiming(hint1)
-		elseif hint1 and not hint2 then
-			e1:SetHintTiming(hint1,0)
-		elseif hint2 and not hint1 then
-			e1:SetHintTiming(0,hint2)
-		else
-			e1:SetHintTiming(hint1,hint2)
-		end
-	end
-	if category then
-		e1:SetCategory(CATEGORY_ATTACH_ARMOR+category)
-	else
-		e1:SetCategory(CATEGORY_ATTACH_ARMOR)
-	end
-	if property then
-		e1:SetProperty(EFFECT_FLAG_CARD_TARGET+property)
-	else
-		e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	end
-	if con then e1:SetCondition(con) end
-	if cost then e1:SetCost(cost) end
-	e1:SetTarget(Auxiliary.EqyilibriumTarget(tg,f))
-	e1:SetOperation(Auxiliary.EquilibriumOperation)
-	c:RegisterEffect(e1)
 end
 function Auxiliary.EquilibriumFilter(c,f,e,tp,tg,eg,ep,ev,re,r,rp)
 	return not c:IsFaceup() and (not f or f(c,e,tp)) and (not tg or tg(e,tp,eg,ep,ev,re,r,rp,c,0))
