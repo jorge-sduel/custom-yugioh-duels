@@ -48,6 +48,21 @@ function cid.initial_effect(c)
 	e2:SetTarget(cid.placetg)
 	e2:SetOperation(cid.placeop)
 	c:RegisterEffect(e2)
+--Activate
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_QUICK_O)
+	e4:SetCategory(CATEGORY_RECOVER)
+	e4:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
+	e4:SetRange(LOCATION_SZONE)
+	e4:SetCost(s.cost)
+	e4:SetCondition(s.condition)
+	e4:SetTarget(s.target)
+	e4:SetOperation(s.activate)
+	c:RegisterEffect(e4)
+end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 --DESTROY AND SPSUMMON
 function cid.doubtfilter(c)
