@@ -168,26 +168,19 @@ function Equilibrium.desop(e,tp,eg,ep,ev,re,r,rp)
 Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,g)
 end
-function Auxiliary.EquilibriumFilter(c,f,e,tp,tg,eg,ep,ev,re,r,rp)
-	return not c:IsFaceup() and (not f or f(c,e,tp)) and (not tg or tg(e,tp,eg,ep,ev,re,r,rp,c,0))
+function Equilibrium.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsOnField() and Equilibrium.desfilter(chkc) and chkc~=e:GetHandler() end
+	if chk==0 then return Duel.IsExistingTarget(Equilibrium.desfilter,tp,LOCATION_MZONE,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g=Duel.SelectTarget(tp,Equilibrium.desfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
-function Auxiliary.EquilibriumTarget(tg,f)
-	return	function(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-				if chkc then return chkc:IsLocation(LOCATION_PZONE) and chkc:IsFaceup() and Auxiliary.EquilibriumFilter(chkc,f,e,tp) end
-				if chk==0 then return Duel.IsExistingTarget(Auxiliary.EquilibriumFilter,tp,LOCATION_PZONE,LOCATION_PZONE,1,nil,f,e,tp,tg,eg,ep,ev,re,r,rp) end
-				--	and e:GetHandler():GetFlagEffect(c)==0 end
-				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-				local g=Duel.SelectTarget(tp,Auxiliary.EquilibriumFilter,tp,LOCATION_PZONE,LOCATION_PZONE,1,1,nil,f,e,tp)
-				if tg then tg(e,tp,eg,ep,ev,re,r,rp,g:GetFirst(),1) end
-			end
-end
-function Auxiliary.EquilibriumOperation(e,tp,eg,ep,ev,re,r,rp)
+function Equilibrium.desop1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
-		if c:IsType(TYPE_SPELL+TYPE_TRAP) then c:CancelToGrave() end
+	if tc and tc:IsRelateToEffect(e) then
 	Duel.SendtoExtraP(tc,tp,REASON_EFFECT)
 Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-		Duel.Overlay(Group.FromCards(c),tc)
+	Duel.Overlay(c,tc)
 	end
 end
