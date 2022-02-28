@@ -4,6 +4,7 @@ local cid,id=GetID()
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function cid.initial_effect(c)
   Equilibrium.AddProcedure(c)
+aux.AddEquilibriumProcedure
 	--MONSTER EFFECTS
 --destroy and spsummon
 	local p1=Effect.CreateEffect(c)
