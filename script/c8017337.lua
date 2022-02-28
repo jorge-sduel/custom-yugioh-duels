@@ -1,6 +1,7 @@
 --Pandelumiere Cartografo
 --Scripted by: XGlitchy30
 local cid,id=GetID()
+cid.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function cid.initial_effect(c)
   Equilibrium.AddProcedure(c)
@@ -118,7 +119,7 @@ function cid.dpop(e,tp,eg,ep,ev,re,r,rp)
 end
 --PROTECTION
 function cid.tgtg(e,c)
-	return c:IsType(TYPE_PENDULUM+TYPE_PANDEMONIUM) or (c:IsLocation(LOCATION_SZONE) and c:GetFlagEffect(726)>0)
+	return c:IsType(TYPE_PENDULUM) or (c:IsLocation(LOCATION_SZONE) and c:GetFlagEffect(726)>0)
 end
 function cid.eqtg(e,c)
 	return c:IsType(TYPE_PENDULUM)
@@ -128,7 +129,7 @@ function cid.placefilter(c)
 	return c:GetSequence()==0 or c:GetSequence()==4
 end
 function cid.ufilter(c)
-	return c:IsType(TYPE_PENDULUM+TYPE_PANDEMONIUM) and c:IsAbleToHand() and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+	return c:IsType(TYPE_PENDULUM) and c:IsAbleToHand() and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
 end
 function cid.ucheck(c,typ)
 	return cid.ufilter(c) and (not typ or not c:IsType(typ))
@@ -137,13 +138,13 @@ end
 	-- return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 -- end
 -- function cid.pandfilter(c,e,tp,eg,ep,ev,re,r,rp)
-	-- return c:IsType(TYPE_PANDEMONIUM) and not c:IsForbidden() and aux.PandActCon(nil,c)(e,tp,eg,ep,ev,re,r,rp)
+	-- return c.Pandemonium and not c:IsForbidden()
 -- end
 -- function cid.ufilter(c,tp,ctype,ct,sg,e,eg,ep,ev,re,r,rp)
-	-- if not c:IsType(ctype) or c:IsForbidden() or (c:IsType(TYPE_PANDEMONIUM) and not aux.PandActCon(nil,c)(e,tp,eg,ep,ev,re,r,rp)) then return false end
+	-- if not c:IsType(ctype) or c:IsForbidden() or (c.Pandemonium then return false end
 	-- sg:AddCard(c)
 	-- local typ
-	-- if ct<2 then typ=TYPE_PENDULUM else typ=TYPE_PANDEMONIUM end
+	-- if ct<2 then typ=TYPE_PENDULUM else typ=TYPE_PENDULUM end
 	-- local res=(ct>=4 or Duel.IsExistingMatchingCard(cid.ufilter,tp,LOCATION_DECK,0,1,sg,tp,typ,ct+1,sg,e,eg,ep,ev,re,r,rp))
 	-- sg:RemoveCard(c)
 	-- ct=ct-1
@@ -164,14 +165,14 @@ function cid.placeop(e,tp,eg,ep,ev,re,r,rp)
 	if #g<=0 then return end
 	local ct=Duel.Destroy(g,REASON_EFFECT)
 	if ct>0 then
-		if Duel.IsExistingMatchingCard(cid.ufilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,nil,TYPE_PENDULUM+TYPE_PANDEMONIUM) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+		if Duel.IsExistingMatchingCard(cid.ufilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,nil,TYPE_PENDULUM) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			local group,typ=Group.CreateGroup(),false
 			group:KeepAlive()
 			for i=1,math.min(ct,2) do
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 				local sg=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(cid.ucheck),tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,group,typ)
 				if #sg>0 then
-					typ=bit.band(sg:GetFirst():GetType(),TYPE_PENDULUM+TYPE_PANDEMONIUM)
+					typ=bit.band(sg:GetFirst():GetType(),TYPE_PENDULUM)
 					group:Merge(sg)
 				end
 			end
