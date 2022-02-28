@@ -56,6 +56,14 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGH
 	e5:SetCondition(Future.con)
 	e5:SetValue(cid.defval)
 	c:RegisterEffect(e5)
+	--atk
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e6:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetCondition(s.atkcon)
+	e6:SetOperation(s.atkop)
+	c:RegisterEffect(e6)
 end
 cid.drawcount=0
 cid.maxval=0
@@ -204,13 +212,41 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1,true)
 	end
 end
-function s.deffilter(c)
+function cid.deffilter(c)
 	return c:GetBaseDefense()>=0 and c:IsPosition(POS_FACEUP_DEFENSE)
 end
-function s.defval(e,c)
-	local g=Duel.GetMatchingGroup(s.deffilter,c:GetControler(),LOCATION_MZONE,0,c)
+function cid.defval(e,c)
+	local g=Duel.GetMatchingGroup(cid.deffilter,c:GetControler(),LOCATION_MZONE,0,c)
 	return g:GetSum(Card.GetBaseDefense)
 end
+function cid.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	local a=Duel.GetAttacker()
+	local d=Duel.GetAttackTarget()
+	return d and a:GetControler()~=d:GetControler()
+end
+function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local a=Duel.GetAttacker()
+	local d=Duel.GetAttackTarget()
+	if a:IsFaceup() and a:IsRelateToBattle() and d:IsFaceup() and d:IsRelateToBattle() then
+		if not a:IsLinkMonster() then
+			local e1=Effect.CreateEffect(e:GetHandler())
+			e1:SetType(EFFECT_TYPE_SINGLE)
+			e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+			e1:SetValue(a:GetDefense())
+			e1:SetReset(RESET_PHASE+PHASE_DAMAGE_CAL)
+			a:RegisterEffect(e1)
+		end
+		if not d:IsLinkMonster() then
+			local e1=Effect.CreateEffect(e:GetHandler())
+			e1:SetType(EFFECT_TYPE_SINGLE)
+			e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+			e1:SetValue(d:GetDefense())
+			e1:SetReset(RESET_PHASE+PHASE_DAMAGE_CAL)
+			d:RegisterEffect(e1)
+		end
+	end
+end
+
 --AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 -- ⠄⠄⠄⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄	
 -- ⠄⠄⠄⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄
