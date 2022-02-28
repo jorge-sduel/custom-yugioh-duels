@@ -1,5 +1,6 @@
 --Liberated Storm Buster
 local cid,id=GetID()
+cid.IsTimeleap=true
 if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
