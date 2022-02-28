@@ -226,7 +226,7 @@ function cid.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	return d and a:GetControler()~=d:GetControler()
 end
-function cid.atop2(e,tp,eg,ep,ev,re,r,rp)
+function cid.atop(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
 	if a:IsFaceup() and a:IsRelateToBattle() and d:IsFaceup() and d:IsRelateToBattle() then
