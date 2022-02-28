@@ -50,6 +50,15 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK
 	e3:SetTarget(cid.revtg)
 	e3:SetOperation(cid.revop)
 	c:RegisterEffect(e3)
+	--ATK/DEF increase
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_UPDATE_ATTACK)
+	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCondition(Timeleap.Future)
+	e4:SetValue(cid.adval)
+	c:RegisterEffect(e4)
 	--THE PART BELOW MUST BE PUT AFTER YOU DEFINED ALL THE EFFECTS (e1,e2,e3...)
 	if not cid.global_check then
 		cid.global_check=true
@@ -153,4 +162,7 @@ function cid.revop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		c:RegisterEffect(e1,true)
 	end
+end
+function cid.adval(e,c)
+	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_HAND,0)*500
 end
