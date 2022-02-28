@@ -63,7 +63,6 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGH
 	e6:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCondition(Timeleap.Future)
-	e6:SetCondition(cid.atkcon)
 	e6:SetOperation(cid.atop)
 	c:RegisterEffect(e6)
 end
