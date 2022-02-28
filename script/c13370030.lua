@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	table.insert(GhostBelleTable,e1)
 end
 function s.matfilter(c)
-	return c:IsRace(RACE_DINOSAUR) and c:IsLevelBelow(4)
+	return c:IsRace(RACE_DINOSAUR)
 end
 function s.fextra(e,tp,mg)
 	if not Duel.IsPlayerAffectedByEffect(tp,69832741) then
