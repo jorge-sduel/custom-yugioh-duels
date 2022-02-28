@@ -225,3 +225,13 @@ end
 function cid.aclimit(e,re,tp)
 	return re:GetHandler():IsCode(e:GetLabel()) and not re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
+function cid.condition(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetBattleDamage(tp)>=2000
+end
+function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,4000)
+end
+function cid.activate(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Recover(tp,4000,REASON_EFFECT)
+end
