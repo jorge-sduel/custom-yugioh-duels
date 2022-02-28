@@ -60,14 +60,15 @@ function cid.initial_effect(c)
 	e4:SetOperation(cid.activate)
 	c:RegisterEffect(e4)
 --destroy
-	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(97268402,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_HAND)
-	e1:SetOperation(Equilibrium.desop1)
-	c:RegisterEffect(e1)
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(97268402,0))
+	e5:SetCategory(CATEGORY_DESTROY)
+	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e5:SetType(EFFECT_TYPE_IGNITION)
+	e5:SetRange(LOCATION_HAND)
+	e5:SetTarget(Auxiliary.EquilibriumTarget(tg,cid.eqtg))
+	e5:SetOperation(Auxiliary.EquilibriumOperation)
+	c:RegisterEffect(e5)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
@@ -108,6 +109,9 @@ end
 --PROTECTION
 function cid.tgtg(e,c)
 	return c:IsType(TYPE_PENDULUM+TYPE_PANDEMONIUM) or (c:IsLocation(LOCATION_SZONE) and c:GetFlagEffect(726)>0)
+end
+function cid.eqtg(e,c)
+	return c:IsType(TYPE_PENDULUM)
 end
 --PLACE
 function cid.placefilter(c)
