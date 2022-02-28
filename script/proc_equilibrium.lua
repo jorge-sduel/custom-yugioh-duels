@@ -167,3 +167,10 @@ function Equilibrium.desop(e,tp,eg,ep,ev,re,r,rp)
 Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,g)
 end
+function Equilibrium.desop1(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+		local dg=Duel.GetMatchingGroup(Equilibrium.filter2,tp,0,LOCATION_ONFIELD,nil)
+	Duel.SendtoExtraP(g,tp,REASON_EFFECT)
+Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	Duel.Overlay(c,g)
+end
