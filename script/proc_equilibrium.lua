@@ -184,3 +184,6 @@ Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.Overlay(c,tc)
 	end
 end
+function Equilibrium.desfilter(c)
+	return c:IsType(TYPE_PENDULUM)
+end
