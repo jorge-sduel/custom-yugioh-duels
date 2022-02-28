@@ -53,7 +53,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGH
 	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetCode(EFFECT_UPDATE_DEFENSE)
-	e5:SetCondition(Future.con)
+	e5:SetCondition(Timeleap.Future)
 	e5:SetValue(cid.defval)
 	c:RegisterEffect(e5)
 	--atk
@@ -61,7 +61,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGH
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e6:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e6:SetRange(LOCATION_MZONE)
-	e6:SetCondition(Future.con)
+	e6:SetCondition(Timeleap.Future)
 	e6:SetCondition(cid.atkcon)
 	e6:SetOperation(cid.atkop)
 	c:RegisterEffect(e6)
