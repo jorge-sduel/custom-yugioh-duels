@@ -1,13 +1,6 @@
 --Cupidigia Pandemonium
 --Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -16,19 +9,13 @@ function cid.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id+EFFECT_COUNT_CODE_OATH)
-	e1:SetCost(cid.cost)
 	e1:SetTarget(cid.target)
 	e1:SetOperation(cid.activate)
 	c:RegisterEffect(e1)
-	Duel.AddCustomActivityCounter(id,ACTIVITY_SPSUMMON,cid.counterfilter)
-end
---GENERIC FILTERS
-function cid.counterfilter(c)
-	return c:IsSummonType(SUMMON_TYPE_PANDEMONIUM)
 end
 --ACTIVATE
 function cid.ddfilter(c)
-	return c:IsFaceup() and c:GetFlagEffect(726)>0
+	return c:IsFaceup()
 end
 function cid.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return bit.band(sumtype,SUMMON_TYPE_PANDEMONIUM)~=SUMMON_TYPE_PANDEMONIUM
@@ -46,12 +33,12 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e1,tp)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_SZONE) and chkc:IsControler(tp) and cid.ddfilter(chkc) end
+	if chkc then return chkc:IsLocation(LOCATION_PZONE) and chkc:IsControler(tp) and cid.ddfilter(chkc) end
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1)
-		and Duel.IsExistingTarget(cid.ddfilter,tp,LOCATION_SZONE,0,1,nil) 
+		and Duel.IsExistingTarget(cid.ddfilter,tp,LOCATION_PZONE,0,1,nil) 
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,cid.ddfilter,tp,LOCATION_SZONE,0,1,1,nil)
+	local g=Duel.SelectTarget(tp,cid.ddfilter,tp,LOCATION_PZONE,0,1,1,nil)
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(1)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
