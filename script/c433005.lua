@@ -58,6 +58,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGH
 	c:RegisterEffect(e5)
 	--atk
 	local e6=Effect.CreateEffect(c)
+	e6:SetDescription(aux.Stringid(id,4))
 	e6:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e6:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e6:SetRange(LOCATION_MZONE)
