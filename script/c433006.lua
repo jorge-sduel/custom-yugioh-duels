@@ -164,5 +164,5 @@ function cid.revop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.adval(e,c)
-	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_HAND,0)*500
+	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_HAND,LOCATION_HAND)*500
 end
