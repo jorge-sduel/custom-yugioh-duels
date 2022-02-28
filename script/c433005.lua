@@ -214,7 +214,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.deffilter(c)
-	return c:GetBaseDefense()>=0 and c:IsPosition(POS_FACEUP_DEFENSE)
+	return c:GetBaseDefense()>=0
 end
 function cid.defval(e,c)
 	local g=Duel.GetMatchingGroup(cid.deffilter,c:GetControler(),LOCATION_MZONE,0,c)
