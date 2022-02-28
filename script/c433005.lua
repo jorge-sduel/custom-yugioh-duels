@@ -47,6 +47,15 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGH
 	e4:SetTarget(cid.sptg)
 	e4:SetOperation(cid.spop)
 	c:RegisterEffect(e4)
+	--defup
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCode(EFFECT_UPDATE_DEFENSE)
+	e5:SetCondition(Future.con)
+	e5:SetValue(cid.defval)
+	c:RegisterEffect(e5)
 end
 cid.drawcount=0
 cid.maxval=0
@@ -194,6 +203,13 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		c:RegisterEffect(e1,true)
 	end
+end
+function s.deffilter(c)
+	return c:GetBaseDefense()>=0 and c:IsPosition(POS_FACEUP_DEFENSE)
+end
+function s.defval(e,c)
+	local g=Duel.GetMatchingGroup(s.deffilter,c:GetControler(),LOCATION_MZONE,0,c)
+	return g:GetSum(Card.GetBaseDefense)
 end
 --AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 -- ⠄⠄⠄⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄	
