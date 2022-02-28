@@ -73,7 +73,7 @@ end
 function cid.desfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
-function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function cid.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) and chkc~=e:GetHandler() end
 	if chk==0 then return Duel.IsExistingTarget(cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
