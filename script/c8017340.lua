@@ -66,14 +66,8 @@ function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_PZONE)<=0 then 
-		return 
-	end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.GetMatchingGroup(cid.setfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,nil)
-	if g:GetCount()>0 then
 		Duel.ConfirmCards(1-tp,g)
-		Duel.BreakEffect()
 		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 	end
 end
