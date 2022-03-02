@@ -68,9 +68,9 @@ end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectMatchingCard(tp,cid.dryfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,e:GetHandler(),e)
+Duel.MoveToField(g,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	if #g>0 then
 		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
-Duel.MoveToField(g,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
 --CHANGE AFTERSUMMON PROC
