@@ -71,7 +71,6 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 		return 
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(aux.PandSSetFilter(cid.setfilter,LOCATION_EXTRA+LOCATION_GRAVE)),tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,nil)
 	if g:GetCount()>0 then
 		Duel.ConfirmCards(1-tp,g)
 		Duel.BreakEffect()
