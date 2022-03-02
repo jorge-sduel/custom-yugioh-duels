@@ -66,9 +66,10 @@ function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(cid.setfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,nil)
-		Duel.ConfirmCards(1-tp,g)
-		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g=Duel.SelectMatchingCard(tp,cid.dryfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,e:GetHandler(),e)
+	if #g>0 then
+		Duel.Destroy(g,REASON_EFFECT)
 	end
 end
 --CHANGE AFTERSUMMON PROC
