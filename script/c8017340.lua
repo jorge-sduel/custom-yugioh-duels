@@ -54,20 +54,12 @@ function cid.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(cid.setfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,nil) 
-	end
-	local lg=Duel.GetMatchingGroup(cid.setfilter,tp,LOCATION_GRAVE,0,nil)
-	if #lg>0 then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,lg,1,0,0)
-	end
-	if e:GetHandler():IsDestructable(e) and e:GetHandler():IsRelateToEffect(e) then
-		Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
-	end
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.setfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,e:GetHandler(),e) end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,PLAYER_ALL,LOCATION_EXTRA)
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectMatchingCard(tp,cid.dryfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,e:GetHandler(),e)
+	local g=Duel.SelectMatchingCard(tp,cid.setfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,e:GetHandler(),e)
 	if #g>0 then
 		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 Duel.MoveToField(g,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
