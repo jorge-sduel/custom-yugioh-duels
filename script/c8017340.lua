@@ -20,7 +20,6 @@ function cid.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
-	e1:SetCode(EFFECT_PANDEMONIUM_SUMMON_AFTERMATH)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_SZONE,0)
 	e1:SetTarget(cid.replacetg)
@@ -67,10 +66,11 @@ function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then 
+	if not e:GetHandler():IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_PZONE)<=0 then 
 		return 
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
+	local g=Duel.GetMatchingGroup(cid.setfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,nil)
 	if g:GetCount()>0 then
 		Duel.ConfirmCards(1-tp,g)
 		Duel.BreakEffect()
