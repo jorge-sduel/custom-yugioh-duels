@@ -1,15 +1,7 @@
 --Incantatrice Pandemonium
---Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Equilibrium.AddProcedure(c)
 	--set
 	local p1=Effect.CreateEffect(c)
 	p1:SetDescription(aux.Stringid(id,0))
@@ -18,12 +10,10 @@ function cid.initial_effect(c)
 	p1:SetRange(LOCATION_SZONE)
 	p1:SetCode(EVENT_FREE_CHAIN)
 	p1:SetCountLimit(1)
-	p1:SetCondition(aux.PandActCheck)
 	p1:SetCost(cid.setcost)
 	p1:SetTarget(cid.settg)
 	p1:SetOperation(cid.setop)
 	c:RegisterEffect(p1)
-	aux.EnablePandemoniumAttribute(c,p1)
 	--MONSTER EFFECTS
 	--change aftersummon proc
 	local e1=Effect.CreateEffect(c)
@@ -50,10 +40,10 @@ function cid.initial_effect(c)
 end
 --SET
 function cid.cfilter(c)
-	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(TYPE_PENDULUM) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
 end
 function cid.setfilter(c)
-	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER)
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(TYPE_PENDULUM) and c:IsType(TYPE_MONSTER)
 end
 -----------
 function cid.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -66,7 +56,6 @@ function cid.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(cid.setfilter,nil,LOCATION_EXTRA+LOCATION_GRAVE)(nil,e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(cid.setfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,nil) 
 	end
 	local lg=Duel.GetMatchingGroup(cid.setfilter,tp,LOCATION_GRAVE,0,nil)
@@ -78,14 +67,12 @@ function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 
-	or not aux.PandSSetCon(cid.setfilter,nil,LOCATION_EXTRA+LOCATION_GRAVE)(nil,e,tp,eg,ep,ev,re,r,rp) then 
+	if not e:GetHandler():IsRelateToEffect(e) or Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then 
 		return 
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(aux.PandSSetFilter(cid.setfilter,LOCATION_EXTRA+LOCATION_GRAVE)),tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,nil)
 	if g:GetCount()>0 then
-		aux.PandSSet(g,REASON_EFFECT,aux.GetOriginalPandemoniumType(g:GetFirst()))(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 		Duel.BreakEffect()
 		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
