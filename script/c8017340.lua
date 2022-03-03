@@ -36,6 +36,23 @@ function cid.initial_effect(c)
 	e2:SetTarget(cid.drytg)
 	e2:SetOperation(cid.dryop)
 	c:RegisterEffect(e2)
+--destroy
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(97268402,0))
+	e5:SetCategory(CATEGORY_DESTROY)
+	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e5:SetType(EFFECT_TYPE_IGNITION)
+	e5:SetRange(LOCATION_HAND)
+	e5:SetTarget(cid.destarget)
+	e5:SetOperation(Equilibrium.desop1)
+	c:RegisterEffect(e5)
+end
+function cid.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.desfilter(chkc) and chkc~=e:GetHandler() end
+	if chk==0 then return Duel.IsExistingTarget(cid.filter,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g=Duel.SelectTarget(tp,cid.desfilter,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 --SET
 function cid.cfilter(c)
