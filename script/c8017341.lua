@@ -1,13 +1,6 @@
 --Pandemoniumplaza
 --Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=getID()
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -39,7 +32,7 @@ function cid.initial_effect(c)
 end
 --ACTIVATE
 function cid.filter(c,sg)
-	if not c:IsType(TYPE_PANDEMONIUM) or not c:IsType(TYPE_MONSTER) or not c:IsAbleToHand() or #sg<=0 then return false end
+	if not c.IsEquilibrium or not c:IsType(TYPE_MONSTER) or not c:IsAbleToHand() or #sg<=0 then return false end
 	local lscale,rscale,ct,check=c:GetLeftScale(),c:GetRightScale(),0,false
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local tc=sg:GetFirst()
@@ -74,11 +67,11 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 --DESTROY REPLACE
 function cid.repfilter(c,tp)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_SZONE) and c:GetFlagEffect(726)>0
+	return c:IsControler(tp) and c:IsLocation(LOCATION_PZONE) and c:GetFlagEffect(726)>0
 		and c:IsReason(REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
 end
 function cid.dryfilter(c,e)
-	return c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER)
+	return c.IsEquilibrium and c:IsType(TYPE_MONSTER)
 		and c:IsDestructable(e) and not c:IsStatus(STATUS_DESTROY_CONFIRMED)
 end
 ---------
