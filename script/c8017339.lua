@@ -135,7 +135,7 @@ function cid.cfilter1(c,tp)
 	return c:IsSummonPlayer(tp) and c:IsSummonType(SUMMON_TYPE_EQUILIBRIUM)
 end
 function cid.spcon1(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(cid.cfilter1,1,nil,tp) and #eg=>1
+	return eg:IsExists(cid.cfilter1,1,nil,tp)
 end
 function cid.filter1(c,e,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
