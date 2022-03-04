@@ -12,13 +12,6 @@ function cid.initial_effect(c)
 	p0:SetCondition(cid.sccon)
 	p0:SetValue(5)
 	c:RegisterEffect(p0)
-	local p1x=Effect.CreateEffect(c)
-	p1x:SetType(EFFECT_TYPE_SINGLE)
-	p1x:SetCode(EVENT_SPSUMMON_SUCCESS)
-	p1x:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	p1x:SetRange(LOCATION_PZONE)
-	p1x:SetOperation(cid.limitproc)
-	c:RegisterEffect(p1x)
 	--MONSTER EFFECTS
 	--spsummon
 	local e1=Effect.CreateEffect(c)
@@ -55,20 +48,6 @@ function cid.limfilter(c)
 	return c:GetPreviousLocation()==LOCATION_DECK
 end
 -------------
-function cid.limitproc(e,tp,eg,ep,ev,re,r,rp)
-	if eg:IsExists(cid.limfilter,1,nil) then
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_FIELD)
-		e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-		e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-		e1:SetTargetRange(1,0)
-		e1:SetCondition(function (e) return Duel.GetCustomActivityCount(id,e:GetHandlerPlayer(),ACTIVITY_SPSUMMON)>=1 end)
-		e1:SetTarget(cid.splimit)
-		e1:SetReset(RESET_PHASE+PHASE_END)
-		Duel.RegisterEffect(e1,e:GetHandlerPlayer())
-	end
-	Duel.SendtoGrave(e:GetHandler(),REASON_RULE)
-end
 --SPSUMMON
 function cid.spfilter(c,e,tp)
 	return c:IsFaceup() and ((c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) 
