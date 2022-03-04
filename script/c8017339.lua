@@ -20,7 +20,7 @@ function cid.initial_effect(c)
 	p1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	p1:SetTargetRange(1,0)
 	p1:SetValue(cid.pendvalue)
-	Duel.RegisterEffect(p1)
+	c:RegisterEffect(p1)
 	--MONSTER EFFECTS
 	--spsummon
 	local e1=Effect.CreateEffect(c)
