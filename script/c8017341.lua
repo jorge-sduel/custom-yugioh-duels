@@ -67,7 +67,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 --DESTROY REPLACE
 function cid.repfilter(c,tp)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_PZONE) and c:GetFlagEffect(726)>0
+	return c:IsControler(tp) and c:IsLocation(LOCATION_PZONE)
 		and c:IsReason(REASON_EFFECT) and not c:IsReason(REASON_REPLACE)
 end
 function cid.dryfilter(c,e)
@@ -99,7 +99,7 @@ function cid.desrepop(e,tp,eg,ep,ev,re,r,rp)
 end
 --SET
 function cid.setfilter(c,e,tp)
-	return c:IsFaceup() and c:GetFlagEffect(726)>0 and aux.PandSSetCon(c,nil,c:GetLocation())(nil,e,tp)
+	return c:IsFaceup() and c.IsEquilibrium
 end
 ------------
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -112,8 +112,7 @@ function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and aux.PandSSetCon(tc,nil,tc:GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) then
-		aux.PandSSet(tc,REASON_EFFECT,aux.GetOriginalPandemoniumType(tc))(e,tp,eg,ep,ev,re,r,rp)
+	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		if tc:IsFacedown() then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEDOWN)
 			local rc=Duel.SelectMatchingCard(tp,Card.IsFacedown,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,e:GetHandler())
@@ -121,7 +120,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			if #rc>0 then
 				Duel.HintSelection(rc)
 				Duel.ConfirmCards(1-tp,rc)
-				if aux.Pandemoniums[rct] and aux.GetOriginalPandemoniumType(rct)~=0 then
+				if c.IsEquilibrium then
 					local actcon=rct:GetActivateEffect():GetCondition()
 					if actcon(rct:GetActivateEffect(),tp,eg,ep,ev,re,r,rp) then
 						if rct:GetActivateEffect():GetCost() then
