@@ -13,13 +13,16 @@ function cid.initial_effect(c)
 	p0:SetValue(5)
 	c:RegisterEffect(p0)
 --extra pande location
+	--tohand
 	local p1=Effect.CreateEffect(c)
-	p1:SetDescription(aux.Stringid(id,4))
-	p1:SetType(EFFECT_TYPE_FIELD)
-	p1:SetCode(EFFECT_EXTRA_PENDULUM_SUMMON)
-	p1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	p1:SetTargetRange(LOCATION_DECK,0)
-	p1:SetValue(cid.pendvalue)
+	p1:SetDescription(aux.Stringid(id,0))
+	p1:SetCategory(CATEGORY_TOHAND)
+	p1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	p1:SetCode(EVENT_SPSUMMON_SUCCESS)
+	p1:SetRange(LOCATION_PZONE)
+	p1:SetCondition(cid.spcon1)
+	p1:SetTarget(cid.sptg1)
+	p1:SetOperation(cid.spop1)
 	c:RegisterEffect(p1)
 	--MONSTER EFFECTS
 	--spsummon
@@ -128,6 +131,25 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		tc=sg:GetNext()
 	end
 end
-function cid.pendvalue(e,c)
-	return c:IsType(TYPE_MONSTER)
+function cid.cfilter1(c,tp)
+	return c:IsSummonPlayer(tp) and c:IsSummonType(SUMMON_TYPE_EQUILIBRIUM)
+end
+function cid.spcon1(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(cid.cfilter1,1,nil,tp) and #eg=>1
+end
+function cid.filter1(c,e,tp)
+	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+end
+function cid.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(cid.filter1,tp,LOCATION_DECK,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
+end
+function cid.spop(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_DECK,0,1,1,nil,e,tp)
+	if #g>0 then
+		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+	end
 end
