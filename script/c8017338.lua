@@ -1,6 +1,7 @@
 --Cupidigia Pandemonium
 --Scripted by: XGlitchy30
 local cid,id=GetID()
+cid.IsEquilibrium=true
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
