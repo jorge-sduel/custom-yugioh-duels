@@ -67,7 +67,7 @@ end
 function cid.extracon(e)
 	local tp=e:GetHandlerPlayer()
 	local g=Duel.GetFieldGroup(tp,LOCATION_EXTRA+LOCATION_GRAVE,0)
-	return aux.PandActCheck(e) and not Duel.IsExistingMatchingCard(cid.doubtfilter,tp,LOCATION_MZONE,0,1,nil)
+	return and not Duel.IsExistingMatchingCard(cid.doubtfilter,tp,LOCATION_MZONE,0,1,nil)
 		and #g>0 and not g:IsExists(cid.excfilter,1,nil) and Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)<=1
 end
 function cid.extraval(mode,c,e,tp,lscale,rscale,eset,tg)
