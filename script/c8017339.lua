@@ -18,7 +18,7 @@ function cid.initial_effect(c)
 	p1:SetType(EFFECT_TYPE_FIELD)
 	p1:SetCode(EFFECT_EXTRA_PENDULUM_SUMMON)
 	p1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	p1:SetTargetRange(1,0)
+	p1:SetTargetRange(LOCATION_DECK,0)
 	p1:SetValue(cid.pendvalue)
 	c:RegisterEffect(p1)
 	--MONSTER EFFECTS
@@ -129,5 +129,5 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.pendvalue(e,c)
-	return c:IsType(TYPE_RITUAL)
+	return c:IsType(TYPE_MONSTER)
 end
