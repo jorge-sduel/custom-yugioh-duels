@@ -14,13 +14,13 @@ function cid.initial_effect(c)
 	c:RegisterEffect(p0)
 --extra pande location
 	local p1=Effect.CreateEffect(c)
-	p1:SetType(EFFECT_TYPE_SINGLE)
+	p1:SetDescription(aux.Stringid(id,4))
+	p1:SetType(EFFECT_TYPE_FIELD)
 	p1:SetCode(EFFECT_EXTRA_PENDULUM_SUMMON)
-	p1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	p1:SetRange(LOCATION_PZONE)
-	p1:SetCondition(cid.extracon)
-	p1:SetValue(cid.extraval)
-	c:RegisterEffect(p1)
+	p1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	p1:SetTargetRange(1,0)
+	p1:SetValue(cid.pendvalue)
+	Duel.RegisterEffect(p1)
 	--MONSTER EFFECTS
 	--spsummon
 	local e1=Effect.CreateEffect(c)
@@ -127,4 +127,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		end
 		tc=sg:GetNext()
 	end
+end
+function cid.pendvalue(e,c)
+	return c:IsType(TYPE_RITUAL) and c:IsType(TYPE_PENDULUM)
 end
