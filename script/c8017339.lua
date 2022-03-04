@@ -129,5 +129,5 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.pendvalue(e,c)
-	return c:IsType(TYPE_RITUAL) and c:IsType(TYPE_PENDULUM)
+	return c:IsType(TYPE_RITUAL)
 end
