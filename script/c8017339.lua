@@ -1,22 +1,14 @@
 --Portale Ciondolo
 --Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
-	aux.EnablePandemoniumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--scale
 	local p0=Effect.CreateEffect(c)
 	p0:SetType(EFFECT_TYPE_SINGLE)
 	p0:SetCode(EFFECT_CHANGE_RSCALE)
 	p0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	p0:SetRange(LOCATION_SZONE)
+	p0:SetRange(LOCATION_PZONE)
 	p0:SetCondition(cid.sccon)
 	p0:SetValue(5)
 	c:RegisterEffect(p0)
