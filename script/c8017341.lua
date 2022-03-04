@@ -1,6 +1,6 @@
 --Pandemoniumplaza
 --Scripted by: XGlitchy30
-local cid,id=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
