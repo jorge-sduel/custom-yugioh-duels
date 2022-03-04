@@ -42,6 +42,7 @@ function cid.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_PZONE)
+	e3:SetCost(cid.cost)
 	e3:SetTarget(cid.sptg2)
 	e3:SetOperation(cid.spop2)
 	c:RegisterEffect(e3)
@@ -55,6 +56,10 @@ function cid.initial_effect(c)
 	e5:SetTarget(cid.destarget)
 	e5:SetOperation(Equilibrium.desop1)
 	c:RegisterEffect(e5)
+end
+function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function cid.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.desfilter(chkc) and chkc~=e:GetHandler() end
