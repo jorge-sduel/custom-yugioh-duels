@@ -36,6 +36,15 @@ function cid.initial_effect(c)
 	e2:SetTarget(cid.drytg)
 	e2:SetOperation(cid.dryop)
 	c:RegisterEffect(e2)
+	--spsummon
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
+	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetRange(LOCATION_PZONE)
+	e3:SetTarget(cid.sptg2)
+	e3:SetOperation(cid.spop2)
+	c:RegisterEffect(e3)
 --destroy
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(97268402,0))
@@ -104,4 +113,24 @@ function cid.dryop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.Destroy(g,REASON_EFFECT)
 	end
+end
+function cid.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_ZOMBIE,ATTRIBUTE_DARK) end
+	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
+end
+function cid.spop2(e,tp,eg,ep,ev,re,r,rp)
+	local ft=5
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	ft=math.min(ft,Duel.GetLocationCount(tp,LOCATION_MZONE))
+	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0,TYPES_TOKEN,0,0,1,RACE_ZOMBIE,ATTRIBUTE_DARK) then return end
+	local i=0
+	repeat
+		local token=Duel.CreateToken(tp,id+1+i)
+		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
+		ft=ft-1
+		i=(i+1)%4
+	until ft<=0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1))
+	Duel.SpecialSummonComplete()
 end
