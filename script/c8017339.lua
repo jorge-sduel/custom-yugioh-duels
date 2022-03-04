@@ -1,6 +1,7 @@
 --Portale Ciondolo
 --Scripted by: XGlitchy30
 local cid,id=GetID()
+cid.IsEquilibrium=true
 function cid.initial_effect(c)
 	Pendulum.AddProcedure(c)
 	--scale
