@@ -15,17 +15,17 @@ function cid.initial_effect(c)
 	--extra pande location
 	local p1=Effect.CreateEffect(c)
 	p1:SetType(EFFECT_TYPE_SINGLE)
-	p1:SetCode(EFFECT_EXTRA_PANDEMONIUM_SUMMON_LOCATION)
+	p1:SetCode(EFFECT_EXTRA_SUMMON_LOCATION)
 	p1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	p1:SetRange(LOCATION_SZONE)
+	p1:SetRange(LOCATION_PZONE)
 	p1:SetCondition(cid.extracon)
 	p1:SetValue(cid.extraval)
 	c:RegisterEffect(p1)
 	local p1x=Effect.CreateEffect(c)
 	p1x:SetType(EFFECT_TYPE_SINGLE)
-	p1x:SetCode(EFFECT_PANDEMONIUM_SUMMON_AFTERMATH)
+	p1x:SetCode(EVENT_SPSUMMON_SUCCESS)
 	p1x:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	p1x:SetRange(LOCATION_SZONE)
+	p1x:SetRange(LOCATION_PZONE)
 	p1x:SetOperation(cid.limitproc)
 	c:RegisterEffect(p1x)
 	--MONSTER EFFECTS
@@ -51,10 +51,10 @@ function cid.counterfilter(c)
 end
 --SCALE
 function cid.sccon(e)
-	return aux.PandActCheck(e) and Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_HAND,0)>0
+	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_HAND,0)>0
 end
 function cid.excfilter(c)
-	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(TYPE_MONSTER) and not c:IsType(TYPE_PENDULUM+TYPE_PANDEMONIUM)
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(TYPE_MONSTER) and not c:IsType(TYPE_PENDULUM)
 end
 --EXTRA PANDE LOCATION
 function cid.doubtfilter(c)
@@ -75,7 +75,7 @@ function cid.extraval(mode,c,e,tp,lscale,rscale,eset,tg)
 	if mode==0 then
 		return LOCATION_DECK
 	elseif mode==1 then
-		return c:IsType(TYPE_MONSTER) and c:IsType(TYPE_PANDEMONIUM)
+		return c:IsType(TYPE_MONSTER) and c:IsType(TYPE_PENDULUM)
 	elseif mode==2 then
 		return {[LOCATION_DECK]=1}
 	elseif mode==3 then
@@ -101,7 +101,7 @@ end
 --SPSUMMON
 function cid.spfilter(c,e,tp)
 	return c:IsFaceup() and ((c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) 
-		or (c:GetFlagEffect(726)>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,false) and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),0,aux.GetOriginalPandemoniumType(c)|TYPE_PANDEMONIUM,c:GetTextAttack(),c:GetTextDefense(),c:GetOriginalLevel(),c:GetOriginalRace(),c:GetOriginalAttribute())))
+		or (c:GetFlagEffect(726)>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,false) and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),0,nil,c:GetTextAttack(),c:GetTextDefense(),c:GetOriginalLevel(),c:GetOriginalRace(),c:GetOriginalAttribute())))
 end
 -------------
 function cid.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -143,7 +143,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsType(TYPE_PENDULUM) then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 		else
-			tc:AddMonsterAttribute(aux.GetOriginalPandemoniumType(tc)|TYPE_PANDEMONIUM)
+			tc:AddMonsterAttribute(TYPE_PENDULUM)
 			Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)
 		end
 		tc=sg:GetNext()
