@@ -3,7 +3,7 @@
 local cid,id=GetID()
 cid.IsEquilibrium=true
 function cid.initial_effect(c)
-	Pendulum.AddProcedure(c)
+	Equilibrium.AddProcedure(c)
 	--scale
 	local p0=Effect.CreateEffect(c)
 	p0:SetType(EFFECT_TYPE_SINGLE)
