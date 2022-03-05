@@ -41,11 +41,28 @@ function cid.initial_effect(c)
 	local e1x=e1:Clone()
 	e1x:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e1x)
+--destroy
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(97268402,0))
+	e5:SetCategory(CATEGORY_DESTROY)
+	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e5:SetType(EFFECT_TYPE_IGNITION)
+	e5:SetRange(LOCATION_HAND)
+	e5:SetTarget(cid.destarget)
+	e5:SetOperation(Equilibrium.desop1)
+	c:RegisterEffect(e5)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_SPSUMMON,cid.counterfilter)
 end
 --GENERIC FILTERS
 function cid.counterfilter(c)
 	return c:GetSummonLocation()~=LOCATION_EXTRA
+end
+function cid.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.desfilter(chkc) and chkc~=e:GetHandler() end
+	if chk==0 then return Duel.IsExistingTarget(cid.filter,tp,LOCATION_PZONE,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g=Duel.SelectTarget(tp,cid.desfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 --SCALE
 function cid.sccon(e)
