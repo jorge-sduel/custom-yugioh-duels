@@ -99,7 +99,7 @@ function cid.desrepop(e,tp,eg,ep,ev,re,r,rp)
 end
 --SET
 function cid.setfilter(c,e,tp)
-	return c:IsFaceup() and c.IsEquilibrium
+	return
 end
 ------------
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
