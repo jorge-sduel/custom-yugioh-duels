@@ -1,6 +1,7 @@
 --Armor S/T
 --Scripted by Secuter
 local s,id=GetID()
+s.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function s.initial_effect(c)
 	--
