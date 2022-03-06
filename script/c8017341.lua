@@ -99,12 +99,12 @@ function cid.desrepop(e,tp,eg,ep,ev,re,r,rp)
 end
 --SET
 function cid.setfilter(c,e,tp)
-	return c:IsFacedown()
+	return c.IsEquilibrium
 end
 ------------
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_SZONE) and cid.setfilter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(cid.setfilter,tp,LOCATION_SZONE,LOCATION_SZONE,1,nil,e,tp)
+	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.setfilter(chkc,e,tp) end
+	if chk==0 then return Duel.IsExistingTarget(cid.setfilter,tp,LOCATION_PZONE,LOCATION_PZONE,1,nil,e,tp)
 		and Duel.IsExistingMatchingCard(Card.IsFacedown,tp,LOCATION_SZONE,LOCATION_SZONE,1,e:GetHandler())
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
@@ -112,7 +112,7 @@ function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFacedown() and tc:IsRelateToEffect(e) then
+	if tc and c.IsEquilibrium and tc:IsRelateToEffect(e) then
 		if tc:IsFacedown() then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEDOWN)
 			local rc=Duel.SelectMatchingCard(tp,Card.IsFacedown,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,e:GetHandler())
