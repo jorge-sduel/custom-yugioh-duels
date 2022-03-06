@@ -99,7 +99,7 @@ function cid.desrepop(e,tp,eg,ep,ev,re,r,rp)
 end
 --SET
 function cid.setfilter(c,e,tp)
-	return
+	return c:IsFacedown()
 end
 ------------
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -112,7 +112,7 @@ function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
+	if tc and tc:IsFacedown() and tc:IsRelateToEffect(e) then
 		if tc:IsFacedown() then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEDOWN)
 			local rc=Duel.SelectMatchingCard(tp,Card.IsFacedown,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,e:GetHandler())
