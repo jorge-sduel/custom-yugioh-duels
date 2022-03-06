@@ -68,8 +68,7 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=eg:GetFirst()
-	if chk==0 then return Duel.GetLocationCount(tc:GetPreviousControler(),LOCATION_MZONE)>0 and #eg==1
-		and tc:IsLocation(LOCATION_GRAVE) end
+	if chk==0 then return Duel.GetLocationCount(tc:GetPreviousControler(),LOCATION_MZONE)>0 and #eg==1 end
 	Duel.SetTargetCard(tc)
 end
 function cid.activate(e,tp,eg,ep,ev,re,r,rp)
