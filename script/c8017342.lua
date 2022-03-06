@@ -57,10 +57,9 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(srg,REASON_EFFECT)
 	end
 	local hg2=Duel.GetMatchingGroup(cid.setfilter,tp,LOCATION_DECK,0,nil)
-	if ct==4 and hg2:GetCount()>0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
+	if ct==4 and hg2:GetCount()>0 and Duel.GetLocationCount(tp,LOCATION_PZONE+LOCATION_MZONE)>0 then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-		Duel.ConfirmCards(1-tp,hg2)
 	end
 end
 --ACT IN HAND
