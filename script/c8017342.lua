@@ -57,17 +57,15 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(srg,REASON_EFFECT)
 	end
 	local hg2=Duel.GetMatchingGroup(cid.setfilter,tp,LOCATION_DECK,0,nil)
-	if ct==4 and hg2:GetCount()>0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and aux.PandSSetCon(cid.setfilter,nil,LOCATION_DECK)(nil,e,tp,eg,ep,ev,re,r,rp) then
+	if ct==4 and hg2:GetCount()>0 and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-		local shg2=hg2:FilterSelect(tp,aux.PandSSetFilter(cid.setfilter,LOCATION_DECK),1,1,nil)
-		aux.PandSSet(shg2,REASON_EFFECT,aux.GetOriginalPandemoniumType(shg2:GetFirst()))(e,tp,eg,ep,ev,re,r,rp)
-		Duel.ConfirmCards(1-tp,shg2)
+		Duel.ConfirmCards(1-tp,hg2)
 	end
 end
 --ACT IN HAND
 function cid.doubtfilter(c)
-	return c:IsFacedown() or not c.IsEquilibrium
+	return c:IsFaceup() or not c.IsEquilibrium
 end
 -------------
 function cid.handcon(e)
