@@ -51,7 +51,34 @@ function cid.initial_effect(c)
 	e5:SetTarget(cid.destarget)
 	e5:SetOperation(Equilibrium.desop1)
 	c:RegisterEffect(e5)
+--Activate
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_QUICK_O)
+	e6:SetCode(EVENT_BATTLE_DESTROYED)
+	e6:SetRange(LOCATION_PZONE)
+	e6:SetCost(cid.cost)
+	e6:SetTarget(cid.target)
+	e6:SetOperation(cid.activate)
+	c:RegisterEffect(e6)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_SPSUMMON,cid.counterfilter)
+end
+function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
+function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	local tc=eg:GetFirst()
+	if chk==0 then return Duel.GetLocationCount(tc:GetPreviousControler(),LOCATION_MZONE)>0 and #eg==1
+		and tc:IsLocation(LOCATION_GRAVE) end
+	Duel.SetTargetCard(tc)
+end
+function cid.activate(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc and tc:IsRelateToEffect(e) then
+		Duel.MoveToField(tc,tc:GetPreviousControler(),tc:GetPreviousControler(),LOCATION_MZONE,tc:GetPreviousPosition(),true)
+		tc:SetStatus(STATUS_SPSUMMON_STEP,false)
+		tc:SetStatus(STATUS_SPSUMMON_TURN,true)
+	end
 end
 --GENERIC FILTERS
 function cid.counterfilter(c)
