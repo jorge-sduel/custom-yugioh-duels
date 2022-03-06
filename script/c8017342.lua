@@ -1,13 +1,6 @@
 --Vibrazioni Minacciose
 --Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -27,22 +20,22 @@ function cid.initial_effect(c)
 end
 --ACTIVATE
 function cid.thfilter(c)
-	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c.IsEquilibrium and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function cid.setfilter(c)
-	return c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER)
+	return c.IsEquilibrium and c:IsType(TYPE_MONSTER)
 end
 -----------
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFacedown,tp,LOCATION_SZONE,0,1,e:GetHandler()) end
-	local g=Duel.GetFieldGroup(tp,LOCATION_SZONE,0):Filter(Card.IsFacedown,nil)
+	local g=Duel.GetFieldGroup(tp,LOCATION_SZONE+LOCATION_PZONE,0)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,g:GetCount(),0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_SZONE,0):Filter(Card.IsFacedown,nil)
 	Duel.Destroy(g,REASON_EFFECT)
-	local og=Duel.GetOperatedGroup():Filter(Card.IsType,nil,TYPE_PANDEMONIUM)
+	local og=Duel.GetOperatedGroup():Filter(Card.IsType,nil,TYPE_PENDULUM)
 	local ct=og:GetCount()
 	if ct>=1 then
 		Duel.BreakEffect()
@@ -74,7 +67,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 --ACT IN HAND
 function cid.doubtfilter(c)
-	return c:IsFacedown() or not c:IsType(TYPE_PANDEMONIUM)
+	return c:IsFacedown() or not c.IsEquilibrium
 end
 -------------
 function cid.handcon(e)
