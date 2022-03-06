@@ -120,7 +120,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			if #rc>0 then
 				Duel.HintSelection(rc)
 				Duel.ConfirmCards(1-tp,rc)
-				if c.IsEquilibrium then
+				if rc:IsType(TYPE_TRAP) then
 					local actcon=rct:GetActivateEffect():GetCondition()
 					if actcon(rct:GetActivateEffect(),tp,eg,ep,ev,re,r,rp) then
 						if rct:GetActivateEffect():GetCost() then
