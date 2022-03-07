@@ -20,8 +20,7 @@ function cid.ritualfil(c)
 	return c.IsEquilibrium and c:IsRitualMonster()
 end
 function cid.mfilter(c)
-	return not Duel.IsPlayerAffectedByEffect(c:GetControler(),69832741) and c:HasLevel() and c.IsEquilibrium
-		and c:IsType(TYPE_MONSTER)
+	return not Duel.IsPlayerAffectedByEffect(c:GetControler(),69832741) and c:HasLevel() and c:IsType(TYPE_MONSTER)
 end
 function cid.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetMatchingGroup(cid.mfilter,tp,LOCATION_PZONE,0,nil)
