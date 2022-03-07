@@ -1,13 +1,5 @@
 --Tempovocazione di Zextra
---Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	aux.AddCodeList(c,8017345)
 	--Activate
@@ -33,13 +25,12 @@ end
 --ACTIVATE
 --filters
 function cid.dfilter(c,e)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER) and c:IsDestructable(e)
+	return c:IsFaceup() and c.IsEquilibrium and c:IsType(TYPE_MONSTER) and c:IsDestructable(e)
 end
 function cid.filter(c,e,tp,m)
-	if (c:IsLocation(LOCATION_SZONE) and (not c:IsFaceup() or c:GetFlagEffect(726)<=0)) or (not c:IsCode(8017345) and not c:IsLevel(7)) 
-	or ((c:IsLocation(LOCATION_SZONE) and bit.band(aux.GetOriginalPandemoniumType(c),TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT+TYPE_PANDEMONIUM)~=TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT+TYPE_PANDEMONIUM)
-	or bit.band(c:GetType(),TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT+TYPE_PANDEMONIUM)~=TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT+TYPE_PANDEMONIUM)
-	or ((c:IsLocation(LOCATION_SZONE) and (not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) or not Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),0,aux.GetOriginalPandemoniumType(c)|TYPE_PANDEMONIUM,c:GetTextAttack(),c:GetTextDefense(),c:GetOriginalLevel(),c:GetOriginalRace(),c:GetOriginalAttribute()))) 
+	if (c:IsLocation(LOCATION_PZONE) and (not c:IsFaceup() or c:GetFlagEffect(726)<=0)) or (not c:IsCode(8017345) and not c:IsLevel(7)) 
+	or ((c:IsLocation(LOCATION_PZONE) and c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER))) 
+	or ((c:IsLocation(LOCATION_PZONE) and (not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) or not Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),0,0,c:GetTextAttack(),c:GetTextDefense(),c:GetOriginalLevel(),c:GetOriginalRace(),c:GetOriginalAttribute()))) 
 	or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true)) then 
 		return false 
 	end
@@ -63,9 +54,9 @@ end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local mg=Duel.GetRitualMaterial(tp)
-		return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_HAND+LOCATION_SZONE,0,1,nil,e,tp,mg)
+		return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_HAND+LOCATION_PZONE,0,1,nil,e,tp,mg)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_SZONE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_PZONE)
 end
 function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local m=Duel.GetRitualMaterial(tp)
@@ -94,9 +85,9 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 		Duel.ReleaseRitualMaterial(mat)
 		Duel.BreakEffect()
-		local ignorechk=tc:IsLocation(LOCATION_SZONE) and true
+		local ignorechk=tc:IsLocation(LOCATION_PZONE) and true
 		if ignorechk then
-			tc:AddMonsterAttribute(aux.GetOriginalPandemoniumType(tc)|TYPE_PANDEMONIUM)
+			tc:AddMonsterAttribute(TYPE_MONSTER)
 		end
 		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,ignorechk,true,POS_FACEUP)
 		tc:CompleteProcedure()
@@ -135,20 +126,20 @@ end
 ----------
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_GRAVE+LOCATION_SZONE,0,1,nil,e,tp)
+		return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_GRAVE+LOCATION_PZONE,0,1,nil,e,tp)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE+LOCATION_SZONE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE+LOCATION_PZONE)
 end
 function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(cid.spfilter),tp,LOCATION_GRAVE+LOCATION_SZONE,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(cid.spfilter),tp,LOCATION_GRAVE+LOCATION_PZONE,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()
 	if tc then
 		local ignorechk=tc:IsLocation(LOCATION_SZONE) and true
 		if ignorechk then
-			tc:AddMonsterAttribute(aux.GetOriginalPandemoniumType(tc)|TYPE_PANDEMONIUM)
+			tc:AddMonsterAttribute(TYPE_MONSTER)
 		end
 		if Duel.SpecialSummonStep(tc,0,tp,tp,ignorechk,false,POS_FACEUP) then
 			local e0=Effect.CreateEffect(c)
