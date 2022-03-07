@@ -23,7 +23,7 @@ function cid.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	return Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
 end
 function cid.forcedgroup(c,e,tp)
-	return c:IsLocation(LOCATION_ONFIELD+LOCATION_HAND) and c:IsAbleToGrave()
+	return c:IsLocation(LOCATION_ONFIELD+LOCATION_HAND) and (c:IsType(TYPE_MONSTER) or c:IsType(TYPE_PENDULUM)) and c:IsAbleToGrave()
 end
 ---------
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
