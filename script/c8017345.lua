@@ -1,23 +1,8 @@
 --Zextratum, Il Drago Abissomonium
---Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Equilibrium.AddProcedure(c)
 	c:EnableReviveLimit()
-	--extra pandemonium zone
-	local p0=Effect.CreateEffect(c)
-	p0:SetType(EFFECT_TYPE_SINGLE)
-	p0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_SET_AVAILABLE)
-	p0:SetCode(EFFECT_ALLOW_EXTRA_PANDEMONIUM_ZONE)
-	p0:SetRange(0xff)
-	c:RegisterEffect(p0)
 	--nuke
 	local p1=Effect.CreateEffect(c)
 	p1:SetCategory(CATEGORY_DESTROY+CATEGORY_DRAW)
@@ -28,15 +13,13 @@ function cid.initial_effect(c)
 	p1:SetTarget(cid.acttg)
 	p1:SetOperation(cid.actop)
 	c:RegisterEffect(p1)
-	aux.EnablePandemoniumAttribute(c,p1,true,TYPE_EFFECT+TYPE_RITUAL,false,cid.actcost,1,false,true)
 	--immunity
 	local p2=Effect.CreateEffect(c)
 	p2:SetType(EFFECT_TYPE_FIELD)
 	p2:SetCode(EFFECT_IMMUNE_EFFECT)
 	p2:SetRange(LOCATION_SZONE)
 	p2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	p2:SetCondition(aux.PandActCheck)
-	p2:SetTarget(function(e,c) return c:IsSummonType(SUMMON_TYPE_PANDEMONIUM) and c:IsStatus(STATUS_SPSUMMON_TURN) end)
+	p2:SetTarget(function(e,c) return c:IsSummonType(SUMMON_TYPE_EQUILIBRIUM) and c:IsStatus(STATUS_SPSUMMON_TURN) end)
 	p2:SetValue(function(e,te) return te:GetOwnerPlayer()~=e:GetHandlerPlayer() end)
 	c:RegisterEffect(p2)
 	--MONSTER EFFECTS
@@ -79,7 +62,7 @@ function cid.prevfilter(c,tp)
 end
 -----------
 function cid.actcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:IsHasType(EFFECT_TYPE_ACTIVATE) and aux.PandActCheck(e)
+	return e:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function cid.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
@@ -101,7 +84,7 @@ function cid.actop(e,tp,eg,ep,ev,re,r,rp)
 end
 --ATK UP
 function cid.atkfilter(c)
-	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and (c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER) or (c:IsLocation(LOCATION_SZONE) and c:GetFlagEffect(726)>0))
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and (c.IsEquilibrium and c:IsType(TYPE_MONSTER) or c:IsLocation(LOCATION_PZONE)) 
 end
 ---------
 function cid.atkval(e,c)
@@ -126,7 +109,7 @@ function cid.repfilter(c,e)
 		and bit.band(c:GetDestination(),LOCATION_FZONE)==0 and bit.band(c:GetDestination(),LOCATION_PZONE)==0
 end
 function cid.rmfilter(c)
-	return c:IsAbleToRemove() and c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER) and not c:IsStatus(STATUS_LEAVE_CONFIRMED)
+	return c:IsAbleToRemove() and c.IsEquilibrium and c:IsType(TYPE_MONSTER) and not c:IsStatus(STATUS_LEAVE_CONFIRMED)
 end
 ---------
 function cid.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -143,6 +126,6 @@ function cid.repval(e,c)
 end
 function cid.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESREPLACE)
-	local g=Duel.SelectMatchingCard(tp,cid.rmfilter,tp,LOCATION_DECK,0,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,cid.rmfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,2,2,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT+REASON_REPLACE)
 end
