@@ -1,7 +1,6 @@
 --Tempovocazione di Zextra
 local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddCodeList(c,8017345)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
