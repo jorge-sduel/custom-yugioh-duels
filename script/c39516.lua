@@ -49,7 +49,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 	------
-	local g=Duel.GetMatchingGroup(Card.IsType(TYPE_MONSTER),tp,LOCATION_MZONE,LOCATION_MZONE,c)
+	local g=Duel.GetMatchingGroup(Card.IsType(TYPE_MONSTER),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	if #g<=0 then return end
 	local tc=g:GetFirst()
 	while tc do
