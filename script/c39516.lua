@@ -81,12 +81,12 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	if bc:IsFaceup() and bc:IsRelateToEffect(e) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+		e1:SetCode(EFFECT_SET_ATTACK)
 		e1:SetValue(0)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		bc:RegisterEffect(e1)
 		local e2=e1:Clone()
-		e2:SetCode(EFFECT_SET_DEFENSE_FINAL)
+		e2:SetCode(EFFECT_SET_DEFENSE)
 		bc:RegisterEffect(e2)
 	end
 end
