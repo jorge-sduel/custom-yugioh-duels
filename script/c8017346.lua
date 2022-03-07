@@ -2,9 +2,9 @@
 local cid,id=GetID()
 function cid.initial_effect(c)
 	--Activate
-	local e1=Ritual.AddProcGreater({handler=c,filter=cid.ritualfil,extrafil=cid.extrafil,location=LOCATION_HAND|LOCATION_PZONE})
-	if not GhostBelleTable then GhostBelleTable={} end
-	table.insert(GhostBelleTable,e1)
+	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_EQUAL,extrafil=cid.extrafil,extraop=cid.extraop,matfilter=cid.forcedgroup,location=LOCATION_HAND+LOCATION_EXTRA+LOCATION_PZONE})
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DECKDES)
+	c:RegisterEffect(e1)
 	--spsummon
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -16,14 +16,14 @@ function cid.initial_effect(c)
 	e2:SetOperation(cid.spop)
 	c:RegisterEffect(e2)
 end
-function cid.ritualfil(c)
-	return c.IsEquilibrium and c:IsRitualMonster()
-end
-function cid.mfilter(c)
-	return not Duel.IsPlayerAffectedByEffect(c:GetControler(),69832741) and c:HasLevel() and c:IsType(TYPE_MONSTER)
-end
 function cid.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
-	return Duel.GetMatchingGroup(cid.mfilter,tp,LOCATION_PZONE,0,nil)
+	return Duel.GetFieldGroup(tp,LOCATION_ONFIELD+LOCATION_HAND,0)
+end
+function cid.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
+	return Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
+end
+function cid.forcedgroup(c,e,tp)
+	return c:IsLocation(LOCATION_ONFIELD+LOCATION_HAND) and c:IsAbleToGrave()
 end
 ---------
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
