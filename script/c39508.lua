@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	c:EnableReviveLimit()
-	Xyz.AddProcedureLevelFree(c,s.mfilter,s.xyzcheck,2)
+	Xyz.AddProcedure(c,nil,4,2,nil,nil,nil,nil,nil,s.xyzcheck)
 	--xyzlv
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
