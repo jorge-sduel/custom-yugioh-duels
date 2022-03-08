@@ -68,7 +68,7 @@ function cid.initial_effect(c)
 	e4:SetOperation(cid.bpop2)
 	c:RegisterEffect(e4)
 end
-function s.bpcon(e,tp,eg,ep,ev,re,r,rp)
+function cid.bpcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsBattlePhase() and Duel.GetCurrentPhase()<PHASE_BATTLE
 end
 function cid.bpcost(e,tp,eg,ep,ev,re,r,rp,chk)
