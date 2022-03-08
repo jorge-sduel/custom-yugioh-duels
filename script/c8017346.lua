@@ -26,6 +26,9 @@ end
 function cid.forcedgroup(c,e,tp)
 	return c:IsLocation(LOCATION_ONFIELD+LOCATION_HAND) and (c:IsType(TYPE_MONSTER) or c:IsType(TYPE_PENDULUM)) and c:IsAbleToGrave()
 end
+function cid.spfilter(c,e,tp)
+	return (c:IsType(TYPE_MONSTER) or c:IsType(TYPE_PENDULUM))
+end
 ---------
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
