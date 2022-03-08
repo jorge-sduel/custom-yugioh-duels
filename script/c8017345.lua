@@ -27,7 +27,7 @@ function cid.initial_effect(c)
 	local p2=Effect.CreateEffect(c)
 	p2:SetDescription(aux.Stringid(id,0))
 	p2:SetType(EFFECT_TYPE_QUICK_O)
-	p2:SetRange(LOCATION_SZONE)
+	p2:SetRange(LOCATION_PZONE)
 	p2:SetCode(EVENT_FREE_CHAIN)
 	p2:SetCondition(cid.bpcon)
 	p2:SetCost(cid.bpcost)
@@ -59,18 +59,28 @@ function cid.initial_effect(c)
 	e3:SetValue(cid.repval)
 	e3:SetOperation(cid.repop)
 	c:RegisterEffect(e3)
+	--End the Battle Phase
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(id,1))
+	e4:SetType(EFFECT_TYPE_IGNITION)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCost(cid.bpcost)
+	e4:SetOperation(cid.bpop2)
+	c:RegisterEffect(e4)
 end
 function cid.bpcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
-function cid.bpcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsBattlePhase() and Duel.GetCurrentPhase()<PHASE_BATTLE
-end
-
 function cid.bpop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.SkipPhase(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)
+end
+function cid.bpop2(e,tp,eg,ep,ev,re,r,rp)
+	Duel.SetLP(1-tp,Duel.GetLP(1-tp)/2)
+end
+function cid.bpop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.SetLp(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)
 end
 function cid.actcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
