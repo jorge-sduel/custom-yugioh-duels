@@ -59,6 +59,10 @@ function cid.initial_effect(c)
 	e3:SetOperation(cid.repop)
 	c:RegisterEffect(e3)
 end
+function cid.bpcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
 function cid.bpcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsBattlePhase() and Duel.GetCurrentPhase()<PHASE_BATTLE
 end
