@@ -72,13 +72,15 @@ function cid.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct)
 end
 function cid.actop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
 	if #g>0 then
 		if Duel.Destroy(g,REASON_EFFECT)==0 then return end
 		local ct=Duel.GetOperatedGroup():FilterCount(cid.prevfilter,nil,tp)
 		if ct>0 then
 			Duel.BreakEffect()
-			Duel.Draw(tp,ct,REASON_EFFECT)
+Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	Duel.Overlay(c,g)			Duel.Draw(tp,ct,REASON_EFFECT)
 			Duel.Draw(1-tp,ct,REASON_EFFECT)
 		end
 	end
