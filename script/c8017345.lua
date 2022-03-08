@@ -125,11 +125,12 @@ end
 function cid.atkfilter(c)
 	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c.IsEquilibrium
 end
+function cid.eqfilter(c)
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsLocation(LOCATION_PZONE) or c:IsFaceup()) and c.IsEquilibrium
+end
 ---------
 function cid.atkval(e,c)
-	local g=Duel.GetMatchingGroup(cid.atkfilter,e:GetHandlerPlayer(),LOCATION_EXTRA+LOCATION_GRAVE+LOCATION_PZONE,0,nil)
-	local atk=g:GetSum(Card.GetBaseAttack)
-	return Duel.GetMatchingGroupCount(Card.IsEquilibrium,e:GetHandlerPlayer(),LOCATION_EXTRA+LOCATION_GRAVE+LOCATION_PZONE,0,nil)*800
+	return Duel.GetMatchingGroupCount(cid.eqfilter,e:GetHandlerPlayer(),LOCATION_EXTRA+LOCATION_GRAVE+LOCATION_PZONE,0,nil)*800
 end
 --ATK DOWN
 function cid.atktg(e,c)
