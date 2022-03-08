@@ -88,3 +88,6 @@ end
 function cid.efilter(e,re)
 	return e:GetOwnerPlayer()==re:GetOwnerPlayer() and e:GetHandler()~=re:GetHandler()
 end
+function cid.econ(e)
+	return e:GetHandlerPlayer()==e:GetOwnerPlayer()
+end
