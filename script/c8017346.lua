@@ -4,6 +4,7 @@ function cid.initial_effect(c)
 	--Activate
 	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_EQUAL,extrafil=cid.extrafil,extraop=cid.extraop,matfilter=cid.forcedgroup,location=LOCATION_HAND+LOCATION_EXTRA+LOCATION_PZONE})
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DECKDES)
+	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	c:RegisterEffect(e1)
 	--spsummon
 	local e2=Effect.CreateEffect(c)
