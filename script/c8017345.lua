@@ -1,5 +1,6 @@
 --Zextratum, Il Drago Abissomonium
 local cid,id=GetID()
+cid.IsEquilibrium=true
 function cid.initial_effect(c)
 	Equilibrium.AddProcedure(c)
 	c:EnableReviveLimit()
