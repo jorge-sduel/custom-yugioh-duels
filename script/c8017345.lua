@@ -126,7 +126,7 @@ end
 function cid.atkval(e,c)
 	local g=Duel.GetMatchingGroup(cid.atkfilter,e:GetHandlerPlayer(),LOCATION_EXTRA+LOCATION_GRAVE+LOCATION_PZONE,0,nil)
 	local atk=g:GetSum(Card.GetBaseAttack)
-	return atk
+	return Duel.GetMatchingGroupCount(Card.IsEquilibrium,e:GetHandlerPlayer(),LOCATION_EXTRA+LOCATION_GRAVE+LOCATION_PZONE,0,nil)*800
 end
 --ATK DOWN
 function cid.atktg(e,c)
