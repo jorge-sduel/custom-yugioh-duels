@@ -22,6 +22,16 @@ function cid.initial_effect(c)
 	p2:SetTarget(function(e,c) return c:IsSummonType(SUMMON_TYPE_EQUILIBRIUM) and c:IsStatus(STATUS_SPSUMMON_TURN) end)
 	p2:SetValue(function(e,te) return te:GetOwnerPlayer()~=e:GetHandlerPlayer() end)
 	c:RegisterEffect(p2)
+	--End the Battle Phase
+	local p2=Effect.CreateEffect(c)
+	p2:SetDescription(aux.Stringid(id,0))
+	p2:SetType(EFFECT_TYPE_QUICK_O)
+	p2:SetRange(LOCATION_SZONE)
+	p2:SetCode(EVENT_FREE_CHAIN)
+	p2:SetCondition(cid.bpcon)
+	p2:SetCost(cid.bpcost)
+	p2:SetOperation(cid.bpop)
+	c:RegisterEffect(p2)
 	--MONSTER EFFECTS
 	--atk up
 	local e1=Effect.CreateEffect(c)
@@ -48,6 +58,14 @@ function cid.initial_effect(c)
 	e3:SetValue(cid.repval)
 	e3:SetOperation(cid.repop)
 	c:RegisterEffect(e3)
+end
+function cid.bpcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsBattlePhase() and Duel.GetCurrentPhase()<PHASE_BATTLE
+end
+
+function cid.bpop(e,tp,eg,ep,ev,re,r,rp)
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	Duel.SkipPhase(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)
 end
 function cid.actcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
