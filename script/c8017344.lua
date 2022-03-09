@@ -1,13 +1,6 @@
 --Discesa dei Duellanti
 --Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -35,10 +28,10 @@ function cid.filter(c)
 	return c:IsSetCard(0xf80) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
 end
 function cid.pfilter(c,e,tp,eg,ep,ev,re,r,rp)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM) and not c:IsForbidden() and aux.PandActCon(nil,c)(e,tp,eg,ep,ev,re,r,rp)
+	return c:IsFaceup() and c.IsEquilibrium and not c:IsForbidden() and aux.PandActCon(nil,c)(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER)
+	return c:IsFaceup() and c.IsEquilibrium and c:IsType(TYPE_MONSTER)
 end
 ----------
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -56,7 +49,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
 				local tc=Duel.SelectMatchingCard(tp,cid.pfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
 				if #tc>0 then
-					aux.PandAct(tc:GetFirst())(e,tp,eg,ep,ev,re,r,rp)
+Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 				end
 			end
 		end
