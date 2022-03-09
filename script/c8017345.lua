@@ -67,6 +67,15 @@ function cid.initial_effect(c)
 	e4:SetCost(cid.bpcost)
 	e4:SetOperation(cid.bpop2)
 	c:RegisterEffect(e4)
+	--attach 1 "D/D/D"
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,1))
+	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e5:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e5:SetCondition(cid.xyzcon)
+	e5:SetTarget(cid.xyztg)
+	e5:SetOperation(cid.xyzop)
+	c:RegisterEffect(e5)
 end
 function cid.bpcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsBattlePhase() and Duel.GetCurrentPhase()<PHASE_BATTLE
@@ -166,4 +175,23 @@ function cid.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESREPLACE)
 	local g=Duel.SelectMatchingCard(tp,cid.rmfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,2,2,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT+REASON_REPLACE)
+end
+function cid.xyzcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
+end
+function cid.xyzfilter(c)
+	return c:IsFaceup() and c.IsEquilibrium 
+end
+function cid.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.xyzfilter,tp,LOCATION_EXTRA,0,1,nil) end
+end
+function cid.xyzop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
+	local g=Duel.GetMatchingGroup(cid.xyzfilter,tp,LOCATION_EXTRA,0,nil)
+	if #g>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
+		local og=g:Select(tp,1,1,nil)
+		Duel.Overlay(c,og)
+	end
 end
