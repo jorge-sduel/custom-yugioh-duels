@@ -28,7 +28,7 @@ function cid.filter(c)
 	return c:IsSetCard(0xf80) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
 end
 function cid.pfilter(c,e,tp,eg,ep,ev,re,r,rp)
-	return c:IsFaceup() and c.IsEquilibrium and not c:IsForbidden() and aux.PandActCon(nil,c)(e,tp,eg,ep,ev,re,r,rp)
+	return c:IsFaceup() and c.IsEquilibrium and not c:IsForbidden()
 end
 function cid.cfilter(c)
 	return c:IsFaceup() and c.IsEquilibrium and c:IsType(TYPE_MONSTER)
@@ -57,7 +57,7 @@ Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
 --TO HAND
 function cid.thfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsFaceup() and c.IsEquilibrium and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 ----------
 function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
