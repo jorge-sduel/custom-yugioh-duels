@@ -1,13 +1,5 @@
 --Spaziovocazione di Zextra
---Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -42,10 +34,10 @@ function cid.initial_effect(c)
 end
 --ACTIVATE
 function cid.dfilter(c)
-	return c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
+	return c.IsEquilibrium and c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
 end
 function cid.spfilter(c,e,tp,m)
-	if bit.band(c:GetType(),TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT+TYPE_PANDEMONIUM)~=TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT+TYPE_PANDEMONIUM
+	if bit.band(c:GetType(),TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT)~=TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT
 	or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) or (c:IsLocation(LOCATION_HAND) and c:IsPublic()) then 
 		return false 
 	end
@@ -138,7 +130,7 @@ function cid.cfilter(c)
 	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsCode(id)
 end
 function cid.spfilter(c,e,tp)
-	return bit.band(c:GetType(),TYPE_MONSTER+TYPE_PANDEMONIUM+TYPE_RITUAL)==TYPE_MONSTER+TYPE_PANDEMONIUM+TYPE_RITUAL and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return bit.band(c:GetType(),TYPE_MONSTER+TYPE_RITUAL)==TYPE_MONSTER+TYPE_PANDEMONIUM+TYPE_RITUAL and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function cid.efilter(e,re)
 	return e:GetOwnerPlayer()==re:GetOwnerPlayer() and e:GetHandler()~=re:GetHandler()
