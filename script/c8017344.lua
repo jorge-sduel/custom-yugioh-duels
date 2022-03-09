@@ -49,7 +49,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 				Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
 				local tc=Duel.SelectMatchingCard(tp,cid.pfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,eg,ep,ev,re,r,rp)
 				if #tc>0 then
-Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+Duel.MoveToField(tc:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 				end
 			end
 		end
