@@ -9,3 +9,6 @@ function s.initial_effect(c)
 	Link.AddProcedure(c,s.matfilter,1,1)
 end
 s.listed_series={0x115}
+function s.matfilter(c,scard,sumtype,tp)
+	return c:IsSetCard(0x1115,scard,sumtype,tp) and not c:IsAttribute(ATTRIBUTE_WIND,scard,sumtype,tp)
+end
