@@ -7,5 +7,5 @@ function s.initial_effect(c)
 end
 s.listed_series={0x3008}
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsFaceup,Card.IsAbleToDeck),tp,LOCATION_ONFIEL+LOCATION_HAND,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsFaceup,Card.IsAbleToDeck),tp,LOCATION_ONFIELD+LOCATION_HAND,0,nil)
 end
