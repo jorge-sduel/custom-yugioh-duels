@@ -6,5 +6,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.fextra(e,tp,mg)
-	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsFaceup,Card.IsAbleToDeck),tp,LOCATION_ONFIELD+LOCATION_HAND,0,nil)
+	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToDeck),tp,LOCATION_ONFIELD+LOCATION_HAND,0,nil)
 end
