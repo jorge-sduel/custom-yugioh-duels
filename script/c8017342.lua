@@ -33,7 +33,7 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function cid.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetFieldGroup(tp,LOCATION_PZONE+LOCATION_MZONE,0)
+	local g=Duel.GetFieldGroup(tp,LOCATION_SZONE+LOCATION_PZONE,0)
 	Duel.Destroy(g,REASON_EFFECT)
 	local og=Duel.GetOperatedGroup():Filter(Card.IsType,nil,TYPE_PENDULUM)
 	local ct=og:GetCount()
