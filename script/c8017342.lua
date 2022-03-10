@@ -57,7 +57,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(srg,REASON_EFFECT)
 	end
 	local hg2=Duel.GetMatchingGroup(cid.setfilter,tp,LOCATION_DECK,0,nil)
-	if ct==4 and hg2:GetCount()>0 then
+	if ct>=4 and hg2:GetCount()>0 then
 		Duel.BreakEffect()
 Duel.MoveToField(hg2,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
