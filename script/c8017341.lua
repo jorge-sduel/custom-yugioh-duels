@@ -118,7 +118,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			local rc=Duel.SelectMatchingCard(tp,Card.IsFacedown,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,e:GetHandler())
 			local rct=rc:GetFirst()
 			if #rct>0 then
-				Duel.HintSelection(rc)
+				Duel.HintSelection(rct)
 				Duel.ConfirmCards(1-tp,rct)
 				if rct:IsType(TYPE_TRAP) then
 					local actcon=rct:GetActivateEffect():GetCondition()
