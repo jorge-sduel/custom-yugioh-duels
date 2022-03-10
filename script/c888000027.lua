@@ -106,7 +106,7 @@ function c888000027.atop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 	while tc do
 		Duel.CalculateDamage(c,tc)
-		if tc:IsDefencePos() then
+		if tc:IsDefensePos() then
 			if c:GetAttack()>tc:GetAttack() then
 				tc:RegisterFlagEffect(888000027,RESET_CHAIN,0,1)
 			elseif c:GetAttack()<tc:GetAttack() then
