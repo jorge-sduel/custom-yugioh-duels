@@ -122,7 +122,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 		end
 		return
 	end
-	if tc:IsType(TYPE_TRAP+TYPE_SPELL) then
+	if tc:IsType(TYPE_TRAP) or tc:IsType(TYPE_SPELL) then
 		local te=tc:GetActivateEffect()
 		local tep=tc:GetControler()
 		local condition
