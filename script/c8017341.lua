@@ -102,28 +102,29 @@ function cid.setfilter(c,e,tp)
 	return c.IsEquilibrium
 end
 ------------
+function cid.filter2(c)
+	return c:IsFacedown() and c:GetSequence()<5
+end
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.setfilter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(cid.setfilter,tp,LOCATION_PZONE,LOCATION_PZONE,1,nil,e,tp)
-		and Duel.IsExistingMatchingCard(Card.IsFacedown,tp,LOCATION_SZONE,LOCATION_SZONE,1,e:GetHandler())
-	end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	Duel.SelectTarget(tp,cid.setfilter,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,nil,e,tp)
+	if chkc then return chkc:IsLocation(LOCATION_SZONE) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(cid.filter2,tp,LOCATION_SZONE,LOCATION_SZONE,1,e:GetHandler()) end
+	e:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEDOWN)
+	Duel.SelectTarget(tp,cid.filter2,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,e:GetHandler())
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if tc and tc.IsEquilibrium and tc:IsRelateToEffect(e) then
-		if tc:IsFaceup() then
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEDOWN)
-			local rc=Duel.SelectMatchingCard(tp,Card.IsFacedown,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,e:GetHandler())
-			local rct=rc:GetFirst()
-			if #rc>0 then
-				Duel.HintSelection(rc)
-				Duel.ConfirmCards(1-tp,rc)
-				Duel.ConfirmCards(tp,rc)
-				if rct:IsType(TYPE_TRAP) then
-	local te=rct:GetActivateEffect()
-		local tep=rct:GetControler()
+	if not tc:IsRelateToEffect(e) or tc:IsFaceup() then
+		if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
+			c:CancelToGrave()
+			Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
+		end
+		return
+	end
+	if tc:IsType(TYPE_TRAP) then
+		local te=tc:GetActivateEffect()
+		local tep=tc:GetControler()
 		local condition
 		local cost
 		local target
@@ -138,8 +139,8 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			and (not condition or condition(te,tep,eg,ep,ev,re,r,rp))
 			and (not cost or cost(te,tep,eg,ep,ev,re,r,rp,0))
 			and (not target or target(te,tep,eg,ep,ev,re,r,rp,0))
-		Duel.ChangePosition(rct,POS_FACEUP)
-		Duel.ConfirmCards(tp,rct)
+		Duel.ChangePosition(tc,POS_FACEUP)
+		Duel.ConfirmCards(tp,tc)
 		if chk then
 			Duel.ClearTargetCard()
 			e:SetProperty(te:GetProperty())
@@ -147,7 +148,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			if tc:GetType()==TYPE_TRAP then
 				tc:CancelToGrave(false)
 			end
-			rct:CreateEffectRelation(te)
+			tc:CreateEffectRelation(te)
 			if cost then cost(te,tep,eg,ep,ev,re,r,rp,1) end
 			if target~=te:GetTarget() then
 				target=te:GetTarget()
@@ -157,9 +158,9 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			for tg in aux.Next(g) do
 				tg:CreateEffectRelation(te)
 			end
-			rct:SetStatus(STATUS_ACTIVATED,true)
-			if rct:IsHasEffect(EFFECT_REMAIN_FIELD) then
-				rct:SetStatus(STATUS_LEAVE_CONFIRMED,false)
+			tc:SetStatus(STATUS_ACTIVATED,true)
+			if tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
+				tc:SetStatus(STATUS_LEAVE_CONFIRMED,false)
 			end
 			if operation~=te:GetOperation() then
 				operation=te:GetOperation()
@@ -170,16 +171,15 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 				tg:ReleaseEffectRelation(te)
 			end
 		else
-			if Duel.Destroy(rct,REASON_EFFECT)==0 then
-				Duel.SendtoGrave(rct,REASON_RULE)
+			if Duel.Destroy(tc,REASON_EFFECT)==0 then
+				Duel.SendtoGrave(tc,REASON_RULE)
 			end
 		end
 	else
-		Duel.ConfirmCards(tp,rct)
+		Duel.ConfirmCards(tp,tc)
 	end
 	if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		c:CancelToGrave()
 		Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
 	end
-end
 end
