@@ -114,6 +114,7 @@ function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
+ local g=Duel.SelectTarget(tp,cid.setfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
 	local tc=Duel.GetFirstTarget()
 	if not tc:IsRelateToEffect(e) or tc:IsFaceup() then
 		if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
@@ -171,9 +172,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 				tg:ReleaseEffectRelation(te)
 			end
 		else
-			if 
- local g=Duel.SelectTarget(tp,cid.setfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
-Duel.Overlay(tc,c)==0 then
+			if Duel.Overlay(tc,c)==0 then
 				Duel.SendtoGrave(tc,REASON_RULE)
 			end
 		end
