@@ -38,13 +38,12 @@ function c74882900.initial_effect(c)
 	e4:SetTargetRange(LOCATION_HAND,0)
 	e4:SetCountLimit(1)
 	e4:SetCondition(c74882900.ntcon)
-	e4:SetTarget(c74882900.nttg)
 	c:RegisterEffect(e4)
 end
 function c74882900.ntcon(e,c,minc)
 	if c==nil then return true end
 	return minc==0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and e:GetHandler():GetFlagEffect(74882900)~=0
+		and e:GetHandler():GetFlagEffect(74882900)~=0 and c:GetLevel()>4
 end
 function c74882900.nttg(e,c)
 	return c:IsLevelAbove(5)
