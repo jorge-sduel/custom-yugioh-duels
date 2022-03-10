@@ -121,7 +121,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 				Duel.HintSelection(rc)
 				Duel.ConfirmCards(1-tp,rc)
 				Duel.ConfirmCards(tp,rc)
-				if rc:IsType(TYPE_TRAP) then
+				if rct:IsType(TYPE_TRAP) then
 					local actcon=rct:GetActivateEffect():GetCondition()
 					if actcon(rct:GetActivateEffect(),tp,eg,ep,ev,re,r,rp) then
 						if rct:GetActivateEffect():GetCost() then
