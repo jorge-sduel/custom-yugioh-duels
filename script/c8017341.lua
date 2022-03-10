@@ -113,7 +113,7 @@ end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc.IsEquilibrium and tc:IsRelateToEffect(e) then
-		if tc:IsFacedown() then
+		if tc:IsFaceup() then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEDOWN)
 			local rc=Duel.SelectMatchingCard(tp,Card.IsFacedown,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,e:GetHandler())
 			local rct=rc:GetFirst()
