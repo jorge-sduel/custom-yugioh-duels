@@ -138,8 +138,8 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			and (not condition or condition(te,tep,eg,ep,ev,re,r,rp))
 			and (not cost or cost(te,tep,eg,ep,ev,re,r,rp,0))
 			and (not target or target(te,tep,eg,ep,ev,re,r,rp,0))
-		Duel.ChangePosition(tc,POS_FACEUP)
-		Duel.ConfirmCards(tp,tc)
+		Duel.ChangePosition(rct,POS_FACEUP)
+		Duel.ConfirmCards(tp,rct)
 		if chk then
 			Duel.ClearTargetCard()
 			e:SetProperty(te:GetProperty())
@@ -147,7 +147,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			if tc:GetType()==TYPE_TRAP then
 				tc:CancelToGrave(false)
 			end
-			tc:CreateEffectRelation(te)
+			rct:CreateEffectRelation(te)
 			if cost then cost(te,tep,eg,ep,ev,re,r,rp,1) end
 			if target~=te:GetTarget() then
 				target=te:GetTarget()
@@ -157,9 +157,9 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			for tg in aux.Next(g) do
 				tg:CreateEffectRelation(te)
 			end
-			tc:SetStatus(STATUS_ACTIVATED,true)
-			if tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
-				tc:SetStatus(STATUS_LEAVE_CONFIRMED,false)
+			rct:SetStatus(STATUS_ACTIVATED,true)
+			if rct:IsHasEffect(EFFECT_REMAIN_FIELD) then
+				rct:SetStatus(STATUS_LEAVE_CONFIRMED,false)
 			end
 			if operation~=te:GetOperation() then
 				operation=te:GetOperation()
@@ -170,12 +170,12 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 				tg:ReleaseEffectRelation(te)
 			end
 		else
-			if Duel.Destroy(tc,REASON_EFFECT)==0 then
-				Duel.SendtoGrave(tc,REASON_RULE)
+			if Duel.Destroy(rct,REASON_EFFECT)==0 then
+				Duel.SendtoGrave(rct,REASON_RULE)
 			end
 		end
 	else
-		Duel.ConfirmCards(tp,tc)
+		Duel.ConfirmCards(tp,rct)
 	end
 	if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		c:CancelToGrave()
