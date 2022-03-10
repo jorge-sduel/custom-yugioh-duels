@@ -35,7 +35,7 @@ end
 function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_SZONE+LOCATION_PZONE,0)
 	Duel.Destroy(g,REASON_EFFECT)
-	local og=Duel.GetOperatedGroup():Filter(Card.IsType,nil,TYPE_PENDULUM)
+	local og=Duel.GetOperatedGroup():Filter(Card.IsType,nil,TYPE_SPELL+TYPE_TRAP)
 	local ct=og:GetCount()
 	if ct>=1 then
 		Duel.BreakEffect()
