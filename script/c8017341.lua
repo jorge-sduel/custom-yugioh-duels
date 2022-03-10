@@ -145,7 +145,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ClearTargetCard()
 			e:SetProperty(te:GetProperty())
 			Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
-			if tc:GetType()==TYPE_TRAP then
+			if tc:GetType()==TYPE_TRAP or tc:GetType()==TYPE_SPELL then
 				tc:CancelToGrave(false)
 			end
 			tc:CreateEffectRelation(te)
