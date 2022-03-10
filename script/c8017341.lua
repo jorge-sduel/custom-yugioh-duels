@@ -171,7 +171,9 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 				tg:ReleaseEffectRelation(te)
 			end
 		else
-			if Duel.Destroy(tc,REASON_EFFECT)==0 then
+			if 
+ local g=Duel.SelectTarget(tp,cid.setfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
+Duel.Overlay(tc,c)==0 then
 				Duel.SendtoGrave(tc,REASON_RULE)
 			end
 		end
