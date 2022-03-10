@@ -122,22 +122,63 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 				Duel.ConfirmCards(1-tp,rc)
 				Duel.ConfirmCards(tp,rc)
 				if rct:IsType(TYPE_TRAP) then
-					local actcon=rct:GetActivateEffect():GetCondition()
-					if actcon(rct:GetActivateEffect(),tp,eg,ep,ev,re,r,rp) then
-						if rct:GetActivateEffect():GetCost() then
-							if rct:GetActivateEffect():GetCost()(e,tp,eg,ep,ev,re,r,rp,0) then
-								rct:GetActivateEffect():GetCost()(e,tp,eg,ep,ev,re,r,rp,1)
-							else
-								return
-							end
-						end
-						Duel.ChangePosition(rct,POS_FACEUP)
-						rct:RegisterFlagEffect(726,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CANNOT_DISABLE,1)
-					end
-				else
-					Duel.Destroy(rct,REASON_EFFECT)
-				end
+	local te=rct:GetActivateEffect()
+		local tep=rct:GetControler()
+		local condition
+		local cost
+		local target
+		local operation
+		if te then
+			condition=te:GetCondition()
+			cost=te:GetCost()
+			target=te:GetTarget()
+			operation=te:GetOperation()
+		end
+		local chk=te and te:GetCode()==EVENT_FREE_CHAIN and te:IsActivatable(tep)
+			and (not condition or condition(te,tep,eg,ep,ev,re,r,rp))
+			and (not cost or cost(te,tep,eg,ep,ev,re,r,rp,0))
+			and (not target or target(te,tep,eg,ep,ev,re,r,rp,0))
+		Duel.ChangePosition(tc,POS_FACEUP)
+		Duel.ConfirmCards(tp,tc)
+		if chk then
+			Duel.ClearTargetCard()
+			e:SetProperty(te:GetProperty())
+			Duel.Hint(HINT_CARD,0,tc:GetOriginalCode())
+			if tc:GetType()==TYPE_TRAP then
+				tc:CancelToGrave(false)
+			end
+			tc:CreateEffectRelation(te)
+			if cost then cost(te,tep,eg,ep,ev,re,r,rp,1) end
+			if target~=te:GetTarget() then
+				target=te:GetTarget()
+			end
+			if target then target(te,tep,eg,ep,ev,re,r,rp,1) end
+			local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+			for tg in aux.Next(g) do
+				tg:CreateEffectRelation(te)
+			end
+			tc:SetStatus(STATUS_ACTIVATED,true)
+			if tc:IsHasEffect(EFFECT_REMAIN_FIELD) then
+				tc:SetStatus(STATUS_LEAVE_CONFIRMED,false)
+			end
+			if operation~=te:GetOperation() then
+				operation=te:GetOperation()
+			end
+			if operation then operation(te,tep,eg,ep,ev,re,r,rp) end
+			tc:ReleaseEffectRelation(te)
+			for tg in aux.Next(g) do
+				tg:ReleaseEffectRelation(te)
+			end
+		else
+			if Duel.Destroy(tc,REASON_EFFECT)==0 then
+				Duel.SendtoGrave(tc,REASON_RULE)
 			end
 		end
+	else
+		Duel.ConfirmCards(tp,tc)
 	end
-end	
+	if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
+		c:CancelToGrave()
+		Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
+	end
+end
