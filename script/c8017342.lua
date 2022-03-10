@@ -60,7 +60,6 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ct>=4 and hg2:GetCount()>0 then
 		Duel.BreakEffect()
 	local shg=hg2:Select(tp,1,1,nil)
-		Duel.Destroy(srg,REASON_EFFECT)
 Duel.MoveToField(shg2,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
