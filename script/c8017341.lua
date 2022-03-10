@@ -182,4 +182,4 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
 	end
 end
-
+end
