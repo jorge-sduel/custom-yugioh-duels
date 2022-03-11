@@ -22,7 +22,7 @@ function cid.initial_effect(c)
 	p2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	p2:SetOperation(cid.atop)
 	c:RegisterEffect(p2)
-	--MONSTER EFFECTS
+	--MONSTER EFFECT
 	--special summon rule
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
