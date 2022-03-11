@@ -180,7 +180,7 @@ function cid.scop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,cid.scfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if g:GetCount()>0 then
-		if Duel.SendtoHand(g,nil,REASON_EFFECT)~=0 then
+		if Duel.SendtoHand(g,nil,REASON_EFFECT) then
 			Duel.ConfirmCards(1-tp,g)
 			if Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 				Duel.Destroy(c,REASON_EFFECT)
