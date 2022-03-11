@@ -1,7 +1,6 @@
 --Discepolo di Zextra
---Scripted by: XGlitchy30
 local cid,id=GetID()
-cid.IsEquilibrium
+cid.IsEquilibrium=true
 function cid.initial_effect(c)
 	Equilibrium.AddProcedure(c)
 	--destroy and search
