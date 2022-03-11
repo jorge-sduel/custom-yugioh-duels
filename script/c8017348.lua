@@ -76,7 +76,7 @@ function cid.racefilter(c,tp,race)
 	end
 end
 function cid.spcon(e,c)
-	return Duel.IsExistingMatchingCard(cid.racefilter,c:GetControler(),LOCATION_PZONE,0,1,nil,c:GetControler())
+	return Duel.IsExistingMatchingCard(cid.racefilter,tp,LOCATION_PZONE,0,1,nil,tp)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
