@@ -107,7 +107,7 @@ function cid.filter2(c)
 end
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_SZONE) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(cid.filter2,tp,LOCATION_SZONE,LOCATION_SZONE,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingTarget(cid.filter2,tp,LOCATION_SZONE,LOCATION_SZONE,1,e:GetHandler()) and Duel.IsExistingTarget(cid.setfilter,tp,LOCATION_PZONE,LOCATION_PZONE,1,e:GetHandler()) end
 	e:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEDOWN)
 	Duel.SelectTarget(tp,cid.filter2,tp,LOCATION_SZONE,LOCATION_SZONE,1,1,e:GetHandler())
