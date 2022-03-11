@@ -179,10 +179,11 @@ function cid.scop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,cid.scfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		Duel.SendtoHand(g,nil,REASON_EFFECT)
+		if Duel.ConfirmCards(1-tp,g) then
 			Duel.ConfirmCards(1-tp,g)
 			if Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 				Duel.Destroy(c,REASON_EFFECT)
+Duel.SendtoHand(g,nil,REASON_EFFECT)
 			end
 		end
 	end
