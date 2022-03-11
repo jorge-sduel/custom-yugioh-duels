@@ -1,7 +1,8 @@
 --Discepolo di Zextra
 local cid,id=GetID()
 cid.IsEquilibrium=true
-function cid.initial_effect(c) 
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
+function cid.initial_effect(c)
 	Equilibrium.AddProcedure(c)
 	--destroy and search
 	local p1=Effect.CreateEffect(c)
