@@ -11,6 +11,7 @@ function cid.initial_effect(c)
 	p1:SetRange(LOCATION_SZONE)
 	p1:SetCode(EVENT_FREE_CHAIN)
 	p1:SetCountLimit(1)
+	p1:SetCost(cid.cost)
 	p1:SetTarget(cid.thtg)
 	p1:SetOperation(cid.thop)
 	c:RegisterEffect(p1)
@@ -55,6 +56,19 @@ function cid.initial_effect(c)
 	e3:SetTarget(cid.sctg)
 	e3:SetOperation(cid.scop)
 	c:RegisterEffect(e3)
+--destroy
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(97268402,0))
+	e5:SetCategory(CATEGORY_DESTROY)
+	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e5:SetType(EFFECT_TYPE_IGNITION)
+	e5:SetRange(LOCATION_HAND)
+	e5:SetOperation(Equilibrium.desop)
+	c:RegisterEffect(e5)
+end
+function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 --DESTROY AND SEARCH
 --filters
