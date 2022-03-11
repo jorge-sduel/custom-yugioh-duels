@@ -98,7 +98,7 @@ function cid.tkop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local tc=Duel.GetFirstTarget()
 	if not Duel.IsPlayerCanSpecialSummonMonster(tp,tc:GetOriginalCode(),0,0x4011,tc:GetTextAttack(),tc:GetTextDefense(),tc:GetOriginalLevel(),tc:GetOriginalRace(),tc:GetOriginalAttribute()) then return end
-	local token=Duel.CreateToken(tp,8017350)
+	local token=Duel.CreateToken(tp,67284108)
 	if Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -191,7 +191,7 @@ function cid.tkop2(e,tp,eg,ep,ev,re,r,rp)
 		end
 		local p=tp
 		if op>0 then p=1-tp end
-		local token=Duel.CreateToken(tp,8017250)
+		local token=Duel.CreateToken(tp,67284108)
 		Duel.SpecialSummonStep(token,0,tp,p,false,false,POS_FACEUP_ATTACK)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
