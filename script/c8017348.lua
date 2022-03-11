@@ -1,7 +1,7 @@
 --Discepolo di Zextra
 local cid,id=GetID()
 cid.IsEquilibrium=true
-function cid.initial_effect(c)
+function cid.initial_effect(c) 
 	Equilibrium.AddProcedure(c)
 	--destroy and search
 	local p1=Effect.CreateEffect(c)
@@ -75,8 +75,12 @@ function cid.racefilter(c,tp,race)
 		return c:IsRace(race)
 	end
 end
-function cid.spcon(c)
-	return Duel.IsExistingMatchingCard(cid.racefilter,tp,LOCATION_PZONE,0,1,nil)
+function cid.spcon(e)
+	local tp=e:GetHandler():GetControler()
+	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
+	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+	if not tc1 or not tc2 then return false end
+	return tc1:GetRace()==tc2:GetRace()
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
