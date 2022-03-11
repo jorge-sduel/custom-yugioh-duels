@@ -59,7 +59,6 @@ function cid.initial_effect(c)
 --destroy
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(97268402,0))
-	e5:SetCategory(CATEGORY_DESTROY)
 	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_HAND)
