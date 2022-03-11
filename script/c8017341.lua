@@ -172,7 +172,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 				tg:ReleaseEffectRelation(te)
 			end
 		else
-			if Duel.Overlay(tc,c)==0 then
+			if Duel.Overlay(g,tg)==0 then
 				Duel.SendtoGrave(tc,REASON_RULE)
 			end
 		end
@@ -181,6 +181,5 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		c:CancelToGrave()
-		Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
 	end
 end
