@@ -63,7 +63,6 @@ function cid.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_HAND)
-	e5:SetCondition(cid.spcon)
 	e5:SetOperation(Equilibrium.desop)
 	c:RegisterEffect(e5)
 end
