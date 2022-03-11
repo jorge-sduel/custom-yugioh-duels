@@ -63,8 +63,22 @@ function cid.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_HAND)
+	e5:SetCondition(cid.spcon)
 	e5:SetOperation(Equilibrium.desop)
 	c:RegisterEffect(e5)
+end
+function cid.racefilter(c,tp,race)
+	if c:IsFacedown() then return false end
+	if not race then
+		return Duel.IsExistingMatchingCard(cid.racefilter,tp,LOCATION_PZONE,0,1,c,tp,c:GetRace())
+	else
+		return c:IsRace(race)
+	end
+end
+function cid.spcon(e,c)
+	if c==nil then return true end
+	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(cid.racefilter,c:GetControler(),LOCATION_PZONE,0,1,nil,c:GetControler())
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
