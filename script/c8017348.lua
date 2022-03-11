@@ -160,7 +160,7 @@ end
 --filters
 function cid.dcfilter(c,tp)
 	return c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:GetPreviousControler()==tp
-		and (c:IsPreviousLocation(LOCATION_MZONE) or c:IsPreviousLocation(LOCATION_SZONE) or c:IsPreviousLocation(LOCATION_FZONE) or c:IsPreviousLocation(LOCATION_PZONE)) 
+		and c:IsPreviousLocation(LOCATION_ONFIELD)
 end
 function cid.scfilter(c)
 	return c:IsType(TYPE_MONSTER) and c.IsEquilibrium and c:IsLevel(7) and c:IsAbleToHand()
