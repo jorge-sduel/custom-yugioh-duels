@@ -100,20 +100,20 @@ end
 --SPECIAL SUMMON RULE
 --filters
 function cid.cfilter(c)
-	return c:IsFaceup() and c:GetFlagEffect(726)>0
+	return c:IsFaceup()
 end
 ----------
 function cid.sprcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	local g=Duel.GetMatchingGroup(cid.cfilter,tp,LOCATION_SZONE,0,c)
+	local g=Duel.GetMatchingGroup(cid.cfilter,tp,LOCATION_PZONE,0,c)
 	return g:GetCount()>0 and ft>0
 end
 function cid.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	local g=Duel.GetMatchingGroup(cid.cfilter,tp,LOCATION_SZONE,0,c)
+	local g=Duel.GetMatchingGroup(cid.cfilter,tp,LOCATION_PZONE,0,c)
 	if #g<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local sg=g:Select(tp,1,1,nil)
@@ -138,7 +138,7 @@ function cid.dcfilter(c,tp)
 		and (c:IsPreviousLocation(LOCATION_MZONE) or c:IsPreviousLocation(LOCATION_SZONE) or c:IsPreviousLocation(LOCATION_FZONE) or c:IsPreviousLocation(LOCATION_PZONE)) 
 end
 function cid.scfilter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsType(TYPE_PANDEMONIUM) and c:IsLevel(7) and c:IsAbleToHand()
+	return c:IsType(TYPE_MONSTER) and c.IsEquilibrium and c:IsLevel(7) and c:IsAbleToHand()
 end
 ---------
 function cid.sccon(e,tp,eg,ep,ev,re,r,rp)
