@@ -1,5 +1,6 @@
 --Mysterious Water Fairy
 local s,id=GetID()
+s.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x88)
