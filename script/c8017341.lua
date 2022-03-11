@@ -172,7 +172,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 				tg:ReleaseEffectRelation(te)
 			end
 		else
-			if Duel.Overlay(g:GetFirst(),tg)==0 then
+			if Duel.Overlay(g:GetFirst(),tc)==0 then
 				Duel.SendtoGrave(tc,REASON_RULE)
 			end
 		end
