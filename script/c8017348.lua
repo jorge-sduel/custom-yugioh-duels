@@ -75,7 +75,7 @@ function cid.racefilter(c,tp,race)
 		return c:IsRace(race)
 	end
 end
-function cid.spcon(e,c)
+function cid.spcon(c)
 	return Duel.IsExistingMatchingCard(cid.racefilter,tp,LOCATION_PZONE,0,1,nil,tp)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
