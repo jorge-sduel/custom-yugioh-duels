@@ -138,7 +138,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		local g2=Duel.SelectMatchingCard(tp,cid.opposp,tp,LOCATION_HAND,0,2,2,nil,e,tp)
 		local tc2=g2:GetFirst()
 		while tc2 do
-			Duel.Summon(tc2,id,tp,tp,false,false,POS_FACEUP)
+			Duel.SpecialSummonStep(tc2,id,tp,tp,false,false,POS_FACEUP)
 			tc2=g2:GetNext()
 		end
 		local og=g2:Filter(Card.IsOnField,nil)
