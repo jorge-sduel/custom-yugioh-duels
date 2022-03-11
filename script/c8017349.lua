@@ -139,7 +139,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		local tc2=g2:GetFirst()
 		while tc2 do
 			Duel.Summon(tp,tc2,true,nil)
-			tc=g:GetNext()
+			tc=g2:GetNext()
 		end
 		local og=g2:Filter(Card.IsOnField,nil)
 		if #og<2 or og:GetClassCount(Card.GetRace)>1 or og:GetClassCount(Card.GetAttribute)>1 then
