@@ -138,10 +138,10 @@ end
 	-- return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 -- end
 -- function cid.pandfilter(c,e,tp,eg,ep,ev,re,r,rp)
-	-- return c.Pandemonium and not c:IsForbidden()
+	-- return c.IsEquilibrium and not c:IsForbidden()
 -- end
 -- function cid.ufilter(c,tp,ctype,ct,sg,e,eg,ep,ev,re,r,rp)
-	-- if not c:IsType(ctype) or c:IsForbidden() or (c.Pandemonium then return false end
+	-- if not c:IsType(ctype) or c:IsForbidden() or (c.IsEquilibrium then return false end
 	-- sg:AddCard(c)
 	-- local typ
 	-- if ct<2 then typ=TYPE_PENDULUM else typ=TYPE_PENDULUM end
@@ -214,7 +214,6 @@ function cid.placeop(e,tp,eg,ep,ev,re,r,rp)
 					-- exg:AddCard(tc2)
 					-- if not (tc1 and tc2) then return end
 					-- Duel.MoveToField(tc1,tp,p,LOCATION_SZONE,POS_FACEUP,true)
-					-- aux.PandAct(tc2,p,0x10|0x200)(e,tp,eg,ep,ev,re,r,rp)
 					-- local e1=Effect.CreateEffect(e:GetHandler())
 					-- e1:SetType(EFFECT_TYPE_SINGLE)
 					-- e1:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
