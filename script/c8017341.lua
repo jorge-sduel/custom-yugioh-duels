@@ -181,5 +181,6 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		c:CancelToGrave()
+		Duel.SendtoGrave(tc,REASON_RULE)
 	end
 end
