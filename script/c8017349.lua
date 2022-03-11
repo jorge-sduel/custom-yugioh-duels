@@ -135,13 +135,13 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	elseif p==200 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SUMMON)
-		local g=Duel.SelectMatchingCard(tp,cid.nfilter,tp,LOCATION_HAND,0,2,2,nil)
-		local tc=g:GetFirst()
-		while tc do
-			Duel.Summon(tp,tc,true,nil)
+		local g2=Duel.SelectMatchingCard(tp,cid.nfilter,tp,LOCATION_HAND,0,2,2,nil)
+		local tc2=g2:GetFirst()
+		while tc2 do
+			Duel.Summon(tp,tc2,true,nil)
 			tc=g:GetNext()
 		end
-		local og=g:Filter(Card.IsOnField,nil)
+		local og=g2:Filter(Card.IsOnField,nil)
 		if #og<2 or og:GetClassCount(Card.GetRace)>1 or og:GetClassCount(Card.GetAttribute)>1 then
 			local oc=og:GetFirst()
 			while oc do
