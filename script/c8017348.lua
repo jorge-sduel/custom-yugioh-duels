@@ -1,12 +1,13 @@
 --Discepolo di Zextra
 --Scripted by: XGlitchy30
 local cid,id=GetID()
+cid.IsEquilibrium
 function cid.initial_effect(c)
 	Equilibrium.AddProcedure(c)
 	--destroy and search
 	local p1=Effect.CreateEffect(c)
 	p1:SetDescription(aux.Stringid(id,0))
-	p1:SetCategory(CATEGORY_DESTROY+CATEGORY_SEARCH+CATEGORY_TOHAND)
+	p1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	p1:SetType(EFFECT_TYPE_QUICK_O)
 	p1:SetRange(LOCATION_SZONE)
 	p1:SetCode(EVENT_FREE_CHAIN)
@@ -64,7 +65,6 @@ end
 ---------
 function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.thfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK+LOCATION_GRAVE)
 end
 function cid.thop(e,tp,eg,ep,ev,re,r,rp)
