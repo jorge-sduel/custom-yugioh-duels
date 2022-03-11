@@ -1,15 +1,8 @@
 --Discepolo di Zextra
 --Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Equilibrium.AddProcedure(c)
 	--destroy and search
 	local p1=Effect.CreateEffect(c)
 	p1:SetDescription(aux.Stringid(id,0))
@@ -18,17 +11,14 @@ function cid.initial_effect(c)
 	p1:SetRange(LOCATION_SZONE)
 	p1:SetCode(EVENT_FREE_CHAIN)
 	p1:SetCountLimit(1)
-	p1:SetCondition(aux.PandActCheck)
 	p1:SetTarget(cid.thtg)
 	p1:SetOperation(cid.thop)
 	c:RegisterEffect(p1)
-	aux.EnablePandemoniumAttribute(c,p1)
 	--atk debuff
 	local p2=Effect.CreateEffect(c)
 	p2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	p2:SetRange(LOCATION_SZONE)
 	p2:SetCode(EVENT_SPSUMMON_SUCCESS)
-	p2:SetCondition(aux.PandActCheck)
 	p2:SetOperation(cid.atop)
 	c:RegisterEffect(p2)
 	--MONSTER EFFECTS
