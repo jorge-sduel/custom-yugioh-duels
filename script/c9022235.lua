@@ -12,6 +12,7 @@ Equilibrium.AddProcedure(c)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCountLimit(1)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e1:SetCost(cid.cost)
 	e1:SetTarget(cid.prottg)
 	e1:SetOperation(cid.protop)
 	c:RegisterEffect(e1)
@@ -82,6 +83,10 @@ function cid.protop(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.valcon(e,re,r,rp)
 	return bit.band(r,REASON_BATTLE+REASON_EFFECT)~=0
+end
+function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function cid.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.desfilter(chkc) and chkc~=e:GetHandler() end
