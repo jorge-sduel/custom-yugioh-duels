@@ -135,7 +135,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	elseif p==200 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SUMMON)
-		local g2=Duel.SelectMatchingCard(tp,cid.nfilter,tp,LOCATION_HAND,0,2,2,nil)
+		local g2=Duel.SelectMatchingCard(tp,cid.opposp,tp,LOCATION_HAND,0,2,2,nil,e,tp)
 		local tc2=g2:GetFirst()
 		while tc2 do
 			Duel.Summon(tp,tc2,true,nil)
