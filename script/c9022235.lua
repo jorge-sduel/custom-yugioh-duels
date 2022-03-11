@@ -1,6 +1,6 @@
 --Pandemoniumgraph Lich
 local cid,id=GetID()
-c.IsEquilibrium=true
+cid.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function cid.initial_effect(c)
 Equilibrium.AddProcedure(c)
@@ -69,7 +69,6 @@ function cid.protop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_PHASE+PHASE_END+RESET_OPPO_TURN,rct)
 		tc:RegisterEffect(e1)
 		Duel.BreakEffect()
-		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 	end
 end
 function cid.valcon(e,re,r,rp)
