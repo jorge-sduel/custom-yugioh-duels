@@ -12,7 +12,7 @@ function c16000007.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e1:SetCondition(Evolute.sumcon)
+	e1:SetCondition(c16000007.atkcon)
 	e1:SetOperation(c16000007.atkop)
 	c:RegisterEffect(e1)
  local e2=Effect.CreateEffect(c)
@@ -63,7 +63,8 @@ function c16000007.rcheck(g,lc,sumtype,tp)
 		and g:IsExists(Card.IsRace,1,nil,RACE_CYBERSE)
 end
 function c16000007.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE
+	local bc=e:GetHandler():GetBattleTarget()
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE and bc and bc:IsType(TYPE_EFFECT) and e:GetHandler():IsInExtraMZone()
 end
 function c16000007.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
