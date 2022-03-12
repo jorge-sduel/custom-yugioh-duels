@@ -16,7 +16,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 condition if Evolute summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE
 ]]
---Reunion Summon
+--Evolute Summon
 function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
     -- opp==true >> you can use opponent monsters as materials (default false)
     -- loc default LOCATION_MZONE
@@ -141,7 +141,7 @@ function Evolute.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
 				end
-				local mg=g:Filter(Reunion.ConditionFilter,nil,f,c,tp)
+				local mg=g:Filter(Evolute.ConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
 				if must then mustg:Merge(must) end
 				if min and min < minc then return false end
