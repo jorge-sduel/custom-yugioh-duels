@@ -5,7 +5,7 @@ HINTMSG_EVMATERIAL	= 400000
 EVOLUTE_IMPORTED	= true
 if not aux.EvoluteProcedure then
 	aux.EvoluteProcedure = {}
-	Reunion = aux.EvoluteProcedure
+	Evolute = aux.EvoluteProcedure
 end
 if not Evolute then
 	Evolute = aux.EvoluteProcedure
