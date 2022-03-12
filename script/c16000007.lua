@@ -54,22 +54,16 @@ function c16000007.initial_effect(c)
 	e6:SetCode(EFFECT_DISABLE)
 	c:RegisterEffect(e6)
 end
-
-
 function c16000007.matfilter(c,ec,tp)
 	return (c:IsAttribute(ATTRIBUTE_LIGHT) or c:IsAttribute(ATTRIBUTE_DARK)) or c:IsRace(RACE_CYBERSE) 
 end
 function c16000007.rcheck(g,lc,sumtype,tp)
-
-	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
-		and g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
-
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT) or g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
 		and g:IsExists(Card.IsRace,1,nil,RACE_CYBERSE)
 end
 function c16000007.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local bc=c:GetBattleTarget()
-	return c:GetSequence()>=5 and c:IsSummonType(SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE) and  bc 
+	return c:IsSummonType(SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE)
 end
 function c16000007.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
