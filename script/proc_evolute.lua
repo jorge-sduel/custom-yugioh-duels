@@ -260,5 +260,5 @@ function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function Evolute.sumcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_EVOLUTE
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE)
 end
