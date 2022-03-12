@@ -1,4 +1,4 @@
---E-Booktreeworm
+--E-Booktreeworm 
 c16000007.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function c16000007.initial_effect(c)
