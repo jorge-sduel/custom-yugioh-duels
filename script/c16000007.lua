@@ -62,7 +62,7 @@ function c16000007.rcheck(g,lc,sumtype,tp)
 		and g:IsExists(Card.IsRace,1,nil,RACE_CYBERSE)
 end
 function c16000007.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE
 end
 function c16000007.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
