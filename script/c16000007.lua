@@ -70,7 +70,7 @@ end
 function c16000007.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	return c:GetSequence()>=5 and c:IsSummonType(SUMMON_TYPE_SPECIAL+388) and  bc 
+	return c:GetSequence()>=5 and c:IsSummonType(SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE) and  bc 
 end
 function c16000007.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
