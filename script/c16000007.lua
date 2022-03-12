@@ -1,9 +1,11 @@
 --E-Booktreeworm
+c16000007.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function c16000007.initial_effect(c)
-		 --evolute procedure
-	aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,8,c16000007.filter1,c16000007.filter1,2,99)
-	c:EnableReviveLimit() 
+	c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	  --synchro summon
+   Evolute.AddProcedure(c,c16000007.matfilter,2,99,c16000007.lcheck)
   --atk up
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_ATKCHANGE)
@@ -55,10 +57,16 @@ function c16000007.initial_effect(c)
 end
 
 
-function c16000007.filter1(c,ec,tp)
-	return (c:IsAttribute(ATTRIBUTE_LIGHT) or c:IsAttribute(ATTRIBUTE_DARK)) or c:IsRace(RACE_FAIRY) 
+function c16000007.matfilter(c,ec,tp)
+	return (c:IsAttribute(ATTRIBUTE_LIGHT) or c:IsAttribute(ATTRIBUTE_DARK)) or c:IsRace(RACE_CYBERSE) 
 end
+function c16000007.rcheck(g,lc,sumtype,tp)
 
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
+		and g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
+
+		and g:IsExists(Card.IsRace,1,nil,RACE_CYBERSE)
+end
 function c16000007.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
