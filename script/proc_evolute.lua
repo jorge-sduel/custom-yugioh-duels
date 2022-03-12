@@ -1,6 +1,6 @@
 EFFECT_HAND_EVOLUTE	= 6011000
 REASON_EVOLUTE		= 0x400000000
-SUMMON_TYPE_EVOLUTE	= 0x400000
+SUMMON_TYPE_EVOLUTE 	= 0xe4000000000
 HINTMSG_EVMATERIAL	= 400000
 EVOLUTE_IMPORTED	= true
 if not aux.EvoluteProcedure then
@@ -50,6 +50,7 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e2:SetCategory(CATEGORY_COUNTER)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
+	e2:SetCondition(Evolute.sumcon)
 	e2:SetTarget(Evolute.addct)
 	e2:SetOperation(Evolute.addc)
 	c:RegisterEffect(e2)
@@ -257,4 +258,7 @@ function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
 		e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
 	end
+end
+function Evolute.sumcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
