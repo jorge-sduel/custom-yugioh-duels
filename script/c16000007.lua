@@ -90,7 +90,7 @@ function c16000007.atkop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e3)
 end
 function c16000007.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():GetCounter(0x88)>=4 then
+	if e:GetHandler():GetCounter(0x88)>=1 then
 		e:SetLabel(1)
 	else
 		e:SetLabel(0)
