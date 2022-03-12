@@ -90,14 +90,15 @@ function c16000007.atkop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e3)
 end
 function c16000007.checkop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if e:GetHandler():GetCounter(0x88)>=1 then
-		c:RegisterFlagEffect(16000007,RESET_EVENT+0x17a0000,0,0)
+	if e:GetHandler():GetCounter(0x88)>=4 then
+		e:SetLabel(1)
+	else
+		e:SetLabel(0)
 	end
 end
 function c16000007.sccon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousPosition(POS_FACEUP) and c:GetFlagEffect(16000007)>0
+	return c:IsPreviousPosition(POS_FACEUP) and e:GetLabelObject():GetLabel()==1
 end
 function c16000007.filter(c)
 	return c:IsRace(RACE_CYBERSE) and c:IsAbleToHand()
