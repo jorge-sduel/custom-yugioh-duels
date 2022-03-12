@@ -89,7 +89,6 @@ function c16000007.atkop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_DAMAGE_CAL)
 		e3:SetValue(c:GetAttack()*2)
 		c:RegisterEffect(e3)
-	end
 end
 function c16000007.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
