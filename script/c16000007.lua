@@ -98,7 +98,7 @@ function c16000007.checkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c16000007.sccon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsPreviousPosition(POS_FACEUP) and e:GetLabelObject():GetLabel()==1
+	return c:IsReason(REASON_DESTROY) and e:GetLabelObject():GetLabel()==1
 end
 function c16000007.filter(c)
 	return c:IsRace(RACE_CYBERSE) and c:IsAbleToHand()
