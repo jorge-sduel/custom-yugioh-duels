@@ -1,9 +1,11 @@
 --ESPergear Knight: Swordie
 local cid,id=GetID()
 function cid.initial_effect(c)
-		 aux.AddOrigEvoluteType(c)
-   aux.AddEvoluteProc(c,nil,5,aux.FilterBoolFunction(Card.IsCode,16000020),cid.matfilter,2,2)
-	c:EnableReviveLimit() 
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+function cid.initial_effect(c)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,cid.matfilter,2,2,cid.rcheck) 
 --atk
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
@@ -36,7 +38,11 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 function cid.matfilter(c,ec,tp)
-   return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsType(TYPE_UNION) and c:IsRace(RACE_MACHINE)
+   return c:IsAttribute(ATTRIBUTE_LIGHT) or c:IsRace(RACE_MACHINE)
+end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
+		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
