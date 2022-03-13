@@ -14,3 +14,4 @@ function cid.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
 		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
 end
+end
