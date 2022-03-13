@@ -4,7 +4,7 @@ function cid.initial_effect(c)
 cid.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,2,2)
+	Evolute.AddProcedure(c,nil,2,2,cid.rcheck)
 --atk
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
@@ -35,6 +35,10 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	local e6=e4:Clone()
 	e6:SetCode(EVENT_TO_DECK)
 	c:RegisterEffect(e6)
+end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
+		and g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
