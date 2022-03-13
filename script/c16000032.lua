@@ -118,3 +118,4 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		or mg:IsExists(cid.mgfilter,1,nil,e,tp,e:GetHandler()) then return end
 	Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 	end
+end
