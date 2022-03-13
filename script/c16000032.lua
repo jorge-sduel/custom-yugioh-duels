@@ -5,7 +5,7 @@ cid.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,cid.matfilter,2,2,cid.rcheck) 
+	Evolute.AddProcedure(c,nil,2,2,cid.rcheck) 
 --atk
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
