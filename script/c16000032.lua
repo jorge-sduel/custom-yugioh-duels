@@ -7,3 +7,4 @@ function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,2) 
 end
+end
