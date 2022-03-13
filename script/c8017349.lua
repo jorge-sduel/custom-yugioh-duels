@@ -8,25 +8,17 @@ function cid.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1,id+EFFECT_COUNT_CODE_OATH)
-	e1:SetCost(cid.spcost)
 	e1:SetTarget(cid.sptg)
 	e1:SetOperation(cid.spop)
 	c:RegisterEffect(e1)
-	Duel.AddCustomActivityCounter(id,ACTIVITY_SPSUMMON,cid.counterfilter)
 end
 --Activate
 --filters
-function cid.counterfilter(c)
-	return c:GetSummonLocation()~=LOCATION_EXTRA
-end
-function cid.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return c:IsLocation(LOCATION_EXTRA)
-end
 function cid.spfilter(c,e,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsLevelBelow(6) and c:IsSummonableCard() and c:IsCanBeSpecialSummoned(e,id,tp,false,false)
 end
 function cid.opposp(c,e,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,id,tp,false,false)
+	return c:IsType(TYPE_MONSTER) and c:IsLevelBelow(6) and c:IsCanBeSpecialSummoned(e,id,tp,false,false)
 end
 function cid.efilter(e,re)
 	return re:IsActiveType(TYPE_MONSTER) and e:GetHandler()~=re:GetHandler() and re:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+id)
@@ -35,17 +27,6 @@ function cid.nfilter(c)
 	return c:IsLevelBelow(4) and c:IsSummonable(true,nil)
 end
 ---------
-function cid.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)==0 end
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
-	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	e1:SetTargetRange(1,0)
-	e1:SetTarget(cid.splimit)
-	Duel.RegisterEffect(e1,tp)
-end
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local p=Duel.GetTurnPlayer()
