@@ -38,7 +38,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 end
 function cid.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
-		and g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
+		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
