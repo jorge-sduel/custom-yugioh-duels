@@ -42,7 +42,7 @@ function cid.rcheck(g,lc,sumtype,tp)
 		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
+	  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
 end
 function cid.filter(c)
