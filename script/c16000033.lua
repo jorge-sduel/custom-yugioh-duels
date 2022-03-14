@@ -66,7 +66,7 @@ function cid.desop(e,tp,eg,ep,ev,re,r,rp)
 		local tc=Duel.GetOperatedGroup():GetFirst()
 		Duel.ConfirmCards(1-tp,tc)
 		Duel.BreakEffect()
-		if tc:IsType(TYPE_MONSTER) and tc:IsType(TYPE_UNION) and tc:IsRace(RACE_MACHINE) and tc:IsAttribute(ATTRIBUTE_LIGHT) then
+		if tc:IsType(TYPE_MONSTER) and tc:IsAttribute(ATTRIBUTE_LIGHT) then
 			if tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 				and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 				and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
