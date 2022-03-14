@@ -1,9 +1,11 @@
 --ESPergear Leader :Supreme Swordtress
 local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,8,cid.matfilter,cid.filter2)
-	c:EnableReviveLimit() 
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
 	--Disable
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -40,7 +42,10 @@ end
 function cid.matfilter(c,ec,tp)
    return c:IsAttribute(ATTRIBUTE_LIGHT) 
 end
-
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
+		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
+end
 function cid.filter2(c,ec,tp)
 	return   (c:IsType(TYPE_UNION) and c:IsRace(RACE_MACHINE)) or c:IsRace(RACE_PSYCHO)
 end
@@ -52,8 +57,8 @@ function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	return bc and bc:GetSummonLocation()==LOCATION_EXTRA
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	   if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x88,4,REASON_COST)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 local c=e:GetHandler()
