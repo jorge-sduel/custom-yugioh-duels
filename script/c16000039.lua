@@ -78,7 +78,7 @@ function cid.negop(e,tp,eg,ep,ev,re,r,rp)
 		if rc:IsAbleToHand()
 			and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 			Duel.BreakEffect()
-			Duel.SendtoHand(rc,tp,nil,REASON_EFFECT)
+			Duel.SendtoHand(rc,tp,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,rc)
 	end
 end
