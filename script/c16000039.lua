@@ -1,9 +1,11 @@
 --ESPErgear Knight:Valkyrie
 local cid,id=GetID()
 function cid.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,9,aux.FilterBoolFunction(Card.IsCode,16000020),cid.matfilter,3,3)
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
 	--negate
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
@@ -47,6 +49,10 @@ function cid.initial_effect(c)
 end
 function cid.matfilter(c,ec,tp)
    return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsType(TYPE_UNION) and c:IsRace(RACE_MACHINE)
+end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
+		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
 end
 function cid.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
