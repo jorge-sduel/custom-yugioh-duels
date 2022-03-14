@@ -1,4 +1,5 @@
 --ESPergear Knight: Knigtie
+local cid,id=GetID()
 function cid.initial_effect(c)
 cid.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
