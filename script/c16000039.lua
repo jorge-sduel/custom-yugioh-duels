@@ -87,7 +87,7 @@ function cid.filter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
 end
 function cid.remcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+388
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE
 end
 function cid.remtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return  Duel.IsExistingMatchingCard(cid.filter,tp,0,LOCATION_ONFIELD,1,nil)
