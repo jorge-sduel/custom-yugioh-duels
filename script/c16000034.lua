@@ -1,9 +1,12 @@
 --ESPergear Knight : Lancie
 local cid,id=GetID()
 function cid.initial_effect(c)
-	   aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,7,aux.FilterBoolFunction(Card.IsCode,16000020),cid.matfilter,2,2)
-	c:EnableReviveLimit() 
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
+--atk
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -46,6 +49,10 @@ function cid.initial_effect(c)
 	e6:SetCode(EVENT_TO_DECK)
 	c:RegisterEffect(e6)
 end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
+		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
+end
 function cid.matfilter(c,ec,tp)
    return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsType(TYPE_UNION) and c:IsRace(RACE_MACHINE)
 end
@@ -56,8 +63,8 @@ function cid.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	return ec==nil or ec:GetFlagEffect(id)==0
 end
 function cid.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
 end
 function cid.xfilter(c)
 	return  c:IsAbleToChangeControler() and c:IsFaceup()
