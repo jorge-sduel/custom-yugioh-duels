@@ -1,9 +1,10 @@
 --Oak Gardna of Fiber VINE
 function c16000130.initial_effect(c)
-	   aux.AddOrigEvoluteType(c)
+c16000130.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,1,c16000130.filter2,c16000130.filter2,1,1)  
-
+	Evolute.AddProcedure(c,nil,2,2,c16000130.rcheck)
    local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
@@ -35,8 +36,10 @@ function c16000130.initial_effect(c)
 	e5:SetOperation(c16000130.spop)
 	c:RegisterEffect(e5)
 end
-
-
+function c16000130.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH)
+		and (g:IsExists(Card.IsRace,1,nil,RACE_PLANT) or g:IsExists(Card.IsRace,1,nil,RACE_INSECT))
+end
 function c16000130.filter2(c,ec,tp)
 	return c:IsRace(RACE_PLANT) or c:IsAttribute(ATTRIBUTE_EARTH)
 end
@@ -52,7 +55,7 @@ function c16000130.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	 return e:GetHandler():IsPreviousPosition(POS_FACEUP)  and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  c:GetFlagEffect(16000130)>0
 end
 function c16000130.filter(c,e,tp)
-	return c:IsSetCard(0x185a) and c:IsType(TYPE_RITUAL) and  c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) 
+	return  c:IsType(TYPE_RITUAL) and  c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) 
 end
 function c16000130.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
   if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -70,7 +73,7 @@ function c16000130.sumop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c16000130.spfilter(c,e,tp)
-	return c:IsType(TYPE_EVOLUTE) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL+388,tp,false,true) and not c:IsCode(16000130)
+	return c.IsEvolute and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE,tp,false,true) and not c:IsCode(16000130)
 end
 function c16000130.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
    if chk==0 then return Duel.GetLocationCountFromEx(tp)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
