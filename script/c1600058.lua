@@ -118,10 +118,6 @@ end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(e:GetLabelObject():GetLabel(),ATTRIBUTE_DARK)~=0
 end
---function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
- --   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
- --   e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST)
---end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
@@ -139,10 +135,6 @@ end
 function s.condition2(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(e:GetLabelObject():GetLabel(),ATTRIBUTE_LIGHT)~=0
 end
---function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
- --   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
- --   e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST)
---end
 function s.filter(c)
 	return c:IsType(TYPE_EFFECT) and c:IsFaceup()  and c:IsDestructable()
 end
@@ -164,10 +156,6 @@ end
 function s.condition3(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(e:GetLabelObject():GetLabel(),ATTRIBUTE_FIRE)~=0
 end
---function s.cost3(e,tp,eg,ep,ev,re,r,rp,chk)
- --   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
- --   e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST)
---end
 function s.cost3(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,2,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,0x88,2,REASON_COST)
@@ -186,10 +174,6 @@ end
 function s.condition4(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(e:GetLabelObject():GetLabel(),ATTRIBUTE_WATER)~=0
 end
---function s.cost4(e,tp,eg,ep,ev,re,r,rp,chk)
- --   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
- --   e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST)
---end
 function s.cost4(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,4,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,0x88,4,REASON_COST)
@@ -226,13 +210,8 @@ end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(e:GetLabelObject():GetLabel(),ATTRIBUTE_EARTH)~=0
 end
-
---function s.cost5(e,tp,eg,ep,ev,re,r,rp,chk)
- --   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
- --   e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST)
---end
 function s.spfilter(c,e,tp)
-	return  c:IsSetCard(0xcf6) or (c:IsFaceup() and c:IsSetCard(0xcf6) and c:IsType(TYPE_PANDEMONIUM)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return  c:IsSetCard(0xcf6) or (c:IsFaceup() and c:IsSetCard(0xcf6) and c.IsEquilibrium) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.cost5(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,4,REASON_COST) end
