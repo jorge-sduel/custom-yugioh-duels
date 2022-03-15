@@ -53,7 +53,7 @@ function c16000130.regop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c16000130.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	 return e:GetHandler():IsPreviousPosition(POS_FACEUP)  and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  c:GetFlagEffect(16000130)>0
+	 return e:GetHandler():IsPreviousPosition(POS_FACEUP)  and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  e:GetLabelObject():GetLabel()==1
 end
 function c16000130.filter(c,e,tp)
 	return  c:IsType(TYPE_RITUAL) and  c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) 
