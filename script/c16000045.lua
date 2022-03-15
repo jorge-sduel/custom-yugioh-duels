@@ -1,8 +1,11 @@
 --ESPergear Knight : Gladiator 
 local cid,id=GetID()
 function cid.initial_effect(c)
-  Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
-	c:EnableReviveLimit() 
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,2,cid.rcheck)
 	 local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetCategory(CATEGORY_TODECK)
