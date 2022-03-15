@@ -1,9 +1,11 @@
 --Ivy Gardna of Fiber VINE
 local cid,id=GetID()
 function cid.initial_effect(c)
-		   aux.AddOrigEvoluteType(c)
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,1,aux.FilterBoolFunction(Card.IsSetCard,0x185a),1,1)  
+	Evolute.AddProcedure(c,nil,2,2,cid.rcheck)  
    local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -24,13 +26,16 @@ function cid.initial_effect(c)
 	e5:SetCode(EFFECT_NO_EFFECT_DAMAGE)
 	c:RegisterEffect(e5)
 end
-
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_earth)
+		and (g:IsExists(Card.IsRace,1,nil,RACE_PLANT) OR (g:IsExists(Card.IsRace,1,nil,RACE_INSECT))
+end
 function cid.effcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp and bit.band(r,REASON_EFFECT)~=0
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
  local c=e:GetHandler()
-if c:RemoveEC(tp,1,REASON_EFFECT) ~=0 then
+if c:RemoveCounter(tp,0x881,REASON_EFFECT) ~=0 then
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_REVERSE_UPDATE)
