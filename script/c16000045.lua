@@ -43,6 +43,10 @@ function cid.initial_effect(c)
 	e6:SetCode(EVENT_TO_DECK)
 	c:RegisterEffect(e6)  
 end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
+		and g:IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
+end
 function cid.matfilter(c,ec,tp)
    return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsType(TYPE_UNION) and c:IsRace(RACE_MACHINE)
 end
