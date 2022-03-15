@@ -27,7 +27,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:RegisterEffect(e5)
 end
 function cid.rcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_earth)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH)
 		and (g:IsExists(Card.IsRace,1,nil,RACE_PLANT) or g:IsExists(Card.IsRace,1,nil,RACE_INSECT))
 end
 function cid.effcon(e,tp,eg,ep,ev,re,r,rp)
