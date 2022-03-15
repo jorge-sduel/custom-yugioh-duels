@@ -36,7 +36,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e5:SetTarget(c16000130.sptg)
 	e5:SetOperation(c16000130.spop)
 	c:RegisterEffect(e5)
-field or in GY
+--field or in GY
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
 	e6:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
