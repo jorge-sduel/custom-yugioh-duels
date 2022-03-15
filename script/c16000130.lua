@@ -25,6 +25,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e4:SetCode(EVENT_LEAVE_FIELD)
 	e4:SetCountLimit(1,16000130)
+	e4:SetLabelObject(e0)
 	e4:SetCondition(c16000130.sumcon)
 	e4:SetTarget(c16000130.sumtg)
 	e4:SetOperation(c16000130.sumop)
@@ -44,12 +45,12 @@ function c16000130.filter2(c,ec,tp)
 	return c:IsRace(RACE_PLANT) or c:IsAttribute(ATTRIBUTE_EARTH)
 end
 function c16000130.regop(e,tp,eg,ep,ev,re,r,rp)
-	  local c=e:GetHandler()
-	if c:GetCounter(0x88)()>0 then
-		c:RegisterFlagEffect(16000130,RESET_EVENT+0x17a0000,0,0)
+	if e:GetHandler():GetCounter(0x88)>=1 then
+		e:SetLabel(1)
+	else
+		e:SetLabel(0)
 	end
 end
-
 function c16000130.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	 return e:GetHandler():IsPreviousPosition(POS_FACEUP)  and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  c:GetFlagEffect(16000130)>0
