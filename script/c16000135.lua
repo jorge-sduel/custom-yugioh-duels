@@ -35,7 +35,6 @@ function cid.effcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
  local c=e:GetHandler()
-if c:RemoveCounter(tp,0x881,REASON_EFFECT) ~=0 then
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_REVERSE_UPDATE)
@@ -43,6 +42,5 @@ if c:RemoveCounter(tp,0x881,REASON_EFFECT) ~=0 then
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	Duel.RegisterEffect(e1,tp)
-end
 end
 
