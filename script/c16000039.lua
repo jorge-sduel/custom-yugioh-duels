@@ -52,7 +52,7 @@ function cid.matfilter(c,ec,tp)
 end
 function cid.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
-		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
+		and g:IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
 end
 function cid.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
