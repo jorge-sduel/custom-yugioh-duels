@@ -43,4 +43,8 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	Duel.RegisterEffect(e1,tp)
 end
+function cid.damval(e,re,val,r,rp,rc)
 
+	if bit.band(r,REASON_EFFECT)~=0 then return 0
+	else return val end
+end
