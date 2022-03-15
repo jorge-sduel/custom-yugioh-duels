@@ -45,7 +45,7 @@ function c16000130.filter2(c,ec,tp)
 end
 function c16000130.regop(e,tp,eg,ep,ev,re,r,rp)
 	  local c=e:GetHandler()
-	if c:GetEC()>0 then
+	if c:GetCounter(0x88)()>0 then
 		c:RegisterFlagEffect(16000130,RESET_EVENT+0x17a0000,0,0)
 	end
 end
