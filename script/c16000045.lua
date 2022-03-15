@@ -1,8 +1,7 @@
 --ESPergear Knight : Gladiator 
 local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,10,aux.FilterBoolFunction(Card.IsCode,16000020),cid.matfilter,3,3)
+  Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
 	c:EnableReviveLimit() 
 	 local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
