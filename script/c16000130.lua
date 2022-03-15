@@ -36,6 +36,14 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e5:SetTarget(c16000130.sptg)
 	e5:SetOperation(c16000130.spop)
 	c:RegisterEffect(e5)
+field or in GY
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e6:SetCode(EFFECT_ADD_RACE)
+	e6:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e6:SetValue(RACE_INSECT)
+	c:RegisterEffect(e6)
 end
 function c16000130.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH)
