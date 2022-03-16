@@ -4,7 +4,7 @@ c16000228.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,2,2,c16000228.rcheck)
+	Evolute.AddProcedure(c,nil,2,99,c16000228.rcheck)
 	--to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(16000228,0))
