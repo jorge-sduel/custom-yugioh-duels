@@ -60,7 +60,7 @@ function c16000228.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function c16000228.etarget(e,c)
-	return c:IsRace(RACE_PLANT) and c:IsPosition (POS_FACEUP_DEFENSE)
+	return c:IsRace(RACE_PLANT) and c:IsPosition(POS_FACEUP_DEFENSE)
 end
 function c16000228.efilter(e,re)
 	return re:IsActiveType(TYPE_MONSTER) and te:GetOwnerPlayer()~=e:GetOwnerPlayer()
