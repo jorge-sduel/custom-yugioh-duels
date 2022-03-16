@@ -1,9 +1,11 @@
 --Chaotic Mindgeist Archfiend
 local cid,id=GetID()
 function cid.initial_effect(c)
-		aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,10,cid.filter1,cid.filter1,3,99)
-	c:EnableReviveLimit() 
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
   --spsummon condition
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -35,8 +37,12 @@ function cid.initial_effect(c)
 	e3:SetOperation(cid.desop)
 	c:RegisterEffect(e3)
 end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
+		and (g:IsExists(Card.IsRace,1,nil,RACE_FIEND) or g:IsExists(Card.IsRace,1,nil,RACE_PSYCHIC))
+end
 function cid.splimit(e,se,sp,st)
-	return st==SUMMON_TYPE_SPECIAL+388
+	return st==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE
 end
 function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -66,8 +72,8 @@ end
 
 function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
    local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x88,4,REASON_COST)
 	c:RegisterFlagEffect(id,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 
