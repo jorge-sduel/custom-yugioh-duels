@@ -1,8 +1,10 @@
 --Allure Rose Maiden
 function c16000228.initial_effect(c)
-		aux.AddOrigEvoluteType(c)
+c16000228.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,3,c16000228.filter2,c16000228.filter2,1,1)
+	Evolute.AddProcedure(c,nil,2,2,c16000228.rcheck)
 	--to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(16000228,0))
@@ -16,18 +18,19 @@ function c16000228.initial_effect(c)
 	e1:SetOperation(c16000228.thop)
 	c:RegisterEffect(e1)
 	--immune
-	--local e2=Effect.CreateEffect(c)
-   -- e2:SetType(EFFECT_TYPE_FIELD)
-	--e2:SetCode(EFFECT_IMMUNE_EFFECT)
-   -- e2:SetRange(LOCATION_MZONE)
-   -- e2:SetTargetRange(LOCATION_MZONE,0)
-   -- e2:SetTarget(c16000228.etarget)
-   -- e2:SetValue(c16000228.efilter)
-   -- c:RegisterEffect(e2)  
+	local e2=Effect.CreateEffect(c)
+    e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_IMMUNE_EFFECT)
+    e2:SetRange(LOCATION_MZONE)
+    e2:SetTargetRange(LOCATION_MZONE,0)
+    e2:SetTarget(c16000228.etarget)
+    e2:SetValue(c16000228.efilter)
+    c:RegisterEffect(e2)  
 end
-
-
-
+function c16000228.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER)
+		and g:IsExists(Card.IsRace,1,nil,RACE_PLANT)
+end
 function c16000228.filter2(c,ec,tp)
 	return c:IsRace(RACE_PLANT) or c:IsAttribute(ATTRIBUTE_WATER)
 end
@@ -43,8 +46,8 @@ function c16000228.discfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_PLANT) and c:IsAbleToGraveAsCost() and not c:IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function c16000228.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	   if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) and Duel.IsExistingMatchingCard(c16000228.discfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,c) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x8,3,REASON_COST) and Duel.IsExistingMatchingCard(c16000228.discfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,c) end
+	e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,c16000228.discfilter,tp,LOCATION_ONFIELD,0,1,1,c)
 	Duel.SendtoGrave(g,REASON_COST)
