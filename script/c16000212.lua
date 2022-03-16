@@ -41,7 +41,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e4:SetCode(EFFECT_CHANGE_CODE)
-	e4:SetValue(70781052)
+	e4:SetValue(CARD_SUMMONED_SKULL)
 	c:RegisterEffect(e4)
 end
 function cid.rcheck(g,lc,sumtype,tp)
