@@ -1,9 +1,11 @@
 --Paintress EX: Cubist Picassudu
 local cid,id=GetID()
 function cid.initial_effect(c)
-   aux.AddOrigEvoluteType(c)
+   cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,6,aux.FilterBoolFunction(Card.IsSetCard,0xc50),2,99)
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
 	--attack up
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_CONTROL+CATEGORY_DISABLE)
@@ -34,9 +36,12 @@ function cid.checku(sg,ec,tp)
 return sg:IsExists(Card.IsType,1,nil,TYPE_NORMAL)
 end
 function cid.filter1(c,ec,tp)
-	return  c:IsType(TYPE_TOKEN)
+	return c:IsType(TYPE_TOKEN)
 end
-
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
+		and g:IsExists(Card.IsRace,1,nil,RACE_FAIRY)
+end
 function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	local ph=Duel.GetCurrentPhase()
 	return Duel.GetTurnPlayer()~=tp 
