@@ -1,7 +1,7 @@
 --Gravity Collapse Dragon
 function c866.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x5DC),aux.NonTuner(nil),1)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x5DC),aux.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--Lock
 	local e1=Effect.CreateEffect(c)
