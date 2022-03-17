@@ -1,7 +1,7 @@
 --Star-vader, Chaos Breaker Dragon
 function c858.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.XyzFilterFunction(c,8),2)
+	Xyz.AddProcedure(c,8,2)
 	c:EnableReviveLimit()
 	--cannot be destroyed
 	local e1=Effect.CreateEffect(c)
