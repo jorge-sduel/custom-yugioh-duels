@@ -1,7 +1,7 @@
 --Star-vader, Nebula Lord Dragon
 function c854.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),Synchro.NonTunerEx(Card.IsSetCard,0x5DC),1,99)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),1,1,Synchro.NonTunerEx(Card.IsSetCard,0x5DC),1,99)
 	c:EnableReviveLimit()
 	--cannot be destroyed
 	local e1=Effect.CreateEffect(c)
