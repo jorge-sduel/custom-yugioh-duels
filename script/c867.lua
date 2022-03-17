@@ -1,7 +1,7 @@
 --Schwarzschild Dragon
 function c867.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x5DC),Synchro.NonTunerEx(nil),1,99)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x5DC),1,1,Synchro.NonTunerEx(nil),1,99)
 	c:EnableReviveLimit()
 	--Add "Star-vader" or "Reverse"
 	local e1=Effect.CreateEffect(c)
