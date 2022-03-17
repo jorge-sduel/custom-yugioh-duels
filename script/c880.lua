@@ -1,7 +1,7 @@
 --Star-vader, Freeze Ray Dragon
 function c880.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x5DC),aux.NonTuner(nil),1,99)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x5DC),Synchro.NonTunerEx(nil),1,99)
 	c:EnableReviveLimit()
 	--Lock
 	local e1=Effect.CreateEffect(c)
