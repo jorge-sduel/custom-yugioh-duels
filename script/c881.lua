@@ -1,7 +1,7 @@
 --Star-vader, Dark Band Dragon
 function c881.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x5DC),aux.NonTuner(nil),1)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x5DC),aux.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--cannot be destroyed
 	local e1=Effect.CreateEffect(c)
