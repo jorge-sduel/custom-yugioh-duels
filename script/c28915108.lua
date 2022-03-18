@@ -1,6 +1,5 @@
 --Corona Spell
-local ref=_G['c'..28915108]
-local id=28915108
+local ref,id=GetID()
 function ref.initial_effect(c)
 	--Corona Card
 	aux.EnableCoronaNeo(c,1,1,ref.matfilter)
