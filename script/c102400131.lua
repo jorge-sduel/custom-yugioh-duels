@@ -3,7 +3,7 @@
 local cid,id=GetID()
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_MACHINE),5,2)
+	Xyz.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_MACHINE),5,2)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
