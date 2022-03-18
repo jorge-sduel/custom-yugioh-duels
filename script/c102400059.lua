@@ -36,9 +36,6 @@ function cid.tgfilter(c,e,tp,n)
 	return c:IsFaceup() and c:IsCode(CARD_CYBER_DRAGON) and c:IsCanBeFusionMaterial()
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
 end
-function cid.spfilter(c,tc,tp)
-	return c:IsType(TYPE_FUSION)
-end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local t={}
 	for i=2,6 do
