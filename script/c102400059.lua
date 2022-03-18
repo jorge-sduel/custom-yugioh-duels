@@ -34,7 +34,6 @@ function cid.initial_effect(c)
 end
 function cid.tgfilter(c,e,tp,n)
 	return c:IsFaceup() and c:IsCode(CARD_CYBER_DRAGON) and c:IsCanBeFusionMaterial()
-		and Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c,n)
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
 end
 function cid.spfilter(c,e,tp,tc,n)
