@@ -29,7 +29,7 @@ function c2101997268.initial_effect(c)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e0:SetCode(EFFECT_LEVEL_RANK)
+	e0:SetCode(EFFECT_RANK_LEVEL)
 	c:RegisterEffect(e0)
 end
 function c2101997268.cfilter(c,tp)
