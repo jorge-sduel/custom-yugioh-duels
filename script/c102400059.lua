@@ -37,7 +37,6 @@ function cid.tgfilter(c,e,tp,n)
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
 end
 function cid.spfilter(c,e,tp,tc,n)
-	if not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) then return false end
 	local g=Group.FromCards(tc)
 	for i=2,n do
 		local tk=Duel.CreateToken(tp,CARD_CYBER_DRAGON)
