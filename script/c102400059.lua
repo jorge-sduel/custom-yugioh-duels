@@ -37,7 +37,7 @@ function cid.tgfilter(c,e,tp,n)
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
 end
 function cid.spfilter(c,tc,tp)
-	return c:IsType(TYPE_FUSION) and not c:IsCode(tc:GetCode(nil,SUMMON_TYPE_FUSION,tp))
+	return c:IsType(TYPE_FUSION)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local t={}
