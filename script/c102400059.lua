@@ -37,8 +37,7 @@ function cid.tgfilter(c,e,tp,n)
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
 end
 function cid.spfilter(c,e,tp,tc,n)
-	return c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:IsCode(CARD_CYBER_DRAGON) and c:IsCanBeFusionMaterial()
-		and Duel.GetLocationCountFromEx(tp,tp,c)>0
+	return c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local t={}
