@@ -37,7 +37,6 @@ function cid.tgfilter(c,e,tp,n)
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
 end
 function cid.spfilter(c,e,tp,tc,n)
-	local g=Group.FromCards(tc)
 	for i=2,n do
 		local tk=Duel.CreateToken(tp,CARD_CYBER_DRAGON)
 		g:AddCard(tk)
