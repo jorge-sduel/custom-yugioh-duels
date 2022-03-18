@@ -36,22 +36,6 @@ function cid.tgfilter(c,e,tp,n)
 	return c:IsFaceup() and c:IsCode(CARD_CYBER_DRAGON) and c:IsCanBeFusionMaterial()
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
 end
-function cid.spfilter(c,e,tp,tc,n)
-	if not (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false)) then return false end
-	local g=Group.FromCards(tc)
-	for i=2,n do
-		Duel.DisableActionCheck(true)
-		local tk=Duel.CreateToken(tp,CARD_CYBER_DRAGON)
-		Duel.DisableActionCheck(false)
-		g:AddCard(tk)
-	end
-	aux.FCheckAdditional=function(tp,sg,fc)
-		return sg:GetCount()==n or fc:IsCode(CARD_CYBER_DRAGON)
-	end
-	local res=c:CheckFusionMaterial(g,nil,tp)
-	aux.FCheckAdditional=nil
-	return res
-end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local t={}
 	for i=2,6 do
