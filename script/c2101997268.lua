@@ -25,6 +25,12 @@ function c2101997268.initial_effect(c)
 	e2:SetTarget(c2101997268.thtg)
 	e2:SetOperation(c2101997268.thop)
 	c:RegisterEffect(e2)
+	--level/rank
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e0:SetCode(EFFECT_LEVEL_RANK)
+	c:RegisterEffect(e0)
 end
 function c2101997268.cfilter(c,tp)
 	return c:IsFaceup() and c:IsSetCard(0x1093) and c:IsControler(tp)
