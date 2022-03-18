@@ -18,7 +18,7 @@ function cid.initial_effect(c)
 	end
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_ADD_FUSION_CODE)
+	e2:SetCode(EFFECT_ADD_CODE)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e2:SetValue(CARD_CYBER_DRAGON)
 	c:RegisterEffect(e2)
