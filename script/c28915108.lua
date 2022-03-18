@@ -1,8 +1,6 @@
 --Corona Spell
 local ref,id=GetID()
 function ref.initial_effect(c)
-	--Corona Card
-	aux.EnableCoronaNeo(c,1,1,ref.matfilter)
 	--Cannot Summon
 	c:EnableReviveLimit()
 	local e0=Effect.CreateEffect(c)
