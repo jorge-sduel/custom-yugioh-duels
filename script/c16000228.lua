@@ -17,15 +17,6 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetTarget(c16000228.thtg)
 	e1:SetOperation(c16000228.thop)
 	c:RegisterEffect(e1)
-	--immune
-	local e2=Effect.CreateEffect(c)
-    e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_IMMUNE_EFFECT)
-    e2:SetRange(LOCATION_MZONE)
-    e2:SetTargetRange(LOCATION_MZONE,0)
-    e2:SetTarget(c16000228.etarget)
-    e2:SetValue(c16000228.efilter)
-    c:RegisterEffect(e2)  
 end
 function c16000228.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER)
@@ -54,11 +45,4 @@ function c16000228.thop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 	end
-end
-
-function c16000228.etarget(e,c)
-	return c:IsRace(RACE_PLANT)
-end
-function c16000228.efilter(e,re)
-	return re:IsActiveType(TYPE_MONSTER)
 end
