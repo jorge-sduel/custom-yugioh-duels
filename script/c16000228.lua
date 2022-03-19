@@ -49,7 +49,7 @@ function c16000228.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x8,3,REASON_COST) and Duel.IsExistingMatchingCard(c16000228.discfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,c) end
 	e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,c16000228.discfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,1,c)
+	local g=Duel.SelectMatchingCard(tp,c16000228.discfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,1,e:GetHandler())
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function c16000228.thop(e,tp,eg,ep,ev,re,r,rp)
@@ -60,7 +60,7 @@ function c16000228.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function c16000228.etarget(e,c)
-	return c:IsRace(RACE_PLANT) and c:IsPosition(POS_FACEUP_DEFENSE)
+	return c:IsRace(RACE_PLANT)
 end
 function c16000228.efilter(e,re)
 	return re:IsActiveType(TYPE_MONSTER) and te:GetOwnerPlayer()~=e:GetOwnerPlayer()
