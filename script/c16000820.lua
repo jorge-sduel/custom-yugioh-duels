@@ -1,8 +1,9 @@
 --Medivatale Tortoise
-local ref=_G['c'..16000820]
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function c16000820.initial_effect(c)
 c:EnableCounterPermit(0x88)
- aux.AddOrigPandemoniumType(c)
+	--
+	Equilibrium.AddProcedure(c)
 --If this card is activated: You can add 1 "Medivatale" card from your Deck or GY to your hand. You can destroy this card, and if you do, all Evolute Monsters you control gain 4 E-C. You can only use each effect of "Medivatale Tortoise" once per turn.
  local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
@@ -11,11 +12,9 @@ c:EnableCounterPermit(0x88)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	--e1:SetRange(LOCATION_SZONE)
 	e1:SetCountLimit(1,16000820)
-	e1:SetCondition(aux.PandActCheck)
 	e1:SetTarget(c16000820.target)
 	e1:SetOperation(c16000820.activate)
-	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1) 
+	c:RegisterEffect(e1) 
 	  --Evolute
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(16000820,1))
@@ -77,7 +76,7 @@ function c16000820.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c16000820.xfilter(c)
-	return c:IsType(TYPE_EVOLUTE) and c:IsFaceup() 
+	return c.IsEvolute and c:IsFaceup() 
 end
 
 function c16000820.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
