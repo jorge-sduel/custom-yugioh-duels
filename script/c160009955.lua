@@ -12,7 +12,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetCountLimit(1)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCost(c160009955.cost)
+	e1:SetCost(c160009955.spcost)
 	e1:SetTarget(c160009955.target)
 	e1:SetOperation(c160009955.operation)
 	c:RegisterEffect(e1)
