@@ -1,15 +1,5 @@
 --Paracyclis Perfect Defense, Starshield
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
 local s,id=getID()
-
 function s.initial_effect(c)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
@@ -36,7 +26,7 @@ function s.initial_effect(c)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker():IsControler(1-tp)
-		and Duel.GetAttackTarget() and Duel.GetAttackTarget():IsSetCard(0x308)
+		and Duel.GetAttackTarget() and Duel.GetAttackTarget():IsRace(RACE_INSECT)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetAttacker():IsCanTurnSet()
@@ -66,7 +56,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.repfilter(c,tp)
-	return c:IsFaceup() and (c:IsSetCard(0X3308) or c:IsSetCard(0X5308)) and c:IsLocation(LOCATION_MZONE)
+	return c:IsFaceup() and c:IsRace(RACE_INSECT) and c:IsLocation(LOCATION_MZONE)
 		and c:IsControler(tp) and c:IsReason(REASON_EFFECT+REASON_BATTLE) and not c:IsReason(REASON_REPLACE)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
