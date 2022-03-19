@@ -36,6 +36,10 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:RegisterEffect(e3)
   Duel.AddCustomActivityCounter(160009955,ACTIVITY_SPSUMMON,c160009955.counterfilter)
 end
+function c160009955.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE)
+		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
+end
 function c160009955.counterfilter(c)
 	return c:GetSummonLocation()~=LOCATION_EXTRA
 end
