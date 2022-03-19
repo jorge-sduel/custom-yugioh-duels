@@ -1,8 +1,10 @@
 --All-Rose Dragon of Rose VINE
 function c16000550.initial_effect(c)
-			aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,8,c16000550.filter1,c16000550.filter2)
-	c:EnableReviveLimit() 
+c16000550.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99) 
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
@@ -33,8 +35,8 @@ function c16000550.filter(c)
 	return c:IsType(TYPE_MONSTER) and not c:IsForbidden()
 end
 function c16000550.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-   e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,4,REASON_COST) end
+   e:GetHandler():RemoveCounter(tp,0x88,4,REASON_COST)
 end
 function c16000550.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
