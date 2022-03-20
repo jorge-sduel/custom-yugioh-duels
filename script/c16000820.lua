@@ -50,7 +50,6 @@ c:EnableCounterPermit(0x88)
 --destroy
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(97268402,0))
-	e7:SetCategory(CATEGORY_DESTROY)
 	e7:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e7:SetType(EFFECT_TYPE_IGNITION)
 	e7:SetRange(LOCATION_HAND)
@@ -198,7 +197,7 @@ function c16000820.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c16000820.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_PZONE) and c16000820.desfilter(chkc) and chkc~=e:GetHandler() end
-	if chk==0 then return Duel.IsExistingTarget(c16000820.filter,tp,LOCATION_PZONE,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingTarget(c16000820.desfilter,tp,LOCATION_PZONE,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,c16000820.desfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
