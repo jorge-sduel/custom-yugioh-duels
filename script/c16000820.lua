@@ -57,6 +57,16 @@ c:EnableCounterPermit(0x88)
 	e6:SetCondition(c16000820.condition2)
 	e6:SetOperation(c16000820.operation2)
 	c:RegisterEffect(e6)
+--destroy
+	local e7=Effect.CreateEffect(c)
+	e7:SetDescription(aux.Stringid(97268402,0))
+	e7:SetCategory(CATEGORY_DESTROY)
+	e7:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e7:SetType(EFFECT_TYPE_IGNITION)
+	e7:SetRange(LOCATION_HAND)
+	e7:SetTarget(c16000820.destarget)
+	e7:SetOperation(Equilibrium.desop1)
+	c:RegisterEffect(e7)
 end
 function c16000820.filter(c)
 	return c:IsSetCard(0xab5) and c:IsAbleToHand()
@@ -195,4 +205,11 @@ function c16000820.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)~=0 and c:IsRelateToEffect(e) then
 		c:RemoveCounter(tp,0x88,2,REASON_EFFECT)
 	end
+end
+function c16000820.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.desfilter(chkc) and chkc~=e:GetHandler() end
+	if chk==0 then return Duel.IsExistingTarget(cid.filter,tp,LOCATION_PZONE,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g=Duel.SelectTarget(tp,cid.desfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
