@@ -120,7 +120,7 @@ function c16000550.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLinkState()
 end
 function c16000550.xxxfilter(c)
-	return c:GetLevel()>0 and c:IsType(TYPE_SYNCHRO)  and c:IsAbleToRemove()
+	return c:GetLevel()>0 and (c:IsType(TYPE_SYNCHRO) or c.IsEvolute) and c:IsAbleToRemove()
 end
 function c16000550.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	  local c=e:GetHandler()
