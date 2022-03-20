@@ -198,7 +198,7 @@ function c16000820.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c16000820.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_PZONE) and c16000820.desfilter(chkc) and chkc~=e:GetHandler() end
-	if chk==0 then return Duel.IsExistingTarget(cid.filter,tp,LOCATION_PZONE,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingTarget(c16000820.filter,tp,LOCATION_PZONE,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,c16000820.desfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
