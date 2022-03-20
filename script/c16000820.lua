@@ -47,7 +47,7 @@ c:EnableCounterPermit(0x88)
 	e5:SetRange(LOCATION_HAND)
 	e5:SetCondition(c16000820.matcon)
 	--e1:SetValue(c16000820.matval)
-	e5:SetOperation(ref.matop)
+	e5:SetOperation(c16000820.matop)
 	c:RegisterEffect(e5)
 	 --become material
 	local e6=Effect.CreateEffect(c)
@@ -90,7 +90,7 @@ function c16000820.xfilter(c)
 end
 
 function c16000820.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsDestructable() and Duel.IsExistingMatchingCard(ref.cfilter,tp,LOCATION_MZONE,0,1,nil) end
+	if chk==0 then return e:GetHandler():IsDestructable() and Duel.IsExistingMatchingCard(c16000820.cfilter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
 end
 
@@ -133,7 +133,7 @@ end
 function c16000820.matval(e,c,mg)
 	return  mg:IsExists(c16000820.mfilter,1,nil)
 end
-function ref.matop(c)
+function c16000820.matop(c)
 	Duel.SendtoGrave(c,REASON_MATERIAL+0x10000000)
 end
 function c16000820.ffilter(c)
