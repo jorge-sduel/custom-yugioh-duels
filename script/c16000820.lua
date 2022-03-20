@@ -1,7 +1,6 @@
 --Medivatale Tortoise
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function c16000820.initial_effect(c)
-c:EnableCounterPermit(0x88)
 	--
 	Equilibrium.AddProcedure(c)
 --If this card is activated: You can add 1 "Medivatale" card from your Deck or GY to your hand. You can destroy this card, and if you do, all Evolute Monsters you control gain 4 E-C. You can only use each effect of "Medivatale Tortoise" once per turn.
