@@ -1,4 +1,5 @@
 --Medivatale Tortoise
+c16000820.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function c16000820.initial_effect(c)
 	--
