@@ -161,17 +161,6 @@ function Evolute.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				aux.DeleteExtraMaterialGroups(emt)
 				return res
-	--summon success
-	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(1600058,0))
-	e2:SetCategory(CATEGORY_COUNTER)
-	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
-e2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
-	e2:SetCondition(Evolute.sumcon)
-	e2:SetTarget(Evolute.addct)
-	e2:SetOperation(Evolute.addc)
-	c:RegisterEffect(e2)
 			end
 end
 function Evolute.Target(f,minc,maxc,specialchk,opp,loc,send)
@@ -255,6 +244,17 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
+	--summon success
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(1600058,0))
+	e2:SetCategory(CATEGORY_COUNTER)
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
+e2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
+	e2:SetCondition(Evolute.sumcon)
+	e2:SetTarget(Evolute.addct)
+	e2:SetOperation(Evolute.addc)
+	c:RegisterEffect(e2)
 			end
 end
 function Evolute.addct(e,tp,eg,ep,ev,re,r,rp,chk)
