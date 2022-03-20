@@ -90,7 +90,7 @@ function c16000820.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	while tc do
 	 
-   tc:AddEC(4)
+   tc:AddCounter(0x88,4)
 		tc=g:GetNext()
 	end
 end
