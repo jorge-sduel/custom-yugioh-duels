@@ -30,7 +30,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
  
 end
 function c16000550.filter(c)
-	return c:IsType(TYPE_MONSTER) and not c:IsForbidden()
+	return (c:IsRace(RACE_PLANT) or c:IsRace(RACE_DRAGON)) and not c:IsForbidden()
 end
 function c16000550.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,4,REASON_COST) end
@@ -43,13 +43,11 @@ function c16000550.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c16000550.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
-	Duel.ConfirmCards(tp,g)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c16000550.filter),tp,LOCATION_EXTRA,LOCATION_EXTRA,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c16000550.filter),tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
 		if not Duel.Equip(tp,tc,c,true) then return end
