@@ -64,8 +64,7 @@ function Evolute.ConditionFilter(c,f,lc,tp)
 end
 function Evolute.GetEvoluteCount(c)
     if c:GetLevel()>0 then return c:GetLevel()
-    elseif c:GetRank()>0 then return c:GetRank()
-    elseif c:GetLink()>0 then return c:GetLink() end
+    elseif c:GetRank()>0 then return c:GetRank() end
     return 0
 end
 function Evolute.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
@@ -148,7 +147,7 @@ function Evolute.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				min = min or minc
 				max = max or maxc
 				if mustg:IsExists(aux.NOT(Evolute.ConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
-				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_EVOLUTE)
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_LINK)
 				tg=tg:Filter(Evolute.ConditionFilter,nil,f,c,tp)
 				local res=(mg+tg):Includes(mustg) and #mustg<=max
 				if res then
