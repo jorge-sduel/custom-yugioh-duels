@@ -113,26 +113,26 @@ function c405.penop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.PendulumSummon(tp)
 	end
 end
-function c405.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x12f)
-end
-function s.damcon(e,tp,eg,ep,ev,re,r,rp)
+--function c405.cfilter(c)
+	--return c:IsFaceup() and c:IsSetCard(0x12f)
+--end
+function c405.damcon(e,tp,eg,ep,ev,re,r,rp)
 	if rp~=tp then return end
 	local ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_DAMAGE)
 	return ex
 end
-function s.damop(e,tp,eg,ep,ev,re,r,rp)
+function c405.damop(e,tp,eg,ep,ev,re,r,rp)
 	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_CHANGE_DAMAGE)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetTargetRange(1,1)
-	e2:SetValue(s.damval)
+	e2:SetValue(c405.damval)
 	e2:SetReset(RESET_CHAIN)
 	Duel.RegisterEffect(e2,tp)
 end
-function s.damval(e,re,val,r,rp,rc)
+function c405.damval(e,re,val,r,rp,rc)
 	local cc=Duel.GetCurrentChain()
 	if cc==0 or (r&REASON_EFFECT)==0 then return end
 	return val*2
