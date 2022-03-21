@@ -33,6 +33,15 @@ Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUT
 	e3:SetTarget(c405.pentg)
 	e3:SetOperation(c405.penop)
 	c:RegisterEffect(e3)
+	--double
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_QUICK_O)
+	e4:SetCode(EVENT_CHAINING)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
+	e4:SetCondition(c405.damcon)
+	e4:SetOperation(c405.damop)
+	c:RegisterEffect(e4)
 end
 c405.counter_list={0x1149}
 c405.listed_series={0x576}
@@ -103,4 +112,28 @@ function c405.penop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.PendulumSummon(tp)
 	end
+end
+function c405.cfilter(c)
+	return c:IsFaceup() and c:IsSetCard(0x12f)
+end
+function s.damcon(e,tp,eg,ep,ev,re,r,rp)
+	if rp~=tp then return end
+	local ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_DAMAGE)
+	return ex
+end
+function s.damop(e,tp,eg,ep,ev,re,r,rp)
+	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
+	local e2=Effect.CreateEffect(e:GetHandler())
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_CHANGE_DAMAGE)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e2:SetTargetRange(1,1)
+	e2:SetValue(s.damval)
+	e2:SetReset(RESET_CHAIN)
+	Duel.RegisterEffect(e2,tp)
+end
+function s.damval(e,re,val,r,rp,rc)
+	local cc=Duel.GetCurrentChain()
+	if cc==0 or (r&REASON_EFFECT)==0 then return end
+	return val*2
 end
