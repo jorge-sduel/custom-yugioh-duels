@@ -1,4 +1,4 @@
---Starving Venemy Dragon
+--odd-eyes Starving Venemy Dragon
 function c405.initial_effect(c)
 	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c)
@@ -75,8 +75,8 @@ function c405.copyop(e,tp,eg,ep,ev,re,r,rp)
 			local cid=c:CopyEffect(code,RESET_EVENT+0x1fe0000,1)
 			local e3=Effect.CreateEffect(e:GetHandler())
 			e3:SetType(EFFECT_TYPE_SINGLE)
-			e3:SetCode(EFFECT_UPDATE_ATTACK)
-			e3:SetValue(-500)
+			e3:SetCode(EFFECT_SET_ATTACK)
+			e3:SetValue(0)
 			e3:SetReset(RESET_EVENT+0x1fe0000)
 			tc:RegisterEffect(e3)
 		end
