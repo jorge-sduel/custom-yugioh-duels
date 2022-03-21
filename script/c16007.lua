@@ -1,5 +1,5 @@
 --Paracyclis Hercules, Stagpunisher
-local s,id=getID()
+local s,id=GetID()
 function s.initial_effect(c)
 	--spsummon proc
 	local e1=Effect.CreateEffect(c)
@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.sptfilter(c,tp)
-	return c:IsReleasable() and Duel.GetMZoneCount(tp,c,tp)>0 and c:IsSetCard(0x308)
+	return c:IsReleasable() and Duel.GetMZoneCount(tp,c,tp)>0 and c:IsRace(RACE_INSECT)
 end
 function s.sppfilter(c,tp)
 	return c:IsReleasable() and Duel.GetMZoneCount(1-tp,c,tp)>0
