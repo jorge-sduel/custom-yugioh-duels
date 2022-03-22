@@ -3,7 +3,7 @@ function c405.initial_effect(c)
 	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c)
 	--fusion material
-Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
+Fusion.AddProcMix(c,true,true,c405.penfilter,c405.Venemyfilter)
 	--Disable effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(405,0))
@@ -47,6 +47,12 @@ Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUT
 end
 c405.counter_list={0x1149}
 c405.listed_series={0x576}
+function c405.penfilter(c)
+	return  c:IsRace(RACE_DRAGON) and c:IsType(TYPE_PENDULUM) and c:IsLevelAbove(7)
+end
+function c405.venemyfilter(c)
+	return  c:IsCode(46) or c:IsCode(93729065)
+end
 function c405.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and aux.disfilter1(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(aux.disfilter1,tp,0,LOCATION_MZONE,1,nil) end
