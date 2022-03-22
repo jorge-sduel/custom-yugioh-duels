@@ -3,7 +3,7 @@ function c405.initial_effect(c)
 	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c)
 	--fusion material
-Fusion.AddProcMix(c,true,true,c405.penfilter,1,1,c405.Venemyfilter)
+Fusion.AddProcMix(c,true,true,s.fusfilter1,s.fusfilter2)
 	--Disable effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(405,0))
@@ -47,10 +47,10 @@ Fusion.AddProcMix(c,true,true,c405.penfilter,1,1,c405.Venemyfilter)
 end
 c405.counter_list={0x1149}
 c405.listed_series={0x576}
-function c405.penfilter(c)
+function c405.fusfilter1(c)
 	return  c:IsRace(RACE_DRAGON) and c:IsType(TYPE_PENDULUM) and c:IsLevelAbove(7)
 end
-function c405.venemyfilter(c)
+function c405.fusfilter2(c)
 	return  c:IsCode(46) or c:IsCode(93729065)
 end
 function c405.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
