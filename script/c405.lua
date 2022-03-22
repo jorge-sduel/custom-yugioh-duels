@@ -4,14 +4,16 @@ function c405.initial_effect(c)
 	Pendulum.AddProcedure(c)
 	--fusion material
 Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
-	--reduce
+	--Disable effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(405,0))
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	e1:SetCategory(CATEGORY_DISABLE)
+	e1:SetType(EFFECT_TYPE_IGNITION)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_PZONE)
-	e1:SetCondition(c405.rdcon)
-	e1:SetOperation(c405.rdop)
+	e1:SetCountLimit(1)
+	e1:SetTarget(c405.distg)
+	e1:SetOperation(c405.disop)
 	c:RegisterEffect(e1)
 	--copy
 	local e2=Effect.CreateEffect(c)
@@ -45,15 +47,29 @@ Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUT
 end
 c405.counter_list={0x1149}
 c405.listed_series={0x576}
-function c405.rdcon(e,tp,eg,ep,ev,re,r,rp)
-	return ep==tp and ev>0
+function c405.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and aux.disfilter1(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(aux.disfilter1,tp,0,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+	local g=Duel.SelectTarget(tp,aux.disfilter1,tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_DISABLE,g,1,0,0)
 end
-function c405.rdop(e,tp,eg,ep,ev,re,r,rp)
+function c405.disop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:GetFlagEffect(405)==0 and Duel.SelectEffectYesNo(tp,c) then
-		Duel.Hint(HINT_CARD,0,405)
-		c:RegisterFlagEffect(405,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,1)
-		Duel.ChangeBattleDamage(tp,0)
+	if not c:IsRelateToEffect(e) then return end
+	local tc=Duel.GetFirstTarget()
+	if tc:IsFaceup() and tc:IsRelateToEffect(e) then
+		Duel.NegateRelatedChain(tc,RESET_TURN_SET)
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_DISABLE)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		tc:RegisterEffect(e1)
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_DISABLE_EFFECT)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		tc:RegisterEffect(e2)
 	end
 end
 function c405.copytg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
