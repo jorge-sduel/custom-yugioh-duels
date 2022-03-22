@@ -3,7 +3,7 @@ function c405.initial_effect(c)
 	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c)
 	--fusion material
-Fusion.AddProcMix(c,true,true,c405.penfilter,c405.Venemyfilter)
+Fusion.AddProcMix(c,true,true,c405.penfilter,1,1,c405.Venemyfilter)
 	--Disable effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(405,0))
