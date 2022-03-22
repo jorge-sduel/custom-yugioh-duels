@@ -12,6 +12,7 @@ function c16000820.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCountLimit(1,16000820)
+	e1:SetCost(c16000820.cost)
 	e1:SetTarget(c16000820.target)
 	e1:SetOperation(c16000820.activate)
 	c:RegisterEffect(e1) 
@@ -56,6 +57,10 @@ function c16000820.initial_effect(c)
 	e7:SetTarget(c16000820.destarget)
 	e7:SetOperation(Equilibrium.desop1)
 	c:RegisterEffect(e7)
+end
+function c16000820.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function c16000820.filter(c)
 	return c:IsSetCard(0xab5) and c:IsAbleToHand()
