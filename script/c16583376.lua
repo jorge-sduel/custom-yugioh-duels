@@ -1,15 +1,8 @@
 --Signore Antilementale Ocenere
---Script by XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=getID()
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function cid.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+   Equilibrium.AddProcedure(c)
 	c:EnableReviveLimit()
 	--pandemonium effect
 	local p1=Effect.CreateEffect(c)
@@ -25,7 +18,6 @@ function cid.initial_effect(c)
 	p1:SetTarget(cid.thtg)
 	p1:SetOperation(cid.thop)
 	c:RegisterEffect(p1)
-	aux.EnablePandemoniumAttribute(c,p1)
 	--spsummon proc
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
