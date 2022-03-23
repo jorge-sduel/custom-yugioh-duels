@@ -1,12 +1,14 @@
-if not aux.ReversePendulumProcedure then
-	aux.ReversePendulumProcedure = {}
-	ReversePendulum = aux.ReversePendulumProcedure
+REVERSEPENDULUM_IMPORTED=true
+
+if not aux.RPendProcedure then
+	aux.RPendProcedure = {}
+	reversependulum = aux.RPendProcedure
 end
-if not ReversePendulum then
-	ReversePendulum = aux.ReversePendulumProcedure
+if not RPendulum then
+	RPendulum = aux.RPendProcedure
 end
---add procedure to ReversePendulum monster, also allows registeration of activation effect
-ReversePendulum.AddProcedure = aux.FunctionWithNamedArgs(
+--add procedure to RPendulum monster, also allows registeration of activation effect
+RPendulum.AddProcedure = aux.FunctionWithNamedArgs(
 function(c,reg,desc)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
