@@ -2,25 +2,6 @@
 if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c18917001.initial_effect(c)
    RPendulum.AddProcedure(c)
-	--Psummon
-	local se2=Effect.CreateEffect(c)
-	se2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	se2:SetCode(EVENT_ADJUST)
-	se2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	se2:SetRange(LOCATION_PZONE)
-	se2:SetTargetRange(0,LOCATION_PZONE)
-	se2:SetOperation(c18917001.psactivate)
-	c:RegisterEffect(se2)
-	--opponent splimit
-	local se3=Effect.CreateEffect(c)
-	se3:SetType(EFFECT_TYPE_FIELD)
-	se3:SetRange(LOCATION_PZONE)
-	se3:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	se3:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE)
-	se3:SetTargetRange(0,1)
-	se3:SetCondition(c18917001.psopcon)
-	se3:SetTarget(c18917001.psoplimit)
-	c:RegisterEffect(se3)
 	--Self Destroy
 	local se4=Effect.CreateEffect(c)
 	se4:SetType(EFFECT_TYPE_IGNITION)
@@ -29,7 +10,6 @@ function c18917001.initial_effect(c)
 	se4:SetDescription(aux.Stringid(18917001,1))
 	se4:SetOperation(c18917001.selfDes)
 	c:RegisterEffect(se4)
-	
 	--Revive
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(18917001,2))
