@@ -1,15 +1,8 @@
 --Timebreaker
+if not ARMOR_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
+c1891700.IsRPendulum=true
 function c18917000.initial_effect(c)
-   ReversePendulum.AddProcedure(c)
-	--Psummon
-	--local e2=Effect.CreateEffect(c)
-	--e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	--e2:SetCode(EVENT_ADJUST)
-	--e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	--e2:SetRange(LOCATION_PZONE)
-	--e2:SetTargetRange(0,LOCATION_PZONE)
-	--e2:SetOperation(c18917000.psactivate)
-	--c:RegisterEffect(e2)
+   RPendulum.AddProcedure(c)
 	--opponent splimit
 	--local e3=Effect.CreateEffect(c)
 	--e3:SetType(EFFECT_TYPE_FIELD)
