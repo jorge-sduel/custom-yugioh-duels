@@ -1,6 +1,5 @@
 --Timebreaker
 if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
-c1891700.IsRPendulum=true
 function c18917000.initial_effect(c)
    RPendulum.AddProcedure(c)
 	--opponent splimit
