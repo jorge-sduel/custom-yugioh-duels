@@ -95,7 +95,7 @@ function c18917003.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function c18917003.thfilter(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0xb00) and c:IsDefenceBelow(1500) and c:IsAbleToHand()
+	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0xb00) and c:IsDefenseBelow(1500) and c:IsAbleToHand()
 end
 function c18917003.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable()
