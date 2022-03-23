@@ -1,8 +1,11 @@
 --Reverse Back
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c18917002.initial_effect(c)
+   RPendulum.AddProcedure(c,false)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetDescription(1160)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetHintTiming(0,0x1e0)
