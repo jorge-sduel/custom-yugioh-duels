@@ -67,7 +67,7 @@ function c18917000.initial_effect(c)
 	e8:SetOperation(c18917000.lvop)
 	c:RegisterEffect(e8)
 end
-function c18917001.penFilter(c,e,tp,lscale,rscale,lvchk)
+function c18917000.penFilter(c,e,tp,lscale,rscale,lvchk)
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	local lv=0
 	if c.pendulum_level then
@@ -197,10 +197,10 @@ function c18917000.pendcon(e,c,og)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return false end
 	if og then
-	return og:IsExists(c18917001.penFilter,1,nil,e,tp,lscale,rscale)
+	return og:IsExists(c18917000.penFilter,1,nil,e,tp,lscale,rscale)
 	and Duel.GetFieldCard(tp,LOCATION_SZONE,6):IsSetCard(0xb00) and Duel.GetFieldCard(tp,LOCATION_SZONE,7):IsSetCard(0xb00)
 	else
-	return Duel.IsExistingMatchingCard(c18917001.penFilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,1,nil,e,tp,lscale,rscale)
+	return Duel.IsExistingMatchingCard(c18917000.penFilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,1,nil,e,tp,lscale,rscale)
 	and Duel.GetFieldCard(tp,LOCATION_SZONE,6):IsSetCard(0xb00) and Duel.GetFieldCard(tp,LOCATION_SZONE,7):IsSetCard(0xb00)
 	end
 end
@@ -212,11 +212,11 @@ function c18917000.pendop(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if og then
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=og:FilterSelect(tp,c18917001.penFilter,1,ft,nil,e,tp,lscale,rscale)
+	local g=og:FilterSelect(tp,c18917000.penFilter,1,ft,nil,e,tp,lscale,rscale)
 	sg:Merge(g)
 	else
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c18917001.penFilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,1,ft,nil,e,tp,lscale,rscale)
+	local g=Duel.SelectMatchingCard(tp,c18917000.penFilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,1,ft,nil,e,tp,lscale,rscale)
 	sg:Merge(g)
 	end
 end 
