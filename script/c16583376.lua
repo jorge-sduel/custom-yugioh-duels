@@ -65,7 +65,7 @@ function cid.con(e)
 	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
 	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 	if not tc1 or not tc2 then return false end
-	return tc1:GetLevel()==tc2:GetLevel()
+	return tc1:GetLeftScale()==tc2:GetRightScale()
 end
 function cid.cfilter(c)
 	return c:IsType(TYPE_PENDULUM)
