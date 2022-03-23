@@ -69,7 +69,7 @@ function cid.con(e)
 end
 --filters
 function cid.chkfilter(c,tp)
-	return c:IsFaceup() and c:IsSetCard(0xa6e) and c:IsType(TYPE_MONSTER)
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsType(TYPE_MONSTER)
 		and Duel.IsExistingMatchingCard(cid.rmfilter,tp,LOCATION_DECK,0,1,nil,tp,c:GetAttribute())
 end
 function cid.rmfilter(c,tp,attr)
