@@ -43,7 +43,7 @@ function RPendulum.Filter(c,e,tp,lscale,rscale,lvchk)
 		lv=c:GetLevel()
 	end
 	return (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM)))
-		and (lvchk or (lv<lscale and lv>rscale) or c:IsHasEffect(511004423)) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
+		and (lvchk or (lv>rscale and lv<lscale) or c:IsHasEffect(511004423)) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
 		and not c:IsForbidden()
 end
 function RPendulum.Condition()
