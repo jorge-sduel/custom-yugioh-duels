@@ -45,7 +45,7 @@ function c18917002.ssop(e,tp,eg,ep,ev,re,r,rp)
 		local g2=Duel.SelectMatchingCard(tp,c18917002.ssfilter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,g:GetFirst():GetRace())
 		g:Merge(g2)
 		if g:GetCount()==2 then
-			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENCE)
+			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 		end
 	end
 end
