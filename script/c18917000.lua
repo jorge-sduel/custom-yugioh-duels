@@ -110,7 +110,6 @@ end
 function c18917000.aclimit(e,re,tp)
 	return true
 end
-
 function c18917000.lvfilter(c,c2)
 	return c:IsFaceup() and c:GetLevel()>0 and c:GetLevel()~=c2:GetLevel()
 end
@@ -133,7 +132,6 @@ function c18917000.lvop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1)
 	end
 end
-
 function c18917000.ssfilter(c,e,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xb00)
 		and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
@@ -153,7 +151,6 @@ function c18917000.ssop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-
 --If both cards in your PZ are Reverse Pendulums, then your opponent's PS is limited.
 --0xb00 == reverse pendulum set code
 function c18917000.psopcon(e,c)
@@ -170,28 +167,6 @@ function c18917000.psoplimit(e,c,sump,sumtype,sumpos,targetp)
 	else
 		return (c:GetLevel()>rsc and c:GetLevel()<lsc) and bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 	end
-end
-
-function c18917000.psactivate(e,tp,eg,ep,ev,re,r,rp)
-	local tc1=Duel.GetFieldCard(1-tp,LOCATION_SZONE,6)
-	--Note: Do not change the number for the flag effect.
-	if tc1 and tc1:GetFlagEffect(77777831)<1 then
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_SPSUMMON_PROC_G)
-	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_BOTH_SIDE)
-	e1:SetRange(LOCATION_PZONE)
-	e1:SetCountLimit(1,10000000)
-	e1:SetCondition(c18917000.pendcon)
-	e1:SetOperation(c18917000.pendop)
-	e1:SetValue(SUMMON_TYPE_PENDULUM)
-	e1:SetReset(RESET_EVENT+0x1fe0000)
-	tc1:RegisterEffect(e1)
-	tc1:RegisterFlagEffect(77777831,RESET_EVENT+0x1fe0000,0,1)
-	end
-end
-function c18917000.spfilter(c)
-return c:IsFaceup() and c:IsSetCard(0xb00)
 end
 function c18917000.pendcon()
 	return	function(e,c,ischain,re,rp)
