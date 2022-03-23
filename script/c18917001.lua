@@ -84,7 +84,7 @@ function c18917001.ssop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function c18917001.aclimit(e,re,tp)
-	if not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:IsActiveType(TYPE_SPELL) or (bit.band(c:GetType(),0x2)~=0x2) then return false end
+	if not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:IsActiveType(TYPE_SPELL) or (bit.band(re:GetType(),0x2)~=0x2) then return false end
 	local c=re:GetHandler()
 	return not c:IsLocation(LOCATION_SZONE) or c:GetFlagEffect(18917001)>0
 end
