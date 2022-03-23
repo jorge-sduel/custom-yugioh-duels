@@ -49,6 +49,34 @@ function cid.initial_effect(c)
 	e3:SetTarget(cid.rctg)
 	e3:SetOperation(cid.rcop)
 	c:RegisterEffect(e3)
+	--destroy
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(97268402,0))
+
+	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e4:SetType(EFFECT_TYPE_IGNITION)
+	e4:SetRange(LOCATION_HAND)
+	e4:SetCondition(cid.con)
+	e4:SetOperation(cid.desop)
+	c:RegisterEffect(e4)
+end
+function cid.con(e)
+	local tp=e:GetHandler():GetControler()
+	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
+	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+	if not tc1 or not tc2 then return false end
+	return tc1:GetLevel()==tc2:GetLevel()
+end
+function cid.cfilter(c)
+	return c:IsType(TYPE_PENDULUM)
+end
+function cid.desop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local g=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_PZONE,0,2,2,nil)
+	Duel.SendtoGrave(g,REASON_RULE)
+	c:SetMaterial(g)
+Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	Duel.Overlay(c,g)
 end
 --filters
 function cid.chkfilter(c,tp)
