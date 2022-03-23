@@ -67,6 +67,18 @@ function c18917000.initial_effect(c)
 	e8:SetOperation(c18917000.lvop)
 	c:RegisterEffect(e8)
 end
+function c18917001.penFilter(c,e,tp,lscale,rscale,lvchk)
+	if lscale>rscale then lscale,rscale=rscale,lscale end
+	local lv=0
+	if c.pendulum_level then
+		lv=c.pendulum_level
+	else
+		lv=c:GetLevel()
+	end
+	return (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM)))
+		and (lvchk or (lv<lscale and lv>rscale) or c:IsHasEffect(511004423)) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
+		and not c:IsForbidden()
+end
 function c18917000.actcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_MZONE,0,1,nil,TYPE_MONSTER)
 end
