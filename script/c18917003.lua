@@ -1,11 +1,7 @@
 --Generic Reverse Pendulum
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c18917003.initial_effect(c)
-    --Activate
-	local se1=Effect.CreateEffect(c)
-	se1:SetType(EFFECT_TYPE_ACTIVATE)
-	se1:SetDescription(aux.Stringid(18917003,0))
-	se1:SetCode(EVENT_FREE_CHAIN)
-	c:RegisterEffect(se1)
+   RPendulum.AddProcedure(c)
 	--Psummon
 	local se2=Effect.CreateEffect(c)
 	se2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
