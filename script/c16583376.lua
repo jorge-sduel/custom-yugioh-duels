@@ -1,7 +1,7 @@
 --Signore Antilementale Ocenere
 local cid,id=GetID()
-if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 cid.IsEquilibrium=true
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function cid.initial_effect(c)
    Equilibrium.AddProcedure(c)
 	c:EnableReviveLimit()
@@ -57,7 +57,7 @@ function cid.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_HAND)
 	e4:SetCondition(cid.con)
-	e4:SetOperation(cid.desop)
+	e4:SetOperation(Equilibrium.desop)
 	c:RegisterEffect(e4)
 end
 function cid.con(e)
@@ -66,17 +66,6 @@ function cid.con(e)
 	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 	if not tc1 or not tc2 then return false end
 	return tc1:GetLeftScale()==tc2:GetRightScale()
-end
-function cid.cfilter(c)
-	return c:IsType(TYPE_PENDULUM)
-end
-function cid.desop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local g=Duel.SelectMatchingCard(tp,c333.cfilter,tp,LOCATION_PZONE,0,2,2,nil)
-	Duel.SendtoGrave(g,REASON_RULE)
-	c:SetMaterial(g)
-Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	Duel.Overlay(c,g)
 end
 --filters
 function cid.chkfilter(c,tp)
