@@ -1,6 +1,7 @@
 --Signore Antilementale Ocenere
 local cid,id=GetID()
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
+cid.IsEquilibrium=true
 function cid.initial_effect(c)
    Equilibrium.AddProcedure(c)
 	c:EnableReviveLimit()
