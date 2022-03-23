@@ -215,7 +215,7 @@ function c18917000.pendcon()
 				return g:IsExists(c18917000.penFilter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 			end
 end
-function c18917000.Operation()
+function c18917000.pendop()
 	return	function(e,tp,eg,ep,ev,re,r,rp,c,sg,inchain)
 				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 				local lscale=c:GetLeftScale()
