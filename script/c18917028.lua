@@ -1,20 +1,20 @@
 --Protector Statue of Infernoes
-local ref=_G['c'..18917028]
+local ref,id=GetID()
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function ref.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+   Equilibrium.AddProcedure(c)
 	--Destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(18917028,0))
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE+EFFECT_TYPE_QUICK_O)
-	e1:SetRange(LOCATION_SZONE+LOCATION_PZONE)
+	e1:SetRange(LOCATION_PZONE)
 	e1:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCondition(ref.actcon)
 	e1:SetTarget(ref.acttg)
 	e1:SetOperation(ref.actop)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
 	--On Normal
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_DESTROY)
@@ -36,10 +36,9 @@ function ref.initial_effect(c)
 	e3:SetOperation(ref.setop)
 	c:RegisterEffect(e3)
 end
-
 --Pandemonium effect
 function ref.actcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsFacedown() and eg:GetFirst():IsControler(1-tp)
+	return eg:GetFirst():IsControler(1-tp)
 end
 function ref.actfilter(c)
 	return c:IsAttackPos()
