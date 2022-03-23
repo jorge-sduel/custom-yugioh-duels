@@ -169,7 +169,7 @@ function c18917000.psoplimit(e,c,sump,sumtype,sumpos,targetp)
 	end
 end
 function c18917000.pendcon()
-	return	function(e,c,ischain,re,rp)
+return	function(e,c,ischain,re,rp)
 				if c==nil then return true end
 				local tp=c:GetControler()
 				local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
@@ -186,7 +186,7 @@ function c18917000.pendcon()
 				else
 					g=Duel.GetFieldGroup(tp,loc,0)
 				end
-				return g:IsExists(c18917000.penFilter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+				return g:IsExists(Pendulum.Filter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 			end
 end
 function c18917000.pendop()
@@ -207,9 +207,9 @@ function c18917000.pendop()
 				if ft2>0 then loc=loc+LOCATION_EXTRA end
 				local tg=nil
 				if og then
-					tg=og:Filter(Card.IsLocation,nil,loc):Filter(c18917000.penFilter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=og:Filter(Card.IsLocation,nil,loc):Filter(Pendulum.Filter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				else
-					tg=Duel.GetMatchingGroup(c18917000.penFilter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=Duel.GetMatchingGroup(Pendulum.Filter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				end
 				ft1=math.min(ft1,tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND))
 				ft2=math.min(ft2,tg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA))
@@ -239,7 +239,7 @@ function c18917000.pendop()
 					else
 						sg:AddCard(tc)
 						if c:IsHasEffect(511007000)~=nil or rpz:IsHasEffect(511007000)~=nil then
-							if not c18917000.penFilter(tc,e,tp,lscale,rscale) then
+							if not Pendulum.Filter(tc,e,tp,lscale,rscale) then
 								local pg=sg:Filter(aux.TRUE,tc)
 								local ct0,ct3,ct4=#pg,pg:FilterCount(Card.IsLocation,nil,LOCATION_HAND),pg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
 								sg:Sub(pg)
@@ -247,7 +247,7 @@ function c18917000.pendop()
 								ft2=ft2+ct4
 								ft=ft+ct0
 							else
-								local pg=sg:Filter(aux.NOT(c18917000.penFilter),nil,e,tp,lscale,rscale)
+								local pg=sg:Filter(aux.NOT(Pendulum.Filter),nil,e,tp,lscale,rscale)
 								sg:Sub(pg)
 								if #pg>0 then
 									if pg:GetFirst():IsLocation(LOCATION_HAND) then
