@@ -42,7 +42,7 @@ function cid.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.splimit(e,c)
-	return not c:IsType(TYPE_BIGBANG) and c:IsLocation(LOCATION_EXTRA) and c:IsControler(e:GetHandlerPlayer())
+	return not c.IsBigbang and c:IsLocation(LOCATION_EXTRA) and c:IsControler(e:GetHandlerPlayer())
 end
 function cid.spfilter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(id)
