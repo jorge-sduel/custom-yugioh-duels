@@ -27,7 +27,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function cid.eqfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_BIGBANG)
+	return c:IsFaceup() and c.IsBigbang
 end
 function cid.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and cid.eqfilter(chkc) end
