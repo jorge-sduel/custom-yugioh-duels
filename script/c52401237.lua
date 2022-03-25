@@ -58,7 +58,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function cid.ffilter(c,fc)
-	return c:GetAttack()~~c:GetDefense()
+	return c:GetAttack()~=c:GetDefense()
 end
 function cid.matcheck(e,c)
 	local ct=c:GetMaterial():GetClassCount(cid.ffilter)
