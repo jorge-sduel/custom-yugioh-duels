@@ -1,261 +1,260 @@
---created by Meedogh, coded by Lyris
---Not yet finalized values
---Custom constants
-EFFECT_CANNOT_BE_BIGBANG_MATERIAL	=624
-EFFECT_MUST_BE_BIGBANG_MATERIAL		=625
-EFFECT_EXTRA_BIGBANG_MATERIAL		=626
-TYPE_BIGBANG						=0x8000000000
-TYPE_CUSTOM							=TYPE_CUSTOM|TYPE_BIGBANG
-CTYPE_BIGBANG						=0x80
-CTYPE_CUSTOM						=CTYPE_CUSTOM|CTYPE_BIGBANG
-
-SUMMON_TYPE_BIGBANG					=SUMMON_TYPE_SPECIAL+340
-
-REASON_BIGBANG						=0x8000000000
-
---Custom Type Table
-Auxiliary.Bigbangs={} --number as index = card, card as index = function() is_synchro
-table.insert(aux.CannotBeEDMatCodes,EFFECT_CANNOT_BE_BIGBANG_MATERIAL)
-
---overwrite constants
-TYPE_EXTRA							=TYPE_EXTRA|TYPE_BIGBANG
-
---overwrite functions
-local get_type, get_orig_type, get_prev_type_field, get_reason = 
-	Card.GetType, Card.GetOriginalType, Card.GetPreviousTypeOnField, Card.GetReason
-
-Card.GetType=function(c,scard,sumtype,p)
-	local tpe=scard and get_type(c,scard,sumtype,p) or get_type(c)
-	if Auxiliary.Bigbangs[c] then
-		tpe=tpe|TYPE_BIGBANG
-		if not Auxiliary.Bigbangs[c]() then
-			tpe=tpe&~TYPE_SYNCHRO
-		end
+EFFECT_HAND_EVOLUTE	= 6011000
+REASON_EVOLUTE		= 0xb1600
+SUMMON_TYPE_EVOLUTE 	= 0xb1600
+HINTMSG_BIGBANGMATERIAL	= b1600000
+EVOLUTE_IMPORTED	= true
+if not aux.EvoluteProcedure then
+	aux.EvoluteProcedure = {}
+	Evolute = aux.EvoluteProcedure
+end
+if not Evolute then
+	Evolute = aux.EvoluteProcedure
+end
+--[[
+add at the start of the script to add Evolute procedure
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+condition if Evolute summoned
+    return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE
+]]
+--Evolute Summon
+function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
+    -- opp==true >> you can use opponent monsters as materials (default false)
+    -- loc default LOCATION_MZONE
+	-- send materials:
+	-- 1 >> grave
+	-- 2 >> remove face-up
+	-- 3 >> remove face-down
+	-- 4 >> hand
+	-- 5 >> deck
+	-- 6 >> destroy
+	if loc==nil then loc=LOCATION_MZONE end
+	if c.evolute_type==nil then
+		local mt=c:GetMetatable()
+		mt.evolute_type=1
+		mt.evolute_parameters={c,f,min,max,control,location,operation}
 	end
-	return tpe
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetDescription(1181)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e1:SetRange(LOCATION_EXTRA)
+	e1:SetCondition(Evolute.Condition(f,min,max,specialchk,opp,loc,send))
+	e1:SetTarget(Evolute.Target(f,min,max,specialchk,opp,loc,send))
+	e1:SetOperation(Evolute.Operation(f,min,max,specialchk,opp,loc,send))
+    e1:SetValue(SUMMON_TYPE_EVOLUTE)
+	c:RegisterEffect(e1)
+	--summon success
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(1600058,0))
+	e2:SetCategory(CATEGORY_COUNTER)
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e2:SetCondition(Evolute.sumcon)
+	e2:SetTarget(Evolute.addct)
+	e2:SetOperation(Evolute.addc)
+	c:RegisterEffect(e2)
 end
-Card.GetOriginalType=function(c)
-	local tpe=get_orig_type(c)
-	if Auxiliary.Bigbangs[c] then
-		tpe=tpe|TYPE_BIGBANG
-		if not Auxiliary.Bigbangs[c]() then
-			tpe=tpe&~TYPE_SYNCHRO
-		end
-	end
-	return tpe
+function Card.IsEvolute(c)
+	return c.IsEvolute
 end
-Card.GetPreviousTypeOnField=function(c)
-	local tpe=get_prev_type_field(c)
-	if Auxiliary.Bigbangs[c] then
-		tpe=tpe|TYPE_BIGBANG
-		if not Auxiliary.Bigbangs[c]() then
-			tpe=tpe&~TYPE_SYNCHRO
-		end
-	end
-	return tpe
+function Evolute.ConditionFilter(c,f,lc,tp)
+	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
-Card.GetReason=function(c)
-	local rs=get_reason(c)
-	local rc=c:GetReasonCard()
-	if rc and Auxiliary.Bigbangs[rc] then
-		rs=rs|REASON_BIGBANG
-	end
-	return rs
+function Evolute.GetEvoluteCount(c)
+    if c:GetLevel()>0 then return c:GetLevel()
+    elseif c:GetRank()>0 then return c:GetRank() end
+    return 0
 end
-
---Custom Functions
-function Card.IsCanBeBigbangMaterial(c,ec)
-	if c:IsType(TYPE_LINK) then return false end
-	if c:IsOnField() and not c:IsFaceup() then return false end
-	local tef={c:IsHasEffect(EFFECT_CANNOT_BE_BIGBANG_MATERIAL)}
-	for _,te in ipairs(tef) do
-		if (type(te:GetValue())=="function" and te:GetValue()(te,ec)) or te:GetValue()==1 then return false end
-	end
-	return true
-end
-function Card.GetVibe(c)
-	---1 = Negative; +0 = Neutral; +1 = Positive
-	local stat=c:GetAttack()-c:GetDefense()
-	if stat==0 then return stat
-	else return stat/math.abs(stat) end
-end
-function Card.GetBigbangAttack(c)
-	return c:GetAttack()*math.abs(c:GetVibe())
-end
-function Card.GetBigbangDefense(c)
-	return c:GetDefense()*math.abs(c:GetVibe())
-end
-function Auxiliary.AddOrigBigbangType(c,issynchro)
-	table.insert(Auxiliary.Bigbangs,c)
-	Auxiliary.Customs[c]=true
-	local issynchro=issynchro==nil and false or issynchro
-	Auxiliary.Bigbangs[c]=function() return issynchro end
-end
-function Auxiliary.AddBigbangProc(c,...)
-	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
-	local t={...}
-	local list={}
-	local min,max
-	for i=1,#t do
-		if type(t[#t])=='number' then
-			max=t[#t]
-			table.remove(t)
-			if type(t[#t])=='number' then
-				min=t[#t]
-				table.remove(t)
-			else
-				min=max
-				max=99
-			end
-			table.insert(list,{t[#t],min,max})
-			table.remove(t)
-		end
-		if #t<2 then break end
-	end
-	local ge2=Effect.CreateEffect(c)
-	ge2:SetType(EFFECT_TYPE_FIELD)
-	ge2:SetCode(EFFECT_SPSUMMON_PROC)
-	ge2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	ge2:SetRange(LOCATION_EXTRA)
-	ge2:SetCondition(Auxiliary.BigbangCondition(table.unpack(list)))
-	ge2:SetTarget(Auxiliary.BigbangTarget(table.unpack(list)))
-	ge2:SetOperation(Auxiliary.BigbangOperation)
-	ge2:SetValue(340)
-	c:RegisterEffect(ge2)
-end
-function Auxiliary.BigbangCondition(...)
-	local funs={...}
-	return  function(e,c)
-				if c==nil then return true end
-				if (c:IsType(TYPE_PENDULUM) or c:IsType(TYPE_PANDEMONIUM)) and c:IsFaceup() then return false end
-				local tp=c:GetControler()
-				local mg=Duel.GetMatchingGroup(Card.IsCanBeBigbangMaterial,tp,LOCATION_MZONE,0,nil,c)
-				local mg2=Duel.GetMatchingGroup(Auxiliary.BigbangExtraFilter,tp,0xff,0xff,nil,c,tp,table.unpack(funs))
-				if mg2:GetCount()>0 then mg:Merge(mg2) end
-				local fg=aux.GetMustMaterialGroup(tp,EFFECT_MUST_BE_BIGBANG_MATERIAL)
-				if fg:IsExists(aux.MustMaterialCounterFilter,1,nil,mg) then return false end
-				Duel.SetSelectedCard(fg)
-				return mg:IsExists(Auxiliary.BigbangRecursiveFilter,1,nil,tp,Group.CreateGroup(),mg,c,0,table.unpack(funs))
-			end
-end
-function Auxiliary.BigbangExtraFilter(c,lc,tp,...)
-	local flist={...}
-	local check=false
-	for i=1,#flist do
-		if flist[i][1](c) then
-			check=true
-		end
-	end
-	local tef1={c:IsHasEffect(EFFECT_EXTRA_BIGBANG_MATERIAL,tp)}
-	local ValidSubstitute=false
-	for _,te1 in ipairs(tef1) do
-		local con=te1:GetCondition()
-		if (not con or con(c,lc,1)) then ValidSubstitute=true end
-	end
-	if not ValidSubstitute then return false end
-	if c:IsLocation(LOCATION_ONFIELD) and not c:IsFaceup() then return false end
-	return c:IsCanBeBigbangMaterial(lc) and (not flist or #flist<=0 or check)
-end
-function Auxiliary.BigbangRecursiveFilter(c,tp,sg,mg,bc,ct,...)
+function Evolute.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
+	if #sg>maxc then return false end
+	filt=filt or {}
 	sg:AddCard(c)
-	ct=ct+1
-	local funs,max,chk={...},0
-	for i=1,#funs do
-		max=max+funs[i][3]
-		if funs[i][1](c) then
-			chk=true
+	for _,filt in ipairs(filt) do
+		if not filt[2](c,filt[3],tp,sg,mg,lc,filt[1],1) then
+			sg:RemoveCard(c)
+			return false
 		end
 	end
-	if max>99 then max=99 end
-	local res=chk and (Auxiliary.BigbangCheckGoal(tp,sg,bc,ct,...)
-		or (ct<max and mg:IsExists(Auxiliary.BigbangRecursiveFilter,1,sg,tp,sg,mg,bc,ct,...)))
+	if not og:IsContains(c) then
+		res=aux.CheckValidExtra(c,tp,sg,mg,lc,emt,filt)
+		if not res then
+			sg:RemoveCard(c)
+			return false
+		end
+	end
+	local res=Evolute.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
+		or (#sg<maxc and mg:IsExists(Evolute.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
 	sg:RemoveCard(c)
-	ct=ct-1
 	return res
 end
-function Auxiliary.BigbangCheckGoal(tp,sg,bc,ct,...)
-	local funs,min={...},0
-	for i=1,#funs do
-		if not sg:IsExists(funs[i][1],funs[i][2],nil) then return false end
-		min=min+funs[i][2]
+function Evolute.CheckRecursive2(c,tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
+	if #sg>maxc then return false end
+	sg:AddCard(c)
+	for _,filt in ipairs(filt) do
+		if not filt[2](c,filt[3],tp,sg,mg,lc,filt[1],1) then
+			sg:RemoveCard(c)
+			return false
+		end
 	end
-	return ct>=min and Duel.GetLocationCountFromEx(tp,tp,sg,bc)>0 and sg:GetSum(Card.GetBigbangAttack)>=bc:GetAttack() and sg:GetSum(Card.GetBigbangDefense)>=bc:GetDefense()
-		and not sg:IsExists(Auxiliary.BigbangUncompatibilityFilter,1,nil,sg,bc,tp)
-end
-function Auxiliary.BigbangUncompatibilityFilter(c,sg,lc,tp)
-	local mg=sg:Filter(aux.TRUE,c)
-	return not Auxiliary.BigbangCheckOtherMaterial(c,mg,lc,tp)
-end
-function Auxiliary.BigbangCheckOtherMaterial(c,mg,lc,tp)
-	local le={c:IsHasEffect(EFFECT_EXTRA_BIGBANG_MATERIAL,tp)}
-	for _,te in pairs(le) do
-		local f=te:GetValue()
-		if f and type(f)=="function" and not f(te,lc,mg) then return false end
+	if not og:IsContains(c) then
+		res=aux.CheckValidExtra(c,tp,sg,mg,lc,emt,filt)
+		if not res then
+			sg:RemoveCard(c)
+			return false
+		end
 	end
-	return true
+	if #(sg2-sg)==0 then
+		if secondg and #secondg>0 then
+			local res=secondg:IsExists(Evolute.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)})
+			sg:RemoveCard(c)
+			return res
+		else
+			local res=Evolute.CheckGoal(tp,sg,lc,minc,f,specialchk,{table.unpack(filt)})
+			sg:RemoveCard(c)
+			return res
+		end
+	end
+	local res=Evolute.CheckRecursive2((sg2-sg):GetFirst(),tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
+	sg:RemoveCard(c)
+	return res
 end
-function Auxiliary.BigbangTarget(...)
-	local funs,min,max={...},0,0
-	for i=1,#funs do min=min+funs[i][2] max=max+funs[i][3] end
-	if max>99 then max=99 end
-	return  function(e,tp,eg,ep,ev,re,r,rp,chk,c)
-				local mg=Duel.GetMatchingGroup(Card.IsCanBeBigbangMaterial,tp,LOCATION_MZONE,0,nil,c)
-				local mg2=Duel.GetMatchingGroup(Auxiliary.BigbangExtraFilter,tp,0xff,0xff,nil,c,tp,table.unpack(funs))
-				if mg2:GetCount()>0 then mg:Merge(mg2) end
-				local bg=Group.CreateGroup()
-				local ce={Duel.IsPlayerAffectedByEffect(tp,EFFECT_MUST_BE_BIGBANG_MATERIAL)}
-				for _,te in ipairs(ce) do
-					local tc=te:GetHandler()
-					if tc then bg:AddCard(tc) end
+function Evolute.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
+	for _,filt in ipairs(filt) do
+		if not sg:IsExists(filt[2],1,nil,filt[3],tp,sg,Group.CreateGroup(),lc,filt[1],1) then
+			return false
+		end
+	end
+	return #sg>=minc and sg:CheckWithSumEqual(Evolute.GetEvoluteCount,lc:GetLevel(),#sg,#sg)
+		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
+end
+function Evolute.Condition(f,minc,maxc,specialchk,opp,loc,send)
+	return	function(e,c,must,g,min,max)
+				if c==nil then return true end
+				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
+				local tp=c:GetControler()
+				local loc2=0
+				if opp then loc2=loc end
+				if not g then
+					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
 				end
-				if #bg>0 then
-					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_LMATERIAL)
-					bg:Select(tp,#bg,#bg,nil)
+				local mg=g:Filter(Evolute.ConditionFilter,nil,f,c,tp)
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
+				if must then mustg:Merge(must) end
+				if min and min < minc then return false end
+				if max and max > maxc then return false end
+				min = min or minc
+				max = max or maxc
+				if mustg:IsExists(aux.NOT(Evolute.ConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_LINK)
+				tg=tg:Filter(Evolute.ConditionFilter,nil,f,c,tp)
+				local res=(mg+tg):Includes(mustg) and #mustg<=max
+				if res then
+					if #mustg==max then
+						local sg=Group.CreateGroup()
+						res=mustg:IsExists(Evolute.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
+					elseif #mustg<max then
+						local sg=mustg
+						res=(mg+tg):IsExists(Evolute.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
+					end
 				end
+				aux.DeleteExtraMaterialGroups(emt)
+				return res
+			end
+end
+function Evolute.Target(f,minc,maxc,specialchk,opp,loc,send)
+	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c,must,g,min,max)
+				local loc2=0
+				if opp then loc2=loc end
+				if not g then
+					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+				end
+				if min and min < minc then return false end
+				if max and max > maxc then return false end
+				min = min or minc
+				max = max or maxc
+				local mg=g:Filter(Evolute.ConditionFilter,nil,f,c,tp)
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
+				if must then mustg:Merge(must) end
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_EVOLUTE)
+				tg=tg:Filter(Evolute.ConditionFilter,nil,f,c,tp)
 				local sg=Group.CreateGroup()
-				sg:Merge(bg)
 				local finish=false
-				while not (sg:GetCount()>=max) do
-					finish=Auxiliary.BigbangCheckGoal(tp,sg,c,#sg,table.unpack(funs))
-					local cg=mg:Filter(Auxiliary.BigbangRecursiveFilter,sg,tp,sg,mg,c,#sg,table.unpack(funs))
+				local cancel=false
+				sg:Merge(mustg)
+				while #sg<max do
+					local filters={}
+					if #sg>0 then
+						Evolute.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg+tg,mg+tg,c,min,max,f,specialchk,mg,emt,filters)
+					end
+					local cg=(mg+tg):Filter(Evolute.CheckRecursive,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt,{table.unpack(filters)})
 					if #cg==0 then break end
-					local cancel=not finish
-					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-					local tc=cg:SelectUnselect(sg,tp,finish,cancel,min,max)
+					finish=#sg>=min and #sg<=max and Evolute.CheckGoal(tp,sg,c,min,f,specialchk,filters)
+					cancel=not og and Duel.IsSummonCancelable() and #sg==0
+					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_LMATERIAL)
+					local tc=Group.SelectUnselect(cg,sg,tp,finish,cancel,1,1)
 					if not tc then break end
-					if not bg:IsContains(tc) then
+					if #mustg==0 or not mustg:IsContains(tc) then
 						if not sg:IsContains(tc) then
 							sg:AddCard(tc)
-							if (sg:GetCount()>=max) then finish=true end
 						else
 							sg:RemoveCard(tc)
 						end
-					elseif #bg>0 and #sg<=#bg then
-						return false
 					end
 				end
-				if finish then
+				if #sg>0 then
+					local filters={}
+					Evolute.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg+tg,mg+tg,c,min,max,f,specialchk,mg,emt,filters)
 					sg:KeepAlive()
-					e:SetLabelObject(sg)
+					local reteff=Effect.GlobalEffect()
+					reteff:SetTarget(function()return sg,filters,emt end)
+					e:SetLabelObject(reteff)
 					return true
-				else return false end
+				else 
+					aux.DeleteExtraMaterialGroups(emt)
+					return false
+				end
 			end
 end
-function Auxiliary.BigbangOperation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
-	local g=e:GetLabelObject()
-	c:SetMaterial(g)
-	for tc in aux.Next(g) do
-		local tef={tc:IsHasEffect(EFFECT_EXTRA_BIGBANG_MATERIAL)}
-		if #tef==0 then
-			Duel.SendtoGrave(tc,REASON_DESTROY+REASON_MATERIAL+REASON_BIGBANG)
-		else for i=1,#tef do
-			local op=tef[i]:GetOperation()
-			if op then
-				op(tc,tp)
-			else
-				Duel.SendtoGrave(tc,REASON_DESTROY+REASON_MATERIAL+REASON_BIGBANG)
-			end end
-		end
+function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
+	return	function(e,tp,eg,ep,ev,re,r,rp,c,must,g,min,max)
+				local g,filt,emt=e:GetLabelObject():GetTarget()()
+				e:GetLabelObject():Reset()
+				for _,ex in ipairs(filt) do
+					if ex[3]:GetValue() then
+						ex[3]:GetValue()(1,SUMMON_TYPE_SPECIAL,ex[3],ex[1]&g,c,tp)
+					end
+				end
+				c:SetMaterial(g)
+				if send==1 then
+					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE+REASON_RETURN)
+				elseif send==2 then
+					Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_EVOLUTE)
+				elseif send==3 then
+					Duel.Remove(g,POS_FACEDOWN,REASON_MATERIAL+REASON_EVOLUTE)
+				elseif send==4 then
+					Duel.SendtoHand(g,nil,REASON_MATERIAL+REASON_EVOLUTE)
+				elseif send==5 then
+					Duel.SendtoDeck(g,nil,2,REASON_MATERIAL+REASON_EVOLUTE)
+				elseif send==6 then
+					Duel.Destroy(g,REASON_MATERIAL+REASON_EVOLUTE)
+				else
+					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
+				end
+				g:DeleteGroup()
+				aux.DeleteExtraMaterialGroups(emt)
+			end
+end
+function Evolute.addct(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x88)
+end
+function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
+	if e:GetHandler():IsRelateToEffect(e) then
+		e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
 	end
-	g:DeleteGroup()
+end
+function Evolute.sumcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
