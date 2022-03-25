@@ -17,7 +17,6 @@ function cid.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetLabelObject(e0)
 	e1:SetCondition(cid.con1)
 	e1:SetTarget(cid.tg1)
 	e1:SetOperation(cid.op1)
@@ -75,14 +74,13 @@ function cid.matcheck(e,c)
 	e1:SetOperation(cid.op1)
 	c:RegisterEffect(e1)
 	end
-
 end
 function cid.con1(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+SUMMON_TYPE_BIGBANG)
 end
 function cid.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end
-	local mc=e:GetHandler():GetMaterialCount()-e:GetLabelObject():GetLabel()
+	local mc=e:GetHandler():GetMaterialCount()
 	if chk==0 then return mc>0 and Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local g=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_GRAVE,0,1,mc,nil)
