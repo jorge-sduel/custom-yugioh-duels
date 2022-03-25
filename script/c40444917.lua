@@ -25,6 +25,11 @@ function cid.initial_effect(c)
 	e3:SetTarget(cid.thtg)
 	e3:SetOperation(cid.thop)
 	c:RegisterEffect(e3)
+	--cannot direct attack
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_EQUIP)
+	e4:SetCode(EFFECT_CANNOT_DIRECT_ATTACK)
+	c:RegisterEffect(e4)
 end
 function cid.eqfilter(c)
 	return c:IsFaceup() and c.IsBigbang
@@ -59,8 +64,7 @@ end
 function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetEquipTarget()
 	local ct=g:GetEquipCount()
-	local fixct=((c:IsDirectAttacked() and 1) or 0)
-	return ct-fixct
+	return ct
 end
 function cid.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
