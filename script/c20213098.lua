@@ -38,8 +38,8 @@ end
 function cid.afilter(c)
 	return c:GetOriginalType()&TYPE_MONSTER~=0
 end
-function cid.filterbbang(c,tp)
-	return c.IsBigbang
+function cid.filterbbang(e,c)
+	return c:IsType(TYPE_MONSTER) and c.IsBigbang
 end
 function cid.filter(c,tp)
 	return not c.IsBigbang or Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_MZONE,0,1,c,tp)
