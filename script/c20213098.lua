@@ -38,7 +38,7 @@ function cid.afilter(c)
 	return c:GetOriginalType()&TYPE_MONSTER~=0 or aux.GetOriginalPandemoniumType(c)~=nil
 end
 function cid.filter(c,tp)
-	return not c:IsType(TYPE_BIGBANG) or Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_MZONE,0,1,c,tp)
+	return not c.IsBigbang or Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_MZONE,0,1,c,tp)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
@@ -46,7 +46,7 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(Duel.SelectReleaseGroup(tp,cid.filter,1,1,nil,tp),REASON_COST)
 end
 function cid.cfilter(c,tp)
-	return c:IsFaceup() and c:IsType(TYPE_BIGBANG)
+	return c:IsFaceup() and c.IsBigbang
 		and Duel.IsExistingMatchingCard(cid.eqfilter,tp,LOCATION_DECK,0,1,nil,tp)
 end
 function cid.eqfilter(c,tp)
@@ -86,7 +86,7 @@ function cid.eqlimit(e,c)
 	return c==e:GetLabelObject()
 end
 function cid.repfilter(c,tp)
-	return c:IsReason(REASON_DESTROY) and Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsType),tp,LOCATION_MZONE,0,1,c,TYPE_BIGBANG)
+	return c:IsReason(REASON_DESTROY) and Duel.IsExistingMatchingCard(c.IsBigBang,tp,LOCATION_MZONE,0,1,c)
 end
 function cid.repcon(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(cid.repfilter,nil,tp)
