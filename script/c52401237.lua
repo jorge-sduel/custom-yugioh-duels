@@ -58,8 +58,24 @@ function cid.initial_effect(c)
 	e4:SetOperation(cid.repop)
 	c:RegisterEffect(e4)
 end
+function cid.ffilter(c,fc)
+	return c:GetAttack()~~c:GetDefense()
+end
 function cid.matcheck(e,c)
-	e:SetLabel(c:GetMaterial():FilterCount(aux.FilterEqualFunction(Card.GetVibe,0),nil))
+	local ct=c:GetMaterial():GetClassCount(cid.ffilter)
+	if ct>0 then
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_EQUIP)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e1:SetCondition(cid.con1)
+	e1:SetTarget(cid.tg1)
+	e1:SetOperation(cid.op1)
+	c:RegisterEffect(e1)
+	end
+
 end
 function cid.con1(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+SUMMON_TYPE_BIGBANG)
