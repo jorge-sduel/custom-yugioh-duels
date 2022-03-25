@@ -76,7 +76,7 @@ function cid.matcheck(e,c)
 	end
 end
 function cid.con1(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+SUMMON_TYPE_BIGBANG)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL)
 end
 function cid.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end
