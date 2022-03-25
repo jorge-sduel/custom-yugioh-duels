@@ -1,5 +1,6 @@
 --created by Meedogh, coded by Lyris
 local cid,id=GetID()
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function cid.initial_effect(c)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
@@ -10,7 +11,7 @@ function cid.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_FZONE)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e1:SetTarget(aux.TargetBoolFunction(c.IsBigbang))
+	e1:SetTarget(aux.TargetBoolFunction(card.IsBigbang))
 	e1:SetValue(function(e) return 200+Duel.GetMatchingGroupCount(cid.afilter,e:GetHandlerPlayer(),LOCATION_SZONE,LOCATION_SZONE,nil)*200 end)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
@@ -35,7 +36,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function cid.afilter(c)
-	return c:GetOriginalType()&TYPE_MONSTER~=0 or aux.GetOriginalPandemoniumType(c)~=nil
+	return c:GetOriginalType()&TYPE_MONSTER~=0
 end
 function cid.filter(c,tp)
 	return not c.IsBigbang or Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_MZONE,0,1,c,tp)
