@@ -1,9 +1,10 @@
-local cid,id=GetID()
 --Cosmicburst Dragon
+local cid,id=GetID()
+cid.IsEquilibrium=true
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function cid.initial_effect(c)
-	c:EnableReviveLimit()
-	aux.AddOrigBigbangType(c)
-	aux.AddBigbangProc(c,aux.FilterEqualFunction(Card.GetVibe,0),1,aux.NOT(aux.FilterEqualFunction(Card.GetVibe,0)),1)
+	--
+	Bigbang.AddProcedure(c,nil,2,99)
 	--equip
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
