@@ -118,7 +118,7 @@ function Bigbang.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 	return #sg>=minc and sg:CheckWithSumEqual(Card.GetAttack,lc:GetAttack(),#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
-function bigbang.Condition(f,minc,maxc,specialchk,opp,loc,send)
+function Bigbang.Condition(f,minc,maxc,specialchk,opp,loc,send)
 	return	function(e,c,must,g,min,max)
 				if c==nil then return true end
 				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
