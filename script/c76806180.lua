@@ -51,7 +51,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.desfilter(c,tp)
 	local ec=c:GetEquipTarget()
-	return ec and ec:IsBigbang and c:IsDestructable() and Duel.IsExistingMatchingCard(nil,tp,LOCATION_HAND+LOCATION_ONFIELD,LOCATION_HAND+LOCATION_ONFIELD,1,c)
+	return ec and ec:IsBigbang and Duel.IsExistingMatchingCard(nil,tp,LOCATION_HAND+LOCATION_ONFIELD,LOCATION_HAND+LOCATION_ONFIELD,1,c)
 end
 function cid.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.desfilter,tp,LOCATION_SZONE,LOCATION_SZONE,1,nil,tp) end
