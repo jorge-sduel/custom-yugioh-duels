@@ -19,7 +19,7 @@ function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	return ex and tg~=nil and tc+tg:FilterCount(cid.cfilter,nil,tp)-tg:GetCount()>0
 end
 function cid.sfilter(c,e,tp)
-	return c:IsCode(52401237) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
+	return c:IsCode(52401237)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.sfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,nil,e,tp) end
