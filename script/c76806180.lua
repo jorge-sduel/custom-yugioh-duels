@@ -3,7 +3,6 @@ local cid,id=GetID()
 cid.IsBigbang=true
 if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function cid.initial_effect(c)
-c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
 	Bigbang.AddProcedure(c,nil,2,99)
 	aux.AddCodeList(c,81455788)
