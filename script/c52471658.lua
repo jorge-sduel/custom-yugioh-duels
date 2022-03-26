@@ -20,10 +20,13 @@ function cid.initial_effect(c)
 	e3:SetCode(EVENT_BE_MATERIAL)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e3:SetCategory(CATEGORY_TOHAND)
-	e3:SetCondition(function(e,tp,eg,ep,ev,re,r) return r==REASON_BIGBANG end)
+	e3:SetCondition(cid.thcon)
 	e3:SetTarget(cid.thtg)
 	e3:SetOperation(cid.thop)
 	c:RegisterEffect(e3)
+end
+function cid.thcon(e,tp,eg,ep,ev,re,r,rp)
+	return bit.band(r,REASON_BIGBANG)~=0
 end
 function cid.filter(c,e,tp)
 	return c:IsLevelBelow(3) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
