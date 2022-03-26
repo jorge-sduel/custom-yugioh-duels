@@ -34,7 +34,7 @@ function cid.initial_effect(c)
 end
 function cid.eqatkcon(e) 
 	local ec=e:GetHandler():GetEquipTarget()
-	return ec and ec:IsRace(RACE_DRAGON) and ec:IsType(TYPE_BIGBANG) 
+	return ec and ec:IsRace(RACE_DRAGON) and ec.IsBigbang
 end
 function cid.eqval(e,c) 
 	return e:GetHandler():GetEquipTarget():GetEquipGroup():FilterCount(cid.atkfilter,nil)*500 
@@ -83,7 +83,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.splimit(e,c)
-	return not c:IsType(TYPE_BIGBANG) and c:IsLocation(LOCATION_EXTRA)
+	return not c.IsBigbang and c:IsLocation(LOCATION_EXTRA)
 end
 function cid.rdcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetEquipTarget()
