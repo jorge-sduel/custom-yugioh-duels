@@ -40,7 +40,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		if sc then
 			Duel.BreakEffect()
 			if Duel.SpecialSummon(sc,SUMMON_TYPE_BIGBANG,tp,tp,false,false,POS_FACEUP)==0 then return end
-			local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(cid.filter),tp,LOCATION_GRAVE,0,nil)
+			local g=Duel.GetMatchingGroup(cid.filter,tp,LOCATION_GRAVE,0,nil)
 			local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 			if #g>0 and ft>0 and Duel.SelectYesNo(tp,1068) then
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
