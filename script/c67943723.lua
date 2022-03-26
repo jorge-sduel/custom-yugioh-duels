@@ -59,7 +59,7 @@ function cid.splimit(e,c)
 	return not c.IsBigbang and c:IsLocation(LOCATION_EXTRA) and c:IsControler(e:GetHandlerPlayer())
 end
 function cid.cfilter(c)
-	return (aux.GetOriginalPandemoniumType(c)~=nil and c:GetSequence()<5 or c:GetOriginalType()&TYPE_MONSTER~=0)
+	return (c:GetSequence()<5 or c:GetOriginalType()&TYPE_MONSTER~=0)
 		and c:IsDestructable()
 end
 function cid.thfilter(c)
