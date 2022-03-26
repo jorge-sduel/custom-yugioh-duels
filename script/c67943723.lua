@@ -57,7 +57,7 @@ function cid.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function cid.splimit(e,c)
-	return not c:IsType(TYPE_BIGBANG) and c:IsLocation(LOCATION_EXTRA) and c:IsControler(e:GetHandlerPlayer())
+	return not c.IsBigbang and c:IsLocation(LOCATION_EXTRA) and c:IsControler(e:GetHandlerPlayer())
 end
 function cid.cfilter(c)
 	return (aux.GetOriginalPandemoniumType(c)~=nil and c:GetSequence()<5 or c:GetOriginalType()&TYPE_MONSTER~=0)
