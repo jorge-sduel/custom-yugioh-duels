@@ -48,7 +48,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.repfilter(c,tp)
-	return c:IsFaceup() and c:IsType(TYPE_BIGBANG) and c:IsLocation(LOCATION_MZONE)
+	return c:IsFaceup() and c.IsBigbang and c:IsLocation(LOCATION_MZONE)
 		and c:IsControler(tp) and not c:IsReason(REASON_REPLACE)
 end
 function cid.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
