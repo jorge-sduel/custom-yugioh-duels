@@ -1,10 +1,12 @@
-local cid,id=GetID()
 --Creation Paladin
+local cid,id=GetID()
+cid.IsBigbang=true
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function cid.initial_effect(c)
+c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
-	aux.AddOrigBigbangType(c)
-	aux.AddBigbangProc(c,aux.FilterEqualFunction(Card.GetVibe,1),1,aux.FilterEqualFunction(Card.GetVibe,-1),1)
-	--
+	Bigbang.AddProcedure(c,nil,2,99)
+--
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
