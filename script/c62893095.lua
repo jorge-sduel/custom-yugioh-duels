@@ -54,7 +54,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 						e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 						e1:SetValue(cid.eqlimit)
 						e1:SetLabelObject(gc)
-						gc:RegisterEffect(e1)
+						tc:RegisterEffect(e1)
 					end
 				end
 			end
