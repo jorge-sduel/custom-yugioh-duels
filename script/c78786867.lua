@@ -86,5 +86,5 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.splimit(e,c)
-	return not (c:IsType(TYPE_BIGBANG) and c:IsRace(RACE_DRAGON)) and c:IsLocation(LOCATION_EXTRA)
+	return not (c.IsBigbang and c:IsRace(RACE_DRAGON)) and c:IsLocation(LOCATION_EXTRA)
 end
