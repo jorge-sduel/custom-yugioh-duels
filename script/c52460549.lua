@@ -13,8 +13,7 @@ function cid.cfilter(c,e,tp)
 	return c:IsFaceup() and c:IsDestructable() and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_EXTRA,0,1,c,c,e,tp)
 end
 function cid.filter(c,mc,e,tp)
-	return c.IsBigbang and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_BIGBANG,tp,false,false)
-		and mc:IsCanBeBigBangMaterial(c) and Duel.GetLocationCountFromEx(tp,tp,mc)
+	return c.IsBigbang and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_BIGBANG,tp,false,false) and Duel.GetLocationCountFromEx(tp,tp,mc)
 end
 function cid.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,e,tp) end
