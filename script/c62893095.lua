@@ -35,9 +35,8 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	if ct==0 or not Duel.NegateActivation(ev) then return end
 	if Duel.Destroy(Duel.GetFieldGroup(tp,LOCATION_MZONE,0),REASON_EFFECT)==ct then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(cid.sfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,nil,e,tp)
-		local sc=sg:GetFirst()
-		if sc then
+		local sg=Duel.SelectMatchingCard(tp,cid.sfilter,LOCATION_EXTRA+LOCATION_GRAVE,0,nil,e,tp)
+		if sg then
 			Duel.BreakEffect()
 			if Duel.SpecialSummon(sc,SUMMON_TYPE_BIGBANG,tp,tp,false,false,POS_FACEUP)==0 then return end
 			local g=Duel.GetMatchingGroup(cid.filter,tp,LOCATION_GRAVE,0,nil)
