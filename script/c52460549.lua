@@ -10,11 +10,10 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function cid.cfilter(c,e,tp)
-	return c:IsFaceup() and c:IsDestructable() and c:IsSetCard(0xcf11) and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_EXTRA,0,1,c,c,e,tp)
+	return c:IsFaceup() and c:IsDestructable() and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_EXTRA,0,1,c,c,e,tp)
 end
 function cid.filter(c,mc,e,tp)
-	return c:IsType(TYPE_BIGBANG) and c:IsCanBeSpecialSummoned(e,340,tp,false,false)
-		and aux.IsCodeListed(c,mc:GetOriginalCode())
+	return c.IsBigbang and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_BIGBANG,tp,false,false)
 		and mc:IsCanBeBigBangMaterial(c) and Duel.GetLocationCountFromEx(tp,tp,mc)
 end
 function cid.tg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -33,7 +32,7 @@ function cid.op(e,tp,eg,ep,ev,re,r,rp)
 		local sg=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_EXTRA,0,1,g,g:GetFirst(),e,tp)
 		if #sg>0 then
 			Duel.BreakEffect()
-			Duel.SpecialSummon(sg,340,tp,tp,false,false,POS_FACEUP)
+			Duel.SpecialSummon(sg,SUMMON_TYPE_BIGBANG,tp,tp,false,false,POS_FACEUP)
 		end
 	end
 end
