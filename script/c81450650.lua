@@ -74,7 +74,7 @@ end
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=e:GetHandler()
 	local mg=tc:GetMaterial()
-	if chk==0 then return tc:IsSummonType(SUMMON_TYPE_SPECIAL+340) and mg:IsExists(cid.mgfilter,1,nil,e,tp,tc) end
+	if chk==0 then return tc:IsSummonType(SUMMON_TYPE_BIGBANG) and mg:IsExists(cid.mgfilter,1,nil,e,tp,tc) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE+LOCATION_REMOVED)
 end
 function cid.mgfilter(c,e,tp,bc)
