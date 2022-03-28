@@ -1,8 +1,10 @@
 --Shining Reverse Dragon
+c86123777.is_reverse_xyz=true
+if not REVERSE_XYZ_IMPORTED then Duel.LoadScript("proc_reverse_xyz.lua") end
 function c86123777.initial_effect(c)
 	c:EnableReviveLimit()
-	Xyz.AddProcedure(c,c86123777.xyzfilter,nil,2,nil,nil,nil,nil,false,c86123777.xyzcheck)
-	--atk
+	ReverseXyz.AddProcedure(c)
+        --atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(86123777,0))
 	e2:SetCategory(CATEGORY_ATKCHANGE)
