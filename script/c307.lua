@@ -123,22 +123,8 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 if not e:GetHandler():IsLocation(LOCATION_PZONE) then
 		Duel.SendtoExtraP(c,tp,REASON_EFFECT)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	end
 end
-function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	local rc=e:GetOwner()
-	local c=e:GetHandler()
-	local e1=Effect.CreateEffect(rc)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_DISABLE)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-	c:RegisterEffect(e1,true)
-	local e2=Effect.CreateEffect(rc)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_DISABLE_EFFECT)
-	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-	c:RegisterEffect(e2,true)
-	e:Reset()
+	end
 end
 function s.ffilter(c,tp)
 	return
