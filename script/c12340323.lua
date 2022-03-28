@@ -1,8 +1,10 @@
 --Reverse-Xyz
+c12340323.is_reverse_xyz=true
+if not REVERSE_XYZ_IMPORTED then Duel.LoadScript("proc_reverse_xyz.lua") end
 function c12340323.initial_effect(c)
 	c:EnableReviveLimit()
-	Xyz.AddProcedure(c,c12340323.xyzfilter,nil,2,nil,nil,nil,nil,false,c12340323.xyzcheck)
-	--attack
+	ReverseXyz.AddProcedure(c)
+        --atack
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
