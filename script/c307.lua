@@ -3,7 +3,7 @@ local s,id=GetID()
 if not TRAMPULA_IMPORTED then Duel.LoadScript("proc_trampula.lua") end
 function s.initial_effect(c)
 	--pendulum summon
-	Pendulum.AddProcedure(c)
+	Trampula.AddProcedure(c)
 	--synchro effect 
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
@@ -20,8 +20,8 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	--e1:SetTarget(s.sctg)
-	--e1:SetOperation(s.scop)
+	e1:SetTarget(s.sctg)
+	e1:SetOperation(s.scop)
 	c:RegisterEffect(e1)
 	--Activate
 	local e2=Effect.CreateEffect(c)
@@ -111,6 +111,7 @@ function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	local mg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_MZONE+LOCATION_EXTRA,0,nil)
 	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	if #g>0 then
@@ -119,13 +120,12 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 		local sc=sg:GetFirst()
 		Synchro.Send=1
 		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
 		e1:SetOperation(s.regop)
 		sc:RegisterEffect(e1)
 		Duel.SynchroSummon(tp,sc,nil,mg)
-	local c=e:GetHandler()
 		Duel.SendtoExtraP(c,tp,REASON_EFFECT)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
