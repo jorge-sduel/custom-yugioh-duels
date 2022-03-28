@@ -91,7 +91,7 @@ function c859.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,c859.cfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SendtoGrave(g:GetFirst(),REASON_COST)
 end
 function c859.cfilter(c)
 	return c:IsSetCard(0x5AA) and c:IsType(TYPE_MONSTER) and c:IsAbleToGraveAsCost()
