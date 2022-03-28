@@ -26,7 +26,6 @@ function cid.initial_effect(c)
 end
 function cid.cfilter(c,e,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xcf11) and c:IsDiscardable()
-		and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,e,tp,nil)
 end
 function cid.filter(c,e,tp,code)
 	return c:IsSetCard(0xcf11) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
