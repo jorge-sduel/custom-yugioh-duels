@@ -1,8 +1,10 @@
 --Raging Fighter
+c86123677.is_reverse_xyz=true
+if not REVERSE_XYZ_IMPORTED then Duel.LoadScript("proc_reverse_xyz.lua") end
 function c86123677.initial_effect(c)
 	c:EnableReviveLimit()
-	Xyz.AddProcedure(c,c86123677.xyzfilter,nil,2,nil,nil,nil,nil,false,c86123677.xyzcheck)
-	--attack
+	ReverseXyz.AddProcedure(c)	
+        --attack
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(86123677,0))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
