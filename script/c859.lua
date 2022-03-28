@@ -1,7 +1,7 @@
 --Star-vader, "Omega" Glendios
 function c859.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,nil,10,3,c859.ovfilter,aux.Stringid(859,0),3,nil,c859.xyzop)
+	Xyz.AddProcedure(c,nil,10,3,c859.ovfilter,aux.Stringid(859,0),3,c859.xyzop)
 	c:EnableReviveLimit()
 	--cannot be destroyed
 	local e1=Effect.CreateEffect(c)
@@ -74,7 +74,7 @@ function c859.ovfilter(c)
 		and Duel.IsExistingMatchingCard(c859.cvfilter,c:GetControler(),LOCATION_HAND,0,1,nil)
 end
 function c859.xyzop(c,tp)
-	Duel.DiscardHand(tp,c859.cvfilter,1,1,REASON_COST+REASON_DISCARD)
+	Duel.DiscardHand(tp,nil,REASON_COST+REASON_DISCARD)
 end
 function c859.tgvalue(e,re,rp)
 	return rp~=e:GetHandlerPlayer()
