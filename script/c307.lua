@@ -111,6 +111,7 @@ function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	local mg=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),tp,LOCATION_MZONE+LOCATION_EXTRA,0,nil)
 	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	if #g>0 then
@@ -119,10 +120,7 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 		local sc=sg:GetFirst()
 		Synchro.Send=1
 		Duel.SynchroSummon(tp,sc,nil,mg)
-	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) then return end
-	if not c:IsLocation(LOCATION_PZONE) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
-		Duel.BreakEffect()
+if not c:IsLocation(LOCATION_PZONE) then
 		Duel.SendtoExtraP(c,tp,REASON_EFFECT)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		Duel.RaiseEvent(c,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
