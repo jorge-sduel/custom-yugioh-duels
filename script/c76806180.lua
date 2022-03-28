@@ -25,10 +25,10 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cid.cfilter(c,e,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xcf11) and c:IsDiscardable()
+	return c:IsType(TYPE_MONSTER) and c:IsLevelBelow(4) and c:IsDiscardable()
 end
 function cid.filter(c,e,tp,code)
-	return c:IsSetCard(0xcf11) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 if chk==0 then return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_HAND,0,1,nil) end
