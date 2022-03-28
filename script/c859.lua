@@ -73,8 +73,11 @@ function c859.ovfilter(c)
 	return c:IsFaceup() and (c:IsSetCard(0x5AA) or c:IsSetCard(0x5DC)) and (c:GetLevel()>=8 or c:GetRank()>=8)
 		and Duel.IsExistingMatchingCard(c859.cvfilter,c:GetControler(),LOCATION_HAND,0,1,nil)
 end
-function c859.xyzop(c,tp)
-	Duel.DiscardHand(tp,nil,REASON_COST+REASON_DISCARD)
+function c859.xyzop(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(c859.cvfilter,tp,LOCATION_HAND,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
+	local g=Duel.SelectMatchingCard(tp,c859.cvfilter,tp,LOCATION_HAND,0,1,1,nil)
+	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
 end
 function c859.tgvalue(e,re,rp)
 	return rp~=e:GetHandlerPlayer()
