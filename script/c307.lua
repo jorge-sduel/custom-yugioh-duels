@@ -3,7 +3,7 @@ local s,id=GetID()
 if not TRAMPULA_IMPORTED then Duel.LoadScript("proc_trampula.lua") end
 function s.initial_effect(c)
 	--pendulum summon
-	Trampula.AddProcedure(c)
+	pendulum.AddProcedure(c)
 	--synchro effect 
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
