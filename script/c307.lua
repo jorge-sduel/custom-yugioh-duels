@@ -119,6 +119,10 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 		local sc=sg:GetFirst()
 		Synchro.Send=1
 		Duel.SynchroSummon(tp,sc,nil,mg)
+Duel.SendtoExtraP(e:GetHandler(),tp,REASON_EFFECT)
+Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	end
+end
 	end
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
