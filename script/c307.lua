@@ -120,11 +120,9 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 		Synchro.Send=1
 		Duel.SynchroSummon(tp,sc,nil,mg)
 	local c=e:GetHandler()
-
 	if not c:IsRelateToEffect(e) then return end
 	if not c:IsLocation(LOCATION_PZONE) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
 		Duel.BreakEffect()
-		c:CancelToGrave()
 		Duel.SendtoExtraP(c,tp,REASON_EFFECT)
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		Duel.RaiseEvent(c,EVENT_SSET,e,REASON_EFFECT,tp,tp,0)
