@@ -36,7 +36,6 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_HAND,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
 	local g=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-	e:SetLabel(g:GetFirst():GetCode())
 	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
 end
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
