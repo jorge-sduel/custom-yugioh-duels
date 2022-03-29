@@ -38,7 +38,6 @@ function c90800.filter1(c,e,tp)
 	return c:IsFaceup() and c:IsType(TYPE_LINK)
 		and Duel.IsExistingMatchingCard(c90800.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
-		and aux.MustMaterialCheck(c,tp,EFFECT_MUST_BE_LMATERIAL)
 end
 function c90800.filter2(c,e,tp,mc)
 	return c:IsType(TYPE_LINK) and c:IsLink(mc:GetLink()+1) and mc:IsCanBeLinkMaterial(c)
@@ -54,7 +53,7 @@ end
 function c90800.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if Duel.GetLocationCountFromEx(tp,tp,tc)<=0 or not aux.MustMaterialCheck(tc,tp,EFFECT_MUST_BE_LMATERIAL) then return end
+	if Duel.GetLocationCountFromEx(tp,tp,tc)<=0 then return end
 	if tc:IsFacedown() or not tc:IsRelateToEffect(e) or tc:IsControler(1-tp) or tc:IsImmuneToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,c90800.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc)
