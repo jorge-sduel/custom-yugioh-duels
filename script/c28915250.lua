@@ -1,6 +1,6 @@
 --Shadowflame Vixen
 --Design and code by Kindrindra
-local ref=_G['c'..28915250]
+local ref,id=GetID()
 function ref.initial_effect(c)
 	--Unaffect
 	local e1=Effect.CreateEffect(c)
