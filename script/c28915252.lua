@@ -1,6 +1,6 @@
 --Shadowflame Guardian
 --Design and code by Kindrindra
-local ref=_G['c'..28915252]
+local ref,id=GetID()
 function ref.initial_effect(c)
 	--Negate
 	local e1=Effect.CreateEffect(c)
