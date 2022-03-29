@@ -1,4 +1,6 @@
 --Black Rose Pendulum Dragon
+local cid,id=GetID()
+function cid.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,aux.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
