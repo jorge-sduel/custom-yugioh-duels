@@ -1,6 +1,6 @@
 --Shadowflame Priestess
 --Design and code by Kindrindra
-local ref=_G['c'..28915251]
+local ref,id=GetID()
 function ref.initial_effect(c)
 	--Recover
 	local e1=Effect.CreateEffect(c)
