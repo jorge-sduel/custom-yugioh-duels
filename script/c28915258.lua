@@ -86,7 +86,7 @@ end
 
 --Set From Extra
 function ref.setcon(c,e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(ref.tributefilter,tp,LOCATION_ONFIELD,0,1,nil)
+	return Duel.IsExistingMatchingCard(ref.mat2,tp,LOCATION_ONFIELD,0,1,nil) and Duel.IsExistingMatchingCard(ref.setmat1,tp,LOCATION_ONFIELD,0,1,nil)
 end
 function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	local tc=e:GetHandler()
