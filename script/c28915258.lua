@@ -92,44 +92,15 @@ function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	local tc=e:GetHandler()
 	local reason=REASON_RULE
 	local tpe=TYPE_EFFECT+TYPE_FUSION
-	
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 	local g=Duel.SelectMatchingCard(tp,ref.setmat1,tp,LOCATION_ONFIELD,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 	local g2=Duel.SelectMatchingCard(tp,ref.mat2,tp,LOCATION_MZONE,0,1,1,g:GetFirst())
 	g:Merge(g2)
-	Duel.Release(g,REASON_COST+REASON_MATERIAL)
-	
+	Duel.Overlay(g,tc)
 	Duel.ConfirmCards(1-tp,tc)
-	
-	if pcall(Group.GetFirst,tc) then
-		local tg=tc:Clone()
-		for cc in aux.Next(tg) do
-			cc:SetCardData(CARDDATA_TYPE,TYPE_TRAP+TYPE_CONTINUOUS)
-			if cc:IsLocation(LOCATION_SZONE) then
-				if cc:IsCanTurnSet() then
-					Duel.ChangePosition(cc,POS_FACEDOWN_ATTACK)
-					Duel.RaiseEvent(cc,EVENT_SSET,e,reason,cc:GetControler(),cc:GetControler(),0)
-				end
-			else Duel.SSet(cc:GetControler(),cc) end
-			if not cc:IsLocation(LOCATION_SZONE) then
-				cc:SetCardData(CARDDATA_TYPE,TYPE_MONSTER+tpe)
-			end
-		end
-	else
-		tc:SetCardData(CARDDATA_TYPE,TYPE_TRAP+TYPE_CONTINUOUS)
-		if tc:IsLocation(LOCATION_SZONE) then
-			if tc:IsCanTurnSet() then
-				Duel.ChangePosition(tc,POS_FACEDOWN_ATTACK)
-				Duel.RaiseEvent(tc,EVENT_SSET,e,reason,tc:GetControler(),tc:GetControler(),0)
-			end
-		else Duel.SSet(tc:GetControler(),tc) end
-		if not tc:IsLocation(LOCATION_SZONE) then
-			tc:SetCardData(CARDDATA_TYPE,TYPE_MONSTER+tpe)
-		end
-	end
+	Duel.MoveToField(tc,tp,tp,LOCATION_MZONE,POS_FACEUP,true)
 end
-
 --Negate
 function ref.ssfilter(c,tp,att)
 	return c:IsSetCard(0x729) and c:IsType(TYPE_SPELL+TYPE_TRAP)
