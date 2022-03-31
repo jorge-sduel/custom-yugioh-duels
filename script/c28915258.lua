@@ -77,7 +77,7 @@ function ref.mat2(c)
 	return c:IsType(TYPE_MONSTER) and c:IsLevelBelow(4)
 end
 function ref.tributefilter(c,filter)
-	return c:IsReleasable() and filter(c)
+	return c:IsReleasable()
 end
 
 function ref.fusionfix(e,tp,eg,ep,ev,re,r,rp)
