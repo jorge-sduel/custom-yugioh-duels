@@ -3,7 +3,7 @@
 local ref=_G['c'..28915257]
 function ref.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil)1,99)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--Counter
 	if not c28915257.global_check then
