@@ -94,9 +94,9 @@ function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	local tpe=TYPE_EFFECT+TYPE_FUSION
 	
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g=Duel.SelectMatchingCard(tp,ref.tributefilter,tp,LOCATION_ONFIELD,0,1,1,nil,ref.setmat1)
+	local g=Duel.SelectMatchingCard(tp,ref.setmat1,tp,LOCATION_ONFIELD,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g2=Duel.SelectMatchingCard(tp,ref.tributefilter,tp,LOCATION_MZONE,0,1,1,g:GetFirst(),ref.mat2)
+	local g2=Duel.SelectMatchingCard(tp,ref.mat2,tp,LOCATION_MZONE,0,1,1,g:GetFirst())
 	g:Merge(g2)
 	Duel.Release(g,REASON_COST+REASON_MATERIAL)
 	
