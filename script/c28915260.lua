@@ -4,7 +4,7 @@ local ref=_G['c'..28915260]
 local id=28915260
 function ref.initial_effect(c)
 	--Link Summon
-	aux.AddLinkProcedure(c,nil,2,3,ref.lcheck)
+	Link.AddProcedure(c,nil,2,3,ref.lcheck)
 	c:EnableReviveLimit()
 	--Counter
 	if not ref.global_check then
