@@ -97,9 +97,9 @@ function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 	local g2=Duel.SelectMatchingCard(tp,ref.mat2,tp,LOCATION_MZONE,0,1,1,g:GetFirst())
 	g:Merge(g2)
-	Duel.Overlay(g,tc)
 	Duel.ConfirmCards(1-tp,tc)
 	Duel.MoveToField(tc,tp,tp,LOCATION_MZONE,POS_FACEUP,true)
+Duel.Overlay(tc,g)
 end
 --Negate
 function ref.ssfilter(c,tp,att)
