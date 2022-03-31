@@ -12,9 +12,8 @@ function ref.initial_effect(c)
 	fusion:SetValue(TYPE_FUSION)
 	c:RegisterEffect(fusion)
 	--Pand/Fusion
-	aux.AddOrigPandemoniumType(c)
 	c:EnableReviveLimit()
-	aux.AddFusionProcFun2(c,aux.FilterBoolFunction(Card.IsFusionSetCard,0x729),ref.mat2,true)
+	Fusion.AddProcFun2(c,aux.FilterBoolFunction(Card.IsFusionSetCard,0x729),ref.mat2,true)
 	--Set from Extra
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(id,0)
@@ -37,7 +36,6 @@ function ref.initial_effect(c)
 	e1:SetTarget(ref.negtg)
 	e1:SetOperation(ref.negop)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
 	--Grant Effect
 	----Effect to Grant
 	local e2=Effect.CreateEffect(c)
