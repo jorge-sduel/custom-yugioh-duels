@@ -5,17 +5,8 @@ local id=28915258
 ref.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function ref.initial_effect(c)
-	--Fusion Fix
-	local fusion=Effect.CreateEffect(c)
-	fusion:SetType(EFFECT_TYPE_SINGLE)
-	fusion:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	fusion:SetCode(EFFECT_ADD_TYPE)
-	fusion:SetCondition(ref.fusionfix)
-	fusion:SetValue(TYPE_FUSION)
-	c:RegisterEffect(fusion)
-	--Pand/Fusion
 	c:EnableReviveLimit()
-	Fusion.AddProcFun2(c,aux.FilterBoolFunction(Card.IsFusionSetCard,0x729),ref.mat2,true)
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x729),ref.mat2)
 	--Set from Extra
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(id,0)
