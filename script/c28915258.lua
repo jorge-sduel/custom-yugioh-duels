@@ -2,6 +2,8 @@
 --Design and code by Kindrindra
 local ref=_G['c'..28915258]
 local id=28915258
+ref.IsEquilibrium=true
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function ref.initial_effect(c)
 	--Fusion Fix
 	local fusion=Effect.CreateEffect(c)
