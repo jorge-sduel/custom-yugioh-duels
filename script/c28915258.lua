@@ -64,7 +64,7 @@ function ref.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function ref.setmat1(c)
-	return c:IsSetCard(0x729) and Duel.IsExistingMatchingCard(ref.tributefilter,tp,LOCATION_MZONE,0,1,c,ref.mat2)
+	return c:IsSetCard(0x729) and Duel.IsExistingMatchingCard(ref.mat2,tp,LOCATION_MZONE,0,1,c)
 end
 function ref.mat2(c)
 	return c:IsType(TYPE_MONSTER) and c:IsLevelBelow(4)
