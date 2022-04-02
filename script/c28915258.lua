@@ -15,7 +15,7 @@ function ref.initial_effect(c)
 	e0:SetRange(LOCATION_EXTRA)
 	e0:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetCountLimit(1,id)
-	e0:SetCondition(ref.setcon)
+	--e0:SetCondition(ref.setcon)
 	e0:SetOperation(ref.setop)
 	c:RegisterEffect(e0)
 	--Negate
