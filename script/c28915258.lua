@@ -25,6 +25,7 @@ function ref.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCode(EVENT_CHAINING)
+	e1:SetCost(s.costov)
 	e1:SetCondition(ref.negcon)
 	e1:SetTarget(ref.negtg)
 	e1:SetOperation(ref.negop)
@@ -62,6 +63,10 @@ function ref.initial_effect(c)
 	e4:SetTarget(ref.sstg)
 	e4:SetOperation(ref.ssop)
 	c:RegisterEffect(e4)
+end
+function ref.costov(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function ref.setmat1(c)
 	return c:IsSetCard(0x729) and Duel.IsExistingMatchingCard(ref.mat2,tp,LOCATION_MZONE,0,1,c)
@@ -145,7 +150,6 @@ function ref.negop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)
 		end
 	end
-	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT)
 end
 
 --Grant Effect
