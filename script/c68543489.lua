@@ -1,7 +1,7 @@
 --Stardust Zombie Dragon
 function c68543489.initial_effect(c)
 	--Synchro Summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsCode,33420078),aux.NonTuner(Card.IsRace,RACE_ZOMBIE),1)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--Pendulum Set
 	aux.AddPendulumProcedure(c)
