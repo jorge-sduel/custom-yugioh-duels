@@ -53,6 +53,7 @@ function c68543489.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
 function c68543489.spop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,c68543489.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
@@ -66,6 +67,12 @@ function c68543489.spop(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetRange(LOCATION_MZONE)
 			e1:SetReset(RESET_EVENT+0x1fe0000)
 			tc:RegisterEffect(e1)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e:SetCode(EFFECT_UPDATE_ATTACK)
+	e2:SetValue(c:GetAttack()*2)
+	e2:SetReset(RESET_PHASE+PHASE_END)
+	c:RegisterEffect(e2)
 		end
 	end
 end
