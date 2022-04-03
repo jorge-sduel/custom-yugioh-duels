@@ -6,7 +6,7 @@ ref.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function ref.initial_effect(c)
 	c:EnableReviveLimit()
-	Equilibrium.AddProcedure()
+	Equilibrium.AddProcedure(c)
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x729),ref.mat2)
 	--Set from Extra
 	local e0=Effect.CreateEffect(c)
