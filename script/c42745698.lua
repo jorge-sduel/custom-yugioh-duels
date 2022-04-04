@@ -1,9 +1,11 @@
 --created by Meedogh, coded by Lyris
 local cid,id=GetID()
+cid.IsBigbang=true
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function cid.initial_effect(c)
+c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
-	aux.AddOrigBigbangType(c)
-	aux.AddBigbangProc(c,aux.FilterBoolFunction(Card.IsCode,52440537),1,aux.NOT(aux.FilterEqualFunction(Card.GetVibe,1)),1)
+	Bigbang.AddProcedure(c,nil,2,99)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DEFCHANGE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
