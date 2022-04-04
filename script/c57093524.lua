@@ -19,7 +19,7 @@ c:AddSetcodesRule(id,false,0xbb109)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_PHASE+PHASE_END)
 	e1:SetCountLimit(1)
-	e1:SetCondition(cid.retcon)
+	e1:SetTarget(cid.retcon)
 	e1:SetOperation(cid.retop)
 	c:RegisterEffect(e1)
 end
@@ -46,11 +46,14 @@ function cid.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.retcon(e,tp,eg,ep,ev,re,r,rp)
-	local label=e:GetHandler():GetFlagEffectLabel(id)
-	return label and label~=Duel.GetTurnCount()
+	local c=e:GetHandler()
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:GetFlagEffect(id)>0
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
 function cid.retop(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.ReturnToField(e:GetLabelObject()) then return end
+	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	local g=Duel.SelectMatchingCard(tp,Card.IsFaceup,tp,0,LOCATION_MZONE,1,1,nil)
 	local tc=g:GetFirst()
@@ -61,5 +64,6 @@ function cid.retop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(-500)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
+	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
