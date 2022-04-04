@@ -47,7 +47,7 @@ function cid.op(e,tp,eg,ep,ev,re,r,rp)
 		else c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY,0,0) end
 	end
 end
-function cid.retcon(e,tp,eg,ep,ev,re,r,rp)
+function cid.retcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:GetFlagEffect(id)>0
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) end
