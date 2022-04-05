@@ -1,17 +1,11 @@
 --Muscwole IronSoul
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cid=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cid
-end
-local id,cid=getID()
+local cid,id=GetID()
+cid.IsBigbang=true
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function cid.initial_effect(c)
-	--BigBang summon
+c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
-	aux.AddOrigBigbangType(c)
-	aux.AddBigbangProc(c,cid.sfilter,1)
+	Bigbang.AddProcedure(c,nil,2,99)
 	--indes
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
