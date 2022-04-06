@@ -59,7 +59,7 @@ function cid.atkcond(val)
 	end
 end
 function cid.spfilter(c,e,tp)
-	return c:IsSetCard(0x777) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_ATTACK)
+	return c:IsRace(RACE_WARRIOR) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_ATTACK)
 		and c:IsCanBeEffectTarget(e)
 end
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
