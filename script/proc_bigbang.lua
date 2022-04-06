@@ -3,7 +3,6 @@ REASON_BIGBANG		= 0x6400
 SUMMON_TYPE_BIGBANG 	= 0x6400
 HINTMSG_BIGBANGMATERIAL	= 6400
 BIGBANG_IMPORTED	= true
-local GetSoul,GetOriginalSoul,GetPreviousSoulOnField,IsSoul,IsSoulBelow,IsSoulAbove,IsGetType,Card.GetOriginalType,Card.GetPreviousTypeOnField=Card.GetRank,GetOriginalRank,GetPreviousRankOnField,IsRank,IsRankBelow,IsRankAbove,GetType,GetOriginalType,GetPreviousTypeOnField
 if not aux.BigbangProcedure then
 	aux.BigbangProcedure = {}
 	Bigbang = aux.BigbangProcedure
