@@ -1,18 +1,20 @@
 --Supreme Muscwole Figther Machomega
 --Created by Leon, scripted by Boos and Neo
 local cid,id=GetID()
+cid.IsBigbang=true
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function cid.initial_effect(c)
+c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
-	aux.AddOrigBigbangType(c)
-	aux.AddBigbangProc(c,cid.sfilter,1)
+	Bigbang.AddProcedure(c,Bigbang.Positive,2,99)
     --cannot be equip spell target
-    local e1=Effect.CreateEffect(c)
-    e1:SetType(EFFECT_TYPE_SINGLE)
-    e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
-    e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-    e1:SetRange(LOCATION_MZONE)
-    e1:SetValue(cid.efilter)
-    c:RegisterEffect(e1)
+    --local e1=Effect.CreateEffect(c)
+    --e1:SetType(EFFECT_TYPE_SINGLE)
+    --e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
+    --e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+    --e1:SetRange(LOCATION_MZONE)
+    --e1:SetValue(cid.efilter)
+    --c:RegisterEffect(e1)
 	--Special summon from grave
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
