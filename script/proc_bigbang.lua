@@ -3,6 +3,7 @@ REASON_BIGBANG		= 0x6400
 SUMMON_TYPE_BIGBANG 	= 0x6400
 HINTMSG_BIGBANGMATERIAL	= 6400
 BIGBANG_IMPORTED	= true
+local GetSoul,GetOriginalSoul,GetPreviousSoulOnField,IsSoul,IsSoulBelow,IsSoulAbove,IsGetType,Card.GetOriginalType,Card.GetPreviousTypeOnField=Card.GetRank,GetOriginalRank,GetPreviousRankOnField,IsRank,IsRankBelow,IsRankAbove,GetType,GetOriginalType,GetPreviousTypeOnField
 if not aux.BigbangProcedure then
 	aux.BigbangProcedure = {}
 	Bigbang = aux.BigbangProcedure
@@ -237,4 +238,13 @@ function Bigbang.Operation(f,minc,maxc,specialchk,opp,loc,send)
 end
 function Bigbang.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_BIGBANG)
+end
+function Bigbang.Neutral(c,e)
+	return c:GetAttack()==c:GetDefense()
+end
+function Bigbang.negative(c,e)
+	return c:GetAttack()<c:GetDefense()
+end
+function Bigbang.Positive(c,e)
+	return c:GetAttack()>c:GetDefense()
 end
