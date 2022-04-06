@@ -56,7 +56,7 @@ c:AddSetcodesRule(id,false,0xbb109)
 	--c:RegisterEffect(e7)
 end
 function cid.ffilter(c,e)
-	return c:GetAttack()~=c:GetDefense()
+	return c:GetAttack()>c:GetDefense()
 end
 function cid.atk(val)
 	return function(e)
