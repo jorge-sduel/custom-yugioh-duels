@@ -67,9 +67,8 @@ function c989705312.initial_effect(c)
 --
         local e9=Effect.CreateEffect(c)
 	e9:SetType(EFFECT_TYPE_SINGLE)
-	e9:SetCode(EFFECT_ADD_TYPE)
-	e9:SetRange(LOCATION_MZONE)
-	e9:SetValue(TYPE_XYZ)
+	e9:SetCode(EFFECT_CHANGE_LEVEL)
+	e9:SetValue(0)
 	c:RegisterEffect(e9)
 end
 function c989705312.matfilter1(c)
