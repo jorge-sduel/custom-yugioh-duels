@@ -61,7 +61,7 @@ function c989705312.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 function c989705312.matfilter1(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_CYBERS)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_CYBERSE)
 end
 function c989705312.matfilter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_SPELL)
