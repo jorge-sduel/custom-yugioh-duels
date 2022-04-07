@@ -77,7 +77,7 @@ function c249000991.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c249000991.cfilter(c,e,tp)
-	return c:IsSetCard(0x168) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
+	return c:IsType(TYPE_SYNCHRO) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
 		and Duel.IsExistingTarget(c249000991.spfilter,tp,LOCATION_GRAVE,0,1,c,e,tp)
 end
 function c249000991.spfilter(c,e,tp)
