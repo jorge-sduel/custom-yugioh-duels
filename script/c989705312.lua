@@ -104,7 +104,7 @@ function c989705312.eqop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoGrave(c,REASON_EFFECT)
 		return
 	end
-	if not Duel.Equip(tp,c,tc,false) then return end
+	if not Duel.Equip(tp,c,tc) then return end
 	aux.SetUnionState(c)
 end
 function c989705312.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
