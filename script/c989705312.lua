@@ -64,6 +64,12 @@ function c989705312.initial_effect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
 	e8:SetCode(EFFECT_RANK_LEVEL)
 	c:RegisterEffect(e8)
+--
+        local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetCode(EFFECT_ADD_TYPE)
+	e9:SetValue(TYPE_XYZ)
+	c:RegisterEffect(e9)
 end
 function c989705312.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_CYBERSE)
