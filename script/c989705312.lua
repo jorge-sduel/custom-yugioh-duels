@@ -62,7 +62,7 @@ function c989705312.initial_effect(c)
 --
         local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
-	e8:SetCode(EFFECT_LEVEL_RANK_S)
+	e8:SetCode(EFFECT_LEVEL_RANK)
 	c:RegisterEffect(e8)
 end
 function c989705312.matfilter1(c)
