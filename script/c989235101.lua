@@ -70,7 +70,7 @@ function c989235101.runlimit(e,se,sp,st)
 	return bit.band(st,0x4f000000)==0x4f000000
 end
 function c989235101.setfilter(c,tp)
-	return c:IsSetCard(0xfe9) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable(true)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable(true)
 end
 function c989235101.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and c989235101.setfilter(chkc,tp) end
