@@ -40,10 +40,18 @@ function c989235101.initial_effect(c)
 	e3:SetTarget(c989235101.thtg)
 	e3:SetOperation(c989235101.thop)
 	c:RegisterEffect(e3)
+	--extra att
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_EXTRA_ATTACK)
+	e4:SetValue(2)
+	c:RegisterEffect(e4)
+--
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
 	e8:SetCode(EFFECT_LEVEL_RANK)
 	c:RegisterEffect(e8)
+--
 	local e9=Effect.CreateEffect(c)
 	e9:SetType(EFFECT_TYPE_SINGLE)
 	e9:SetCode(EFFECT_CHANGE_LEVEL)
