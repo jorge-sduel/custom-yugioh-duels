@@ -66,10 +66,10 @@ function c989213573.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 function c989213573.matfilter1(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0xfe5)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
 end
 function c989213573.matfilter2(c)
-	return c:IsFaceup() and c:IsType(TYPE_SPELL) and c:IsType(TYPE_EQUIP) and c:IsSetCard(0xfe5)
+	return c:IsFaceup() and c:IsType(TYPE_SPELL) and c:IsType(TYPE_EQUIP)
 end
 function c989213573.runfilter1(c)
 	return c989213573.matfilter1(c) and Duel.IsExistingMatchingCard(c989213573.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,1,c)
