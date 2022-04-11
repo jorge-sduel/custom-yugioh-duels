@@ -54,7 +54,7 @@ function c986942312.initial_effect(c)
 	c:RegisterEffect(e10)
 end
 function c986942312.matfilter1(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:GetAttack()==0 and c:GetDefense()==0)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:IsAttack(0) or c:IsDefense(0))
 end
 function c986942312.matfilter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_SPELL+TYPE_TRAP)
