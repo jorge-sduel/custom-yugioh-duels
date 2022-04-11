@@ -68,7 +68,6 @@ end
 function card.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.removefilter,tp,0,LOCATION_GRAVE,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
-	Duel.Damage(1-tp,g*300,REASON_EFFECT)
 end
 function card.spfilter(c)
 	return c:IsLevelAbove(8) and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_INSECT)
