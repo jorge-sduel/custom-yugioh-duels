@@ -75,7 +75,7 @@ end
 function card.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and
-		Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,ATTRIBUTE_DARK)>=8
+		Duel.GetMatchingGroupCount(Card.IsAttribute,c:GetControler(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,ATTRIBUTE_DARK)>=3
 end
 function card.spcon2(e,c)
 	if c==nil then return true end
