@@ -95,7 +95,7 @@ function c986942312.retop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoHand(sg,nil,REASON_EFFECT)
 end
 function c986942312.thfilter(c)
-	return c:IsSetCard(0xfe9) and c:IsAbleToHand()
+	return c:IsRankAbove(4) and c:IsAbleToHand()
 end
 function c986942312.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
