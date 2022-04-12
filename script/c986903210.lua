@@ -45,7 +45,7 @@ function c986903210.initial_effect(c)
 	e5:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e5:SetRange(LOCATION_SZONE)
 	e5:SetTargetRange(0,1)
-	e5:SetValue(c98903210.aclimit)
+	e5:SetValue(c986903210.aclimit)
 	c:RegisterEffect(e5)
 --
         local e8=Effect.CreateEffect(c)
