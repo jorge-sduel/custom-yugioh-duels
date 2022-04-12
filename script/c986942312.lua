@@ -9,7 +9,7 @@ function c986942312.initial_effect(c)
 	r1:SetRange(LOCATION_HAND)
 	r1:SetCondition(c986942312.runcon)
 	r1:SetOperation(c986942312.runop)
-	r1:SetValue(0x4f000000)
+	--r1:SetValue(0x4f000000)
 	c:RegisterEffect(r1)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
@@ -66,7 +66,7 @@ end
 function c986942312.aclimit(e,re,tp)
 	if not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:IsActiveType(TYPE_SPELL) then return false end
 	local c=re:GetHandler()
-	return not c:IsLocation(LOCATION_SZONE) or c:GetFlagEffect(id)>0
+	return not c:IsLocation(LOCATION_SZONE) or c:GetFlagEffect(986942312)>0
 end
 function c986942312.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:IsAttack(0) or c:IsDefense(0))
