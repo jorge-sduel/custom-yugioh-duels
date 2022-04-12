@@ -82,7 +82,7 @@ function c979812053.initial_effect(c)
 	c:RegisterEffect(e10)
 end
 function c979812053.matfilter1(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsRankAbove(5)
 end
 function c979812053.matfilter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_SPELL)
