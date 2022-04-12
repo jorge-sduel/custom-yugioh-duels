@@ -84,7 +84,7 @@ function c986903210.runlimit(e,se,sp,st)
 	return bit.band(st,0x4f000000)==0x4f000000
 end
 function c986903210.spfilter(c,e,tp)
-	return c:GetLevel()==1 and c:IsRace(RACE_SPELLCASTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:GetLevel()==1 and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function c986903210.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and c986903210.spfilter(chkc,e,tp) end
@@ -97,7 +97,7 @@ end
 function c986903210.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
+		Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP)
 			local e4=Effect.CreateEffect(e:GetHandler())
 			e4:SetType(EFFECT_TYPE_SINGLE)
 			e4:SetCode(EFFECT_UPDATE_ATTACK)
