@@ -9,7 +9,7 @@ function c986903210.initial_effect(c)
 	r1:SetRange(LOCATION_HAND)
 	r1:SetCondition(c986903210.runcon)
 	r1:SetOperation(c986903210.runop)
-	r1:SetValue(0x4f000000)
+	--r1:SetValue(0x4f000000)
 	c:RegisterEffect(r1)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
