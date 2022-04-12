@@ -37,16 +37,7 @@ function c986903210.initial_effect(c)
 	e4:SetCode(EVENT_TO_GRAVE)
 	e4:SetTarget(c986903210.settg)
 	e4:SetOperation(c986903210.setop)
-	c:RegisterEffect(e4) 
-	--cannot activate
-	local e5=Effect.CreateEffect(c)
-	e5:SetType(EFFECT_TYPE_FIELD)
-	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e5:SetCode(EFFECT_CANNOT_ACTIVATE)
-	e5:SetRange(LOCATION_SZONE)
-	e5:SetTargetRange(0,1)
-	e5:SetValue(c986903210.aclimit)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e4)
 --
         local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
@@ -63,11 +54,6 @@ function c986903210.initial_effect(c)
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
 	c:RegisterEffect(e10)
-end
-function c986903210.aclimit(e,re,tp)
-	if not re:IsHasType(EFFECT_TYPE_ACTIVATE) or not re:IsActiveType(TYPE_SPELL) then return false end
-	local c=re:GetHandler()
-	return not c:IsLocation(LOCATION_SZONE) or c:GetFlagEffect(id)>0
 end
 function c986903210.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:GetAttack()==0 or c:GetDefense()==0)
