@@ -9,15 +9,15 @@ function c979812053.initial_effect(c)
 	r1:SetRange(LOCATION_HAND)
 	r1:SetCondition(c979812053.runcon)
 	r1:SetOperation(c979812053.runop)
-	r1:SetValue(0x4f000000)
+	--r1:SetValue(0x4f000000)
 	c:RegisterEffect(r1)
 	--cannot special summon
-	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e1:SetValue(c979812053.runlimit)
-	c:RegisterEffect(e1)
+	--local e1=Effect.CreateEffect(c)
+	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	--e1:SetType(EFFECT_TYPE_SINGLE)
+	--e1:SetCode(EFFECT_SPSUMMON_CONDITION)
+	--e1:SetValue(c979812053.runlimit)
+	--c:RegisterEffect(e1)
 	--atkup
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -52,9 +52,36 @@ function c979812053.initial_effect(c)
 	e5:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 	e5:SetValue(1)
 	c:RegisterEffect(e5)
+	--equip
+	local e6=Effect.CreateEffect(c)
+	e6:SetDescription(aux.Stringid(id,1))
+	e6:SetCategory(CATEGORY_EQUIP)
+	e6:SetType(EFFECT_TYPE_IGNITION)
+	e6:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetCountLimit(1)
+	e6:SetCondition(c979812053.eqcon)
+	e6:SetTarget(c979812053.eqtg)
+	e6:SetOperation(c979812053.eqop)
+	c:RegisterEffect(e6)
+        local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetCode(EFFECT_LEVEL_RANK)
+	c:RegisterEffect(e8)
+--
+        local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetCode(EFFECT_CHANGE_LEVEL)
+	--e9:SetRange(LOCATION_MZONE)
+	e9:SetValue(0)
+	c:RegisterEffect(e9)
+	local e10=Effect.CreateEffect(c)
+	e10:SetType(EFFECT_TYPE_SINGLE)
+	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	c:RegisterEffect(e10)
 end
 function c979812053.matfilter1(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x2fe5)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
 end
 function c979812053.matfilter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_SPELL)
@@ -99,5 +126,20 @@ function c979812053.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT) then
 		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
+	end
+end
+function c979812053.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:IsAbleToChangeControler() end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
+		and Duel.IsExistingTarget(Card.IsAbleToChangeControler,tp,0,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToChangeControler,tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
+end
+function c979812053.eqop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local tc=Duel.GetFirstTarget()
+	if tc and tc:IsRelateToEffect(e) then
+	Duel.Equip(tp,tc,c)
 	end
 end
