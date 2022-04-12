@@ -127,6 +127,14 @@ function c979812053.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT) then
 		Duel.Equip(tp,tc,e:GetHandler())
+local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetProperty(EFFECT_FLAG_OWNER_RELATE)
+		e1:SetCode(EFFECT_EQUIP_LIMIT)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e1:SetValue(1)
+		e1:SetLabelObject(tc)
+		tc:RegisterEffect(e1)
 	end
 end
 function c979812053.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -149,5 +157,6 @@ function c979812053.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1:SetValue(1)
 		e1:SetLabelObject(tc)
-		tc:RegisterEffect(e1)	end
+		tc:RegisterEffect(e1)
+	end
 end
