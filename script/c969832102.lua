@@ -40,9 +40,15 @@ function c969832102.initial_effect(c)
 	e3:SetTarget(c969832102.thtg)
 	e3:SetOperation(c969832102.thop)
 	c:RegisterEffect(e3)
+--
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_ATTACK_ALL)
+	e4:SetValue(1)
+	c:RegisterEffect(e4)
 end
 function c969832102.matfilter1(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:GetAttack()==0 and c:GetDefense()==0)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:GetAttack()==0 or c:GetDefense()==0)
 end
 function c969832102.matfilter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_SPELL+TYPE_TRAP)
