@@ -129,7 +129,7 @@ function c961398231.spr(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsReason(REASON_DESTROY) and c:IsPreviousLocation(LOCATION_ONFIELD)
 		and c:IsPreviousPosition(POS_FACEUP) then
-		c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,2)
+		c:RegisterFlagEffect(961398231,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,2)
 	end
 end
 function c961398231.spcon(e,tp,eg,ep,ev,re,r,rp)
