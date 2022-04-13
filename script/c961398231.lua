@@ -144,7 +144,7 @@ function c961398231.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,true,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
-	e:GetHandler():ResetFlagEffect(id)
+	e:GetHandler():ResetFlagEffect(961398231)
 end
 function c961398231.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
