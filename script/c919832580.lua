@@ -61,12 +61,29 @@ function c919832580.initial_effect(c)
 	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e7:SetValue(1)
 	c:RegisterEffect(e7)
+--
+       local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetCode(EFFECT_LEVEL_RANK)
+	c:RegisterEffect(e8)
+--
+        local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetCode(EFFECT_CHANGE_LEVEL)
+	--e9:SetRange(LOCATION_MZONE)
+	e9:SetValue(0)
+	c:RegisterEffect(e9)
+--
+	local e10=Effect.CreateEffect(c)
+	e10:SetType(EFFECT_TYPE_SINGLE)
+	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	c:RegisterEffect(e10)
 end
 function c919832580.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function c919832580.matfilter2(c)
-	return c:IsFaceup() and c:IsType(TYPE_SPELL) and c:IsSetCard(0xfe5)
+	return c:IsFaceup() and c:IsType(TYPE_SPELL)
 end
 function c919832580.runfilter1(c)
 	return c919832580.matfilter1(c) and Duel.IsExistingMatchingCard(c919832580.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,1,c)
