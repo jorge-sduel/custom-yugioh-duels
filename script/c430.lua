@@ -169,12 +169,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
-	if sg:GetCount()>0 then
-		Duel.SendtoHand(sg,nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,sg)
-	end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local tc1=Duel.SelectMatchingCard(tp,s.filter1,tp,LOCATION_EXTRA,0,1,1,nil,tp):GetFirst()
+	if not tc1 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local tc2=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,tc1,nil,nil):GetFirst()
+	Duel.SendtoHand(Group.FromCards(tc1,tc2),nil,REASON_EFFECT)
+	Duel.ConfirmCards(1-tp,Group.FromCards(tc1,tc2))
 end
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttacker()
