@@ -54,7 +54,7 @@ function s.initial_effect(c)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetTargetRange(LOCATION_MZONE,0)
 	e6:SetTarget(s.atktg)
-	--e6:SetValue(s.indct)
+	e6:SetValue(1)
 	c:RegisterEffect(e6)
 	-- Inflict Damage
 	local e7=Effect.CreateEffect(c)
