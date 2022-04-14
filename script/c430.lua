@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 	--Special summon itself from hand, then end the Battle Phase
 	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(id,0))
+	e5:SetDescription(aux.Stringid(id,2))
 	e5:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e5:SetCode(EVENT_ATTACK_ANNOUNCE)
@@ -59,7 +59,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 	-- Inflict Damage
 	local e7=Effect.CreateEffect(c)
-	e7:SetDescription(aux.Stringid(id,0))
+	e7:SetDescription(aux.Stringid(id,3))
 	e7:SetCategory(CATEGORY_ATK_CHANGE)
 	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e7:SetCode(EVENT_REMOVE)
@@ -83,19 +83,19 @@ function s.initial_effect(c)
 	e9:SetValue(0x1046)
 	c:RegisterEffect(e9)
 --indes
-	local e9=Effect.CreateEffect(c)
-	e9:SetType(EFFECT_TYPE_SINGLE)
-	e9:SetProperty(EFFECT_TYPE_SINGLE)
-	e9:SetCode(EFFECT_ADD_SETCODE)
-	e9:SetValue(0x2073)
-	c:RegisterEffect(e9)
---indes
 	local e10=Effect.CreateEffect(c)
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetProperty(EFFECT_TYPE_SINGLE)
 	e10:SetCode(EFFECT_ADD_SETCODE)
-	e10:SetValue(0x2017)
+	e10:SetValue(0x2073)
 	c:RegisterEffect(e10)
+--indes
+	local e11=Effect.CreateEffect(c)
+	e11:SetType(EFFECT_TYPE_SINGLE)
+	e11:SetProperty(EFFECT_TYPE_SINGLE)
+	e11:SetCode(EFFECT_ADD_SETCODE)
+	e11:SetValue(0x2017)
+	c:RegisterEffect(e11)
 --indes
 	local e12=Effect.CreateEffect(c)
 	e12:SetType(EFFECT_TYPE_SINGLE)
@@ -133,7 +133,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e16)
 end
 function s.filter(e,c,sump,sumtype,sumpos,targetp)
-	return c:IsType(TYPE_PENDULUM)
+	return c:IsType(TYPE_PENDULUM) and c:IsFaceup()
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsType(TYPE_PENDULUM) then return false end
@@ -166,10 +166,10 @@ function s.scop2(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e2)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:GetControler()==tp and chkc:GetLocation()==LOCATION_DECK and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,2,nil) end
+	if chkc then return chkc:GetControler()==tp and chkc:GetLocation()==LOCATION_EXTRA and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_EXTRA,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,2,2,nil)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_EXTRA,0,2,2,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,2,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
