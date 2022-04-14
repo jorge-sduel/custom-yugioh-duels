@@ -9,7 +9,7 @@ function c919832580.initial_effect(c)
 	r1:SetRange(LOCATION_HAND)
 	r1:SetCondition(c919832580.runcon)
 	r1:SetOperation(c919832580.runop)
-	r1:SetValue(0x4f000000)
+	--r1:SetValue(0x4f000000)
 	c:RegisterEffect(r1)
 	--equip
 	local e1=Effect.CreateEffect(c)
@@ -63,7 +63,7 @@ function c919832580.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 function c919832580.matfilter1(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsType(TYPE_UNION)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function c919832580.matfilter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_SPELL) and c:IsSetCard(0xfe5)
