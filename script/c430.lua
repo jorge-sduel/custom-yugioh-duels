@@ -131,7 +131,7 @@ function s.initial_effect(c)
 	e16:SetValue(0x98)
 	c:RegisterEffect(e16)
 end
-function s.filter(e,c,sump,sumtype,sumpos,targetp)
+function s.filter(c)
 	return c:IsType(TYPE_PENDULUM) and c:IsFaceup()
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp)
