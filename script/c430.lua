@@ -97,7 +97,7 @@ function s.initial_effect(c)
 	e10:SetValue(0x2017)
 	c:RegisterEffect(e10)
 --indes
-	local e11=Effect.CreateEffect(c)
+	local e12=Effect.CreateEffect(c)
 	e12:SetType(EFFECT_TYPE_SINGLE)
 	e12:SetProperty(EFFECT_TYPE_SINGLE)
 	e12:SetCode(EFFECT_ADD_SETCODE)
