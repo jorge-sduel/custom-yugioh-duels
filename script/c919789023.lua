@@ -160,7 +160,7 @@ function c919789023.reccon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function c919789023.recfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xfe5) and c:IsType(TYPE_SPELL)
+	return c:IsFaceup() and c:IsType(TYPE_SPELL)
 end
 function c919789023.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
