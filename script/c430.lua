@@ -60,7 +60,7 @@ function s.initial_effect(c)
 	-- Inflict Damage
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(id,3))
-	e7:SetCategory(CATEGORY_ATK_CHANGE)
+	e7:SetCategory(CATEGORY_ATKCHANGE)
 	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e7:SetCode(EVENT_REMOVE)
 	e7:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
