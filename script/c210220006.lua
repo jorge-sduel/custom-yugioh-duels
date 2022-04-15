@@ -37,5 +37,5 @@ function card.damcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function card.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,90162951)
-	Duel.Damage(1-tp,600,REASON_EFFECT)
+	Duel.Damage(1-tp,500,REASON_EFFECT)
 end
