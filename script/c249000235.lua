@@ -1,8 +1,8 @@
 --Azura the Esper of Hidden Power
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249000235.initial_effect(c)
-	c:EnableReviveLimit()
-	--pendulum summon
-	aux.EnablePendulumAttribute(c,false)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(249000235,false,0xbb00)
 	--xyz summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
