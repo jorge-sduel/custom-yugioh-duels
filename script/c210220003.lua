@@ -36,7 +36,7 @@ function card.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function card.filter(c)
-	return (c:IsFaceup() and c:IsSetCard(0x256)) or (c:IsCode(210220010))
+	return (c:IsFaceup() and c:IsRace(RACE_INSECT))
 end
 function card.spcon(e,c)
 	if c==nil then return true end
