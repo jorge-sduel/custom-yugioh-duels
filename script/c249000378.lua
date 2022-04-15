@@ -2,7 +2,7 @@
 if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249000378.initial_effect(c)
    RPendulum.AddProcedure(c)
-c:AddSetcodesRule(id,false,0xbb00)
+c:AddSetcodesRule(249000378,false,0xbb00)
 	--draw
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(68762510,0))
