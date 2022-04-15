@@ -24,10 +24,10 @@ function card.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(card.filter,tp,LOCATION_DECK,0,5,c)
+		and Duel.IsExistingMatchingCard(card.filter,tp,LOCATION_DECK,0,3,c)
 end
 function card.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,card.filter,tp,LOCATION_DECK,0,5,5,c)
+	local g=Duel.SelectMatchingCard(tp,card.filter,tp,LOCATION_DECK,0,3,3,c)
 	Duel.SendtoGrave(g,REASON_COST)
 end
