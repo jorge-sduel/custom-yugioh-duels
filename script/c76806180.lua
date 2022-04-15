@@ -5,6 +5,7 @@ if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	Bigbang.AddProcedure(c,nil,2,99)
+c:AddSetcodesRule(id,false,0xbb109)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
