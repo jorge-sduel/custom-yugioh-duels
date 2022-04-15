@@ -116,7 +116,7 @@ function c18917003.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function c18917003.cfilter(c)
-	return c:IsSetCard(0x99) and c:IsType(TYPE_MONSTER) and c:GetLevel()==7 and c:IsAbleToRemoveAsCost()
+	return c:IsSetCard(0x99) and c:IsType(TYPE_MONSTER) and c:IsLevel(7) and c:IsAbleToRemoveAsCost()
 end
 function c18917003.cspcon(e,c)
 	if c==nil then return true end
