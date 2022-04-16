@@ -6,7 +6,7 @@ c:AddSetcodesRule(249000224,false,0xbb00)
 	--return to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_PHASE_START+PHASE_BATTLE)
+	e2:SetCode(EVENT_PHASE_START+PHASE_BATTLE_START)
 	e2:SetRange(LOCATION_PZONE)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	--e2:SetCondition(c249000224.retcon)
