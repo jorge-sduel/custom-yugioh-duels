@@ -120,7 +120,7 @@ function c18917003.cfilter(c)
 end
 function c18917003.cspcon(e,c)
 	if c==nil then return true end
-	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+	return Duel.GetLocationCount(tp,LOCATION_MZONE)>=0
 		and Duel.IsExistingMatchingCard(c18917003.cfilter,c:GetControler(),LOCATION_DECK+LOCATION_EXTRA,0,1,nil)
 end
 function c18917003.cspop(e,tp,eg,ep,ev,re,r,rp,c)
