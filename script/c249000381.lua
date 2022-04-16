@@ -1,7 +1,8 @@
 --Emerald-Gaze Pendulum-Angel
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249000381.initial_effect(c)
-	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(249000381,false,0xbb00)
 	--draw
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DRAW)
