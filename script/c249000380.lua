@@ -1,7 +1,8 @@
 --Red Gaze Pendulum Angel
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249000380.initial_effect(c)
-	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(249000380,false,0xbb00)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(12423762,0))
