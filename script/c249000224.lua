@@ -3,15 +3,16 @@ if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua"
 function c249000224.initial_effect(c)
    RPendulum.AddProcedure(c)
 c:AddSetcodesRule(249000224,false,0xbb00)
-	--return to hand
+	--damage
 	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_QUICK_O)
-	e2:SetCode(EVENT_PHASE_START+PHASE_BATTLE_START)
+	e2:SetDescription(aux.Stringid(249000224,0))
+	e2:SetCategory(CATEGORY_DAMAGE)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetRange(LOCATION_PZONE)
-	e2:SetHintTiming(0,TIMING_BATTLE_START)
-	e2:SetCondition(c249000224.retcon)
-	e2:SetTarget(c249000224.rettg)
-	e2:SetOperation(c249000224.retop)
+	e2:SetCondition(c249000224.condition)
+	e2:SetTarget(c249000224.target)
+	e2:SetOperation(c249000224.operation)
 	c:RegisterEffect(e2)
 	--level
 	local e3=Effect.CreateEffect(c)
@@ -43,7 +44,6 @@ c:AddSetcodesRule(249000224,false,0xbb00)
 	e6:SetTarget(c249000224.target)
 	e6:SetOperation(c249000224.operation)
 	c:RegisterEffect(e6)
-	Duel.AddCustomActivityCounter(249000224,ACTIVITY_SPSUMMON,c249000224.counterfilter)
 end
 function c249000224.counterfilter(c)
 	return not c:GetSummonType()==SUMMON_TYPE_PENDULUM
@@ -106,4 +106,19 @@ function c249000224.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function c249000224.atkcon(e)
 	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),0,LOCATION_MZONE)>0
+end
+function c249000224.condition(e,tp,eg,ep,ev,re,r,rp)
+	return eg:GetFirst():IsSummonType(SUMMON_TYPE_PENDULUM) and eg:GetFirst():IsControler(tp)
+end
+function c249000224.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetTargetPlayer(1-tp)
+	Duel.SetTargetParam(500)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,0,0,1-tp,500)
+end
+function c249000224.operation(e,tp,eg,ep,ev,re,r,rp)
+	if e:GetHandler():IsRelateToEffect(e) then
+		local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+		Duel.Damage(p,d,REASON_EFFECT)
+	end
 end
