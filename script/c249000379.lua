@@ -1,7 +1,8 @@
 --Aurora Pendulum-Angel
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249000379.initial_effect(c)
-	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(249000379,false,0xbb00)
 	--indes
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD)
