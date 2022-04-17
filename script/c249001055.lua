@@ -4,7 +4,7 @@ if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") end
 if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249001055.initial_effect(c)
    RPendulum.AddProcedure(c)
-Ignition.AddProcedure(c,c249000634.ignfilter1,c249000634.ignfilter2,1,1)
+Ignition.AddProcedure(c,c249001055.ignfilter1,c249001055.ignfilter2,1,1)
 c:AddSetcodesRule(249001055,false,0xbb00)
 	--rewind
 	local e1=Effect.CreateEffect(c)
