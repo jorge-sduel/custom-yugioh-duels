@@ -54,15 +54,15 @@ c:AddSetcodesRule(249001055,false,0xbb00)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetValue(249000634)
 	c:RegisterEffect(e5)
-	--if not c249001055.global_check then
-		--c249001055.global_check=true
-		--local ge1=Effect.CreateEffect(c)
-		--ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		--ge1:SetCode(EVENT_ADJUST)
-		--ge1:SetCountLimit(1)
-		--ge1:SetOperation(c249001055.startop)
-		--Duel.RegisterEffect(ge1,0)
-	--end
+	if not c249001055.global_check then
+		c249001055.global_check=true
+		local ge1=Effect.CreateEffect(c)
+		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		ge1:SetCode(EVENT_ADJUST)
+		ge1:SetCountLimit(1)
+		ge1:SetOperation(c249001055.startop)
+		Duel.RegisterEffect(ge1,0)
+	end
 end
 function c249001055.ignfilter1(c)
 	return c:IsCode(249000634)
