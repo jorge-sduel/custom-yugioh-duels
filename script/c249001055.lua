@@ -1,8 +1,8 @@
 --Takina the Enlightened Temporal Sage
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249001055.initial_effect(c)
-	c:EnableReviveLimit()
-	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(249001055,false,0xbb00)
 	--rewind
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
