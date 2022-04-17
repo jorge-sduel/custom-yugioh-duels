@@ -50,15 +50,15 @@ c:AddSetcodesRule(249000634,false,0xbb00)
 	e4:SetTarget(c249000634.sptg)
 	e4:SetOperation(c249000634.spop)
 	c:RegisterEffect(e4)
-	--if not c249000634.global_check then
-		--c249000634.global_check=true
-		--local ge1=Effect.CreateEffect(c)
-		--ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		--ge1:SetCode(EVENT_ADJUST)
-		--ge1:SetCountLimit(1)
-		--ge1:SetOperation(c249000634.startop)
-		--Duel.RegisterEffect(ge1,0)
-	--end
+	if not c249000634.global_check then
+		c249000634.global_check=true
+		local ge1=Effect.CreateEffect(c)
+		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		ge1:SetCode(EVENT_ADJUST)
+		ge1:SetCountLimit(1)
+		ge1:SetOperation(c249000634.startop)
+		Duel.RegisterEffect(ge1,0)
+	end
 end
 function c249000634.costfilter(c)
 	return c:IsSetCard(0x1B7) and c:IsAbleToRemove() and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE+LOCATION_HAND))
