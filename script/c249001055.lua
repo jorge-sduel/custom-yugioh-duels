@@ -1,6 +1,7 @@
 --Takina the Enlightened Temporal Sage
 c249001055.IsIgnition=true
-if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") endif not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
+if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") end
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249001055.initial_effect(c)
    RPendulum.AddProcedure(c)
 Ignition.AddProcedure(c,c249000634.ignfilter1,c249000634.ignfilter2,1,1)
