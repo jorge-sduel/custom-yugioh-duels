@@ -1,7 +1,9 @@
 --Takina the Enlightened Temporal Sage
-if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
+c249001055.IsIgnition=true
+if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") endif not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249001055.initial_effect(c)
    RPendulum.AddProcedure(c)
+Ignition.AddProcedure(c,c249000634.ignfilter1,c249000634.ignfilter2,1,1)
 c:AddSetcodesRule(249001055,false,0xbb00)
 	--rewind
 	local e1=Effect.CreateEffect(c)
@@ -51,15 +53,21 @@ c:AddSetcodesRule(249001055,false,0xbb00)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetValue(249000634)
 	c:RegisterEffect(e5)
-	if not c249001055.global_check then
-		c249001055.global_check=true
-		local ge1=Effect.CreateEffect(c)
-		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EVENT_ADJUST)
-		ge1:SetCountLimit(1)
-		ge1:SetOperation(c249001055.startop)
-		Duel.RegisterEffect(ge1,0)
-	end
+	--if not c249001055.global_check then
+		--c249001055.global_check=true
+		--local ge1=Effect.CreateEffect(c)
+		--ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		--ge1:SetCode(EVENT_ADJUST)
+		--ge1:SetCountLimit(1)
+		--ge1:SetOperation(c249001055.startop)
+		--Duel.RegisterEffect(ge1,0)
+	--end
+end
+function c249001055.ignfilter1(c)
+	return c:IsCode(249000634)
+end
+function c249001055.ignfilter2(c)
+	return c:IsLocation(LOCATION_HAND)
 end
 function c249001055.costfilter(c)
 	return c:IsSetCard(0x1B7) and c:IsAbleToRemove() and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE+LOCATION_HAND))
