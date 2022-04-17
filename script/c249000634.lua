@@ -1,5 +1,8 @@
 --Takina the Temporal Mage
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249000634.initial_effect(c)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(249000634,false,0xbb00)
 	c:SetUniqueOnField(1,0,249000634)
 	--pendulum summon
 	aux.EnablePendulumAttribute(c)
