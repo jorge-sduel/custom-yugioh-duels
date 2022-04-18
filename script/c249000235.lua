@@ -32,7 +32,7 @@ c:AddSetcodesRule(249000235,false,0xbb00)
 	e3:SetCode(EFFECT_OVERLAY_REMOVE_REPLACE)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1)
-	e3:SetCondition(c249000235.rcon)
+	--e3:SetCondition(c249000235.rcon)
 	e3:SetOperation(c249000235.rop)
 	c:RegisterEffect(e3)
 	--Draw
