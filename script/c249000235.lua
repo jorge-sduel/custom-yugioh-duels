@@ -118,9 +118,11 @@ function c249000235.splimit(e,se,sp,st)
 	return bit.band(st,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM or (bit.band(st,SUMMON_TYPE_XYZ)==SUMMON_TYPE_XYZ and se:GetHandler()==e:GetHandler())
 end
 function c249000235.rcon(e,tp,eg,ep,ev,re,r,rp)
-	return (r&REASON_COST)~=0 and re:IsActivated(0x7e0) and re:IsActiveType(TYPE_XYZ)
-		and e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_EFFECT)
-		and ep==e:GetOwnerPlayer() and re:GetHandler():GetOverlayCount()>=ev-1
+	local ct=bit.band(ev,0xffff)
+	if ct>1 then
+		re:GetHandler():RemoveOverlayCard(tp,ct-1,ct-1,REASON_COST)
+	end
+	e:GetHandler():RegisterFlagEffect(2490002351,RESET_PHASE+PHASE_END,0,1)
 end
 function c249000235.rop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=bit.band(ev,0xffff)
