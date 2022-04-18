@@ -147,6 +147,11 @@ function c249000235.drop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,dc)
 		Duel.Draw(tp,1,REASON_EFFECT)
 		Duel.ShuffleHand(tp)
+		if Duel.GetFieldGroupCount(tp,LOCATION_PZONE,0)>0 
+			and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+			Duel.BreakEffect()
+			Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+		end
 	end
 end
 function c249000235.costfilter(c)
