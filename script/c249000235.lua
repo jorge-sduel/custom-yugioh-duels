@@ -33,7 +33,7 @@ c:AddSetcodesRule(249000235,false,0xbb00)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1)
 	e3:SetCondition(c249000235.rcon)
-	e3:SetOperation(c249000235.rop)
+	--e3:SetOperation(c249000235.rop)
 	c:RegisterEffect(e3)
 	--Draw
 	local e4=Effect.CreateEffect(c)
@@ -118,8 +118,8 @@ function c249000235.splimit(e,se,sp,st)
 	return bit.band(st,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM or (bit.band(st,SUMMON_TYPE_XYZ)==SUMMON_TYPE_XYZ and se:GetHandler()==e:GetHandler())
 end
 function c249000235.rcon(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler()~=re:GetHandler() then return false end
-	return e:GetHandler():GetFlagEffect(2490002351)==0 and bit.band(r,REASON_COST)~=0 and re:GetHandler():GetOverlayCount()>=ev-1
+	if e:GetHandler():GetFlagEffect(249000235+ep)==0 and (r&REASON_COST)~=0 and re:IsActivated() and re:IsActiveType(TYPE_XYZ)
+		and re:GetHandler():GetOverlayCount()>=ev-1
 end
 function c249000235.rop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=bit.band(ev,0xffff)
