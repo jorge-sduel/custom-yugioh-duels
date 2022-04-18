@@ -33,7 +33,7 @@ c:AddSetcodesRule(249000235,false,0xbb00)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1)
 	e3:SetCondition(c249000235.rcon)
-	e3:SetOperation(c249000235.rop)
+	--e3:SetOperation(c249000235.rop)
 	c:RegisterEffect(e3)
 	--Draw
 	local e4=Effect.CreateEffect(c)
@@ -118,11 +118,9 @@ function c249000235.splimit(e,se,sp,st)
 	return bit.band(st,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM or (bit.band(st,SUMMON_TYPE_XYZ)==SUMMON_TYPE_XYZ and se:GetHandler()==e:GetHandler())
 end
 function c249000235.rcon(e,tp,eg,ep,ev,re,r,rp)
-	local ct=bit.band(ev,0xffff)
-	if ct>1 then
-		re:GetHandler():RemoveOverlayCard(tp,ct-1,ct-1,REASON_COST)
-	end
-	e:GetHandler():RegisterFlagEffect(2490002351,RESET_PHASE+PHASE_END,0,1)
+	return (r&REASON_COST)~=0 and re:IsActivated(0x7e0) and re:IsActiveType(TYPE_XYZ)
+		and e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_EFFECT)
+		and ep==e:GetOwnerPlayer() and re:GetHandler():GetOverlayCount()>=ev-1
 end
 function c249000235.rop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=bit.band(ev,0xffff)
@@ -152,9 +150,6 @@ function c249000235.drop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c249000235.costfilter(c)
-	local label
-	if c:GetLevel() > 0 then label=c:GetLevel() else label=c:GetRank() end
-	if label <= 0 then return false end
 	return c:IsAbleToGraveAsCost() and Duel.IsExistingMatchingCard(c249000235.targetfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,nil,label)
 end
 function c249000235.targetfilter(c,label)
