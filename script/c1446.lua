@@ -4,7 +4,8 @@ function c1446.initial_effect(c)
    RPendulum.AddProcedure(c)
 c:AddSetcodesRule(1446,false,0xbb00)
 	c:AddSetcodesRule(1446,false,0x601)
-	--dark synchro summon	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,10)
+	--dark synchro summon
+	Synchro.AddDarkSynchroProcedure(c,Synchro.NonTuner(nil),nil,10)
 	--damage
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(249000224,0))
