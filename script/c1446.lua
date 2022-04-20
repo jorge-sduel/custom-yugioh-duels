@@ -66,7 +66,7 @@ function c1446.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c1446.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_PENDULUM
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SYNCHRO
 end
 function c1446.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsDestructable() end
