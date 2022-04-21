@@ -251,7 +251,14 @@ function Evolute.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x88)
 end
 function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():AddCounter(0x88,1)
+	local c=e:GetHandler()
+	local g=Duel.GetFieldGroup(tp,LOCATION_FZONE,LOCATION_FZONE)
+	if c:IsRelateToEffect(e) then g:AddCard(c) end
+	for tc in aux.Next(g) do
+		if tc:IsCanAddCounter(0x88,1) then
+			tc:AddCounter(0x88,1)
+		end
+	end
 end
 --function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
 	--if e:GetHandler():IsRelateToEffect(e) then
