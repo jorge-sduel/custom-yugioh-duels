@@ -251,7 +251,7 @@ function Evolute.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x88)
 end
 function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():AddCounter(0x6f,1)
+	e:GetHandler():AddCounter(0x6e,1)
 end
 --function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
 	--if e:GetHandler():IsRelateToEffect(e) then
