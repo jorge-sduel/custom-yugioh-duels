@@ -88,7 +88,7 @@ function c249000383.operation(e,tp,eg,ep,ev,re,r,rp)
 	if tc:GetLevel() > tc:GetRank() then lvrk = tc:GetLevel() else lvrk = tc:GetRank() end
 	if Duel.SendtoGrave(tc,REASON_EFFECT)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,c249000384.tfilter,tp,LOCATION_EXTRA,0,1,1,nil,rc,e,tp):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,c249000383.tfilter,tp,LOCATION_EXTRA,0,1,1,nil,rc,e,tp,lvrk):GetFirst()
 	if not sc then return end
 	if sc:IsType(TYPE_XYZ) then
 		Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
