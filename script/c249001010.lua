@@ -1,9 +1,10 @@
 --Azure Magician
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249001010.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,nil,4,2)
-	aux.EnablePendulumAttribute(c,false)
-	c:EnableReviveLimit()
+	Xyz.AddProcedure(c,nil,4,2)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(249001010,false,0xbb00)
 	--search spell/trap
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
