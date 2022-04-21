@@ -1,15 +1,6 @@
 --Clarion Wing Cyborg Dragon
 function c1787.initial_effect(c)
-	--synchro summon
-	local e0=Effect.CreateEffect(c)
-	e0:SetType(EFFECT_TYPE_FIELD)
-	e0:SetCode(EFFECT_SPSUMMON_PROC)
-	e0:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e0:SetRange(LOCATION_EXTRA)
-	e0:SetCondition(c1787.syncon)
-	e0:SetOperation(c1787.synop)
-	e0:SetValue(SUMMON_TYPE_SYNCHRO)
-	c:RegisterEffect(e0)
+Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),2,2,Synchro.NonTuner(nil),1,99)
 	--disable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
