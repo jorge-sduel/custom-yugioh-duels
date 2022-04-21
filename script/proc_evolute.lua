@@ -255,8 +255,8 @@ function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,LOCATION_FZONE,LOCATION_FZONE)
 	if c:IsRelateToEffect(e) then g:AddCard(c) end
 	for tc in aux.Next(g) do
-		if tc:IsCanAddCounter(0x88,1) then
-			tc:AddCounter(0x88,1)
+		if tc:IsCanAddCounter(0x1148,1) then
+			tc:AddCounter(0x1148,1)
 		end
 	end
 end
