@@ -244,8 +244,8 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
-			end
 	e:GetHandler():AddCounter(0x111f,e:GetHandler():GetLevel())
+			end
 end
 function Evolute.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
