@@ -27,7 +27,7 @@ function c249000383.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,2490003832)
-	--e3:SetCost(c249000383.cost)
+	e3:SetCost(c249000383.cost)
 	e3:SetTarget(c249000383.target)
 	e3:SetOperation(c249000383.operation)
 	c:RegisterEffect(e3)
@@ -88,7 +88,7 @@ function c249000383.operation(e,tp,eg,ep,ev,re,r,rp)
 	if tc:GetLevel() > tc:GetRank() then lvrk = tc:GetLevel() else lvrk = tc:GetRank() end
 	if Duel.SendtoGrave(tc,REASON_EFFECT)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,c249000384.tfilter,tp,LOCATION_EXTRA,0,1,1,nil,rc,e,tp,lvrk):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,c249000384.tfilter,tp,LOCATION_EXTRA,0,1,1,nil,rc,e,tp):GetFirst()
 	if not sc then return end
 	if sc:IsType(TYPE_XYZ) then
 		Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
