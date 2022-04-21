@@ -52,7 +52,7 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetCondition(Evolute.sumcon)
-	e2:SetTarget(Evolute.addct)
+	--e2:SetTarget(Evolute.addct)
 	e2:SetOperation(Evolute.addc)
 	c:RegisterEffect(e2)
 end
@@ -251,10 +251,13 @@ function Evolute.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x88)
 end
 function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
-	end
+	e:GetHandler():AddCounter(0x88,1)
 end
+--function Evolute.addc(e,tp,eg,ep,ev,re,r,rp)
+	--if e:GetHandler():IsRelateToEffect(e) then
+		--e:GetHandler():AddCounter(0x88,e:GetHandler():GetLevel())
+	--end
+--end
 function Evolute.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
