@@ -232,3 +232,14 @@ function c16000820.synchktg(e,c,sg,tg,ntg,tsg,ntsg)
 		return true
 	end
 end
+function c16000820.synval(e,c,sc)
+	if c:IsLocation(LOCATION_HAND) then
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
+		e1:SetLabel(16000820)
+		e1:SetTarget(c16000820.synchktg)
+		c:RegisterEffect(e1)
+		return true
+	else return false end
+end
