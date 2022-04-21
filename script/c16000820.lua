@@ -57,6 +57,11 @@ function c16000820.initial_effect(c)
 	e7:SetTarget(c16000820.destarget)
 	e7:SetOperation(Equilibrium.desop1)
 	c:RegisterEffect(e7)
+	local e8=Effect.CreateEffect(c)
+	e8:SetDescription(aux.Stringid(97268402,0))
+	e7:SetType(EFFECT_TYPE_SINGLE)
+	e7:SetCode(EFFECT_HAND_REUNION)
+	c:RegisterEffect(e7)
 end
 function c16000820.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
