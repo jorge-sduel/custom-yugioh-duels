@@ -60,7 +60,7 @@ function c16000820.initial_effect(c)
 	local e8=Effect.CreateEffect(c)
 	e8:SetDescription(aux.Stringid(97268402,0))
 	e7:SetType(EFFECT_TYPE_SINGLE)
-	e7:SetCode(EFFECT_HAND_REUNION)
+	e7:SetCode(EFFECT_HAND_SYNCHRO)
 	c:RegisterEffect(e7)
 end
 function c16000820.cost(e,tp,eg,ep,ev,re,r,rp,chk)
