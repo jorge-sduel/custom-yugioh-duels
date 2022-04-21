@@ -57,10 +57,14 @@ function c16000820.initial_effect(c)
 	e7:SetTarget(c16000820.destarget)
 	e7:SetOperation(Equilibrium.desop1)
 	c:RegisterEffect(e7)
+--hand synchro
 	local e8=Effect.CreateEffect(c)
-	e7:SetType(EFFECT_TYPE_SINGLE)
-	e7:SetCode(EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
-	c:RegisterEffect(e7)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e8:SetCode(EFFECT_HAND_SYNCHRO)
+	e8:SetLabel(16000820)
+	e8:SetValue(c16000820.synval)
+	c:RegisterEffect(e8)
 end
 function c16000820.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
@@ -210,4 +214,21 @@ function c16000820.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,c16000820.desfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
+end
+function c16000820.chk2(c)
+	if not c:IsHasEffect(EFFECT_HAND_SYNCHRO) or c:IsHasEffect(EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK) then return false end
+	local te={c:GetCardEffect(EFFECT_HAND_SYNCHRO)}
+	for i=1,#te do
+		local e=te[i]
+		if e:GetLabel()==16000820 then return true end
+	end
+	return false
+end
+function c16000820.synchktg(e,c,sg,tg,ntg,tsg,ntsg)
+	if c then
+		local res=tg:IsExists(c16000820.chk2,1,c) or ntg:IsExists(c16000820.chk2,1,c) or sg:IsExists(c16000820.chk2,1,c)
+		return res,Group.CreateGroup(),Group.CreateGroup()
+	else
+		return true
+	end
 end
