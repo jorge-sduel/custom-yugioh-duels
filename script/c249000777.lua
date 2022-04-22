@@ -36,8 +36,8 @@ function c249000777.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0 end
 end
 function c249000777.spfilter(c,e,tp)
-	return c:GetOriginalLevel()<=10 and ((not c:IsSummonableCard()) or c:IsAttribute(ATTRIBUTE_DEVINE)) and c:IsType(TYPE_MONSTER)
-		and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:GetOriginalLevel()<=10 and ((not c:IsSummonableCard()) or c:IsAttribute(ATTRIBUTE_DIVINE)) and c:IsType(TYPE_MONSTER)
+		and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function c249000777.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmDecktop(tp,1)
@@ -57,7 +57,7 @@ function c249000777.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,c249000777.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 		local tc=g:GetFirst()
-		if tc and Duel.SpecialSummonStep(tc,0,tp,tp,true,false,POS_FACEUP) then
+		if tc and Duel.SpecialSummonStep(tc,0,tp,tp,true,true,POS_FACEUP) then
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
