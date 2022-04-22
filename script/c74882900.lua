@@ -43,7 +43,7 @@ end
 function c74882900.ntcon(e,c,minc)
 	if c==nil then return true end
 	return minc==0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and e:GetHandler():GetFlagEffect(74882900)~=0 and c:GetLevel()>4
+		and e:GetHandler():GetFlagEffect(74882900)~=0 and c:IsLevelAbove(5)
 end
 function c74882900.nttg(e,c)
 	return c:IsLevelAbove(5)
