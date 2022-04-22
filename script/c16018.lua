@@ -34,7 +34,7 @@ function s.fusfilter(c,code,fc,sumtype,tp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:GetSummonType()==SUMMON_TYPE_FUSION and c:IsPreviousLocation(LOCATION_EXTRA)
+	return c:GetSummonType()==SUMMON_TYPE_FUSION
 end
 function s.cfilter(c)
 	return c:IsRace(RACE_INSECT) and c:IsAbleToGraveAsCost()
