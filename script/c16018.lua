@@ -48,7 +48,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
 	if ct>#Duel.GetFieldGroup(tp,0,LOCATION_MZONE):Filter(Card.IsFaceup,nil) then return end
 	local tg=Duel.GetFieldGroup(tp,0,LOCATION_MZONE)
-	local ng=tg:FilterSelect(tp,Card.IsFaceup,1,1,nil)
+	local ng=tg:FilterSelect(tp,Card.IsFaceup,1,ct,nil)
 	Duel.ChangePosition(ng,POS_FACEDOWN_DEFENSE)
 	local sg=Duel.GetFieldGroup(tp,0,LOCATION_MZONE):Filter(Card.IsFacedown,nil)
 	for tc in aux.Next(sg) do
