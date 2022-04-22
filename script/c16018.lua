@@ -45,7 +45,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(Duel.DiscardDeck(tp,ct,REASON_COST))
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
-	local ct=e:GetLabel()
+	local ct=Duel.GetFieldGroup(tp,0,LOCATION_MZONE):FilterCount(Card.IsFaceup,nil)
 	if ct>#Duel.GetFieldGroup(tp,0,LOCATION_MZONE):Filter(Card.IsFaceup,nil) then return end
 	local tg=Duel.GetFieldGroup(tp,0,LOCATION_MZONE)
 	local ng=tg:FilterSelect(tp,Card.IsFaceup,1,1,nil)
