@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	--e1:SetCondition(s.thcon)
-	--e1:SetCost(s.thcost)
+	e1:SetCost(s.thcost)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
 end
@@ -45,7 +45,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(Duel.DiscardDeck(tp,ct,REASON_COST))
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetFieldGroup(tp,0,LOCATION_MZONE):FilterCount(Card.IsFaceup,nil)
+	local ct=e:GetLabel()
 	if ct>#Duel.GetFieldGroup(tp,0,LOCATION_MZONE):Filter(Card.IsFaceup,nil) then return end
 	local tg=Duel.GetFieldGroup(tp,0,LOCATION_MZONE)
 	local ng=tg:FilterSelect(tp,Card.IsFaceup,1,1,nil)
