@@ -29,6 +29,7 @@ function s.contactop(g)
 	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
 end
 function s.fusfilter(c,code,fc,sumtype,tp)
+
 	return c:IsSummonCode(fc,sumtype,tp,code) and not c:IsHasEffect(511002961)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
