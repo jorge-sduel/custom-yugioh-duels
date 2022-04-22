@@ -1,7 +1,8 @@
 --Sapphire Kitsune
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c249000777.initial_effect(c)
-	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(249000777,false,0xbb00)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_SPECIAL_SUMMON)
