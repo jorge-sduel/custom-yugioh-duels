@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCondition(s.thcon)
-	e1:SetCost(s.thcost)
+	--e1:SetCost(s.thcost)
 	e1:SetOperation(s.thop)
 	c:RegisterEffect(e1)
 end
