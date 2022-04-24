@@ -65,6 +65,7 @@ function c7041324.initial_effect(c)
 	e6:SetTarget(c7041324.sptg)
 	e6:SetOperation(c7041324.spop)
 	c:RegisterEffect(e6)
+c7041324.listed_names={CARD_ASSAULT_MODE,24696097}
 end
 function c7041324.discon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)
