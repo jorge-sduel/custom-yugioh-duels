@@ -62,6 +62,3 @@ function scard.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e1,tp)
 	end
 end
-
-	end
-end
