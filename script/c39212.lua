@@ -33,7 +33,7 @@ function scard.filter1(c,e,tp)
 	return tcode and c:IsType(TYPE_SYNCHRO) and Duel.IsExistingMatchingCard(scard.filter2,tp,0x13,0,1,nil,tcode,e,tp)
 end
 function scard.filter2(c,tcode,e,tp)
-	return c:IsCode(tcode) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsCode(tcode) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function scard.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -53,7 +53,7 @@ function scard.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tcode=scard.list[code]
 	local tg=Duel.SelectMatchingCard(tp,scard.filter2,tp,LOCATION_GRAVE+LOCATION_HAND+LOCATION_DECK,0,1,1,nil,tcode,e,tp)
 	local tc=tg:GetFirst()
-	if tc and Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)>0 then
+	if tc and Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP)>0 then
 		tc:CompleteProcedure()
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
