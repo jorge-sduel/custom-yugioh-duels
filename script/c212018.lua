@@ -1,8 +1,5 @@
 --Predaplant Dracosera
 function c212018.initial_effect(c)
-	--link summon
-	c:EnableReviveLimit()
-	aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsLinkAttribute,ATTRIBUTE_DARK),2,2)
 	--add counter
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(212018,0))
