@@ -24,7 +24,7 @@ end
 scard.list={[44508094]=61257789,[70902743]=77336644,[6021033]=1764972,
 				[31924889]=14553285,[23693634]=38898779,[95526884]=37169670}
 function scard.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	e:SetLabel(1)
+		e:SetLabel(1)
 	return true
 end
 function scard.filter1(c,e,tp)
