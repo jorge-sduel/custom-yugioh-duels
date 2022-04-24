@@ -29,7 +29,7 @@ function scard.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function scard.filter1(c,e,tp,ft)
 return c:IsType(TYPE_SYNCHRO) and (ft>0 or (c:GetSequence()<5 and c:IsControler(tp))) 
-		and Duel.IsExistingMatchingCard(scard.filter2,tp,LOCATION_DECK,0,1,nil,c:GetCode(),e,tp)
+		and Duel.IsExistingMatchingCard(scard.filter2,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_GRAVE,0,1,nil,c:GetCode(),e,tp)
 end
 function scard.filter2(c,tcode,e,tp)
 		return c:IsSetCard(0x104f) and c.assault_mode and c.assault_mode==tcode and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
