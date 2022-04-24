@@ -28,12 +28,11 @@ function scard.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function scard.filter1(c,e,tp)
-	local code=c:GetCode()
-	local tcode=scard.list[code]
-	return tcode and c:IsType(TYPE_SYNCHRO) and Duel.IsExistingMatchingCard(scard.filter2,tp,0x13,0,1,nil,tcode,e,tp)
+return c:IsType(TYPE_SYNCHRO) and (ft>0 or (c:GetSequence()<5 and c:IsControler(tp))) 
+		and Duel.IsExistingMatchingCard(scard.filter2,tp,LOCATION_DECK,0,1,nil,c:GetCode(),e,tp)
 end
 function scard.filter2(c,tcode,e,tp)
-	return c:IsCode(tcode) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+		return c:IsSetCard(0x104f) and c.assault_mode and c.assault_mode==tcode and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function scard.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
