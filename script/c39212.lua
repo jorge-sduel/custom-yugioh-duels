@@ -1,7 +1,6 @@
 --
 --Automate ID
 local scard,s_id=GetID()
-
 function scard.initial_effect(c)
 	--code
 	local e0=Effect.CreateEffect(c)
@@ -46,13 +45,13 @@ function scard.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rg=Duel.SelectReleaseGroup(tp,scard.filter1,1,1,nil,e,tp)
 	e:SetLabel(rg:GetFirst():GetCode())
 	Duel.Release(rg,REASON_COST)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0x13)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE+LOCATION_HAND+LOCATION_DECK)
 end
 function scard.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local code=e:GetLabel()
 	local tcode=scard.list[code]
-	local tg=Duel.SelectMatchingCard(tp,scard.filter2,tp,0x13,0,1,1,nil,tcode,e,tp)
+	local tg=Duel.SelectMatchingCard(tp,scard.filter2,tp,LOCATION_GRAVE+LOCATION_HAND+LOCATION_DECK,0,1,1,nil,tcode,e,tp)
 	local tc=tg:GetFirst()
 	if tc and Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)>0 then
 		tc:CompleteProcedure()
