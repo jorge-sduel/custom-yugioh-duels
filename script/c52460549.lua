@@ -59,7 +59,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,tc:GetAttack()+800,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,SUMMON_TYPE_BIGBANG,tp,tp,false,false,POS_FACEUP)
-		g:SetStatus(STATUS_PROC_COMPLETE,true)
-		g:SetStatus(STATUS_SPSUMMON_TURN,true)
 	end
 end
