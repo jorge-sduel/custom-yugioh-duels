@@ -21,7 +21,7 @@ function c362136733.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c362136733.dfilter(c)
-	return c:IsRace(RACE_DEVINE) and c:IsLevelAbove(1) and c:IsAbleToGrave()
+	return c:IsRace(RACE_DIVINE) and c:IsLevelAbove(1) and c:IsAbleToGrave()
 end
 function c362136733.filter(c,e,tp,m,ft)
 	if not c:IsSetCard(0xb8d) or bit.band(c:GetType(),0x81)~=0x81
