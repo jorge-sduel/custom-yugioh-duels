@@ -30,7 +30,7 @@ function c27084918.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
     e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function c27084918.atkfilter(c)
-    return c:IsFaceup() and c:IsSetCard(0xc1c) and not c:IsCode(27084918)
+    return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_EARTH) and not c:IsCode(27084918)
 end
 function c27084918.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
     if chk==0 then return Duel.IsExistingMatchingCard(c27084918.atkfilter,tp,LOCATION_MZONE,0,1,nil) end
