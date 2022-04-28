@@ -1,7 +1,7 @@
 --EX-Exostorm Divine Blade
 function c27084918.initial_effect(c)
     --xyz summon
-    aux.AddXyzProcedure(c,nil,7,3,c27084918.ovfilter,aux.Stringid(27084918,1),3,c27084918.xyzop)
+    Xyz.AddProcedure(c,nil,7,3,c27084918.ovfilter,aux.Stringid(27084918,1),3,c27084918.xyzop)
     c:EnableReviveLimit()
     --atkup
     local e1=Effect.CreateEffect(c)
