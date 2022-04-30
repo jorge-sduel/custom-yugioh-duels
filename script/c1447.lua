@@ -62,6 +62,9 @@ c:AddSetcodesRule(1447,false,0xbb00)
 	e8:SetValue(c1447.splimit)
 	c:RegisterEffect(e8)
 end
+function c1447.dmfilter(c)
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM)
+end
 function c1447.spcon(e,c)
 	if c==nil then return true end
 	return Duel.CheckReleaseGroup(c:GetControler(),Card.IsType,5,false,5,true,c,c:GetControler(),nil,false,nil,TYPE_MONSTER)
@@ -82,7 +85,7 @@ function c1447.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function c1447.atkval(e,c)
-	return Duel.GetFieldGroupCount(tp,LOCATION_EXTRA,0)*1000
+	return Duel.GetMatchingGroupCount(c1447.dmfilter,tp,LOCATION_EXTRA,0,nil)*1000
 end
 function c1447.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
