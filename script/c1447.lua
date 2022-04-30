@@ -6,11 +6,13 @@ c:AddSetcodesRule(1447,false,0xbb00)
 --
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_CANNOT_DISABLE)
+	e1:SetCode(EFFECT_CANNOT_DISABLE)
+
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_CANNOT_DISEFFECT)
+	e2:SetCode(EFFECT_CANNOT_DISEFFECT)
+
 	c:RegisterEffect(e2)
 	--pzone
 	local e3=Effect.CreateEffect(c)
@@ -31,7 +33,7 @@ c:AddSetcodesRule(1447,false,0xbb00)
 	e5:SetCode(EFFECT_SPSUMMON_PROC)
 	e5:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e5:SetRange(LOCATION_PZONE)
-	e5:SetCoste(c1447.spcost)
+	e5:SetCost(c1447.spcost)
 	c:RegisterEffect(e5)
 	--attack
 	local e6=Effect.CreateEffect(c)
