@@ -33,7 +33,7 @@ c:AddSetcodesRule(1447,false,0xbb00)
 	e5:SetCode(EFFECT_SPSUMMON_PROC)
 	e5:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e5:SetRange(LOCATION_PZONE)
-	e5:SetCost(c1447.spcost)
+	e5:SetCost(c1447.cost)
 	c:RegisterEffect(e5)
 	--attack
 	local e6=Effect.CreateEffect(c)
