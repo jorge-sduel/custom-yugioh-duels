@@ -33,7 +33,9 @@ c:AddSetcodesRule(1447,false,0xbb00)
 	e5:SetCode(EFFECT_SPSUMMON_PROC)
 	e5:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e5:SetRange(LOCATION_PZONE)
-	e5:SetOperation(c1447.cost)
+	e5:SetCondition(c1447.spcon)
+	e5:SetTarget(c1447.sptg)
+	e5:SetOperation(c1447.spop)
 	c:RegisterEffect(e5)
 	--attack
 	local e6=Effect.CreateEffect(c)
@@ -60,10 +62,24 @@ c:AddSetcodesRule(1447,false,0xbb00)
 	e8:SetValue(c1447.splimit)
 	c:RegisterEffect(e8)
 end
-function c1447.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,Card.IsType,5,false,nil,nil,TYPE_MONSTER) end
-	local g=Duel.SelectReleaseGroupCost(tp,Card.IsType,5,5,false,nil,nil,TYPE_MONSTER)
+function c1447.spcon(e,c)
+	if c==nil then return true end
+	return Duel.CheckReleaseGroup(c:GetControler(),Card.IsType,1,false,1,true,c,c:GetControler(),nil,false,nil,TYPE_MONSTER)
+end
+function c1447.sptg(e,tp,eg,ep,ev,re,r,rp,c)
+	local g=Duel.SelectReleaseGroup(tp,Card.IsType,1,1,false,true,true,c,nil,nil,false,nil,TYPE_MONSTER)
+	if g then
+		g:KeepAlive()
+		e:SetLabelObject(g)
+	return true
+	end
+	return false
+end
+function c1447.spop(e,tp,eg,ep,ev,re,r,rp,c)
+	local g=e:GetLabelObject()
+	if not g then return end
 	Duel.Release(g,REASON_COST)
+	g:DeleteGroup()
 end
 function c1447.atkval(e,c)
 	return Duel.GetMatchingGroupCount(Card.IsFaceup(),c:GetControler(),LOCATION_EXTRA,0,nil)*1000
