@@ -1,5 +1,5 @@
 REVERSEPENDULUM_IMPORTED=true
-RACE_GOD-FAIRY=0x200000000
+--RACE_GOD-FAIRY=0x200000000
 if not aux.RPendProcedure then
 	aux.RPendProcedure = {}
 	reversependulum = aux.RPendProcedure
