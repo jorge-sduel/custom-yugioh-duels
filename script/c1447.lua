@@ -64,10 +64,10 @@ c:AddSetcodesRule(1447,false,0xbb00)
 end
 function c1447.spcon(e,c)
 	if c==nil then return true end
-	return Duel.CheckReleaseGroup(c:GetControler(),Card.IsType,1,false,1,true,c,c:GetControler(),nil,false,nil,TYPE_MONSTER)
+	return Duel.CheckReleaseGroup(c:GetControler(),Card.IsType,5,false,5,true,c,c:GetControler(),nil,false,nil,TYPE_MONSTER)
 end
 function c1447.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local g=Duel.SelectReleaseGroup(tp,Card.IsType,1,1,false,true,true,c,nil,nil,false,nil,TYPE_MONSTER)
+	local g=Duel.SelectReleaseGroup(tp,Card.IsType,5,5,false,true,true,c,nil,nil,false,nil,TYPE_MONSTER)
 	if g then
 		g:KeepAlive()
 		e:SetLabelObject(g)
