@@ -2,7 +2,7 @@
 function c23061987.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcCode2(c,23995346,23061998,false,false)
+	Fusion.AddProcCode2(c,23995346,23061998,false,false)
 	--atkup
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
