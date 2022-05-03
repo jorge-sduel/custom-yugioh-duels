@@ -9,42 +9,16 @@ function s.initial_effect(c)
 	e1:SetRange(0x5f)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
-	--Cannot leave the field due to effects.
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetTargetRange(LOCATION_FZONE,0)
-	e2:SetRange(LOCATION_FZONE)
-	e2:SetCode(EFFECT_IMMUNE_EFFECT)
-	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e2:SetValue(s.filter)
-	Duel.RegisterEffect(e2,0)
-	--prevents ctivating/setting new fields
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_FIELD)
-	e3:SetCode(EFFECT_CANNOT_SSET)
-	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e3:SetRange(LOCATION_FZONE)
-	e3:SetTargetRange(1,0)
-	e3:SetTarget(s.setlimit)
-	c:RegisterEffect(e3)
-	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetCode(EFFECT_CANNOT_ACTIVATE)
-	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e4:SetRange(LOCATION_FZONE)
-	e4:SetTargetRange(1,0)
-	e4:SetValue(s.actlimit)
-	c:RegisterEffect(e4)
 	--add spell/set trap from the banlist
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
-	e5:SetRange(LOCATION_FZONE)
+	e5:SetRange(LOCATION_REMOVED)
 	e5:SetTargetRange(LOCATION_FZONE,LOCATION_FZONE)
 	e5:SetProperty(EFFECT_FLAG_BOTH_SIDE)
 	e5:SetType(EFFECT_TYPE_QUICK_O)
 	e5:SetCode(EVENT_FREE_CHAIN)
 	--e5:SetCountLimit(1,EFFECT_COUNT_CODE_SINGLE)
-	--e5:SetCountLimit(1,id)
+	e5:SetCountLimit(3,id)
 	e5:SetOperation(s.nameop)
 	c:RegisterEffect(e5)
 end
@@ -137,7 +111,21 @@ ban_number={48995978,2978414,28400508,63767246,88177324,75433814
 52653092}
 function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	Duel.MoveToField(c,tp,tp,LOCATION_FZONE,POS_FACEUP,true)
+if not Duel.SelectYesNo(1-tp,aux.Stringid(4010,0)) or not Duel.SelectYesNo(tp,aux.Stringid(4010,0)) then
+        local sg=Duel.GetMatchingGroup(Card.IsCode,tp,0x7f,0x7f,nil,215)
+        Duel.SendtoDeck(sg,nil,-2,REASON_RULE)
+        return
+    end	
+	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_REMOVED,0,1,nil,215) then
+		Duel.DisableShuffleCheck()
+		Duel.SendtoDeck(c,nil,-2,REASON_RULE)
+	else
+		Duel.Remove(c,POS_FACEUP,REASON_RULE)
+		Duel.Hint(HINT_CARD,0,215)
+	end
+	if c:GetPreviousLocation()==LOCATION_HAND then
+		Duel.Draw(tp,1,REASON_RULE)
+	end
 end
 function s.filter(e,te,c)
 	if not te then return false end
@@ -163,5 +151,10 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 		add_number_id=ban_number[num]
 		g1=Duel.CreateToken(tp,add_number_id)
 		Duel.SendtoHand(g1,tp,REASON_RULE)
-	end
+		local mg=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),tp,LOCATION_MZONE,0,nil)
+		if #mg>0 and #g1>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+			Duel.BreakEffect()
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+			Duel.XyzSummon(tp,g1:GetFirst(),nil,mg)
+		end
 end
