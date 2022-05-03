@@ -149,8 +149,7 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 		local num=Duel.GetRandomNumber(1,#ban_number)
 		add_number_id=ban_number[num]
 		g1=Duel.CreateToken(tp,add_number_id)
-		Duel.SendtoHand(g1,tp,REASON_RULE)
-		if #mg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		Duel.SendtoHand(g1,tp,REASON_RULE) and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.XyzSummon(tp,g1:GetFirst(),nil,mg)
 		end
 end
