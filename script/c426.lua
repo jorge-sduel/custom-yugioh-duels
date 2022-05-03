@@ -154,3 +154,4 @@ if Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.XyzSummon(tp,g1:GetFirst(),nil,mg)
 		end
 end
+end
