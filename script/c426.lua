@@ -13,8 +13,6 @@ function s.initial_effect(c)
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetRange(LOCATION_REMOVED)
-	e5:SetTargetRange(LOCATION_FZONE,LOCATION_FZONE)
-	e5:SetProperty(EFFECT_FLAG_BOTH_SIDE)
 	e5:SetType(EFFECT_TYPE_QUICK_O)
 	e5:SetCode(EVENT_FREE_CHAIN)
 	--e5:SetCountLimit(1,EFFECT_COUNT_CODE_SINGLE)
@@ -152,7 +150,6 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 		add_number_id=ban_number[num]
 		g1=Duel.CreateToken(tp,add_number_id)
 		Duel.SendtoHand(g1,tp,REASON_RULE)
-		end
 		if #mg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.XyzSummon(tp,g1:GetFirst(),nil,mg)
 		end
