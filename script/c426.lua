@@ -151,6 +151,7 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 		add_number_id=ban_number[num]
 		g1=Duel.CreateToken(tp,add_number_id)
 		Duel.SendtoHand(g1,tp,REASON_RULE)
+		end
 		local mg=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),tp,LOCATION_MZONE,0,nil)
 		if #mg>0 and #g1>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()
