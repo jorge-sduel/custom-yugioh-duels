@@ -151,7 +151,7 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 		g1=Duel.CreateToken(tp,add_number_id)
 		Duel.SendtoHand(g1,tp,REASON_RULE)
 if Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-			Duel.XyzSummon(tp,g1,nil,mg)
+			Duel.XyzSummon(tp,g1,nil)
 		end
 end
 end
