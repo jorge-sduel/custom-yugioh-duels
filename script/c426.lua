@@ -121,7 +121,7 @@ if not Duel.SelectYesNo(1-tp,aux.Stringid(4010,0)) or not Duel.SelectYesNo(tp,au
 		Duel.SendtoDeck(c,nil,-2,REASON_RULE)
 	else
 		Duel.Remove(c,POS_FACEUP,REASON_RULE)
-		Duel.Hint(HINT_CARD,0,215)
+		Duel.Hint(HINT_CARD,0,id)
 	end
 	if c:GetPreviousLocation()==LOCATION_HAND then
 		Duel.Draw(tp,1,REASON_RULE)
@@ -146,16 +146,14 @@ function s.cond1(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
+	local mg=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),tp,LOCATION_MZONE,0,nil)
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
 		local num=Duel.GetRandomNumber(1,#ban_number)
 		add_number_id=ban_number[num]
 		g1=Duel.CreateToken(tp,add_number_id)
 		Duel.SendtoHand(g1,tp,REASON_RULE)
-		local mg=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),tp,LOCATION_MZONE,0,nil)
 		end
 		if #mg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-			Duel.BreakEffect()
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			Duel.XyzSummon(tp,g1:GetFirst(),nil,mg)
 		end
 end
