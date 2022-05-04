@@ -1,8 +1,8 @@
 --Prismatic of Endymion
 function c249001008.initial_effect(c)
-	aux.AddFusionProcFunRep2(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),3,99,false)
+	Fusion.AddProcMixRep(c,true,true,c249001008.ffilter,2,99)
 	c:EnableCounterPermit(0x1)
-	aux.EnablePendulumAttribute(c,false)
+	Pendulum.AddProcedure(c,false)
 	c:EnableReviveLimit()
 	--summon success
 	local e1=Effect.CreateEffect(c)
@@ -56,6 +56,9 @@ function c249001008.initial_effect(c)
 	e5:SetTarget(c249001008.pentg)
 	e5:SetOperation(c249001008.penop)
 	c:RegisterEffect(e5)
+end
+function c249001008.ffilter(c,fc,sumtype,tp)
+	return c:IsRace(RACE_SPELLCASTER,fc,sumtype,tp)
 end
 function c249001008.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler() 
