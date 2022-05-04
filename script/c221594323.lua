@@ -93,7 +93,7 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	e:SetLabel(g:GetFirst():GetLevel())
+	e:SetLabel(g:GetFirst():GetAttack())
 end
 function cid.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
