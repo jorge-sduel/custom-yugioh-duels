@@ -77,8 +77,8 @@ function Bigbang.ConditionFilter(c,f,lc,tp)
 	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
 function Bigbang.GetBigbangCount(c)
-    if c:GetAttack()>0 then return c:GetAttack() end
-    return 0
+    if c:GetAttack()>1 then return c:GetAttack() end
+    return 1
 end
 function Bigbang.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	if #sg>maxc then return false end
