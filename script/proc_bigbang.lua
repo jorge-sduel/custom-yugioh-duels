@@ -77,8 +77,7 @@ function Bigbang.ConditionFilter(c,f,lc,tp)
 	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
 function Bigbang.GetBigbangCount(c)
-    if c:GetLevel()>0 then return c:GetLevel()
-    elseif c:GetRank()>0 then return c:GetRank() end
+    if c:GetAttack()>0 then return c:GetAttack() end
     return 0
 end
 function Bigbang.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
@@ -140,7 +139,7 @@ function Bigbang.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 			return false
 		end
 	end
-	return #sg>=minc and sg:CheckWithSumEqual(Card.GetAttack,lc:GetAttack(),#sg,#sg)
+	return #sg>=minc and sg:CheckWithSumEqual(Bigbang.GetBigbangCount,lc:GetAttack(),#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Bigbang.Condition(f,minc,maxc,specialchk,opp,loc,send)
