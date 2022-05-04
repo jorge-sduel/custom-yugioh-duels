@@ -49,7 +49,7 @@ function cid.setfilter(c)
 	end
 end
 function cid.spfilter(c,e,tp)
-	return c:GetLevel()==8 and c:IsType(TYPE_MONSTER) and c:IsSetCard(0xf45) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:GetLevel()==8 and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 --set trap
 function cid.setcon(e,tp,eg,ep,ev,re,r,rp)
