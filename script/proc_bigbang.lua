@@ -231,7 +231,6 @@ function Bigbang.Target(f,minc,maxc,specialchk,opp,loc,send)
 			end
 end
 function Bigbang.Operation(f,minc,maxc,specialchk,opp,loc,send)
-	local c=e:GetHandler()
 	return	function(e,tp,eg,ep,ev,re,r,rp,c,must,g,min,max)
 				local g,filt,emt=e:GetLabelObject():GetTarget()()
 				e:GetLabelObject():Reset()
@@ -258,14 +257,14 @@ function Bigbang.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
-		local e1=Effect.CreateEffect(c)
+		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetDescription(aux.Stringid(52401237,15))
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CLIENT_HINT)
 		e1:SetCode(EFFECT_EXTRA_ATTACK)
 		e1:SetValue(2)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		c:RegisterEffect(e1)
+		Duel.RegisterEffect(e1)
 			end
 end
 function Bigbang.sumcon(e,tp,eg,ep,ev,re,r,rp)
