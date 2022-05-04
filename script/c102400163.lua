@@ -59,7 +59,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 			if Duel.SpecialSummon(tc1,0,tp,tp,false,false,POS_FACEUP)~=0 then tc0=tc1 end
 		end
 		if tc0 then
-			if Duel.GetLocationCountFromEx(tp,tp,tc0)<=0 or not aux.MustMaterialCheck(tc0,tp,EFFECT_MUST_BE_XMATERIAL) then break end
+			if Duel.GetLocationCountFromEx(tp,tp,tc0)<=0 then break end
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc0)
 			local tc2=g2:GetFirst()
