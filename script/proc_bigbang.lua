@@ -257,14 +257,8 @@ function Bigbang.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetDescription(aux.Stringid(52401237,15))
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetProperty(EFFECT_FLAG_CLIENT_HINT)
-		e1:SetCode(EFFECT_EXTRA_ATTACK)
-		e1:SetValue(2)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		Duel.RegisterEffect(e1)
+		e:GetHandler():SetTurnCounter(e:GetHandler():GetOriginalLevel())
+
 			end
 end
 function Bigbang.sumcon(e,tp,eg,ep,ev,re,r,rp)
