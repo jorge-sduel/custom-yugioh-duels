@@ -1,16 +1,9 @@
 --Dimenticalgia Des Cowboy
 --Script by XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedureLevelFree(c,cid.mfilter,cid.xyzcheck,2,2)
+	Xyz.AddProcedureLevelFree(c,cid.mfilter,8,2)
 	c:EnableReviveLimit()
 	--draw
 	local e1=Effect.CreateEffect(c)
@@ -39,7 +32,7 @@ function cid.initial_effect(c)
 end
 --filters
 function cid.mfilter(c,xyzc)
-	return c:IsXyzLevel(xyzc,8) and c:IsAttribute(ATTRIBUTE_DARK)
+	return c:IsAttribute(ATTRIBUTE_DARK)
 end
 function cid.xyzcheck(g)
 	return g:IsExists(Card.IsSetCard,1,nil,0xf45)
