@@ -76,7 +76,7 @@ function cid.tgfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x3c97)
 end
 function cid.tgcon(e)
-	return Duel.IsExistingMatchingCard(cid.tgfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(cid.tgfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function cid.efilter(e,re)
 	return e:GetOwnerPlayer()~=re:GetOwnerPlayer()
