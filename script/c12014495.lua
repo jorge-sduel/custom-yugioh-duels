@@ -38,7 +38,7 @@ function cid.xyzcheck(g)
 	return g:IsExists(Card.IsSetCard,1,nil,0xf45)
 end
 function cid.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xf45) and c:IsType(TYPE_MONSTER)
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
 end
 --draw
 function cid.drawcon(e,tp,eg,ep,ev,re,r,rp)
