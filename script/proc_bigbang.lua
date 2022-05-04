@@ -275,5 +275,5 @@ function Bigbang.Positive(c,e)
 end
 function Bigbang.Level(e)
 	local lv=e:GetHandler():GetOriginalLevel()
-	return -lv
+	return -lv/2
 end
