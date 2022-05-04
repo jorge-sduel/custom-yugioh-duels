@@ -257,13 +257,13 @@ function Bigbang.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
-			end
         local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetDescription(aux.Stringid(52401237,15))
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetCode(52401237)
 	Duel.RegisterEffect(e1)
+			end
 end
 function Bigbang.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_BIGBANG)
