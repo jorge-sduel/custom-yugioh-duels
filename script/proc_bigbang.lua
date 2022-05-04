@@ -50,7 +50,7 @@ function Bigbang.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e3:SetCode(EFFECT_CHANGE_LSCALE)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetValue(e:GetHandler():GetOriginalLevel())
+	e3:SetValue(Bigbang.Level)
 	c:RegisterEffect(e3)
 	local e4=e3:Clone()
 	e4:SetCode(EFFECT_CHANGE_RSCALE)
@@ -270,4 +270,8 @@ function Bigbang.negative(c,e)
 end
 function Bigbang.Positive(c,e)
 	return c:GetAttack()>c:GetDefense()
+end
+function Bigbang.Level(e)
+	local lv=e:GetHandler():GetOriginalLevel()
+	return lv
 end
