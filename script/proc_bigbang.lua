@@ -258,7 +258,7 @@ function Bigbang.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
-		e:GetHandler():SetTurnCounter(e:GetHandler():GetOriginalLevel())
+		--e:GetHandler():SetTurnCounter(e:GetHandler():GetOriginalLevel())
 			end
 end
 function Bigbang.sumcon(e,tp,eg,ep,ev,re,r,rp)
