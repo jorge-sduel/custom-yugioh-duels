@@ -48,7 +48,7 @@ function cid.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
 function cid.spfilter(c,e,tp)
-	return c:GetLeftScale()==4 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cid.lvop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
