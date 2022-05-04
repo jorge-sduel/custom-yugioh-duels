@@ -231,6 +231,7 @@ function Bigbang.Target(f,minc,maxc,specialchk,opp,loc,send)
 			end
 end
 function Bigbang.Operation(f,minc,maxc,specialchk,opp,loc,send)
+	local c=e:GetHandler()
 	return	function(e,tp,eg,ep,ev,re,r,rp,c,must,g,min,max)
 				local g,filt,emt=e:GetLabelObject():GetTarget()()
 				e:GetLabelObject():Reset()
