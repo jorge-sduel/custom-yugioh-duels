@@ -57,12 +57,12 @@ function Bigbang.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e3:SetValue(TYPE_SYNCHRO)
 	c:RegisterEffect(e4)
 --
-        local e9=Effect.CreateEffect(c)
-	e9:SetType(EFFECT_TYPE_SINGLE)
-	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e9:SetCode(EFFECT_CHANGE_LEVEL)
-	e9:SetValue(0)
-	c:RegisterEffect(e9)
+        --local e9=Effect.CreateEffect(c)
+	--e9:SetType(EFFECT_TYPE_SINGLE)
+	--e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	--e9:SetCode(EFFECT_CHANGE_LEVEL)
+	--e9:SetValue(0)
+	--c:RegisterEffect(e9)
 --
 	local e10=Effect.CreateEffect(c)
 	e10:SetType(EFFECT_TYPE_SINGLE)
@@ -275,5 +275,5 @@ function Bigbang.Positive(c,e)
 end
 function Bigbang.Level(e)
 	local lv=e:GetHandler():GetOriginalLevel()
-	return lv
+	return -lv
 end
