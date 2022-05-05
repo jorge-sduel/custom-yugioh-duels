@@ -2,7 +2,7 @@
 c16000007.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function c16000007.initial_effect(c)
-	c:EnableCounterPermit(0x88)
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	  --synchro summon
    Evolute.AddProcedure(c,c16000007.matfilter,2,99,c16000007.lcheck)
@@ -93,7 +93,7 @@ function c16000007.atkop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e3)
 end
 function c16000007.checkop(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():GetCounter(0x88)>=1 then
+	if e:GetHandler():GetCounter(0x111f)>=1 then
 		e:SetLabel(1)
 	else
 		e:SetLabel(0)
