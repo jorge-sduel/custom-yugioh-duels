@@ -139,10 +139,10 @@ function cid.PendOperation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 		ce=eset[op+1]
 	end
 	if ce then
-		tg=tg:Filter(aux.PConditionExtraFilterSpecific,nil,e,tp,lscale,rscale,ce)
+		tg=tg:Filter(Pendulum.ConditionExtraFilter,nil,e,tp,lscale,rscale,ce)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	aux.GCheckAdditional=aux.PendOperationCheck(ft1,ft2,ft)
+	aux.GCheckAdditional=Pendulum.OperationCheck(ft1,ft2,ft)
 	local g=tg:SelectSubGroup(tp,aux.TRUE,true,1,math.min(#tg,ft))
 	aux.GCheckAdditional=nil
 	if not g then return end
