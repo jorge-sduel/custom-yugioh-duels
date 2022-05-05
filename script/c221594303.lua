@@ -1,14 +1,6 @@
 --created by Walrus, coded by Lyris
 local cid,id=GetID()
 function cid.initial_effect(c)
-	if not PENDULUM_CHECKLIST then
-		PENDULUM_CHECKLIST=0
-		local ge1=Effect.GlobalEffect()
-		ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge1:SetCode(EVENT_PHASE_START+PHASE_DRAW)
-		ge1:SetOperation(aux.PendulumReset)
-		Duel.RegisterEffect(ge1,0)
-	end
 	local ge2=Effect.CreateEffect(c)
 	ge2:SetDescription(1160)
 	ge2:SetType(EFFECT_TYPE_ACTIVATE)
@@ -24,7 +16,6 @@ function cid.initial_effect(c)
 	--e2:SetTarget(cid.splimit)
 	--c:RegisterEffect(e2)
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(1074)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC_G)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
@@ -57,14 +48,6 @@ end
 function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsSetCard(0xc97) then return false end
 	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
-end
-function cid.PConditionFilter(c,e,tp,tc,eset)
-	local seq=tc:GetSequence()
-	local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,seq==4 and 0 or 1)
-	local lscale=seq==0 and tc:GetLeftScale() or tc:GetLeftScale()
-	local rscale=1-seq==1 and rpz:GetRightScale() or rpz:GetLeftScale()
-	if lscale>rscale then lscale,rscale=rscale,lscale end
-	return c:IsLocation(LOCATION_REMOVED) and c:IsFaceup() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
 end
 function cid.PendCondition()
 	return	function(e,c,ischain,re,rp)
