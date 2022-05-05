@@ -49,6 +49,18 @@ function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsSetCard(0xc97) then return false end
 	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
+function cid.PendFilter(c,e,tp,lscale,rscale,lvchk)
+	if lscale>rscale then lscale,rscale=rscale,lscale end
+	local lv=0
+	if c.pendulum_level then
+		lv=c.pendulum_level
+	else
+		lv=c:GetLevel()
+	end
+	return (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and (c:IsType(TYPE_PENDULUM) or c:IsLocation(LOCATION_REMOVED))))
+		and (lvchk or (lv>lscale and lv<rscale) or c:IsHasEffect(511004423)) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
+		and not c:IsForbidden()
+end
 function cid.PendCondition()
 	return	function(e,c,ischain,re,rp)
 				if c==nil then return true end
@@ -67,7 +79,7 @@ function cid.PendCondition()
 				else
 					g=Duel.GetFieldGroup(tp,loc,0)
 				end
-				return g:IsExists(Pendulum.Filter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+				return g:IsExists(cid.PendFilter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 			end
 end
 function cid.PendOperation()
@@ -88,9 +100,9 @@ function cid.PendOperation()
 				if ft2>0 then loc=loc+LOCATION_EXTRA end
 				local tg=nil
 				if og then
-					tg=og:Filter(Card.IsLocation,nil,loc):Filter(Pendulum.Filter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=og:Filter(Card.IsLocation,nil,loc):Filter(cid.PendFilter,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				else
-					tg=Duel.GetMatchingGroup(Pendulum.Filter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
+					tg=Duel.GetMatchingGroup(cid.PendFilter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				end
 				ft1=math.min(ft1,tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND+LOCATION_REMOVED))
 				ft2=math.min(ft2,tg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA))
@@ -120,7 +132,7 @@ function cid.PendOperation()
 					else
 						sg:AddCard(tc)
 						if c:IsHasEffect(511007000)~=nil or rpz:IsHasEffect(511007000)~=nil then
-							if not Pendulum.Filter(tc,e,tp,lscale,rscale) then
+							if not cid.PendFilter(tc,e,tp,lscale,rscale) then
 								local pg=sg:Filter(aux.TRUE,tc)
 								local ct0,ct3,ct4=#pg,pg:FilterCount(Card.IsLocation,nil,LOCATION_HAND+LOCATION_REMOVED),pg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
 								sg:Sub(pg)
@@ -128,7 +140,7 @@ function cid.PendOperation()
 								ft2=ft2+ct4
 								ft=ft+ct0
 							else
-								local pg=sg:Filter(aux.NOT(Pendulum.Filter),nil,e,tp,lscale,rscale)
+								local pg=sg:Filter(aux.NOT(cid.PendFilter),nil,e,tp,lscale,rscale)
 								sg:Sub(pg)
 								if #pg>0 then
 									if pg:GetFirst():IsLocation(LOCATION_HAND+LOCATION_REMOVED+LOCATION_EXTRA) then
