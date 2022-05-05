@@ -2,7 +2,7 @@
 function c16000550.initial_effect(c)
 c16000550.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
-	c:EnableCounterPermit(0x88)
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,99) 
 	--equip
@@ -33,8 +33,8 @@ function c16000550.filter(c)
 	return (c:IsRace(RACE_PLANT) or c:IsRace(RACE_DRAGON)) and not c:IsForbidden()
 end
 function c16000550.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,4,REASON_COST) end
-   e:GetHandler():RemoveCounter(tp,0x88,4,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+   e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function c16000550.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -122,8 +122,8 @@ function c16000550.xxxfilter(c)
 end
 function c16000550.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	  local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c16000550.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and c16000550.xxxfilter(chkc) end
