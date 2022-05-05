@@ -3,7 +3,7 @@ local cid,id=GetID()
 function cid.initial_effect(c)
 cid.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
-	c:EnableCounterPermit(0x88)
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
 	 local e1=Effect.CreateEffect(c)
@@ -75,8 +75,8 @@ function cid.filter(c)
 	return not c:IsDisabled()
 end
 function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
+	 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	  if chkc then return chkc:IsControler(1-tp) end
