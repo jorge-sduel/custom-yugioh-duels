@@ -24,7 +24,7 @@ function cid.initial_effect(c)
 	--e2:SetTarget(cid.splimit)
 	--c:RegisterEffect(e2)
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(1163)
+	e1:SetDescription(1074)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC_G)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
@@ -66,7 +66,7 @@ function cid.PConditionFilter(c,e,tp,tc,eset)
 	if lscale>rscale then lscale,rscale=rscale,lscale end
 	return c:IsLocation(LOCATION_REMOVED) and c:IsFaceup() and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
 end
-function cid.pendCondition()
+function cid.PendCondition()
 	return	function(e,c,ischain,re,rp)
 				if c==nil then return true end
 				local tp=c:GetControler()
