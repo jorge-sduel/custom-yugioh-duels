@@ -84,7 +84,7 @@ function cid.PendOperation()
 					ft=1
 				end
 				local loc=0
-				if ft1>0 then loc=loc+LOCATION_HAND+LOCATION_REMOVE end
+				if ft1>0 then loc=loc+LOCATION_HAND+LOCATION_REMOVED end
 				if ft2>0 then loc=loc+LOCATION_EXTRA end
 				local tg=nil
 				if og then
@@ -92,17 +92,17 @@ function cid.PendOperation()
 				else
 					tg=Duel.GetMatchingGroup(Pendulum.Filter,tp,loc,0,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 				end
-				ft1=math.min(ft1,tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND+LOCATION_REMOVE))
+				ft1=math.min(ft1,tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND+LOCATION_REMOVED))
 				ft2=math.min(ft2,tg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA))
 				ft2=math.min(ft2,aux.CheckSummonGate(tp) or ft2)
 				while true do
-					local ct1=tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND+LOCATION_REMOVE)
+					local ct1=tg:FilterCount(Card.IsLocation,nil,LOCATION_HAND+LOCATION_REMOVED)
 					local ct2=tg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
 					local ct=ft
 					if ct1>ft1 then ct=math.min(ct,ft1) end
 					if ct2>ft2 then ct=math.min(ct,ft2) end
 					local loc=0
-					if ft1>0 then loc=loc+LOCATION_HAND+LOCATION_REMOVE end
+					if ft1>0 then loc=loc+LOCATION_HAND+LOCATION_REMOVED end
 					if ft2>0 then loc=loc+LOCATION_EXTRA end
 					local g=tg:Filter(Card.IsLocation,sg,loc)
 					if #g==0 or ft==0 then break end
@@ -111,7 +111,7 @@ function cid.PendOperation()
 					if not tc then break end
 					if sg:IsContains(tc) then
 						sg:RemoveCard(tc)
-						if tc:IsLocation(LOCATION_HAND+LOCATION_REMOVE) then
+						if tc:IsLocation(LOCATION_HAND+LOCATION_REMOVED) then
 							ft1=ft1+1
 						else
 							ft2=ft2+1
@@ -122,7 +122,7 @@ function cid.PendOperation()
 						if c:IsHasEffect(511007000)~=nil or rpz:IsHasEffect(511007000)~=nil then
 							if not Pendulum.Filter(tc,e,tp,lscale,rscale) then
 								local pg=sg:Filter(aux.TRUE,tc)
-								local ct0,ct3,ct4=#pg,pg:FilterCount(Card.IsLocation,nil,LOCATION_HAND+LOCATION_REMOVE),pg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
+								local ct0,ct3,ct4=#pg,pg:FilterCount(Card.IsLocation,nil,LOCATION_HAND+LOCATION_REMOVED),pg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)
 								sg:Sub(pg)
 								ft1=ft1+ct3
 								ft2=ft2+ct4
@@ -131,7 +131,7 @@ function cid.PendOperation()
 								local pg=sg:Filter(aux.NOT(Pendulum.Filter),nil,e,tp,lscale,rscale)
 								sg:Sub(pg)
 								if #pg>0 then
-									if pg:GetFirst():IsLocation(LOCATION_HAND+LOCATION_REMOVE+LOCATION_EXTRA) then
+									if pg:GetFirst():IsLocation(LOCATION_HAND+LOCATION_REMOVED+LOCATION_EXTRA) then
 										ft1=ft1+1
 									else
 										ft2=ft2+1
@@ -140,7 +140,7 @@ function cid.PendOperation()
 								end
 							end
 						end
-						if tc:IsLocation(LOCATION_HAND+LOCATION_REMOVE) then
+						if tc:IsLocation(LOCATION_HAND+LOCATION_REMOVED) then
 							ft1=ft1-1
 						else
 							ft2=ft2-1
