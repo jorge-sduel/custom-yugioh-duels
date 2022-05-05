@@ -2,7 +2,7 @@
 function c160009955.initial_effect(c)
 c160009955.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
-	c:EnableCounterPermit(0x88)
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,2,c160009955.rcheck)  
 		--special summon
@@ -44,7 +44,7 @@ function c160009955.counterfilter(c)
 	return c:GetSummonLocation()~=LOCATION_EXTRA
 end
 function c160009955.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,2,REASON_COST) and Duel.GetCustomActivityCount(160009955,tp,ACTIVITY_SPSUMMON)==0 end
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) and Duel.GetCustomActivityCount(160009955,tp,ACTIVITY_SPSUMMON)==0 end
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
@@ -53,7 +53,7 @@ function c160009955.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetTarget(c160009955.splimit)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
-	 e:GetHandler():RemoveCounter(tp,0x88,2,REASON_COST)
+	 e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function c160009955.splimit(e,c,sump,sumtype,sumpos,targetp)
 	return c:IsLocation(LOCATION_EXTRA) and not c:IsRace(RACE_MACHINE)
