@@ -3,7 +3,7 @@ local cid,id=GetID()
 function cid.initial_effect(c)
    cid.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
-	c:EnableCounterPermit(0x88)
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
 	--attack up
@@ -47,9 +47,9 @@ function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp 
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) and Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,1,nil) end
+  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) and Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,1,nil) end
   
- e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
+ e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
  Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_EXTRA+LOCATION_HAND,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
