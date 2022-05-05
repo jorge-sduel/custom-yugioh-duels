@@ -1,5 +1,6 @@
 --created by Swag, coded by Lyris
 if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
+local cid,id=GetID()
 function cid.initial_effect(c)
    RPendulum.AddProcedure(c)
 c:AddSetcodesRule(id,false,0xbb00)
