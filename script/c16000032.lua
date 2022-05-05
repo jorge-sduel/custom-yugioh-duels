@@ -3,7 +3,7 @@ local cid,id=GetID()
 function cid.initial_effect(c)
 cid.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
-	c:EnableCounterPermit(0x88)
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,2,cid.rcheck)
 --atk
@@ -42,8 +42,8 @@ function cid.rcheck(g,lc,sumtype,tp)
 		and g:IsExists(Card.IsRace,1,nil,RACE_MACHINE)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
+	  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function cid.filter(c)
 	return c:GetSummonLocation()==LOCATION_EXTRA and not (c:GetAttack()==0 and c:IsDisabled())
