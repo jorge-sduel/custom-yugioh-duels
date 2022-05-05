@@ -2,7 +2,7 @@
 function c16000130.initial_effect(c)
 c16000130.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
-	c:EnableCounterPermit(0x88)
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,2,c16000130.rcheck)
    local e1=Effect.CreateEffect(c)
@@ -53,7 +53,7 @@ function c16000130.filter2(c,ec,tp)
 	return c:IsRace(RACE_PLANT) or c:IsAttribute(ATTRIBUTE_EARTH)
 end
 function c16000130.regop(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():GetCounter(0x88)>=1 then
+	if e:GetHandler():GetCounter(0x111f)>=1 then
 		e:SetLabel(1)
 	else
 		e:SetLabel(0)
