@@ -2,7 +2,7 @@
 function c16000228.initial_effect(c)
 c16000228.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
-	c:EnableCounterPermit(0x88)
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,99,c16000228.rcheck)
 	--to hand
@@ -37,8 +37,8 @@ function c16000228.discfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_PLANT) and c:IsAbleToGraveAsCost() and not c:IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function c16000228.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x88,3,REASON_COST)
+	  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c16000228.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
