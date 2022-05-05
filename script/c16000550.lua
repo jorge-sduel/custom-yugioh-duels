@@ -38,8 +38,8 @@ function c16000550.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c16000550.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(c16000550.filter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,nil) end
-	--Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_EXTRA)
+		and Duel.IsExistingMatchingCard(c16000550.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_GRAVE)
 end
 function c16000550.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
