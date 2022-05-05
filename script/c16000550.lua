@@ -39,7 +39,7 @@ end
 function c16000550.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 		and Duel.IsExistingMatchingCard(c16000550.filter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_EXTRA)
+	--Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,LOCATION_EXTRA)
 end
 function c16000550.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -55,7 +55,7 @@ function c16000550.eqop(e,tp,eg,ep,ev,re,r,rp)
 			local def=tc:GetTextDefense()/2
 			if tc:IsFacedown() or atk<0 then atk=0 end
 			if tc:IsFacedown() or def<0 then def=0 end
-			if not Duel.Equip(tp,tc,c,false) then return end
+			if not Duel.Equip(tp,tc,c) then return end
 	tc:RegisterFlagEffect(16000550,RESET_EVENT+0x1fe0000,0,0)
 	e:SetLabelObject(tc)
 		local e1=Effect.CreateEffect(c)
