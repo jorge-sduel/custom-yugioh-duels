@@ -89,7 +89,7 @@ function cid.PendCondition(e,c,og)
 	else
 		g=Duel.GetFieldGroup(tp,loc,0)
 	end
-	if aux.PendCondition()(e,c,og) then return true end
+	if Pendulum.Condition()(e,c,og) then return true end
 	return g:IsExists(cid.PConditionFilter,1,nil,e,tp,c,{})
 end
 function cid.PendOperation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
