@@ -392,8 +392,7 @@ function Spacet.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 			return false
 		end
 	end
-	return #sg>=minc and sg:CheckWithSumGreater(Card.GetAttack,lc:GetAttack()-e:GetControler():GetLp(),#sg,#sg)
-		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
+	return #sg>=minc and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Spacet.Condition(f,minc,maxc,specialchk,opp,loc,send)
 	return	function(e,c,must,g,min,max)
