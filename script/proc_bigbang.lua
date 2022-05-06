@@ -2,6 +2,10 @@ EFFECT_HAND_BIGBANG	= 60111
 REASON_BIGBANG		= 0x6400
 SUMMON_TYPE_BIGBANG 	= 0x6400
 HINTMSG_BIGBANGMATERIAL	= 6400
+EFFECT_HAND_SPACET	= 601111
+REASON_SPACET		= 0x2000000000000000
+SUMMON_TYPE_SPACET 	= 0x20000000000000000
+HINTMSG_SPACETMATERIAL	= 200000000000000000
 BIGBANG_IMPORTED	= true
 if not aux.BigbangProcedure then
 	aux.BigbangProcedure = {}
@@ -45,17 +49,17 @@ function Bigbang.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
     e1:SetValue(SUMMON_TYPE_BIGBANG)
 	c:RegisterEffect(e1)
 	--scale
-	--local e3=Effect.CreateEffect(c)
-	--e3:SetType(EFFECT_TYPE_SINGLE)
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
 	--e3:SetCode(EFFECT_CHANGE_RANK)
-	--e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE)
 	--e3:SetRange(LOCATION_MZONE)
 	--e3:SetValue(Bigbang.Level)
 	--c:RegisterEffect(e3)
 	--local e4=e3:Clone()
-	--e4:SetCode(EFFECT_REMOVE_TYPE)
-	--e3:SetValue(TYPE_SYNCHRO)
-	--c:RegisterEffect(e4)
+	e3:SetCode(EFFECT_REMOVE_TYPE)
+	e3:SetValue(TYPE_SYNCHRO)
+	c:RegisterEffect(e3)
 --
         --local e9=Effect.CreateEffect(c)
 	--e9:SetType(EFFECT_TYPE_SINGLE)
@@ -275,4 +279,40 @@ end
 function Bigbang.Level(e)
 	local lv=e:GetHandler():GetOriginalLevel()
 	return lv
+end
+--spacet Summon
+function Spacet.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
+    -- opp==true >> you can use opponent monsters as materials (default false)
+    -- loc default LOCATION_MZONE
+	-- send materials:
+	-- 1 >> grave
+	-- 2 >> remove face-up
+	-- 3 >> remove face-down
+	-- 4 >> hand
+	-- 5 >> deck
+	-- 6 >> destroy
+	if loc==nil then loc=LOCATION_MZONE end
+	if c.spacet_type==nil then
+		local mt=c:GetMetatable()
+		mt.spacet_type=1
+		mt.spacet_parameters={c,f,min,max,control,location,operation}
+	end
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetDescription(1181)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e1:SetRange(LOCATION_EXTRA)
+	e1:SetCondition(Spacet.Condition(f,min,max,specialchk,opp,loc,send))
+	e1:SetTarget(Spacet.Target(f,min,max,specialchk,opp,loc,send))
+	e1:SetOperation(Spacet.Operation(f,min,max,specialchk,opp,loc,send))
+    e1:SetValue(SUMMON_TYPE_SPACET)
+	c:RegisterEffect(e1)
+	--scale
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE)
+	e3:SetCode(EFFECT_REMOVE_TYPE)
+	e3:SetValue(TYPE_SYNCHRO)
+	c:RegisterEffect(e3)
 end
