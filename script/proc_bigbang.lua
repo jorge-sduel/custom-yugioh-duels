@@ -280,6 +280,13 @@ function Bigbang.Level(e)
 	local lv=e:GetHandler():GetOriginalLevel()
 	return lv
 end
+if not aux.SpacetProcedure then
+	aux.SpacetProcedure = {}
+	Spacet = aux.SpacetProcedure
+end
+if not Spacet then
+	Spacet = aux.SpacetProcedure
+end
 --spacet Summon
 function Spacet.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
     -- opp==true >> you can use opponent monsters as materials (default false)
