@@ -177,7 +177,7 @@ function Evolute.Target(f,minc,maxc,specialchk,opp,loc,send)
 				local mg=g:Filter(Evolute.ConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
 				if must then mustg:Merge(must) end
-				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_EVOLUTE)
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,EFFECT_HAND_EVOLUTE)
 				tg=tg:Filter(Evolute.ConditionFilter,nil,f,c,tp)
 				local sg=Group.CreateGroup()
 				local finish=false
