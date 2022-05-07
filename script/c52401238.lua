@@ -14,5 +14,5 @@ end
 function cid.lcheck(c)
  --Local tc=e:GetHandler()
  --Local tp=e:GetControler()
-	return c:IsCode(52401237) and c:IsAttackAbove(3500-tp:GetLp())
+	return c:IsCode(52401237) and c:IsAttackAbove(3500-Duel.GetLP(e:GetHandlerPlayer()))
 end
