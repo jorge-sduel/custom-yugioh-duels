@@ -68,6 +68,12 @@ function c16000820.initial_effect(c)
 	--e8:SetLabel(16000820)
 	--e8:SetValue(c16000820.synval)
 	c:RegisterEffect(e8)
+	  --Evolute
+	local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetCode(EFFECT_CHANGE_ATTRIBUTE)
+	e9:SetCode(ATTRIBUTE_FIRE)
+	c:RegisterEffect(e9)
 end
 function c16000820.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
