@@ -11,8 +11,8 @@ c:AddSetcodesRule(id,false,0xbb109)
 	--e1:SetCode(52401238)
 	--c:RegisterEffect(e1)
 end
-function cid.lcheck(e,c,tp)
+function cid.lcheck(g,lc,sumtype,tp)
  --local rc=e:GetHandler()
  --local tp=e:GetControler()
-	return c:IsCode(52401237) and c:IsAttackBelow(3500-Duel.GetLP(e:GetHandlerPlayer()))
+	return g:IsExists(Card.IsCode,1,nil,52401237) and g:IsAttackBelow(3500-Duel.GetLP(e:GetHandlerPlayer()))
 end
