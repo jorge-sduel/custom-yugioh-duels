@@ -11,8 +11,8 @@ c:AddSetcodesRule(id,false,0xbb109)
 	--e1:SetCode(52401238)
 	--c:RegisterEffect(e1)
 end
-function cid.lcheck(e)
- --Local tc=e:GetHandler()
+function cid.lcheck(e,rc)
+ Local rc=e:GetHandler()
  --Local tp=e:GetControler()
-	return c:IsCode(52401237) and c:IsAttackAbove(3500-Duel.GetLP(e:GetHandlerPlayer()))
+	return rc:IsCode(52401237) and rc:IsAttackAbove(3500-Duel.GetLP(e:GetHandlerPlayer()))
 end
