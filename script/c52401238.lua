@@ -14,3 +14,6 @@ end
 function cid.lcheck(c)
 	return c:IsCode(52401237)
 end
+function excon.descon(e)
+	return Duel.GetLP(e:GetHandlerPlayer())<=6000
+end
