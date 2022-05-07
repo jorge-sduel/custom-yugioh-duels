@@ -300,7 +300,8 @@ function Auxiliary.AddSpacetSummonProcedure(c,code,loc,excon)
 	c:RegisterEffect(e1)
 end
 function Auxiliary.SpacetSummonFilter(c,cd)
-	return ((cd and c:IsCode(cd)) or (not cd or c.IsBigbang)) and c:IsAbleToRemoveAsCost()
+	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
+--[((cd and c:IsCode(cd)) or (not cd or c.IsBigbang)) and c:IsAbleToRemoveAsCost()]
 end
 function Auxiliary.SpacetSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(52401238,tp) and c:IsAbleToGraveAsCost()
