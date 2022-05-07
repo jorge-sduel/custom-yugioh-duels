@@ -12,5 +12,7 @@ c:AddSetcodesRule(id,false,0xbb109)
 	--c:RegisterEffect(e1)
 end
 function cid.lcheck(e,c)
-	return c:IsCode(52401237) and c:IsAttackAbove(e:GetHandler():GetAttack()-e:GetControler():GetLp())
+ Local tc=e:GetHandler()
+ Local tp=e:GetControler()
+	return c:IsCode(52401237) and c:IsAttackAbove(tc:GetAttack()-tp:GetLp())
 end
