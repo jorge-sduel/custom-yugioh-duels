@@ -155,7 +155,7 @@ function Bigbang.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				if opp then loc2=loc end
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
-g:Merge(Duel.GetMatchingGroup(Auxiliary.SpacetSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
+g:Merge(Duel.GetMatchingGroup(Auxiliary.BigbangSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				local mg=g:Filter(Bigbang.ConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_BIGBANG)
@@ -187,7 +187,7 @@ function Bigbang.Target(f,minc,maxc,specialchk,opp,loc,send)
 				if opp then loc2=loc end
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
-g:Merge(Duel.GetMatchingGroup(Auxiliary.SpacetSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
+g:Merge(Duel.GetMatchingGroup(Auxiliary.BigbangSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
@@ -281,6 +281,9 @@ end
 function Bigbang.Level(e)
 	local lv=e:GetHandler():GetOriginalLevel()
 	return lv
+end
+function Auxiliary.BigbangSummonSubstitute(c,cd,tp)
+	return c:IsHasEffect(52401238,tp) and c:IsAbleToGraveAsCost()
 end
 --Space-Time summon
 function Auxiliary.AddSpacetSummonProcedure(c,code,loc,excon)
