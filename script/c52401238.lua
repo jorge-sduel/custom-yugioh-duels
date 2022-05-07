@@ -1,11 +1,11 @@
 --Cosmicburst Dragon
 local cid,id=GetID()
-cid.IsBigbang=true
+cid.IsSpacet=true
 if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function cid.initial_effect(c)
 c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
-	Spacet.AddProcedure(c,nil,2,99)
+		aux.AddMaleficSummonProcedure(c,52401237,LOCATION_MZONE)
 	--equip
 	--local e0=Effect.CreateEffect(c)
 	--e0:SetType(EFFECT_TYPE_SINGLE)
