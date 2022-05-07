@@ -10,4 +10,10 @@ c:AddSetcodesRule(id,false,0xbb109)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(52401238)
 	c:RegisterEffect(e1)
+--
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_UPDATE_ATTACK)
+	e2:SetValue(-1500)
+	c:RegisterEffect(e2)
 end
