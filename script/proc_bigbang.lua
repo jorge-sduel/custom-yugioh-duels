@@ -280,3 +280,55 @@ function Bigbang.Level(e)
 	local lv=e:GetHandler():GetOriginalLevel()
 	return lv
 end
+--Space-Time summon
+function Auxiliary.AddSpacetSummonProcedure(c,code,loc,excon)
+	--special summon
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e1:SetRange(LOCATION_EXTRA)
+	e1:SetValue(SUMMON_TYPE_BIGBANG)
+	e1:SetCondition(Auxiliary.SpacetSummonCondition(code,loc,excon))
+	e1:SetTarget(Auxiliary.SpacetSummonTarget(code,loc))
+	e1:SetOperation(Auxiliary.SpacetSummonOperation(code,loc))
+	c:RegisterEffect(e1)
+end
+function Auxiliary.SpacetSummonFilter(c,cd)
+	return ((cd and c:IsCode(cd)) or (not cd and c.IsSpacet)) and c:IsAbleToRemoveAsCost()
+end
+function Auxiliary.SpacetSummonSubstitute(c,cd,tp)
+	return c:IsHasEffect(52401238,tp) and c:IsAbleToRemoveAsCost()
+end
+function Auxiliary.SpacetSummonCondition(cd,loc,excon)
+	return 	function(e,c)
+				if excon and not excon(e,c) then return false end
+				if c==nil then return true end
+				return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+					and (Duel.IsExistingMatchingCard(Auxiliary.SpacetSummonFilter,c:GetControler(),loc,0,1,nil,cd)
+					or Duel.IsExistingMatchingCard(Auxiliary.SpacetSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler()))
+			end
+end
+function Auxiliary.SpacetSummonTarget(cd,loc)
+	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
+				local g=Duel.GetMatchingGroup(Auxiliary.SpacetSummonFilter,tp,loc,0,nil,cd)
+				g:Merge(Duel.GetMatchingGroup(Auxiliary.SpacetSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,c:GetControler()))
+				local sg=aux.SelectUnselectGroup(g,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+				if #sg>0 then
+					sg:KeepAlive()
+					e:SetLabelObject(sg)
+					return true
+				end
+				return false
+			end
+end
+function Auxiliary.SpacetSummonOperation(cd,loc)
+	return	function(e,tp,eg,ep,ev,re,r,rp,c)
+				local g=e:GetLabelObject()
+				if not g then return end
+				local tc=g:GetFirst()
+				if tc:IsHasEffect(52401238,tp) then tc:IsHasEffect(52401238,tp):UseCountLimit(tp) end
+				Duel.Remove(tc,POS_FACEUP,REASON_COST)
+				g:DeleteGroup()
+			end
+end
