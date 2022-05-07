@@ -299,8 +299,8 @@ function Auxiliary.AddSpacetSummonProcedure(c,code,loc,excon)
 	e1:SetOperation(Auxiliary.SpacetSummonOperation(code,loc))
 	c:RegisterEffect(e1)
 end
-function Auxiliary.SpacetSummonFilter(c,cd)
-	return not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)
+function Auxiliary.SpacetSummonFilter(e,c,cd,tp)
+	return c:IsAttackAbove(Duel.GetLP(e:GetHandlerPlayer())) and not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)
 --[((cd and c:IsCode(cd)) or (not cd or c.IsBigbang)) and c:IsAbleToRemoveAsCost()]
 end
 function Auxiliary.SpacetSummonSubstitute(c,cd,tp)
