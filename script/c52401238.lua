@@ -13,7 +13,7 @@ c:AddSetcodesRule(id,false,0xbb109)
 end
 function cid.lcheck(c,tp)
  --local rc=e:GetHandler()
- local tp=e:GetControler()
+ --local tp=e:GetControler()
 	return c:IsCode(52401237) and c:IsAttackBelow(3500)
 --Duel.GetLP(e:GetHandlerPlayer()))
 end
