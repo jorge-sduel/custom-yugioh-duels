@@ -295,7 +295,7 @@ function Auxiliary.AddSpacetSummonProcedure(c,code,loc,excon)
 	c:RegisterEffect(e1)
 end
 function Auxiliary.SpacetSummonFilter(c,cd)
-	return ((cd and c:IsCode(cd)) or (not cd and c.IsSpacet)) and c:GetControler():GetLP()-c:GetAttack()=<e:GetHandler():GetAttack() and c:IsAbleToRemoveAsCost()
+	return ((cd and c:IsCode(cd)) or (not cd and c.IsSpacet)) and c:GetControler():GetLP()-c:GetAttack()<e:GetHandler():GetAttack() and c:IsAbleToRemoveAsCost()
 end
 function Auxiliary.SpacetSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(52401238,tp) and c:IsAbleToRemoveAsCost()
