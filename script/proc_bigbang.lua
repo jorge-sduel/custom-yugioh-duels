@@ -310,13 +310,13 @@ function Auxiliary.SpacetSummonCondition(cd,loc,excon)
 				if excon and not excon(e,c) then return false end
 				if c==nil then return true end
 				return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-					and (Duel.IsExistingMatchingCard(Bigbang.ConditionFilter,c:GetControler(),loc,0,1,nil,cd)
+					and (Duel.IsExistingMatchingCard(Auxiliary.SpacetSummonFilter,c:GetControler(),loc,0,1,nil,cd)
 					or Duel.IsExistingMatchingCard(Auxiliary.SpacetSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler()))
 			end
 end
 function Auxiliary.SpacetSummonTarget(cd,loc)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
-				local g=Duel.GetMatchingGroup(Bigbang.ConditionFilter,tp,loc,0,nil,cd)
+				local g=Duel.GetMatchingGroup(Auxiliary.SpacetSummonFilter,tp,loc,0,nil,cd)
 				g:Merge(Duel.GetMatchingGroup(Auxiliary.SpacetSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,c:GetControler()))
 				local sg=aux.SelectUnselectGroup(g,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 				if #sg>0 then
