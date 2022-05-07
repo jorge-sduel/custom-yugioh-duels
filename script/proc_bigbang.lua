@@ -164,7 +164,7 @@ function Bigbang.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				min = min or minc
 				max = max or maxc
 				if mustg:IsExists(aux.NOT(Bigbang.ConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
-				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_LINK)
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_BIGBANG)
 				tg=tg:Filter(Bigbang.ConditionFilter,nil,f,c,tp)
 				local res=(mg+tg):Includes(mustg) and #mustg<=max
 				if res then
