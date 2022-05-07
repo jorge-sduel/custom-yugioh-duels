@@ -138,6 +138,7 @@ function Evolute.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				if opp then loc2=loc end
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+g:Merge(Duel.GetMatchingGroup(Auxiliary.EvoluteSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				local mg=g:Filter(Evolute.ConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
@@ -169,6 +170,7 @@ function Evolute.Target(f,minc,maxc,specialchk,opp,loc,send)
 				if opp then loc2=loc end
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+g:Merge(Duel.GetMatchingGroup(Auxiliary.EvoluteSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
@@ -260,4 +262,7 @@ end
 --end
 function Evolute.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
+end
+function Auxiliary.EvoluteSummonSubstitute(c,cd,tp)
+	return c:IsHasEffect(16000820,tp) and c:IsAbleToGraveAsCost()
 end
