@@ -11,6 +11,6 @@ c:AddSetcodesRule(id,false,0xbb109)
 	--e1:SetCode(52401238)
 	--c:RegisterEffect(e1)
 end
-function cid.lcheck(c)
+function cid.lcheck(c,e)
 	return c:IsCode(52401237) and c:IsAttackBelow(e:GetHandler:GetAttack()-e:GetControler():GetLp())
 end
