@@ -14,5 +14,5 @@ end
 function cid.lcheck(g,lc,sumtype,tp)
  --local rc=e:GetHandler()
  --local tp=e:GetControler()
-	return g:IsCode(52401237) and g:IsAttackBelow(3500-Duel.GetLP(e:GetHandlerPlayer()))
+	return g:IsExists(Card.IsCode,1,nil,52401237) and g:IsAttackBelow(3500-Duel.GetLP(e:GetHandlerPlayer()))
 end
