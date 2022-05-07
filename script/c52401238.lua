@@ -13,6 +13,6 @@ c:AddSetcodesRule(id,false,0xbb109)
 end
 function cid.lcheck(e,c)
  --Local tc=e:GetHandler()
- Local tp=e:GetControler()
+ --Local tp=e:GetControler()
 	return c:IsCode(52401237) and c:IsAttackAbove(3500-tp:GetLp())
 end
