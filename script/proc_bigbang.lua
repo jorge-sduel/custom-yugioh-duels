@@ -186,6 +186,7 @@ function Bigbang.Target(f,minc,maxc,specialchk,opp,loc,send)
 				if opp then loc2=loc end
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+g:Merge(Duel.GetMatchingGroup(Auxiliary.SpacetSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
@@ -298,7 +299,7 @@ function Auxiliary.SpacetSummonFilter(c,cd)
 	return ((cd and c:IsCode(cd)) or (not cd)) and c:GetControler():GetLP()-c:GetAttack()<e:GetHandler():GetAttack() and c:IsAbleToRemoveAsCost()
 end
 function Auxiliary.SpacetSummonSubstitute(c,cd,tp)
-	return c:IsHasEffect(52401238,tp) and c:IsAbleToRemoveAsCost()
+	return c:IsHasEffect(52401238,tp) and c:IsAbleToGraveAsCost()
 end
 function Auxiliary.SpacetSummonCondition(cd,loc,excon)
 	return 	function(e,c)
