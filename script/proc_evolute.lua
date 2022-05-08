@@ -264,5 +264,5 @@ function Evolute.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
 function Auxiliary.EvoluteSummonSubstitute(c,cd,tp)
-	return c:IsHasEffect(16000820,tp) and c:IsAbleToGraveAsCost()
+	return c:IsHasEffect(16000820,tp) and not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
