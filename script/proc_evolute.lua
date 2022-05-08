@@ -27,7 +27,7 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	-- 4 >> hand
 	-- 5 >> deck
 	-- 6 >> destroy
-	if loc==nil then loc=LOCATION_MZONE end
+	if loc==nil then loc=LOCATION_MZONE+LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE end
 	if c.evolute_type==nil then
 		local mt=c:GetMetatable()
 		mt.evolute_type=1
