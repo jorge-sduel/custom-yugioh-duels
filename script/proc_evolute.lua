@@ -60,7 +60,7 @@ function Card.IsEvolute(c)
 	return c.IsEvolute
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
-	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) or c:IsHasEffect(16000820,tp)
+	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and (c:IsLocation(LOCATION_MZONE) or c:IsHasEffect(16000820,tp))
 end
 function Evolute.GetEvoluteCount(c)
     if c:GetLevel()>0 then return c:GetLevel()
@@ -137,7 +137,7 @@ function Evolute.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,loc2,nil)
+					g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,loc2,nil)
 				end
 				local mg=g:Filter(Evolute.ConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
