@@ -1,5 +1,6 @@
 --Number S21: Frozen Lady Truth
 function c249000963.initial_effect(c)
+ Xyz.AddProcedure(c,nil,3,7)
 	c:EnableReviveLimit()
 	--immune spell
 	local e1=Effect.CreateEffect(c)
