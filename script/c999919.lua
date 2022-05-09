@@ -66,7 +66,7 @@ function c999919.syncon(e,c,tuner)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<-2 then return false end
 	local g1=Duel.GetMatchingGroup(c999919.matfilter1,tp,LOCATION_MZONE,LOCATION_MZONE,nil,c)
 	local g2=Duel.GetMatchingGroup(c999919.matfilter2,tp,LOCATION_MZONE,LOCATION_MZONE,nil,c)
-	local pe=Duel.IsPlayerAffectedByEffect(tp,EFFECT_MUST_BE_SMATERIAL)
+	--local pe=Duel.IsPlayerAffectedByEffect(tp,EFFECT_MUST_BE_SMATERIAL)
 	local lv=c:GetLevel()
 	if tuner then
 		local tlv=tuner:GetLevel()
