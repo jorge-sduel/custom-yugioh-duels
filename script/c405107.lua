@@ -1,7 +1,7 @@
 --Galaxy-Eyes Tachyon Neon Lustrous
 function c405107.initial_effect(c)
 	--Synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(c405107.mfilter),aux.NonTuner(c405107.mfilter2),1,99)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(c405107.mfilter),1,1,Synchro.NonTuner(c405107.mfilter2),1,99)
 	c:EnableReviveLimit()
 	--Banish
 	local e1=Effect.CreateEffect(c)
