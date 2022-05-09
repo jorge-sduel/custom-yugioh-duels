@@ -1,7 +1,7 @@
 --Emissary of the Red Dragon
 function c999907.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,nil,aux.NonTuner(nil),1)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--Negate
 	local e1=Effect.CreateEffect(c)
