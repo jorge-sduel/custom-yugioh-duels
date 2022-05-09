@@ -16,10 +16,10 @@ function c249000626.condition(e,tp,eg,ep,ev,re,r,rp,chk)
 	return tp==Duel.GetTurnPlayer()
 end
 function c249000626.costfilter(c)
-	return c:IsSetCard(0x1E0) and c:IsAbleToRemoveAsCost() and c:IsType(TYPE_MONSTER)
+	return c:IsType(TYPE_SPELL) and c:IsAbleToRemoveAsCost()
 end
 function c249000626.costfilter2(c,e)
-	return c:IsSetCard(0x1E0) and c:IsType(TYPE_MONSTER) and not c:IsPublic() and c~=e:GetHandler()
+	return c:IsType(TYPE_SPELL) and not c:IsPublic() and c~=e:GetHandler()
 end
 function c249000626.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return (Duel.IsExistingMatchingCard(c249000626.costfilter,tp,LOCATION_GRAVE,0,1,nil)
