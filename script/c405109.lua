@@ -1,7 +1,7 @@
 --Galaxy-Eyes Tachyon Binary Pulsar Dragon
 function c405109.initial_effect(c)
 	--Synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(c405109.mfilter),aux.NonTuner(c405109.mfilter2),1,99)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(c405109.mfilter),1,1,Synchro.NonTuner(c405109.mfilter2),1,99)
 	c:EnableReviveLimit()
 	--Atk
 	local e1=Effect.CreateEffect(c)
