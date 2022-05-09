@@ -30,12 +30,12 @@ function c249000963.initial_effect(c)
 	e3:SetOperation(c249000963.desop)
 	c:RegisterEffect(e3)
 	--spsummon limit
-	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_SINGLE)
-	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e4:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e4:SetValue(c249000963.splimit)
-	c:RegisterEffect(e4)
+	--local e4=Effect.CreateEffect(c)
+	--e4:SetType(EFFECT_TYPE_SINGLE)
+	--e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	--e4:SetCode(EFFECT_SPSUMMON_CONDITION)
+	--e4:SetValue(c249000963.splimit)
+	--c:RegisterEffect(e4)
 end
 c249000963.xyz_number=21
 function c249000963.efilter(e,te)
