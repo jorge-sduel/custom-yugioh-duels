@@ -1,16 +1,8 @@
 --Daemon Quasar Dragon
 function c999902.initial_effect(c)
 	--synchro summon
+Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),2,2,Synchro.NonTuner(Card.IsType,TYPE_SYNCHRO),1,1)
 	c:EnableReviveLimit()
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e1:SetRange(LOCATION_EXTRA)
-	e1:SetCondition(c999902.syncon)
-	e1:SetOperation(c999902.synop)
-	e1:SetValue(SUMMON_TYPE_SYNCHRO)
-	c:RegisterEffect(e1)
 	--atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
