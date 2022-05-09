@@ -43,7 +43,7 @@ function c249000626.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function c249000626.filter1(c,e,tp,att)
-	return c:IsType(TYPE_XYZ) and Duel.IsExistingMatchingCard(c249000626.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c,c:GetRank()+1,c:GetAttribute(),c:GetCode())
+	return c:IsType(TYPE_XYZ) and Duel.IsExistingMatchingCard(c249000626.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c,c:GetRank()+1,c:GetAttribute())
 end
 function c249000626.filter2(c,e,tp,mc,rk,att,code)
 	if c.rum_limit_code and code~=c.rum_limit_code then return false end
