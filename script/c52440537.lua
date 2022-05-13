@@ -16,7 +16,7 @@ function cid.initial_effect(c)
 	e2:SetCode(EVENT_DESTROYED)
 	--e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	--e2:SetCountLimit(1,id)
-	e2:SetTarget(cid.shtg)
+	--e2:SetTarget(cid.shtg)
 	e2:SetOperation(cid.shop)
 	c:RegisterEffect(e2)
 end
