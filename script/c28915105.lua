@@ -2,9 +2,6 @@
 local ref=_G['c'..28915105]
 local id=28915105
 function ref.initial_effect(c)
-	--Corona Card
-	--aux.EnableCorona(c,ref.matfilter,3,99,TYPE_SPELL,nil)
-	aux.EnableCoronaNeo(c,3,3,ref.matfilter,ref.matfilter2)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DRAW+CATEGORY_TOGRAVE)
@@ -24,7 +21,7 @@ end
 function ref.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
 	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(1)
+	Duel.SetTargetParam(2)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
 end
 function ref.actop(e,tp,eg,ep,ev,re,r,rp)
