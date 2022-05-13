@@ -13,7 +13,7 @@ function c101600100.initial_effect(c)
 end
 function c101600100.cfilter(c)
 	return c:IsFaceup() and c:IsAbleToExtra() and c:IsRace(RACE_DRAGON) and (c:GetLevel()==7 or c:GetLevel()==8)
-		--and bit.band(c:GetSummonType(),SUMMON_TYPE_SYNCHRO)==SUMMON_TYPE_SYNCHRO
+		and bit.band(c:GetSummonType(),SUMMON_TYPE_SYNCHRO)==SUMMON_TYPE_SYNCHRO
 end
 function c101600100.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(c101600100.cfilter,tp,LOCATION_MZONE,0,1,nil)
@@ -30,7 +30,7 @@ function c101600100.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c101600100.mgfilter(c,e,tp,sync)
 	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
-		--and bit.band(c:GetReason(),0x80008)==0x80008 and c:GetReasonCard()==sync
+		and bit.band(c:GetReason(),0x80008)==0x80008 and c:GetReasonCard()==sync
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c101600100.activate(e,tp,eg,ep,ev,re,r,rp)
