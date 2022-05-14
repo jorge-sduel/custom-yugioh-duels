@@ -230,7 +230,7 @@ end
 function c101600116.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(c101600116.cpfilter,tp,LOCATION_EXTRA,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectTarget(tp,c101600116.cpfilter,tp,LOCATION_EXTRA,0,1,1,nil)
+	Duel.SelectTarget(tp,c101600116.cpfilter,tp,0,LOCATION_MZONE,1,1,nil)
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function c101600116.operation(e,tp,eg,ep,ev,re,r,rp)
