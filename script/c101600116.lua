@@ -228,7 +228,7 @@ function c101600116.cpfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsType(TYPE_SYNCHRO) and c:IsAbleToGraveAsCost() and (c:GetLevel()==7 or c:GetLevel()==8)
 end
 function c101600116.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return Duel.IsExistingTarget(c101600116.cpfilter,tp,LOCATION_EXTRA,0,1,nil) and e:GetHandler():GetFlagEffect(101600117)<1 end
+	if chk==0 then return Duel.IsExistingTarget(c101600116.cpfilter,tp,LOCATION_EXTRA,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectTarget(tp,c101600116.cpfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 	Duel.SendtoGrave(g,REASON_COST)
@@ -239,11 +239,11 @@ function c101600116.operation(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
 		local code=tc:GetOriginalCode()
 		local reset_flag=RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END
-		c:CopyEffect(code,reset_flag,2)
+		c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,2)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetReset(reset_flag,2)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,2)
 		e1:SetCode(EFFECT_CHANGE_CODE)
 		e1:SetValue(code)
 		c:RegisterEffect(e1)
