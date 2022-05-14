@@ -47,11 +47,11 @@ end
 function c101600101.filter2(c,tp,lv)
 	local rlv=lv-c:GetLevel()
 	local rg=Duel.GetMatchingGroup(c101600101.filter3,tp,LOCATION_GRAVE,0,c)
-	return rlv>0 and c:IsType(TYPE_TUNER) and c:IsAbleToRemove() and c:IsSetCard(0xcd01)
+	return rlv>0 and c:IsType(TYPE_TUNER) and c:IsAbleToRemove()
 		and rg:CheckWithSumEqual(Card.GetLevel,rlv,1,1)
 end
 function c101600101.filter3(c)
-	return c:GetLevel()>0 and not c:IsType(TYPE_TUNER) and c:IsAbleToRemove() and c:IsSetCard(0xcd01)
+	return c:GetLevel()>0 and not c:IsType(TYPE_TUNER) and c:IsAbleToRemove()
 end
 function c101600101.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetFlagEffect(tp,101600102)<1 and Duel.GetFlagEffect(tp,101600101)<1
@@ -88,18 +88,18 @@ end
 function c101600101.sfilter1(c,e,tp,code)
 	local lv=c:GetLevel()
 	if code then return c:IsCode(code) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) else
-	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) and c:IsSetCard(0xcd01)
+	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false)
 		and Duel.IsExistingMatchingCard(c101600101.sfilter2,tp,LOCATION_REMOVED,0,1,nil,tp,lv)
 	end
 end
 function c101600101.sfilter2(c,tp,lv)
 	local rlv=lv-c:GetLevel()
 	local rg=Duel.GetMatchingGroup(c101600101.sfilter3,tp,LOCATION_REMOVED,0,c)
-	return rlv>0 and c:IsType(TYPE_TUNER) and c:IsAbleToDeck() and c:IsSetCard(0xcd01)
+	return rlv>0 and c:IsType(TYPE_TUNER) and c:IsAbleToDeck()
 		and rg:CheckWithSumEqual(Card.GetLevel,rlv,1,1)
 end
 function c101600101.sfilter3(c)
-	return c:GetLevel()>0 and not c:IsType(TYPE_TUNER) and c:IsAbleToRemove() and c:IsSetCard(0xcd01)
+	return c:GetLevel()>0 and not c:IsType(TYPE_TUNER) and c:IsAbleToRemove()
 end
 function c101600101.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetFlagEffect(tp,101600100)<1 and Duel.GetFlagEffect(tp,101600103)<1
@@ -144,7 +144,7 @@ function c101600101.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
 end
 function c101600101.thfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand() and c:IsSetCard(0xcd01) and not c:IsCode(101600101)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand() and not c:IsCode(101600101)
 end
 function c101600101.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c101600101.thfilter,tp,LOCATION_DECK,0,1,nil)
