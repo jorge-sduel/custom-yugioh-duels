@@ -39,7 +39,9 @@ function c101600101.initial_effect(c)
 end
 function c101600101.filter1(c,e,tp,code)
 	local lv=c:GetLevel()
-	if code then return c:IsCode(code) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) else
+	--if code then
+ return --c:IsCode(code) and 
+c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) else
 	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) and c:IsSetCard(0xcd01)
 		and Duel.IsExistingMatchingCard(c101600101.filter2,tp,LOCATION_GRAVE,0,1,nil,tp,lv)
 	end
