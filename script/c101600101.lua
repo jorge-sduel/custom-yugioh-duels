@@ -43,7 +43,7 @@ function c101600101.filter1(c,e,tp,code)
 --c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) else
 	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false)
 		and Duel.IsExistingMatchingCard(c101600101.filter2,tp,LOCATION_GRAVE,0,1,nil,tp,lv)
-	end
+--	end
 end
 function c101600101.filter2(c,tp,lv)
 	local rlv=lv-c:GetLevel()
