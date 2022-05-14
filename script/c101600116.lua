@@ -228,16 +228,17 @@ function c101600116.cpfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsType(TYPE_SYNCHRO) and c:IsAbleToGraveAsCost() and (c:GetLevel()==7 or c:GetLevel()==8)
 end
 function c101600116.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and c101600116.cpfilter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(c101600116.cpfilter,tp,LOCATION_EXTRA,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	Duel.SelectTarget(tp,c101600116.cpfilter,tp,0,LOCATION_MZONE,1,1,nil)
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.SelectTarget(tp,c101600116.cpfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 end
 function c101600116.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) then
-		local code=tc:GetOriginalCode()
+	if tc and c:IsRelateToEffect(e) and c:IsFaceup() and tc:IsRelateToEffect(e) then
+		local code=tc:GetOriginalCodeRule()
+	Duel.SendtoGrave(tc,REASON_COST)
 		c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,2)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
