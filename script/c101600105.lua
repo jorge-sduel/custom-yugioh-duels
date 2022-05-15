@@ -18,7 +18,7 @@ function c101600105.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTarget(c101600105.target)
-	--e4:SetOperation(c101600105.operation)
+	e4:SetOperation(c101600105.operation)
 	e4:SetCountLimit(1,101610105)
 	c:RegisterEffect(e4)
 	--damage
