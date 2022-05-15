@@ -36,7 +36,7 @@ end
 function c101600106.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local tc=Duel.SelectTarget(tp,c101600106.filter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
-	if tc:IsRelateToEffect(e) then
+	--if tc:IsRelateToEffect(e) then
 		Duel.SendtoGrave(tc,REASON_EFFECT)
 	end
 end
