@@ -25,7 +25,7 @@ function c101600106.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c101600106.filter(c)
-	return c:IsSetCard(0xcd01) and c:IsAbleToGrave()
+	return c:IsLevelBelow(4) and c:IsAbleToGrave()
 end
 function c101600106.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_DECK) and chkc:IsControler(tp) and c101600106.filter(chkc) end
