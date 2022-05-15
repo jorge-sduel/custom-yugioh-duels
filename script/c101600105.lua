@@ -87,7 +87,7 @@ function c101600105.filter(c,e,tp)
 		and Duel.IsExistingMatchingCard(c101600105.exfilter,tp,LOCATION_EXTRA,0,1,nil,lv+lv2,e,tp)
 end
 function c101600105.exfilter(c,lv,e,tp)
-	return c:GetLevel()==lv and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) and c:IsRace(RACE_DRAGON) and c:IsSetCard(0xcd01)
+	return c:GetLevel()==lv and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) and c:IsRace(RACE_DRAGON)
 		and c:IsType(TYPE_SYNCHRO)
 end
 function c101600105.ex(c,tc)
