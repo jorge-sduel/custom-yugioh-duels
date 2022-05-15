@@ -35,7 +35,7 @@ function c101600106.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c101600106.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local tc=Duel.SelectTarget(tp,c101600106.filter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectTarget(tp,c101600106.filter,tp,LOCATION_DECK,0,1,1,nil)
 	--if tc:IsRelateToEffect(e) then
 		Duel.SendtoGrave(tc:GetFirst(),REASON_EFFECT)
 	--end
