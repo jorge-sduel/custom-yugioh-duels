@@ -28,18 +28,17 @@ function c101600106.filter(c)
 	return c:IsLevelBelow(4) and c:IsAbleToGrave()
 end
 function c101600106.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_DECK) and chkc:IsControler(tp) and c101600106.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(c101600106.filter,tp,LOCATION_DECK,0,1,nil) end
-	--Duel.RegisterFlagEffect(tp,101600116,RESET_PHASE+PHASE_END,0,1)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,0)
+	if chk==0 then return Duel.IsExistingMatchingCard(c101600106.filter,tp,LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end
 function c101600106.thop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local tc=Duel.SelectTarget(tp,c101600106.filter,tp,LOCATION_DECK,0,1,1,nil)
-	--if tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc:GetFirst(),REASON_EFFECT)
-	--end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local g=Duel.SelectMatchingCard(tp,c101600106.filter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then
+		Duel.SendtoGrave(g,REASON_EFFECT)
+	end
 end
+
 function c101600106.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToRemoveAsCost() end
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
