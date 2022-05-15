@@ -82,16 +82,12 @@ function c101600105.damop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c101600105.filter(c,e,tp)
 	local lv=c:GetLevel()
-	local lv2=e:GetHandler():GetOriginalLevel()
-	return lv>0 and c:IsType(TYPE_TUNER) and c:IsAbleToRemoveAsCost()
+	local lv2=e:GetHandler():GetLevel()
+	return lv>0 and not c:IsType(TYPE_TUNER) and c:IsAbleToRemoveAsCost()
 		and Duel.IsExistingMatchingCard(c101600105.exfilter,tp,LOCATION_EXTRA,0,1,nil,lv+lv2,e,tp)
 end
 function c101600105.exfilter(c,lv,e,tp)
-	return c:GetLevel()==lv and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) and c:IsRace(RACE_DRAGON)
-		and c:IsType(TYPE_SYNCHRO)
-end
-function c101600105.ex(c,tc)
-	return c:GetSequence()==4 or c:GetSequence()==5 and c:GetLinkedGroup():IsContains(tc)
+	return c:GetLevel()==lv and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) and c:IsRace(RACE_DRAGON) and c:IsType(TYPE_SYNCHRO)
 end
 function c101600105.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetLocationCountFromEx(tp)>0
