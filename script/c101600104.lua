@@ -72,5 +72,6 @@ function c101600104.operation(e,tp,eg,ep,ev,re,r,rp)
 		local sg=Duel.SelectMatchingCard(tp,c101600104.exfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv,e,tp)
 		local sc=sg:GetFirst()
 		Duel.SpecialSummon(sg,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
+			sg:GetFirst():CompleteProcedure()
 	end
 end
