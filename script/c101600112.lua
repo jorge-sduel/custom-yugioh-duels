@@ -70,8 +70,8 @@ function c101600112.spcon3(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function c101600112.spfilter3(c,e,tp)
-	if true then return (c:GetLevel()==7 or c:GetLevel()==8) and c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_DRAGON)
-		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not (c:GetOriginalCode()==101600112 or c:GetOriginalCode()==101600112) end
+	return (c:GetLevel()==7 or c:GetLevel()==8) and c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_DRAGON)
+		and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(101600112)
 end
 function c101600112.sptg3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and c101600112.spfilter3(chkc,e,tp) end
