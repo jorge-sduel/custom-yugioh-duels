@@ -29,7 +29,7 @@ function c101600106.filter(c)
 end
 function c101600106.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_DECK) and chkc:IsControler(tp) and c101600106.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(c101600106.filter,tp,LOCATION_DECK,0,1,nil) and Duel.GetFlagEffect(tp,101600106)<1 end
+	if chk==0 then return Duel.IsExistingTarget(c101600106.filter,tp,LOCATION_DECK,0,1,nil) end
 	--Duel.RegisterFlagEffect(tp,101600116,RESET_PHASE+PHASE_END,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,0)
 end
