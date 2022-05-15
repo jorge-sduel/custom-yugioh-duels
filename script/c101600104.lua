@@ -47,7 +47,7 @@ end
 function c101600104.synfilter(c,e,tp)
 	local lv=c:GetLevel()
 	local lv2=e:GetHandler():GetOriginalLevel()
-	return lv>0 and c:IsSetCard(0xcd01) and not c:IsType(TYPE_TUNER) and c:IsAbleToRemoveAsCost()
+	return lv>0 and not c:IsType(TYPE_TUNER) and c:IsAbleToRemoveAsCost()
 		and Duel.IsExistingMatchingCard(c101600104.exfilter,tp,LOCATION_EXTRA,0,1,nil,lv+lv2,e,tp)
 end
 function c101600104.exfilter(c,lv,e,tp)
