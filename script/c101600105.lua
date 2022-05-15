@@ -83,7 +83,7 @@ end
 function c101600105.filter(c,e,tp)
 	local lv=c:GetLevel()
 	local lv2=e:GetHandler():GetOriginalLevel()
-	return lv>0 and c:IsSetCard(0xcd01) and c:IsType(TYPE_TUNER) and c:IsAbleToRemoveAsCost()
+	return lv>0 and c:IsType(TYPE_TUNER) and c:IsAbleToRemoveAsCost()
 		and Duel.IsExistingMatchingCard(c101600105.exfilter,tp,LOCATION_EXTRA,0,1,nil,lv+lv2,e,tp)
 end
 function c101600105.exfilter(c,lv,e,tp)
@@ -94,8 +94,8 @@ function c101600105.ex(c,tc)
 	return c:GetSequence()==4 or c:GetSequence()==5 and c:GetLinkedGroup():IsContains(tc)
 end
 function c101600105.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local xtra=Duel.GetMatchingGroup(c101600105.ex,tp,LOCATION_MZONE,LOCATION_MZONE,nil,e:GetHandler())
-	if chk==0 then return (Duel.GetLocationCountFromEx(tp)>0 or xtra:GetCount()>0)
+	--local xtra=Duel.GetMatchingGroup(c101600105.ex,tp,LOCATION_MZONE,LOCATION_MZONE,nil,e:GetHandler())
+	if chk==0 then return Duel.GetLocationCountFromEx(tp)>0
 		and e:GetHandler():IsAbleToRemoveAsCost()
 		and Duel.IsExistingMatchingCard(c101600105.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
