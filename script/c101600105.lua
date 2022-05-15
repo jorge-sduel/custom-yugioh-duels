@@ -94,7 +94,6 @@ function c101600105.ex(c,tc)
 	return c:GetSequence()==4 or c:GetSequence()==5 and c:GetLinkedGroup():IsContains(tc)
 end
 function c101600105.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	--local xtra=Duel.GetMatchingGroup(c101600105.ex,tp,LOCATION_MZONE,LOCATION_MZONE,nil,e:GetHandler())
 	if chk==0 then return Duel.GetLocationCountFromEx(tp)>0
 		and e:GetHandler():IsAbleToRemoveAsCost()
 		and Duel.IsExistingMatchingCard(c101600105.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
@@ -110,7 +109,7 @@ function c101600105.operation(e,tp,eg,ep,ev,re,r,rp)
 	local lv=e:GetLabel()
 	if Duel.GetLocationCountFromEx(tp)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,c101600105.exfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv,e,tp)
+		local sg=Duel.SelectMatchingCard(tp,c101600104.exfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv,e,tp)
 		local sc=sg:GetFirst()
 		Duel.SpecialSummon(sg,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
 	end
