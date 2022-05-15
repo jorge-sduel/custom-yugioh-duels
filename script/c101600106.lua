@@ -38,7 +38,7 @@ function c101600106.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectTarget(tp,c101600106.filter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	--if tc:IsRelateToEffect(e) then
 		Duel.SendtoGrave(tc,REASON_EFFECT)
-	end
+	--end
 end
 function c101600106.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToRemoveAsCost() end
