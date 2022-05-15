@@ -109,7 +109,7 @@ function c101600105.operation(e,tp,eg,ep,ev,re,r,rp)
 	local lv=e:GetLabel()
 	if Duel.GetLocationCountFromEx(tp)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,c101600104.exfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv,e,tp)
+		local sg=Duel.SelectMatchingCard(tp,c101600105.exfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv,e,tp)
 		local sc=sg:GetFirst()
 		Duel.SpecialSummon(sg,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
 	end
