@@ -62,7 +62,7 @@ function c101600108.scop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SMATERIAL)
 		local mg=Duel.SelectMatchingCard(tp,c101600108.scfilter2,tp,LOCATION_GRAVE,0,1,1,nil,c,sc,tp)
 		mg:AddCard(c)
-Duel.SendtoDeck(mg,nil,REASON_EFFECT)
 		Duel.SynchroSummon(tp,sc,nil,mg)
+Duel.SendtoHand(mg:GetFirst(),nil,REASON_EFFECT)
 	end
 end
