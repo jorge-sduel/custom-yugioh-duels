@@ -64,5 +64,5 @@ function c101600108.scop(e,tp,eg,ep,ev,re,r,rp)
 		mg:AddCard(c)
 		Duel.SynchroSummon(tp,sc,nil,mg)
 	end
-Duel.SendtoHand(mg:GetFirst(),nil,REASON_EFFECT)
+Duel.SendtoHand(mg,nil,REASON_EFFECT)
 end
