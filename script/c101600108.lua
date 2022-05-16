@@ -25,7 +25,7 @@ function c101600108.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c101600108.filter(c)
-	return c:IsSetCard(0xcd01) and c:IsAbleToHand() and not c:IsCode(101600108)
+	return c:IsLevelBelow(4) and c:IsAbleToHand() and not c:IsCode(101600108)
 end
 function c101600108.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c101600108.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -43,7 +43,7 @@ function c101600108.synfilter1(c,syncard,tuner,f)
     return c:IsFaceup() and c:IsCanBeSynchroMaterial(syncard,tuner) and (f==nil or f(c))
 end
 function c101600108.synfilter2(c,syncard,tuner,f)
-    return c:IsSetCard(0xcd01) and c:IsNotTuner() and c:IsCanBeSynchroMaterial(syncard,tuner) and (f==nil or f(c))
+    return c:IsNotTuner() and c:IsCanBeSynchroMaterial(syncard,tuner) and (f==nil or f(c))
 end
 function c101600108.syncheck(c,g,mg,tp,lv,syncard,minc,maxc)
     g:AddCard(c)
