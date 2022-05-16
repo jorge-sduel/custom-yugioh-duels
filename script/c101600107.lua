@@ -76,11 +76,11 @@ end
 function c101600107.filter(c,e,tp)
 	local lv=c:GetLevel()
 	local lv2=e:GetHandler():GetLevel()
-	return lv>0 and c:IsSetCard(0xcd01) and c:IsType(TYPE_TUNER) and c:IsAbleToRemove()
+	return lv>0 and c:IsType(TYPE_TUNER) and c:IsAbleToRemove()
 		and Duel.IsExistingMatchingCard(c101600107.exfilter,tp,LOCATION_EXTRA,0,1,nil,lv+lv2,e,tp)
 end
 function c101600107.exfilter(c,lv,e,tp)
-	return c:GetLevel()==lv and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) and c:IsSetCard(0xcd01)
+	return c:GetLevel()==lv and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false)
 end
 function c101600107.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and c101600107.filter(chkc,e,tp) end
