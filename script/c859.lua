@@ -154,8 +154,9 @@ function c859.wfilter(c)
 	return c:IsFacedown()
 end
 function c859.wop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SetLP(1-tp,0)
-end
+	local WIN_REASON_OMEGA_GLENDIOS = 0x92
+
+	Duel.Win(tp,0x92)end
 function c859.hspfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x5DC) and (c:IsLevelAbove(8) or c:IsRankAbove(8))
 end
