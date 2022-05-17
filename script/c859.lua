@@ -10,9 +10,10 @@ local over=Effect.CreateEffect(c)
 	over:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	over:SetRange(LOCATION_EXTRA)
 	over:SetCost(c859.xyzop)
-	over:SetCondition(c86123277.hspcon)
-	over:SetOperation(c86123277.hspop)
-	c:RegisterEffect(over)	--cannot be destroyed
+	over:SetCondition(c859.hspcon)
+	over:SetOperation(c859.hspop)
+	c:RegisterEffect(over)
+	--cannot be destroyed
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
