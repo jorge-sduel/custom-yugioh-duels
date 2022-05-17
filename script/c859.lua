@@ -158,7 +158,7 @@ function c859.wop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Win(tp,0x92)
 end
 function c859.hspfilter(c)
-	return c:IsSetCard(0x5DC) and (c:IsLevelAbove(8) or c:IsRankAbove(8))
+	return c:IsFaceup() and c:IsSetCard(0x5DC) and (c:IsLevelAbove(8) or c:IsRankAbove(8))
 end
 function c859.hspcon(e,c)
 	if c==nil then return true end
