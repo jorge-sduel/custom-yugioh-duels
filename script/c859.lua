@@ -77,7 +77,7 @@ function c859.initial_effect(c)
 	c:RegisterEffect(e8)
 end
 function c859.cvfilter(c)
-	return c:IsSetCard(0x5DC) and c:IsType(TYPE_MONSTER) and c:IsDiscardable()
+	return c:IsSetCard(0x5DC) and c:IsType(TYPE_MONSTER) and c:IsAbletoGrave()
 end
 function c859.ovfilter(c)
 	return c:IsFaceup() and (c:IsSetCard(0x5AA) or c:IsSetCard(0x5DC)) and (c:GetLevel()>=8 or c:GetRank()>=8)
