@@ -1,7 +1,7 @@
 --Binary Star Twin Gunner
 function c883.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.XyzFilterFunction(c,8),2)
+	Xyz.AddProcedure(c,nil,8,2)
 	c:EnableReviveLimit()
 	--Overlay Charge
 	local e1=Effect.CreateEffect(c)
