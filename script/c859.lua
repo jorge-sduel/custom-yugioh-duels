@@ -4,7 +4,7 @@ function c859.initial_effect(c)
 	Xyz.AddProcedure(c,nil,10,3)
 	c:EnableReviveLimit()
 --over
-local over=Effect.CreateEffect(c)
+	local over=Effect.CreateEffect(c)
 	over:SetType(EFFECT_TYPE_FIELD)
 	over:SetCode(EFFECT_SPSUMMON_PROC)
 	over:SetProperty(EFFECT_FLAG_UNCOPYABLE)
