@@ -1,7 +1,7 @@
 --Star-vader, "Omega" Glendios
 function c859.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,nil,10,3,c859.ovfilter,aux.Stringid(859,0),3,c859.xyzop)
+	Xyz.AddProcedure(c,nil,10,3)
 	c:EnableReviveLimit()
 	--cannot be destroyed
 	local e1=Effect.CreateEffect(c)
