@@ -1,7 +1,7 @@
 --Star-vader, Magnet Hollow
 function c884.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.XyzFilterFunction(c,6),2)
+	Xyz.AddProcedure(c,nil,6,2)
 	c:EnableReviveLimit()
 	--Add to hand
 	local e1=Effect.CreateEffect(c)
