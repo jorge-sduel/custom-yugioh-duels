@@ -3,7 +3,16 @@ function c859.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,10,3)
 	c:EnableReviveLimit()
-	--cannot be destroyed
+--over
+local over=Effect.CreateEffect(c)
+	over:SetType(EFFECT_TYPE_FIELD)
+	over:SetCode(EFFECT_SPSUMMON_PROC)
+	over:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	over:SetRange(LOCATION_EXTRA)
+	over:SetCost(c859.xyzop)
+	over:SetCondition(c86123277.hspcon)
+	over:SetOperation(c86123277.hspop)
+	c:RegisterEffect(over)	--cannot be destroyed
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -146,4 +155,19 @@ end
 function c859.wop(e,tp,eg,ep,ev,re,r,rp)
 	local WIN_REASON_OMEGA_GLENDIOS = 0x92
 	Duel.Win(tp,0x92)
+end
+function c859.hspfilter(c)
+	return c:IsSetCard(0x5DC) and (c:IsLevelAbove(8) or c:IsRankAbove(8))
+end
+function c859.hspcon(e,c)
+	if c==nil then return true end
+	return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)+Duel.GetLocationCountFromEx(e:GetHandlerPlayer(),e:GetHandlerPlayer(),nil,c)>0
+        and Duel.IsExistingMatchingCard(c859.hspfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+end
+function c859.hspop(e,tp,eg,ep,ev,re,r,rp)
+    local c=e:GetHandler()
+	local g=Duel.SelectMatchingCard(tp,c859.hspfilter,tp,LOCATION_MZONE,0,1,1,nil)
+    Duel.Overlay(c,g)
+    c:SetMaterial(g)
+
 end
