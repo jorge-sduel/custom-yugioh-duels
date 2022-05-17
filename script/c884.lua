@@ -25,35 +25,32 @@ function c884.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function c884.thfilter(c)
-	return c:IsSetCard(0x5AA)
+	return c:IsSetCard(0x5AA) and c:IsAbleToHand()
+end
+function c884.thfilter2(c)
+	return c:IsSetCard(0x5AA) and c:IsFaceup() and c:IsAbleToHand()
 end
 function c884.thtg1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chkc then return chkc:GetControler()==tp and chkc:GetLocation()==LOCATION_DECK and c884.thfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(c884.thfilter,tp,LOCATION_DECK,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(c884.thfilter,tp,LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function c884.thop1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,c884.thfilter,tp,LOCATION_DECK,0,1,1,nil)
-	local tc=g:GetFirst()
-	if tc:IsRelateToEffect(e) then
-		Duel.SendtoHand(tc,nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,tc)
+	local g=Duel.SelectMatchingCard(tp,c884.thfilter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then
+		Duel.SendtoHand(g,nil,REASON_EFFECT)
+		Duel.ConfirmCards(1-tp,g)
 	end
 end
-function c884.thfilter2(c)
-	return c:IsSetCard(0x5AA) and c:IsFaceup()
-end
 function c884.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chkc then return chkc:GetControler()==tp and 
-	(chkc:GetLocation()==LOCATION_ONFIELD or chkc:GetLocation()==LOCATION_GRAVE) and c884.thfilter2(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(c884.thfilter2,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(c884.thfilter2,tp,LOCATION_ONFIEL+LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-function c884.thop2(e,tp,eg,ep,ev,re,r,rp)
+function c884.thop1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,c884.thfilter2,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,1,1,nil)
-	local tc=g:GetFirst()
-	if tc:IsRelateToEffect(e) then
-		Duel.SendtoHand(tc,nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,tc)
+	local g=Duel.SelectMatchingCard(tp,c884.thfilter2,tp,LOCATION_ONFIEL+LOCATION_GRAVE,0,1,1,nil)
+	if #g>0 then
+		Duel.SendtoHand(g,nil,REASON_EFFECT)
+		Duel.ConfirmCards(1-tp,g)
 	end
 end
