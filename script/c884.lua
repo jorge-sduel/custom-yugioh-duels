@@ -10,7 +10,7 @@ function c884.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetRange(LOCATION_MZONE)
-	--e1:SetCost(c884.cost)
+	e1:SetCost(c884.cost)
 	e1:SetTarget(c884.thtg1)
 	e1:SetOperation(c884.thop1)
 	c:RegisterEffect(e1)
@@ -46,7 +46,7 @@ function c884.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c884.thfilter2,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_ONFIELD+LOCATION_GRAVE)
 end
-function c884.thop1(e,tp,eg,ep,ev,re,r,rp)
+function c884.thop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,c884.thfilter2,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,1,1,nil)
 	if #g>0 then
