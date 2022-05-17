@@ -162,13 +162,13 @@ function c859.hspfilter(c)
 end
 function c859.hspcon(e,c)
 	if c==nil then return true end
-	return Duel.IsExistingMatchingCard(c859.cvfilter,tp,LOCATION_HAND,0,1,nil) and Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)+Duel.GetLocationCountFromEx(e:GetHandlerPlayer(),e:GetHandlerPlayer(),nil,c)>0
+	return Duel.IsExistingMatchingCard(c859.cfilter,tp,LOCATION_HAND,0,1,nil) and Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)+Duel.GetLocationCountFromEx(e:GetHandlerPlayer(),e:GetHandlerPlayer(),nil,c)>0
         and Duel.IsExistingMatchingCard(c859.hspfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function c859.hspop(e,tp,eg,ep,ev,re,r,rp)
     local c=e:GetHandler()
 	local g=Duel.SelectMatchingCard(tp,c859.hspfilter,tp,LOCATION_MZONE,0,1,1,nil)
-	local g2=Duel.SelectMatchingCard(tp,c859.cvfilter,tp,LOCATION_HAND,0,1,1,nil)
+	local g2=Duel.SelectMatchingCard(tp,c859.cfilter,tp,LOCATION_HAND,0,1,1,nil)
 	Duel.SendtoGrave(g2,REASON_COST)
     Duel.Overlay(c,g)
     c:SetMaterial(g)
