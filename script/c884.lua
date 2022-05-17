@@ -21,10 +21,8 @@ function c884.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c884.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST)
-	and e:GetHandler():GetFlagEffect(884)==0 end
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
-	e:GetHandler():RegisterFlagEffect(884,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,1)
 end
 function c884.thfilter(c)
 	return c:IsSetCard(0x5AA)
