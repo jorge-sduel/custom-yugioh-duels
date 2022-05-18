@@ -24,7 +24,7 @@ function c101600115.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c101600115.filter(c)
-	return c:IsReleasable() and c:IsSetCard(0xcd01)
+	return c:IsReleasable()
 end
 function c101600115.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroup(tp,c101600115.filter,1,e:GetHandler())
