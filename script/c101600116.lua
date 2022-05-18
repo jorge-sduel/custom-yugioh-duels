@@ -41,14 +41,13 @@ function c101600116.initial_effect(c)
 	c:RegisterEffect(e7)
 	--copy
 	local e8=Effect.CreateEffect(c)
-	e8:SetDescription(aux.Stringid(101600116,0))
-	e8:SetCategory(CATEGORY_REMOVE)
+	e8:SetDescription(aux.Stringid(10032958,0))
 	e8:SetType(EFFECT_TYPE_QUICK_O)
 	e8:SetCode(EVENT_FREE_CHAIN)
-	e8:SetCountLimit(1)
 	e8:SetRange(LOCATION_MZONE)
-	e8:SetTarget(c101600116.target)
-	e8:SetOperation(c101600116.operation)
+	e8:SetCost(c101600116.effcost)
+	e8:SetTarget(c101600116.efftg)
+	e8:SetOperation(c101600116.effop)
 	c:RegisterEffect(e8)
 	--Special Summon
 	local e9=Effect.CreateEffect(c)
@@ -224,30 +223,36 @@ function c101600116.disop(e,tp,eg,ep,ev,re,r,rp)
 		tc=g:GetNext()
 	end
 end
-function c101600116.cpfilter(c)
-	return c:IsRace(RACE_DRAGON) and c:IsType(TYPE_SYNCHRO) and c:IsAbleToGraveAsCost() and (c:GetLevel()==7 or c:GetLevel()==8)
+function c101600116.filter(c)
+	return c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_DRAGON) or c:IsSetCard(0x525)
 end
-function c101600116.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and c101600116.cpfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(c101600116.cpfilter,tp,LOCATION_EXTRA,0,1,nil) end
+function c101600116.cfilter(c)
+	return c101600116.filter(c) and c:IsAbleToGraveAsCost()
+end
+function c101600116.effcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	Duel.SelectTarget(tp,c101600116.cpfilter,tp,LOCATION_EXTRA,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c101600116.cfilter,tp,LOCATION_EXTRA,0,1,1,nil)
+	Duel.SendtoGrave(g,REASON_COST)
+	e:SetLabelObject(g:GetFirst())
 end
-function c101600116.operation(e,tp,eg,ep,ev,re,r,rp)
+function c101600116.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	local tc=e:GetLabelObject()
+	Duel.SetTargetCard(tc)
+end
+function c101600116.effop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if tc and c:IsRelateToEffect(e) and c:IsFaceup() and tc:IsRelateToEffect(e) then
-		local code=tc:GetOriginalCodeRule()
-	Duel.SendtoGrave(tc,REASON_COST)
-		c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,2)
+	if c:IsRelateToEffect(e) and tc then
+		c:CopyEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,1)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,2)
 		e1:SetCode(EFFECT_CHANGE_CODE)
-		e1:SetValue(code)
+		e1:SetValue(tc:GetOriginalCode())
 		c:RegisterEffect(e1)
-		c:RegisterFlagEffect(101600116,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,2)
 	end
 end
 function c101600116.specost(e,tp,eg,ep,ev,re,r,rp,chk)
