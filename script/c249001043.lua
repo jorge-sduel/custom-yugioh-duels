@@ -1,7 +1,7 @@
 --Number S90: Neo Galaxy-Eyes Photon Lord
 function c249001043.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_LIGHT),8,3,c249001043.ovfilter,aux.Stringid(51543904,0),3,c249001043.xyzop)
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),8,3,c249001043.ovfilter,aux.Stringid(51543904,0),3,c249001043.xyzop)
 	c:EnableReviveLimit()
 	--negate
 	local e1=Effect.CreateEffect(c)
