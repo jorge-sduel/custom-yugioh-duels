@@ -1,6 +1,6 @@
 --E-C Recharge
 function c160008617.initial_effect(c)
-c:EnableCounterPermit(0x88)
+--c:EnableCounterPermit(0x88)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_COUNTER)
@@ -13,18 +13,18 @@ c:EnableCounterPermit(0x88)
 	c:RegisterEffect(e1)
 end
 function c160008617.filter(c)
-	return c:IsFaceup() and c:IsType(TYPE_EVOLUTE) 
+	return c:IsFaceup() and c.IsEvolute
 end
 function c160008617.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and c160008617.filter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(c160008617.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(160008617,1))
 	Duel.SelectTarget(tp,c160008617.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x88)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x111f)
 end
 
 function c160008617.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:AddEC(1)~=0 then
+	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:AddCounter(1,0x111f)~=0 then
 		end
 	end
