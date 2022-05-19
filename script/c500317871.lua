@@ -11,7 +11,7 @@ function c500317871.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c500317871.filter(c,e,tp)
-	return c:IsType(TYPE_EVOLUTE)and c:IsSpecialSummonable(SUMMON_TYPE_SPECIAL+388)
+	return c.IsEvolute and c:IsSpecialSummonable()
 end
 function c500317871.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
  if chk==0 then return Duel.IsExistingMatchingCard(c500317871.filter,tp,LOCATION_EXTRA,0,1,nil) end
@@ -22,6 +22,6 @@ function c500317871.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,c500317871.filter,tp,LOCATION_EXTRA,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
-	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_SPECIAL+388)
+	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_EVOLUTE)
 	end
 end
