@@ -25,6 +25,6 @@ end
 
 function c160008617.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:AddCounter(1,0x111f)~=0 then
+	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:AddCounter(0x111f,1)~=0 then
 		end
 	end
