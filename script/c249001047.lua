@@ -1,7 +1,7 @@
 --Heroic Champion Masamune
 function c249001047.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_WARRIOR),4,3)
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WARRIOR),4,3)
 	c:EnableReviveLimit()
 	c:SetSPSummonOnce(249001047)
 	--special summon
