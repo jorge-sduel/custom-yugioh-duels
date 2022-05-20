@@ -2,7 +2,7 @@
 --Script by XGlitchy30
 function c53313931.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,nil,4,2)
+	Xyz.AddProcedure(c,nil,4,2)
 	c:EnableReviveLimit()
 	--shuffle & draw (+ search)
 	local e1=Effect.CreateEffect(c)
