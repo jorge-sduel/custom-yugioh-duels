@@ -36,21 +36,21 @@ function c53313902.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c53313902.rfilter(c,tp)
-	return (c:IsSetCard(0xcf6) or c:IsLocation(LOCATION_SZONE)) and Duel.CheckReleaseGroup(tp,Card.IsAttribute,1,c,ATTRIBUTE_LIGHT)
+	return (c:IsSetCard(0xcf6) or c:IsLocation(LOCATION_PZONE)) and Duel.CheckReleaseGroup(tp,Card.IsAttribute,1,c,ATTRIBUTE_LIGHT)
 end
 function c53313902.pzfilter(c)
-	return aux.PaCheckFilter(c) and c:IsReleasable()
+	return c.IsEquilibrium and c:IsReleasable()
 end
 function c53313902.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local g=Duel.GetReleaseGroup(tp):Filter(c53313902.rfilter,nil,tp)+Duel.GetMatchingGroup(c53313902.pzfilter,tp,LOCATION_SZONE,0,nil)
+	local g=Duel.GetReleaseGroup(tp):Filter(c53313902.rfilter,nil,tp)+Duel.GetMatchingGroup(c53313902.pzfilter,tp,LOCATION_PZONE,0,nil)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2
 		and g:GetCount()>0
 end
 function c53313902.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g1=Duel.GetReleaseGroup(tp):Filter(c53313902.rfilter,nil,tp)+Duel.GetMatchingGroup(c53313902.pzfilter,tp,LOCATION_SZONE,0,nil):Select(tp,1,1,nil)
+	local g1=Duel.GetReleaseGroup(tp):Filter(c53313902.rfilter,nil,tp)+Duel.GetMatchingGroup(c53313902.pzfilter,tp,LOCATION_PZONE,0,nil):Select(tp,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 	local g2=Duel.SelectReleaseGroup(tp,Card.IsAttribute,1,1,g1:GetFirst(),ATTRIBUTE_LIGHT)
 	g1:Merge(g2)
