@@ -57,7 +57,7 @@ function cid.cfilter(c,tp)
 		and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c:GetOriginalCode())
 end
 function cid.filter(c,code)
-	return c:IsCode(code) and c.IsEquilibrium
+	return c.IsType(TYPE_PENDULUM)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)
