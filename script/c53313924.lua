@@ -1,8 +1,8 @@
 --Mysterious Tornado Dragon
 function c53313924.initial_effect(c)
-	--fusion material: 1 "Mysterious" Dragon Monster + 1 WIND Winged Beast Monster.
+	--fusion material: 1 Dragon Monster + 1 WIND Winged Beast Monster.
 	c:EnableReviveLimit()
-	aux.AddFusionProcFun2(c,c53313924.matfilter1,c53313924.matfilter2,true)
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WINGEDBEAST),aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON))
 	--If this card is Fusion Summoned: Return all Spell/Traps on the field to the hand.
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
