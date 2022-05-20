@@ -39,7 +39,7 @@ function cid.lcheck(g,lc)
 return g:IsExists(Card.IsType,1,nil,TYPE_PENDULUM) or c.IsEquilibrium
 end
 function cid.tefilter(c)
-	return c.IsEquilibrium and c:IsSetCard(0x9b5) and not c:IsForbidden()
+	return c:IsSetCard(0x9b5) and not c:IsForbidden()
 end
 function cid.tetg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.tefilter,tp,LOCATION_DECK,0,1,nil) end
