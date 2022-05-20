@@ -33,10 +33,10 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function cid.matfilter(c)
-	return c:IsLinkType(TYPE_EFFECT) and not c:IsLinkType(TYPE_LINK)
+	return c:IsType(TYPE_EFFECT) and not c:IsType(TYPE_LINK)
 end
 function cid.lcheck(g,lc)
-return g:IsExists(Card.IsLinkType,1,nil,TYPE_PENDULUM) or c.IsEquilibrium
+return g:IsExists(Card.IsType,1,nil,TYPE_PENDULUM) or c.IsEquilibrium
 end
 function cid.tefilter(c)
 	return c.IsEquilibrium and c:IsSetCard(0x9b5) and not c:IsForbidden()
