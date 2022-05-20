@@ -2,7 +2,7 @@
 local cid,id=GetID()
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddLinkProcedure(c,cid.matfilter,2,2,cid.lcheck)
+	Xyz.AddProcedure(c,cid.matfilter,2,2,cid.lcheck)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -36,10 +36,10 @@ function cid.matfilter(c)
 	return c:IsLinkType(TYPE_EFFECT) and not c:IsLinkType(TYPE_LINK)
 end
 function cid.lcheck(g,lc)
-return g:IsExists(Card.IsLinkType,1,nil,TYPE_PANDEMONIUM)
+return g:IsExists(Card.IsLinkType,1,nil,TYPE_PENDULUM) or c.IsEquilibrium
 end
 function cid.tefilter(c)
-	return c:IsType(TYPE_PANDEMONIUM) and c:IsSetCard(0x9b5) and not c:IsForbidden()
+	return c.IsEquilibrium and c:IsSetCard(0x9b5) and not c:IsForbidden()
 end
 function cid.tetg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.tefilter,tp,LOCATION_DECK,0,1,nil) end
@@ -49,7 +49,7 @@ function cid.teop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3))
 	local g=Duel.SelectMatchingCard(tp,cid.tefilter,tp,LOCATION_DECK,0,1,1,nil)
 	if g:GetCount()>0 then
-		aux.PandEnableFUInED(g,REASON_EFFECT)(e,tp,eg,ep,ev,re,r,rp)
+	
 	end
 end
 function cid.cfilter(c,tp)
@@ -80,7 +80,6 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,aux.PandSSetFilter(cid.filter),tp,LOCATION_DECK,0,1,1,nil,e:GetLabel())
 	if #g>0 then
-		aux.PandSSet(g,REASON_EFFECT,aux.GetOriginalPandemoniumType(g:GetFirst()))(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
