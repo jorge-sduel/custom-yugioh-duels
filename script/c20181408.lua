@@ -53,7 +53,7 @@ function cid.teop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.cfilter(c,tp)
-	return c:IsAbleToGraveAsCost() and (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c.IsEquilibrium
+	return c:IsAbleToGraveAsCost() and (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c.IsEquilibrium)
 		and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c:GetOriginalCode())
 end
 function cid.filter(c,code)
