@@ -2,7 +2,7 @@
 function c53313925.initial_effect(c)
 	c:EnableReviveLimit()
 	--Materials: 2+ Level 8 monsters
-	aux.AddXyzProcedure(c,nil,8,2,c53313925.alternatesum,aux.Stringid(53313925,0),99)
+	Xyz.AddProcedure(c,nil,8,2,c53313925.alternatesum,aux.Stringid(53313925,0),99)
 	--If this card is Xyz Summoned using 2+ "Mysterious" monsters with different names: You can destroy all monsters your opponent controls.
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
