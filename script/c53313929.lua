@@ -27,7 +27,7 @@ function c53313929.cfilter(c)
 end
 function c53313929.filter(c,e,tp)
 	return c:IsLevelBelow(6) and c:IsSetCard(0xcf6)
-		and c:IsType(TYPE_PANDEMONIUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and c.IsEquilibrium and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c53313929.thfilter(c)
 	return c:IsSetCard(0xcf6) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
