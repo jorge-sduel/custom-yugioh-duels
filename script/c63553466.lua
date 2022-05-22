@@ -3,7 +3,7 @@
 function c63553466.initial_effect(c)
 	--fusion summon
 	c:EnableReviveLimit()
-	aux.AddFusionProcFunRep(c,c63553466.matfilter,3,false)
+	Fusion.AddProcMixN(c,true,true,c63553466.matfilter,3)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -118,7 +118,7 @@ function c63553466.clear(e,tp,eg,ep,ev,re,r,rp)
 end
 --filters
 function c63553466.matfilter(c)
-	return (c:IsType(TYPE_PENDULUM) or c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM) and c:IsCanBeFusionMaterial()
+	return (c:IsType(TYPE_PENDULUM) or c.IsEquilibrium) and c:IsCanBeFusionMaterial()
 end
 function c63553466.fselect(c,tp,mg,sg)
 	sg:AddCard(c)
