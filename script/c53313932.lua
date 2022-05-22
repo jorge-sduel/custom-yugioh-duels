@@ -2,7 +2,7 @@
 --Script by XGlitchy30
 function c53313932.initial_effect(c)
 	--link summon
-	aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsLinkSetCard,0xcf6),2,2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xcf6),2,2)
 	c:EnableReviveLimit()
 	--add to hand
 	local e1=Effect.CreateEffect(c)
