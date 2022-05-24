@@ -6,7 +6,7 @@ function cid.initial_effect(c)
 c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
 	aux.AddSpacetSummonProcedure(c,cid.lcheck,LOCATION_MZONE,cid.excon)
-	Bigbang.AddProcedure(c,nil,2,99,cid.excon)
+	Bigbang.AddProcedure(c,nil,2,99,cid.excon2)
 	--local e1=Effect.CreateEffect(c)
 	--e1:SetType(EFFECT_TYPE_SINGLE)
 	--e1:SetCode(52401238)
@@ -17,4 +17,7 @@ function cid.lcheck(c)
 end
 function cid.excon(e)
 	return Duel.GetLP(e:GetHandlerPlayer())<=6000
+end
+function cid.excon2(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttackBelow,1,nil,Duel.GetLP(e:GetHandlerPlayer())+e:GetAttack())
 end
