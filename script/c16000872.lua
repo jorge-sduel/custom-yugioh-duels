@@ -1,9 +1,10 @@
 --Venom Blazing Viper
 function c16000872.initial_effect(c)
-		aux.AddOrigEvoluteType(c)
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,3,c16000872.filter2,c16000872.filter2,1,99)
-	--to hand
+	Evolute.AddProcedure(c,nil,2,99,c16000872.rcheck)
+   --destroy
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(16000872,0))
@@ -26,11 +27,9 @@ function c16000872.initial_effect(c)
 	e6:SetTarget(c16000872.distg)
 	c:RegisterEffect(e6)
 end
-
-
-
-function c16000872.filter2(c,ec,tp)
-	return c:IsRace(RACE_REPTILE) or c:IsAttribute(ATTRIBUTE_FIRE)
+function c16000872.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE)
+		and g:IsExists(Card.IsRace,1,nil,RACE_REPTILE)
 end
 function c16000872.cfilter(c,tp,rp)
 	return  c:IsRace(RACE_REPTILE) 
@@ -41,8 +40,8 @@ function c16000872.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function c16000872.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	   if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,1,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,1,REASON_COST)
+	   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,1,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,1,REASON_COST)
 end
 function c16000872.spop(e,tp,eg,ep,ev,re,r,rp)
 	 if not e:GetHandler():IsRelateToEffect(e) then return end
