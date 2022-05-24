@@ -18,6 +18,6 @@ end
 function cid.excon(e)
 	return Duel.GetLP(e:GetHandlerPlayer())<=6000
 end
-function cid.excon2(g,lc,sumtype,tp)
+function cid.excon2(e,g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttackBelow,1,nil,Duel.GetLP(e:GetHandlerPlayer())+e:GetAttack())
 end
