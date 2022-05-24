@@ -19,5 +19,5 @@ function cid.excon(e)
 	return Duel.GetLP(e:GetHandlerPlayer())<=6000
 end
 function cid.excon2(e,c,tp)
-	return c:IsAttackBelow(Duel.GetLP(tp))
+	return c:IsAttackAbove(Duel.GetLP(tp)-e:GetAttack())
 end
