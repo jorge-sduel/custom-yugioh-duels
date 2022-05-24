@@ -35,7 +35,7 @@ function c16000871.rcheck(g,lc,sumtype,tp)
 		and g:IsExists(Card.IsRace,1,nil,RACE_FISH)
 end
 function c16000871.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-		 if chk==0 then return e:GetHandler():IsCanRemoveCountet(tp,0x111f,4,REASON_COST) end
+		 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function c16000871.filter(c)
@@ -56,7 +56,7 @@ end
 
 function c16000871.descon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return Duel.GetAttackTarget()==c and c:GetCounter()==0
+	return Duel.GetAttackTarget()==c and c:GetCounter(0x111f)==0
 end
 function c16000871.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetAttacker():IsRelateToBattle() end
