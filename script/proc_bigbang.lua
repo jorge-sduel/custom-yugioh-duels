@@ -286,7 +286,7 @@ function Auxiliary.BigbangSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(52401238,tp) and c:IsAbleToGraveAsCost()
 end
 --Space-Time summon
-function Spacet.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
+function Bigbang2.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	if loc==nil then loc=LOCATION_MZONE end
 	if c.spacet_type==nil then
 		local mt=c:GetMetatable()
