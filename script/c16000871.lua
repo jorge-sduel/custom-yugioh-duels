@@ -1,8 +1,10 @@
 --Alien' Sharks
 function c16000871.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,4,c16000871.filter1,c16000871.filter1,1,99)  
+	Evolute.AddProcedure(c,nil,2,99,c16000871.rcheck)
    --destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(16000871,0))
@@ -28,16 +30,13 @@ function c16000871.initial_effect(c)
 	e2:SetOperation(c16000871.desop)
 	c:RegisterEffect(e2)
 end
-
-
-
-function c16000871.filter1(c,ec,tp)
-	return c:IsRace(RACE_FISH) or c:IsAttribute(ATTRIBUTE_DARK)
+function c16000871.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
+		and g:IsExists(Card.IsRace,1,nil,RACE_FISH)
 end
-
 function c16000871.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-		 if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+		 if chk==0 then return e:GetHandler():IsCanRemoveCountet(tp,0x111f,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function c16000871.filter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
@@ -57,7 +56,7 @@ end
 
 function c16000871.descon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return Duel.GetAttackTarget()==c and c:GetEC()==0
+	return Duel.GetAttackTarget()==c and c:GetCounter()==0
 end
 function c16000871.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetAttacker():IsRelateToBattle() end
