@@ -1,8 +1,10 @@
 --Oak Loupine
 function c16000873.initial_effect(c)
-		aux.AddOrigEvoluteType(c)
+c16000873.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,3,aux.FilterBoolFunction(Card.IsRace,RACE_PLANT),1,99)
+	Evolute.AddProcedure(c,nil,2,99)
 	--to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(16000873,0))
@@ -25,10 +27,6 @@ function c16000873.initial_effect(c)
 	e2:SetValue(c16000873.val)
 	c:RegisterEffect(e2)
 end
-
-
-
-
 function c16000873.filter(c)
 	return c:IsRace(RACE_PLANT) and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
@@ -36,8 +34,8 @@ function c16000873.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
    if chk==0 then return Duel.IsExistingMatchingCard(c16000873.filter,tp,LOCATION_DECK,0,1,nil) end
 end
 function c16000873.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	   if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c16000873.thop(e,tp,eg,ep,ev,re,r,rp)
    Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
