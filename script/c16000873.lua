@@ -12,7 +12,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_NO_TURN_RESET)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCountLimit(1,16000873)
+	e1:SetCountLimit(1)
 	e1:SetCost(c16000873.drcost)
 	e1:SetTarget(c16000873.thtg)
 	e1:SetOperation(c16000873.thop)
