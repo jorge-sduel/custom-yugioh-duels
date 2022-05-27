@@ -103,6 +103,6 @@ function c16000969.scop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetTargetRange(0,LOCATION_MZONE)
 	e1:SetValue(16000970)
-		e1:SetReset(RESET_PHASE+PHASE_END,2)
-	Duel.RegisterEffect(e1)
+	e1:SetReset(RESET_PHASE+PHASE_END,2)
+	c:RegisterEffect(e1,tp)
 end
