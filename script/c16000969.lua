@@ -78,15 +78,16 @@ function c16000969.bantg(e,c)
 	return c:IsCode(e:GetLabel())
 end
 function c16000969.checkop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if c:GetEC()>0 then
-		c:RegisterFlagEffect(16000969,RESET_EVENT+0x17a0000,0,0)
+	if e:GetHandler():GetCounter(0x111f)>=1 then
+		e:SetLabel(1)
+	else
+		e:SetLabel(0)
 	end
 end
 function c16000969.sccon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return (c:IsReason(REASON_BATTLE) or (c:GetReasonPlayer()==1-tp and c:IsReason(REASON_EFFECT+REASON_COST)))
-		and c:IsPreviousPosition(POS_FACEUP) and c:GetFlagEffect(16000969)>0
+		and c:IsPreviousPosition(POS_FACEUP) and e:GetLabelObject():GetLabel()==1
 end
 
 function c16000969.scop(e,tp,eg,ep,ev,re,r,rp)
