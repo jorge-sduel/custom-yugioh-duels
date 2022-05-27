@@ -86,7 +86,7 @@ function c16000969.checkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c16000969.sccon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	 return e:GetHandler():IsPreviousPosition(POS_FACEUP)  and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  e:GetLabelObject():GetLabel()==1
+	 return e:GetHandler():IsPreviousPosition(POS_FACEUP) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  e:GetLabelObject():GetLabel()==1
 end
 --function c16000969.sccon(e,tp,eg,ep,ev,re,r,rp)
 	--local c=e:GetHandler()
