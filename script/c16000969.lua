@@ -28,7 +28,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_LEAVE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL+EFFECT_FLAG_DELAY)
-	e4:SetLabelObject(e0)
+	e3:SetLabelObject(e0)
 	e3:SetCondition(c16000969.sccon)
 	e3:SetOperation(c16000969.scop)
 	c:RegisterEffect(e3)
