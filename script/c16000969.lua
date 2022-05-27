@@ -29,8 +29,8 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetCode(EVENT_LEAVE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetLabelObject(e0)
-	e3:SetCondition(c16000969.sccon)
+	--e3:SetLabelObject(e0)
+	--e3:SetCondition(c16000969.sccon)
 	e3:SetOperation(c16000969.scop)
 	c:RegisterEffect(e3)
 end
