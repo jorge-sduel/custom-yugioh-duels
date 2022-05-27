@@ -95,7 +95,7 @@ function c16000969.sccon(e,tp,eg,ep,ev,re,r,rp)
 	return (c:IsReason(REASON_BATTLE) or (c:GetReasonPlayer()==1-tp and c:IsReason(REASON_EFFECT+REASON_COST))) and e:GetHandler():IsPreviousPosition(POS_FACEUP)  and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  e:GetLabelObject():GetLabel()==1
 end
 function c16000969.scop(e,tp,eg,ep,ev,re,r,rp)
-Duel.Draw(tp,2)
+--Duel.Draw(tp,2)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	--e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
