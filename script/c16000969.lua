@@ -96,6 +96,7 @@ function c16000969.sccon(e,tp,eg,ep,ev,re,r,rp)
 end
 function c16000969.scop(e,tp,eg,ep,ev,re,r,rp)
 --Duel.Draw(tp,2)
+	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	--e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
