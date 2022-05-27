@@ -95,13 +95,15 @@ function c16000969.sccon(e,tp,eg,ep,ev,re,r,rp)
 	return (c:IsReason(REASON_BATTLE) or (c:GetReasonPlayer()==1-tp and c:IsReason(REASON_EFFECT+REASON_COST))) and e:GetHandler():IsPreviousPosition(POS_FACEUP)  and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  e:GetLabelObject():GetLabel()==1
 end
 function c16000969.scop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
-	--e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e1:SetCode(EFFECT_ADD_CODE)
-	e1:SetTargetRange(0,LOCATION_MZONE)
-	e1:SetValue(16000970)
-	e1:SetReset(RESET_PHASE+PHASE_END,2)
-	c:RegisterEffect(e1,tp)
+local c=e:GetHandler()
+	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(s.filter),tp,0,LOCATION_MZONE,nil)
+	local tc=g:GetFirst()
+	for tc in aux.Next(g) do
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_CHANGE_CODE)
+		e1:SetValue(16000970)
+		e1:SetReset(RESET_PHASE+PHASE_END,2)
+		tc:RegisterEffect(e1)
+	end
 end
