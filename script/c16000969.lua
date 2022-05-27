@@ -96,7 +96,7 @@ end
 --end
 function c16000969.scop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
- local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,0x7f,nil)
+ local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_ONFIELD,nil)
 local tc=g:GetFirst()
 	while tc do
 		local e3=Effect.CreateEffect(e:GetHandler())
