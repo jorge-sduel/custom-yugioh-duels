@@ -1,8 +1,10 @@
 --Cybersian Judgeman
 function c16000969.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
+c16000969.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,8,c16000969.filter1,c16000969.filter2,2,99)  
+	Evolute.AddProcedure(c,c16000969.filter1,2,99,c16000969.rcheck)  
   --Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(16000969,0))
@@ -33,8 +35,9 @@ end
 function c16000969.filter1(c,ec,tp)
 	return c:IsRace(RACE_SPELLCASTER) or c:IsAttribute(ATTRIBUTE_EARTH)
 end
-function c16000969.filter2(c,ec,tp)
-	return  c:IsRace(RACE_SPELLCASTER) or c:IsAttribute(ATTRIBUTE_EARTH)
+function c16000969.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH)
+		and g:IsExists(Card.IsRace,1,nil,RACE_SPELLCASTER)
 end
 function c16000969.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
