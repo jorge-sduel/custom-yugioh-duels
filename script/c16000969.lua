@@ -95,24 +95,7 @@ end
 --e:GetHandler():IsPreviousPosition(POS_FACEUP)  and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  e:GetLabelObject():GetLabel()==1
 --end
 function c16000969.scop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
- local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_ONFIELD,nil)
-local tc=g:GetFirst()
-	while tc do
-		local e3=Effect.CreateEffect(e:GetHandler())
-		e3:SetType(EFFECT_TYPE_SINGLE)
-		e3:SetCode(EFFECT_CHANGE_CODE)
-		e3:SetValue(16000970)
-		e3:SetReset(RESET_PHASE+PHASE_END,2)
-		tc:RegisterEffect(e3)
-		   local e4=Effect.CreateEffect(e:GetHandler())
-		e4:SetType(EFFECT_TYPE_SINGLE)
-		e4:SetCode(EFFECT_REMOVE_SETCODE)
-		e4:SetReset(RESET_PHASE+PHASE_END,2)
-		tc:RegisterEffect(e4)
-		tc=g:GetNext()
-
-		local e1=Effect.CreateEffect(c)
+	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	--e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetCode(EFFECT_CHANGE_CODE)
@@ -127,5 +110,4 @@ local tc=g:GetFirst()
 	e2:SetTargetRange(0,LOCATION_MZONE)
 		e2:SetReset(RESET_PHASE+PHASE_END,2)
 	Duel.RegisterEffect(e2,tp)	
-	end
 end
