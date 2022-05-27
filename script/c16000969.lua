@@ -21,7 +21,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e0:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e0:SetCode(EVENT_LEAVE_FIELD_P)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e0:SetOperation(c16000969.sccon)
+	e0:SetOperation(c16000969.checkop)
 	c:RegisterEffect(e0)
  local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(16000969,2))
@@ -86,10 +86,10 @@ function c16000969.checkop(e,tp,eg,ep,ev,re,r,rp)
 		e:SetLabel(0)
 	end
 end
---function c16000969.sccon(e,tp,eg,ep,ev,re,r,rp)
-	--local c=e:GetHandler()
-	 --return e:GetHandler():IsPreviousPosition(POS_FACEUP) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  e:GetLabelObject():GetLabel()==1
---end
+function c16000969.sccon2(e,tp,eg,ep,ev,re,r,rp)
+ local c=e:GetHandler()
+	 return e:GetHandler():IsPreviousPosition(POS_FACEUP) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and  e:GetLabelObject():GetLabel()==1
+end
 function c16000969.filter(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
 end
