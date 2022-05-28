@@ -1,8 +1,10 @@
 --Dahija, Dahlia Archer of Rose VINE
 function c16000987.initial_effect(c)
-		 aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,5,c16000987.filter1,c16000987.filter2)
-	c:EnableReviveLimit() 
+c16000987.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99) 
  --immune
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -41,15 +43,15 @@ function c16000987.filter2(c,ec,tp)
 	return c:IsRace(RACE_PLANT) or c:IsAttribute(ATTRIBUTE_FIRE) 
 end
 function c16000987.immcon(e)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+388) and e:GetHandler():IsLinkState()
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE) and e:GetHandler():IsLinkState()
 end
 function c16000987.condition(e,tp,eg,ep,ev,re,r,rp)
 		return e:GetHandler():IsLinkState()
 end
 function c16000987.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,2,REASON_COST) end
-	 e:GetHandler():RemoveEC(tp,2,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
+	 e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 	--local e1=Effect.CreateEffect(c)
   --  e1:SetType(EFFECT_TYPE_FIELD)
    -- e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
