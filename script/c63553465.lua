@@ -2,7 +2,7 @@
 --Script by XGlitchy30
 function c63553465.initial_effect(c)
 	--link summon
-	aux.AddLinkProcedure(c,c63553465.matfilter,2,2)
+	Link.AddProcedure(c,c63553465.matfilter,2,2)
 	c:EnableReviveLimit()
 	--set/special summon
 	local e1=Effect.CreateEffect(c)
@@ -33,25 +33,24 @@ c63553465.check_same_level=0
 c63553465.check_other_race=0
 --filters
 function c63553465.matfilter(c)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM
+	return c.IsEquilibrium
 end
 function c63553465.spcostfilter(c,tp,e)
-	return c:IsFaceup() and c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM
+	return c:IsFaceup() and  c.IsEquilibrium
 		and Duel.IsExistingMatchingCard(c63553465.spfilter,tp,LOCATION_DECK,0,1,nil,c:GetLevel(),c:GetAttribute(),e,tp)
 end
 function c63553465.spfilter(c,lv,attr,e,tp)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and c:GetLevel()==lv and not c:IsRace(attr)
+	return  c.IsEquilibrium and c:GetLevel()==lv and not c:IsRace(attr)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c63553465.thcfilter(c,lg)
 	return lg:IsContains(c)
 end
 function c63553465.fdfilter(c,e,tp)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM
-		and (c:IsCanBeSpecialSummoned(e,0,tp,false,false) or c:GetActivateEffect():IsActivatable(tp))
+	return  c.IsEquilibrium and (c:IsCanBeSpecialSummoned(e,0,tp,false,false) or c:GetActivateEffect():IsActivatable(tp))
 end
 function c63553465.excfilter(c)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and c:IsFaceup()
+	return  c.IsEquilibrium and c:IsFaceup()
 end
 --set/special summon
 function c63553465.spcon(e,tp,eg,ep,ev,re,r,rp)
@@ -109,11 +108,11 @@ function c63553465.fdop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 		else
 			tc:SetCardData(CARDDATA_TYPE,TYPE_TRAP+TYPE_CONTINUOUS)
-			Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-			if not tc:IsLocation(LOCATION_SZONE) then
+			Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+			if not tc:IsLocation(LOCATION_PZONE) then
 				local edcheck=0
 				if tc:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
-				Card.SetCardData(tc,CARDDATA_TYPE,TYPE_MONSTER+TYPE_EFFECT+edcheck+aux.GetOriginalPandemoniumType(tc))
+				Card.SetCardData(tc,CARDDATA_TYPE,TYPE_MONSTER+TYPE_EFFECT+edcheck)
 			else
 				tc:RegisterFlagEffect(726,RESET_EVENT+0x1fe0000,EFFECT_FLAG_CANNOT_DISABLE,1)
 			end
