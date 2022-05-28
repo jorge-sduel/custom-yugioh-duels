@@ -1,5 +1,5 @@
 --Pandemoniumgraph of Armageddon
-local id,cid=GetID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--You can only control 1 face-up "Pandemoniumgraph of Armageddon".
 	c:SetUniqueOnField(1,0,id)
