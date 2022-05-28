@@ -1,12 +1,5 @@
 --Pandemoniumgraph of Armageddon
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local id,cid=GetID()
 function cid.initial_effect(c)
 	--You can only control 1 face-up "Pandemoniumgraph of Armageddon".
 	c:SetUniqueOnField(1,0,id)
@@ -20,10 +13,10 @@ function cid.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
-	e2:SetRange(LOCATION_SZONE)
+	e2:SetRange(LOCATION_PZONE)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(function(e,c) return c:IsType(TYPE_PANDEMONIUM) end)
+	e2:SetTarget(function(e,c) return c.IsEquilibrium end)
 	e2:SetValue(cid.evalue)
 	c:RegisterEffect(e2)
 	--Once per turn, you can target 1 card in your Pandemonium Zone and 1 monster your opponent controls; destroy them. You must control a face-up Pandemonium card in your Pandemonium zone to activate this effect.
@@ -36,7 +29,6 @@ function cid.initial_effect(c)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetHintTiming(0,0x1e0)
 	e3:SetCountLimit(1)
-	e3:SetCondition(aux.PandActCon)
 	e3:SetTarget(cid.destg)
 	e3:SetOperation(cid.desop)
 	c:RegisterEffect(e3)
