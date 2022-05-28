@@ -30,7 +30,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1)
-	e3:SetCondition(c16000987.condition)
+	--e3:SetCondition(c16000987.condition)
 	e3:SetCost(c16000987.cost)
 	e3:SetTarget(c16000987.target)
 	e3:SetOperation(c16000987.operation)
@@ -43,7 +43,7 @@ function c16000987.filter2(c,ec,tp)
 	return c:IsRace(RACE_PLANT) or c:IsAttribute(ATTRIBUTE_FIRE) 
 end
 function c16000987.immcon(e)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE) and e:GetHandler():IsLinkState()
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
 function c16000987.condition(e,tp,eg,ep,ev,re,r,rp)
 		return e:GetHandler():IsLinkState()
