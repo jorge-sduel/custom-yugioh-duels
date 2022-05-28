@@ -3,7 +3,7 @@
 function c63553468.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
-	aux.AddSynchroMixProcedure(c,c63553468.matfilter1,nil,nil,aux.NonTuner(nil),1,99)
+	Synchro.AddMixProcedure(c,c63553468.matfilter1,1,Synchro.NonTuner(nil),1,99)
 	--no tuner check
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -29,8 +29,8 @@ function c63553468.initial_effect(c)
 end
 --filters
 function c63553468.matfilter1(c,syncard)
-	return (c:IsType(TYPE_TUNER) and (c:IsType(TYPE_PENDULUM) or c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM))
-		or ((c:IsType(TYPE_PENDULUM) or c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM) and c:IsNotTuner(syncard))
+	return (c:IsType(TYPE_TUNER) and (c:IsType(TYPE_PENDULUM) or c.IsEquilibrium))
+		or (c:IsType(TYPE_PENDULUM) or c.IsEquilibrium)
 end
 function c63553468.thfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
