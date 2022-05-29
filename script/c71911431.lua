@@ -68,8 +68,8 @@ function cid.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveEC(tp,3,REASON_COST) end
-	c:RemoveEC(tp,3,REASON_COST)
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	c:RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function cid.filter(c,e,tp)
 	return c:IsFaceup() and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
