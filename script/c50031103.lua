@@ -1,7 +1,10 @@
 --Romana, Princess of Rose VINE
 function c50031103.initial_effect(c)
-	aux.AddOrigEvoluteType(c)
-   aux.AddEvoluteProc(c,nil,4,c50031103.filter1,c50031103.filter2)
+c50031103.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99,c50031103.rcheck)
 	c:EnableReviveLimit()
 local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(50031103,0))
@@ -24,6 +27,10 @@ local e1=Effect.CreateEffect(c)
 	--e2:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 	e2:SetOperation(c50031103.spop)
 	c:RegisterEffect(e2)
+end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE)
+		and g:IsExists(Card.IsRace,1,nil,RACE_PLANT)
 end
 function c50031103.filter1(c,ec,tp)
 	return c:IsType(TYPE_NORMAL)
