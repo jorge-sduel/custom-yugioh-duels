@@ -1,9 +1,11 @@
 --created by Chahine, coded by Lyris
 local cid,id=GetID()
 function cid.initial_effect(c)
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,8,aux.OR(aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WATER),aux.FilterBoolFunction(Card.IsRace,RACE_FAIRY)),3)
+	Evolute.AddProcedure(c,cid.evfilter,3,99,cid.rcheck)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -34,8 +36,15 @@ function cid.initial_effect(c)
 	e3:SetOperation(cid.spop)
 	c:RegisterEffect(e3)
 end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER)
+		and g:IsExists(Card.IsRace,1,nil,RACE_ZOMBIE) 
+end
+function cid.evfilter(c)
+	return c:IsAttribute(ATTRIBUTE_WATER) or c:IsRace(RACE_FAIRY) 
+end
 function cid.cfilter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsRace(RACE_FAIRY) and (c:IsFaceup() and c:IsType(TYPE_PENDULUM+TYPE_PANDEMONIUM) or not c:IsLocation(LOCATION_EXTRA)) and c:IsAbleToRemove()
+	return c:IsType(TYPE_MONSTER) and c:IsRace(RACE_FAIRY) and (c:IsFaceup() and (c:IsType(TYPE_PENDULUM) or c.IsEquilibrium) or not c:IsLocation(LOCATION_EXTRA)) and c:IsAbleToRemove()
 end
 function cid.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE+LOCATION_HAND,0,1,nil) end
