@@ -1,9 +1,11 @@
 --Fairy of Breeze
 	local cid,id=GetID()
 function cid.initial_effect(c)
-   aux.AddOrigEvoluteType(c)
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,6,cid.filter1,cid.filter2,1,99)
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
   --recover
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(70780151,0))
@@ -30,6 +32,10 @@ function cid.initial_effect(c)
 	e2:SetTarget(cid.sptg)
 	e2:SetOperation(cid.spop)
 	c:RegisterEffect(e2)
+end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WIND)
+		and g:IsExists(Card.IsRace,1,nil,RACE_FAIRY)
 end
 function cid.filter1(c,ec,tp)
 	return c:IsRace(RACE_FAIRY) or c:IsAttribute(ATTRIBUTE_WIND)
