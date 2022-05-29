@@ -39,7 +39,7 @@ function c50031103.filter2(c,ec,tp)
 	return c:IsRace(RACE_PLANT) or c:IsAttribute(ATTRIBUTE_FIRE) 
 end
 function c50031103.condition(e,tp,eg,ep,ev,re,r,rp)
-	return  e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+388 and e:GetHandler():IsLinkState()
+	return  e:GetHandler():GetSummonType()==SUMMON_TYPE_EVOLUTE
 end
 function c50031103.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsFacedown() end
