@@ -28,7 +28,7 @@ local e1=Effect.CreateEffect(c)
 	e2:SetOperation(c50031103.spop)
 	c:RegisterEffect(e2)
 end
-function cid.rcheck(g,lc,sumtype,tp)
+function c50031103.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE)
 		and g:IsExists(Card.IsRace,1,nil,RACE_PLANT)
 end
