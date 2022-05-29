@@ -1,8 +1,10 @@
 --Ostrich of Doom
 function c16001002.initial_effect(c)
-   aux.AddOrigEvoluteType(c)
+c16001002.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,4,c16001002.filter1,c16001002.filter2,1,99) 
+	Evolute.AddProcedure(c,nil,2,99,c16001002.rcheck) 
   --remove
 	local e4=Effect.CreateEffect(c)
 	e4:SetCategory(CATEGORY_REMOVE)
@@ -14,6 +16,10 @@ function c16001002.initial_effect(c)
 	e4:SetOperation(c16001002.rmop)
 	c:RegisterEffect(e4) 
 end
+function c16001002.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER)
+		and g:IsExists(Card.IsRace,1,nil,RACE_ZOMBIE) 
+end
 function c16001002.filter1(c,ec,tp)
 	return c:IsRace(RACE_ZOMBIE) or c:IsAttribute(ATTRIBUTE_WATER)
 end
@@ -23,7 +29,7 @@ end
 
 function c16001002.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
- return e:GetHandler():GetEC()==4 and e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+388)
+ return e:GetHandler():GetCounter(0x111f)==4 and e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
 
 function c16001002.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
