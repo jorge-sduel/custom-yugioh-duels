@@ -32,6 +32,19 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e2:SetTarget(cid.sptg)
 	e2:SetOperation(cid.spop)
 	c:RegisterEffect(e2)
+	--recover
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetCategory(CATEGORY_RECOVER)
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e3:SetCode(EVENT_PHASE+PHASE_STANDBY)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetCountLimit(1)
+	--e3:SetCondition(cid.condition)
+	e3:SetTarget(cid.target)
+	e:SetOperation(cid.operation)
+	c:RegisterEffect(e3)
 end
 function cid.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WIND)
@@ -74,8 +87,8 @@ end
 
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-   if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function cid.filter(c,e,tp)
 	return c:IsFaceup() and c:IsRace(RACE_FAIRY) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -99,5 +112,18 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e3,true)
 		Duel.SpecialSummonComplete()
+	end
+end
+function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetParam(1000)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,1000)
+end
+function cid.operation(e,tp,eg,ep,ev,re,r,rp)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	local c=e:GetHandler()
+	if c:IsPosition(POS_FACEUP_ATTACK) and c:IsRelateToEffect(e) then
+		Duel.SetLP(tp,Duel.GetLP(tp)*2)
 	end
 end
