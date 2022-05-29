@@ -43,7 +43,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetCountLimit(1)
 	--e3:SetCondition(cid.condition)
 	e3:SetTarget(cid.target)
-	e:SetOperation(cid.operation)
+	e3:SetOperation(cid.operation)
 	c:RegisterEffect(e3)
 end
 function cid.rcheck(g,lc,sumtype,tp)
