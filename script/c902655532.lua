@@ -1,13 +1,7 @@
 --Pandemoniumgraph of Eternity
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 	--You can only control 1 "Pandemoniumgraph of Eternity".
 	c:SetUniqueOnField(1,0,id)
 	--Activate
@@ -51,7 +45,7 @@ function cid.evalue(e,re,rp)
 	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp~=e:GetHandlerPlayer()
 end
 function cid.cfilter(c,tp)
-	return c:GetSummonPlayer()==tp and c:IsSummonType(SUMMON_TYPE_SPECIAL+726)
+	return c:GetSummonPlayer()==tp and c:IsSummonType(SUMMON_TYPE_EQUILIBRIUM)
 end
 function cid.indcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(cid.cfilter,1,nil,tp)
