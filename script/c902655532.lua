@@ -62,7 +62,7 @@ function cid.indop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function cid.pafilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM)
+	return c:IsFaceup() and c.IsEquilibrium
 		and c:GetTurnID()==Duel.GetTurnCount() and c:GetReason()==REASON_RULE
 end
 function cid.check(e,tp,eg,ep,ev,re,r,rp)
