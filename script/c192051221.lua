@@ -3,7 +3,12 @@
 function c192051221.initial_effect(c)
 	c:EnableReviveLimit()
 	--2: Level/Rank 3 EARTH, Level/Rank 3 Dragon
-	aux.AddEvoluteProc(c,6,c192051221.mfilter1,c192051221.mfilter2)
+c192051221.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99,c192051221.rcheck)
+
 	--If this card was Evolute Summoned using "Steelus Colarium", place 2 more E-Counters on it.
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -39,6 +44,10 @@ function c192051221.initial_effect(c)
 	e5:SetCode(EFFECT_DISABLE)
 	e5:SetCondition(function(e) return e:GetHandler():GetCounter(0x1088)==0 end)
 	c:RegisterEffect(e5)
+end
+function c192051221.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH)
+		and g:IsExists(Card.IsRace,1,nil,RACE_DRAGON)
 end
 function c192051221.mfilter1(c)
 	return c:IsAttribute(ATTRIBUTE_EARTH) and aux.EvoluteValue(c)==3
