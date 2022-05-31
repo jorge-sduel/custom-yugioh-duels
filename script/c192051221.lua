@@ -27,6 +27,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetCategory(CATEGORY_ATKCHANGE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetRange(LOCATION_MZONE)
+	e3:SetCode(EVENT_PHASE+PHASE_END)
 	e3:SetTarget(c192051221.atktg)
 	e3:SetOperation(c192051221.atkop)
 	c:RegisterEffect(e3)
