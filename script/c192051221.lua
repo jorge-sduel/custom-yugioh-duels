@@ -39,7 +39,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e4:SetOperation(c192051221.rmop)
 	c:RegisterEffect(e4)
 	--Negate this card's effects while it has no E-Counters.
-	local e5=Effect.CreateEffect(c)
+	--local e5=Effect.CreateEffect(c)
 	--e5:SetType(EFFECT_TYPE_SINGLE)
 	--e5:SetCode(EFFECT_DISABLE)
 	--e5:SetCondition(function(e) return e:GetHandler():GetCounter(0x1088)==0 end)
