@@ -68,15 +68,14 @@ function c192051221.tgop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterFlagEffect(388,RESET_EVENT+0x1ff0000,0,1,e:GetLabelObject():GetLabel())
 end
 function c192051221.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local val=500
-	if Duel.GetTurnPlayer()~=tp then val=-700 end
+	if Duel.GetTurnPlayer()~=tp then end
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	local tc=g:GetFirst()
 	while tc do
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(val)
+		e1:SetValue(500)
 		e1:SetReset(RESET_EVENT+0x1fe0000)
 		tc:RegisterEffect(e1)
 		local e2=e1:Clone()
