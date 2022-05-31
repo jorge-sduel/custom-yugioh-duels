@@ -24,9 +24,9 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:RegisterEffect(e2)
 	--During each of your Standby Phases: Monsters your opponent controls gain 500 ATK and DEF. During each of your opponent's Standby Phases: monsters they control lose 700 ATK and DEF.
 	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e3:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	e3:SetCountLimit(1)
+	e3:SetCategory(CATEGORY_ATKCHANGE)
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetRange(LOCATION_MZONE)
 	e3:SetTarget(c192051221.atktg)
 	e3:SetOperation(c192051221.atkop)
 	c:RegisterEffect(e3)
