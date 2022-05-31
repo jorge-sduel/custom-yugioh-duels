@@ -7,7 +7,7 @@ c192051221.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,2,99)
+	Evolute.AddProcedure(c,c192051221.mfilter1,2,99,c 192051221.rcheck)
 
 	--If this card was Evolute Summoned using "Steelus Colarium", place 2 more E-Counters on it.
 	local e1=Effect.CreateEffect(c)
@@ -54,7 +54,7 @@ function c192051221.rcheck(g,lc,sumtype,tp)
 		and g:IsExists(Card.IsRace,1,nil,RACE_DRAGON)
 end
 function c192051221.mfilter1(c)
-	return c:IsAttribute(ATTRIBUTE_EARTH) and aux.EvoluteValue(c)==3
+	return  c:IsLevel(3) or c:IsRank(3)
 end
 function c192051221.mfilter2(c)
 	return c:IsRace(RACE_DRAGON) and aux.EvoluteValue(c)==3
