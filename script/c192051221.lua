@@ -7,7 +7,7 @@ c192051221.IsEvolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,2,99,c192051221.rcheck)
+	Evolute.AddProcedure(c,nil,2,99)
 
 	--If this card was Evolute Summoned using "Steelus Colarium", place 2 more E-Counters on it.
 	local e1=Effect.CreateEffect(c)
