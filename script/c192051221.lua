@@ -39,11 +39,12 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e4:SetOperation(c192051221.rmop)
 	c:RegisterEffect(e4)
 	--Negate this card's effects while it has no E-Counters.
-	--local e5=Effect.CreateEffect(c)
-	--e5:SetType(EFFECT_TYPE_SINGLE)
-	--e5:SetCode(EFFECT_DISABLE)
-	--e5:SetCondition(function(e) return e:GetHandler():GetCounter(0x1088)==0 end)
-	--c:RegisterEffect(e5)
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCode(EFFECT_DISABLE)
+	e5:SetCondition(function(e) return e:GetHandler():GetCounter(0x111f)==0 end)
+	c:RegisterEffect(e5)
 end
 function c192051221.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH)
@@ -89,5 +90,5 @@ function c192051221.rmcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function c192051221.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:GetCounter(0x1088)>0 then c:RemoveCounter(tp,0x1088,1,REASON_EFFECT) end
+	if c:GetCounter(0x111f)>0 then c:RemoveCounter(tp,0x111f,1,REASON_EFFECT) end
 end
