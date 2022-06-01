@@ -160,8 +160,8 @@ function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 		Duel.RegisterFlagEffect(tp,29432356,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 		Duel.HintSelection(Group.FromCards(c))
 		Duel.HintSelection(Group.FromCards(rpz))
-	end
 	Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+	end
 end
 function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
