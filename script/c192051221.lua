@@ -62,7 +62,7 @@ end
 function c192051221.matcheck(e,c)
 	e:SetLabel(0)
 	local g=c:GetMaterial()
-	if g:IsExists(Card.IsCode,1,nil,192051209) then e:SetLabel(2) end
+	if g:IsExists(Card.IsType,1,nil,TYPE_MONSTER) then e:SetLabel(2) end
 end
 function c192051221.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+388
