@@ -67,10 +67,10 @@ function c192051221.matcheck(e,c)
 	if g:IsExists(Card.IsType,1,nil,TYPE_MONSTER) then e:SetLabel(2) end
 end
 function c192051221.tgcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+388
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_EVOLUTE
 end
 function c192051221.tgop(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():RegisterFlagEffect(388,RESET_EVENT+0x1ff0000,0,1,e:GetLabelObject():GetLabel())
+	e:GetHandler():AddCounter(tp,0x111f,2,REASON_EFFECT)
 end
 function c192051221.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
