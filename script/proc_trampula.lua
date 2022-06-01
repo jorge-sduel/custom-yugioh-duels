@@ -155,8 +155,8 @@ function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 			--e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
 			e2:SetValue(TYPE_TRAP)
 			tc:RegisterEffect(e2)
-	end
 	Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+	end
 	if #sg>0 then
 		Duel.RegisterFlagEffect(tp,29432356,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 		Duel.HintSelection(Group.FromCards(c))
