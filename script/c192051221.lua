@@ -46,7 +46,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--e5:SetType(EFFECT_TYPE_SINGLE)
 	--e5:SetRange(LOCATION_MZONE)
 	--e5:SetCode(EFFECT_DISABLE)
-	--e5:SetCondition(function(e) return e:GetHandler():GetCounter(0x111f)==0 end)
+	--e5:SetCondition(function(e) return e:GetHandler():GetCounter(0x111f)==0 and e:GetHandler():IsLocation(LOCATION_MZONE) end)
 	--c:RegisterEffect(e5)
 end
 function c192051221.rcheck(g,lc,sumtype,tp)
