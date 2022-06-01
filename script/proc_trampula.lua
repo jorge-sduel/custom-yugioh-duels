@@ -126,7 +126,7 @@ function Trampula.Operation()
 					local tc=Group.SelectUnselect(g,sg,tp,#sg>0,Duel.IsSummonCancelable())
 if not tc then break end
 					if sg:IsContains(tc) then
-						sg:RemoveCard(tc)
+						--sg:RemoveCard(tc)
 						if tc:IsLocation(LOCATION_HAND) then
 							ft1=ft1+1
 						else
