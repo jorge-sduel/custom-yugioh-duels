@@ -124,7 +124,7 @@ function Trampula.Operation()
 					if #g==0 or ft==0 then break end
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 					local tc=Group.SelectUnselect(g,sg,tp,#sg>0,Duel.IsSummonCancelable())
-if not tc then break end
+--if not tc then break end
 					if sg:IsContains(tc) then
 						--sg:RemoveCard(tc)
 						if tc:IsLocation(LOCATION_HAND) then
