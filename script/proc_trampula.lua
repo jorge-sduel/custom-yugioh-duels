@@ -143,7 +143,7 @@ function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 		end
 	end
 	if #sg>0 then
-		Duel.Hint(HINT_CARD,0,id)
+		Duel.Hint(HINT_CARD,0,34884015)
 		Duel.RegisterFlagEffect(tp,29432356,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 		Duel.HintSelection(Group.FromCards(c))
 		Duel.HintSelection(Group.FromCards(rpz))
