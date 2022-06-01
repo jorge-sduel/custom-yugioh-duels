@@ -86,7 +86,7 @@ function Trampula.Condition()
 				return g:IsExists(Trampula.Filter,1,nil,e,tp,lscale,rscale,c:IsHasEffect(511007000) and rpz:IsHasEffect(511007000))
 			end
 end
-function Trampula.Operation()
+function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 	local rpz=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 	local lscale=c:GetLeftScale()
 	local rscale=rpz:GetRightScale()
