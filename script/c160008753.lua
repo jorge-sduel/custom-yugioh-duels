@@ -6,6 +6,31 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
+	--attackup
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetCode(EFFECT_UPDATE_ATTACK)
+	e3:SetValue(cid.attackup)
+	c:RegisterEffect(e3)
+	--destroy replace
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
+	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e4:SetCode(EFFECT_DESTROY_REPLACE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetTarget(cid.reptg)
+	c:RegisterEffect(e4)
+end
+function cid.attackup(e,c)
+	return c:GetCounter(0x111f)*200
+end
+function cid.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():IsReason(REASON_BATTLE)
+		and e:GetHandler():IsCanRemoveCounter(tp,0x111f,1,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,1,REASON_EFFECT)
+	return true
 end
 function cid.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
