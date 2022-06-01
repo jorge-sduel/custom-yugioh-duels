@@ -141,7 +141,7 @@ function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 			end
 			ft=ft-1
 		end
-	local th=tc:GetFirst()
+	local th=tc
 	end
 	Duel.SpecialSummonStep(th,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 		local e1=Effect.CreateEffect(c)
