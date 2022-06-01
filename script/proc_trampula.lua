@@ -141,29 +141,27 @@ function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 			end
 			ft=ft-1
 		end
-		local th=tc:GetFirst()
-	while th do
-	end
-	Duel.SpecialSummonStep(th,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 		local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+			--e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
 			e1:SetValue(TYPE_MONSTER)
 			tc:RegisterEffect(e1)
 			local e2=Effect.CreateEffect(c)
 			e2:SetCode(EFFECT_REMOVE_TYPE)
 			e2:SetType(EFFECT_TYPE_SINGLE)
 			e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+			--e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
 			e2:SetValue(TYPE_TRAP)
 			tc:RegisterEffect(e2)
+	end
 	if #sg>0 then
 		Duel.RegisterFlagEffect(tp,29432356,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
 		Duel.HintSelection(Group.FromCards(c))
 		Duel.HintSelection(Group.FromCards(rpz))
 	end
+	Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 end
 function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
