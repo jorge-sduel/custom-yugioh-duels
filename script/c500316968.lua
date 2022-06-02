@@ -73,3 +73,4 @@ function cid.disop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 		end
 	end
+end
