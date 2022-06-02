@@ -15,7 +15,7 @@ function cid.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(function(e,c) return c:IsType(TYPE_PANDEMONIUM) end)
+	e2:SetTarget(function(e,c) return c.IsEquilibrium end)
 	e2:SetValue(cid.evalue)
 	c:RegisterEffect(e2)
 	--Once per turn, if a face-up Pandemonium Monster(s) in your Main Monster Zone is destroyed by an opponent's card (either by battle or card effect) while you control a card in your Pandemonium zone: You can add 1 Level 4 or lower "Pandemoniumgraph" monster from your Deck to your hand.
@@ -36,7 +36,7 @@ function cid.evalue(e,re,rp)
 	return re:IsActiveType(TYPE_SPELL) and rp~=e:GetHandlerPlayer()
 end
 function cid.cfilter(c,tp)
-	return c:GetPreviousTypeOnField()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM
+	return c.IsEquilibrium
 		and c:IsPreviousPosition(POS_FACEUP) and c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:GetPreviousControler()==tp
 		and c:IsPreviousLocation(LOCATION_MZONE) and c:GetPreviousSequence()<5
 end
