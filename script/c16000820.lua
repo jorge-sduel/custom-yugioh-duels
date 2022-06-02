@@ -106,7 +106,7 @@ function c16000820.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	while tc do
 	 
-   tc:AddCounter(0x88,4)
+   tc:AddCounter(0x111f,4)
 		tc=g:GetNext()
 	end
 end
@@ -208,7 +208,7 @@ function c16000820.spop(e,tp,eg,ep,ev,re,r,rp)
 		sg:AddCard(sg2:GetFirst())
 	end
 	if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)~=0 and c:IsRelateToEffect(e) then
-		c:RemoveCounter(tp,0x88,2,REASON_EFFECT)
+		c:RemoveCounter(tp,0x111f,2,REASON_EFFECT)
 	end
 end
 function c16000820.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
