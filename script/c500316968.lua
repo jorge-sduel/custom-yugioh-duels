@@ -1,9 +1,11 @@
 --Paper Knight
 local cid,id=GetID()
 function cid.initial_effect(c)
-   aux.AddOrigEvoluteType(c)
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,7,cid.filter1,cid.filter1,2,99)
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
   --atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -27,7 +29,10 @@ end
 function cid.filter1(c,ec,tp)
 	return c:IsRace(RACE_FAIRY) or c:IsAttribute(ATTRIBUTE_EARTH)
 end
-
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_EARTH)
+		and g:IsExists(Card.IsRace,1,nil,RACE_FAIRY)
+end
 function cid.lcheck(g,lc)
 	return g:GetClassCount(Card.GetLinkCode)==g:GetCount()
 end
