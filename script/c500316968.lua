@@ -38,7 +38,7 @@ function cid.lcheck(g,lc)
 end
 function cid.valop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not c:IsSummonType(SUMMON_TYPE_SPECIAL+388) then return end
+	if not c:IsSummonType(SUMMON_TYPE_EVOLUTE) then return end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_SET_BASE_ATTACK)
