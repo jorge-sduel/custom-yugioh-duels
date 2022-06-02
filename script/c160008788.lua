@@ -15,25 +15,25 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetHintTiming(TIMING_DAMAGE_STEP)
 	e2:SetCountLimit(1)
-	e2:SetCost(cid.cost)
-	e2:SetTarget(cid.tg)
-	e2:SetOperation(cid.op)
+	e2:SetCost(c160008788.cost)
+	e2:SetTarget(c160008788.tg)
+	e2:SetOperation(c160008788.op)
 	c:RegisterEffect(e2)
 end
-function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+function c160008788.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x111f,1,REASON_COST) end
 	Duel.RemoveCounter(tp,1,0,0x111f,1,REASON_COST)
 end
-function cid.filter(c)
+function c160008788.filter(c)
 	return c:IsFaceup()
 end
-function cid.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function c160008788.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(cid.filter,tp,LOCATION_MZONE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(c160008788.filter,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,cid.filter,tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,c160008788.filter,tp,LOCATION_MZONE,0,1,1,nil)
 end
-function cid.op(e,tp,eg,ep,ev,re,r,rp)
+function c160008788.op(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		local e1=Effect.CreateEffect(e:GetHandler())
