@@ -1,7 +1,9 @@
 --Medivatale Onibear
 function c160008788.initial_effect(c)
-   c:EnableReviveLimit()
-	aux.AddOrigEvoluteType(c)
-   aux.AddEvoluteProc(c,nil,6,aux.FilterBoolFunction(Card.IsSetCard,0xab5),1,99)
+c160008788.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 end
 
