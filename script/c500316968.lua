@@ -51,8 +51,8 @@ function cid.discon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)
 end
 function cid.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function cid.filter(c)
 	return c:IsRace(RACE_FAIRY) 
@@ -70,7 +70,7 @@ function cid.disop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_GRAVE,0,1,1,nil)
 		if g:GetCount()>0 then
 			Duel.BreakEffect()
-			Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
+			Duel.SendtoHand(g,nil,REASON_EFFECT)
 		end
 	end
 end
