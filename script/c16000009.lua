@@ -23,7 +23,7 @@ function c16000009.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	else Duel.PayLPCost(tp,1500) end
 end
 function c16000009.spfilter(c,e,tp)
-	return c.IsEvolute and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_EVOLUTE,tp,false,false)
+	return c.Is_Evolute and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_EVOLUTE,tp,false,false)
 end
 function c16000009.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and c16000009.spfilter(chkc,e,tp) end
