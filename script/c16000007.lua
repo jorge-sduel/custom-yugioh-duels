@@ -1,5 +1,5 @@
 --E-Booktreeworm 
-c16000007.IsEvolute=true
+c16000007.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function c16000007.initial_effect(c)
 	--c:EnableCounterPermit(0x88)
