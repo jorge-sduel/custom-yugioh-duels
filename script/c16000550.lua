@@ -1,6 +1,6 @@
 --All-Rose Dragon of Rose VINE
 function c16000550.initial_effect(c)
-c16000550.IsEvolute=true
+c16000550.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
@@ -118,7 +118,7 @@ function c16000550.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLinkState()
 end
 function c16000550.xxxfilter(c)
-	return c:GetLevel()>0 and (c:IsType(TYPE_SYNCHRO) or c.IsEvolute) and c:IsAbleToRemove()
+	return c:GetLevel()>0 and (c:IsType(TYPE_SYNCHRO) or c.Is_Evolute) and c:IsAbleToRemove()
 end
 function c16000550.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	  local c=e:GetHandler()
