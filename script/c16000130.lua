@@ -1,6 +1,6 @@
 --Oak Gardna of Fiber VINE
 function c16000130.initial_effect(c)
-c16000130.IsEvolute=true
+c16000130.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
