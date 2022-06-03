@@ -13,7 +13,7 @@ function c160008617.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c160008617.filter(c)
-	return c:IsFaceup() and c.IsEvolute
+	return c:IsFaceup() and c.Is_Evolute
 end
 function c160008617.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and c160008617.filter(chkc) end
