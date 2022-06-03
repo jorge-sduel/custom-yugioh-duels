@@ -74,7 +74,7 @@ function c160008888.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=g:GetFirst()
 	while tc do
-		Duel.Summon(tp,tc,true,nil)
+		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 		tc=g:GetNext()
 	end
 end
