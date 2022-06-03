@@ -3,7 +3,7 @@
 function c192051221.initial_effect(c)
 	c:EnableReviveLimit()
 	--2: Level/Rank 3 EARTH, Level/Rank 3 Dragon
-c192051221.IsEvolute=true
+c192051221.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
