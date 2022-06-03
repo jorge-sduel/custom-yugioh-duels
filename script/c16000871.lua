@@ -1,6 +1,6 @@
 --Alien' Sharks
 function c16000871.initial_effect(c)
-c16000871.IsEvolute=true
+c16000871.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
