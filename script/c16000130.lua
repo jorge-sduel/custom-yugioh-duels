@@ -82,7 +82,7 @@ function c16000130.sumop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c16000130.spfilter(c,e,tp)
-	return c.IsEvolute and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE,tp,false,true) and not c:IsCode(16000130)
+	return c.Is_Evolute and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL+SUMMON_TYPE_EVOLUTE,tp,false,true) and not c:IsCode(16000130)
 end
 function c16000130.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
    if chk==0 then return Duel.GetLocationCountFromEx(tp)>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
