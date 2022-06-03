@@ -22,7 +22,7 @@ function c16000226.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c16000226.mgfilter(c,e,tp,sync)
 	return not c:IsControler(tp) or not c:IsLocation(LOCATION_GRAVE)
-		or  not  r==REASON_MATERIAL+0x10000000
+		or  not  r==REASON_MATERIAL
 		or not c:IsCanBeSpecialSummoned(e,0,tp,false,false) or c:IsHasEffect(EFFECT_NECRO_VALLEY)
 end
 function c16000226.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -31,7 +31,7 @@ function c16000226.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=tc:GetMaterial()
 	local sumable=true
 	local sumtype=tc:GetSummonType()
-	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)==0 or sumtype~=SUMMON_TYPE_SPECIAL+388 or mg:GetCount()==0 
+	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)==0 or sumtype~=SUMMON_TYPE_EVOLUTE or mg:GetCount()==0 
 		or mg:GetCount()>Duel.GetLocationCount(tp,LOCATION_MZONE)
 		or mg:IsExists(c16000226.mgfilter,1,nil,e,tp,tc) then
 		sumable=false
