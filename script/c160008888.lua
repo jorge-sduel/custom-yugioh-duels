@@ -1,8 +1,10 @@
 --Chaos Fairy
 function c160008888.initial_effect(c)   
-	 aux.AddOrigEvoluteType(c)
+c160008888.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-   aux.AddEvoluteProc(c,nil,4,c160008888.filter1,c160008888.filter2)
+	Evolute.AddProcedure(c,nil,2,99)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(160008888,0))
@@ -44,8 +46,8 @@ function c160008888.filter(c)
 end
 function c160008888.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.GetCustomActivityCount(160008888,tp,ACTIVITY_SPSUMMON)==0 and c:IsCanRemoveCounter(tp,0x88,3,REASON_COST) end
-	c:RemoveCounter(tp,0x88,3,REASON_COST)
+	if chk==0 then return Duel.GetCustomActivityCount(160008888,tp,ACTIVITY_SPSUMMON)==0 and c:IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	c:RemoveCounter(tp,0x111f,3,REASON_COST)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
@@ -57,7 +59,7 @@ function c160008888.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e1,tp)
 end
 function c160008888.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c.evolute and c~=e:GetLabelObject()
+	return not c.Is_Evolute and c~=e:GetLabelObject()
 end
 function c160008888.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
