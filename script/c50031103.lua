@@ -1,6 +1,6 @@
 --Romana, Princess of Rose VINE
 function c50031103.initial_effect(c)
-c50031103.IsEvolute=true
+c50031103.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
