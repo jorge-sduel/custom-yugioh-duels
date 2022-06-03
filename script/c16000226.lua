@@ -31,9 +31,7 @@ function c16000226.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=tc:GetMaterial()
 	local sumable=true
 	local sumtype=tc:GetSummonType()
-	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)==0 or sumtype~=SUMMON_TYPE_EVOLUTE or mg:GetCount()==0 
-		or mg:GetCount()>Duel.GetLocationCount(tp,LOCATION_MZONE) then
-		sumable=false
+	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)==0 or sumtype~=SUMMON_TYPE_EVOLUTE or mg:GetCount()>Duel.GetLocationCount(tp,LOCATION_MZONE) then
 	end
 	if sumable and Duel.SelectYesNo(tp,aux.Stringid(16000226,0)) then
 		Duel.BreakEffect()
