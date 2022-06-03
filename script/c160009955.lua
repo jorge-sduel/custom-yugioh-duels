@@ -1,6 +1,6 @@
 --Cyber Flame Phoenix
 function c160009955.initial_effect(c)
-c160009955.IsEvolute=true
+c160009955.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
