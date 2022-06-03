@@ -47,8 +47,8 @@ function cid.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,cid.cfilter,1,1,REASON_COST+REASON_DISCARD)
 end
 function cid.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
-   if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,6,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,6,REASON_COST)
+   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,6,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,6,REASON_COST)
 end
 function cid.filter2(c,ec,tp)
 	return c:IsRace(RACE_FAIRY) or c:IsAttribute(ATTRIBUTE_LIGHT)
