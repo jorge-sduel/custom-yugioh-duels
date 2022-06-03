@@ -41,12 +41,12 @@ function c160008888.val(e,c)
 	elseif bit.band(r,ATTRIBUTE_LIGHT)>0 then return -400
 	else return 0 end
 end
-function c160008888.filter(c)
+function c160008888.filter(c,e)
 	return c:IsType(TYPE_NORMAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c160008888.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.GetCustomActivityCount(160008888,tp,ACTIVITY_SPSUMMON)==0 and c:IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
 	c:RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c160008888.splimit(e,c,sump,sumtype,sumpos,targetp,se)
