@@ -32,8 +32,7 @@ function c16000226.activate(e,tp,eg,ep,ev,re,r,rp)
 	local sumable=true
 	local sumtype=tc:GetSummonType()
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)==0 or sumtype~=SUMMON_TYPE_EVOLUTE or mg:GetCount()==0 
-		or mg:GetCount()>Duel.GetLocationCount(tp,LOCATION_MZONE)
-		--or mg:IsExists(c16000226.mgfilter,1,nil,e,tp,tc) then
+		or mg:GetCount()>Duel.GetLocationCount(tp,LOCATION_MZONE) then
 		sumable=false
 	end
 	if sumable and Duel.SelectYesNo(tp,aux.Stringid(16000226,0)) then
