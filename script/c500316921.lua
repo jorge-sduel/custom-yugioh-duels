@@ -1,8 +1,10 @@
 --Frex
 function c500316921.initial_effect(c)
-	aux.AddOrigEvoluteType(c)
+c500316921.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-   aux.AddEvoluteProc(c,nil,6,c500316921.filter1,c500316921.filter2,1,99)
+	Evolute.AddProcedure(c,nil,2,99)
 	--remove
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(500316921,0))
@@ -26,8 +28,8 @@ function c500316921.filter1(c,ec,tp)
 	return c:IsRace(RACE_FIEND)
 end
 function c500316921.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	 if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c500316921.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end
