@@ -1,7 +1,7 @@
 --Fairy of Breeze
 	local cid,id=GetID()
 function cid.initial_effect(c)
-cid.IsEvolute=true
+cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
