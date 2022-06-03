@@ -1,6 +1,6 @@
 --Frex
 function c500316921.initial_effect(c)
-c500316921.IsEvolute=true
+c500316921.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
