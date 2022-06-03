@@ -42,7 +42,7 @@ function c160008888.val(e,c)
 	else return 0 end
 end
 function c160008888.filter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsSummonable(true,nil)
+	return c:IsType(TYPE_NORMAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c160008888.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -65,7 +65,7 @@ function c160008888.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=g:GetFirst()
 	while tc do
-	 Duel.SpecialSummonStep(tc,160008888,tp,tp,false,false,POS_FACEUP)
+	 Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
 		tc=g:GetNext()
 			end
 			
