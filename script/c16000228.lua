@@ -1,6 +1,6 @@
 --Allure Rose Maiden
 function c16000228.initial_effect(c)
-c16000228.IsEvolute=true
+c16000228.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
