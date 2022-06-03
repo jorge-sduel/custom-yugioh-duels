@@ -1,6 +1,6 @@
 --Cybersian Judgeman
 function c16000969.initial_effect(c)
-c16000969.IsEvolute=true
+c16000969.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
