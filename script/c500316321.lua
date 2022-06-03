@@ -1,9 +1,11 @@
 --Evolute Priestess
 	local cid,id=GetID()
 function cid.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,6,cid.filter1,cid.filter1,1,99)  
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)  
 		local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -29,6 +31,10 @@ function cid.initial_effect(c)
 	e4:SetCondition(cid.drcon)
 	e4:SetOperation(cid.swapop)
 	c:RegisterEffect(e4)
+end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT)
+		and g:IsExists(Card.IsRace,1,nil,RACE_SPELLCASTER)
 end
 function cid.filter1(c,ec,tp)
 	return c:IsRace(RACE_SPELLCASTER) or c:IsAttribute(ATTRIBUTE_LIGHT)
