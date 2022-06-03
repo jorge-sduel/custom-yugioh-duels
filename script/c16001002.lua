@@ -1,6 +1,6 @@
 --Ostrich of Doom
 function c16001002.initial_effect(c)
-c16001002.IsEvolute=true
+c16001002.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
