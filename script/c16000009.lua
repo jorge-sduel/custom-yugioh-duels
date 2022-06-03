@@ -23,7 +23,7 @@ function c16000009.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	else Duel.PayLPCost(tp,1500) end
 end
 function c16000009.spfilter(c,e,tp)
-	return c.IsEvolute and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c.IsEvolute and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_EVOLUTE,tp,false,false)
 end
 function c16000009.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and c16000009.spfilter(chkc,e,tp) end
@@ -52,7 +52,7 @@ function c16000009.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(1)
 		e1:SetLabelObject(tc)
 		c:RegisterEffect(e1)
-	tc:AddCounter(tc,0x111f,3)
+	tc:AddCounter(0x111f,3)
 	end
 end
 function c16000009.desop(e,tp,eg,ep,ev,re,r,rp)
