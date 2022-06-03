@@ -91,7 +91,7 @@ function c16000820.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c16000820.xfilter(c)
-	return c.IsEvolute and c:IsFaceup() 
+	return c.Is_Evolute and c:IsFaceup() 
 end
 
 function c16000820.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
