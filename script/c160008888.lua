@@ -42,7 +42,7 @@ function c160008888.val(e,c)
 	else return 0 end
 end
 function c160008888.filter(c,e)
-	return c:IsType(TYPE_NORMAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_NORMAL)
 end
 function c160008888.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
