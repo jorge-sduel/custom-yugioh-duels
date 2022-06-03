@@ -48,15 +48,6 @@ function c160008888.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetCustomActivityCount(160008888,tp,ACTIVITY_SPSUMMON)==0 and c:IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
 	c:RemoveCounter(tp,0x111f,3,REASON_COST)
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
-	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	e1:SetLabelObject(c)
-	e1:SetTargetRange(1,0)
-	e1:SetTarget(c160008888.splimit)
-	Duel.RegisterEffect(e1,tp)
 end
 function c160008888.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c.Is_Evolute and c~=e:GetLabelObject()
@@ -77,5 +68,5 @@ function c160008888.spop(e,tp,eg,ep,ev,re,r,rp)
 	 Duel.SpecialSummonStep(tc,160008888,tp,tp,false,false,POS_FACEUP)
 		tc=g:GetNext()
 			end
-			Duel.SpecialSummonComplete()
+			
 end
