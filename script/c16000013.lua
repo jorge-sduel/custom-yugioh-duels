@@ -11,7 +11,7 @@ function c16000013.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c16000013.filter(c)
-	return  c:IsType(TYPE_EVOLUTE)and c:GetEC()==0 and c:IsControlerCanBeChanged() and c:IsFaceup()
+	return  c.Is_Evolute and c:GetCounter(0x111f)==0 and c:IsControlerCanBeChanged() and c:IsFaceup()
 end
 function c16000013.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:GetLocation()==LOCATION_MZONE and chkc:GetControler()==tp and c16000013.filter(chkc) end
