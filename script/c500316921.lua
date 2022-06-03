@@ -28,8 +28,8 @@ function c500316921.filter1(c,ec,tp)
 	return c:IsRace(RACE_FIEND)
 end
 function c500316921.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
+	 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,6,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,6,REASON_COST)
 end
 function c500316921.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end
