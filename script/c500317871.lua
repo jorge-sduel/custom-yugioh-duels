@@ -11,7 +11,7 @@ function c500317871.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c500317871.filter(c,e,tp)
-	return c.IsEvolute and c:IsSpecialSummonable()
+	return c.Is_Evolute and c:IsSpecialSummonable()
 end
 function c500317871.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
  if chk==0 then return Duel.IsExistingMatchingCard(c500317871.filter,tp,LOCATION_EXTRA,0,1,nil) end
