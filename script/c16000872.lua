@@ -1,5 +1,6 @@
 --Venom Blazing Viper
 function c16000872.initial_effect(c)
+cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
