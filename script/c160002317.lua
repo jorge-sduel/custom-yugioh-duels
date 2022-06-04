@@ -17,6 +17,13 @@ function cid.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_XMATERIAL)
 	e2:SetCode(EFFECT_DIRECT_ATTACK)
 	c:RegisterEffect(e2)
+--hand synchro
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e8:SetCode(16000820)
+	c:RegisterEffect(e8)
+
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)
