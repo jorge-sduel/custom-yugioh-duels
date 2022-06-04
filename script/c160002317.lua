@@ -2,8 +2,6 @@
 --Conjoint Twister
 local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigConjointType(c)
-	aux.EnableConjointAttribute(c,1)
 	--Remove up to 9 E-Cs from 1 Evolute Monster you control, then target 1 Spell/Trap for each 3 E-Cs removed; destroy them.
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -25,7 +23,7 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function cid.cfilter(c,tp)
-	return c:IsCanRemoveEC(tp,3,REASON_COST)
+	return c:IsCanRemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function cid.filter(c,e)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsCanBeEffectTarget(e)
@@ -43,7 +41,7 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=tg:GetFirst()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,math.floor(tc:GetEC()/3),e:GetHandler(),e)
-	tc:RemoveEC(tp,3*#g,REASON_COST)
+	tc:RemoveCounter(tp,0x111f,3*#g,REASON_COST)
 	Duel.SetTargetCard(g)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
