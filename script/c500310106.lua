@@ -1,13 +1,6 @@
 --Sinnamon Quick Summon
 --Scripted by: XGlitchy30
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local id,cid=GetID()
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -86,7 +79,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(tc)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
-		e1:SetCode(EFFECT_CANNOT_BE_EVOLUTE_MATERIAL)
+		e1:SetCode(EFFECT_CANNOT_MATERIAL)
 		e1:SetRange(0xff)
 		e1:SetTargetRange(0xff,0xff)
 		e1:SetTarget(cid.tfunc)
@@ -103,7 +96,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(sc)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
-	e1:SetCode(EFFECT_CANNOT_BE_EVOLUTE_MATERIAL)
+	e1:SetCode(EFFECT_CANNOT_BE_MATERIAL)
 	e1:SetTargetRange(0xff,0xff)
 	e1:SetTarget(cid.tfunc)
 	e1:SetValue(1)
