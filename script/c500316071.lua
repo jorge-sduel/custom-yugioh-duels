@@ -24,7 +24,7 @@ e2:SetCountLimit(1,500316071+EFFECT_COUNT_CODE_OATH)
 	c:RegisterEffect(e2)
 end
 function c500316071.filter(c)
-	return c:IsFaceup() and c:IsType(TYPE_EVOLUTE) and c:GetEC()
+	return c:IsFaceup() and c.Is_Evolute and c:GetCounter(0x111f)<c:GetOriginalLevel()
 end
 function c500316071.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and c500316071.filter(chkc) end
@@ -36,7 +36,7 @@ end
 
 function c500316071.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:RefillEC() then
+	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:AddCounter(0x111f,tc:GetCounter(0x111f)-tc:GetOriginalLevel()) then
   Duel.BreakEffect()
 		Duel.Recover(1-tp,1000,REASON_EFFECT)
 		end
