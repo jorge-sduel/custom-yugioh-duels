@@ -72,7 +72,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local echeck=Duel.GetMatchingGroup(cid.extrafilter,tp,LOCATION_EXTRA,0,nil,mg,e)
 	if #echeck<=0 then return end
 	local tc0=echeck:Select(tp,1,1,nil)
-	local sg=mg:Filter(Card.IsCanBeEvoluteMaterial,nil,tc0:GetFirst()):GetFirst()
+	local sg=mg:Filter(Card.IsCanBeMaterial,nil,tc0:GetFirst()):GetFirst()
 	local egroup=Group.CreateGroup()
 	egroup:KeepAlive()
 	for tc in aux.Next(mg) do
