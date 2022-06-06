@@ -1,17 +1,12 @@
 --Evolute Cat
-local ref=_G['c'..160009730]
 function c160009730.initial_effect(c)
- 
 	--hand 
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e1:SetCode(EFFECT_EXTRA_EVOLUTE_MATERIAL)
-	e1:SetRange(LOCATION_HAND)
-	e1:SetCondition(c160009730.matcon)
-	--e1:SetValue(c160009730.matval)
-	e1:SetOperation(ref.matop)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e1:SetCode(16000820)
 	c:RegisterEffect(e1)
+--
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_BE_MATERIAL)
