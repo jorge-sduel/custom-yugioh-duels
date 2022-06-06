@@ -1,6 +1,6 @@
 --Coins of Mercy
 function c500316071.initial_effect(c)
-c:EnableCounterPermit(0x88)
+--c:EnableCounterPermit(0x88)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_COUNTER)
