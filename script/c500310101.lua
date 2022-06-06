@@ -14,7 +14,7 @@ function c500310101.initial_effect(c)
 	c:RegisterEffect(e1) 
 end
 function c500310101.filter(c,e)
-	return c:IsFaceup() and c:IsSetCard(0xa34) and c:IsType(TYPE_EVOLUTE)and c:GetEC() --c:GetStage()>c:GetCounter(0x1088) --c:GetCounter(0x1088)<=0
+	return c:IsFaceup() and c.Is_Evolute and c:GetCounter(0x111f)<c:GetOriginalLevel() --c:GetStage()>c:GetCounter(0x1088) --c:GetCounter(0x1088)<=0
 end
 function c500310101.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
@@ -55,7 +55,7 @@ function c500310101.activate(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e3)
 		--local val = tc:GetStage() - tc:GetCounter(0x1088)
-		tc:RefillEC()
+		tc:AddCounter(0x111f,tc:GetOriginalLevel()-tc:GetCounter(0x111f))
 	end
 end
 function c500310101.damval(e,re,dam,r,rp,rc)
