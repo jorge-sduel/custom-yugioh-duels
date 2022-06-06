@@ -36,7 +36,7 @@ end
 
 function c500316071.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:AddCounter(0x111f,tc:GetCounter(0x111f)-tc:GetOriginalLevel()) then
+	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:AddCounter(0x111f,tc:GetOriginalLevel()-tc:GetCounter(0x111f)) then
   Duel.BreakEffect()
 		Duel.Recover(1-tp,1000,REASON_EFFECT)
 		end
@@ -48,7 +48,7 @@ function c500316071.spfilter(c,e,tp)
 end
 function c500316071.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	local mg=e:GetHandler():GetReasonCard():GetMaterial()
+	local mg=e:GetHandler():GetReason():GetMaterial()
 	if chkc then return mg:IsContains(chkc) and c500316071.spfilter(chkc,e,tp) and chkc~=c end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and mg:IsExists(c500316071.spfilter,1,c,e,tp) end
