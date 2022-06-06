@@ -1,6 +1,6 @@
 --Sinnamon Quick Summon
 --Scripted by: XGlitchy30
-local id,cid=GetID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -39,14 +39,14 @@ function cid.tfunc(e,c)
 end
 function cid.extrafilter(c,mg,e)
 	if not c:IsType(TYPE_MONSTER) or not c:IsType(TYPE_EVOLUTE) or (c:IsType(TYPE_PENDULUM) and c:IsFaceup()) then return end
-	local sg=mg:Filter(Card.IsCanBeEvoluteMaterial,nil,c)
+	local sg=mg:Filter(Card.IsCanBeMaterial,nil,c)
 	sg:KeepAlive()
 	local summon_check={}
 	for tc in aux.Next(sg) do
 		local e1=Effect.CreateEffect(tc)
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
-		e1:SetCode(EFFECT_CANNOT_BE_EVOLUTE_MATERIAL)
+		e1:SetCode(EFFECT_CANNOT_BE_MATERIAL)
 		e1:SetRange(0xff)
 		e1:SetTargetRange(0xff,0xff)
 		e1:SetTarget(cid.tfunc)
