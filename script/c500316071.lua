@@ -44,11 +44,11 @@ function c500316071.activate(e,tp,eg,ep,ev,re,r,rp)
 
 function c500316071.spfilter(c,e,tp)
 	return c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp)
-		and c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
+		and c:IsReason(REASON_MATERIAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 function c500316071.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local c=e:GetHandler()
-	local mg=e:GetHandler():GetReason():GetMaterial()
+	local mg=e:GetHandler()
+	--local mg=e:GetHandler():GetReason():GetMaterial()
 	if chkc then return mg:IsContains(chkc) and c500316071.spfilter(chkc,e,tp) and chkc~=c end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and mg:IsExists(c500316071.spfilter,1,c,e,tp) end
