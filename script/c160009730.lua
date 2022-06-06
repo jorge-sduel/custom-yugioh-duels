@@ -37,9 +37,9 @@ end
 function c160009730.matval(e,c,mg)
 	return  mg:IsExists(c160009730.mfilter,1,nil)
 end
-function ref.matop(c)
-	Duel.SendtoGrave(c,REASON_MATERIAL+0x10000000)
-end
+--function ref.matop(c)
+--	Duel.SendtoGrave(c,REASON_MATERIAL+0x10000000)
+--end
 function c160009730.ctcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_HAND)
 end
