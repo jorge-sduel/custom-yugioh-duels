@@ -38,7 +38,7 @@ function cid.tfunc(e,c)
 	return c~=e:GetOwner()
 end
 function cid.extrafilter(c,mg,e)
-	if not c:IsType(TYPE_MONSTER) or not c:IsType(TYPE_EVOLUTE) or (c:IsType(TYPE_PENDULUM) and c:IsFaceup()) then return end
+	if not c:IsType(TYPE_MONSTER) or not c.Is_Evolute or (c:IsType(TYPE_PENDULUM) and c:IsFaceup()) then return end
 	local sg=mg:Filter(Card.IsCanBeMaterial,nil,c)
 	sg:KeepAlive()
 	local summon_check={}
