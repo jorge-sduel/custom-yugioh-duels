@@ -42,7 +42,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetHintTiming(0,0x11e0)
 	e3:SetCountLimit(1,50031022)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_GRAVE)
+	e3:SetRange(LOCATION_MZONE)
 	e3:SetCost(c50031000.cost)
 	e3:SetTarget(c50031000.target)
 	e3:SetOperation(c50031000.operation)
@@ -93,7 +93,7 @@ function c50031000.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c50031000.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCountFromEx(tp)
-	if ft<=0 or not aux.MustMaterialCheck(nil,tp,EFFECT_MUST_BE_SMATERIAL) then return end
+	if ft<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,c50031000.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp):GetFirst()
 	if tc then
