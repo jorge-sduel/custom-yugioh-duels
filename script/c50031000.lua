@@ -109,8 +109,8 @@ end
 
 
 function c50031000.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	 if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST)  end
-	 e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST)  end
+	 e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c50031000.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return  chkc:GetLocation()==LOCATION_GRAVE and chkc:IsAbleToRemove()  and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and Duel.IsExistingMatchingCard(c50031000.xfilter,tp,LOCATION_HAND,0,2,nil,e,tp) end
