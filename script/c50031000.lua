@@ -42,7 +42,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetHintTiming(0,0x11e0)
 	e3:SetCountLimit(1,50031022)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_MZONE)
+	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCost(c50031000.cost)
 	e3:SetTarget(c50031000.target)
 	e3:SetOperation(c50031000.operation)
