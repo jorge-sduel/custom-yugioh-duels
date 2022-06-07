@@ -1,7 +1,10 @@
 --Zombie Kid
 function c50031000.initial_effect(c)
-		aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,6,c50031000.filter1,c50031000.filter2,2,99)
+c50031000.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99,c50031000.rcheck)
 	c:EnableReviveLimit()
   --to extra
 	local e1=Effect.CreateEffect(c)
@@ -44,6 +47,10 @@ function c50031000.initial_effect(c)
 	e3:SetTarget(c50031000.target)
 	e3:SetOperation(c50031000.operation)
 	c:RegisterEffect(e3)
+end
+function c50031000.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
+		and g:IsExists(Card.IsRace,1,nil,RACE_ZOMBIE)
 end
 function c50031000.filter1(c,ec,tp)
 	return c:IsRace(RACE_ZOMBIE) or c:IsAttribute(ATTRIBUTE_DARK)
