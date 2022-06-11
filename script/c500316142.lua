@@ -1,9 +1,12 @@
 --Kappa Raptor
 local cid,id=GetID()
 function cid.initial_effect(c)
-		aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	aux.AddEvoluteProc(c,nil,7,cid.filter1,cid.filter1,2,99)   
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
+	c:EnableReviveLimit()   
    local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_POSITION+CATEGORY_DEFCHANGE)
@@ -29,12 +32,16 @@ function cid.initial_effect(c)
 	e3:SetOperation(cid.atkop)
 	c:RegisterEffect(e3)
 end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER)
+		and g:IsExists(Card.IsRace,1,nil,RACE_DINOSAUR)
+end
 function cid.filter1(c,ec,tp)
 	return c:IsRace(RACE_DINOSAUR) or c:IsAttribute(ATTRIBUTE_WATER)
 end
 function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST)  end 
- e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST)  end 
+ e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function cid.tgfilter(c)
 	return (c:IsFaceup() and c:IsType(TYPE_EFFECT)) or c:IsFacedown()
