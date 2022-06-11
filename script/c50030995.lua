@@ -7,7 +7,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,99)
-Aux.AddEvoluteSummonProcedure(c,nil,LOCATION_ONFIELD)  
+aux.AddEvoluteSummonProcedure(c,nil,LOCATION_ONFIELD)  
 	--spsummon proc
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
