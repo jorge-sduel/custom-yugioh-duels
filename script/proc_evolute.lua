@@ -312,7 +312,7 @@ function Auxiliary.EvoluteSummonOperation(cd,loc)
 				local tc=g:GetFirst()
 				if tc:IsHasEffect(48829461,tp) then tc:IsHasEffect(48829461,tp):UseCountLimit(tp) end
 		c:SetMaterial(tc)
-				Duel.SendToGrave(tc,REASON_MATERIAL+REASON_EVOLUTE)
+				Duel.SendtoGrave(tc,REASON_MATERIAL+REASON_EVOLUTE)
 				g:DeleteGroup()
 			end
 end
