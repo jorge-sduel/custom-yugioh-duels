@@ -62,11 +62,11 @@ function cid.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.SelectYesNo(tp,aux.Stringid(id,0))
 end
 function cid.repop(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():RemoveC(tp,0x111f,1,REASON_EFFECT)
+	e:GetHandler():RemoveCounter(tp,0x111f,1,REASON_EFFECT)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,2,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function cid.filter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
