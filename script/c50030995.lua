@@ -1,17 +1,12 @@
 --Sinnamon-Flavored: Kiki Jaguar
 --Scripted by Remnance
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,7,cid.mfilter1,cid.mfilter2,2,99)  
+	Evolute.AddProcedure(c,nil,2,99)  
 	--spsummon proc
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
