@@ -8,18 +8,6 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,99)
 aux.AddEvoluteSummonProcedure(c,nil,LOCATION_ONFIELD)  
-	--spsummon proc
-	local e0=Effect.CreateEffect(c)
-	e0:SetDescription(aux.Stringid(id,0))
-	e0:SetType(EFFECT_TYPE_FIELD)
-	e0:SetCode(EFFECT_SPSUMMON_PROC)
-	e0:SetProperty(EFFECT_FLAG_UNCOPYABLE)
-	e0:SetRange(LOCATION_EXTRA)
-	e0:SetCountLimit(1,id)
-	e0:SetCondition(cid.hspcon)
-	e0:SetOperation(cid.hspop)
-	e0:SetValue(SUMMON_TYPE_SPECIAL+388)
-	c:RegisterEffect(e0)
 	--deck check
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -71,9 +59,9 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmDecktop(tp,3)
 	local g=Duel.GetDecktopGroup(tp,3)
 	local sel=0
-	if g:IsExists(function(tc) return tc:IsSetCard(0xa34) and tc:IsType(TYPE_MONSTER) end,1,nil) then sel=sel+1 end
-	if g:IsExists(function(tc) return tc:IsSetCard(0xa34) and tc:IsType(TYPE_SPELL) end,1,nil) then sel=sel+2 end
-	if g:IsExists(function(tc) return tc:IsSetCard(0xa34) and tc:IsType(TYPE_TRAP) end,1,nil) then sel=sel+4 end
+	if g:IsExists(function(tc) return and tc:IsType(TYPE_MONSTER) end,1,nil) then sel=sel+1 end
+	if g:IsExists(function(tc) return and tc:IsType(TYPE_SPELL) end,1,nil) then sel=sel+2 end
+	if g:IsExists(function(tc) return and tc:IsType(TYPE_TRAP) end,1,nil) then sel=sel+4 end
 	--setting the option
 	if sel==1 then
 		Duel.SelectOption(tp,aux.Stringid(id,1))
