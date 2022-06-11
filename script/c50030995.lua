@@ -6,7 +6,8 @@ cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,2,99)  
+	Evolute.AddProcedure(c,nil,2,99)
+Aux.AddEvoluteSummonProcedure(c,nil,LOCATION_ONFIELD)  
 	--spsummon proc
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
@@ -58,8 +59,8 @@ function cid.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 --deck check
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,5,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,5,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,5,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,5,REASON_COST)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b1=Duel.IsPlayerCanDraw(tp,1)
