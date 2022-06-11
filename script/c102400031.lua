@@ -2,9 +2,11 @@
 --S・VINEの第二女王クライッシャ
 local cid,id=GetID()
 function cid.initial_effect(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,8,aux.FilterBoolFunction(Card.IsRace,RACE_FAIRY),aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WATER))
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
 	c:EnableCounterPermit(0x1)
 	local ae3=Effect.CreateEffect(c)
 	ae3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
@@ -34,8 +36,12 @@ function cid.initial_effect(c)
 	ae2:SetOperation(cid.op)
 	c:RegisterEffect(ae2)
 end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER)
+		and g:IsExists(Card.IsRace,1,nil,RACE_FAIRY)
+end
 function cid.cfilter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x285b)
+	return c:IsType(TYPE_MONSTER)
 end
 function cid.acop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -49,22 +55,21 @@ end
 function cid.eop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	c:RemoveCounter(tp,0x1,3,REASON_EFFECT)
-	c:AddEC(1)
-	aux.AddECounter(1)
+	c:AddCounter(0x111f,1)
 end
 function cid.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,1,REASON_COST) end
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,1,REASON_COST) end
 	return Duel.SelectYesNo(tp,aux.Stringid(id,0))
 end
 function cid.repop(e,tp,eg,ep,ev,re,r,rp)
-	e:GetHandler():RemoveEC(tp,1,REASON_EFFECT)
+	e:GetHandler():RemoveC(tp,0x111f,1,REASON_EFFECT)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,2,REASON_COST) end
 	e:GetHandler():RemoveEC(tp,2,REASON_COST)
 end
 function cid.filter(c,e,tp)
-	return c:IsSetCard(0x285b) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cid.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetMatchingGroupCount(Card.IsAbleToRemove,tp,0,LOCATION_EXTRA,nil)>0
