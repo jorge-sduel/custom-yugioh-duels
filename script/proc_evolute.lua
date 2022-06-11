@@ -261,9 +261,9 @@ end
 function Evolute.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
-function Auxiliary.EvoluteSummonSubstitute(c,f,lc,tp)
-	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp) and c:IsHasEffect(16000820,tp)
-end
+--function Auxiliary.EvoluteSummonSubstitute(c,f,lc,tp)
+--	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp) and c:IsHasEffect(16000820,tp)
+--end
 --Summon Evolute used 1 monster only
 function Auxiliary.AddEvoluteSummonProcedure(c,code,loc,excon)
 	--special summon
