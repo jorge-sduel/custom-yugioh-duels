@@ -1,9 +1,11 @@
 --Legendary Shark
 local cid,id=GetID()
 function cid.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
+cid.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
- aux.AddEvoluteProc(c,nil,5,cid.filter1,cid.filter2,2,99)  
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)  
 
 --spsummon proc
 	local e0=Effect.CreateEffect(c)
@@ -15,7 +17,7 @@ function cid.initial_effect(c)
 	e0:SetCountLimit(1,id)
 	e0:SetCondition(cid.hspcon)
 	e0:SetOperation(cid.hspop)
-	e0:SetValue(SUMMON_TYPE_SPECIAL+388)
+	e0:SetValue(SUMMON_TYPE_EVOLUTE)
 	c:RegisterEffect(e0)
   --immune spell
 	local e1=Effect.CreateEffect(c)
@@ -50,6 +52,10 @@ function cid.initial_effect(c)
 	e4:SetOperation(cid.thop)
 	c:RegisterEffect(e4)
 end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
+		and g:IsExists(Card.IsRace,1,nil,RACE_AQUA+RACE_FISH+RACE_SEASERPENT)
+end
 function cid.econ(e)
 	return Duel.IsEnvironment(22702055)
 end
@@ -78,8 +84,8 @@ function cid.efilter(e,te)
 	return te:IsActiveType(TYPE_MONSTER)
 end
 function cid.hdcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,2,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,2,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function cid.thfilter2(c)
 	return aux.IsCodeListed(c,22702055) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable()
