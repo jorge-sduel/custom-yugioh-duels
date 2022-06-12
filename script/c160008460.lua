@@ -45,9 +45,9 @@ end
 
 function c160008460.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	 if chkc then return chkc:IsControler(tp) and chkc:IsOnField() end
-	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_ONFIELD,0,1,c) end
+	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,0,1,1,c)
+	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,c)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function c160008460.operation(e,tp,eg,ep,ev,re,r,rp)
@@ -57,7 +57,7 @@ function c160008460.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c160008460.cfilter2(c,tp,zone) 
-return c:IsPreviousPosition(POS_FACEUP) and c:GetPreviousControler()==tp and c:IsSetCard(0xa69)
+return c:IsPreviousPosition(POS_FACEUP) and c:GetPreviousControler()==tp
 	  
 end
 function c160008460.spcon(e,tp,eg,ep,ev,re,r,rp)
