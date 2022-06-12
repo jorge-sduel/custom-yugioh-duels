@@ -58,7 +58,7 @@ end
 
 function cid.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:GetAttackAnnouncedCount()==0 and Duel.CheckReleaseGroup(tp,cid.cfilter,1,e:GetHandler()) and e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST)  end
+	if chk==0 then return c:GetAttackAnnouncedCount()==0 and Duel.CheckReleaseGroup(tp,cid.cfilter,1,e:GetHandler()) and e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST)  end
  local g=Duel.SelectReleaseGroup(tp,cid.cfilter,1,1,e:GetHandler())
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -68,7 +68,7 @@ function cid.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterEffect(e1,true)
 	c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
  Duel.Release(g,REASON_COST)
- e:GetHandler():RemoveEC(tp,3,REASON_COST)
+ e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function cid.filter(c)
 	return c:IsFaceup() 
