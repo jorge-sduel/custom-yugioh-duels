@@ -1,8 +1,10 @@
 --Psy-Smokai, Magma Gas Dragon
 function c160008460.initial_effect(c)
-   aux.AddOrigEvoluteType(c)
+c160008460.IsEvolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,7,c160008460.filter1,c160008460.filter1,2,99)   
+	Evolute.AddProcedure(c,nil,2,99)   
 	--attack up
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_CONTROL)
@@ -37,8 +39,8 @@ function c160008460.filter1(c,ec,tp)
 end
 
 function c160008460.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST)  end
- e:GetHandler():RemoveEC(tp,3,REASON_COST)
+  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST)  end
+ e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 
 function c160008460.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
