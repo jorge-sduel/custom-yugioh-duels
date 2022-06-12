@@ -48,6 +48,7 @@ end
 function cid.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_MATERIAL)
 	local g=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_MZONE,0,1,1,nil)
+		c:SetMaterial(g)
    Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
 	--Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
 end
