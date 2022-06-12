@@ -68,7 +68,7 @@ function cid.filter2(c,ec,tp)
 end
 
 function cid.spfilter(c)
-	return c:IsFaceup() and c:GetOriginalLevel()=>5 and c:IsAttribute(ATTRIBUTE_WATER) 
+	return c:IsFaceup() and c:GetOriginalLevel()=5 and c:IsAttribute(ATTRIBUTE_WATER) 
 end
 function cid.check()
 	return Duel.IsEnvironment(22702055)
