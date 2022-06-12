@@ -279,7 +279,7 @@ function Auxiliary.AddEvoluteSummonProcedure(c,code,loc,excon)
 	c:RegisterEffect(e1)
 end
 function Auxiliary.EvoluteSummonFilter(c,cd)
-	return ((cd and c:IsCode(cd)) or (not cd and c.Is_Evolute)) and c:IsAbleToRemoveAsCost()
+	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) or c.Is_Evolute
 end
 function Auxiliary.EvoluteSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(48829461,tp) and c:IsAbleToGraveAsCost()
