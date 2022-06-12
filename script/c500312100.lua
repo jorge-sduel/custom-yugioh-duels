@@ -1,9 +1,11 @@
 --Gaia, the Lightning Dragon Champion
 local cid,id=GetID()
 function cid.initial_effect(c)
-	  aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
- aux.AddEvoluteProc(c,nil,7,cid.filter1,cid.filter2,3,99)
+	Evolute.AddProcedure(c,nil,2,99)
  --pierce
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -29,11 +31,11 @@ function cid.initial_effect(c)
 	e3:SetRange(LOCATION_EXTRA)
 	e3:SetCondition(cid.hspcon)
 	e3:SetOperation(cid.hspop)
-	e3:SetValue(SUMMON_TYPE_SPECIAL+388)
+	e3:SetValue(SUMMON_TYPE_EVOLUTE)
 	c:RegisterEffect(e3)   
 end
 function cid.spfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_EVOLUTE) and (c:GetStage()==5 or c:GetStage()==6 )
+	return c:IsFaceup() and c.Is_Evolute and (c:GetLevel()==5 or c:GetLevel()==6 )
 end
 function cid.hspcon(e,c)
   if c==nil then return true end
@@ -46,7 +48,7 @@ end
 function cid.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_MATERIAL)
 	local g=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_MZONE,0,1,1,nil)
-   Duel.SendtoGrave(g,REASON_MATERIAL+0x10000000)
+   Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
 	--Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
 end
 function cid.cfilter(c)
