@@ -17,6 +17,16 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetTarget(c160008802.tg)
 	e1:SetOperation(c160008802.op)
 	c:RegisterEffect(e1)
+	--destroy replace
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_DESTROY_REPLACE)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetCountLimit(1)
+	e2:SetTarget(c160008802.destg)
+	e2:SetValue(c160008802.value)
+	e2:SetOperation(c160008802.desop)
+	c:RegisterEffect(e2)
 end
 function c160008802.con(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetLP(tp)<Duel.GetLP(1-tp)
@@ -45,6 +55,24 @@ function c160008802.op(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummon(sp,0,tp,tp,false,false,POS_FACEUP)
 		end
 	end
+end
+function c160008802.dfilter(c)
+	return not c:IsReason(REASON_REPLACE) and c:IsLocation(LOCATION_MZONE) and c:IsFaceup()
+end
+function c160008802.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then
+		local count=eg:FilterCount(c160008802.dfilter,nil)
+		e:SetLabel(count)
+		return count>0 and Duel.IsCanRemoveCounter(tp,1,0,0x111f,count,REASON_COST)
+	end
+	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
+end
+function c160008802.value(e,c)
+	return c:IsFaceup() and c:GetLocation()==LOCATION_MZONE
+end
+function c160008802.desop(e,tp,eg,ep,ev,re,r,rp)
+	local count=e:GetLabel()
+	Duel.RemoveCounter(tp,1,0,0x111f,count,REASON_COST)
 end
 
 
