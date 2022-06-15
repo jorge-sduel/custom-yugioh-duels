@@ -3,6 +3,10 @@
 local ref=_G['c'..28915122]
 local id=28915122
 function ref.initial_effect(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
 	--Convergent Evolute
 	c:SetSPSummonOnce(id)
 aux.AddConvergentEvolSummonProcedure(c,nil,LOCATION_ONFIELD)
