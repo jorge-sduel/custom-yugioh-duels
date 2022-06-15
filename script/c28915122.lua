@@ -78,7 +78,7 @@ function ref.operation0(e,tp,eg,ep,ev,re,r,rp)
 			local g1 = Duel.SelectMatchingCard(1-tp,ref.rmfilter2,1-tp,LOCATION_EXTRA,0,1,1,nil,tc)
 			Duel.Remove(g1,POS_FACEUP,REASON_EFFECT)
 		else
-			Duel.Hint(HINT_SELECTMSG,tp,HITNMSG_REMOVE)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 			local g1=Duel.SelectMatchingCard(tp,ref.rmfilter3,tp,0,LOCATION_ONFIELD,1,2,nil)
 			Duel.Remove(g1,POS_FACEUP,REASON_EFFECT)
 		end
