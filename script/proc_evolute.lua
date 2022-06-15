@@ -377,7 +377,7 @@ function Auxiliary.ConvergentEvolSummonOperation(cd,loc)
 			end
 end
 function Auxiliary.ConvergentEvolatkcon(e,tp,eg,ep,ev,re,r,rp)
-    return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
+    return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
 function Auxiliary.ConvergentEvolatkop(e,tp,eg,ep,ev,re,r,rp)
     local c=e:GetHandler()
