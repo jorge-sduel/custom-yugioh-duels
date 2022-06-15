@@ -18,6 +18,7 @@ aux.AddConvergentEvolSummonProcedure(c,nil,LOCATION_ONFIELD)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	e0:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e0:SetRange(LOCATION_MZONE)
+	e0:SetTarget(ref.cost0)
 	e0:SetTarget(ref.target0)
 	e0:SetOperation(ref.operation0)
 	c:RegisterEffect(e0)
@@ -53,6 +54,11 @@ function ref.rmfilter3(c)
 end
 function ref.ssfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and not c:IsType(TYPE_EFFECT)
+end
+function ref.cost0(e,tp,eg,ep,ev,re,r,rp,chk)
+   local c=e:GetHandler()
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,5,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,5,REASON_COST)
 end
 function ref.target0(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(ref.rmfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,1,nil) end
