@@ -317,3 +317,56 @@ function Auxiliary.EvoluteSummonOperation(cd,loc)
 				g:DeleteGroup()
 			end
 end
+--Convergent evolute
+function Auxiliary.AddConvergentEvolSummonProcedure(c,code,loc,excon)
+	--special summon
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e1:SetRange(LOCATION_EXTRA)
+    e1:SetValue(SUMMON_TYPE_EVOLUTE)
+	e1:SetCondition(Auxiliary.ConvergentEvolSummonCondition(code,loc,excon))
+	e1:SetTarget(Auxiliary.ConvergentEvolSummonTarget(code,loc))
+	e1:SetOperation(Auxiliary.ConvergentEvolSummonOperation(code,loc))
+	c:RegisterEffect(e1)
+end
+function Auxiliary.ConvergentEvolSummonFilter(c,cd)
+	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) or c.Is_Evolute
+end
+function Auxiliary.ConvergentEvolSummonSubstitute(c,cd,tp)
+	return c:IsHasEffect(48829461,tp) and c:IsAbleToGraveAsCost()
+end
+function Auxiliary.ConvergentEvolSummonCondition(cd,loc,excon)
+	return 	function(e,c)
+				if excon and not excon(e,c) then return false end
+				if c==nil then return true end
+				return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+					and (Duel.IsExistingMatchingCard(Auxiliary.ConvergentEvolSummonFilter,c:GetControler(),loc,0,1,nil,cd)
+					or Duel.IsExistingMatchingCard(Auxiliary.ConvergentEvolSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler()))
+			end
+end
+function Auxiliary.ConvergentEvolSummonTarget(cd,loc)
+	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
+				local g=Duel.GetMatchingGroup(Auxiliary.ConvergentEvolSummonFilter,tp,loc,0,nil,cd)
+				g:Merge(Duel.GetMatchingGroup(Auxiliary.ConvergentEvolSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,c:GetControler()))
+				local sg=aux.SelectUnselectGroup(g,e,tp,1,99,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+				if #sg>0 then
+					sg:KeepAlive()
+					e:SetLabelObject(sg)
+					return true
+				end
+				return false
+			end
+end
+function Auxiliary.ConvergentEvolSummonOperation(cd,loc)
+	return	function(e,tp,eg,ep,ev,re,r,rp,c)
+				local g=e:GetLabelObject()
+				if not g then return end
+				local tc=g:GetFirst()
+				if tc:IsHasEffect(48829461,tp) then tc:IsHasEffect(48829461,tp):UseCountLimit(tp) end
+		c:SetMaterial(tc)
+				Duel.SendtoGrave(tc,REASON_MATERIAL+REASON_EVOLUTE)
+				g:DeleteGroup()
+			end
+end
