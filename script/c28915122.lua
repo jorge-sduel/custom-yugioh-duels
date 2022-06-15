@@ -57,7 +57,7 @@ end
 function ref.target0(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(ref.rmfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,1,nil) end
 	if chkc then return ref.rmfilter(chkc) and chkc:IsLocation(LOCATION_GRAVE+LOCATION_MZONE) and chkc:IsControler(tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HITNMSG_REMOVE)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g0 = Duel.SelectTarget(tp,ref.rmfilter,tp,LOCATION_GRAVE+LOCATION_MZONE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g0,tp,1,g0:GetFirst():GetLocation())
 	--Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_EXTRA)
@@ -68,7 +68,7 @@ function ref.operation0(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)~=0 then
 		if Duel.IsExistingMatchingCard(ref.rmfilter2,1-tp,LOCATION_EXTRA,0,1,nil,tc) and Duel.SelectYesNo(1-tp,aux.Stringid(id,0)) then
-			Duel.Hint(HINT_SELECTMSG,tp,HITNMSG_REMOVE)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 			local g1 = Duel.SelectMatchingCard(1-tp,ref.rmfilter2,1-tp,LOCATION_EXTRA,0,1,1,nil,tc)
 			Duel.Remove(g1,POS_FACEUP,REASON_EFFECT)
 		else
