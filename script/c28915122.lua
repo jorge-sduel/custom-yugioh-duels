@@ -32,6 +32,12 @@ aux.AddConvergentEvolSummonProcedure(c,nil,LOCATION_ONFIELD)
 	e1:SetTarget(ref.target1)
 	e1:SetOperation(ref.operation1)
 	c:RegisterEffect(e1)
+--
+	local e10=Effect.CreateEffect(c)
+	e10:SetType(EFFECT_TYPE_SINGLE)
+	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	c:RegisterEffect(e10)
 end
 function ref.efilter(c)
 	return c:IsType(TYPE_MONSTER)
