@@ -56,7 +56,7 @@ function cid.filter2(c,ec,tp)
 	return not c:IsType(TYPE_EFFECT)
 end
 function cid.psfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xc50) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function cid.pscost(e,tp,eg,ep,ev,re,r,rp,chk)
   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST)  end
@@ -75,6 +75,6 @@ function cid.psop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,cid.psfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 	local tc=g:GetFirst()
 	if g:GetCount()>0 then
-		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
