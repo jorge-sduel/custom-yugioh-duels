@@ -5,7 +5,7 @@ local id=28915122
 function ref.initial_effect(c)
 	--Convergent Evolute
 	c:SetSPSummonOnce(id)
-aux.AddConvergentEvolSummonProcedure(c,ref.efilter,LOCATION_ONFIELD)
+aux.AddConvergentEvolSummonProcedure(c,nil,LOCATION_ONFIELD)
 	c:EnableReviveLimit()
 	--Effect 0
 	local e0=Effect.CreateEffect(c)
