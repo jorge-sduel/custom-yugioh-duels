@@ -5,9 +5,8 @@ local id=28915122
 function ref.initial_effect(c)
 	--Convergent Evolute
 	c:SetSPSummonOnce(id)
-	aux.AddOrigEvoluteType(c)
+function Auxiliary.AddEvoluteSummonProcedure(c,ref.efielter,LOCATION_ONFIELD)
 	c:EnableReviveLimit()
-	aux.AddEvoluteProc(c,'Convergent',0,ref.matfilter1,ref.matfilter2,2,99)
 	--Effect 0
 	local e0=Effect.CreateEffect(c)
 	e0:SetCategory(CATEGORY_REMOVE)
@@ -15,7 +14,6 @@ function ref.initial_effect(c)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	e0:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e0:SetRange(LOCATION_MZONE)
-	e0:SetCondition(aux.cdrewcon)
 	e0:SetTarget(ref.target0)
 	e0:SetOperation(ref.operation0)
 	c:RegisterEffect(e0)
@@ -29,6 +27,9 @@ function ref.initial_effect(c)
 	e1:SetTarget(ref.target1)
 	e1:SetOperation(ref.operation1)
 	c:RegisterEffect(e1)
+end
+function ref.efilter(c)
+	return c:IsType(TYPE_MONSTER)
 end
 function ref.matfilter1(c)
 	return c:IsRace(RACE_PLANT)
