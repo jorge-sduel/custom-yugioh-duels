@@ -43,7 +43,7 @@ function cid.initial_effect(c)
 end
 cid.pendulum_level=12
 function cid.thfilter(c)
-	return c:IsSetCard(0x89f) and c:IsAbleToHand() and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+	return c:IsAbleToHand() and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
 end
 function cid.xyzfilter(c,xyz,sumtype,tp)
 	return c:IsType(TYPE_RITUAL)
@@ -52,7 +52,7 @@ function cid.penfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsSetCard(0x89f)
 end
 function cid.excfilter(c)
-	return not c:IsType(TYPE_MONSTER) or not c:IsSetCard(0x89f)
+	return not c:IsType(TYPE_MONSTER)
 end
 function cid.posfilter(c,tp)
 	return not c:IsPosition(POS_FACEUP_DEFENSE) and c:IsCanChangePosition()
