@@ -330,6 +330,14 @@ function Auxiliary.AddConvergentEvolSummonProcedure(c,code,loc,excon)
 	e1:SetTarget(Auxiliary.ConvergentEvolSummonTarget(code,loc))
 	e1:SetOperation(Auxiliary.ConvergentEvolSummonOperation(code,loc))
 	c:RegisterEffect(e1)
+    --"Gain ATK"
+    local e0=Effect.CreateEffect(c)
+    e0:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+    e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+    e0:SetCode(EVENT_SPSUMMON_SUCCESS)
+    e0:SetCondition(Auxiliary.ConvergentEvolatkcon)
+    e0:SetOperation(Auxiliary.ConvergentEvolatkop)
+    c:RegisterEffect(e0)
 end
 function Auxiliary.ConvergentEvolSummonFilter(c,cd)
 	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) or c.Is_Evolute
@@ -366,15 +374,20 @@ function Auxiliary.ConvergentEvolSummonOperation(cd,loc)
 		c:SetMaterial(g)
 				Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
 				g:DeleteGroup()
-    local Lv=0
+			end
+end
+function Auxiliary.ConvergentEvolatkcon(e,tp,eg,ep,ev,re,r,rp)
+    return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
+end
+function Auxiliary.ConvergentEvolatkop(e,tp,eg,ep,ev,re,r,rp)
+    local c=e:GetHandler()
+    local g=c:GetMaterial()
+    local lv=0
     local tc=g:GetFirst()
     while tc do
         local lv2=tc:GetLevel()
-        Lv=Lv+lv2
+        lv=lv+lv2
         tc=g:GetNext()
-
-c:AddCounter(0x111f,Lv) 
     end
-
-			end
+    c:AddCounter(0x111f,lv)
 end
