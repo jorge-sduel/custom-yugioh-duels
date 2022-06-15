@@ -366,5 +366,15 @@ function Auxiliary.ConvergentEvolSummonOperation(cd,loc)
 		c:SetMaterial(g)
 				Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
 				g:DeleteGroup()
+    local Lv=0
+    local tc=g:GetFirst()
+    while tc do
+        local lv2=tc:GetLevel()
+        Lv=Lv+lv2
+        tc=g:GetNext()
+
+c:AddCounter(0x111f,Lv) 
+    end
+
 			end
 end
