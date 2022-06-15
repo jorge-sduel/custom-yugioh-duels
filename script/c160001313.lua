@@ -1,8 +1,11 @@
 --Merroine of Fber VINE
 function c160001313.initial_effect(c)
-	   aux.AddOrigEvoluteType(c)
+   c:EnableReviveLimit()
+c160001313.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,4,c160001313.filter1,c160001313.filter2,1,99)
+	Evolute.AddProcedure(c,nil,2,99)
   --act limit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -27,11 +30,11 @@ function c160001313.initial_effect(c)
 	c:RegisterEffect(e0)
 end
 function c160001313.con(e,tp,eg,ep,ev,re,r,rp)
-	return  e:GetHandler():GetEC()>0
+	return  e:GetHandler():GetCounter(0x111f)>0
 end
 function c160001313.chainop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=re:GetHandler()
-	if  rc:IsSetCard(0x85a)  then
+	if  rc:IsType(TYPE_SPELL)  then
 		Duel.SetChainLimit(c160001313.chainlm)
 	end
 end
@@ -47,8 +50,8 @@ end
 
 function c160001313.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-		 if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,2,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,2,REASON_COST)
+		 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 	--local e1=Effect.CreateEffect(c)
   --  e1:SetType(EFFECT_TYPE_FIELD)
    -- e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
