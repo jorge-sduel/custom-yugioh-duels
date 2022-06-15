@@ -1,10 +1,12 @@
 --Paintress EX - Da Vinca
 local cid,id=GetID()
 function cid.initial_effect(c)
-
-	 aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,7,cid.filter1,cid.filter2,1,99)
+   c:EnableReviveLimit()
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 		--extra summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -57,8 +59,8 @@ function cid.psfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0xc50) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function cid.pscost(e,tp,eg,ep,ev,re,r,rp,chk)
-  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST)  end
-	 e:GetHandler():RemoveEC(tp,3,REASON_COST)
+  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST)  end
+	 e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function cid.pstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return (Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1))
