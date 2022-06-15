@@ -389,5 +389,5 @@ function Auxiliary.ConvergentEvolatkop(e,tp,eg,ep,ev,re,r,rp)
         lv=lv+lv2
         tc=g:GetNext()
     end
-    c:AddCounter(0x111f,lv)
+    e:GetHandler():AddCounter(0x111f,lv)
 end
