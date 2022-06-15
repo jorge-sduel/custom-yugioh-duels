@@ -363,10 +363,8 @@ function Auxiliary.ConvergentEvolSummonOperation(cd,loc)
 	return	function(e,tp,eg,ep,ev,re,r,rp,c)
 				local g=e:GetLabelObject()
 				if not g then return end
-				local tc=g:GetFirst()
-				if tc:IsHasEffect(48829461,tp) then tc:IsHasEffect(48829461,tp):UseCountLimit(tp) end
-		c:SetMaterial(tc)
-				Duel.SendtoGrave(tc,REASON_MATERIAL+REASON_EVOLUTE)
+		c:SetMaterial(g)
+				Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
 				g:DeleteGroup()
 			end
 end
