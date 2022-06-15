@@ -1,17 +1,10 @@
 --created by Zolanark, coded by XGlitchy30
 local cid,id=GetID()
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
 function cid.initial_effect(c)
-	aux.EnablePendulumAttribute(c,false)
+	Pendulum.AddProcedure(c,false)
 	c:EnableReviveLimit()
-	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsType,TYPE_RITUAL),12,3,nil,nil,99)
+	Xyz.AddProcedure(c,nil,12,3)
+	Xyz.AddProcedure(c,cid.xyzfilter,nil,3,nil,nil,nil,nil,false)
 	local p1=Effect.CreateEffect(c)
 	p1:SetDescription(aux.Stringid(id,0))
 	p1:SetCategory(CATEGORY_TOHAND)
@@ -51,6 +44,9 @@ end
 cid.pendulum_level=12
 function cid.thfilter(c)
 	return c:IsSetCard(0x89f) and c:IsAbleToHand() and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
+end
+function cid.xyzfilter(c,xyz,sumtype,tp)
+	return c:IsType(TYPE_RITUAL)
 end
 function cid.penfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsSetCard(0x89f)
