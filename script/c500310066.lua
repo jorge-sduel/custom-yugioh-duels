@@ -4,7 +4,7 @@ c500310066.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,2,99) 
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck) 
    --CounterAdd
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -50,7 +50,10 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e7:SetOperation(c500310066.activate)
 	c:RegisterEffect(e7)
 end
-
+function c500310066.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER)
+		and g:IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
+end
 function c500310066.filter1(c,ec,tp)
 	return c:IsAttribute(ATTRIBUTE_WATER) or c:IsRace(RACE_WARRIOR) 
 end
