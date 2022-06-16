@@ -96,12 +96,12 @@ function c500310066.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c500310066.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local dam=Duel.GetFieldGroupCount(1-tp,LOCATION_MZONE,0)*300
+	local dam=Duel.GetFieldGroupCount(1-tp,LOCATION_MZONE,0)*100
 	Duel.Damage(p,dam,REASON_EFFECT)
 end
 function c500310066.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,2,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,2,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function c500310066.xxfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
