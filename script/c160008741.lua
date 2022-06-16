@@ -1,9 +1,11 @@
 --Paintress Dragon
 local cid,id=GetID()
 function cid.initial_effect(c)
-   aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,8,cid.filter1,cid.filter1,2,99)
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
 	--destroy
   local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
@@ -40,6 +42,7 @@ function cid.initial_effect(c)
 	e5:SetValue(cid.atkval)
 	c:RegisterEffect(e5)
  end
+
 --filters
 function cid.filter1(c,ec,tp)
 	return  c:IsSetCard(0xc50)
