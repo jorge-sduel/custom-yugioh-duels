@@ -1,9 +1,10 @@
 --Sakura, Ice Queen Slasher
 function c500310066.initial_effect(c)
-		--evolute procedure
-	aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,6,c500310066.filter1,c500310066.filter2,1,99)
-	c:EnableReviveLimit() 
+c500310066.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99) 
    --CounterAdd
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -83,8 +84,8 @@ function c500310066.distg(e,c)
 	return c:GetCounter(0x1015)>0  
 end
 function c500310066.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function c500310066.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) end
