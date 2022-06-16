@@ -42,7 +42,10 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e5:SetValue(cid.atkval)
 	c:RegisterEffect(e5)
  end
-
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER)
+		and g:IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
+end
 --filters
 function cid.filter1(c,ec,tp)
 	return  c:IsSetCard(0xc50)
