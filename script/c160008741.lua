@@ -56,15 +56,15 @@ end
 
 
 function cid.costfilter(c)
-	return c:IsAbleToRemoveAsCost()  and  c:IsType(TYPE_PENDULUM)  and not c:IsType(TYPE_EFFECT)  and c:IsFaceup()
+	return c:IsAbleToRemoveAsCost()  and  c:IsType(TYPE_PENDULUM)  and c:IsFaceup()
 end
 function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
    local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_EXTRA,0,1,nil) end
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_EXTRA,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,cid.costfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 	c:RegisterFlagEffect(id,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 
@@ -97,7 +97,7 @@ function cid.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp
 end
 function cid.cfilter(c)
-	return c:IsAbleToRemoveAsCost() and c:IsType(TYPE_MONSTER) and not c:IsType(TYPE_EFFECT) and c:IsFaceup()
+	return c:IsAbleToRemoveAsCost() and c:IsType(TYPE_MONSTER) and c:IsFaceup()
 end
 function cid.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_EXTRA,0,1,e:GetHandler()) end
