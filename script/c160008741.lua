@@ -90,7 +90,7 @@ function cid.atkval(e,c)
 	return Duel.GetMatchingGroupCount(cid.atkfilter,c:GetControler(),LOCATION_REMOVED,LOCATION_REMOVED,nil,nil)*100
 end
 function cid.atkfilter(c)
-	return c:IsFaceup()  and c:IsType(TYPE_MONSTER) and not c:IsType(TYPE_EFFECT)
+	return c:IsFaceup()  and c:IsType(TYPE_MONSTER)
 end
 
 function cid.spcon(e,tp,eg,ep,ev,re,r,rp)
