@@ -1,9 +1,11 @@
 --Neo Paintress Goghi
 local cid,id=GetID()
 function cid.initial_effect(c)
-   aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
- aux.AddEvoluteProc(c,nil,8,cid.filter1,cid.filter1)
+	Evolute.AddProcedure(c,nil,2,99)
  local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_CHAINING)
