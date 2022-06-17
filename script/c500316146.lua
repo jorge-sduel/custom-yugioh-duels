@@ -1,8 +1,12 @@
 --Tri-Horned Amalgamated Dragon
 local cid,id=GetID()
 function cid.initial_effect(c)
-aux.AddOrigEvoluteType(c)
-   aux.AddEvoluteProc(c,nil,8,cid.filter1,cid.filter1,2,99)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
+aux.AddEvoluteSummonProcedure(c,cid.filter1,LOCATION_ONFIELD)  
 	c:EnableReviveLimit()  
  --negate
 	local e1=Effect.CreateEffect(c)
@@ -31,7 +35,7 @@ aux.AddOrigEvoluteType(c)
 	c:RegisterEffect(e2) 
 end
 function cid.filter1(c,ec,tp)
-	return c:IsAttribute(ATTRIBUTE_DARK) or c:IsRace(RACE_DRAGON)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_DRAGON) and c:IsLevelAbove(8)
 end
 function cid.spfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
