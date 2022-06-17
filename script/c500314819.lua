@@ -23,7 +23,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(0,LOCATION_MZONE)
-	e2:SetTarget(cid.atktg)
+	--e2:SetTarget(cid.atktg)
 	e2:SetValue(cid.val)
 	c:RegisterEffect(e2)
 	 --handes
@@ -90,7 +90,7 @@ function cid.atktg(e,c)
 	return c:IsType(TYPE_EFFECT)
 end
 function cid.val(e,c)
-	 return Duel.GetMatchingGroupCount(cid.ctfilter,e:GetHandler():GetControler(),LOCATION_REMOVED,0,nil)*-100
+	 return Duel.GetMatchingGroupCount(cid.ctfilter,e:GetHandler():GetControler(),LOCATION_REMOVED,LOCATION_REMOVED,nil)*-100
 end
 function cid.ctfilter(c)
 	return not c:IsType(TYPE_EFFECT)
