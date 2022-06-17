@@ -1,9 +1,11 @@
 --Garbage Beast
 local cid,id=GetID()
 function cid.initial_effect(c)
-	   aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,2,cid.filter1,cid.filter1,1,99)
+	Evolute.AddProcedure(c,nil,2,99)
 -attack up
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_CONTROL)
@@ -38,9 +40,9 @@ function cid.filter1(c,ec,tp)
 end
 
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,1,REASON_COST)  end
+  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,1,REASON_COST)  end
   
- e:GetHandler():RemoveEC(tp,1,REASON_COST)
+ e:GetHandler():RemoveCounter(tp,0x111f,1,REASON_COST)
  Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
    
 end
