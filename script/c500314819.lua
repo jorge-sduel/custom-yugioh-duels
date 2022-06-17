@@ -99,8 +99,8 @@ function cid.hdcon(e,tp,eg,ep,ev,re,r,rp)
    return rp==1-tp and Duel.GetCurrentPhase()~=PHASE_DRAW and Duel.GetCurrentPhase()~=PHASE_DAMAGE and re:IsActiveType(TYPE_MONSTER) and e:GetHandler():GetFlagEffect(1)>0
 end
 function cid.hdcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function cid.hdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,0,LOCATION_HAND,1,nil) end
@@ -114,6 +114,6 @@ function cid.hdop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.chcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,5,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,5,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,5,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,5,REASON_COST)
 end
