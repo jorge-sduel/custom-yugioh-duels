@@ -80,6 +80,9 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 		local e6=e1:Clone()
 		e6:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
 		tc:RegisterEffect(e6)
+	local e6=e1:Clone()
+		e6:SetCode(id)
+		tc:RegisterEffect(e6)
 	end
 end
 function cid.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
