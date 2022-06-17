@@ -279,7 +279,7 @@ function Auxiliary.AddEvoluteSummonProcedure(c,code,loc,excon)
 	c:RegisterEffect(e1)
 end
 function Auxiliary.EvoluteSummonFilter(c,cd)
-	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
+	return not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
 function Auxiliary.EvoluteSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(4882946100,tp) and c:IsAbleToGraveAsCost()
@@ -340,7 +340,7 @@ function Auxiliary.AddConvergentEvolSummonProcedure(c,code,loc,excon)
     c:RegisterEffect(e0)
 end
 function Auxiliary.ConvergentEvolSummonFilter(c,cd)
-	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) or c.Is_Evolute
+	return (not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)) or c.Is_Evolute
 end
 function Auxiliary.ConvergentEvolSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(48829461,tp) and c:IsAbleToGraveAsCost()
