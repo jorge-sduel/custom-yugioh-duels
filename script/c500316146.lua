@@ -41,7 +41,7 @@ function cid.spfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
 end
 function cid.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,,5,REASON_COST) and Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,5,REASON_COST) and Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_GRAVE,0,1,nil) end
  e:GetHandler():RemoveCounter(tp,0x111f,5,REASON_COST)
    Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE) 
 local g=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_GRAVE,0,1,1,nil)
