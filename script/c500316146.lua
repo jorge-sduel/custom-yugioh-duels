@@ -41,8 +41,8 @@ function cid.spfilter(c)
 	return c:IsRace(RACE_DRAGON) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
 end
 function cid.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,5,REASON_COST) and Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_GRAVE,0,1,nil) end
- e:GetHandler():RemoveEC(tp,5,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,,5,REASON_COST) and Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_GRAVE,0,1,nil) end
+ e:GetHandler():RemoveCounter(tp,0x111f,5,REASON_COST)
    Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE) 
 local g=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST) 
@@ -85,8 +85,8 @@ function cid.postg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	 Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST)  end 
- e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST)  end 
+ e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function cid.posop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
