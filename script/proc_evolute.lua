@@ -279,10 +279,10 @@ function Auxiliary.AddEvoluteSummonProcedure(c,code,loc,excon)
 	c:RegisterEffect(e1)
 end
 function Auxiliary.EvoluteSummonFilter(c,cd)
-	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp))
+	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
 function Auxiliary.EvoluteSummonSubstitute(c,cd,tp)
-	return c:IsHasEffect(48829461,tp) and c:IsAbleToGraveAsCost()
+	return c:IsHasEffect(4882946100,tp) and c:IsAbleToGraveAsCost()
 end
 function Auxiliary.EvoluteSummonCondition(cd,loc,excon)
 	return 	function(e,c)
@@ -311,7 +311,7 @@ function Auxiliary.EvoluteSummonOperation(cd,loc)
 				local g=e:GetLabelObject()
 				if not g then return end
 				local tc=g:GetFirst()
-				if tc:IsHasEffect(48829461,tp) then tc:IsHasEffect(48829461,tp):UseCountLimit(tp) end
+				if tc:IsHasEffect(4882946100,tp) then tc:IsHasEffect(48829461,tp):UseCountLimit(tp) end
 		c:SetMaterial(tc)
 				Duel.SendtoGrave(tc,REASON_MATERIAL+REASON_EVOLUTE)
 				g:DeleteGroup()
