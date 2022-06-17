@@ -34,7 +34,7 @@ aux.AddEvoluteSummonProcedure(c,cid.filter1,LOCATION_ONFIELD)
 	e2:SetOperation(cid.posop)
 	c:RegisterEffect(e2) 
 end
-function cid.filter1(c,ec,tp)
+function cid.filter1(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_DRAGON) and c:IsLevelAbove(8)
 end
 function cid.spfilter(c)
