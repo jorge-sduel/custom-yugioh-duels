@@ -1,7 +1,7 @@
 --coded by Lyris
 --Steelus Toxicatem Ultima
 function c192051222.initial_effect(c)
-c192051221.Is_Evolute=true
+c192051222.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
