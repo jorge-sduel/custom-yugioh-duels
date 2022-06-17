@@ -78,6 +78,6 @@ function c192051222.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(c192051222.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	local ct=Duel.Destroy(g,REASON_EFFECT)
 	if ct>0 then
-		Duel.Damage(tp,ct*400,REASON_EFFECT)
+		Duel.Damage(1-tp,ct*400,REASON_EFFECT)
 	end
 end
