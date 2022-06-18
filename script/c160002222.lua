@@ -21,8 +21,8 @@ function cid.filter2(c,ec,tp)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,5,REASON_COST) end
-	c:RemoveCounter(tp,0x111f,5,REASON_COST)
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
+	c:RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
