@@ -43,7 +43,7 @@ function cid.valcheck(e,c)
 	e:GetLabelObject():SetLabel(ct)
 end
 function cid.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+388)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
 function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) end
