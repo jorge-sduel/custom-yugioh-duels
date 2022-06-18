@@ -1,7 +1,10 @@
 --Overdriven
 function c160002126.initial_effect(c)
-		   aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,11,c160002126.filter1,c160002126.filter2,3,99)
+c160002126.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 			local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(160002126,0))
 	e1:SetCategory(CATEGORY_DRAW)
@@ -41,11 +44,11 @@ end
 
 function c160002126.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	 local c=e:GetHandler()
-if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST)  and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_REMOVED,0,3,c) and c:GetFlagEffect(160002126)==0 end
+if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST)  and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_REMOVED,0,3,c) and c:GetFlagEffect(160002126)==0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToDeck,tp,LOCATION_REMOVED,0,3,3,e:GetHandler())
 	Duel.SendtoDeck(g,nil,2,REASON_COST)
-	 e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	 e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 	c:RegisterFlagEffect(160002126,RESET_CHAIN,0,1)
 end
 function c160002126.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -69,11 +72,11 @@ function c160002126.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c160002126.cfilter,1,nil,1-tp)
 end
 function c160002126.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
-if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,5,REASON_COST)  and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_REMOVED,0,5,c) end
+if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,5,REASON_COST)  and Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_REMOVED,0,5,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToDeck,tp,LOCATION_REMOVED,0,5,5,e:GetHandler())
 	Duel.SendtoDeck(g,nil,2,REASON_COST)
-	 e:GetHandler():RemoveEC(tp,5,REASON_COST)
+	 e:GetHandler():RemoveCounter(tp,0x111f,5,REASON_COST)
 	
 end
 function c160002126.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
