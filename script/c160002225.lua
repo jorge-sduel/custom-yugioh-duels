@@ -39,7 +39,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 end
 
 function cid.valcheck(e,c)
-   local ct=e:GetHandler():GetMaterial():FilterCount(Card.IsRace,nil,RACE_PLANT) and e:GetHandler():GetMaterial():GetClassCount(Card.GetAttribute)
+   local ct=e:GetHandler():GetMaterial() and e:GetHandler():GetMaterial():GetClassCount(Card.GetAttribute)
 	e:GetLabelObject():SetLabel(ct)
 end
 function cid.descon(e,tp,eg,ep,ev,re,r,rp)
