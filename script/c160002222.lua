@@ -12,7 +12,6 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCountLimit(1)
 	e1:SetCost(cid.cost)
 	e1:SetOperation(cid.atkop)
 	c:RegisterEffect(e1)
@@ -22,8 +21,8 @@ function cid.filter2(c,ec,tp)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,1,REASON_COST) end
-	c:RemoveCounter(tp,0x111f,1,REASON_COST)
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,5,REASON_COST) end
+	c:RemoveCounter(tp,0x111f,5,REASON_COST)
 end
 function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
