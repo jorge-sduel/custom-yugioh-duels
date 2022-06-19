@@ -1,8 +1,11 @@
 --Archfiend Beast
 	local cid,id=GetID()
 function cid.initial_effect(c)
-		aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,8,cid.filter1,cid.filter2,2,99)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit() 
 	--destroy
 	local e1=Effect.CreateEffect(c)
@@ -34,8 +37,8 @@ end
 
 function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
   local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveEC(tp,4,REASON_COST) end
-	c:RemoveEC(tp,4,REASON_COST)
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	c:RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function cid.desfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and not c:IsAttribute(ATTRIBUTE_LIGHT)
