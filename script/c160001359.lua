@@ -60,7 +60,7 @@ function cid.desop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectMatchingCard(tp,cid.desfilterxx,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 		if g:GetCount()>0 then
 			--Duel.HintSelection(g)
-			Duel.SendtoGrave(g,nil,REASON_EFFECT)
+			Duel.Destroy(g,REASON_EFFECT)
 		end
 	end
 end
