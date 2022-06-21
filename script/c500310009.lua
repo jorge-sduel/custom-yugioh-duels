@@ -4,7 +4,7 @@ cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
+	Evolute.AddProcedure(c,nil,2,99,c500310009.rcheck)
 	--disable search
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -30,7 +30,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 
 	
 end
-function cid.rcheck(g,lc,sumtype,tp)
+function c500310009.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WIND)
 		and g:IsExists(Card.IsRace,1,nil,RACE_THUNDER)
 end
