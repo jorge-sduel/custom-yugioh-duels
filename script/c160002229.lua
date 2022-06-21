@@ -1,8 +1,11 @@
 --Invasive Flames
 	local cid,id=GetID()
 function cid.initial_effect(c)
-		aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,5,cid.filter1,cid.filter2,2,99)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit() 
 		--summon success
 	local e2=Effect.CreateEffect(c)
@@ -35,7 +38,7 @@ function cid.filter2(c,ec,tp)
 end
 
 function cid.sumcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL+388)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
 function cid.sumsuc(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
@@ -56,8 +59,8 @@ function cid.chainlm(e,rp,tp)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
   local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveEC(tp,3,REASON_COST) end
-	c:RemoveEC(tp,3,REASON_COST)
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	c:RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:GetControler()~=tp and chkc:GetLocation()==LOCATION_GRAVE and chkc:IsAbleToRemove() end
