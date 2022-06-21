@@ -1,8 +1,10 @@
 --Wind Shaking Bird
 function c500310009.initial_effect(c)
-	   aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,6,c500310009.filter1,c500310009.filter2)
+	Evolute.AddProcedure(c,nil,2,99,cid.rcheck)
 	--disable search
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -28,6 +30,10 @@ function c500310009.initial_effect(c)
 
 	
 end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WIND)
+		and g:IsExists(Card.IsRace,1,nil,RACE_THUNDER)
+end
 function c500310009.filter1(c,ec,tp)
 	return c:IsRace(RACE_THUNDER) or c:IsAttribute(ATTRIBUTE_WIND)
 end
@@ -36,7 +42,7 @@ function c500310009.filter2(c,ec,tp)
 end
 
 function c500310009.con(e,tp,eg,ep,ev,re,r,rp)
-	return  e:GetHandler():GetEC()==6
+	return  e:GetHandler():GetCounter(0x111f)==6
 end
 function c500310009.repfilter(c,tp)
 	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE)
