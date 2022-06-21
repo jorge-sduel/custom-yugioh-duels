@@ -1,9 +1,11 @@
 --Burnetic Hero
   local cid,id=GetID()
 function cid.initial_effect(c)
-   aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,8,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_FIRE),2,99)  
+	Evolute.AddProcedure(c,nil,2,99)  
    --destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -35,11 +37,11 @@ function cid.desfilterxx(c)
 end
 function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
    local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_EXTRA,0,1,nil) end
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_EXTRA,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,cid.costfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 	c:RegisterFlagEffect(id,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -69,7 +71,7 @@ function cid.filter(c,tp)
 end
 
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
-	local d1=eg:FilterCount(cid.filter,nil,tp)*200
+	local d1=eg:FilterCount(cid.filter,nil,tp)*1000
 	Duel.Damage(1-tp,d1,REASON_EFFECT,true)
 	Duel.RDComplete()
 end
