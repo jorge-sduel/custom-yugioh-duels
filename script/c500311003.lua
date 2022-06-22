@@ -23,7 +23,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--Activate
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(500311003,0))
-	e7:SetCategory(CATEGORY_TODECK+CATEGORY_DAMAGE)
+	--e7:SetCategory(CATEGORY_TODECK+CATEGORY_DAMAGE)
 	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e7:SetRange(LOCATION_MZONE)
 	--e7:SetProperty(EFFECT_FLAG_DELAY)
@@ -69,14 +69,14 @@ function c500311003.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 
 function c500311003.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c500311003.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)
-		if tc:IsLocation(LOCATION_DECK+LOCATION_EXTRA) and tc:IsType(TYPE_MONSTER) and not tc:IsType(TYPE_FUSION) then
+		if tc:IsLocation(LOCATION_EXTRA) and not tc:IsType(TYPE_FUSION) then
 			Duel.Damage(1-tp,1000,REASON_EFFECT)
 		end
 	end
