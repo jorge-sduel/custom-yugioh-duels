@@ -1,7 +1,10 @@
 --Sarah The K , Pirncess of Gust Vine
 function c500311003.initial_effect(c)
-aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,7,c500311003.filter1,c500311003.filter1,2,99)
+c500311003.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99,c500311003.rcheck)
 	c:EnableReviveLimit()
 		--cannot be target
 	   --atk up
@@ -37,6 +40,9 @@ aux.AddOrigEvoluteType(c)
 
 
 end
+function c500311003.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WIND)
+end
 function c500311003.atkval(e)
 	return Duel.GetMatchingGroupCount(Card.IsAttribute,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,ATTRIBUTE_WIND)*100
 end
@@ -46,7 +52,7 @@ end
 
 
 function c500311003.cfilter(c)
-	return c:IsSetCard(0x885a) and c:IsType(TYPE_MONSTER) and c:IsReason(REASON_EFFECT)
+	return c:IsType(TYPE_MONSTER) and c:IsReason(REASON_EFFECT)
 end
 function c500311003.descon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c500311003.cfilter,1,nil)
@@ -66,8 +72,8 @@ function c500311003.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 
 function c500311003.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,2,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function c500311003.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
