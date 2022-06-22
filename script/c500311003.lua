@@ -20,7 +20,6 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
    e4:SetType(EFFECT_TYPE_SINGLE)
  e4:SetCode(EFFECT_PIERCE)
    c:RegisterEffect(e4)
-
 	--Activate
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(500311003,0))
@@ -35,7 +34,6 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e7:SetCost(c500311003.eqcost)
 	e7:SetTarget(c500311003.destg)
 	e7:SetOperation(c500311003.desop)
-	e7:SetLabelObject(e1)
 	c:RegisterEffect(e7)
 
 
