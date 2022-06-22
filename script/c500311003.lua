@@ -60,7 +60,7 @@ function c500311003.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	local tc=g:GetFirst()
-	if tc and tc:IsAbleToRemove() then
+	if tc and tc:IsAbleToDeck() then
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,tc,1,0,0)
 		if not tc:IsType(TYPE_FUSION)  then
 			Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1000)
