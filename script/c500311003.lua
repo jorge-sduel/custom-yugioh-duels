@@ -63,7 +63,7 @@ function c500311003.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tc=g:GetFirst()
 	if tc and tc:IsAbleToRemove() then
 		Duel.SetOperationInfo(0,CATEGORY_TODECK,tc,1,0,0)
-		if tc:IsFaceup() and tc:GetSummonLocation()==LOCATION_EXTRA and not tc:IsType(TYPE_FUSION)  then
+		if not tc:IsType(TYPE_FUSION)  then
 			Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1000)
 		end
 	end
@@ -77,7 +77,7 @@ function c500311003.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)
-		if tc:IsLocation(LOCATION_DECK+LOCATION_EXTRA) and tc:IsType(TYPE_MONSTER) and tc:GetSummonLocation()==LOCATION_EXTRA  and not tc:IsType(TYPE_FUSION) then
+		if tc:IsLocation(LOCATION_DECK+LOCATION_EXTRA) and tc:IsType(TYPE_MONSTER) and not tc:IsType(TYPE_FUSION) then
 			Duel.Damage(1-tp,1000,REASON_EFFECT)
 		end
 	end
