@@ -27,7 +27,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e7:SetRange(LOCATION_MZONE)
 	e7:SetProperty(EFFECT_FLAG_DELAY)
-	e7:SetCode(EVENT_TOGRAVE)
+	e7:SetCode(EVENT_TO_GRAVE)
 	--e7:SetCountLimit(1,500311003)
 	e7:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e7:SetCondition(c500311003.descon)
