@@ -83,6 +83,6 @@ end
 
 function c160008799.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:AddCounter(3,0x111f)~=0 then
+	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and tc:AddCounter(0x111f,3)~=0 then
 		end
 	end
