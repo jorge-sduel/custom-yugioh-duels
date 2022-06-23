@@ -58,7 +58,7 @@ function c500311003.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
-function c500311003.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function c500311003.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
@@ -71,7 +71,7 @@ function c500311003.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		end
 	end
 end
-function c500311003.operation(e,tp,eg,ep,ev,re,r,rp)
+function c500311003.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
