@@ -2,7 +2,7 @@
 function c160008799.initial_effect(c)
 	c:EnableCounterPermit(0x88)
 	--link summon
-	aux.AddLinkProcedure(c,c160008799.matfilter,2,2)
+	Link.AddProcedure(c,nil,2,2)
 	c:EnableReviveLimit()
 	--Evolute
 	   local e1=Effect.CreateEffect(c)
