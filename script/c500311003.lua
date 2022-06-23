@@ -29,7 +29,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--e7:SetProperty(EFFECT_FLAG_DELAY)
 	e7:SetCode(EVENT_FREE_CHAIN)
 	--e7:SetCountLimit(1,500311003)
-	e7:SetCondition(c500311003.descon)
+	--e7:SetCondition(c500311003.descon)
 	e7:SetCost(c500311003.eqcost)
 	e7:SetTarget(c500311003.destg)
 	e7:SetOperation(c500311003.desop)
