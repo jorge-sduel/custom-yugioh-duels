@@ -54,29 +54,28 @@ end
 function c500311003.descon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c500311003.cfilter,1,nil)
 end
-function c500311003.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() end
-	if chk==0 then return true end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
-	local tc=g:GetFirst()
-	if tc and tc:IsAbleToDeck() then
-		Duel.SetOperationInfo(0,CATEGORY_TODECK,tc,1,0,0)
-		if not tc:IsType(TYPE_FUSION)  then
-			Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1000)
-		end
-	end
-end
-
 function c500311003.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
-function c500311003.desop(e,tp,eg,ep,ev,re,r,rp)
+function c500311003.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsOnField() end
+	if chk==0 then return true end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+	local tc=g:GetFirst()
+	if tc and tc:IsAbleToRemove() then
+		Duel.SetOperationInfo(0,CATEGORY_REMOVE,tc,1,0,0)
+		if tc:IsFaceup() and not tc:IsAttribute(ATTRIBUTE_DARK) then
+			Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1000)
+		end
+	end
+end
+function c500311003.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)
-		if tc:IsLocation(LOCATION_EXTRA) and not tc:IsType(TYPE_FUSION) then
+		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
+		if tc:IsLocation(LOCATION_REMOVED) and tc:IsType(TYPE_MONSTER) and not tc:IsAttribute(ATTRIBUTE_DARK) then
 			Duel.Damage(1-tp,1000,REASON_EFFECT)
 		end
 	end
