@@ -1,8 +1,10 @@
 --Saber Yasmin of Gust VINE
 function c160002156.initial_effect(c)
-	  aux.AddOrigEvoluteType(c)
+c160002156.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,4,c160002156.filter1,c160002156.filter2)
+	Evolute.AddProcedure(c,nil,2,99)
 		--immune
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -50,8 +52,8 @@ function c160002156.discon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)
 end
 function c160002156.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x88,4,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x88,4,REASON_COST)
+if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function c160002156.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
