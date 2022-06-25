@@ -71,9 +71,9 @@ function cid.drop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
+  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
   
- e:GetHandler():RemoveEC(tp,3,REASON_COST)
+ e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 
 end
 
