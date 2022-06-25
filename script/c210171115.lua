@@ -56,7 +56,7 @@ function c210171115.activate(e,tp,eg,ep,ev,re,r,rp)
 					local rct=Duel.Release(g,REASON_EFFECT)
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 					local cg=sg1:Select(tp,rct,rct,nil)
-					Duel.SendtoGrave(cg,nil,REASON_EFFECT)
+					Duel.SendtoGrave(cg,REASON_EFFECT)
 					sg1:Sub(cg)
 				end
 			end
