@@ -1,9 +1,10 @@
 --Crime Punisher
 function c500310045.initial_effect(c)
-		 aux.AddOrigEvoluteType(c)
+c500310045.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	c:SetSPSummonOnce(500310045)
- aux.AddEvoluteProc(c,nil,7,c500310045.filter1,c500310045.filter2)  
+	Evolute.AddProcedure(c,nil,2,99)  
 
 --spsummon proc
 	local e0=Effect.CreateEffect(c)
@@ -15,7 +16,7 @@ function c500310045.initial_effect(c)
 	e0:SetCountLimit(1,500310045)
 	e0:SetCondition(c500310045.hspcon)
 	e0:SetOperation(c500310045.hspop)
-	e0:SetValue(SUMMON_TYPE_SPECIAL+388)
+	e0:SetValue(SUMMON_TYPE_EVOLUTE)
 	c:RegisterEffect(e0)
 	 --disable
 	local e3=Effect.CreateEffect(c)
@@ -62,7 +63,7 @@ function c500310045.hspop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,500310045,RESET_PHASE+PHASE_END,0,1)
 end
 function c500310045.con(e,tp,eg,ep,ev,re,r,rp)
-	return  e:GetHandler():GetEC()==7
+	return  e:GetHandler():GetCounter(0x111f)==7
 end
 function c500310045.distg(e,c)
 	return c:GetSummonLocation()==LOCATION_EXTRA and not c:IsLinkState() and not c:IsImmuneToEffect(e) and not c:IsCode(500310045)
