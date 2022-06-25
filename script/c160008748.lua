@@ -75,7 +75,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.atkfilter(c)
-	return c:IsRace(RACE_BEAST)
+	return c:IsType(TYPE_MONSTER)
 end
 function cid.atkval(e,c)
 	return Duel.GetMatchingGroupCount(cid.atkfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)*-300
