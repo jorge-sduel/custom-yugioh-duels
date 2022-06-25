@@ -35,7 +35,7 @@ function cid.filter1(c,ec,tp)
 	return c:IsRace(RACE_BEAST) or c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function cid.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+388
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_EVOLUTE
 end
 function cid.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	   if chk==0 then return Duel.IsPlayerCanDraw(tp,3) end
