@@ -48,27 +48,8 @@ function cid.filter(c)
 end
 function cid.drop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	if Duel.Draw(p,d,REASON_EFFECT)==3 then
-		Duel.ShuffleHand(p)
-		Duel.BreakEffect()
-		local g=Duel.GetFieldGroup(p,LOCATION_HAND,0)
-		if g:IsExists(Card.IsRace,1,nil,RACE_BEAST) then
-			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_DISCARD)
-			local g1=g:Select(p,1,1,nil)
-			if g1:GetFirst():IsRace(RACE_BEAST) then
-				g:RemoveCard(g1:GetFirst())
-			else
-				g:Remove(cid.filter,nil)
-			end
-			Duel.Hint(HINT_SELECTMSG,p,HINTMSG_DISCARD)
-			local g2=g:Select(p,1,1,nil)
-			g1:Merge(g2)
-			Duel.SendtoGrave(g1,REASON_DISCARD+REASON_EFFECT)
-		else
-			Duel.ConfirmCards(1-p,g)
-			Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
-		end
-	end
+	Duel.Draw(p,d,REASON_EFFECT)
+	Duel.ShuffleHand(p)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
