@@ -21,7 +21,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e2:SetCountLimit(1,160002156)
 	e2:SetCondition(c160002156.drcon)
-	e2:SetTarget(c160002156.drtg)
+	--e2:SetTarget(c160002156.drtg)
 	e2:SetOperation(c160002156.drop)
 	c:RegisterEffect(e2)
 		--negate
