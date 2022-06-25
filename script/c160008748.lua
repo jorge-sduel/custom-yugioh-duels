@@ -14,7 +14,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetCountLimit(1,id)
 	e1:SetCondition(cid.drcon)
 	--e1:SetCost(cid.drcost)
-	e1:SetTarget(cid.drtg)
+	--e1:SetTarget(cid.drtg)
 	e1:SetOperation(cid.drop)
 	c:RegisterEffect(e1)
   --attack up
@@ -48,8 +48,8 @@ function cid.filter(c)
 end
 function cid.drop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	Duel.Draw(p,d,REASON_EFFECT)
-	Duel.ShuffleHand(p)
+	Duel.Draw(tp,3,REASON_EFFECT)
+	Duel.ShuffleHand(tp)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
