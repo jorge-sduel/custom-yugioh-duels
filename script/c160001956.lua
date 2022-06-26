@@ -38,16 +38,15 @@ function cid.filter2(c,ec,tp)
 	return c:IsRace(RACE_FAIRY) or c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function cid.filter3(c,ec,tp)
-	return not c:IsType(TYPE_EFFECT)
+	return c:IsType(TYPE_MONSTER)
 end
 
 
 function cid.repfilter(c,tp)
-	return c:IsFaceup() and  c:IsSetCard(0xc50)
-		and c:IsControler(tp) and  c:IsLocation(LOCATION_ONFIELD) and (c:IsReason(REASON_BATTLE) or (c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==1-tp)) and not c:IsReason(REASON_REPLACE)
+	return c:IsFaceup() and c:IsControler(tp) and  c:IsLocation(LOCATION_ONFIELD) and (c:IsReason(REASON_BATTLE) or (c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==1-tp)) and not c:IsReason(REASON_REPLACE)
 end
 function cid.repfilterxxl(c,e)
-	return not c:IsType(TYPE_EFFECT)
+	return c:IsType(TYPE_MONSTER)
 		and c:IsAbleToRemove() and c:IsFaceup()
 end
 function cid.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -76,19 +75,19 @@ function cid.filter(c,e,tp)
 	return c:IsType(TYPE_EFFECT) and c:IsAbleToHand()
 end
 function cid.desfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsSetCard(0xc50)
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM)
 	  --  and Duel.IsExistingMatchingCard(cid.filter(c),0,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c)
 end
 function cid.costfilter(c)
-	return c:IsAbleToRemoveAsCost()  and  c:IsType(TYPE_PENDULUM)  and not c:IsType(TYPE_EFFECT)  and c:IsFaceup()
+	return c:IsAbleToRemoveAsCost() and c:IsType(TYPE_PENDULUM) and c:IsFaceup()
 end
 function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
    local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_EXTRA,0,1,nil) end
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_EXTRA,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,cid.costfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 	c:RegisterFlagEffect(id,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 
