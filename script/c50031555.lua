@@ -1,8 +1,10 @@
 --Yasmin Queen of Rose VINE
-
 function c50031555.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,10,c50031555.filter1,c50031555.filter2,c50031555.filter3,3,99)
+c50031555.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit()
   --spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -64,7 +66,7 @@ function c50031555.splimit(e,se,sp,st)
 	return st==SUMMON_TYPE_SPECIAL+388
 end
 function c50031555.immcon(e)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+388 and e:GetHandler():IsLinkState()
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_EVOLUTE
 end
 --function c50031555.efilter(e,te)
   --  if te:IsActiveType(TYPE_SPELL+TYPE_TRAP) then return true end
@@ -100,8 +102,8 @@ function c50031555.condition2(e,tp,eg,ep,ev,re,r,rp)
 end
 function c50031555.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	   local c=e:GetHandler()
-  if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	 e:GetHandler():RemoveEC(tp,3,REASON_COST)
+  if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	 e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c50031555.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
