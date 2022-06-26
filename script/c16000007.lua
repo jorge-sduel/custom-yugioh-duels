@@ -5,7 +5,7 @@ function c16000007.initial_effect(c)
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	  --synchro summon
-   Evolute.AddProcedure(c,c16000007.matfilter,2,99,c16000007.lcheck)
+   Evolute.AddProcedure(c,nil,2,99,c16000007.lcheck)
   --atk up
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
@@ -60,7 +60,7 @@ function c16000007.matfilter(c,ec,tp)
 	return (c:IsAttribute(ATTRIBUTE_LIGHT) or c:IsAttribute(ATTRIBUTE_DARK)) and c:IsRace(RACE_CYBERSE) 
 end
 function c16000007.rcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT) or g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
+	return (g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_LIGHT) or g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK))
 		and g:IsExists(Card.IsRace,1,nil,RACE_CYBERSE)
 end
 function c16000007.atkcon(e,tp,eg,ep,ev,re,r,rp)
