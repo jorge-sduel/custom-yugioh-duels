@@ -64,14 +64,14 @@ function cid.filter2(c,ec,tp)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) or c:IsRace(RACE_FAIRY) 
 end
 function cid.costfilter(c)
-	return c:IsAbleToRemoveAsCost() and c:IsType(TYPE_NORMAL) and (c:IsType(TYPE_PENDULUM) and c:IsFaceup())
+	return c:IsAbleToRemoveAsCost() and (c:IsType(TYPE_PENDULUM) and c:IsFaceup())
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,2,REASON_COST)  and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_EXTRA,0,1,c) end
+if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST)  and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_EXTRA,0,1,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,cid.costfilter,tp,LOCATION_EXTRA,0,1,1,e:GetHandler())
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	 e:GetHandler():RemoveEC(tp,2,REASON_COST)
+	 e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function cid.filter(c)
 	return c:IsFaceup() and c:IsType(TYPE_EFFECT) and not c:IsDisabled()
