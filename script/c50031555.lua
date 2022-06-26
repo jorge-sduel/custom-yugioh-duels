@@ -63,7 +63,7 @@ function c50031555.mfilter2(c) return c:IsAttribute(ATTRIBUTE_FIRE) end
 function c50031555.mfilter3(c) 
 return c:IsType(TYPE_NORMAL) end
 function c50031555.splimit(e,se,sp,st)
-	return st==SUMMON_TYPE_SPECIAL+388
+	return st==SUMMON_TYPE_EVOLUTE
 end
 function c50031555.immcon(e)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_EVOLUTE
@@ -121,7 +121,7 @@ function c50031555.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousPosition(POS_FACEUP) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function c50031555.thfilter(c,e,tp)
-	return c:IsSetCard(0x85a) and c:IsType(TYPE_MONSTER) and  c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_MONSTER) and  c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c50031555.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	   if chkc then return chkc:GetLocation()==LOCATION_GRAVE and chkc:GetControler()==tp
