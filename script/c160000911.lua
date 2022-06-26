@@ -108,8 +108,8 @@ end
 
 function c160000911.cost(e,tp,eg,ep,ev,re,r,rp,chk)
  local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,5,REASON_COST)  end
-	e:GetHandler():RemoveEC(tp,5,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,5,REASON_COST)  end
+	e:GetHandler():RemoveCounter(tp,0x111f,5,REASON_COST)
 	c:RegisterFlagEffect(160000911,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 function c160000911.target(e,tp,eg,ep,ev,re,r,rp,chk)
