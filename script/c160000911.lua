@@ -1,7 +1,10 @@
 --Carole, Empress of Fiber VINE
 function c160000911.initial_effect(c)
-		 aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,8,c160000911.filter1,c160000911.filter2,2,99)
+c160000911.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit()
 
  --battle indes
@@ -74,17 +77,17 @@ function c160000911.filter2(c,ec,tp)
 end
 
 function c160000911.cfilter(c)
-	return c:IsSetCard(0x85a) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
 end
 
 function c160000911.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
  local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST)  end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST)  end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 	c:RegisterFlagEffect(160000911,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 function c160000911.filter(c)
-	return c:IsSetCard(0x185a) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function c160000911.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:GetControler()==tp and chkc:GetLocation()==LOCATION_GRAVE and c160000911.filter(chkc) end
@@ -143,7 +146,7 @@ function c160000911.limit(ch)
 	end
 end
 function c160000911.cfilter(c)
-	return c:IsSetCard(0x185a) and c:IsAbleToRemoveAsCost()
+	return c:IsAbleToRemoveAsCost()
 end
 
 function c160000911.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
