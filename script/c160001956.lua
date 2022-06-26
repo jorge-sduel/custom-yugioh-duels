@@ -47,7 +47,7 @@ function cid.repfilter(c,tp)
 end
 function cid.repfilterxxl(c,e)
 	return c:IsType(TYPE_MONSTER)
-		and c:IsAbleToRemove() and c:IsFaceup()
+		and c:IsAbleToRemove()
 end
 function cid.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToRemove() and eg:IsExists(cid.repfilter,1,nil,tp)  and Duel.IsExistingMatchingCard(cid.repfilterxxl,tp,LOCATION_EXTRA,0,1,c,e) end
