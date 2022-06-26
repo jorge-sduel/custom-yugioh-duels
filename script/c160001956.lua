@@ -1,8 +1,11 @@
 --Paintress EX :Assalia Witchiee
 local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigEvoluteType(c)
-aux.AddEvoluteProc(c,nil,7,cid.filter1,cid.filter2,cid.filter3,1,99)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 		--destroy replace
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
