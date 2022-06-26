@@ -80,7 +80,7 @@ function cid.filtersex(c)
 	return c:IsFaceup()  and not c:IsDisabled()
 end
 function cid.sscon(e,tp,eg,ep,ev,re,r,rp)
-return aux.exccon(e) and c:IsPreviousLocation(LOCATION_ONFIELD)
+return  e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and cid.filter(chkc) end
