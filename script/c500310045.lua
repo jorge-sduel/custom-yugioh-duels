@@ -66,7 +66,7 @@ function c500310045.con(e,tp,eg,ep,ev,re,r,rp)
 	return  e:GetHandler():GetCounter(0x111f)==7
 end
 function c500310045.distg(e,c)
-	return c:GetSummonLocation()==LOCATION_EXTRA and not c:IsCode(500310045)
+	return c:GetSummonLocation()==LOCATION_EXTRA and c:IsAttackBelow(e:GetHandler():GetAttack()) and not c:IsCode(500310045)
 end
 function c500310045.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
