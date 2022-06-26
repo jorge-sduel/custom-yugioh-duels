@@ -1,7 +1,7 @@
 --Burning Red Dragon Archfiend
 function c999913.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,nil,aux.NonTuner(nil),1)
+	Synchro.AddProcedure(c,1,1,nil,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--to hand
 	local e1=Effect.CreateEffect(c)
