@@ -12,7 +12,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetCategory(CATEGORY_REMOVE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+	--e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCountLimit(1,160003541)
 	e1:SetCondition(c160003541.descon)
 	e1:SetTarget(c160003541.destg)
@@ -85,8 +85,8 @@ function c160003541.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function c160003541.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
-		if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+		if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c160003541.pmfilter(c)
 	return c:IsType(TYPE_RITUAL)
