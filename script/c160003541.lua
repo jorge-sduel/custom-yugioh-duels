@@ -1,6 +1,9 @@
 function c160003541.initial_effect(c)
-	   aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,7,c160003541.filter1,c160003541.filter2,2,99)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit() 
 
 		--destroy
@@ -74,11 +77,11 @@ function c160003541.filter1(c)
 end
 function c160003541.descon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:GetSummonType()==SUMMON_TYPE_SPECIAL+388 and c:GetMaterial():IsExists(c160003541.pmfilter,1,nil)
+	return c:GetSummonType()==SUMMON_TYPE_EVOLUTE
 end
 function c160003541.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function c160003541.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
