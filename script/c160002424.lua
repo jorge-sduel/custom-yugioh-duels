@@ -1,8 +1,10 @@
 --Paintress EX - Surrealist Dali
 function c160002424.initial_effect(c)
-	  --evolute procedure
-	aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,6,c160002424.filter1,c160002424.filter1,2,99)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit()
 	  --atk down
 --to deck
@@ -46,11 +48,11 @@ end
  --   return c:IsFaceup() and c:IsType(TYPE_MONSTER) and not c:IsType(TYPE_EFFECT)
 --end
 function c160002424.hdcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c160002424.thfilter(c)
-	return c:IsSetCard(0xc52)  and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
 end
 function c160002424.thfilter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
@@ -79,7 +81,7 @@ function c160002424.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function c160002424.filter(c)
-	return c:IsSetCard(0xc50) and c:IsAbleToHand()
+	return c:IsAbleToHand()
 end
 
 function c160002424.retcon(e,tp,eg,ep,ev,re,r,rp)
