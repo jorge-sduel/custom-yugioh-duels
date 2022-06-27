@@ -7,16 +7,16 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit() 
 		--destroy
-	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_REMOVE)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	--local e1=Effect.CreateEffect(c)
+	--e1:SetCategory(CATEGORY_REMOVE)
+	--e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	--e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	--e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCountLimit(1,160003541)
+	--e1:SetCountLimit(1,160003541)
 	--e1:SetCondition(Evolute.sumcon)
 	--e1:SetTarget(c160003541.destg)
-	e1:SetOperation(c160003541.desop)
-	c:RegisterEffect(e1)
+	--e1:SetOperation(c160003541.desop)
+	--c:RegisterEffect(e1)
 	--atk change
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(160003541,1))
@@ -111,8 +111,8 @@ function c160003541.con(e,c)
 end
 
 function c160003541.discost(e,tp,eg,ep,ev,re,r,rp,chk)
- if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0X111f,3,REASON_COST) end
-		e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
+ if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0X111f,2,REASON_COST) end
+		e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 
 function c160003541.atkcon(e,tp,eg,ep,ev,re,r,rp)
