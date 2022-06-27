@@ -88,7 +88,7 @@ function c160003541.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c160003541.pmfilter1(c)
-	return c:IsSummon(SUMMON_TYPE_SPECIAL)
+	return c:IsSummonType(SUMMON_TYPE_SPECIAL)
 end
 function c160003541.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(c160003541.filter1,tp,0,LOCATION_ONFIELD,2,nil) end
