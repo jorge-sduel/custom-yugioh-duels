@@ -13,7 +13,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCountLimit(1,160003541)
-	--e1:SetCondition(Evolute.sumcon)
+	e1:SetCondition(Evolute.sumcon)
 	e1:SetTarget(c160003541.destg)
 	e1:SetOperation(c160003541.desop)
 	c:RegisterEffect(e1)
