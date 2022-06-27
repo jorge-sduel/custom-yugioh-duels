@@ -6,7 +6,6 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit() 
-
 		--destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_REMOVE)
@@ -14,7 +13,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	--e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCountLimit(1,160003541)
-	e1:SetCondition(c160003541.descon)
+	e1:SetCondition(Evolute.sumcon)
 	e1:SetTarget(c160003541.destg)
 	e1:SetOperation(c160003541.desop)
 	c:RegisterEffect(e1)
@@ -88,8 +87,8 @@ function c160003541.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 		if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
-function c160003541.pmfilter(c)
-	return c:IsType(TYPE_RITUAL)
+function c160003541.pmfilter1(c)
+	return c:IsSummon(SUMMON_TYPE_SPECIAL) and c:IsPreviusLocation(LOCATION_EXTRA)
 end
 function c160003541.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(c160003541.filter1,tp,0,LOCATION_ONFIELD,2,nil) end
@@ -112,8 +111,8 @@ function c160003541.con(e,c)
 end
 
 function c160003541.discost(e,tp,eg,ep,ev,re,r,rp,chk)
- if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-		e:GetHandler():RemoveEC(tp,3,REASON_COST)
+ if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0X111f,3,REASON_COST) end
+		e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 
 function c160003541.atkcon(e,tp,eg,ep,ev,re,r,rp)
