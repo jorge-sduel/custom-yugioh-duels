@@ -96,7 +96,7 @@ function c160003541.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c160003541.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,c160003541.filter1,tp,0,LOCATION_ONFIELD,2,2,nil)
+	local g=Duel.SelectMatchingCard(tp,c160003541.pmfilter1,tp,0,LOCATION_ONFIELD,2,2,nil)
 	if g:GetCount()>0 then 
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	end
