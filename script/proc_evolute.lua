@@ -60,7 +60,7 @@ function Card.IsEvolute(c)
 	return c.IsEvolute
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
-	return ((not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and ((c:IsFaceup() and c:IsLocation(lc)) or (c:IsHasEffect(16000820,tp) and c:IsLocation(LOCATION_HAND)))) and not c:IsHasEffect(50031787,tp)
+	return ((not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and ((c:IsFaceup() and c:IsLocation(LOCATION_MZONE)) or (c:IsHasEffect(16000820,tp) and c:IsLocation(LOCATION_HAND)))) and not c:IsHasEffect(50031787,tp)
 end
 function Evolute.GetEvoluteCount(c)
     if c:GetLevel()>0 then return c:GetLevel()
