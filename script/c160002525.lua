@@ -56,8 +56,8 @@ function c160002525.filter(c,e,tp)
 end
 function c160002525.cost(e,tp,eg,ep,ev,re,r,rp,chk)
    local c=e:GetHandler()
-		 if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+		 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function c160002525.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return   Duel.GetLocationCountFromEx(1-tp)>0 and
@@ -96,6 +96,7 @@ function c160002525.operation(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e3)
 	tc:RegisterEffect(e3,true)
 		Duel.SpecialSummonComplete()
+		Duel.Recover(tp,tc:GetAttack(),REASON_EFFECT)
 	end
 end
 end
@@ -127,7 +128,8 @@ function c160002525.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,c160002525.sipfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	if g:GetCount()>0 then
 	  local tc=g:GetFirst()
-	 tc:AddEC(3)
+	 tc:AddCounter(0x111f,3)
+		Duel.Recover(1-tp,tc:GetAttack(),REASON_EFFECT)
 	end
 end
 	end
