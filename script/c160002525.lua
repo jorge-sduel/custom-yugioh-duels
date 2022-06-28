@@ -46,7 +46,7 @@ function c160002525.filter1(c,ec,tp)
 	return c:IsAttribute(ATTRIBUTE_DARK) or c:IsRace(RACE_PLANT)
 end
 function c160002525.atkfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x185a) and (c:IsType(TYPE_RITUAL) or c:IsType(TYPE_EVOLUTE) )
+	return c:IsFaceup() and (c:IsType(TYPE_RITUAL) or c.Is_Evolute)
 end
 function c160002525.val(e,c)
 	return Duel.GetMatchingGroupCount(c160002525.atkfilter,0,LOCATION_MZONE,LOCATION_MZONE,c)*300
