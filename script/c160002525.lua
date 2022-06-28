@@ -1,8 +1,10 @@
 --Pixie Hesperiidae of Fiber VINE 
 function c160002525.initial_effect(c)
-		   aux.AddOrigEvoluteType(c)
+c160002525.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,6,c160002525.filter1,c160002525.filter1,2,99)
+	Evolute.AddProcedure(c,nil,2,99)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetDescription(aux.Stringid(160002525,0))
