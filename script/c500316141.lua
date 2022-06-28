@@ -1,9 +1,11 @@
 --Paintress EX: Coupé-out Matissa
 local cid,id=GetID()
 function cid.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,7,cid.filter1,aux.TRUE,2,99)  
+	Evolute.AddProcedure(c,nil,2,99)  
    --remove
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(500316141,0))
@@ -47,7 +49,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e8)
 end
 function cid.filter3(c,ec,tp)
-	return not c:IsType(TYPE_EFFECT)
+	return c:IsType(TYPE_MONSTER)
 end
 
 function cid.costfilter(c)
@@ -55,11 +57,11 @@ function cid.costfilter(c)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nil) end
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,cid.costfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 	c:RegisterFlagEffect(500316141,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 function cid.filterxx(c,ec,tp)
