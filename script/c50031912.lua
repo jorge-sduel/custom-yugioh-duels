@@ -1,7 +1,10 @@
 --Shomesa, Sunflower  of Rose VINE
 function c50031912.initial_effect(c)
-		aux.AddOrigEvoluteType(c)
- aux.AddEvoluteProc(c,nil,9,c50031912.mfilter1,c50031912.mfilter2,c50031912.mfilter3,3,99)
+c50031912.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit()
   --spsummon condition
 	local e1=Effect.CreateEffect(c)
@@ -16,7 +19,7 @@ function c50031912.initial_effect(c)
 	e3:SetCategory(CATEGORY_REMOVE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e3:SetCondition(c50031912.remcon)
+	e3:SetCondition(Evolute.sumcon)
 	e3:SetCost(c50031912.remcost)
 	e3:SetTarget(c50031912.remtg)
 	e3:SetOperation(c50031912.remop)
@@ -50,7 +53,7 @@ function c50031912.check1(c,sg,tp)
 end
 
 function c50031912.remcon(e,tp,eg,ep,ev,re,r,rp)
-		return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+388 and e:GetHandler():IsLinkState()
+		return e:GetHandler():GetSummonType()==SUMMON_TYPE_EVOLUTE
 end
 function c50031912.remcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -109,7 +112,7 @@ function c50031912.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousPosition(POS_FACEUP) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function c50031912.filter(c)
-	return c:IsType(TYPE_NORMAL) and c:IsAbleToDeck()
+	return c:IsAbleToDeck()
 end
 function c50031912.sumtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and c50031912.filter(chkc) end
