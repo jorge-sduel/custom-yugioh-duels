@@ -52,7 +52,7 @@ function c160002525.val(e,c)
 	return Duel.GetMatchingGroupCount(c160002525.atkfilter,0,LOCATION_MZONE,LOCATION_MZONE,c)*300
 end
 function c160002525.filter(c,e,tp)
-	return not  c:IsType(TYPE_EVOLUTE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)
+	return not c.Is_Evolute and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp)
 end
 function c160002525.cost(e,tp,eg,ep,ev,re,r,rp,chk)
    local c=e:GetHandler()
