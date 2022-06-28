@@ -74,7 +74,7 @@ function cid.disable(e,c)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveCounter(tp0x111f,2,REASON_COST) end
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
 	c:RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function cid.filter(c)
