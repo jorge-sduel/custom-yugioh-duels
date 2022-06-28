@@ -118,7 +118,7 @@ function c160002525.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function c160002525.sipfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_EVOLUTE) 
+	return c:IsFaceup() and c.Is_Evolute
 end
 function c160002525.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
