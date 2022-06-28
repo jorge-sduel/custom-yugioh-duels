@@ -42,6 +42,9 @@ aux.AddEvoluteSummonProcedure(c,c50031912.trishula,LOCATION_MZONE)
 	e6:SetCode(EVENT_TO_DECK)
 	c:RegisterEffect(e6)
 end
+function c50031912.trishula(c)
+	return c:IsCode(52687916)
+end
 function c50031912.splimit(e,se,sp,st)
 	return st==SUMMON_TYPE_SPECIAL+388
 end
