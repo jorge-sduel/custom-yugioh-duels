@@ -6,7 +6,7 @@ cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,3,99,nil,true,LOCATION_HAND)
+	Evolute.AddProcedure(c,nil,3,99,nil,nil,LOCATION_HAND)
 	--local e6=Effect.CreateEffect(c)
 	--e6:SetType(EFFECT_TYPE_FIELD)
 	--e6:SetCode(EFFECT_CANNOT_BE_EVOLUTE_MATERIAL)
@@ -20,7 +20,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e5:SetRange(LOCATION_EXTRA)
 	e5:SetCode(16000820)
 	e5:SetTargetRange(LOCATION_HAND,0)
-	--e5:SetTarget(cid.sumlimit)
+	e5:SetValue(cid.code)
 	c:RegisterEffect(e5)
 	--c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsSetCard,0x6c97))
 	local e1=Effect.CreateEffect(c)
@@ -61,6 +61,9 @@ function cid.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 end
 function cid.tgfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x3c97)
+end
+function cid.code(c)
+	return c:IsCode(id)
 end
 function cid.tgcon(e)
 	return Duel.IsExistingMatchingCard(cid.tgfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
