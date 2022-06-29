@@ -70,9 +70,9 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmDecktop(tp,3)
 	local g=Duel.GetDecktopGroup(tp,3)
 	local sel=0
-	if g:IsExists(function(tc) return tc:IsSetCard(0xa34) and tc:IsType(TYPE_MONSTER) end,1,nil) then sel=sel+1 end
-	if g:IsExists(function(tc) return tc:IsSetCard(0xa34) and tc:IsType(TYPE_SPELL) end,1,nil) then sel=sel+2 end
-	if g:IsExists(function(tc) return tc:IsSetCard(0xa34) and tc:IsType(TYPE_TRAP) end,1,nil) then sel=sel+4 end
+	if g:IsExists(function(tc) return tc:IsType(TYPE_MONSTER) end,1,nil) then sel=sel+1 end
+	if g:IsExists(function(tc) return tc:IsType(TYPE_SPELL) end,1,nil) then sel=sel+2 end
+	if g:IsExists(function(tc) return tc:IsType(TYPE_TRAP) end,1,nil) then sel=sel+4 end
 	--setting the option
 	if sel==1 then
 		Duel.SelectOption(tp,aux.Stringid(id,1))
