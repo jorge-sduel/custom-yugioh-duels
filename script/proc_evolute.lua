@@ -64,7 +64,7 @@ function Evolute.IsLocation(c,loc)
 	return (c:IsType(TYPE_MONSTER) and c:IsLocation(loc)) and not c:IsHasEffect(16000820)
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
-	return ((not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and ((c:IsFaceup()) or (c:IsHasEffect(16000820) and c:IsLocation(LOCATION_HAND)))) and not c:IsHasEffect(50031787,tp)
+	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and not c:IsHasEffect(50031787,tp)
 end
 function Evolute.GetEvoluteCount(c)
     if c:GetLevel()>0 then return c:GetLevel()
