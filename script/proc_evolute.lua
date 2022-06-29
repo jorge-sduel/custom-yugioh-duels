@@ -28,7 +28,7 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	-- 5 >> deck
 	-- 6 >> destroy
 	if loc==nil then loc=LOCATION_MZONE+LOCATION_HAND end
-	if loc==LOCATION_HAND then loc=LOCATION_MZONE+LOCATION_HAND end
+	--if loc==LOCATION_HAND then loc=LOCATION_MZONE+LOCATION_HAND end
 	if c.evolute_type==nil then
 		local mt=c:GetMetatable()
 		mt.evolute_type=1
@@ -62,8 +62,8 @@ function Card.IsEvolute(c)
 end
 function Evolute.IsLocation(c,loc)
 	if loc==nil then loc=LOCATION_MZONE end
-	if loc==LOCATION_HAND then loc=LOCATION_MZONE+LOCATION_HAND end
-	return c:IsLocation(loc) or c:IsHasEffect(16000820) 
+	-(if loc==LOCATION_HAND then loc=LOCATION_MZONE+LOCATION_HAND end
+	return c:IsLocation(loc+LOCATION_MZONE) or c:IsHasEffect(16000820) 
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
 	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and not c:IsHasEffect(50031787,tp)
