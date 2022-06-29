@@ -6,7 +6,7 @@ cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,3,99,nil,nil,LOCATION_HAND)
+	Evolute.AddProcedure(c,nil,3,99)
 	--local e6=Effect.CreateEffect(c)
 	--e6:SetType(EFFECT_TYPE_FIELD)
 	--e6:SetCode(EFFECT_CANNOT_BE_EVOLUTE_MATERIAL)
