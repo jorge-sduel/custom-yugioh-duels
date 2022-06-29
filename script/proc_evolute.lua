@@ -65,7 +65,7 @@ end
 function Evolute.GetEvoluteCount(c)
     if c:GetLevel()>0 then return c:GetLevel()
     elseif c:GetRank()>0 then return c:GetRank() end
-    return 0
+    return 1
 end
 function Evolute.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	if #sg>maxc then return false end
