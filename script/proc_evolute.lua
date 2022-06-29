@@ -58,19 +58,19 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	c:RegisterEffect(e2)
 end
 function Card.IsEvolute(c)
-	return c.IsEvolute
+	return c.Is_Evolute
 end
 function Evolute.IsLocation(c,e,loc,loc1)
 	if loc==nil then loc1=LOCATION_MZONE end
 	--if c:IsCode(221594325) then loc1=LOCATION_HAND end
-	return c:IsLocation(loc1) or c:IsHasEffect(16000820,tp) 
+	return c:IsLocation(loc1) or c:IsHasEffect(16000820,tp)
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
 	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and not c:IsHasEffect(50031787,tp)
 end
 function Evolute.GetEvoluteCount(c)
-    if c:GetLevel()>0 then return c:GetLevel()
-    elseif c:GetRank()>0 then return c:GetRank() end
+    if c:GetLevel()>=1 then return c:GetLevel()
+    elseif c:GetRank()>=1 then return c:GetRank() end
     return 1
 end
 function Evolute.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
