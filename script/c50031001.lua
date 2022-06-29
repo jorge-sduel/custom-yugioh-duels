@@ -1,9 +1,11 @@
 --Sweethard-Powered: Tyla Kitten
 local cid,id=GetID()
 function cid.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
- aux.AddEvoluteProc(c,nil,6,cid.filter1,cid.filter2,2,99)  
+	Evolute.AddProcedure(c,nil,2,99)  
 
 --spsummon proc
 	local e0=Effect.CreateEffect(c)
@@ -15,7 +17,7 @@ function cid.initial_effect(c)
 	e0:SetCountLimit(1,id)
 	e0:SetCondition(cid.hspcon)
 	e0:SetOperation(cid.hspop)
-	e0:SetValue(SUMMON_TYPE_SPECIAL+388)
+	e0:SetValue(SUMMON_TYPE_EVOLUTE)
 	c:RegisterEffect(e0)
 		--deck check
 	local e1=Effect.CreateEffect(c)
@@ -38,7 +40,7 @@ function cid.filter2(c,ec,tp)
 	return c:IsRace(RACE_BEASTWARRIOR)
 end
 function cid.spfilter(c)
-	return c:IsFaceup() and c:IsCode(500310010) 
+	return c:IsFaceup() and c:IsType(TYPE_XYZ) 
 end
 function cid.hspcon(e,c)
   if c==nil then return true end
@@ -55,8 +57,8 @@ function cid.hspop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-   if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	 e:GetHandler():RemoveEC(tp,4,REASON_COST)
+   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	 e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetDecktopGroup(tp,3):GetCount()==3 end
@@ -66,9 +68,9 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ConfirmDecktop(tp,3)
 	local g=Duel.GetDecktopGroup(tp,3)
 	local sel=0
-	if g:IsExists(function(tc) return tc:IsSetCard(0xa34) and tc:IsType(TYPE_MONSTER) end,1,nil) then sel=sel+1 end
-	if g:IsExists(function(tc) return tc:IsSetCard(0xa34) and tc:IsType(TYPE_SPELL) end,1,nil) then sel=sel+2 end
-	if g:IsExists(function(tc) return tc:IsSetCard(0xa34) and tc:IsType(TYPE_TRAP) end,1,nil) then sel=sel+4 end
+	if g:IsExists(function(tc) return tc:IsType(TYPE_MONSTER) end,1,nil) then sel=sel+1 end
+	if g:IsExists(function(tc) return tc:IsType(TYPE_SPELL) end,1,nil) then sel=sel+2 end
+	if g:IsExists(function(tc) return tc:IsType(TYPE_TRAP) end,1,nil) then sel=sel+4 end
 	--setting the option
 	if sel==1 then
 		Duel.SelectOption(tp,aux.Stringid(id,1))
@@ -121,7 +123,7 @@ function cid.retcon(e,tp,eg,ep,ev,re,r,rp)
 		and e:GetHandler():GetPreviousControler()==tp
 end
 function cid.thfilter(c)
-	return c:IsSetCard(0xa34) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function cid.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
 	  if chk==0 then return Duel.IsExistingMatchingCard(cid.thfilter,tp,LOCATION_DECK,0,1,nil) end
