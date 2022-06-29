@@ -62,7 +62,7 @@ function Card.IsEvolute(c)
 end
 function Evolute.IsLocation(c,loc)
 	if loc==nil then loc=LOCATION_MZONE end
-	-(if loc==LOCATION_HAND then loc=LOCATION_MZONE+LOCATION_HAND end
+	--if loc==LOCATION_HAND then loc=LOCATION_MZONE+LOCATION_HAND end
 	return c:IsLocation(loc+LOCATION_MZONE) or c:IsHasEffect(16000820) 
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
