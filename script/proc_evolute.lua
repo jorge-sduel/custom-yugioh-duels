@@ -59,6 +59,10 @@ end
 function Card.IsEvolute(c)
 	return c.IsEvolute
 end
+function Evolute.IsLocation(c,loc)
+	if loc==nil then loc=LOCATION_MZONE end
+	return c:IsType(TYPE_MONSTER)
+end
 function Evolute.ConditionFilter(c,f,lc,tp)
 	return ((not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and ((c:IsFaceup() and c:IsLocation(LOCATION_MZONE)) or (c:IsHasEffect(16000820) and c:IsLocation(LOCATION_HAND)))) and not c:IsHasEffect(50031787,tp)
 end
@@ -137,7 +141,7 @@ function Evolute.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,loc2,nil)
+					g=Duel.GetMatchingGroup(Evolute.IsLocation,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,loc2,nil)
 				end
 				local mg=g:Filter(Evolute.ConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
@@ -168,7 +172,7 @@ function Evolute.Target(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,loc2,nil)
+					g=Duel.GetMatchingGroup(Evolute.IsLocation,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,loc2,nil)
 				end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
