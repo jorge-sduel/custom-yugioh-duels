@@ -1,22 +1,25 @@
 --Sweethard-Powered: Lyla Coyote
 local cid,id=GetID()
 function cid.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
- aux.AddEvoluteProc(c,nil,5,cid.filter1,cid.filter2,2,99)  
+	Evolute.AddProcedure(c,nil,2,99)  
+aux.AddEvoluteSummonProcedure(c,cid.spfilter,LOCATION_MZONE)  
 
 --spsummon proc
-	local e0=Effect.CreateEffect(c)
-	e0:SetDescription(aux.Stringid(id,0))
-	e0:SetType(EFFECT_TYPE_FIELD)
-	e0:SetCode(EFFECT_SPSUMMON_PROC)
-	e0:SetProperty(EFFECT_FLAG_UNCOPYABLE)
-	e0:SetRange(LOCATION_EXTRA)
-	e0:SetCountLimit(1,id)
-	e0:SetCondition(cid.hspcon)
-	e0:SetOperation(cid.hspop)
-	e0:SetValue(SUMMON_TYPE_SPECIAL+388)
-	c:RegisterEffect(e0)
+	--local e0=Effect.CreateEffect(c)
+	--e0:SetDescription(aux.Stringid(id,0))
+	--e0:SetType(EFFECT_TYPE_FIELD)
+	--e0:SetCode(EFFECT_SPSUMMON_PROC)
+	--e0:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	--e0:SetRange(LOCATION_EXTRA)
+	--e0:SetCountLimit(1,id)
+	--e0:SetCondition(cid.hspcon)
+	--e0:SetOperation(cid.hspop)
+	--e0:SetValue(SUMMON_TYPE_SPECIAL+388)
+	--c:RegisterEffect(e0)
 		--deck check
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -38,7 +41,7 @@ function cid.filter2(c,ec,tp)
 	return c:IsRace(RACE_BEASTWARRIOR)
 end
 function cid.spfilter(c)
-	return c:IsFaceup() and c:IsCode(500310020) 
+	return c:IsFaceup() and c:IsType(TYPE_XYZ) 
 end
 function cid.hspcon(e,c)
   if c==nil then return true end
@@ -56,8 +59,8 @@ end
 
 
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,5,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,5,REASON_COST)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetDecktopGroup(tp,3):GetCount()==3 end
