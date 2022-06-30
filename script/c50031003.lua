@@ -1,4 +1,5 @@
 --Sweethard-Powered: Sagi Rabbit
+local cid,id=GetID()
 function cid.initial_effect(c)
 cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
