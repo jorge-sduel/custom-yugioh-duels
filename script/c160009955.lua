@@ -4,7 +4,7 @@ c160009955.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,nil,2,2,c160009955.rcheck)  
+	Evolute.AddProcedure(c,nil,2,99,c160009955.rcheck)  
 		--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(160009955,0))
@@ -34,7 +34,18 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetCondition(c160009955.condition)
 	e3:SetValue(2100)
 	c:RegisterEffect(e3)
-  Duel.AddCustomActivityCounter(160009955,ACTIVITY_SPSUMMON,c160009955.counterfilter)
+--draw
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(id,0))
+	e4:SetCategory(CATEGORY_DRAW)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e4:SetCode(EVENT_TO_GRAVE)
+	e4:SetCondition(c160009955.condition4)
+	e4:SetTarget(c160009955.target4)
+	e4:SetOperation(c160009955.operation4)
+	c:RegisterEffect(e4)
+  --Duel.AddCustomActivityCounter(160009955,ACTIVITY_SPSUMMON,c160009955.counterfilter)
 end
 function c160009955.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE)
@@ -45,14 +56,14 @@ function c160009955.counterfilter(c)
 end
 function c160009955.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) and Duel.GetCustomActivityCount(160009955,tp,ACTIVITY_SPSUMMON)==0 end
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
-	e1:SetTargetRange(1,0)
-	e1:SetTarget(c160009955.splimit)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	Duel.RegisterEffect(e1,tp)
+	--local e1=Effect.CreateEffect(e:GetHandler())
+	--e1:SetType(EFFECT_TYPE_FIELD)
+	--e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+	--e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
+	--e1:SetTargetRange(1,0)
+	--e1:SetTarget(c160009955.splimit)
+	--e1:SetReset(RESET_PHASE+PHASE_END)
+	--Duel.RegisterEffect(e1,tp)
 	 e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function c160009955.splimit(e,c,sump,sumtype,sumpos,targetp)
@@ -79,4 +90,18 @@ function c160009955.filter1(c,ec,tp)
 end
 function c160009955.condition(e)
 	return e:GetHandler():GetOriginalRace()==RACE_MACHINE
+end
+function c160009955.condition4(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:IsReason(REASON_DESTROY)
+end
+function c160009955.target4(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetParam(2)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
+end
+function c160009955.operation4(e,tp,eg,ep,ev,re,r,rp)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Draw(p,d,REASON_EFFECT)
 end
