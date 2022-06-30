@@ -1,13 +1,7 @@
 --Cybernetic Integration
 function c2101997264.initial_effect(c)
 	--Activate
-	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON+CATEGORY_DECKDES)
-	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetTarget(c2101997264.target)
-	e1:SetOperation(c2101997264.activate)
-	c:RegisterEffect(e1)
+c:RegisterEffect(Fusion.CreateSummonEff(c,aux.FilterBoolFunction(Card.IsRace,RACE_MACHINE)))
 end
 c2101997264.card_code_list={70095154}
 function c2101997264.fcheck(tp,sg,fc,mg)
