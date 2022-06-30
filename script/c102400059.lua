@@ -37,7 +37,7 @@ function cid.tgfilter(c,e,tp,n)
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
 end
 function cid.spfilter(c,tc,tp)
-	return c:IsType(TYPE_FUSION) and c:IsMaterialListCode(CARD_CYBER_DRAGON)
+	return c:IsType(TYPE_FUSION) and aux.IsMaterialListCode(c,CARD_CYBER_DRAGON)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local t={}
