@@ -1,8 +1,10 @@
 --Buttergal of Fiber VINE
 function c500311550.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,4,c500311550.filter1,c500311550.filter2)
-	c:EnableReviveLimit() 
+c500311550.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99) 
   --cannot be target/battle indestructable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -41,15 +43,15 @@ function c500311550.filter2(c,ec,tp)
 	return c:IsAttribute(ATTRIBUTE_EARTH) or  c:IsRace(RACE_PLANT+RACE_INSECT) 
 end
 function c500311550.con(e,tp,eg,ep,ev,re,r,rp)
-	return  e:GetHandler():GetEC()==4
+	return  e:GetHandler():GetCounter(0x111f)==4
 end
 function c500311550.tgtg(e,c)
-	return  c:IsType(TYPE_RITUAL) or c:IsType(TYPE_EVOLUTE)
+	return  c:IsType(TYPE_RITUAL) or c.Is_Evolute
 end
 function c500311550.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-		 if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+		 if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 	--local e1=Effect.CreateEffect(c)
   --  e1:SetType(EFFECT_TYPE_FIELD)
    -- e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
@@ -61,11 +63,11 @@ function c500311550.cost(e,tp,eg,ep,ev,re,r,rp,chk)
    -- Duel.RegisterEffect(e1,tp)
 end
 function c500311550.tgfilter(c)
-	 return c:IsSetCard(0x185a) and c:IsAbleToGrave()
+	 return  c:IsAbleToGrave()
 		and Duel.IsExistingMatchingCard(c500311550.thfilter,tp,LOCATION_DECK,0,1,c,c:GetCode())
 end
 function c500311550.thfilter(c,code)
-	return  c:IsSetCard(0x185a) and c:IsType(TYPE_MONSTER) and not c:IsCode(code) and not c:IsForbidden() and c:IsAbleToHand()
+	return c:IsType(TYPE_MONSTER) and not c:IsCode(code) and not c:IsForbidden() and c:IsAbleToHand()
 end
 function c500311550.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	 if chk==0 then return Duel.IsExistingMatchingCard(c500311550.tgfilter,tp,LOCATION_DECK,0,1,nil,tp) end
