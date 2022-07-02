@@ -1,7 +1,10 @@
+--
 function c500315455.initial_effect(c)
-	  aux.AddOrigEvoluteType(c)
-  aux.AddEvoluteProc(c,nil,7,c500315455.filter1,c500315455.filter2)
-	c:EnableReviveLimit() 
+c500315455.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99) 
 --equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(500315455,0))
@@ -44,12 +47,12 @@ function c500315455.filter2(c,ec,tp)
 end
 
 function c500315455.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,4,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,4,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,4,REASON_COST)
 end
 function c500315455.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
-		if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+		if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end
 function c500315455.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
