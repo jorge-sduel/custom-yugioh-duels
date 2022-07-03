@@ -1,9 +1,10 @@
 --Yasmin, Young Princess of Gust Vine
 function c160009933.initial_effect(c)
-	  --evolute procedure
-	aux.EnablePendulumAttribute(c)
-	aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,4,c160009933.filter1,c160009933.filter1,1,99)
+c160009933.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	c:EnableReviveLimit()
+	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit()
 local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(160009933,0))
