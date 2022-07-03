@@ -1,20 +1,22 @@
 --Fulla, Young Pixie of Rose VINE
   
 function c50031222.initial_effect(c)
-   aux.AddOrigEvoluteType(c)
- aux.AddEvoluteProc(c,nil,7,c50031222.filter1,c50031222.filter2,1,99)
+c50031222.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	local e1=Effect.CreateEffect(c)
-  e1:SetDescription(aux.Stringid(50031222,0))
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCountLimit(1,50031222)
-	e1:SetCondition(c50031222.condition)
-	e1:SetCost(c50031222.cost)
-	e1:SetTarget(c50031222.target)
-	e1:SetOperation(c50031222.operation)
-	c:RegisterEffect(e1)
+	Evolute.AddProcedure(c,nil,2,99)
+	--local e1=Effect.CreateEffect(c)
+  --e1:SetDescription(aux.Stringid(50031222,0))
+	--e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	--e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	--e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+	--e1:SetCountLimit(1,50031222)
+	--e1:SetCondition(c50031222.condition)
+	--e1:SetCost(c50031222.cost)
+	--e1:SetTarget(c50031222.target)
+	--e1:SetOperation(c50031222.operation)
+	--c:RegisterEffect(e1)
    --equip
 	 local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(50031222,0))
@@ -67,9 +69,9 @@ function c50031222.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function c50031222.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveCounter(tp,0x88,3,REASON_COST) 
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,3,REASON_COST) 
  end
-	c:RemoveCounter(tp,0x88,3,REASON_COST) 
+	c:RemoveCounter(tp,0x111f,3,REASON_COST) 
   end
 function c50031222.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and c50031222.filter(chkc) end
@@ -80,7 +82,7 @@ function c50031222.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,1,0,0)
 end
 function c50031222.filter(c)
-	return c:IsSetCard(0x85a) and c:IsType(TYPE_MONSTER) and not c:IsForbidden()
+	return c:IsType(TYPE_MONSTER) and not c:IsForbidden()
 end
 function c50031222.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
