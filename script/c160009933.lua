@@ -52,8 +52,8 @@ function c160009933.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+388
 end
 function c160009933.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,2,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,2,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function c160009933.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:GetControler()~=tp and chkc:GetLocation()==LOCATION_GRAVE and chkc:IsAbleToDeck() end
@@ -84,7 +84,7 @@ function c160009933.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c160009933.cfilter,1,nil,1-tp)
 end
 function c160009933.filter(c)
-	return c:IsSetCard(0x885a) and c:IsType(TYPE_MONSTER) and  (c:IsAbleToHand() or c:IsAbleToGrave())
+	return c:IsType(TYPE_MONSTER) and  (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function c160009933.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c160009933.filter,tp,LOCATION_DECK,0,1,nil) end
