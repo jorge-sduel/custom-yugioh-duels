@@ -134,7 +134,7 @@ function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not bc then return false end
 	if tc:IsControler(1-tp) then return end
 	e:SetLabelObject(bc)
-	return bc:IsFaceup() and tc:IsFaceup() and tc:IsType(TYPE_PENDULUM) or tc:Is_Evolute
+	return bc:IsFaceup() and tc:IsFaceup() and (tc:IsType(TYPE_PENDULUM) or tc:Is_Evolute)
 end
 function cid.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
