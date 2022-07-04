@@ -3,7 +3,6 @@ function c160009933.initial_effect(c)
 c160009933.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
-	c:EnableReviveLimit()
 	Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit()
 local e1=Effect.CreateEffect(c)
