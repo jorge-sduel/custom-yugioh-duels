@@ -22,7 +22,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e4:SetCategory(CATEGORY_ATKCHANGE)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_BATTLE_START)
-	e4:SetRange(LOCATION_PZONE)
+	e4:SetRange(LOCATION_PZONE+LOCATION_MZONE)
 	e4:SetCountLimit(1)
 	e4:SetCondition(cid.condition)
 	e4:SetOperation(cid.op)
