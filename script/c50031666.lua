@@ -82,9 +82,9 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e8:SetCountLimit(1)
 	e8:SetHintTiming(TIMING_DAMAGE_STEP)
 	--e8:SetCondition(s.atkcon)
-	e8:SetCost(cid.atkcost)
-	e8:SetTarget(cid.atktg)
-	e8:SetOperation(cid.atkop)
+	e8:SetCost(cid.atkcost2)
+	e8:SetTarget(cid.atktg2)
+	e8:SetOperation(cid.atkop2)
 	c:RegisterEffect(e8)
 end
 --enable pendulum level
@@ -271,18 +271,18 @@ end
 --  local g2=Duel.RemoveCounter(tp,1,1,0x1075,4,REASON_RULE)
 --  Duel.SendtoGrave(g1,REASON_MATERIAL+REASON_SYNCHRO)
 --end
-function cid.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
+function cid.atkcost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.IsCanRemoveCounter(tp,0x111f,0,COUNTER_SPELL,2,REASON_COST) end
 	Duel.RemoveCounter(tp,0x111f,0,COUNTER_SPELL,2,REASON_COST)
 end
-function cid.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function cid.atktg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 end
-function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
+function cid.atkop2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		local e1=Effect.CreateEffect(e:GetHandler())
