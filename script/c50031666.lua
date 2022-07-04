@@ -273,8 +273,8 @@ end
 --end
 function cid.atkcost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,0x111f,0,COUNTER_SPELL,2,REASON_COST) end
-	Duel.RemoveCounter(tp,0x111f,0,COUNTER_SPELL,2,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x111f,2,REASON_COST) end
+	Duel.RemoveCounter(tp,1,0,0x111f,2,REASON_COST)
 end
 function cid.atktg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
