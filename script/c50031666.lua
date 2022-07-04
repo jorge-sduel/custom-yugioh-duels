@@ -2,10 +2,11 @@
 --XGlitchy30 was here
 local cid,id=GetID()
 function cid.initial_effect(c)
-	--evolute procedure
-	aux.EnablePendulumAttribute(c)
-	aux.AddOrigEvoluteType(c)
-	aux.AddEvoluteProc(c,nil,4,cid.filter1,cid.filter2,2,99)
+c160009933.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+	Evolute.AddProcedure(c,nil,2,99)
+	Pendulum.AddProcedure(c)
 	c:EnableReviveLimit()
 	--PENDULUM EFFECTS
 	--active limit
@@ -96,7 +97,7 @@ function cid.atkfilter(c)
 	return bit.band(c:GetSummonType(),SUMMON_TYPE_SPECIAL)==SUMMON_TYPE_SPECIAL  and c:IsType(TYPE_EFFECT)
 end
 function cid.costfilter(c)
-	return c:IsAbleToRemoveAsCost() and not c:IsType(TYPE_EFFECT) and (c:IsType(TYPE_PENDULUM) and c:IsFaceup())
+	return c:IsAbleToRemoveAsCost() and (c:IsType(TYPE_PENDULUM) and c:IsFaceup())
 end
 function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsSetCard(0xc50) or c:IsType(TYPE_NORMAL) then return false end
@@ -109,7 +110,7 @@ end
 --active limit
 function cid.actcon(e,tp,eg,ep,ev,re,r,rp)
 	local ac=Duel.GetAttacker()
-	return ac and ac:IsControler(tp) and not ac:IsType(TYPE_EFFECT)
+	return ac and ac:IsControler(tp) and ac:Is_Evolute or ac:IsType(TYPE_PENDULUM)
 end
 function cid.actop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -133,7 +134,7 @@ function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not bc then return false end
 	if tc:IsControler(1-tp) then return end
 	e:SetLabelObject(bc)
-	return bc:IsFaceup() and tc:IsFaceup() and not tc:IsType(TYPE_EFFECT)
+	return bc:IsFaceup() and tc:IsFaceup() and tc:IsType(TYPE_PENDULUM) or tc:Is_Evolute
 end
 function cid.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -196,11 +197,11 @@ function cid.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,2,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nil) and c:GetFlagEffect(id)==0 end
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nil) and c:GetFlagEffect(id)==0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,cid.costfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	e:GetHandler():RemoveEC(tp,2,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 	c:RegisterFlagEffect(id,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
@@ -234,7 +235,7 @@ function cid.penop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.CheckLocation(tp,LOCATION_PZONE,0) and not Duel.CheckLocation(tp,LOCATION_PZONE,1) then return false end
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
 
