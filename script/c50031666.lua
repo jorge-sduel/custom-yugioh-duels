@@ -71,15 +71,20 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e7:SetOperation(cid.penop)
 	c:RegisterEffect(e7)
 --
+	--to hand
 	local e8=Effect.CreateEffect(c)
-	e8:SetCategory(CATEGORY_ATKCHANGE)
-	e8:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e8:SetCode(EVENT_BATTLE_START)
+	e8:SetDescription(aux.Stringid(id,1))
+	e8:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
+	e8:SetType(EFFECT_TYPE_QUICK_O)
+	e8:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
+	e8:SetCode(EVENT_FREE_CHAIN)
 	e8:SetRange(LOCATION_MZONE)
 	e8:SetCountLimit(1)
+	e8:SetHintTiming(TIMING_DAMAGE_STEP)
+	--e8:SetCondition(s.atkcon)
 	e8:SetCost(cid.atkcost)
-	e8:SetCondition(cid.condition)
-	e8:SetOperation(cid.op)
+	e8:SetTarget(cid.atktg)
+	e8:SetOperation(cid.atkop)
 	c:RegisterEffect(e8)
 end
 --enable pendulum level
@@ -266,3 +271,32 @@ end
 --  local g2=Duel.RemoveCounter(tp,1,1,0x1075,4,REASON_RULE)
 --  Duel.SendtoGrave(g1,REASON_MATERIAL+REASON_SYNCHRO)
 --end
+function cid.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,0x111f,0,COUNTER_SPELL,2,REASON_COST) end
+	Duel.RemoveCounter(tp,0x111f,0,COUNTER_SPELL,2,REASON_COST)
+end
+function cid.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
+end
+function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+		e1:SetValue(math.ceil(tc:GetAttack()/2))
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		tc:RegisterEffect(e1)
+		local e2=Effect.CreateEffect(e:GetHandler())
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_SET_DEFENSE_FINAL)
+		e2:SetValue(math.ceil(tc:GetDefense()/2))
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		tc:RegisterEffect(e2)
+	end
+end
+
