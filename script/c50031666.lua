@@ -2,7 +2,7 @@
 --XGlitchy30 was here
 local cid,id=GetID()
 function cid.initial_effect(c)
-c160009933.Is_Evolute=true
+cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	Evolute.AddProcedure(c,nil,2,99)
