@@ -22,7 +22,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e4:SetCategory(CATEGORY_ATKCHANGE)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_BATTLE_START)
-	e4:SetRange(LOCATION_PZONE+LOCATION_MZONE)
+	e4:SetRange(LOCATION_PZONE)
 	e4:SetCountLimit(1)
 	e4:SetCondition(cid.condition)
 	e4:SetOperation(cid.op)
@@ -70,6 +70,17 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e7:SetTarget(cid.pentg)
 	e7:SetOperation(cid.penop)
 	c:RegisterEffect(e7)
+--
+	local e8=Effect.CreateEffect(c)
+	e8:SetCategory(CATEGORY_ATKCHANGE)
+	e8:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e8:SetCode(EVENT_BATTLE_START)
+	e8:SetRange(LOCATION_MZONE)
+	e8:SetCountLimit(1)
+	e8:SetCost(cid.atkcost)
+	e8:SetCondition(cid.condition)
+	e8:SetOperation(cid.op)
+	c:RegisterEffect(e8)
 end
 --enable pendulum level
 cid.pendulum_level=4
@@ -198,11 +209,11 @@ end
 function cid.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) and Duel.IsExistingMatchingCard(cid.costfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nil) and c:GetFlagEffect(id)==0 end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,cid.costfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil)
-	Duel.Remove(g,POS_FACEUP,REASON_COST)
+	--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	--local g=Duel.SelectMatchingCard(tp,cid.costfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil)
+	--Duel.Remove(g,POS_FACEUP,REASON_COST)
 	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
-	c:RegisterFlagEffect(id,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
+	--c:RegisterFlagEffect(id,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_DAMAGE_CAL,0,1)
 end
 function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
