@@ -12,7 +12,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e4:SetType(EFFECT_TYPE_QUICK_O)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetCountLimit(1,id)
+	e4:SetCountLimit(1)
 	e4:SetHintTiming(0,TIMING_END_PHASE)
 	e4:SetCost(s.spcost)
 	e4:SetTarget(s.sptg)
