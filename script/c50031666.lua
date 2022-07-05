@@ -4,9 +4,11 @@ local cid,id=GetID()
 function cid.initial_effect(c)
 cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 	--c:EnableCounterPermit(0x88)
 	Evolute.AddProcedure(c,nil,2,99)
-	Pendulum.AddProcedure(c)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(id,false,0xbb00)
 	c:EnableReviveLimit()
 	--PENDULUM EFFECTS
 	--active limit
