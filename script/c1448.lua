@@ -120,7 +120,7 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_LEVEL)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e1:SetValue(12)
+		e1:SetValue(2)
 		tc:RegisterEffect(e1)
 	end
 end
