@@ -1,6 +1,7 @@
 --Elephantoad
 local s,id=GetID()
 function s.initial_effect(c)
+s.Is_Evolute=true
    c:EnableReviveLimit()
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
