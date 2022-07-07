@@ -1,6 +1,7 @@
 --Extra ritual trap
 local s,id=GetID()
 if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
+if not TRAMPULA_IMPORTED then Duel.LoadScript("proc_trampula.lua") end
 function s.initial_effect(c)
    RPendulum.AddProcedure(c)
 c:AddSetcodesRule(id,false,0xbb00)
