@@ -11,7 +11,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetCountLimit(1)
+	--e2:SetCountLimit(1)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
