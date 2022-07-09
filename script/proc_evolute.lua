@@ -56,6 +56,14 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	--e2:SetTarget(Evolute.addct)
 	e2:SetOperation(Evolute.addc)
 	c:RegisterEffect(e2)
+	--remove Synchro type
+	local ea=Effect.CreateEffect(c)
+	ea:SetType(EFFECT_TYPE_SINGLE)
+	ea:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	ea:SetRange(0xee)
+	ea:SetCode(EFFECT_REMOVE_TYPE)
+	ea:SetValue(TYPE_SYNCHRO)
+	c:RegisterEffect(ea)
 end
 function Card.IsEvolute(c)
 	return c.Is_Evolute
