@@ -5,7 +5,7 @@ c16000989.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,card.IsEvolute,2,99,c16000989.rcheck)
+	Evolute.AddProcedure(c,Card.IsEvolute,2,99,c16000989.rcheck)
 	--When this card is Evolute Summoned:You can Conjoint 1 monster from your hand to this card. (HOpT)
 	--If this card is Conjointed with another card: You can remove 4 E-C from this card; Special Summon 2 monsters from your Deck with the Same name of the Conjoint momster to this card, also negate their effects, and cannot be used as Materials for a Summon, except Evolute Materials for a Summon. (HOpT)
 	--local e1=Effect.CreateEffect(c)
