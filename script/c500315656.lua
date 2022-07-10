@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:GetLevel()>0
+	return c:IsFaceup() and c:GetLevel()>0 and not c.Is_Evolute
 end
 function s.xyzfilter(c,tp)
 	return c:IsFaceup() and c.Is_Evolute and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,c)
