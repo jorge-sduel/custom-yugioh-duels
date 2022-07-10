@@ -59,7 +59,7 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	--remove Synchro type
 	local ea=Effect.CreateEffect(c)
 	ea:SetType(EFFECT_TYPE_SINGLE)
-	ea:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	ea:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
 	ea:SetRange(0x3ff)
 	ea:SetCode(EFFECT_REMOVE_TYPE)
 	ea:SetValue(TYPE_SYNCHRO)
