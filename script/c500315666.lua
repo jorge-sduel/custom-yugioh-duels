@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DRAW)
-	e1:SetType(EFFECT_TYPE_QUICK_O)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_BATTLE_DESTROYED)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCondition(s.condition)
