@@ -1,5 +1,6 @@
 --Conjoint Sorceress
 function c16000989.initial_effect(c)
+c16000989.Is_EvolSyn=true
 c16000989.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
