@@ -46,7 +46,7 @@ function s.rcheck(g,lc,sumtype,tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,0x111f,2,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function s.tffilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:CheckActivateEffect(false,false,false)~=nil
