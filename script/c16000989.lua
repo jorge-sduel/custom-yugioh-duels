@@ -45,8 +45,8 @@ function s.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsType,1,nil,TYPE_TUNER)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	   if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,2,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,2,REASON_COST)
+	   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,2,REASON_COST) end
+	e:GetHandler():RemoveEC(tp,0x111f,2,REASON_COST)
 end
 function s.tffilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:CheckActivateEffect(false,false,false)~=nil
