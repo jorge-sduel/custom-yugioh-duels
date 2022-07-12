@@ -11,8 +11,9 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetType(EFFECT_TYPE_IGNITION)
+	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetRange(LOCATION_MZONE)
+	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1)
 	e1:SetTarget(cid.target)
 	e1:SetCost(cid.cost)
@@ -72,14 +73,13 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp,nil)
 	if g:GetCount()>0 then
-		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
-	end
-   --pierce
 	local e4=Effect.CreateEffect(e:GetHandler())
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
 	e4:SetValue(g:GetAttack())
 	Duel.RegisterEffect(e4)
+		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+	end
 end
 function cid.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
