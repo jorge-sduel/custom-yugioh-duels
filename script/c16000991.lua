@@ -1,12 +1,12 @@
 --Love Song Idol
 local cid,id=GetID()
 function cid.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
+cid.Is_EvolSyn=true
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	aux.AddEvoluteProc(c,nil,3,cid.filter1,cid.filter1,1,1)  
-	--Conjoint Procedure
-	aux.AddOrigConjointType(c)
-	aux.EnableConjointAttribute(c,3)
+	Evolute.AddProcedure(c,Card.IsEvolute,2,99,cid.rcheck)
  --special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -38,26 +38,29 @@ function cid.initial_effect(c)
 	e5:SetCondition(cid.damcon)
 	e5:SetOperation(cid.damop)
 	c:RegisterEffect(e5)
-   local e42=Effect.CreateEffect(c)
-	e42:SetType(EFFECT_TYPE_XMATERIAL)
-	e42:SetCode(EFFECT_PIERCE)
-	c:RegisterEffect(e42)
-	local e52=Effect.CreateEffect(c)
-	e52:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_CONTINUOUS)
-	e52:SetCode(EVENT_PRE_BATTLE_DAMAGE)
-	e52:SetCondition(cid.damcon)
-	e52:SetOperation(cid.damop)
-	c:RegisterEffect(e52)
+   --local e42=Effect.CreateEffect(c)
+	--e42:SetType(EFFECT_TYPE_XMATERIAL)
+	--e42:SetCode(EFFECT_PIERCE)
+	--c:RegisterEffect(e42)
+	--local e52=Effect.CreateEffect(c)
+	--e52:SetType(EFFECT_TYPE_SINGLE)
+	--e52:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	--e52:SetCondition(cid.damcon)
+	--e52:SetOperation(cid.damop)
+	--c:RegisterEffect(e52)
+end
+function cid.rcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsType,1,nil,TYPE_TUNER)
 end
 function cid.filter1(c,ec,tp)
 	return not c:IsType(TYPE_TOKEN)
 end
  function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	   if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,3,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,3,REASON_COST)
+	   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x111f,3,REASON_COST)
 end  
 function cid.filter(c,e,tp)
-	return c:IsType(TYPE_NORMAL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
