@@ -79,6 +79,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
 	e4:SetValue(atk)
+	e4:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e4)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
