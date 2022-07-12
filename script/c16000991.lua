@@ -73,7 +73,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp,nil)
-	local atk=g:GetAttack()
+	local atk=g:GetFirst():GetAttack()
 	if g:GetCount()>0 then
 	local e4=Effect.CreateEffect(e:GetHandler())
 	e4:SetType(EFFECT_TYPE_SINGLE)
