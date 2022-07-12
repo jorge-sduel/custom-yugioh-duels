@@ -78,7 +78,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e4=Effect.CreateEffect(e:GetHandler())
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
-	e4:SetValue(g:GetAttack)
+	e4:SetValue(g:GetAttack())
 	Duel.RegisterEffect(e4)
 end
 function cid.damcon(e,tp,eg,ep,ev,re,r,rp)
