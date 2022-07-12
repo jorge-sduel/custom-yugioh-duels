@@ -40,6 +40,15 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--e2:SetTarget(c16000989.target)
 	--e2:SetOperation(c16000989.activate)
 	--c:RegisterEffect(e2)
+	--Limit batlle target
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetTargetRange(0,LOCATION_MZONE)
+	e4:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
+	--e4:SetCondition(s.atcon)
+	e4:SetValue(s.atlimit)
+	c:RegisterEffect(e4)
 end
 function s.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsType,1,nil,TYPE_TUNER)
@@ -102,4 +111,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			etc=g:GetNext()
 		end
 	end
+end
+function s.atlimit(e,c)
+	return c~=e:GetHandler()
 end
