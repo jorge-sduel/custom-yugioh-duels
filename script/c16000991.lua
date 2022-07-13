@@ -6,7 +6,7 @@ cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,Card.IsEvolute,2,99,cid.rcheck)
+	Synchro.AddProcedure(c,cid.ESfilter,1,99,Synchro.NoTuner(Card.IsEvolute),1,99)
  --special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -53,8 +53,8 @@ end
 function cid.rcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsType,1,nil,TYPE_TUNER)
 end
-function cid.filter1(c,ec,tp)
-	return not c:IsType(TYPE_TOKEN)
+function cid.ESfilter(c,ec,tp)
+	return c:IsType(TYPE_TUNER) and c.Is_Evolute
 end
  function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	   if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x111f,3,REASON_COST) end
