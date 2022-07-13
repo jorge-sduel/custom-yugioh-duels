@@ -27,7 +27,7 @@ function s.synop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
 	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetTargetRange(LOCATION_GRAVE,0)
 	e3:SetCode(id)
 	c:RegisterEffect(e3)
