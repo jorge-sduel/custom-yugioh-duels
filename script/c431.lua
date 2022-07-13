@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
 	c:EnableReviveLimit()
-	Xyz.AddProcedure(c,s.xyzfilter,nil,2)
+	Xyz.AddProcedure(c,s.xyzfilter,nil,2,nil,nil,nil,nil,false)
 
 end
 function s.xyzfilter(c,xyz,sumtype,tp)
