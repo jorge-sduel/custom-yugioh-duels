@@ -37,10 +37,10 @@ function s.xyzcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	return Duel.GetLocationCountFromEx(tp,tp,c)>0
-		and Duel.IsExistingMatchingCard(s.spfilter1,tp,LOCATION_GRAVE,0,2,nil,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter1,tp,LOCATION_GRAVE+LOCATION_MZONE,0,2,nil,tp)
 end
 function s.xyzop(e,tp,eg,ep,ev,re,r,rp,c)
-	local g1=Duel.SelectMatchingCard(tp,s.spfilter1,tp,LOCATION_GRAVE,0,2,2,nil,tp)
+	local g1=Duel.SelectMatchingCard(tp,s.spfilter1,tp,LOCATION_GRAVE+LOCATION_MZONE,0,2,2,nil,tp)
 	c:SetMaterial(g1)
 	Duel.Overlay(c,g1)
 end
