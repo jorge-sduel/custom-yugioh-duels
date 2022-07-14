@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCost(s.lpcost)
-	e1:SetCondition(s.lpcon)
+	--e1:SetCondition(s.lpcon)
 	e1:SetOperation(s.lpop)
 	c:RegisterEffect(e1)
 end
