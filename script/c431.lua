@@ -45,6 +45,14 @@ function s.initial_effect(c)
 	--e3:SetTarget(aux.TargetBoolFunction(Card.IsAttribute,ATTRIBUTE_WATER))
 	e3:SetValue(s.atkfilter)
 	c:RegisterEffect(e3)
+	--immune
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCode(EFFECT_IMMUNE_EFFECT)
+	e4:SetValue(s.efilter)
+	c:RegisterEffect(e4)
 end
 function s.atkfilter(e,c)
 	return e:GetHandler():GetAttack()*-1 
@@ -86,4 +94,8 @@ end
 function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(tp,4000)
 	Duel.SetLP(1-tp,4000)
+end
+function s.efilter(e,te)
+	local c=te:GetHandler()
+	return not (c:GetType()==TYPE_MONSTER and (c:IsAttribute(ATTRIBUTE_DARK) or c:IsAttribute(ATTRIBUTE_LIGHT))) 
 end
