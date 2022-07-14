@@ -46,7 +46,7 @@ function s.initial_effect(c)
 	e3:SetValue(s.atkfilter)
 	c:RegisterEffect(e3)
 end
-function s.spfilter1(e,c,tp)
+function s.atkfilter(e,c)
 	return e:GetHandler():GetAttack() 
 end
 function s.xyzfilter(c,xyz,sumtype,tp)
