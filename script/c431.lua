@@ -53,6 +53,13 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_IMMUNE_EFFECT)
 	e4:SetValue(s.efilter)
 	c:RegisterEffect(e4)
+--
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCode(EFFECT_DISABLE)
+	e5:SetCondition(function(e) return not e:GetHandler():IsOriginalCode(id) end)
+	c:RegisterEffect(e5)
 end
 function s.atkfilter(e,c)
 	return e:GetHandler():GetAttack()*-1 
