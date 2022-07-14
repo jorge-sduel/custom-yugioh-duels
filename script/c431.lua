@@ -97,5 +97,5 @@ function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.efilter(e,te)
 	local c=te:GetHandler()
-	return not (c:GetType()==TYPE_MONSTER and (c:IsAttribute(ATTRIBUTE_DARK) or c:IsAttribute(ATTRIBUTE_LIGHT))) 
+	return not (c:IsAttribute(ATTRIBUTE_DARK) or c:IsAttribute(ATTRIBUTE_LIGHT))
 end
