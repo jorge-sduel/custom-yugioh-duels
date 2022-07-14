@@ -21,5 +21,21 @@ Ritual.AddProcGreater(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_PENDULUM))
 	e2:SetValue(500)
 	c:RegisterEffect(e2)
+--
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e3:SetCode(EVENT_ATTACK_ANNOUNCE)
+	e3:SetRange(LOCATION_SZONE)
+	e3:SetCondition(s.atkcon)
+	e3:SetOperation(s.atkop)
+	c:RegisterEffect(e3)
 end
 s.pendulum_level=10
+function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	local at=Duel.GetAttacker()
+	return Duel.GetAttackTarget()==nil
+end
+function s.atkop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.NegateAttack()
+end
