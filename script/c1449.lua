@@ -34,7 +34,7 @@ end
 s.pendulum_level=10
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttacker()
-	return Duel.GetAttackTarget()==nil and at:Iscontroler(1-tp)
+	return Duel.GetAttackTarget()==nil
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateAttack()
