@@ -26,6 +26,16 @@ function s.initial_effect(c)
 	e1:SetTarget(s.syntg)
 	e1:SetOperation(s.synop)
 	c:RegisterEffect(e1)
+	--change lp
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetType(EFFECT_TYPE_QUICK_O)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCost(s.lpcost)
+	e1:SetCondition(s.lpcon)
+	e1:SetOperation(s.lpop)
+	c:RegisterEffect(e1)
 end
 function s.xyzfilter(c,xyz,sumtype,tp)
 	return (c:IsType(TYPE_LINK,xyz,sumtype,tp) and c:IsAttribute(ATTRIBUTE_LIGHT,xyz,sumtype,tp)) or (c:IsType(TYPE_XYZ,xyz,sumtype,tp) and c:IsAttribute(ATTRIBUTE_DARK,xyz,sumtype,tp))
@@ -51,12 +61,13 @@ end
 function s.synop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_FIELD)
-	e3:SetTargetRange(LOCATION_GRAVE,0)
-	e3:SetCode(id)
-	c:RegisterEffect(e3)
 		Duel.XyzSummon(tp,c,nil)
 	end
-	e3:Reset()
+end
+function s.lpcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
+end
+function s.lpop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.SetLP(tp,4000)
+	Duel.SetLP(1-tp,4000)
 end
