@@ -64,6 +64,10 @@ function s.synop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.XyzSummon(tp,c,nil)
 	end
 end
+function s.lpcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
 function s.lpcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
