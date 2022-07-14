@@ -60,9 +60,27 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_DISABLE)
 	e5:SetCondition(function(e) return not e:GetHandler():IsOriginalCode(id) end)
 	c:RegisterEffect(e5)
+--
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetCode(id)
+	--e6:SetCondition(function(e) return not e:GetHandler():IsOriginalCode(id) end)
+	c:RegisterEffect(e6)
+	--disable
+	--local e4=Effect.CreateEffect(c)
+	--e4:SetType(EFFECT_TYPE_FIELD)
+	--e4:SetRange(LOCATION_MZONE)
+	--e4:SetTargetRange(0,LOCATION_MZONE)
+	--e4:SetTarget(s.disfilter)
+	--e4:SetCode(EFFECT_DISABLE)
+	--c:RegisterEffect(e4)
 end
 function s.atkfilter(e,c)
 	return e:GetHandler():GetAttack()*-1 
+end
+function s.disfilter(c)
+	return c:IsHasEffect(id) and not c:IsOriginalCode(id)
 end
 function s.xyzfilter(c,xyz,sumtype,tp)
 	return (c:IsType(TYPE_LINK,xyz,sumtype,tp) and c:IsAttribute(ATTRIBUTE_LIGHT,xyz,sumtype,tp)) or (c:IsType(TYPE_XYZ,xyz,sumtype,tp) and c:IsAttribute(ATTRIBUTE_DARK,xyz,sumtype,tp))
