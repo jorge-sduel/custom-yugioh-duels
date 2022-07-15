@@ -12,6 +12,15 @@ Ritual.AddProcGreater(c)
  		ea:SetRange(LOCATION_HAND)
  		ea:SetOperation(Trampula.SetOp)
  		c:RegisterEffect(ea)
+	--Activate
+	local e1=Effect.CreateEffect(c)
+	e1:SetCategory(CATEGORY_TOHAND)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetTarget(s.target)
+	e1:SetOperation(s.activate)
+	c:RegisterEffect(e1)
 	--pendulum zone draw
 	local e8=Effect.CreateEffect(c)
 	e8:SetDescription(aux.Stringid(16178681,1))
@@ -33,4 +42,22 @@ function s.drop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or Duel.Destroy(c,REASON_EFFECT)==0 then return end
 	Duel.Draw(tp,2,REASON_EFFECT)
+end
+function s.filter(c)
+	return c:IsFaceup() and c:IsAbleToHand()
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:GetControler()==tp and chkc:GetLocation()==LOCATION_GRAVE and c146.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(c146.filter,tp,LOCATION_GRAVE,0,2,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,2,2,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,2,0,0)
+end
+function s.activate(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
+	if sg:GetCount()>0 then
+		Duel.SendtoHand(sg,nil,REASON_EFFECT)
+		Duel.ConfirmCards(1-tp,sg)
+	end
 end
