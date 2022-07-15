@@ -33,7 +33,7 @@ Ritual.AddProcGreater(c)
 end
 s.pendulum_level=10
 function s.drtg2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsDestructable() and not e:GetHandler():IsLocation(LOCATION_PZONE)
+	if chk==0 then return e:GetHandler():IsDestructable()
 		and Duel.IsPlayerCanDraw(tp,1) end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
