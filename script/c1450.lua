@@ -12,5 +12,25 @@ Ritual.AddProcGreater(c)
  		ea:SetRange(LOCATION_HAND)
  		ea:SetOperation(Trampula.SetOp)
  		c:RegisterEffect(ea)
+	--pendulum zone draw
+	local e8=Effect.CreateEffect(c)
+	e8:SetDescription(aux.Stringid(16178681,1))
+	e8:SetCategory(CATEGORY_DESTROY+CATEGORY_TOHAND+CATEGORY_DRAW)
+	e8:SetType(EFFECT_TYPE_IGNITION)
+	e8:SetRange(LOCATION_PZONE)
+	e8:SetTarget(s.drtg2)
+	e8:SetOperation(s.drop2)
+	c:RegisterEffect(e8)
 end
 s.pendulum_level=10
+function s.drtg2(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():IsDestructable()
+		and Duel.IsPlayerCanDraw(tp,1) end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
+end
+function s.drop2(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) or Duel.Destroy(c,REASON_EFFECT)==0 then return end
+	Duel.Draw(tp,2,REASON_EFFECT)
+end
