@@ -405,3 +405,18 @@ function Auxiliary.ConvergentEvolatkop(e,tp,eg,ep,ev,re,r,rp)
     end
     e:GetHandler():AddCounter(0x111f,lv)
 end
+function Auxiliary.AddEcProcedure(c,cd)
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(1600058,0))
+	e2:SetCategory(CATEGORY_COUNTER)
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e2:SetCondition(Evolute.sumcon2)
+	--e2:SetTarget(Evolute.addct)
+	e2:SetOperation(Evolute.addc)
+	c:RegisterEffect(e2)
+end
+function Evolute.sumcon2(e,tp,eg,ep,ev,re,r,rp,cd)
+	return e:GetHandler():IsSummonType(cd)
+end
