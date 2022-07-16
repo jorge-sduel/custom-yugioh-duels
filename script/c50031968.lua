@@ -37,14 +37,13 @@ function cid.mtfilter(c)
 	return c:IsRace(RACE_ZOMBIE) and c:IsFaceup()
 end
 function cid.mttg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsType(TYPE_CONJOINT)
-		and Duel.IsExistingMatchingCard(cid.mtfilter,tp,LOCATION_REMOVED,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.mtfilter,tp,LOCATION_GRAVE,0,1,nil) end
 end
 function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectMatchingCard(tp,cid.mtfilter,tp,LOCATION_REMOVED,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,cid.mtfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	if g:GetCount()>0 then
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	end
