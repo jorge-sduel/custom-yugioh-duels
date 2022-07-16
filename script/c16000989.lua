@@ -6,7 +6,7 @@ s.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Evolute.AddProcedure(c,Card.IsEvolute,2,99,s.rcheck)
+	Synchro.AddProcedure(c,Card.IsEvolute,2,99,Synchro.NoTunerEx(Card.IsEvolute),1,99)
 	--Activate a card
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
