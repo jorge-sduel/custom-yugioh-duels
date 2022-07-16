@@ -3,7 +3,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),aux.NonTuner(Card.IsRace,RACE_MACHINE),1)
+	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),Synchro.NonTunerEx(Card.IsRace,RACE_MACHINE),1)
 	c:EnableReviveLimit()
 	--Destroy & Coin Flip
 	local e1=Effect.CreateEffect(c)
