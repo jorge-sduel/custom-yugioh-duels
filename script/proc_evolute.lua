@@ -420,6 +420,6 @@ end
 function Auxiliary.sumcon2(c,cd)
 	return c:GetSummonType()==cd
 end
-function Auxiliary.addEc(c)
-	c:AddCounter(0x111f,c:GetLevel())
+function Auxiliary.addEc(e,tp,eg,ep,ev,re,r,rp)
+	e:GetHandler():AddCounter(0x111f,e:GetHandler():GetLevel())
 end
