@@ -45,9 +45,10 @@ function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local g=Duel.SelectMatchingCard(tp,cid.mtfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local atk=g:GetAttack()
 	if g:GetCount()>0 then
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
-Duel.Recover(tp,g:GetFirst:GetAttack()+g:GetFirst:GetDefense(),REASON_EFFECT)
+Duel.Recover(tp,atk,REASON_EFFECT)
 	end
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
