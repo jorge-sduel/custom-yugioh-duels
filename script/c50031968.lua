@@ -75,7 +75,7 @@ if tc:IsLocation(LOCATION_REMOVED) and tc:IsType(TYPE_MONSTER) and tc.Is_Evolute
 		local g=Duel.SelectMatchingCard(tp,cid.desfilterxx,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 		if g:GetCount()>0 then
 			Duel.HintSelection(g)
-			Duel.SendtoGrave(g,nil,REASON_EFFECT)
+			Duel.SendtoGrave(g,REASON_EFFECT)
 			Duel.Recover(tp,3000,REASON_EFFECT)
 		end
 	end
