@@ -418,7 +418,7 @@ function Auxiliary.AddEcProcedure(c,cd)
 	c:RegisterEffect(e2)
 end
 function Auxiliary.sumcon2(c,cd)
-	return c:IsSummonType(cd)
+	return c:GetSummonType()==cd
 end
 function Auxiliary.addEc(c)
 	c:AddCounter(0x111f,c:GetLevel())
