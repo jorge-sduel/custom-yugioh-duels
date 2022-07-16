@@ -46,11 +46,7 @@ function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local g=Duel.SelectMatchingCard(tp,cid.mtfilter,tp,LOCATION_REMOVED,0,1,1,nil)
 	if g:GetCount()>0 then
-		Duel.Overlay(c,g)
-		local tc=g:GetFirst()
-		if tc:IsLocation(LOCATION_OVERLAY) and tc:GetOriginalType()&TYPE_EVOLUTE~=0 then
-			Duel.Recover(tp,1000,REASON_EFFECT)
-		end
+		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	end
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -73,12 +69,13 @@ local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 
-if tc:IsLocation(LOCATION_REMOVED) and tc:IsType(TYPE_MONSTER) and tc:IsRace(RACE_ZOMBIE) and not tc:IsAttribute(ATTRIBUTE_LIGHT) then
+if tc:IsLocation(LOCATION_REMOVED) and tc:IsType(TYPE_MONSTER) and tc.Is_Evolute then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		local g=Duel.SelectMatchingCard(tp,cid.desfilterxx,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,aux.ExceptThisCard(e))
 		if g:GetCount()>0 then
 			Duel.HintSelection(g)
 			Duel.SendtoGrave(g,nil,REASON_EFFECT)
+			Duel.Recover(tp,3000,REASON_EFFECT)
 		end
 	end
 end
