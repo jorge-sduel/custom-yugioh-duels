@@ -34,7 +34,7 @@ function cid.mtfilter2(c,e)
    return c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function cid.mtfilter(c)
-	return c:IsRace(RACE_ZOMBIE) and c:IsFaceup()
+	return c:IsFaceup()
 end
 function cid.mttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.mtfilter,tp,LOCATION_GRAVE,0,1,nil) end
