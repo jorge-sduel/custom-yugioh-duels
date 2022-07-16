@@ -47,7 +47,7 @@ function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,cid.mtfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	if g:GetCount()>0 then
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
-Duel.Recover(tp,atk,REASON_EFFECT)
+Duel.Recover(tp,g:GetAttack(),REASON_EFFECT)
 	end
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
