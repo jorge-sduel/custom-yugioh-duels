@@ -22,6 +22,7 @@ local e2=Effect.CreateEffect(c)
 	e2:SetCountLimit(1,id)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCategory(CATEGORY_REMOVE)
+	e2:SetRange(LOCATION_MZONE)
 	e2:SetCost(cid.cost)
 	e2:SetTarget(cid.rmtg)
 	e2:SetOperation(cid.rmop)
@@ -34,7 +35,7 @@ function cid.mtfilter2(c,e)
    return c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function cid.mtfilter(c)
-	return c:IsFaceup()
+	return c:IsAbleToRemove()
 end
 function cid.mttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.mtfilter,tp,LOCATION_GRAVE,0,1,nil) end
@@ -46,6 +47,7 @@ function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,cid.mtfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	if g:GetCount()>0 then
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
+Duel.Recover(tp,g:GetAttack()+g:GetDefense(),REASON_EFFECT)
 	end
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
