@@ -412,11 +412,14 @@ function Auxiliary.AddEcProcedure(c,cd)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e2:SetCondition(Evolute.sumcon2)
+	e2:SetCondition(Auxiliary.sumcon2)
 	--e2:SetTarget(Evolute.addct)
-	e2:SetOperation(Evolute.addc)
+	e2:SetOperation(Auxiliary.addEc)
 	c:RegisterEffect(e2)
 end
-function Evolute.sumcon2(e,tp,eg,ep,ev,re,r,rp,cd)
-	return e:GetHandler():IsSummonType(cd)
+function Auxiliary.sumcon2(c,cd)
+	return c:IsSummonType(cd)
+end
+function Auxiliary.addEc(c)
+	c:AddCounter(0x111f,c:GetLevel())
 end
