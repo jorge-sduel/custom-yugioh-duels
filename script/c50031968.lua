@@ -8,14 +8,13 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:EnableReviveLimit()
 	Synchro.AddProcedure(c,Card.IsEvoluteTuner,1,1,Synchro.NonTunerEx(Card.IsEvolute),1,99)
 aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)  
-	--  
-   local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetTarget(cid.mttg)
-	e1:SetOperation(cid.mtop)
+	--cannot attack
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
+	e1:SetRange(LOCATION_SZONE)
+	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e1:SetTarget(cid.atktarget)
 	c:RegisterEffect(e1)
 local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -41,8 +40,8 @@ function cid.mttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.mtfilter,tp,LOCATION_GRAVE,0,1,nil) end
 end
 function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
-	--local c=e:GetHandler()
-	if c:IsRelateToEffect(e) then return end
+	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local g=Duel.SelectMatchingCard(tp,cid.mtfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
@@ -78,4 +77,7 @@ if tc:IsLocation(LOCATION_REMOVED) and tc:IsType(TYPE_MONSTER) and tc.Is_Evolute
 		end
 	end
 end
+end
+function cid.atktarget(e,c)
+	return c:GetAttack()>e:GetHandler():GetDefense()
 end
