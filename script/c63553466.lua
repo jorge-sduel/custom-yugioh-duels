@@ -118,7 +118,7 @@ function c63553466.clear(e,tp,eg,ep,ev,re,r,rp)
 end
 --filters
 function c63553466.matfilter(c)
-	return (c:IsType(TYPE_PENDULUM) or c.IsEquilibrium) and c:IsCanBeFusionMaterial()
+	return (c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium) and c:IsCanBeFusionMaterial()
 end
 function c63553466.fselect(c,tp,mg,sg)
 	sg:AddCard(c)
