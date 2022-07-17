@@ -3,7 +3,7 @@
 function c63553468.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
-	Synchro.AddMixProcedure(c,c63553468.matfilter1,1,Synchro.NonTuner(nil),1,99)
+	Synchro.AddProcedure(c,c63553468.matfilter1,1,Synchro.NonTunerEx(nil),1,99)
 	--no tuner check
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -29,17 +29,17 @@ function c63553468.initial_effect(c)
 end
 --filters
 function c63553468.matfilter1(c,syncard)
-	return (c:IsType(TYPE_TUNER) and (c:IsType(TYPE_PENDULUM) or c.IsEquilibrium))
-		or (c:IsType(TYPE_PENDULUM) or c.IsEquilibrium)
+	return (c:IsType(TYPE_TUNER) and (c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium))
+		or (c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium)
 end
 function c63553468.thfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
+	return c:IsFaceup() and c.Is_Equilibrium and c:IsAbleToHand()
 end
 function c63553468.setfilter(c)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM
+	return c.Is_Equilibrium
 end
 function c63553468.spfilter(c,e,tp)
-	return c:IsFaceup() and c:GetLevel()<=4 and (c:IsType(TYPE_PENDULUM) or c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsFaceup() and c:GetLevel()<=4 and (c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 --choose effect
 function c63553468.condition(e,tp,eg,ep,ev,re,r,rp)
@@ -81,12 +81,12 @@ function c63553468.operation(e,tp,eg,ep,ev,re,r,rp)
 			Duel.ConfirmCards(1-tp,g)
 		end
 	else
-		if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or not aux.PandSSetCon(c63553468.setfilter,nil,LOCATION_DECK)(nil,e,tp,eg,ep,ev,re,r,rp) then return end
+		if Duel.GetLocationCount(tp,LOCATION_PZONE)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-		local g=Duel.SelectMatchingCard(tp,aux.PandSSetFilter(c63553468.setfilter),tp,LOCATION_DECK,0,1,1,nil)
+		local g=Duel.SelectMatchingCard(tp,c63553468.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 		local tc=g:GetFirst()
 		if tc then
-			aux.PandSSet(tc,REASON_EFFECT,aux.GetOriginalPandemoniumType(tc))(e,tp,eg,ep,ev,re,r,rp)
+			Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 			Duel.ConfirmCards(1-tp,tc)
 		end
 	end
