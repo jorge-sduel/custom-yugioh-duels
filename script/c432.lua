@@ -23,7 +23,7 @@ function card.rescon(sg, e, tp, mg)
 end
 
 function card.spcost(e, tp, eg, ep, ev, re, r, rp, chk)
-	local g = Duel.GetMatchingGroup(card.cfilter, tp, LOCATION_HAND, 0, nil, e, tp, tid)
+	local g = Duel.GetMatchingGroup(card.cfilter, tp, LOCATION_ONFIELD+LOCATION_EXTRA, 0, nil, e, tp, tid)
 	if chk == 0 then
 		return aux.SelectUnselectGroup(g, e, tp, 3, 3, card.rescon, chk)
 	end
