@@ -15,7 +15,7 @@ function card.initial_effect(c)
 end
 
 function card.cfilter(c)
-	return not c:IsPublic() and c:IsType(TYPE_MONSTER)
+	return c:IsType(TYPE_MONSTER)
 end
 
 function card.rescon(sg, e, tp, mg)
