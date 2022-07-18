@@ -27,10 +27,10 @@ function c63553468.matfilter1(c,syncard)
 		or (c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium)
 end
 function c63553468.thfilter(c)
-	return c:IsFaceup() and c.Is_Equilibrium and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium and c:IsAbleToHand()
 end
 function c63553468.setfilter(c)
-	return c.Is_Equilibrium
+	return c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium
 end
 function c63553468.spfilter(c,e,tp)
 	return c:IsFaceup() and c:GetLevel()<=4 and (c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
