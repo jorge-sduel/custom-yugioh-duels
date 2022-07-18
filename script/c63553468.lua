@@ -4,12 +4,6 @@ function c63553468.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
 	Synchro.AddProcedure(c,c63553468.matfilter1,1,Synchro.NonTunerEx(nil),1,99)
-	--no tuner check
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetCode(80896940)
-	c:RegisterEffect(e1)
 	--choose effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
