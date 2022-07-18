@@ -27,7 +27,7 @@ function c63553468.matfilter1(c,syncard)
 		or (c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium)
 end
 function c63553468.thfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium and c:IsAbleToHand()
+	return (c:IsFaceup() or c:IsLocation(LOCATION_DECK)) and c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium and c:IsAbleToHand()
 end
 function c63553468.setfilter(c)
 	return c:IsType(TYPE_PENDULUM) or c.Is_Equilibrium
