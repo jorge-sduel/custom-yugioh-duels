@@ -1,16 +1,16 @@
 --Conjoint Archfiend
 	local cid,id=GetID()
 function cid.initial_effect(c)
-	   aux.AddOrigEvoluteType(c)
+s.Is_EvolSyn=true
+s.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-  aux.AddEvoluteProc(c,nil,7,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),aux.FilterBoolFunction(Card.IsRace,RACE_FIEND),1,99)
-
-	--Conjoint Procedure
-	aux.AddOrigConjointType(c)
-	aux.EnableConjointAttribute(c,1)
+	Synchro.AddProcedure(c,Card.IsEvoluteTuner,1,1,Synchro.NonTunerEx(Card.IsEvolute),1,99)
+aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)
    --actlimit
 	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_FIELD)
+	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e1:SetTargetRange(0,1)
@@ -19,7 +19,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e1)
 	--disable
 	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_CONTINUOUS)
+	e2:SetType(EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetOperation(cid.disop)
@@ -28,7 +28,7 @@ function cid.initial_effect(c)
 	e3:SetCode(EVENT_BE_BATTLE_TARGET)
 	c:RegisterEffect(e3)
 	local e6=Effect.CreateEffect(c)
-	e6:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_FIELD)
+	e6:SetType(EFFECT_TYPE_FIELD)
 	e6:SetCode(EFFECT_DISABLE)
 	e6:SetTargetRange(0,LOCATION_MZONE)
 	e6:SetTarget(cid.distg)
