@@ -88,7 +88,7 @@ function c1453.splimit(e,se,sp,st)
 	return sc:IsType(TYPE_PENDULUM)
 end
 function c1453.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,e:GetHandler()) end
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,3,false,nil,e:GetHandler()) end
 	local g=Duel.SelectReleaseGroupCost(tp,nil,3,3,false,nil,e:GetHandler())
 	local tc=g:GetFirst()
 	local suma=0
