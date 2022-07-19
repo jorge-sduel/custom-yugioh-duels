@@ -1,8 +1,8 @@
 --Conjoint Archfiend
 	local cid,id=GetID()
 function cid.initial_effect(c)
-s.Is_EvolSyn=true
-s.Is_Evolute=true
+cid.Is_EvolSyn=true
+cid.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
