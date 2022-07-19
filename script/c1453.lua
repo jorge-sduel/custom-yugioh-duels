@@ -13,7 +13,8 @@ c:AddSetcodesRule(1453,false,0xbb00)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CANNOT_DISEFFECT)
 
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e2)
+
 	--Halve damage
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
@@ -21,7 +22,7 @@ c:AddSetcodesRule(1453,false,0xbb00)
 	e3:SetCode(EFFECT_CHANGE_DAMAGE)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetTargetRange(1,0)
-	e3:SetValue(c1435.val)
+	e3:SetValue(c1453.val)
 	c:RegisterEffect(e3)
 	--Tribute to Increase ATK
 	local e6=Effect.CreateEffect(c)
@@ -42,7 +43,9 @@ c:AddSetcodesRule(1453,false,0xbb00)
 	e5:SetCondition(c1453.spcon)
 	e5:SetTarget(c1453.sptg)
 	e5:SetOperation(c1453.spop)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e5)
+
+
 	--spsummon condition
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
@@ -73,7 +76,9 @@ function c1453.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Release(g,REASON_COST)
 	g:DeleteGroup()
 end
-
+
+
+
 function c1453.splimit(e,se,sp,st)
 	local sc=se:GetHandler()
 	return sc:IsType(TYPE_PENDULUM)
