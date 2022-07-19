@@ -88,25 +88,35 @@ function c1453.splimit(e,se,sp,st)
 	return sc:IsType(TYPE_PENDULUM)
 end
 function c1453.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroup(tp,nil,2,e:GetHandler()) end
-	local g=Duel.SelectReleaseGroup(tp,nil,2,2,e:GetHandler())
-	local atk=0
-	local tc1=g:GetFirst()
-	local tc2=g:GetNext()
-	if tc1:IsFaceup() then atk=tc1:GetAttack() end
-	if tc2:IsFaceup() then atk=atk+tc2:GetAttack() end
-	if atk<0 then atk=0 end
-	e:SetLabel(atk)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,e:GetHandler()) end
+	local g=Duel.SelectReleaseGroupCost(tp,nil,3,3,false,nil,e:GetHandler())
+	local tc=g:GetFirst()
+	local suma=0
+	local sumd=0
+	while tc do
+		suma=suma+tc:GetAttack()
+		sumd=sumd+tc:GetDefense()
+		tc=g:GetNext()
+	end
+	e:SetLabel(suma)
+	e:GetLabelObject():SetLabel(sumd)
 	Duel.Release(g,REASON_COST)
 end
 function c1453.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsFaceup() and c:IsRelateToEffect(e) then
-		local e1=Effect.CreateEffect(c)
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(e:GetLabel())
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
-		c:RegisterEffect(e1)
-	end
+	if c:GetFlagEffect(236)>0 then return end
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_UPDATE_ATTACK)
+	--e1:SetCondition(s.dfcon)
+	e1:SetValue(e:GetLabel())
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_UPDATE_DEFENSE)
+	--e2:SetCondition(s.dfcon)
+	e2:SetValue(e:GetLabelObject():GetLabel())
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+	c:RegisterEffect(e2)
 end
