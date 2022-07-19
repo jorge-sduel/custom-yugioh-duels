@@ -54,6 +54,9 @@ c:AddSetcodesRule(1453,false,0xbb00)
 	e8:SetValue(c1453.splimit)
 	c:RegisterEffect(e8)
 end
+function c1453.val(e,re,dam,r,rp,rc)
+	return math.floor(dam/2)
+end
 function c1453.dmfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_PENDULUM)
 end
