@@ -1,8 +1,8 @@
 --Conjoint Archfiend
-	local cid,id=GetID()
-function cid.initial_effect(c)
-cid.Is_EvolSyn=true
-cid.Is_Evolute=true
+	local s,id=GetID()
+function s.initial_effect(c)
+s.Is_EvolSyn=true
+s.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
@@ -15,38 +15,65 @@ aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)
 	e1:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e1:SetTargetRange(0,1)
 	e1:SetValue(1)
-	e1:SetCondition(cid.actcon)
+	e1:SetCondition(s.actcon)
 	c:RegisterEffect(e1)
 	--disable
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e2:SetOperation(cid.disop)
+	e2:SetOperation(s.disop)
 	c:RegisterEffect(e2)
 	local e3=e2:Clone()
 	e3:SetCode(EVENT_BE_BATTLE_TARGET)
 	c:RegisterEffect(e3)
-	local e6=Effect.CreateEffect(c)
-	e6:SetType(EFFECT_TYPE_FIELD)
-	e6:SetCode(EFFECT_DISABLE)
-	e6:SetTargetRange(0,LOCATION_MZONE)
-	e6:SetTarget(cid.distg)
-	c:RegisterEffect(e6)
-	local e7=e6:Clone()
-	e7:SetCode(EFFECT_DISABLE_EFFECT)
-	c:RegisterEffect(e7)
+	--Gain ATK equal 1 of your destroyed monsters
+	local e2=Effect.CreateEffect(c)
+	e2:SetCategory(CATEGORY_ATKCHANGE)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e2:SetCode(EVENT_DESTROYED)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
+	e2:SetCountLimit(1)
+	e2:SetCost(s.atkcost)
+	e2:SetTarget(s.atktg2)
+	e2:SetOperation(s.atkop2)
+	c:RegisterEffect(e2)
 end
 
-function cid.actcon(e)
+function s.actcon(e)
 	local c=e:GetHandler()
 	return (Duel.GetAttacker()==c and c:GetBattleTarget()) or Duel.GetAttackTarget()==c
 end
-function cid.disop(e,tp,eg,ep,ev,re,r,rp)
+function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetBattleTarget()
 	if not tc then return end
 	tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_BATTLE,0,1)
 end
-function cid.distg(e,c)
+function s.distg(e,c)
 	return c:GetFlagEffect(id)~=0
+end
+function s.filter2(c,e,tp)
+	return c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsType(TYPE_MONSTER)
+		and c:IsPreviousLocation(LOCATION_MZONE) and c:IsPreviousControler(tp)
+		and c:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and c:IsCanBeEffectTarget(e)
+end
+function s.atktg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return eg:IsContains(chkc) and s.filter2(chkc,e,tp) end
+	if chk==0 then return eg:IsExists(s.filter2,1,nil,e,tp) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
+	local g=eg:FilterSelect(tp,s.filter2,1,1,nil,e,tp)
+	Duel.SetTargetCard(g)
+end
+function s.atkop2(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local tc=Duel.GetFirstTarget()
+	if c:IsFaceup() and c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_UPDATE_ATTACK)
+		e1:SetValue(tc:GetBaseAttack())
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
+		c:RegisterEffect(e1)
+	end
 end
