@@ -432,3 +432,6 @@ function Auxiliary.addEc(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e1)
 end
+function Auxiliary.EvoluteStage(c,tp)
+	return c:IsHasEffect(160001126,tp)
+end
