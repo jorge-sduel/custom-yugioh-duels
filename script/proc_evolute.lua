@@ -424,5 +424,11 @@ function Auxiliary.sumcon2(c,e,cd)
 	return c:GetSummonType()==cd
 end
 function Auxiliary.addEc(e,tp,eg,ep,ev,re,r,rp)
+		local c=e:GetHandler()
 	e:GetHandler():AddCounter(0x111f,e:GetHandler():GetLevel())
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(160001126)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		c:RegisterEffect(e1)
 end
