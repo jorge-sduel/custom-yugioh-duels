@@ -113,6 +113,6 @@ end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:GetCounter(0x111f)==0 then
-		Duel.Win(tp,WIN_REASON_VENNOMINAGA)
+		Duel.Win(tp,WIN_REASON_DEUCE)
 	end
 end
