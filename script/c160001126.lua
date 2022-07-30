@@ -60,7 +60,7 @@ aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)
 	--win
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e7:SetCode(EVENT_ADJUST)
+	e7:SetCode(EVENT_PHASE+PHASE_END)
 	e7:SetRange(LOCATION_MZONE)
 	e7:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e7:SetOperation(s.winop)
@@ -112,7 +112,7 @@ function s.costop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:GetCounter(0x111f)==0 and c:IsHasEffect(id+1) then
+	if c:GetCounter(0x111f)==0 then
 		Duel.Win(tp,WIN_REASON_DEUCE)
 	end
 end
