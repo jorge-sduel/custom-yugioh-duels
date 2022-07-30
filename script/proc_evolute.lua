@@ -433,5 +433,5 @@ function Auxiliary.addEc(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1)
 end
 function Auxiliary.EvoluteStage(c,tp)
-	return c:IsHasEffect(160001126,tp)
+	return c:IsHasEffect(160001127,tp)
 end
