@@ -60,9 +60,11 @@ aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)
 	--win
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e7:SetCode(EVENT_PHASE+PHASE_END)
+	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e7:SetRange(LOCATION_MZONE)
-	e7:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
+	e7:SetCode(EVENT_PHASE+PHASE_END)
+	e7:SetCountLimit(1)
+	e7:SetCondition(s.wincon)
 	e7:SetOperation(s.winop)
 	c:RegisterEffect(e7)
 end
@@ -109,6 +111,9 @@ function s.costchk(e,te_or_c,tp)
 end
 function s.costop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RemoveCounter(tp,0x111f,1,REASON_COST)
+end
+function s.wincon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnPlayer()==tp
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
