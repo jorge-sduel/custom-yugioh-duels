@@ -112,7 +112,7 @@ function s.costop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:GetCounter(0x111f)==0 and aux.EvolutesStage then
+	if c:GetCounter(0x111f)==0 and c:IsHasEffect(id+1) then
 		Duel.Win(tp,WIN_REASON_DEUCE)
 	end
 end
