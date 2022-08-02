@@ -55,7 +55,7 @@ aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)
 	e6:SetCode(id)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e6:SetCondition(Evolute.Sumcon)
+	e6:SetCondition(Evolute.sumcon)
 	e6:SetTargetRange(0,1)
 	c:RegisterEffect(e6)
 	--win
