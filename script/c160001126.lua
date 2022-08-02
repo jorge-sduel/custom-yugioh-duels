@@ -6,7 +6,7 @@ s.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	Synchro.AddProcedure(c,Card.IsEvoluteTuner,1,1,Synchro.NonTunerEx(Card.IsEvolute),1,99)
+	Synchro.AddProcedure(c,Card.IsEvoluteTuner,1,1,aux.FilterBoolFunction(Card.IsCode,500315455),1,1)
 aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)
    --actlimit
 	local e1=Effect.CreateEffect(c)
@@ -113,7 +113,7 @@ function s.costop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RemoveCounter(tp,0x111f,1,REASON_COST)
 end
 function s.wincon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
+	return Duel.GetTurnPlayer()==tp and c:IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
