@@ -55,6 +55,7 @@ aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)
 	e6:SetCode(id)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e6:SetCondition(Evolute.Sumcon)
 	e6:SetTargetRange(0,1)
 	c:RegisterEffect(e6)
 	--win
@@ -107,7 +108,7 @@ function s.atkop2(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.costchk(e,te_or_c,tp)
 	local ct=#{Duel.GetPlayerEffect(tp,id)}
-	return e:GetHandler():IsCanRemoveCounter(tp,0x111f,1,REASON_COST) and e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
+	return e:GetHandler():IsCanRemoveCounter(tp,0x111f,1,REASON_COST)
 end
 function s.costop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RemoveCounter(tp,0x111f,1,REASON_COST)
