@@ -107,13 +107,13 @@ function s.atkop2(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.costchk(e,te_or_c,tp)
 	local ct=#{Duel.GetPlayerEffect(tp,id)}
-	return e:GetHandler():IsCanRemoveCounter(tp,0x111f,1,REASON_COST)
+	return e:GetHandler():IsCanRemoveCounter(tp,0x111f,1,REASON_COST) and e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
 function s.costop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RemoveCounter(tp,0x111f,1,REASON_COST)
 end
 function s.wincon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp and c:IsSummonType(SUMMON_TYPE_EVOLUTE)
+	return Duel.GetTurnPlayer()==tp and e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
