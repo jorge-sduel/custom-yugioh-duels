@@ -30,7 +30,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2)
 	end
 function cm.sfilter(c)
-	return c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_FIRE) or c:IsType(TYPE_TUNER)
+	return (c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_FIRE)) or c:IsType(TYPE_TUNER)
 end
 function cm.sscon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
