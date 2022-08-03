@@ -46,7 +46,7 @@ aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e5:SetTargetRange(0,1)
-	e5:SetCost(s.costchk)
+	--e5:SetCost(s.costchk)
 	e5:SetOperation(s.costop)
 	c:RegisterEffect(e5)
 	--accumulate
@@ -114,7 +114,7 @@ function s.costop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RemoveCounter(tp,0x111f,1,REASON_COST)
 end
 function s.wincon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp and e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
+	return Duel.GetTurnPlayer()==tp and e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function s.winop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
