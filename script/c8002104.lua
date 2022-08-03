@@ -4,7 +4,7 @@ local m=8002104
 local cm=_G["c"..m]
 function cm.initial_effect(c)
 	--synchro summon
-    Synchro.AddProcedure(c,cm.sfilter,aux.NonTuner(nil),1,99)
+    Synchro.AddProcedure(c,cm.sfilter,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--Aid me, my useless knight
 	local e1=Effect.CreateEffect(c)
@@ -30,7 +30,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2)
 	end
 function cm.sfilter(c)
-	return c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_FIRE)
+	return c:IsRace(RACE_WARRIOR) and c:IsAttribute(ATTRIBUTE_FIRE) or c:IsType(TYPE_TUNER)
 end
 function cm.sscon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
