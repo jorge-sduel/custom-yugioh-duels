@@ -1,13 +1,13 @@
 --Neon Data Connector
 local cid,id=GetID()
 function cid.initial_effect(c)
-	 aux.AddOrigEvoluteType(c)
+cid.Is_EvolSyn=true
+cid.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	aux.AddEvoluteProc(c,nil,6,cid.filter1,cid.filter1,1,99)  
-	--Conjoint Procedure
-	aux.AddOrigConjointType(c)
-	aux.EnableConjointAttribute(c,6) 
-
+	Synchro.AddProcedure(c,Card.IsEvoluteTuner,1,1,Synchro.NonTuner(Card.IsEvolute),1,1)
+--aux.AddEcProcedure(c,SUMMON_TYPE_SYNCHRO)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
