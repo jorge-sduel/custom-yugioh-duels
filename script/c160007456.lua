@@ -100,7 +100,7 @@ function cid.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
 end
 function cid.value(e,c)
-	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_REMOVED,0)*100
+	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_REMOVE,0,nil,TYPE_MONSTER)*100
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
