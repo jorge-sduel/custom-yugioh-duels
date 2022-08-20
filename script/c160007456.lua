@@ -119,6 +119,7 @@ local tc=e:GetLabelObject()
 		end
 		if tc:CanAttack() and not tc:IsImmuneToEffect(e) then
 			Duel.BreakEffect()
+Duel.NegateAttack()
 			Duel.CalculateDamage(tc,Duel.GetAttackTarget())
 		end
 	end
