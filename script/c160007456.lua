@@ -103,21 +103,25 @@ function cid.value(e,c)
 	return Duel.GetMatchingGroupCount(Card.IsType,e:GetHandler():GetControler(),LOCATION_REMOVED,LOCATION_REMOVED,nil,TYPE_MONSTER)*100
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return true end
-	local at=Duel.GetAttacker()
-	Duel.SetTargetCard(at)
+	if chkc then return false end
+	local a=Duel.GetAttacker()
+	if chk==0 then return a and a:IsCanBeEffectTarget(e) and Duel.IsExistingTarget(Card.IsFaceup,tp,0,LOCATION_MZONE,1,a) end
+	Duel.SetTargetCard(a)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
+	local g=Duel.SelectTarget(tp,Card.IsFaceup,tp,0,LOCATION_MZONE,1,1,a)
+	e:SetLabelObject(g:GetFirst())
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
-		   local bc=Duel.GetAttackTarget()
-		local g=Duel.GetMatchingGroup(nil,tp,0,LOCATION_MZONE,bc)
-		if g:GetCount()>0 then
-			Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(36708764,0))
-			local tc=g:Select(tp,1,1,nil):GetFirst()
-			local at=Duel.GetAttacker()
-			if at:IsImmuneToEffect(e) and not tc:IsImmuneToEffect(e) then
-				Duel.CalculateDamage(at,tc)
-			end
+local tc=e:GetLabelObject()
+	if Duel.NegateAttack() and tc:IsRelateToEffect(e) and tc:IsFaceup() then
+		if tc:IsDefensePos() then
+			Duel.ChangePosition(tc,POS_FACEUP_ATTACK)
 		end
+		if tc:CanAttack() and not tc:IsImmuneToEffect(e) then
+			Duel.BreakEffect()
+			Duel.CalculateDamage(tc,Duel.GetAttackTarget())
+		end
+	end
 end
 function cid.skipop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
