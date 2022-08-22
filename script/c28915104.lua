@@ -27,6 +27,12 @@ aux.AddConvergentEvolSummonProcedure(c,ref.matfilter1,LOCATION_ONFIELD)
 	e2:SetTarget(ref.tgtg)
 	e2:SetOperation(ref.tgop)
 	c:RegisterEffect(e2)
+--
+	local e10=Effect.CreateEffect(c)
+	e10:SetType(EFFECT_TYPE_SINGLE)
+	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	c:RegisterEffect(e10)
 end
 function ref.matfilter1(c,ec,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) or c:IsRace(RACE_WARRIOR)
