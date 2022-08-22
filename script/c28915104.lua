@@ -3,9 +3,12 @@ local ref=_G['c'..28915104]
 local id=28915104
 function ref.initial_effect(c)
 	--Evolute Summon
-	aux.AddOrigEvoluteType(c)
+ref.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	aux.AddEvoluteProc(c,'Convergent',0,ref.matfilter1,ref.matfilter2,2,99)
+	--Convergent Evolute
+aux.AddConvergentEvolSummonProcedure(c,ref.matfilter1,LOCATION_ONFIELD)
 	--Nontarget
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -26,7 +29,7 @@ function ref.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function ref.matfilter1(c,ec,tp)
-	return c:IsAttribute(ATTRIBUTE_FIRE)
+	return c:IsAttribute(ATTRIBUTE_FIRE) or c:IsRace(RACE_WARRIOR)
 end
 function ref.matfilter2(c,ec,tp)
 	return c:IsRace(RACE_WARRIOR)
@@ -35,8 +38,8 @@ end
 --Removal
 function ref.tgcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveEC(tp,4,REASON_COST) and Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
-	c:RemoveEC(tp,4,REASON_EFFECT)
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,4,REASON_COST) and Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	c:RemoveCounter(tp,0x111f,4,REASON_EFFECT)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD,nil)
 end
 function ref.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
