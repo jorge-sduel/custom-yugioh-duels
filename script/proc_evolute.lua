@@ -366,7 +366,8 @@ function Auxiliary.ConvergentEvolSummonCondition(cd,loc,excon)
 	return 	function(e,c)
 				if excon and not excon(e,c) then return false end
 				if c==nil then return true end
-				return Duel.GetLocationCountFromEx(c:GetControler(),LOCATION_MZONE)>0
+				return 
+--Duel.GetLocationCountFromEx(c:GetControler(),LOCATION_MZONE)>0
 --GetLocationCount
 					and (Duel.IsExistingMatchingCard(Auxiliary.ConvergentEvolSummonFilter,c:GetControler(),loc,0,1,nil,cd)
 					or Duel.IsExistingMatchingCard(Auxiliary.ConvergentEvolSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler()))
@@ -389,7 +390,7 @@ function Auxiliary.ConvergentEvolSummonOperation(cd,loc)
 	return	function(e,tp,eg,ep,ev,re,r,rp,c)
 				local g=e:GetLabelObject()
 				if not g then return end
-		c:SetMaterial(g)
+		c:SetMaterial(g) and Duel.GetLocationCountFromEx(tp,tp,g,c)>0
 				Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
 				g:DeleteGroup()
 			end
