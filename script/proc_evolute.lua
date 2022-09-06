@@ -377,6 +377,7 @@ function Auxiliary.ConvergentEvolSummonTarget(cd,loc)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
 				local g=Duel.GetMatchingGroup(Auxiliary.ConvergentEvolSummonFilter,tp,loc,0,nil,cd)
 				g:Merge(Duel.GetMatchingGroup(Auxiliary.ConvergentEvolSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,c:GetControler()))
+Duel.GetLocationCountFromEx(tp,tp,g,c)>0
 				local sg=aux.SelectUnselectGroup(g,e,tp,1,99,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 				if #sg>0 then
 					sg:KeepAlive()
@@ -390,7 +391,7 @@ function Auxiliary.ConvergentEvolSummonOperation(cd,loc)
 	return	function(e,tp,eg,ep,ev,re,r,rp,c)
 				local g=e:GetLabelObject()
 				if not g then return end
-		c:SetMaterial(g) and Duel.GetLocationCountFromEx(tp,tp,g,c)>0
+		c:SetMaterial(g)
 				Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
 				g:DeleteGroup()
 			end
