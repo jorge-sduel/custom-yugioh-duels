@@ -391,7 +391,6 @@ function Auxiliary.ConvergentEvolSummonOperation(cd,loc)
 				local g=e:GetLabelObject()
 				if not g then return end
 		c:SetMaterial(g)
-Duel.GetLocationCountFromEx(tp,tp,g,c)>0
 				Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
 				g:DeleteGroup()
 			end
