@@ -376,7 +376,7 @@ function Auxiliary.ConvergentEvolSummonTarget(cd,loc)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
 				local g=Duel.GetMatchingGroup(Auxiliary.ConvergentEvolSummonFilter,tp,loc,0,nil,cd)
 				g:Merge(Duel.GetMatchingGroup(Auxiliary.ConvergentEvolSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,c:GetControler()))
-				local sg=aux.SelectUnselectGroup(g,e,tp,1,99,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+				local sg=aux.SelectUnselectGroup(g,e,tp,2,99,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 				if #sg>0 then
 					sg:KeepAlive()
 					e:SetLabelObject(sg)
