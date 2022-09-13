@@ -26,7 +26,7 @@ function c960123542.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c960123542.filter1(c)
-	return c:IsType(TYPE_SPELL) and c:IsType(TYPE_CONTINUOS)
+	return c:IsType(TYPE_SPELL)
 end
 function c960123542.filter2(c)
 	return c:IsType(TYPE_MONSTER) and c:IsRace(RACE_INSECT)
