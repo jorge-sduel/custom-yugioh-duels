@@ -1,5 +1,5 @@
 REASON_RUNIC		 = 0x520000000
-SUMMON_TYPE_RUNIC = 0x4f000000
+SUMMON_TYPE_RUNIC = 0x4000000000000000
 HINTMSG_RNMATERIAL	 = 6010000000000
 RUNIC_IMPORTED    = true
 if not aux.RunicProcedure then
@@ -67,7 +67,7 @@ function Runic.Filter(c,f,sc,tp)
 end
 function Runic.Check(tp,sg,sc,f1,f2,min)
 	return sg:IsExists(Runic.FilterEx,1,nil,f1,sc,tp,sg,LOCATION_MZONE)
-		and sg:IsExists(Runic.FilterEx,min,nil,f2,sc,tp,sg,LOCATION_HAND)
+		and sg:IsExists(Runic.FilterEx,min,nil,f2,sc,tp,sg,LOCATION_ONFIELD)
 end
 function Runic.Remove(c,g)
 	return g:IsContains(c)
@@ -94,7 +94,7 @@ function Runic.Target(f1,f2,min,max)
                     mg1=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
                 end
                 if not mg2 then
-                    mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_HAND,0,nil,f2,c,tp)
+                    mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
                 end
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,mg1+mg2,tp,c,mg1+mg2,REASON_RUNIC)
 				if must then mustg:Merge(must) end                
@@ -106,8 +106,8 @@ function Runic.Target(f1,f2,min,max)
 					local cg=Group.CreateGroup()
                     if not sg:IsExists(Runic.FilterEx,1,nil,f1,c,tp,mg2,LOCATION_MZONE) then
                         cg=mg1:Filter(Runic.FilterEx,nil,f1,c,tp,mg2,LOCATION_MZONE)
-                    elseif not sg:IsExists(Runic.FilterEx,max,nil,f2,c,tp,mg1,LOCATION_HAND) then
-                        cg=mg2:Filter(Runic.FilterEx,nil,f2,c,tp,mg1,LOCATION_HAND)
+                    elseif not sg:IsExists(Runic.FilterEx,max,nil,f2,c,tp,mg1,LOCATION_ONFIELD) then
+                        cg=mg2:Filter(Runic.FilterEx,nil,f2,c,tp,mg1,LOCATION_ONFIELD)
                     end
 					cg:Remove(Runic.Remove,nil,sg)
 					if #cg==0 then break end
@@ -155,7 +155,7 @@ function Card.RunicRule(c,e,tp,mustg,mg)
 		mg2=mg:Filter(Card.IsLocation,nil,LOCATION_ONFIELD):Filter(Runic.Filter,nil,f2,c,tp)
 	else
 		mg1=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
-		mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_HAND,0,nil,f2,c,tp)
+		mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
 	end
     if #mg1<=0 or #mg2<=0 then return false end
 	if mustg and not Runic.FilterMustBeMat(mg1,mg2,mustg) then return false end
