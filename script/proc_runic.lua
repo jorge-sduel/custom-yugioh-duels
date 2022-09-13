@@ -1,6 +1,6 @@
 REASON_RUNIC		 = 0x128
-SUMMON_TYPE_RUNIC = SUMMON_TYPE_SPECIAL+388 
-HINTMSG_RNMATERIAL	 = 60100000
+SUMMON_TYPE_RUNIC = SUMMON_TYPE_SPECIAL+3880000
+HINTMSG_RNMATERIAL	 = 60100000000000
 RUNIC_IMPORTED    = true
 if not aux.RunicProcedure then
 	aux.RunicProcedure = {}
@@ -60,7 +60,7 @@ function Runic.FilterEx(c,f,sc,tp,mg,loc)
     g:AddCard(c)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp))
         and (not loc or c:IsLocation(loc))
-        and Duel.GetLocationCount(tp,tp,g,sc)>0
+        and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1
 end
 function Runic.Filter(c,f,sc,tp)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
