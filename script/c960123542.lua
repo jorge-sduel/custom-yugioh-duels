@@ -2,6 +2,7 @@
 c960123542.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c960123542.initial_effect(c)
+	c:EnableReviveLimit()
 	--ignition summon
 	Runic.AddProcedure(c,c960123542.filter2,c960123542.filter1,1,99)
 	--damage
