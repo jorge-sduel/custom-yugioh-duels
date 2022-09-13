@@ -1,5 +1,5 @@
 --Verdant Mutant
-c960123542.IsIgnition=true
+c960123542.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c960123542.initial_effect(c)
 	--ignition summon
