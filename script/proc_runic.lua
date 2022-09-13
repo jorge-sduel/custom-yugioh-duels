@@ -1,5 +1,5 @@
 REASON_RUNIC		 = 0x520000000
-SUMMON_TYPE_RUNIC = 0x800000000000000
+SUMMON_TYPE_RUNIC = 0x4f000000
 HINTMSG_RNMATERIAL	 = 6010000000000
 RUNIC_IMPORTED    = true
 if not aux.RunicProcedure then
@@ -35,6 +35,25 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
+--
+       local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e8:SetCode(EFFECT_LEVEL_RANK)
+	c:RegisterEffect(e8)
+--
+        local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e9:SetCode(EFFECT_CHANGE_LEVEL)
+	e9:SetValue(0)
+	c:RegisterEffect(e9)
+--
+	local e10=Effect.CreateEffect(c)
+	e10:SetType(EFFECT_TYPE_SINGLE)
+	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	c:RegisterEffect(e10)
 end
 function Runic.FilterEx(c,f,sc,tp,mg,loc)
     local g=mg
