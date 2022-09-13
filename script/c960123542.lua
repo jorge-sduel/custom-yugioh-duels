@@ -23,7 +23,7 @@ function c960123542.initial_effect(c)
 	e2:SetCode(EFFECT_EXTRA_SUMMON_COUNT)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,0)
-	e2:SetTarget(aux.TargetBoolFunction(Card.IsRace,RACE_INSECT))
+	e2:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_MONSTER))
 	c:RegisterEffect(e2)
 end
 function c960123542.filter1(c)
