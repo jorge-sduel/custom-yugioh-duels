@@ -3,7 +3,7 @@ c960123542.IsIgnition=true
 if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") end
 function c960123542.initial_effect(c)
 	--ignition summon
-	Ignition.AddProcedure(c,c960123542.filter1,c960123542.filter2,1,99)
+	Ignition.AddProcedure(c,c960123542.filter2,c960123542.filter1,1,99)
 	--damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(960123542,0))
