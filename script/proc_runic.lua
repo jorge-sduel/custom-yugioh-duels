@@ -60,14 +60,14 @@ function Runic.FilterEx(c,f,sc,tp,mg,loc)
     g:AddCard(c)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp))
         and (not loc or c:IsLocation(loc))
-        and Duel.GetLocationCountFromEx(tp,tp,g,sc)>0
+        and Duel.GetLocationCount(tp,tp,g,sc)>0
 end
 function Runic.Filter(c,f,sc,tp)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
 end
 function Runic.Check(tp,sg,sc,f1,f2,min)
-	return sg:IsExists(Ignition.FilterEx,1,nil,f1,sc,tp,sg,LOCATION_MZONE)
-		and sg:IsExists(Ignition.FilterEx,min,nil,f2,sc,tp,sg,LOCATION_HAND)
+	return sg:IsExists(Runic.FilterEx,1,nil,f1,sc,tp,sg,LOCATION_MZONE)
+		and sg:IsExists(Runic.FilterEx,min,nil,f2,sc,tp,sg,LOCATION_HAND)
 end
 function Runic.Remove(c,g)
 	return g:IsContains(c)
@@ -135,7 +135,7 @@ end
 function Runic.Operation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 	local g=e:GetLabelObject()
 	c:SetMaterial(g)
-	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_IGNITION)
+	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNIC)
 	g:DeleteGroup()
 end
 -- Runic Summon by card effect
