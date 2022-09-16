@@ -24,7 +24,7 @@ function c956891234.repval(e,re,r,rp)
 end
 function c956891234.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNE and e:GetHandler():IsLocation(LOCATION_GRAVE)
+	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNIC and e:GetHandler():IsLocation(LOCATION_GRAVE)
 end
 function c956891234.thfilter(c)
 	return c:IsAbleToHand()
