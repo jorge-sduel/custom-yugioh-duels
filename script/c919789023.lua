@@ -1,16 +1,20 @@
 --Tiska Virtuakit-β
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c919789023.initial_effect(c)
+	c:EnableReviveLimit()
+	--ignition summon
+	Runic.AddProcedure(c,c919789023.matfilter2,c919789023.matfilter1,1,99)
 	--Rune Summon
 	c:EnableReviveLimit()
-	local r1=Effect.CreateEffect(c)
-	r1:SetType(EFFECT_TYPE_FIELD)
-	r1:SetCode(EFFECT_SPSUMMON_PROC)
-	r1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	r1:SetRange(LOCATION_HAND)
-	r1:SetCondition(c919789023.runcon)
-	r1:SetOperation(c919789023.runop)
+	--local r1=Effect.CreateEffect(c)
+	--r1:SetType(EFFECT_TYPE_FIELD)
+	--r1:SetCode(EFFECT_SPSUMMON_PROC)
+	--r1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	--r1:SetRange(LOCATION_HAND)
+	--r1:SetCondition(c919789023.runcon)
+	--r1:SetOperation(c919789023.runop)
 	--r1:SetValue(0x4f000000)
-	c:RegisterEffect(r1)
+	--c:RegisterEffect(r1)
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(29071332,0))
@@ -87,10 +91,10 @@ function c919789023.initial_effect(c)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
 	c:RegisterEffect(e10)
 end
-function c919789023.matfilter1(c)
+function c919789023.matfilter2(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
 end
-function c919789023.matfilter2(c)
+function c919789023.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_EQUIP) and c:IsType(TYPE_SPELL)
 end
 function c919789023.runfilter1(c)
