@@ -1,9 +1,10 @@
 --Tyranic Dragon
+c968713202.IsIgnition=true
+if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") end
 function c968713202.initial_effect(c)
-	--Rune Summon
+	--ignition summon
+	Ignition.AddProcedure(c,c968713202.filter2,c968713202.filter1,1,1)	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_DRAGON),1,1,aux.FilterBoolFunction(Card.IsCode,57470761),1,1)
-	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(968713202,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -18,6 +19,12 @@ function c968713202.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_PIERCE)
 	c:RegisterEffect(e2)
+end
+function c968713202.filter1(c)
+	return c:IsType(TYPE_TRAP)
+end
+function c968713202.filter2(c)
+	return c:IsType(TYPE_MONSTER)
 end
 function c968713202.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_RUNE
