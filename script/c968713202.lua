@@ -27,10 +27,10 @@ function c968713202.filter2(c)
 	return c:IsType(TYPE_MONSTER)
 end
 function c968713202.setcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_RUNE
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_RUNIC
 end
 function c968713202.filter(c)
-	return c:GetCode()==57470761 and c:IsSSetable()
+	return c:IsType(TYPE_TRAP) and c:IsSSetable()
 end
 function c968713202.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
