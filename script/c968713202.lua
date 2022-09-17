@@ -1,5 +1,5 @@
 --Tyranic Dragon
-c968713202.IsIgnition=true
+c968713202.Is_runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c968713202.initial_effect(c)
 	--ignition summon
