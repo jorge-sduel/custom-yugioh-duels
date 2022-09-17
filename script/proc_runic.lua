@@ -218,3 +218,6 @@ function Duel.RunicSummon(c,tp,mustg,mg)
 		c:CompleteProcedure()
 	end
 end
+function Runic.sumcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_RUNIC)
+end
