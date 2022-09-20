@@ -77,7 +77,7 @@ function Runic.Condition(f1,f2,min,max)
 				if c==nil then return true end
 				local tp=c:GetControler()
                 
-                if not Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Runic.Filter),tp,LOCATION_MZONE,0,1,nil,f1,c,tp)
+                if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,1,nil,f1,c,tp)
                     or not Duel.IsExistingMatchingCard(Runic.Filter,tp,LOCATION_ONFIELD,0,min,nil,f2,c,tp) then return false end
                 
                 local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
