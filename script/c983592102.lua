@@ -1,5 +1,5 @@
 --Transfigurer Angel
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end0
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c983592102.initial_effect(c)
 	--search
 	local e1=Effect.CreateEffect(c)
