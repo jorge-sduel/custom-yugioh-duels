@@ -1,8 +1,10 @@
 --Advanced Rainbow Dragon
+c985210323.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c985210323.initial_effect(c)
-	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x1034),1,1,aux.FilterBoolFunction(Card.IsSetCard,0x34),4,99)
+	--ignition summon
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x2034),aux.FilterBoolFunction(Card.IsSetCard,0x34),2,99)
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -41,7 +43,7 @@ function c985210323.initial_effect(c)
 end
 function c985210323.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:GetSummonType()==SUMMON_TYPE_RUNE then
+	if c:GetSummonType()==SUMMON_TYPE_RUNIC then
 		local ct=c:GetMaterialCount()
 		c:RegisterFlagEffect(985210323,RESET_EVENT+0x1fe0000,0,0,ct*200)
 	end
