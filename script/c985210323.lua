@@ -42,7 +42,7 @@ function c985210323.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function c985210323.filter1(c)
-	return c:IsSetCard(0x34)
+	return c:IsSetCard(0x34) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP))
 end
 function c985210323.filter2(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x2034)
