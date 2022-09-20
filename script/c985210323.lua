@@ -6,12 +6,12 @@ function c985210323.initial_effect(c)
 	--ignition summon
 	Runic.AddProcedure(c,c985210323.filter2,c985210323.filter1,2,99)
 	--cannot special summon
-	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e1:SetValue(SUMMON_TYPE_RUNIC)
-	c:RegisterEffect(e1)
+	--local e1=Effect.CreateEffect(c)
+	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	--e1:SetType(EFFECT_TYPE_SINGLE)
+	--e1:SetCode(EFFECT_SPSUMMON_CONDITION)
+	--e1:SetValue(SUMMON_TYPE_RUNIC)
+	--c:RegisterEffect(e1)
 	--
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -36,7 +36,7 @@ function c985210323.initial_effect(c)
 	--Multiple Attack
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
-	e5:SetCode(EFFECT_EXTRA_ATTACK_MONSTER)
+	e5:SetCode(EFFECT_EXTRA_ATTACK)
 	e5:SetProperty(EFFECT_FLAG_CLIENT_HINT)
 	e5:SetValue(c985210323.atkval)
 	c:RegisterEffect(e5)
@@ -76,5 +76,5 @@ function c985210323.atkfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0x34)
 end
 function c985210323.atkval(e,c)
-	return Duel.GetMatchingGroupCount(c985210323.atkfilter,c:GetControler(),LOCATION_ONFIELD,0,nil)-1
+	return Duel.GetMatchingGroupCount(c985210323.atkfilter,c:GetControler(),LOCATION_ONFIELD,0,nil)
 end
