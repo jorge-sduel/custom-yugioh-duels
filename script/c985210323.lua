@@ -4,7 +4,7 @@ if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c985210323.initial_effect(c)
 	c:EnableReviveLimit()
 	--ignition summon
-	Runic.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x2034),aux.FilterBoolFunctionEx(Card.IsSetCard,0x34),2,99)
+	Runic.AddProcedure(c,c985210323.filter2,c985210323.filter1,2,99)
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -40,6 +40,12 @@ function c985210323.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_CLIENT_HINT)
 	e5:SetValue(c985210323.atkval)
 	c:RegisterEffect(e5)
+end
+function c985210323.filter1(c)
+	return c:IsSetCard(0x34)
+end
+function c985210323.filter2(c)
+	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x2034)
 end
 function c985210323.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
