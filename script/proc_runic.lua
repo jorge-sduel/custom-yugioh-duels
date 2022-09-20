@@ -80,7 +80,7 @@ function Runic.Condition(f1,f2,min,max)
                 if not Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Runic.Filter),tp,LOCATION_MZONE,0,1,nil,f1,c,tp)
                     or not Duel.IsExistingMatchingCard(Runic.Filter,tp,LOCATION_ONFIELD,0,min,nil,f2,c,tp) then return false end
                 
-                local mg1=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
+                local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
                 local mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
                 
                 if #mg1<=0 or #mg2<=0 then return false end
@@ -91,7 +91,7 @@ end
 function Runic.Target(f1,f2,min,max)
 	return function(e,tp,eg,ep,ev,re,r,rp,chk,c,must,mg1,mg2)
                 if not mg1 then
-                    mg1=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
+                    mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
                 end
                 if not mg2 then
                     mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
