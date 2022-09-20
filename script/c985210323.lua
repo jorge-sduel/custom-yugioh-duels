@@ -12,20 +12,11 @@ function c985210323.initial_effect(c)
 	--e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	--e1:SetValue(SUMMON_TYPE_RUNIC)
 	--c:RegisterEffect(e1)
-	--
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e2:SetRange(LOCATION_MZONE)
-	e2:SetCode(EFFECT_UPDATE_ATTACK)
-	e2:SetValue(c985210323.gainval)
-	c:RegisterEffect(e2)
-	--
+	--spsummon success
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e3:SetOperation(c985210323.regop)
+	e3:SetOperation(c985210323.sucop)
 	c:RegisterEffect(e3)
 	--actlimit
 	local e4=Effect.CreateEffect(c)
@@ -47,17 +38,14 @@ end
 function c985210323.filter2(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x2034)
 end
-function c985210323.regop(e,tp,eg,ep,ev,re,r,rp)
+function c985210323.sucop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:GetSummonType()==SUMMON_TYPE_RUNIC then
-		local ct=c:GetMaterialCount()
-		c:RegisterFlagEffect(985210323,RESET_EVENT+0x1fe0000,0,0,ct*200)
-	end
-end
-function c985210323.gainval(e,c)
-	local ct=e:GetHandler():GetFlagEffectLabel(985210323)
-	if not ct then return 0 end
-	return ct
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_UPDATE_ATTACK)
+	e1:SetValue(c:GetMaterialCount()*200)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+	c:RegisterEffect(e1)
 end
 function c985210323.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local e5=Effect.CreateEffect(e:GetHandler())
