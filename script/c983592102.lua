@@ -1,4 +1,5 @@
 --Transfigurer Angel
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end0
 function c983592102.initial_effect(c)
 	--search
 	local e1=Effect.CreateEffect(c)
@@ -43,7 +44,7 @@ function c983592102.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c983592102.drcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNE and rc:IsSetCard(0xfe9)
+	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNIC9 and rc:IsSetCard(0xfe9)
 end
 function c983592102.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
