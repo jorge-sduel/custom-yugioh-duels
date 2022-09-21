@@ -79,9 +79,9 @@ end
 
 function s.cfilter(c,tp,zone,rp)
     local seq=c:GetPreviousSequence()
-    if c:GetPreviousControler()~=tp then seq=seq+16 end
+    if c:GetPreviousControler()~=tp then end
     return ((c:IsReason(REASON_BATTLE)) or (c:IsReason(REASON_EFFECT) and rp~=tp)) and c:IsSetCard(0x2034) 
-        and c:IsPreviousLocation(LOCATION_MZONE) and bit.extract(zone,seq)~=0
+        and c:IsPreviousLocation(LOCATION_MZONE)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local zone=e:GetHandler():GetLinkedZone()
@@ -89,7 +89,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-    local g=eg:Filter(s.cfilter,nil,tp,e:GetHandler():GetLinkedZone())
+    local g=eg:Filter(s.cfilter,nil,tp)
     local atk=0
     for tc in aux.Next(g) do
         atk=atk | tc:GetBaseAttack()
