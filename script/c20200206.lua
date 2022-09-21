@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	--destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(40854197,0))
-	e2:SetCategory(CATEGORY_DESTROY)
+	e2:SetCategory(EVENT_TO_GRAVE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_TO_DESTROY)
 	e2:SetRange(LOCATION_MZONE)
@@ -84,8 +84,8 @@ function s.cfilter(c,tp,zone,rp)
         and c:IsPreviousLocation(LOCATION_MZONE)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	local zone=e:GetHandler():GetLinkedZone()
-    return eg:IsExists(s.cfilter,1,nil,tp,LOCATION_ONFIELD,rp)
+	--local zone=e:GetHandler():GetLinkedZone()
+    return eg:IsExists(s.cfilter,1,nil,tp)
 end
 
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
