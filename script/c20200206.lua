@@ -40,7 +40,7 @@ function s.spfilter(c)
 end
 function s.tgfilter(c)
 	local code=c:GetCode()
-	return c:IsSetCard(0x1034) and c:IsAbleToGrave() and not Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_ONFIELD,0,1,nil,code)
+	return c:IsSetCard(0x1034) and c:IsAbleToGrave()
 end
 function s.adfilter(c)
 	return c:IsSetCard(0x2034) or (c:IsSetCard(0x34) and c:IsType(TYPE_SPELL+TYPE_TRAP))
