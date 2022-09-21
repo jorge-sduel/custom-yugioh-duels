@@ -85,7 +85,7 @@ function s.cfilter(c,tp,zone,rp)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local zone=e:GetHandler():GetLinkedZone()
-    return eg:IsExists(s.cfilter,1,nil,tp,zone,rp)
+    return eg:IsExists(s.cfilter,1,nil,tp,LOCATION_ONFIELD,rp)
 end
 
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
