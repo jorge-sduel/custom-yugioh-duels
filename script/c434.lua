@@ -95,7 +95,6 @@ function s.equipop(c,e,tp,tc,chk)
 	e1:SetLabelObject(e:GetLabelObject())
 	tc:RegisterEffect(e1)
 	--if ht<6 then 
-		Duel.Draw(tp,6,REASON_EFFECT)
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetTargetCards(e)
@@ -105,6 +104,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	for tc in aux.Next(sg) do
 		Card.EquipByEffectAndLimitRegister(c,e,tp,tc)
 	end
+		Duel.Draw(tp,6,REASON_EFFECT)
 end
 function s.efilter(e,te)
 	return not te:IsActiveType(TYPE_EQUIP)
