@@ -151,6 +151,6 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-		local atk=c:GetAttack()+1000
+		local atk=c:GetAttack()
 		Duel.SetLP(tp,atk,REASON_EFFECT)
 end
