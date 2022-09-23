@@ -76,7 +76,7 @@ function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,g,#g,0,0)
 end
 function s.equipop(c,e,tp,tc,chk)
-local ht=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
+--local ht=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
 	local eff=false or chk
 	Duel.Equip(tp,tc,c,false,eff)
 	local e1=Effect.CreateEffect(c)
@@ -87,8 +87,8 @@ local ht=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
 	e1:SetValue(aux.EquipByEffectLimit)
 	e1:SetLabelObject(e:GetLabelObject())
 	tc:RegisterEffect(e1)
-	if ht<6 then 
-		Duel.Draw(tp,6-ht,REASON_EFFECT)
+	--if ht<6 then 
+		Duel.Draw(tp,6,REASON_EFFECT)
 	end
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
@@ -133,13 +133,13 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCountFromEx(tp,LOCATION_MZONE)>0
-		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,true,false) end
+		and e:GetHandler():IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	if Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)~=0 then
+	if Duel.SpecialSummon(c,SUMMON_TYPE_FUSION,tp,tp,true,false,POS_FACEUP)~=0 then
 		c:CompleteProcedure()
 	end
 end
