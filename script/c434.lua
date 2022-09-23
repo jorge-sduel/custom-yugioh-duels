@@ -94,9 +94,9 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetTargetCards(e)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<#sg then return end
 	local c=e:GetHandler()
-	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
+	if not c:IsRelateToEffect(e) then return end
 	for tc in aux.Next(sg) do
-		aux.EquipByEffectAndLimitRegister(c,e,tp,tc)
+		Card.EquipByEffectAndLimitRegister(c,e,tp,tc)
 	end
 end
 function s.efilter(e,te)
