@@ -4,6 +4,13 @@ function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,18175965,34022290)
+--lp
+	local e0=Effect.CreateEffect(c)
+	e0:SetDescription(aux.Stringid(id,0))
+	e0:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FIELD)
+	e0:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e0:SetOperation(s.lpop)
+	c:RegisterEffect(e0)
 --equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
