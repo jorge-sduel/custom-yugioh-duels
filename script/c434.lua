@@ -89,7 +89,6 @@ function s.equipop(c,e,tp,tc,chk)
 	tc:RegisterEffect(e1)
 	--if ht<6 then 
 		Duel.Draw(tp,6,REASON_EFFECT)
-	end
 end
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetTargetCards(e)
