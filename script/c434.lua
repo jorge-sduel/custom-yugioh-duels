@@ -7,7 +7,7 @@ function s.initial_effect(c)
 --lp
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
-	e0:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FIELD)
+	e0:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e0:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e0:SetOperation(s.lpop)
 	c:RegisterEffect(e0)
