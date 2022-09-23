@@ -58,7 +58,7 @@ function s.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e5:SetCode(EVENT_ADJUST)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e5:SetRange(LOCATION_SZONE)
+	e5:SetRange(LOCATION_MZONE)
 	e5:SetOperation(s.lpop)
 	c:RegisterEffect(e5)
 end
