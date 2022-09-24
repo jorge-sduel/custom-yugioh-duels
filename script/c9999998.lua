@@ -139,10 +139,10 @@ function c9999998.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.GetMatchingGroup(c9999998.ffilter,tp,LOCATION_HAND,0,nil,e)
 	if not tc then return end
 
-			local sg=g2:Select(tp,1,3,nil,nil,3)
+			local sg=g2:Select(tp,0,3,nil,nil,3)
 			tc:SetMaterial(sg)
 			Duel.SendtoGrave(sg,sg)
-	if Duel.SpecialSummon(tc,SUMMON_TYPE_SYNCHRO,tp,tp,true,true,POS_FACEUP)~=0 then
+	if Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,true,true,POS_FACEUP)~=0 then
 		--Cannot attack
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetDescription(3206)
