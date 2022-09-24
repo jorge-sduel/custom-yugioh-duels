@@ -141,7 +141,7 @@ function c9999998.spop(e,tp,eg,ep,ev,re,r,rp)
 
 			local sg=g2:Select(tp,0,3,nil,nil,3)
 			tc:SetMaterial(sg)
-			Duel.SendtoGrave(sg,sg)
+			Duel.SendtoGrave(sg,REASON_RULE)
 	if Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,true,true,POS_FACEUP)~=0 then
 		--Cannot attack
 		local e1=Effect.CreateEffect(e:GetHandler())
