@@ -39,7 +39,7 @@ function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseEvent(c,EVENT_CUSTOM+47408488,e,0,tp,0,0)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():IsPreviusLocation(LOCATION_DECK) then return end
+	if e:GetHandler():IsPreviousLocation(LOCATION_DECK) then return end
 	if Duel.GetCurrentChain()>0 then
 		e:GetHandler():RegisterFlagEffect(47408488,RESET_EVENT+RESETS_STANDARD+RESET_CHAIN,0,1)
 		return false
