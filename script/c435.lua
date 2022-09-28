@@ -26,9 +26,8 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-
-	e3:SetTarget(c968713202.settg)
-	e3:SetOperation(c968713202.setop)
+	e3:SetTarget(s.settg)
+	e3:SetOperation(s.setop)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x1034}
