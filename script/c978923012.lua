@@ -44,7 +44,7 @@ function c978923012.setop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c978923012.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNIC and rc:IsSetCard(0xfe9)
+	return rc:IsSetCard(0xfe9)
 end
 function c978923012.thfilter(c)
 	return c:IsSetCard(0xfe9) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
