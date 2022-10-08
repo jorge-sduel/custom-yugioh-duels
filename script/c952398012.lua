@@ -32,7 +32,7 @@ function c952398012.efilter(e,re)
 end
 function c952398012.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNE and rc:IsSetCard(0xfe9)
+	return rc:IsSetCard(0xfe9)
 end
 function c952398012.thfilter(c)
 	return c:IsSetCard(0xfe9) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
