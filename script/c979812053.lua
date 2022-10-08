@@ -1,4 +1,6 @@
 --Complete Release Virtuakit-X
+c979812053.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c979812053.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
@@ -9,7 +11,7 @@ function c979812053.initial_effect(c)
 	r1:SetRange(LOCATION_HAND)
 	r1:SetCondition(c979812053.runcon)
 	r1:SetOperation(c979812053.runop)
-	--r1:SetValue(0x4f000000)
+	r1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(r1)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
@@ -104,7 +106,7 @@ function c979812053.runop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g2=Duel.SelectMatchingCard(tp,c979812053.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,2,2,nil,c)
 	g:Merge(g2)
 	c:SetMaterial(g)
-	Duel.SendtoGrave(g,REASON_MATERIAL+0x100000000)
+	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNIC)
 end
 function c979812053.runlimit(e,se,sp,st)
 	return bit.band(st,0x4f000000)==0x4f000000
