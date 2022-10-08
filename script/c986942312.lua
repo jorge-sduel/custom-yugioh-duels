@@ -1,4 +1,5 @@
 --Transfigured, Zephyr Demon
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c986942312.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
@@ -9,7 +10,7 @@ function c986942312.initial_effect(c)
 	r1:SetRange(LOCATION_HAND)
 	r1:SetCondition(c986942312.runcon)
 	r1:SetOperation(c986942312.runop)
-	--r1:SetValue(0x4f000000)
+	r1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(r1)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
@@ -94,7 +95,7 @@ function c986942312.runop(e,tp,eg,ep,ev,re,r,rp,c)
 	local mt2=g2:Select(tp,2,2,nil)
 	g:Merge(mt2)
 	c:SetMaterial(g)
-	Duel.SendtoGrave(g,REASON_MATERIAL+0x100000000)
+	Duel.SendtoGrave(g,REASON_MATERIAL)
 end
 function c986942312.runlimit(e,se,sp,st)
 	return bit.band(st,0x4f000000)==0x4f000000
