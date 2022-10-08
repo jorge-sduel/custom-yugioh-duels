@@ -1,5 +1,4 @@
 --Transfigurer, Foul
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c997835212.initial_effect(c)
 	--summon
 	local e1=Effect.CreateEffect(c)
@@ -46,7 +45,7 @@ function c997835212.setop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c997835212.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return rc:IsSetCard(0xfe9)
+	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNE and rc:IsSetCard(0xfe9)
 end
 function c997835212.tdfilter(c)
 	return c:IsSetCard(0xfe9) and c:IsAbleToDeck()
