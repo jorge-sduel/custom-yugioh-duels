@@ -1,4 +1,5 @@
 --Transfigured, Zephyr Demon
+c986942312.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c986942312.initial_effect(c)
 	--Rune Summon
