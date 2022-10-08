@@ -29,7 +29,7 @@ function c982391022.tgfilter2(c)
 	return c:IsFaceup() and c:IsSetCard(0xfe9) and c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function c982391022.spfilter(c,e,tp,att)
-	return c:IsType(TYPE_RUNE) and c:IsAttribute(att) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNE,tp,false,true)
+	return c.Is_Runic and c:IsAttribute(att) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNE,tp,false,true)
 end
 function c982391022.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc==0 then
@@ -58,7 +58,7 @@ function c982391022.activate(e,tp,eg,ep,ev,re,r,rp)
 			sc:SetMaterial(g)
 			Duel.SendtoGrave(g,REASON_EFFECT+REASON_MATERIAL+REASON_RUNE)
 			Duel.BreakEffect()
-			if Duel.SpecialSummonStep(sc,SUMMON_TYPE_RUNE,tp,tp,false,true,POS_FACEUP) then
+			if Duel.SpecialSummonStep(sc,SUMMON_TYPE_RUNIC,tp,tp,false,true,POS_FACEUP) then
 				local e1=Effect.CreateEffect(e:GetHandler())
 				e1:SetType(EFFECT_TYPE_SINGLE)
 				e1:SetCode(EFFECT_SET_ATTACK)
