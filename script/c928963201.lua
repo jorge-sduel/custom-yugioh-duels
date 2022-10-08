@@ -1,4 +1,5 @@
 --Transfigurer, Frost
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c928963201.initial_effect(c)
 	--special summon
 	local e1=Effect.CreateEffect(c)
@@ -41,7 +42,7 @@ function c928963201.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c928963201.thcon(e,tp,eg,ep,ev,re,r,rp)
 		local c=e:GetHandler()
-		return c:GetReasonCard():IsSetCard(0xfe9) and c:IsReason(REASON_RUNE)
+		return c:GetReasonCard():IsSetCard(0xfe9)
 end
 function c928963201.thfilter(c)
 	return c:IsSetCard(0xfe9) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
