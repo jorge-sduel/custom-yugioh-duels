@@ -23,7 +23,7 @@ function c928963201.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function c928963201.cfilter(c)
-	return c:IsFaceup() and c.Is_Runic
+	return c:IsFaceup() and c:IsRankAbove(1) and not c:IsType(TYPE_XYZ)
 end
 function c928963201.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(c928963201.cfilter,tp,LOCATION_MZONE,0,1,nil)
