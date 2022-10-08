@@ -12,7 +12,8 @@ function c982391022.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c982391022.filter(c,e,tp)
-	return c.Is_Runic and c:IsSpecialSummonable()
+	return c.Is_Runic 
+--and c:IsSpecialSummonable()
 end
 function c982391022.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
  if chk==0 then return Duel.IsExistingMatchingCard(c982391022.filter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil) end
