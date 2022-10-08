@@ -24,6 +24,14 @@ Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
+	--confirm
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,1))
+	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetCondition(s.condition)
+	e3:SetOperation(s.operation)
+	c:RegisterEffect(e3)
 end
 s.material_setcode={0x1034}
 function s.contactfil(tp)
@@ -70,5 +78,15 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,true,false,POS_FACEUP)
+	end
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return (r&REASON_EFFECT)~=0 and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=3
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)<3 then return end
+	Duel.SortDecktop(tp,tp,3)
+	if Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))==1 then
+		Duel.MoveToDeckBottom(3,tp)
 	end
 end
