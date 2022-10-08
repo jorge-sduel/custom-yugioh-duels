@@ -15,12 +15,12 @@ function c982391022.filter(c,e,tp)
 	return c.Is_Runic and c:IsSpecialSummonable()
 end
 function c982391022.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
- if chk==0 then return Duel.IsExistingMatchingCard(c500317871.filter,tp,LOCATION_EXTRA,0,1,nil) end
+ if chk==0 then return Duel.IsExistingMatchingCard(c982391022.filter,tp,LOCATION_EXTRA,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
 end
 function c982391022.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c500317871.filter,tp,LOCATION_EXTRA,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c982391022.filter,tp,LOCATION_EXTRA,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
 	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC)
