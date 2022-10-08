@@ -23,6 +23,7 @@ function c982391022.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,c982391022.filter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
+		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC)
 	end
 end
