@@ -1,4 +1,5 @@
 --Tiska Virtuakit-β
+c919789023.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c919789023.initial_effect(c)
 	c:EnableReviveLimit()
