@@ -95,7 +95,7 @@ function c986942312.runop(e,tp,eg,ep,ev,re,r,rp,c)
 	local mt2=g2:Select(tp,2,2,nil)
 	g:Merge(mt2)
 	c:SetMaterial(g)
-	Duel.SendtoGrave(g,REASON_MATERIAL)
+	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNIC)
 end
 function c986942312.runlimit(e,se,sp,st)
 	return bit.band(st,0x4f000000)==0x4f000000
