@@ -38,7 +38,7 @@ function c989612012.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function c989612012.filter(c,e,tp)
-	return c:IsType(TYPE_RUNE) and c:IsSetCard(0xfe9) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c.Is_Runic and c:IsSetCard(0xfe9) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function c989612012.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:GetLocation()==LOCATION_GRAVE and chkc:GetControler()==tp
