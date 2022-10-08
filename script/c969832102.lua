@@ -1,4 +1,6 @@
 --Transfigured Draconic Hellscape
+c969832102.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c969832102.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
@@ -9,7 +11,7 @@ function c969832102.initial_effect(c)
 	r1:SetRange(LOCATION_HAND)
 	r1:SetCondition(c969832102.runcon)
 	r1:SetOperation(c969832102.runop)
-	--r1:SetValue(0x4f000000)
+	r1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(r1)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
@@ -88,7 +90,7 @@ function c969832102.runop(e,tp,eg,ep,ev,re,r,rp,c)
 	local mt2=g2:Select(tp,2,2,nil)
 	g:Merge(mt2)
 	c:SetMaterial(g)
-	Duel.SendtoGrave(g,REASON_MATERIAL+0x100000000)
+	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNIC)
 end
 function c969832102.runlimit(e,se,sp,st)
 	return bit.band(st,0x4f000000)==0x4f000000
