@@ -1,4 +1,5 @@
 --Transfigured, Horseman
+c989235101.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c989235101.initial_effect(c)
 	--Rune Summon
