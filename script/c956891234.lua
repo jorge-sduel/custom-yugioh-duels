@@ -25,7 +25,7 @@ function c956891234.repval(e,re,r,rp)
 end
 function c956891234.thcon(e,tp,eg,ep,ev,re,r,rp) 
 	local rc=e:GetHandler():GetReasonCard()
-	return  rc==REASON_RUNIC
+	return  rc==REASON_MATERIAL+REASON_RUNIC
 end
 function c956891234.thfilter(c)
 	return c:IsAbleToHand()
