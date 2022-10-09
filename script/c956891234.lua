@@ -14,7 +14,7 @@ function c956891234.initial_effect(c)
 	e5:SetDescription(aux.Stringid(952312343,0))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e5:SetCode(EVENT_BE_MATERIAL)
-	--e5:SetCondition(c956891234.thcon)
+	e5:SetCondition(c956891234.thcon)
 	e5:SetTarget(c956891234.thtg)
 	e5:SetOperation(c956891234.thop)
 	c:RegisterEffect(e5)
@@ -23,7 +23,8 @@ function c956891234.repval(e,re,r,rp)
 	return bit.band(r,REASON_BATTLE)~=0 or bit.band(r,REASON_EFFECT)~=0
 end
 function c956891234.thcon(e,tp,eg,ep,ev,re,r,rp) 
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_MATERIAL
+	local rc=e:GetHandler():GetReasonCard()
+	return  rc:IsRankAbove(1) and not rc:IsType(TYPE_EXTRA)
 end
 function c956891234.thfilter(c)
 	return c:IsAbleToHand()
