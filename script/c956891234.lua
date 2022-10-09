@@ -23,9 +23,8 @@ end
 function c956891234.repval(e,re,r,rp)
 	return bit.band(r,REASON_BATTLE)~=0 or bit.band(r,REASON_EFFECT)~=0
 end
-function c956891234.thcon(e,tp,eg,ep,ev,re,r,rp) 
-	local rc=e:GetHandler():GetReasonCard()
-	return  rc==REASON_MATERIAL+REASON_RUNIC
+function c956891234.thcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_RUNIC
 end
 function c956891234.thfilter(c)
 	return c:IsAbleToHand()
