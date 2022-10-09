@@ -1,7 +1,7 @@
 --Transfigured Agony Beast
 function c906790134.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,nil,11,2)
+	Xyz.AddProcedure(c,c906790134.xyzfilter,nil,3,nil,nil,nil,nil,false)
 	c:EnableReviveLimit()
 	--material
 	local e1=Effect.CreateEffect(c)
@@ -24,6 +24,9 @@ function c906790134.initial_effect(c)
 	e2:SetTarget(c906790134.destg)
 	e2:SetOperation(c906790134.desop)
 	c:RegisterEffect(e2)
+end
+function s.xyzfilter(c,xyz,sumtype,tp)
+	return c:IsRank(11)
 end
 function c906790134.filter(c)
 	return c:IsSetCard(0xfe9) and c:IsType(TYPE_MONSTER)
