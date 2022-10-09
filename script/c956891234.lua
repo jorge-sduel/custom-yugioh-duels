@@ -12,7 +12,7 @@ function c956891234.initial_effect(c)
 	--to deck
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(952312343,0))
-	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e5:SetType(EFFECT_FLAG_PLAYER_TARGET)
 	e5:SetCode(EVENT_BE_MATERIAL)
 	e5:SetCondition(c956891234.thcon)
 	e5:SetTarget(c956891234.thtg)
