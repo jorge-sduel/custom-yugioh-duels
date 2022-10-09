@@ -25,7 +25,7 @@ function c906790134.initial_effect(c)
 	e2:SetOperation(c906790134.desop)
 	c:RegisterEffect(e2)
 end
-function s.xyzfilter(c,xyz,sumtype,tp)
+function c906790134.xyzfilter(c,xyz,sumtype,tp)
 	return c:IsRank(11)
 end
 function c906790134.filter(c)
