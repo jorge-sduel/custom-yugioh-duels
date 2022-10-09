@@ -25,7 +25,7 @@ function c956891234.repval(e,re,r,rp)
 end
 function c956891234.thcon(e,tp,eg,ep,ev,re,r,rp) 
 	local rc=e:GetHandler():GetReasonCard()
-	return  rc:IsRankAbove(1) and not rc:IsType(TYPE_XYZ)
+	return  rc==REASON_RUNIC
 end
 function c956891234.thfilter(c)
 	return c:IsAbleToHand()
