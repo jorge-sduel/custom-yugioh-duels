@@ -1,7 +1,7 @@
 --Transfigured Agony Beast
 function c906790134.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,c906790134.xyzfilter,nil,3,nil,nil,nil,nil,false)
+	Xyz.AddProcedure(c,c906790134.xyzfilter,nil,2,nil,nil,nil,nil,false)
 	c:EnableReviveLimit()
 	--material
 	local e1=Effect.CreateEffect(c)
