@@ -24,7 +24,7 @@ function c956891234.repval(e,re,r,rp)
 	return bit.band(r,REASON_BATTLE)~=0 or bit.band(r,REASON_EFFECT)~=0
 end
 function c956891234.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsLocation(LOCATION_GRAVE) and e:GetHandler():GetReasonCard()==REASON_RUNIC
+	return e:GetHandler():IsPreviousLocation(LOCATION_SZONE) and e:GetHandler():GetReasonCard().Is_Runic
 end
 function c956891234.thfilter(c)
 	return c:IsAbleToHand()
