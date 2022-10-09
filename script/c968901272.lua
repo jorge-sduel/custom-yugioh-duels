@@ -1,7 +1,7 @@
 --Transfigured Dark Magic
 function c968901272.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),1,2)
+	Xyz.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),1,2)
 	c:EnableReviveLimit()
 	--set
 	local e1=Effect.CreateEffect(c)
