@@ -22,6 +22,7 @@ function c983592102.initial_effect(c)
 	e5:SetDescription(aux.Stringid(952312343,0))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e5:SetCode(EVENT_BE_MATERIAL)
+	e5:SetCountLimit(1)
 	e5:SetCondition(c983592102.drcon)
 	e5:SetTarget(c983592102.drtg)
 	e5:SetOperation(c983592102.drop)
@@ -44,7 +45,7 @@ function c983592102.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c983592102.drcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return  rc:IsSetCard(0xfe9) and e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and rc.Is_Runic
+	return  rc:IsSetCard(0xfe9) and e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
 end
 function c983592102.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
