@@ -29,6 +29,16 @@ function s.initial_effect(c)
 	e3:SetTarget(s.settg)
 	e3:SetOperation(s.setop)
 	c:RegisterEffect(e3)
+	--Increase ATK
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetCode(EFFECT_UPDATE_ATTACK)
+	e4:SetRange(LOCATION_SZONE)
+	e4:SetTargetRange(LOCATION_MZONE,0)
+	e4:SetTarget(s.atktg)
+	e4:SetCondition(s.atkcon)
+	e4:SetValue(800)
+	c:RegisterEffect(e4)
 end
 s.listed_series={0x1034}
 function s.repcon(e)
@@ -79,4 +89,13 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SSet(tp,tc)
 		Duel.ConfirmCards(1-tp,tc)
 	end
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
+end
+function s.atktg(e,c)
+	return c:IsSetCard(0x1034) and Duel.GetAttacker()==c
+end
+function s.atkcon(e)
+	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL and Duel.GetAttackTarget()~=nil
 end
