@@ -22,6 +22,7 @@ function c986941012.initial_effect(c)
 	e5:SetDescription(aux.Stringid(952312343,0))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e5:SetCode(EVENT_BE_MATERIAL)
+	e5:SetCountLimit(1)
 	e5:SetCondition(c986941012.spcon)
 	e5:SetTarget(c986941012.sptg2)
 	e5:SetOperation(c986941012.spop2)
@@ -56,7 +57,7 @@ function c986941012.spop1(e,tp,eg,ep,ev,re,r,rp)
 end
 function c986941012.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return rc:IsSetCard(0xfe9)
+	return  rc:IsSetCard(0xfe9) and e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
 end
 function c986941012.filter2(c,e,tp)
 	return c:IsSetCard(0xfe9) and not c:IsCode(986941012) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
