@@ -22,6 +22,7 @@ function c997835212.initial_effect(c)
 	e5:SetDescription(aux.Stringid(952312343,0))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e5:SetCode(EVENT_BE_MATERIAL)
+	e5:SetCountLimit(1)
 	e5:SetCondition(c997835212.tdcon)
 	e5:SetTarget(c997835212.tdtg)
 	e5:SetOperation(c997835212.tdop)
@@ -46,7 +47,7 @@ function c997835212.setop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c997835212.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return rc:IsSetCard(0xfe9)
+	return  rc:IsSetCard(0xfe9) and e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
 end
 function c997835212.tdfilter(c)
 	return c:IsSetCard(0xfe9) and c:IsAbleToDeck()
