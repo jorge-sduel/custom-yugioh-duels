@@ -1,7 +1,7 @@
 --Protective Prince
 function c996821023.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,nil,11,2,c996821023.ovfilter,aux.Stringid(85115440,0),2)
+	Xyz.AddProcedure(c,nil,11,2,c996821023.ovfilter,aux.Stringid(85115440,0),2)
 	c:EnableReviveLimit()
 	--
 	local e1=Effect.CreateEffect(c)
@@ -26,7 +26,7 @@ function c996821023.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c996821023.ovfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_RUNE) and c:IsLevelAbove(7)
+	return c:IsFaceup() and c.Is_Runic and c:IsRankAbove(7)
 end
 function c996821023.matcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_XYZ
