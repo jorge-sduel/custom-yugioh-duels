@@ -81,7 +81,7 @@ function cid.rmop(e,tp,eg,ep,ev,re,r,rp)
    -- local exc=nil
    -- if e:IsHasType(EFFECT_TYPE_ACTIVATE) then exc=e:GetHandler() end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,aux.ExceptThisCard(e))
+	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1)
 	if g:GetCount()>0 then
 		  Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
 		end
