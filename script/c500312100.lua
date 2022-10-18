@@ -74,15 +74,15 @@ function cid.filter(c)
 	return c:IsFaceup() 
 end
 function cid.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c) end
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,0,0)
+	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and cid.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
+	local g=Duel.SelectTarget(tp,cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,1-tp,LOCATION_ONFIELD)
 end
 function cid.rmop(e,tp,eg,ep,ev,re,r,rp)
-   -- local exc=nil
-   -- if e:IsHasType(EFFECT_TYPE_ACTIVATE) then exc=e:GetHandler() end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1)
-	if g:GetCount()>0 then
-		  Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
-		end
+	local tc=Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) then
+		Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)
 	end
+end
