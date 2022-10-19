@@ -52,7 +52,6 @@ function s.valop(e,tp,eg,ep,ev,re,r,rp)
 		o:RegisterEffect(e1)
 			if o:GetAttack()==0 then dg:AddCard(o) end
 	end
-end
 	if #dg==0 then return end
 	Duel.BreakEffect()
 	Duel.Destroy(dg,REASON_EFFECT)
