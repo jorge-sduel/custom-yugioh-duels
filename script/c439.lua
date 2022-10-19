@@ -26,7 +26,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsAttackAbove(0)
 end
 function s.sfilter(c)
-	return c:IsAttackBelow(2300)
+	return c:IsAttackBelow(2300) and c:IsSetCard(0x135) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.valtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
