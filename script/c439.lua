@@ -26,24 +26,29 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsAttackAbove(0)
 end
-function s.filter(c)
+function s.sfilter(c)
 	return c:IsAttackBelow(2300) and c:IsSpecialSummonable()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_GRAVE)
+	if chkc then return false end
+	if chk==0 then return Duel.IsExistingTarget(s.sfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPPO)
+	e:SetLabelObject(e:GetHandler())
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELF)
+	Duel.SelectTarget(tp,s.sfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler())
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil)
-	local atk=g:GetAttack()
-	if #g>0 then
-		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	local o=e:GetLabelObject()
+	local s=g:GetFirst()
+	if s==o then s=g:GetNext() end
+	if s:IsFaceup() and o:IsFaceup() and s:IsRelateToEffect(e) and o:IsRelateToEffect(e) then
+		local val=s:GetAttack()*-1
+		Duel.SpecialSummon(s,0,tp,tp,false,false,POS_FACEUP)
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)
-			e1:SetValue(-atk)
+			e1:SetValue(val)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 			c:RegisterEffect(e1)
 			if c:GetAttack()==0 then Duel.Destroy(c,REASON_EFFECT) end
