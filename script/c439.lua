@@ -27,8 +27,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsAttackAbove(0)
 end
 function s.filter(c)
-	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) 
---and c:IsAttackAbove(2300)
+	return c:IsAttackAbove(2300)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
