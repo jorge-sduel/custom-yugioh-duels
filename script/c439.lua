@@ -1,16 +1,14 @@
 --@Ignister (Anime)
 local s,id=GetID()
 function s.initial_effect(c)
-	--Special Summon
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,1))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e1:SetCountLimit(1)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCondition(s.condition)
-	e1:SetTarget(s.target)
-	e1:SetOperation(s.operation)
+	e1:SetTarget(s.valtg)
+	e1:SetOperation(s.valop)
 	c:RegisterEffect(e1)
 	--Destruction replacement
 	local e2=Effect.CreateEffect(c)
@@ -27,9 +25,9 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsAttackAbove(0)
 end
 function s.sfilter(c)
-	return c:IsAttackBelow(2300) and c:IsSpecialSummonable()
+	return c:IsAttackBelow(2300)
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.valtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(s.sfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPPO)
@@ -37,7 +35,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELF)
 	Duel.SelectTarget(tp,s.sfilter,tp,LOCATION_GRAVE,0,1,1,e:GetHandler())
 end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
+function s.valop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local o=e:GetHandler()
 	local s=g:GetFirst()
