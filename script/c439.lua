@@ -39,6 +39,7 @@ end
 function s.valop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local o=e:GetHandler()
+	local dg=Group.CreateGroup()
 	local s=g:GetFirst()
 	if s==o then s=g:GetNext() end
 	if s:IsFaceup() and o:IsFaceup() and s:IsRelateToEffect(e) and o:IsRelateToEffect(e) then
