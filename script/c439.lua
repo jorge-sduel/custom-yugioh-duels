@@ -5,8 +5,9 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetCountLimit(1)
+	--e1:SetCountLimit(1)
 	e1:SetRange(LOCATION_MZONE)
+	e1:SetCondition(s.condition)
 	e1:SetTarget(s.valtg)
 	e1:SetOperation(s.valop)
 	c:RegisterEffect(e1)
@@ -49,8 +50,12 @@ function s.valop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		e1:SetValue(val)
 		o:RegisterEffect(e1)
-			if o:GetAttack()==0 then Duel.Destroy(c,REASON_EFFECT) end
+			if o:GetAttack()==0 then dg:AddCard(o) end
 	end
+end
+	if #dg==0 then return end
+	Duel.BreakEffect()
+	Duel.Destroy(dg,REASON_EFFECT)
 end
 function s.repfilter(c,tp)
 	return c:IsFaceup() and c:IsControler(tp) and c:IsOnField() and c:IsRace(RACE_CYBERSE) and c:IsAttackAbove(2300) and not c:IsReason(REASON_REPLACE) and c:IsReason(REASON_EFFECT+REASON_BATTLE)
