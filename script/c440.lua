@@ -22,13 +22,12 @@ function s.initial_effect(c)
 end
 	--Lists "Utopia" archetype
 s.listed_series={0x107f}
-	--Specifically lists "Double or Nothing!"
-s.listed_names={94770493}
+	--Specifically lists "Double or Nothing!"}
 	--Number 39
 s.xyz_number=39
 	--Look for "Double or Nothing!"
 function s.thfilter(c)
-	return c:IsRankup() and c:IsAbleToHand()
+	return c:IsSetCard(0x107f) and c:IsAbleToHand()
 end
 	--Check for "Utopia" Xyz monster, excluding "Number 39: Utopia Double"
 function s.spfilter(c,e,tp,mc,pg)
