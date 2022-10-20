@@ -19,10 +19,18 @@ function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.scop(e,tp,eg,ep,ev,re,r,rp)
+	local e2=Effect.CreateEffect(e:GetHandler())
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(511002793)
+	e2:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
+	e2:SetTargetRange(LOCATION_ONFIELD,0)
+	--e2:SetValue(c328.indval)
+	Duel.RegisterEffect(e2,tp)
 	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:Select(tp,1,1,nil)
 		Duel.XyzSummon(tp,sg:GetFirst(),nil)
 	end
+	e2:Reset()
 end
