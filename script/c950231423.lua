@@ -7,7 +7,7 @@ function c950231423.initial_effect(c)
 	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsCode,24907044),c950231423.STMatFilter,1,1)
 	--atk down
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,2))
+	e1:SetDescription(aux.Stringid(950231423,2))
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_BATTLE_DAMAGE)
