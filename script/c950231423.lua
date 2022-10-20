@@ -5,17 +5,17 @@ function c950231423.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
 	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsCode,24907044),c950231423.STMatFilter,1,1)
---atk down
+	--atk down
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(950231423,0))
+	e1:SetDescription(aux.Stringid(id,2))
 	e1:SetCategory(CATEGORY_ATKCHANGE)
-	e1:SetType(EFFECT_TYPE_QUICK_O)
-	--e1:SetCode(EVENT_BATTLE_DAMAGE)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e1:SetCode(EVENT_BATTLE_DAMAGE)
 	e1:SetRange(LOCATION_MZONE)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
-	--e1:SetCondition(c950231423.atkcon1)
-	e1:SetTarget(c950231423.atktg1)
-	e1:SetOperation(c950231423.atkop1)
+	e1:SetTarget(c950231423.atktg2)
+	e1:SetOperation(c950231423.atkop2)
 	c:RegisterEffect(e1)
 	--actlimit
 	local e3=Effect.CreateEffect(c)
@@ -78,4 +78,21 @@ function c950231423.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c950231423.aclimit(e,re,tp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
+end
+function c950231423.atktg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:IsFaceup() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+	Duel.SelectTarget(tp,Card.IsFaceup,tp,0,LOCATION_MZONE,1,1,nil)
+end
+function c950231423.atkop2(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc:IsFaceup() and tc:IsRelateToEffect(e) then
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_UPDATE_ATTACK)
+		e1:SetValue(-ev)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		tc:RegisterEffect(e1)
+	end
 end
