@@ -92,6 +92,7 @@ function c950231423.atkop2(e,tp,eg,ep,ev,re,r,rp)
 		local tc=g:GetFirst()
 		local tc1=th:GetFirst()
 		for tc in aux.Next(g) do
+		for tc1 in aux.Next(th) do
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
