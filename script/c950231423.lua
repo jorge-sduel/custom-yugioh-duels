@@ -101,7 +101,7 @@ function c950231423.atkop2(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCode(EFFECT_UPDATE_ATTACK)
 		e2:SetValue(ev)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e:GetHandler():RegisterEffect(e1)
+		e:GetHandler():RegisterEffect(e2)
 		end
 	end
 end
