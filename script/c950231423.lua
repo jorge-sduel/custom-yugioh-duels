@@ -105,6 +105,7 @@ function c950231423.atkop2(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetValue(ev)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		th1:RegisterEffect(e1)
+end
 		end
 	end
 end
