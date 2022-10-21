@@ -109,4 +109,4 @@ function c950231423.atkop2(e,tp,eg,ep,ev,re,r,rp)
 --end
 		end
 	end
-end42.51 49.00 28.48 o
+end
