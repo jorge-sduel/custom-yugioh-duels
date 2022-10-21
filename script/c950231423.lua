@@ -96,12 +96,13 @@ function c950231423.atkop2(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(-ev)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
+	local th=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_UPDATE_ATTACK)
 		e2:SetValue(ev)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e:GetHandler():RegisterEffect(e2)
+		th:RegisterEffect(e2)
 		end
 	end
 end
