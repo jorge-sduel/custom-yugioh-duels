@@ -45,16 +45,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
-		local e1=Effect.CreateEffect(c)
+		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetCode(EFFECT_CHANGE_LEVEL)
 		e1:SetValue(2)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		c:RegisterEffect(e1)
-end
-function s.atktg(e,c)
-	return not c:IsSetCard(0x19DD94E)
+		e:GetHandler():RegisterEffect(e1)
 end
 function s.tncon2(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsLevel(3)
