@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-function s.condtion(e)
+function s.condition(e)
 	return e:GetHandler()==Duel.GetAttackTarget()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
