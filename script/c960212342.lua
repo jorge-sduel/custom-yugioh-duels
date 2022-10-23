@@ -12,6 +12,15 @@ function c960212342.initial_effect(c)
 	--e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	--e1:SetValue(aux.runlimit)
 	--c:RegisterEffect(e1)
+	--Cannot be targeted for attack
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCode(EFFECT_CANNOT_BE_BATTLE_TARGET)
+	e1:SetCondition(c960212342.atkcon)
+	e1:SetValue(aux.imval1)
+	c:RegisterEffect(e1)
 	--double
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_QUICK_O)
@@ -31,6 +40,15 @@ function c960212342.initial_effect(c)
 	e3:SetTarget(c960212342.settg)
 	e3:SetOperation(c960212342.setop)
 	c:RegisterEffect(e3)
+end
+function c960212342.atkcon(e)
+	return Duel.IsExistingMatchingCard(c960212342.tfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
+end
+function c960212342.tfilter(c)
+	return c:IsFaceup() and c:IsTrap()
+end
+function s.atkcon(e)
+	return Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 function c960212342.filter(c)
 	return c:IsType(TYPE_TRAP) and c:IsSSetable()
