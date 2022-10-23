@@ -18,7 +18,7 @@ function c960212342.initial_effect(c)
 	e2:SetCode(EVENT_CHAINING)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
-	--e2:SetCondition(c960212342.damcon)
+	e2:SetCondition(c960212342.damcon)
 	e2:SetOperation(c960212342.damop)
 	c:RegisterEffect(e2)
 	--ToHand
@@ -58,9 +58,9 @@ function c960212342.cfilter(c)
 	return c:IsFaceup()
 end
 function c960212342.damcon(e,tp,eg,ep,ev,re,r,rp)
-	if rp~=tp or not re:GetHandler():IsSetCard(0x12f) then return end
+	if rp~=tp then return end
 	local ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_DAMAGE)
-	return ex and Duel.IsExistingMatchingCard(c960212342.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,e:GetHandler())
+	return ex and Duel.IsExistingMatchingCard(c960212342.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,e:GetHandler())
 end
 function c960212342.damop(e,tp,eg,ep,ev,re,r,rp)
 	local cid=Duel.GetChainInfo(ev,CHAININFO_CHAIN_ID)
