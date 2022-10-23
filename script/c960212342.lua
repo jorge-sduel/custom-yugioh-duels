@@ -47,9 +47,6 @@ end
 function c960212342.tfilter(c)
 	return c:IsFaceup() and c:IsTrap()
 end
-function s.atkcon(e)
-	return Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
-end
 function c960212342.filter(c)
 	return c:IsType(TYPE_TRAP) and c:IsSSetable()
 end
