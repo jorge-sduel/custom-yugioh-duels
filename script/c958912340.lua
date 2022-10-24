@@ -7,7 +7,7 @@ function c958912340.initial_effect(c)
 	Runic.AddProcedure(c,nil,aux.FilterBoolFunction(Card.IsCode,97077563),1,1)
 	--spsummon
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(958912340,2))
+	e4:SetDescription(aux.Stringid(958912340,0))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_MZONE)
