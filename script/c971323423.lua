@@ -6,7 +6,7 @@ function c971323423.initial_effect(c)
 	c:EnableReviveLimit()
 	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_EFFECT)),1,1,aux.FilterBoolFunction(Card.IsType,TYPE_SPELL),1,1)
 	--pendulum summon
-	Pendulum.addAtribute(c)
+	Pendulum.AddProcedure(c)
 	--destroy and set
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
