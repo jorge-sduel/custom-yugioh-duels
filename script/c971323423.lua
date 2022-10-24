@@ -4,7 +4,7 @@ if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c971323423.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_EFFECT)),1,1,aux.FilterBoolFunction(Card.IsType,TYPE_SPELL),1,1)
+	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_EFFECT)),aux.FilterBoolFunction(Card.IsType,TYPE_SPELL),1,1)
 	--pendulum summon
 	Pendulum.AddProcedure(c)
 	--destroy and set
