@@ -1,8 +1,10 @@
 --Brotherhood of the Fire Fist - Ox
+c950129342.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c950129342.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x79),1,1,aux.FilterBoolFunction(Card.IsSetCard,0x7c),2,1,99)
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_FIRE),nil,2,99)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -30,7 +32,7 @@ function c950129342.initial_effect(c)
 end
 function c950129342.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:GetSummonType()==SUMMON_TYPE_RUNE then
+	if c:IsSummonType(SUMMON_TYPE_RUNIC) then
 		local ct=c:GetMaterialCount()-1
 		c:RegisterFlagEffect(950129342,RESET_EVENT+0x1fe0000,0,0,ct*500)
 	end
@@ -41,7 +43,7 @@ function c950129342.val(e,c)
 	return ct
 end
 function c950129342.filter(c)
-	return c:IsSetCard(0x7c) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable(true)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable(true)
 end
 function c950129342.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>-1
