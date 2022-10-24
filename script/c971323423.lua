@@ -1,10 +1,12 @@
 --The Warrior Princess
+c971323423.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c971323423.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_EFFECT)),1,1,aux.FilterBoolFunction(Card.IsType,TYPE_SPELL),1,1)
+	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_EFFECT)),1,1,aux.FilterBoolFunction(Card.IsType,TYPE_SPELL),1,1)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.addProcedure(c)
 	--destroy and set
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -17,7 +19,7 @@ function c971323423.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c971323423.desfilter(c)
-	return c:IsType(TYPE_MONSTER) and not c:IsType(TYPE_EFFECT)
+	return c:IsType(TYPE_MONSTER)
 end
 function c971323423.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and c971323423.desfilter(chkc) and chkc~=e:GetHandler() end
