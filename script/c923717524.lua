@@ -4,7 +4,7 @@ if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c923717524.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_ZOMBIE),1,1,aux.FilterBoolFunction(Card.IsCode,17601919),1,1)
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_ZOMBIE),aux.FilterBoolFunction(Card.IsCode,17601919),1,1)
 	--counter
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(17601919,1))
