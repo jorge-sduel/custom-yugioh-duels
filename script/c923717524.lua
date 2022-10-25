@@ -1,8 +1,10 @@
 --Purmpince of Ghosts
+c923717524.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c923717524.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_ZOMBIE),1,1,aux.FilterBoolFunction(Card.IsCode,17601919),1,1)
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_ZOMBIE),1,1,aux.FilterBoolFunction(Card.IsCode,17601919),1,1)
 	--counter
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(17601919,1))
@@ -28,7 +30,7 @@ function c923717524.initial_effect(c)
 end
 function c923717524.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x2f)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,0x2f)
 end
 function c923717524.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
