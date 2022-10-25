@@ -2,6 +2,7 @@
 c923717524.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c923717524.initial_effect(c)
+	c:EnableCounterPermit(0x2f,LOCATION_SZONE)
 	--Rune Summon
 	c:EnableReviveLimit()
 	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_ZOMBIE),aux.FilterBoolFunction(Card.IsCode,17601919),1,1)
