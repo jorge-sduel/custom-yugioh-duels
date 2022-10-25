@@ -38,5 +38,5 @@ function c923717524.addc(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c923717524.adval(e,c)
-	return e:GetHandler():GetCounter(0x2f)*100
+	return e:GetHandler():GetCounter(0x2f)*300
 end
