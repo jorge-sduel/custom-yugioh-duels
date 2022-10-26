@@ -1,8 +1,10 @@
 --Perfectly Apex Great Moth
+c934627890.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c934627890.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsCode,58192742),1,1,aux.FilterBoolFunction(Card.IsCode,40240595),1,1)
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_INSECT),aux.FilterBoolFunction(Card.IsType,TYPE_EQUIP),1,1)
 	--direct attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(49121795,0))
@@ -65,7 +67,7 @@ function c934627890.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(r,REASON_EFFECT+REASON_BATTLE)~=0
 end
 function c934627890.spfilter(c,e,tp)
-	return c:IsCode(48579379) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsLevelAbove(8) and c:IsRace(RACE_INSECT) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function c934627890.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
