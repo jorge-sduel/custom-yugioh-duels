@@ -1,4 +1,5 @@
 --Glyphic Decipherer
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c943789022.initial_effect(c)
 	--tohand
 	local e1=Effect.CreateEffect(c)
