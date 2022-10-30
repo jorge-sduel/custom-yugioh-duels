@@ -6,6 +6,7 @@ function c943789022.initial_effect(c)
 	e1:SetDescription(aux.Stringid(952312343,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_BE_MATERIAL)
+	e1:SetCountLimit(1)
 	e1:SetCondition(c943789022.thcon)
 	e1:SetTarget(c943789022.thtg)
 	e1:SetOperation(c943789022.thop)
@@ -23,7 +24,8 @@ function c943789022.initial_effect(c)
 end
 function c943789022.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return rc:IsType(TYPE_RUNE) and rc:IsSummonType(SUMMON_TYPE_RUNE)
+	return e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
+
 end
 function c943789022.thfilter(c,tp)
 	return c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp) and c:IsAbleToHand()
