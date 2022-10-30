@@ -48,7 +48,7 @@ function c943789022.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c943789022.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_RUNE) and (c:GetLevel()==7 or c:GetLevel()==8)
+	return c:IsFaceup() and c.IsRunic and (c:GetLevel()==7 or c:GetLevel()==8)
 end
 function c943789022.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(c943789022.cfilter,tp,LOCATION_MZONE,0,1,nil)
