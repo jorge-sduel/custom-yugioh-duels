@@ -40,7 +40,7 @@ function s.contactop(g)
 	Duel.Release(g,REASON_COST+REASON_MATERIAL)
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0xbf) and c:IsAbleToGrave() and c:IsType(TYPE_MONSTER) and c:IsDefenseBelow(1500)
+	return (c:IsSetCard(0xbf) or c:IsAttribute(ATTRIBUTE_EARTH)) and c:IsAbleToGrave() and c:IsType(TYPE_MONSTER) and c:IsDefenseBelow(1500)
 end
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -51,7 +51,8 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
 	local tc=g:GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_GRAVE) then
+	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_GRAVE) then
+
 	end
 end
 function s.filter(c,e,tp)
