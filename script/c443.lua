@@ -86,7 +86,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardDeck(tp,1,REASON_EFFECT)~=0 then
-		--local oc=Duel.GetOperatedGroup():GetFirst()
+		local oc=Duel.GetOperatedGroup():GetFirst()
 		local c=e:GetHandler()
 		if c:IsRelateToEffect(e) then
 			Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
