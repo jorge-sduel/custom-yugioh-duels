@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xbf}
 function s.ritualfil(c)
-	return (c:IsAttribute(ATTRIBUTE_WATER) c:IsLocation(LOCATION_HAND)) or c:IsCode(442)
+	return (c:IsAttribute(ATTRIBUTE_WATER) and c:IsLocation(LOCATION_HAND)) or c:IsCode(442)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
