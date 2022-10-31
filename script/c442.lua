@@ -35,7 +35,7 @@ function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 --spirit art and possessed filter
 function s.thfilter(c)
-	return (c:IsSetCard(0x10c0) or c:IsSetCard(0xc0) or c:IsSetCard(0x14d)) and c:IsSpellTrap() and c:IsAbleToHand()
+	return ((c:IsSetCard(0x10c0) or c:IsSetCard(0xc0) or c:IsSetCard(0x14d)) and c:IsSpellTrap()) or (c:IsAttribute(ATTRIBUTE_WATER) and c:IsDefenseBelow(1500)) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
