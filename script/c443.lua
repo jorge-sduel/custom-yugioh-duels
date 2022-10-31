@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	--e1:SetCondition(s.spcon)
-	e1:SetTarget(s.target)
+	--e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 	--handes
