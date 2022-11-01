@@ -29,7 +29,7 @@ function s.matfilter(c,scard,sumtype,tp)
 	return c:IsSetCard(0xbf,scard,sumtype,tp)
 end
 function s.filter(c,e,tp)
-	return (c:IsSetCard(0xbf) or c:IsAttribute(ATTRIBUTE_WIND)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsSetCard(0xbf) or (c:IsAttribute(ATTRIBUTE_WIND) and c:IsDefenseBelow(1500))) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
