@@ -40,7 +40,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local sg=g:Select(tp,1,ft,nil)
 		for tc in aux.Next(sg) do
 			if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE) then
-			end
+			--end
 		end
 		Duel.SpecialSummonComplete()
 	end
