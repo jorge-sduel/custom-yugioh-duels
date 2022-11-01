@@ -77,7 +77,7 @@ function c12340222.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
         if ft<=0 then return false end
         local g=Duel.GetMatchingGroup(c12340222.spfilter2,tp,LOCATION_HAND+LOCATION_DECK,0,nil,e,tp)
         local lv=e:GetHandler():GetLevel()
-        return g:CheckWithSumEqual(Card.GetLevel,lv,2,ct)
+        return g:CheckWithSumEqual(Card.GetLevel,lv,2,ft)
     end
 end
 function c12340222.spop2(e,tp,eg,ep,ev,re,r,rp)
