@@ -46,7 +46,7 @@ function s.pierceop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		a:RegisterEffect(e1)
 	--double pierce
-	local e2=Effect.CreateEffect(c)
+	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_PRE_BATTLE_DAMAGE)
 	e2:SetCondition(s.damcon)
