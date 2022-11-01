@@ -40,7 +40,7 @@ function c12340221.shcon(c)
         and Duel.IsExistingMatchingCard(c12340221.shfilter,tp,0,LOCATION_ONFIELD,1,nil)
 end
 function c12340221.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x204) and c:IsAbleToDeckAsCost()
+	return c:IsFaceup() and c:IsSetCard(0x204) and c:IsAbleToDeck()
 end
 function c12340221.shcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c12340221.cfilter,tp,LOCATION_MZONE,0,1,nil)
