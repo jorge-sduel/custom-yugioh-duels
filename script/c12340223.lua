@@ -29,7 +29,7 @@ Fusion.AddProcFunRep(c,c12340223.ffilter,2,false)
 	--shuffle
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(12340223,1))
-	e4:SetCategory(CATEGORY_TO_DECK)
+	e4:SetCategory(CATEGORY_TODECK)
 	e4:SetType(EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetCode(EVENT_PHASE+PHASE_STANDBY)
