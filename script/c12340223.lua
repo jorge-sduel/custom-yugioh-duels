@@ -1,4 +1,4 @@
---Fluid Reunion
+--Fluid Reunion
 function c12340223.initial_effect(c)
 		c:EnableReviveLimit()
 	--fusion material	
@@ -40,7 +40,8 @@ Fusion.AddProcFunRep(c,c12340223.ffilter,2,false)
 end
 function c12340223.ffilter(c)
 	return c:IsSetCard(0x1204) or c:IsSetCard(0x204)
-	end
+	end
+
 function c12340223.costfilter(c,e,tp,sc)
     return (c:IsFaceup() or not c:IsLocation(LOCATION_MZONE))
         and c:IsSetCard(0x204) and c:GetLevel()>0 and c:IsAbleToDeckOrExtraAsCost()
