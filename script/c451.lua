@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	e4:SetCondition(s.condition2)
 	c:RegisterEffect(e4)
 end
-s.listed_series={0x52
+s.listed_series={0x52}
 function s.filter1(c,tp)
 	return c:IsFaceup() and c:GetEquipTarget()
 		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE,LOCATION_MZONE,1,c:GetEquipTarget(),c)
