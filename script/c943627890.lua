@@ -1,4 +1,6 @@
 --D.D. Mark
+c943627890.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c943627890.initial_effect(c)
 	--tohand
 	local e1=Effect.CreateEffect(c)
@@ -18,7 +20,7 @@ function c943627890.initial_effect(c)
 	e5:SetDescription(aux.Stringid(952312343,0))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e5:SetCode(EVENT_BE_MATERIAL)
-	e5:SetCondition(c943627890.descon)
+	e5:SetCondition(Runic.materialmonster)
 	e5:SetTarget(c943627890.destg)
 	e5:SetOperation(c943627890.desop)
 	c:RegisterEffect(e5)
