@@ -45,8 +45,8 @@ function c963427890.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_EQUIP_LIMIT)
 		e1:SetProperty(EFFECT_FLAG_COPY_INHERIT+EFFECT_FLAG_OWNER_RELATE)
 		e1:SetReset(RESET_EVENT+0x1fe0000)
-		e1:SetLabelObject(c)
-		e1:SetValue(c963427890.eqlimit)
+		--e1:SetLabelObject(c)
+		e1:SetValue(1)
 		tc:RegisterEffect(e1)
 	end
 end
