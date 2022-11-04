@@ -16,7 +16,7 @@ condition if Runic summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_RUNIC
 ]]
 --Runic Summon
-function Runic.AddProcedure(c,f1,f2,min,max)
+function Runic.AddProcedure(c,f1,f2,min,max,loc)
     --if min==nil then min=1 end
     --if max==nil then max=min end
 	if c.runic_type==nil then
@@ -35,6 +35,17 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetDescription(1182)
+	e2:SetCode(EFFECT_SPSUMMON_PROC)
+	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e2:SetRange(loc)
+	e2:SetCondition(Runic.Condition(f1,f2,min,max))
+	e2:SetTarget(Runic.Target(f1,f2,min,max))
+	e2:SetOperation(Runic.Operation)
+    e2:SetValue(SUMMON_TYPE_RUNIC)
+	c:RegisterEffect(e2)
 --
        local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
