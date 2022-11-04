@@ -22,7 +22,7 @@ function Runic.AddProcedure(c,f1,f2,min,max,loc)
 	if c.runic_type==nil then
 		local mt=c:GetMetatable()
 		mt.runic_type=1
-		mt.runic_parameters={c,f1,f2,min,max}
+		mt.runic_parameters={c,f1,f2,min,max,loc}
 	end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
