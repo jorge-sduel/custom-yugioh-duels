@@ -1,4 +1,5 @@
 --Lost Runic Circle
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c948930275.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -10,8 +11,8 @@ function c948930275.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c948930275.filter(c,e,tp)
-	return c:IsType(TYPE_RUNE) and c:IsLevelBelow(6)
-		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNE,tp,false,true)
+	return c.Is_Runic and c:IsRankBelow(6)
+		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNIC,tp,false,true)
 end
 function c948930275.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -26,7 +27,7 @@ function c948930275.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	local mg=Group.FromCards(e:GetHandler())
 	tc:SetMaterial(mg)
-	if Duel.SpecialSummon(tc,SUMMON_TYPE_RUNE,tp,tp,false,true,POS_FACEUP)~=0 then
+	if Duel.SpecialSummon(tc,SUMMON_TYPE_RUNIC,tp,tp,false,true,POS_FACEUP)~=0 then
 		local fid=e:GetHandler():GetFieldID()
 		tc:CompleteProcedure()
 		tc:RegisterFlagEffect(948930275,RESET_EVENT+0x1fe0000,0,1,fid)
