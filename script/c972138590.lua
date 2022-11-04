@@ -4,7 +4,7 @@ if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c972138590.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,nil,nil,1,1)
+	Runic.AddProcedure(c,nil,c972138590.matfilter,1,1)
 	--search
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(989512332,1))
@@ -22,6 +22,9 @@ function c972138590.initial_effect(c)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
+end
+function c972138590.matfilter(c)
+	return c:IsSpellTrap()
 end
 function c972138590.filter(c)
 	return (c:GetRank()==7 or c:GetRank()==8) and c.Is_Runic and c:IsAbleToHand()
