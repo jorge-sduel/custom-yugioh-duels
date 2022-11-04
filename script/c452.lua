@@ -72,13 +72,13 @@ function s.atlimit(e,c)
 	return c:IsFaceup() and not Duel.IsExistingMatchingCard(s.tfilter,c:GetControler(),LOCATION_MZONE,0,1,c,c:GetAttack())
 end
 
-function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp)
 		and Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_GRAVE,0,1,e:GetHandler()) end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_HAND)
 end
-function s.activate1(e,tp,eg,ep,ev,re,r,rp)
+function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TODECK)
 	local g=Duel.SelectMatchingCard(p,Card.IsMonster,p,LOCATION_GRAVE,0,1,2,nil)
