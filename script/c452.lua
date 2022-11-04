@@ -65,7 +65,7 @@ end
 function s.con(e)
 	return Duel.IsExistingMatchingCard(Card.IsPosition,e:GetHandlerPlayer(),LOCATION_MZONE,0,2,nil,POS_FACEUP)
 end
-function s.tfilter(c,atk)
+function s.tfilter(e,c,atk)
 	return c:IsFaceup() and c:IsSetCard(0x52) and c:GetAttack()<atk
 end
 function s.atlimit(e,c)
