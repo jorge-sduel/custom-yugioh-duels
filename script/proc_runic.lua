@@ -254,12 +254,10 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	c:RegisterEffect(e10)
 end
 function Runic.materialmonster(e,tp,eg,ep,ev,re,r,rp)
-
 	local rc=e:GetHandler():GetReasonCard()
-	return  rc:IsSetCard(0xfe9) and e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
+	return  e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
 end
 function Runic.materialspelltrap(e,tp,eg,ep,ev,re,r,rp)
-
 	local rc=e:GetHandler():GetReasonCard()
-	return  rc:IsSetCard(0xfe9) and (e:GetHandler():IsPreviousLocation(LOCATION_SZONE) or e:GetHandler():IsPreviousLocation(LOCATION_MZONE)) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
+	return  (e:GetHandler():IsPreviousLocation(LOCATION_SZONE) or e:GetHandler():IsPreviousLocation(LOCATION_MZONE)) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
 end
