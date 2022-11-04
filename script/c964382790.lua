@@ -5,7 +5,7 @@ function c964382790.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
 	Runic.AddProcedure(c,nil,c964382790.STMatFilter,2,2,LOCATION_DECK)
-	--aux.AddRunicProcedure2(c,aux.FilterBoolFunction(Card.IsCode,946320791),c964382790.STMatFilter,2,2,LOCATION_DECK)
+	aux.AddRunicProcedure2(c,aux.FilterBoolFunction(Card.IsCode,946320791),c964382790.STMatFilter,2,2,LOCATION_DECK)
 	--set
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(24294108,0))
