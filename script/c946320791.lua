@@ -1,14 +1,16 @@
 --Chantress of the Runic Risen
+c946320791.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c946320791.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),1,1,c946320791.STMatFilter,1,1)
+	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),c946320791.STMatFilter,1,1)
 	--Set Card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(961423423,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCondition(c946320791.setcon1)
+	e1:SetCondition(Runic.sumcon)
 	e1:SetTarget(c946320791.settg1)
 	e1:SetOperation(c946320791.setop1)
 	c:RegisterEffect(e1)
