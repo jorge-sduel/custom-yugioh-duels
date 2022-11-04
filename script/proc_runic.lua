@@ -221,3 +221,42 @@ end
 function Runic.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_RUNIC)
 end
+function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
+    --if min==nil then min=1 end
+    --if max==nil then max=min end
+	if c.runic_type==nil then
+		local mt=c:GetMetatable()
+		mt.runic_type=1
+		mt.runic_parameters={c,f1,f2,min,max}
+	end
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetDescription(1182)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e1:SetRange(loc)
+	e1:SetCondition(Runic.Condition(f1,f2,min,max))
+	e1:SetTarget(Runic.Target(f1,f2,min,max))
+	e1:SetOperation(Runic.Operation)
+    e1:SetValue(SUMMON_TYPE_RUNIC)
+	c:RegisterEffect(e1)
+--
+       local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e8:SetCode(EFFECT_LEVEL_RANK)
+	c:RegisterEffect(e8)
+--
+        local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e9:SetCode(EFFECT_CHANGE_LEVEL)
+	e9:SetValue(0)
+	c:RegisterEffect(e9)
+--
+	local e10=Effect.CreateEffect(c)
+	e10:SetType(EFFECT_TYPE_SINGLE)
+	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	c:RegisterEffect(e10)
+end
