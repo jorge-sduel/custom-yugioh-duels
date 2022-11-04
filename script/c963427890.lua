@@ -1,4 +1,5 @@
 --Subzero Conjurer
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c963427890.initial_effect(c)
 	--set
 	local e1=Effect.CreateEffect(c)
@@ -64,7 +65,7 @@ function c963427890.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c963427890.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return rc:IsType(TYPE_RUNE) and rc:IsSummonType(SUMMON_TYPE_RUNE) and rc:IsRace(RACE_SPELLCASTER)
+	return e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic and rc:IsRace(RACE_SPELLCASTER)
 end
 function c963427890.thfilter(c,mg,ec)
 	return mg:IsExists(Card.IsCode,1,ec,c:GetCode()) and c:IsAbleToHand()
