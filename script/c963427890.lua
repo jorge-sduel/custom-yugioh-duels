@@ -8,7 +8,7 @@ function c963427890.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e1:SetTarget(c963427890.eqtg)
+	--e1:SetTarget(c963427890.eqtg)
 	e1:SetOperation(c963427890.eqop)
 	c:RegisterEffect(e1)
 	--summon
@@ -22,9 +22,9 @@ function c963427890.initial_effect(c)
 	e2:SetOperation(c963427890.thop)
 	c:RegisterEffect(e2)
 end
---function c963427890.eqfilter(c)
---	return c:GetType()==0x4
---end
+function c963427890.eqfilter(c)
+	return c:GetType()==0x4
+end
 function c963427890.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
 	if chk==0 then return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_SZONE)>0
