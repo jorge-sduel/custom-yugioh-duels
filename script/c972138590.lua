@@ -1,8 +1,10 @@
 --Runic Underworld Chantress
+c972138590.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c972138590.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,nil,1,1,nil,1,1)
+	Runic.AddProcedure(c,nil,nil,1,1)
 	--search
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(989512332,1))
@@ -22,7 +24,7 @@ function c972138590.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c972138590.filter(c)
-	return (c:GetLevel()==7 or c:GetLevel()==8) and c:IsType(TYPE_RUNE) and c:IsAbleToHand()
+	return (c:GetRank()==7 or c:GetRank()==8) and c.Is_Runic and c:IsAbleToHand()
 end
 function c972138590.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c972138590.filter,tp,LOCATION_DECK,0,1,nil) end
