@@ -1,9 +1,11 @@
 --Guardian of the Immortal Runic Hall
+c964382790.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c964382790.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,nil,2,2,c964382790.STMatFilter,2,2)
-	aux.AddRuneProcedure2(c,aux.FilterBoolFunction(Card.IsCode,946320791),1,1,c964382790.STMatFilter,2,2,LOCATION_DECK)
+	Runic.AddProcedure(c,nil,2,2,c964382790.STMatFilter,2,2)
+	aux.AddRunicProcedure2(c,aux.FilterBoolFunction(Card.IsCode,946320791),c964382790.STMatFilter,2,2,LOCATION_DECK)
 	--set
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(24294108,0))
