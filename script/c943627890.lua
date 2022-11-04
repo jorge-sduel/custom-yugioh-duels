@@ -20,7 +20,7 @@ function c943627890.initial_effect(c)
 	e5:SetDescription(aux.Stringid(952312343,0))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e5:SetCode(EVENT_BE_MATERIAL)
-	e5:SetCondition(Runic.materialmonster)
+	e5:SetCondition(c943627890.descon)
 	e5:SetTarget(c943627890.destg)
 	e5:SetOperation(c943627890.desop)
 	c:RegisterEffect(e5)
@@ -63,7 +63,7 @@ function c943627890.selfdesop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c943627890.descon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return rc:IsType(TYPE_RUNE) and rc:IsSummonType(SUMMON_TYPE_RUNE)
+	return  rc:IsSetCard(0xfe9) and e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
 end
 function c943627890.desfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
