@@ -22,9 +22,9 @@ function c963427890.initial_effect(c)
 	e2:SetOperation(c963427890.thop)
 	c:RegisterEffect(e2)
 end
-function c963427890.eqfilter(c)
-	return c:GetType()==0x4
-end
+--function c963427890.eqfilter(c)
+--	return c:GetType()==0x4
+--end
 function c963427890.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
 	if chk==0 then return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_SZONE)>0
@@ -45,7 +45,7 @@ function c963427890.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_EQUIP_LIMIT)
 		e1:SetProperty(EFFECT_FLAG_COPY_INHERIT+EFFECT_FLAG_OWNER_RELATE)
 		e1:SetReset(RESET_EVENT+0x1fe0000)
-		--e1:SetLabelObject(c)
+		e1:SetLabelObject(c)
 		e1:SetValue(1)
 		tc:RegisterEffect(e1)
 	end
