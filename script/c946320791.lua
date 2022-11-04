@@ -69,9 +69,9 @@ end
 function c946320791.setop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if Duel.GetLocationCount(c:GetControler(),LOCATION_SZONE)<=0 then return end
-	AI.Chat(eg:GetCount())
+	--AI.Chat(eg:GetCount())
 	local g=eg:Filter(c946320791.filter,nil,c:GetControler())
-	AI.Chat(g:GetCount())
+	--AI.Chat(g:GetCount())
 	if g:GetCount()>0 then
 		local tc=g:Select(c:GetControler(),1,1,nil)
 		Duel.SSet(tp,tc)
