@@ -1,9 +1,11 @@
 --Serpent of Immortal Runic Forests
+c984379021.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c984379021.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,nil,2,2,c984379021.STMatFilter,2,2)
-	aux.AddRuneProcedure2(c,aux.FilterBoolFunction(Card.IsCode,962438790),1,1,c984379021.STMatFilter,2,2,LOCATION_DECK)
+	Runic.AddProcedure(c,nil,c984379021.STMatFilter,2,2)
+	aux.AddRunicProcedure2(c,aux.FilterBoolFunction(Card.IsCode,962438790),c984379021.STMatFilter,2,2,LOCATION_DECK)
 	--cannot disable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
