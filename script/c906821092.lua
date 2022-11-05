@@ -1,15 +1,17 @@
 --Immortal Majesty of Everunic Waters
+c906821092.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c906821092.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WATER),2,2,aux.FilterBoolFunction(Card.IsType,TYPE_FIELD),1,1)
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WATER),aux.FilterBoolFunction(Card.IsType,TYPE_FIELD),1,1)
 	--cannot special summon
-	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e1:SetValue(aux.runlimit)
-	c:RegisterEffect(e1)
+	--local e1=Effect.CreateEffect(c)
+	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	--e1:SetType(EFFECT_TYPE_SINGLE)
+	--e1:SetCode(EFFECT_SPSUMMON_CONDITION)
+	--e1:SetValue(aux.runlimit)
+	--c:RegisterEffect(e1)
 	--activate limit
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
