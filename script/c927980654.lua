@@ -1,15 +1,17 @@
 --Immortal Sylph of Everunic Winds
+c927980654.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c927980654.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WIND),2,2,c927980654.STMatFilter,1,1)
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WIND),c927980654.STMatFilter,2,2)
 	--cannot special summon
-	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e1:SetValue(aux.runlimit)
-	c:RegisterEffect(e1)
+	--local e1=Effect.CreateEffect(c)
+	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	--e1:SetType(EFFECT_TYPE_SINGLE)
+	--e1:SetCode(EFFECT_SPSUMMON_CONDITION)
+	--e1:SetValue(aux.runlimit)
+	--c:RegisterEffect(e1)
 	--activate limit
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
