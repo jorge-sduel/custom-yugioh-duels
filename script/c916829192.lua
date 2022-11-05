@@ -5,7 +5,7 @@ function c916829192.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
 	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),aux.FilterBoolFunction(Card.IsType,TYPE_PENDULUM),2,2)
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),aux.FilterBoolFunction(Card.IsType,TYPE_PENDULUM),2,2,LOCATION_GRAVE+LOCATION_REMOVED)
+	aux.AddRunicProcedure2(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),aux.FilterBoolFunction(Card.IsType,TYPE_PENDULUM),2,2,LOCATION_GRAVE+LOCATION_REMOVED)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
 	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
