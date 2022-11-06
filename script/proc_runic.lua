@@ -291,5 +291,5 @@ function Runic.slevel(e,c)
 	return c:GetRank()
 end
 function Runic.synlimit(e,c)
-	return not e:GetHandler():IsLevel(0)
+	return e:GetHandler():IsLevel(0)
 end
