@@ -1,8 +1,9 @@
 --Flaming Angel of Ruins
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c999019282.initial_effect(c)
 	--link summon
 	c:EnableReviveLimit()
-	aux.AddLinkProcedure(c,c999019282.matfilter,2,2)
+	Link.AddProcedure(c,c999019282.matfilter,2,2)
 	--disable field
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -22,7 +23,7 @@ function c999019282.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c999019282.matfilter(c,scard,sumtype,tp)
-	return c:IsType(TYPE_RITUAL,scard,sumtype,tp) or c:IsType(TYPE_RUNE,scard,sumtype,tp) 
+	return c:IsType(TYPE_RITUAL,scard,sumtype,tp) or c.Is_Runic
 end
 function c999019282.disop(e,tp)
 	local c=e:GetHandler()
