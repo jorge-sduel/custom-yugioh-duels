@@ -261,3 +261,6 @@ function Runic.materialspelltrap(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
 	return  (e:GetHandler():IsPreviousLocation(LOCATION_SZONE) or e:GetHandler():IsPreviousLocation(LOCATION_MZONE)) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
 end
+function Card.IsRunic(c)
+	return c.Is_Runic
+end
