@@ -1,15 +1,17 @@
 --Eternal Sylph of Runic Winds
+c964839022.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c964839022.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),1,1,c964839022.STMatFilter,1,1)
+	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),c964839022.STMatFilter,1,1)
 	--activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(40884383,0))
 	e1:SetCategory(CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCondition(c964839022.setcon)
+	e1:SetCondition(Runic.sumcon)
 	e1:SetTarget(c964839022.settg)
 	e1:SetOperation(c964839022.setop)
 	c:RegisterEffect(e1)
