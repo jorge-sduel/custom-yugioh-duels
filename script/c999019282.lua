@@ -33,7 +33,7 @@ function c999019282.disop(e,tp)
 	return flag1+flag2
 end
 function c999019282.costfilter(c)
-	return c:IsType(TYPE_RITUAL) or c:IsType(TYPE_RUNE)
+	return c:IsType(TYPE_RITUAL) or c.Is_Runic
 end
 function c999019282.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroup(tp,c999019282.costfilter,1,nil) end
