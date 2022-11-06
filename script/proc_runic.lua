@@ -43,6 +43,13 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(Runic.slevel)
 	c:RegisterEffect(e2)
+	--synchro limit
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e1:SetValue(Runic.synlimit)
+	c:RegisterEffect(e1)
 --
        local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
@@ -282,4 +289,7 @@ function Card.IsRunic(c)
 end
 function Runic.slevel(e,c)
 	return c:GetRank()
+end
+function Runic.synlimit(e,c)
+	return not e:GetHandler():IsLevel(0)
 end
