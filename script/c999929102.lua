@@ -1,8 +1,9 @@
 --Great Beast from Ruins
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c999929102.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
-	aux.AddSynchroProcedure(c,nil,1,1,aux.FilterBoolFunction(Card.IsType,TYPE_RUNE),1,99)
+	Synchro.AddProcedure(c,nil,1,1,card.IsRunic,1,99)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(20154092,0))
@@ -38,7 +39,7 @@ function c999929102.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(g,REASON_COST)
 end
 function c999929102.spfilter(c,e,tp)
-	return c:IsType(TYPE_RUNE) and c:IsCanBeSpecialSummoned(e,0,tp,false,true)
+	return c.Is_Runic and c:IsCanBeSpecialSummoned(e,0,tp,false,true)
 end
 function c999929102.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c999929102.spfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil,e,tp) end
