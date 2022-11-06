@@ -1,8 +1,10 @@
 --Mastered Sun of Runic Flames
+c943689072.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c943689072.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),1,1,c943689072.STMatFilter,1,1)
+	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),c943689072.STMatFilter,1,1)
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(40884383,0))
@@ -10,7 +12,7 @@ function c943689072.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCondition(c943689072.eqcon1)
+	e1:SetCondition(Runic.sumcon)
 	e1:SetTarget(c943689072.eqtg1)
 	e1:SetOperation(c943689072.eqop1)
 	c:RegisterEffect(e1)
