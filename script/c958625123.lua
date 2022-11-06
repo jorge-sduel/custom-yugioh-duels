@@ -1,15 +1,17 @@
 --Marine Majesty of Runic Waters
+c958625123.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c958625123.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),1,1,c958625123.STMatFilter,1,1)
+	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),c958625123.STMatFilter,1,1)
 	--activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(40884383,0))
 	e1:SetCategory(CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCondition(c958625123.tfcon)
+	e1:SetCondition(Runic.sumcon)
 	e1:SetTarget(c958625123.tftg)
 	e1:SetOperation(c958625123.tfop)
 	c:RegisterEffect(e1)
