@@ -35,6 +35,14 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
+	--synchro level
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_SYNCHRO_LEVEL)
+	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetValue(Runic.slevel)
+	c:RegisterEffect(e2)
 --
        local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
@@ -233,6 +241,14 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
+	--synchro level
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_SYNCHRO_LEVEL)
+	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetValue(Runic.slevel)
+	c:RegisterEffect(e2)
 --
        local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
@@ -263,4 +279,7 @@ function Runic.materialspelltrap(e,tp,eg,ep,ev,re,r,rp)
 end
 function Card.IsRunic(c)
 	return c.Is_Runic
+end
+function Runic.slevel(e,c)
+	return c:GetRank()
 end
