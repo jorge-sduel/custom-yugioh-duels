@@ -1,4 +1,6 @@
 --Immortal Sorcerer of Everunic Risen
+c919238201.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c919238201.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
