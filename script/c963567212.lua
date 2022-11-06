@@ -1,8 +1,11 @@
 --Gleaming of the Runic Nights
+c963567212.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c963567212.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),1,1,c963567212.STMatFilter,1,1,LOCATION_GRAVE)
+	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),c963567212.STMatFilter,1,1)
+	aux.AddRunicProcedure2(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),c963567212.STMatFilter,1,1,LOCATION_GRAVE)
 	--Place in Pendulum Zone
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(40884383,0))
