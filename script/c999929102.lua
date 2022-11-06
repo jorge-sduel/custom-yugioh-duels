@@ -3,7 +3,7 @@ if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c999929102.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
-	Synchro.AddProcedure(c,nil,1,1,card.IsRunic,1,99)
+	Synchro.AddProcedure(c,nil,Synchro.NonTuner(card.IsRunic),1)
 	--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(20154092,0))
