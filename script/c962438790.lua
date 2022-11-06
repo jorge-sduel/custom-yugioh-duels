@@ -1,8 +1,10 @@
 --Eternal Serpent of Runic Forests
+c962438790.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c962438790.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),1,1,c962438790.STMatFilter,1,1)
+	Runic.AddProcedure(c,aux.NOT(aux.FilterBoolFunction(Card.IsType,TYPE_TOKEN)),c962438790.STMatFilter,1,1)
 	--activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(40884383,0))
@@ -10,7 +12,7 @@ function c962438790.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCondition(c962438790.setcon)
+	e1:SetCondition(Runic.sumcon)
 	e1:SetTarget(c962438790.settg)
 	e1:SetOperation(c962438790.setop)
 	c:RegisterEffect(e1)
@@ -29,9 +31,6 @@ function c962438790.initial_effect(c)
 end
 function c962438790.STMatFilter(c)
 	return bit.band(c:GetType(),0x20004)==0x20004
-end
-function c962438790.setcon(e,c)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_RUNE
 end
 function c962438790.setfilter(c)
 	return c:GetType()==0x20004 and c:IsSSetable()
