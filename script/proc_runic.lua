@@ -288,5 +288,5 @@ function Runic.Levelcon(e,c)
 	return  not e:GetHandler():IsHasEffect(999381000)
 end
 function Runic.synfilter(e,c)
-	return e:GetHandler():GetLevel()~=1
+	return e:GetHandler():IsHasEffect(EFFECT_ALLOW_NEGATIVE)
 end
