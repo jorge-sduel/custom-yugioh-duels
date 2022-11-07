@@ -230,6 +230,7 @@ end
 function Runic.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_RUNIC)
 end
+--Runic Summon other location
 function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -242,13 +243,12 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
-	--synchro level
+	--synchro custom
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_SYNCHRO_LEVEL)
-	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e2:SetRange(LOCATION_MZONE)
-	e2:SetValue(Runic.slevel)
+	e2:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e2:SetValue(Runic.synlimit)
 	c:RegisterEffect(e2)
 --
        local e8=Effect.CreateEffect(c)
@@ -261,6 +261,7 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	e9:SetType(EFFECT_TYPE_SINGLE)
 	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e9:SetCode(EFFECT_CHANGE_LEVEL)
+	e9:SetCondition(Runic.Levelcon)
 	e9:SetValue(0)
 	c:RegisterEffect(e9)
 --
@@ -268,6 +269,7 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	e10:SetCondition(Runic.Levelcon)
 	c:RegisterEffect(e10)
 end
 function Runic.materialmonster(e,tp,eg,ep,ev,re,r,rp)
@@ -290,4 +292,119 @@ end
 function Runic.synlimit(e,c)
 	if not c then return false end
 	return not c:IsHasEffect(999381001)
+end
+--Runic Summon 2 or more monsters
+function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetDescription(1182)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e1:SetRange(loc)
+	e1:SetCondition(Auxiliary.RunicCondition(f1,min1,max1,f2,min,max))
+	e1:SetTarget(Auxiliary.RunicTarget(f1,min1,max1,f2,min,max))
+	e1:SetOperation(Auxiliary.RunicOperation)
+    e1:SetValue(SUMMON_TYPE_RUNIC)
+	c:RegisterEffect(e1)
+	--synchro custom
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e2:SetValue(Runic.synlimit)
+	c:RegisterEffect(e2)
+--
+       local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e8:SetCode(EFFECT_LEVEL_RANK)
+	c:RegisterEffect(e8)
+--
+        local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e9:SetCode(EFFECT_CHANGE_LEVEL)
+	e9:SetCondition(Runic.Levelcon)
+	e9:SetValue(0)
+	c:RegisterEffect(e9)
+--
+	local e10=Effect.CreateEffect(c)
+	e10:SetType(EFFECT_TYPE_SINGLE)
+	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	e10:SetCondition(Runic.Levelcon)
+	c:RegisterEffect(e10)
+end
+function Auxiliary.RunicCheck(tp,sg,sc,f1,min1,f2,min)
+	return sg:IsExists(Runic.FilterEx,min1,nil,f1,sc,tp,sg,LOCATION_MZONE)
+		and sg:IsExists(Runic.FilterEx,min,nil,f2,sc,tp,sg,LOCATION_ONFIELD)
+end
+function Auxiliary.RunicRemove(c,g)
+	return g:IsContains(c)
+end
+function Auxiliary.RunicCondition(f1,min1,max1,f2,min,max)
+	return	function(e,c)
+				if c==nil then return true end
+				local tp=c:GetControler()
+                
+                if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,min1,nil,f1,c,tp)
+                    or not Duel.IsExistingMatchingCard(Runic.Filter,tp,LOCATION_ONFIELD,0,min,nil,f2,c,tp) then return false end
+                
+                local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
+                local mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
+                
+                if #mg1<=0 or #mg2<=0 then return false end
+                return mg1:IsExists(Runic.FilterEx,min1,nil,f1,c,tp,mg2)
+                    and mg2:IsExists(Runic.FilterEx,min,nil,f2,c,tp,mg1)
+            end
+end
+function Runic.Target(f1,min1,max1,f2,min,max)
+	return function(e,tp,eg,ep,ev,re,r,rp,chk,c,must,mg1,mg2)
+                if not mg1 then
+                    mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
+                end
+                if not mg2 then
+                    mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
+                end
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,mg1+mg2,tp,c,mg1+mg2,REASON_RUNIC)
+				if must then mustg:Merge(must) end                
+				local sg=Group.CreateGroup()
+				local finish=false
+				local cancel=false
+				sg:Merge(mustg)
+				while #sg<(max+1) do
+					local cg=Group.CreateGroup()
+                    if not sg:IsExists(Runic.FilterEx,max1,nil,f1,c,tp,mg2,LOCATION_MZONE) then
+                        cg=mg1:Filter(Runic.FilterEx,nil,f1,c,tp,mg2,LOCATION_MZONE)
+                    elseif not sg:IsExists(Runic.FilterEx,max,nil,f2,c,tp,mg1,LOCATION_ONFIELD) then
+                        cg=mg2:Filter(Runic.FilterEx,nil,f2,c,tp,mg1,LOCATION_ONFIELD)
+                    end
+					cg:Remove(Auxiliary.RunicRemove,nil,sg)
+					if #cg==0 then break end
+					finish=#sg>=(min+1) and Auxiliary.RunicCheck(tp,sg,c,f1,min1,f2,min)
+					cancel=Duel.GetCurrentChain()<=0 and #sg==0
+					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RNMATERIAL)
+					local tc=Group.SelectUnselect(cg,sg,tp,finish,cancel,min+1,max+1)
+					if not tc then break end
+					if not sg:IsContains(tc) then
+						sg:AddCard(tc)
+					else
+						sg:RemoveCard(tc)
+					end
+				end
+				
+				if #sg>0 then
+					sg:KeepAlive()
+					e:SetLabelObject(sg)
+					return true
+				else
+					return false
+				end
+            end
+end
+function Auxiliary.RunicOperation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
+	local g=e:GetLabelObject()
+	c:SetMaterial(g)
+	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNIC)
+	g:DeleteGroup()
 end
