@@ -20,7 +20,7 @@ function s.rvfilter(c)
 	--if c.ex_rune_parameters then
 		--local f2=c.ex_rune_parameters[6]
 		return c.Is_Runic Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil)
-	else return Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil,f1,aux.TRUE) end
+	--else return Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil,f1,aux.TRUE) end
 end
 function s.tffilter(c)
 	return bit.band(c:GetType(),0x20004)==0x20004 and not c:IsForbidden()
