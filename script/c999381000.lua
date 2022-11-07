@@ -54,7 +54,7 @@ function s.thfilter(c)
 	--Owns Extra Runic Parameters
 	--if c.ex_runic_parameters then
 		--local f2=c.ex_runic_parameters[6]
-		return c:IsAbleToHand() 
+		return c:IsAbleToHand() and c.Is_Runic
 --and (not f1 or f1(mc) or not f2 or f2(mc))
 	--else return c:IsAbleToHand() and (not f1 or f1(mc)) end
 end
