@@ -61,7 +61,7 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
-	e10:SetCondition(Runic.Levelcon)
+	--e10:SetCondition(Runic.Levelcon)
 	c:RegisterEffect(e10)
 end
 function Runic.FilterEx(c,f,sc,tp,mg,loc)
