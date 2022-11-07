@@ -53,7 +53,7 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e9:SetType(EFFECT_TYPE_SINGLE)
 	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e9:SetCode(EFFECT_CHANGE_LEVEL)
-	e9:SetCondition(Runic.Levelcon)
+	--e9:SetCondition(Runic.Levelcon)
 	e9:SetValue(0)
 	c:RegisterEffect(e9)
 --
@@ -61,6 +61,7 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	e10:SetCondition(Runic.Levelcon)
 	c:RegisterEffect(e10)
 end
 function Runic.FilterEx(c,f,sc,tp,mg,loc)
@@ -284,7 +285,7 @@ function Runic.slevel(e,c)
 	return c:GetRank()
 end
 function Runic.Levelcon(e,c)
-	return e:GetHandler():IsLevel(0) or not e:GetHandler():IsHasEffect(999381000)
+	return  not e:GetHandler():IsHasEffect(999381000)
 end
 function Runic.synlimit(e,c)
 	if not c then return false end
