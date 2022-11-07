@@ -1,4 +1,5 @@
 --Greenwood Levia
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 local s,id=GetID()
 function s.initial_effect(c)
 	--place
@@ -14,15 +15,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.rvfilter(c)
-	if not c.rune_parameters or not c:IsType(TYPE_RUNE) then return false end
-	local f1=c.rune_parameters[6]
-	if c.ex_rune_parameters then
-		local f2=c.ex_rune_parameters[6]
-		return Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil,f1,f2)
+	--if not c.rune_parameters or not c:IsType(TYPE_RUNE) then return false end
+	--local f1=c.rune_parameters[6]
+	--if c.ex_rune_parameters then
+		--local f2=c.ex_rune_parameters[6]
+		return c.Is_Runic Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil)
 	else return Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil,f1,aux.TRUE) end
 end
-function s.tffilter(c,f1,f2)
-	return bit.band(c:GetType(),0x20004)==0x20004 and not c:IsForbidden() and (not f1 or f1(c) or not f2 or f2(c))
+function s.tffilter(c)
+	return bit.band(c:GetType(),0x20004)==0x20004 and not c:IsForbidden()
+-- and (not f1 or f1(c) or not f2 or f2(c))
 end
 function s.tftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -37,9 +39,9 @@ function s.tfop(e,tp,eg,ep,ev,re,r,rp)
 	local sc=g:GetFirst()
 	if sc then
 		--Get Functions
-		local f1=sc.rune_parameters[6]
-		if sc.ex_rune_parameters then local f2=sc.ex_rune_parameters[6]
-		else local f2=aux.TRUE end
+		--local f1=sc.rune_parameters[6]
+		--if sc.ex_rune_parameters then local f2=sc.ex_rune_parameters[6]
+		--else local f2=aux.TRUE end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 		--Place on Field
 		local tc=Duel.SelectMatchingCard(tp,s.tffilter,tp,LOCATION_DECK,0,1,1,nil,f1,f2):GetFirst()
