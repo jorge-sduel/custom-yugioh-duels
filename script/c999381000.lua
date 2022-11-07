@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,0)
 	e3:SetTarget(aux.TargetBoolFunction(Card.IsRunic))
-	e3:SetValue(s.level)
+	e3:SetValue(s.Level)
 	c:RegisterEffect(e3)
 end
 function s.Level(c)
