@@ -287,6 +287,6 @@ end
 function Runic.Levelcon(e,c)
 	return  not e:GetHandler():IsHasEffect(999381000)
 end
-function s.synclimitfilter(e,c)
+function Runic.synfilter(e,c)
 	return e:GetHandler():GetLevel()~=0
 end
