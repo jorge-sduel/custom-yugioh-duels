@@ -48,13 +48,14 @@ function s.rvfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.thfilter(c,mc)
-	if not c.runic_parameters or not c.Is_Runic then return false end
-	local f1=c.runic_parameters[6]
+	--if not c.runic_parameters or not c.Is_Runic then return false end
+	--local f1=c.runic_parameters[6]
 	--Owns Extra Runic Parameters
-	if c.ex_runic_parameters then
-		local f2=c.ex_runic_parameters[6]
-		return c:IsAbleToHand() and (not f1 or f1(mc) or not f2 or f2(mc))
-	else return c:IsAbleToHand() and (not f1 or f1(mc)) end
+	--if c.ex_runic_parameters then
+		--local f2=c.ex_runic_parameters[6]
+		return c:IsAbleToHand() 
+--and (not f1 or f1(mc) or not f2 or f2(mc))
+	--else return c:IsAbleToHand() and (not f1 or f1(mc)) end
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rvfilter,tp,LOCATION_HAND,0,1,nil) end
