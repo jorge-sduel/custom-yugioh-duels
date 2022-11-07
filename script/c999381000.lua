@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e3:SetValue(s.Level)
 	c:RegisterEffect(e3)
 end
-function s.Level(c)
+function s.Level(e,c)
 	return c:GetRank()
 end
 function s.rvfilter(c)
