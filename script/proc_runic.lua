@@ -289,5 +289,5 @@ function Runic.Levelcon(e,c)
 end
 function Runic.synlimit(e,c)
 	if not c then return false end
-	return not c:IsHasEffect(999381001)
+	return not c:IsSetCard(0xsyrun)
 end
