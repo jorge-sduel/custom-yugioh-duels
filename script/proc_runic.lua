@@ -291,5 +291,5 @@ function Runic.slevel(e,c)
 	return c:GetRank()
 end
 function Runic.synlimit(e,c)
-	return e:GetHandler():IsLevel(0)
+	return e:GetHandler():IsLevel(0) or not c:IsHasEffect(999381000,tp)
 end
