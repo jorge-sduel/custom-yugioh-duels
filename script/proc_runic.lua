@@ -35,13 +35,13 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
-	--synchro limit
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
-	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e2:SetValue(Runic.synlimit)
-	c:RegisterEffect(e2)
+	--synchro custom
+	local e4=Effect.CreateEffect(c)
+	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_SYNCHRO_MAT_RESTRICTION)
+	e4:SetValue(Runic.synfilter)
+	c:RegisterEffect(e4)
 --
        local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
@@ -287,7 +287,6 @@ end
 function Runic.Levelcon(e,c)
 	return  not e:GetHandler():IsHasEffect(999381000)
 end
-function Runic.synlimit(e,c)
-	if not c then return false end
-	return not c:IsSetCard(0x10t)
+function s.synclimitfilter(e,c)
+	return e:GetHandler():GetLevel()~=0
 end
