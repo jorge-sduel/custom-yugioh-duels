@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetTargetRange(LOCATION_EXTRA,LOCATION_EXTRA)
 	e5:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_SYNCHRO))
-	e5:SetValue(0xsyrun)
+	e5:SetValue(0x5sr)
 	c:RegisterEffect(e5)
 end
 function s.Level(e,c)
