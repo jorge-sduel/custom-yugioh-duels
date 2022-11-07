@@ -47,7 +47,7 @@ end
 function s.rvfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c)
 end
-function s.thfilter(c,mc)
+function s.thfilter(c)
 	--if not c.runic_parameters or not c.Is_Runic then return false end
 	--local f1=c.runic_parameters[6]
 	--Owns Extra Runic Parameters
