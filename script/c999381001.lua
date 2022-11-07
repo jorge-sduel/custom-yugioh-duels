@@ -19,7 +19,8 @@ function s.rvfilter(c)
 	--local f1=c.rune_parameters[6]
 	--if c.ex_rune_parameters then
 		--local f2=c.ex_rune_parameters[6]
-		return c.Is_Runic and Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil)
+		return c.Is_Runic
+-- and Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil)
 	--else return Duel.IsExistingMatchingCard(s.tffilter,tp,LOCATION_DECK,0,1,nil,f1,aux.TRUE) end
 end
 function s.tffilter(c)
