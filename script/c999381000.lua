@@ -1,4 +1,5 @@
 --Greenwood Dragon
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 local s,id=GetID()
 function s.initial_effect(c)
 	--effect
@@ -13,16 +14,28 @@ function s.initial_effect(c)
 	local e2=e1:Clone()
 	e2:SetCode(EVENT_FLIP_SUMMON_SUCCESS)
 	c:RegisterEffect(e2)
+	--level
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetCode(EFFECT_CHANGE_LEVEL)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,0)
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsRunic))
+	e3:SetValue(s.level)
+	c:RegisterEffect(e3)
+end
+function s.Level(c)
+	return c:GetOriginalLevel()
 end
 function s.rvfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil,c)
 end
 function s.thfilter(c,mc)
-	if not c.rune_parameters or not c:IsType(TYPE_RUNE) then return false end
-	local f1=c.rune_parameters[6]
-	--Owns Extra Rune Parameters
-	if c.ex_rune_parameters then
-		local f2=c.ex_rune_parameters[6]
+	if not c.runic_parameters or not c.Is_Runic then return false end
+	local f1=c.runic_parameters[6]
+	--Owns Extra Runic Parameters
+	if c.ex_runic_parameters then
+		local f2=c.ex_runic_parameters[6]
 		return c:IsAbleToHand() and (not f1 or f1(mc) or not f2 or f2(mc))
 	else return c:IsAbleToHand() and (not f1 or f1(mc)) end
 end
