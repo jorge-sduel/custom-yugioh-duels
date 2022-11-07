@@ -35,20 +35,12 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
-	--synchro level
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_SYNCHRO_LEVEL)
-	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e2:SetRange(LOCATION_MZONE)
-	e2:SetValue(Runic.slevel)
-	c:RegisterEffect(e2)
-	--synchro limit
+	synchro limit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetCondition(Runic.synlimit)
+	e1:SetValue(Runic.synlimit)
 	c:RegisterEffect(e1)
 --
        local e8=Effect.CreateEffect(c)
@@ -61,6 +53,7 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e9:SetType(EFFECT_TYPE_SINGLE)
 	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e9:SetCode(EFFECT_CHANGE_LEVEL)
+	e9:SetCondition(Runic.Levelcon)
 	e9:SetValue(0)
 	c:RegisterEffect(e9)
 --
@@ -290,6 +283,10 @@ end
 function Runic.slevel(e,c)
 	return c:GetRank()
 end
-function Runic.synlimit(e,c)
+function Runic.Levelcon(e,c)
 	return c:IsLevel(0) or not c:IsHasEffect(999381000)
+end
+function Runic.synlimit(e,c)
+	if not c then return false end
+	return not c:IsHasEffect(999381001)
 end
