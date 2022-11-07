@@ -1,5 +1,4 @@
 --D.D. Mark
-c943627890.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c943627890.initial_effect(c)
 	--tohand
