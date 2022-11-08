@@ -341,7 +341,7 @@ function Runic.matfilter2(c,f2,sc,tp)
 	return (not f2 or f2(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
 end
 function Runic.runfilter1(c)
-	return Runic.matfilter1(c,f1,sc,tp) and Duel.IsExistingMatchingCard(Runic.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,min,c)
+	return Runic.matfilter1(c) and Duel.IsExistingMatchingCard(Runic.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,min,c)
 end
 function Runic.runcon(e,c)
 	if c==nil then return true end
