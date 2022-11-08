@@ -336,7 +336,7 @@ function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	c:RegisterEffect(e10)
 end
 function Auxiliary.RunicCheck(tp,sg,sc,f1,min1,f2,min)
-	return sg:IsExists(Runic.FilterEx,1,nil,f1,sc,tp,sg,LOCATION_MZONE)
+	return sg:IsExists(Runic.Filter,min1,nil,f1,sc,tp,sg,LOCATION_MZONE)
 		and sg:IsExists(Runic.FilterEx,min,nil,f2,sc,tp,sg,LOCATION_ONFIELD)
 end
 function Auxiliary.RunicRemove(c,g)
@@ -348,13 +348,13 @@ function Auxiliary.RunicCondition(f1,min1,max1,f2,min,max)
 				local tp=c:GetControler()
                 
                 if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,min1,nil,f1,c,tp)
-                    or not Duel.IsExistingMatchingCard(Runic.Filter,tp,LOCATION_ONFIELD,0,min1,nil,f2,c,tp) then return false end
+                    or not Duel.IsExistingMatchingCard(Runic.FilterEx,tp,LOCATION_ONFIELD,0,min,nil,f2,c,tp) then return false end
                 
                 local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
-                local mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
+                local mg2=Duel.GetMatchingGroup(Runic.FilterEx,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
                 
                 if #mg1<=0 or #mg2<=0 then return false end
-                return mg1:IsExists(Runic.FilterEx,min,nil,f1,c,tp,mg2)
+                return mg1:IsExists(Runic.Filter,min1,nil,f1,c,tp,mg2)
                     and mg2:IsExists(Runic.FilterEx,min,nil,f2,c,tp,mg1)
             end
 end
@@ -364,7 +364,7 @@ function Auxiliary.RunicTarget(f1,min1,max1,f2,min,max)
                     mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
                 end
                 if not mg2 then
-                    mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
+                    mg2=Duel.GetMatchingGroup(Runic.FilterEx,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
                 end
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,mg1+mg2,tp,c,mg1+mg2,REASON_RUNIC)
 				if must then mustg:Merge(must) end                
@@ -374,8 +374,8 @@ function Auxiliary.RunicTarget(f1,min1,max1,f2,min,max)
 				sg:Merge(mustg)
 				while #sg<(max+1) do
 					local cg=Group.CreateGroup()
-                    if not sg:IsExists(Runic.FilterEx,1,nil,f1,c,tp,mg2,LOCATION_MZONE) then
-                        cg=mg1:Filter(Runic.FilterEx,nil,f1,c,tp,mg2,LOCATION_MZONE)
+                    if not sg:IsExists(Runic.Filter,max1,nil,f1,c,tp,mg2,LOCATION_MZONE) then
+                        cg=mg1:Filter(Runic.Filter,nil,f1,c,tp,mg2,LOCATION_MZONE)
                     elseif not sg:IsExists(Runic.FilterEx,max,nil,f2,c,tp,mg1,LOCATION_ONFIELD) then
                         cg=mg2:Filter(Runic.FilterEx,nil,f2,c,tp,mg1,LOCATION_ONFIELD)
                     end
