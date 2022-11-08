@@ -378,9 +378,9 @@ function Auxiliary.RunicTarget(f1,min1,max1,f2,min,max)
                     elseif not sg:IsExists(Runic.FilterEx,max,nil,f2,c,tp,mg1,LOCATION_ONFIELD) then
                         cg=mg2:Filter(Runic.FilterEx,nil,f2,c,tp,mg1,LOCATION_ONFIELD)
                     end
-					cg:Remove(Runic.Remove,nil,sg)
+					cg:Remove(Auxiliary.RunicRemove,nil,sg)
 					if #cg==0 then break end
-					finish=#sg>=(min+1) and Runic.Check(tp,sg,c,f1,f2,min)
+					finish=#sg>=(min+1) and Auxiliary.RunicCheck(tp,sg,c,f1,f2,min)
 					cancel=Duel.GetCurrentChain()<=0 and #sg==0
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RNMATERIAL)
 					local tc=Group.SelectUnselect(cg,sg,tp,finish,cancel,min+1,max+1)
