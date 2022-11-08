@@ -304,8 +304,8 @@ function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(loc)
-	e1:SetCondition(Runic.spcon(e,c,min1,max1,min,max))
-	e1:SetTarget(Runic.sptg(e,tp,eg,ep,ev,re,r,rp,c,min1,max1,min,max))
+	e1:SetCondition(Runic.spcon(min1,max1,min,max))
+	e1:SetTarget(Runic.sptg(min1,max1,min,max))
 	e1:SetOperation(Runic.spop)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
@@ -344,7 +344,8 @@ end
 function Runic.matfilter2(c,f2,sc,tp)
 	return (not f2 or f2(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
 end
-function Runic.spcon(e,c,min1,max1,min,max)
+function Runic.spcon(min1,max1,min,max)
+	return	function(e,c,min1,max1,min,max)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
@@ -357,7 +358,8 @@ function Runic.spcon(e,c,min1,max1,min,max)
 			and aux.SelectUnselectGroup(rg2,e,tp,min,max,aux.ChkfMMZ(1),0)
 	end
 end
-function Runic.sptg(e,tp,eg,ep,ev,re,r,rp,c,min1,max1,min,max)
+function Runic.sptg(min1,max1,min,max)
+	return function(e,tp,eg,ep,ev,re,r,rp,c,min1,max1,min,max)
 	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
 	local rg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil)
 	local g1
