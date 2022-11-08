@@ -344,29 +344,29 @@ end
 function Runic.matfilter2(c,f2,sc,tp)
 	return (not f2 or f2(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
 end
-function Runic.spcon(e,c)
+function Runic.spcon(e,c,min1,max1,min,max)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
 	local rg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-2 then return false end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-min1 then return false end
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		return aux.SelectUnselectGroup(rg1,e,tp,3,3,aux.ChkfMMZ(1),0)
+		return aux.SelectUnselectGroup(rg1,e,tp,min+min1,max+max1,aux.ChkfMMZ(1),0)
 	else
-		return aux.SelectUnselectGroup(rg1,e,tp,2,2,aux.ChkfMMZ(1),0)
-			and aux.SelectUnselectGroup(rg2,e,tp,1,1,aux.ChkfMMZ(1),0)
+		return aux.SelectUnselectGroup(rg1,e,tp,min1,max1,aux.ChkfMMZ(1),0)
+			and aux.SelectUnselectGroup(rg2,e,tp,min,max,aux.ChkfMMZ(1),0)
 	end
 end
-function Runic.sptg(e,tp,eg,ep,ev,re,r,rp,c)
+function Runic.sptg(e,tp,eg,ep,ev,re,r,rp,c,min1,max1,min,max)
 	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
 	local rg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil)
 	local g1
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		g1=aux.SelectUnselectGroup(rg1,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+		g1=aux.SelectUnselectGroup(rg1,e,tp,min+min1,max+max1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 	else
-		g1=aux.SelectUnselectGroup(rg1,e,tp,2,2,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+		g1=aux.SelectUnselectGroup(rg1,e,tp,min1,max1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 		if #g1>=1 then
-		local g2=aux.SelectUnselectGroup(rg2,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+		local g2=aux.SelectUnselectGroup(rg2,e,tp,min,max,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 		g1:Merge(g2)
 		end
 	end
