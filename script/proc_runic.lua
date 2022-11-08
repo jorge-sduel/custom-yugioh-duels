@@ -368,7 +368,7 @@ function Runic.sptg(min1,max1,min,max)
 		g1=aux.SelectUnselectGroup(rg1,e,tp,min+min1,max+max1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 	else
 		g1=aux.SelectUnselectGroup(rg1,e,tp,min1,max1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
-		if #g1>=max1 then
+		if #g1>=min1 then
 		local g2=aux.SelectUnselectGroup(rg2,e,tp,min,max,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 		g1:Merge(g2)
 		end
