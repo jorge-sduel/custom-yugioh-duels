@@ -354,7 +354,7 @@ function Auxiliary.RunicCondition(f1,min1,max1,f2,min,max)
                 local mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
                 
                 if #mg1<=0 or #mg2<=0 then return false end
-                return mg1:IsExists(Runic.FilterEx,min1,nil,f1,c,tp,mg2)
+                return mg1:IsExists(Runic.FilterEx,min,nil,f1,c,tp,mg2)
                     and mg2:IsExists(Runic.FilterEx,min,nil,f2,c,tp,mg1)
             end
 end
@@ -374,7 +374,7 @@ function Auxiliary.RunicTarget(f1,min1,max1,f2,min,max)
 				sg:Merge(mustg)
 				while #sg<(max+1) do
 					local cg=Group.CreateGroup()
-                    if not sg:IsExists(Runic.FilterEx,max1,nil,f1,c,tp,mg2,LOCATION_MZONE) then
+                    if not sg:IsExists(Runic.FilterEx,max,nil,f1,c,tp,mg2,LOCATION_MZONE) then
                         cg=mg1:Filter(Runic.FilterEx,nil,f1,c,tp,mg2,LOCATION_MZONE)
                     elseif not sg:IsExists(Runic.FilterEx,max,nil,f2,c,tp,mg1,LOCATION_ONFIELD) then
                         cg=mg2:Filter(Runic.FilterEx,nil,f2,c,tp,mg1,LOCATION_ONFIELD)
