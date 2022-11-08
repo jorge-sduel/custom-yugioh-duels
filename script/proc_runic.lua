@@ -306,7 +306,7 @@ function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	e1:SetRange(loc)
 	e1:SetCondition(Runic.spcon(min1,max1,min,max))
 	e1:SetTarget(Runic.sptg(min1,max1,min,max))
-	e1:SetOperation(Runic.spop)
+	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
 	--synchro custom
