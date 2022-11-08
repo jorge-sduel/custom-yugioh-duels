@@ -343,10 +343,9 @@ end
 function Runic.runfilter1(c)
 	return Runic.matfilter1(c,f1,sc,tp) and Duel.IsExistingMatchingCard(Runic.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,min,c)
 end
-function Auxiliary.RunicCondition(e,c,f1,min1,max1,f2,min,max)
-
+function Auxiliary.RunicCondition(e,c,min)
 	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1 and Duel.IsExistingMatchingCard(Runic.runfilter1,c:GetControler(),LOCATION_MZONE,0,min1,nil)
+	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1 and Duel.IsExistingMatchingCard(Runic.runfilter1,c:GetControler(),LOCATION_MZONE,0,min,nil)
 end
 function Auxiliary.RunicOperation(e,tp,eg,ep,ev,re,r,rp,c,f1,min1,max1,f2,min,max)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
