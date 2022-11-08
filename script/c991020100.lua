@@ -5,7 +5,7 @@ if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--rune procedure
 	c:EnableReviveLimit()
-	aux.AddRunicProcedure(c,nil,2,99,nil,1,1)
+	aux.AddRunicProcedure(c,nil,2,99,nil,1,1,LOCATION_HAND)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
 	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
