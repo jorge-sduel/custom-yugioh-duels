@@ -349,15 +349,15 @@ function Runic.spcon(min1,max1,min,max)
 				if c==nil then return true end
 				local tp=c:GetControler()
                 
-                if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Runic.matfilter1),tp,LOCATION_MZONE,0,1,nil,c,tp)
-                    or not Duel.IsExistingMatchingCard(Runic.matfilter2,tp,LOCATION_ONFIELD,0,min,nil,c,tp) then return false end
+                if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Runic.matfilter1),tp,LOCATION_MZONE,0,1,nil,f1,c,tp)
+                    or not Duel.IsExistingMatchingCard(Runic.matfilter2,tp,LOCATION_ONFIELD,0,min,nil,f2,c,tp) then return false end
                 
-                local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.matfilter1),tp,LOCATION_MZONE,0,nil,c,tp)
-                local mg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil,c,tp)
+                local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.matfilter1),tp,LOCATION_MZONE,0,nil,f1,c,tp)
+                local mg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
                 
                 if #mg1<=0 or #mg2<=0 then return false end
-                return mg1:IsExists(Runic.matfilter1,min1,nil,c,tp,mg2)
-                    and mg2:IsExists(Runic.matfilter2,min,nil,c,tp,mg1)
+                return mg1:IsExists(Runic.matfilter1,min1,nil,f1,c,tp,mg2)
+                    and mg2:IsExists(Runic.matfilter2,min,nil,f2,c,tp,mg1)
             end
 end
 function Runic.sptg(min1,max1,min,max)
