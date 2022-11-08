@@ -306,7 +306,7 @@ function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	e1:SetRange(loc)
 	e1:SetCondition(Runic.spcon(min1,max1,min,max))
 	--e1:SetTarget(Runic.sptg(min1,max1,min,max))
-	e1:SetOperation(Runic.Operation)
+	e1:SetOperation(Runic.spop)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
 	--synchro custom
@@ -383,7 +383,7 @@ function Runic.sptg(min1,max1,min,max)
 end
 function Runic.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g1=e:GetLabelObject()
-	if not g1 then return end
-	Duel.Remove(g1,POS_FACEUP,REASON_COST)
+	c:SetMaterial(g1)
+	Duel.SendtoGrave(g1,REASON_MATERIAL+REASON_RUNIC)
 	g1:DeleteGroup()
 end
