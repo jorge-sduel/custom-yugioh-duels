@@ -302,7 +302,6 @@ function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(loc)
 	e1:SetCondition(Auxiliary.RunicCondition(f1,min1,max1,f2,min,max))
-	e1:SetTarget(Auxiliary.RunicTarget(f1,min1,max1,f2,min,max))
 	e1:SetOperation(Auxiliary.RunicOperation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
@@ -335,78 +334,32 @@ function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	e10:SetCondition(Runic.Levelcon)
 	c:RegisterEffect(e10)
 end
-function Auxiliary.RunicCheck(tp,sg,sc,f1,min1,f2,min)
-	return sg:IsExists(Runic.Filter,min1,nil,f1,sc,tp,sg,LOCATION_MZONE)
-		and sg:IsExists(Runic.FilterEx,min,nil,f2,sc,tp,sg,LOCATION_ONFIELD)
+function Runic.matfilter1(c,f,sc,tp)
+	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp))
 end
-function Auxiliary.RunicRemove(c,g)
-	return g:IsContains(c)
+function Runic.matfilter2(c,f,sc,tp)
+	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
+end
+function Runic.runfilter1(c)
+	return Runic.matfilter1(c) and Duel.IsExistingMatchingCard(Runic.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,min,c)
 end
 function Auxiliary.RunicCondition(f1,min1,max1,f2,min,max)
 	return	function(e,c)
-				if c==nil then return true end
-				local tp=c:GetControler()
-                
-                if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,min1,nil,f1,c,tp)
-                    or not Duel.IsExistingMatchingCard(Runic.Filter,tp,LOCATION_ONFIELD,0,min,nil,f2,c,tp) then return false end
-                
-                local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
-                local mg2=Duel.GetMatchingGroup(Runic.FilterEx,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
-                
-                if #mg1<=0 or #mg2<=0 then return false end
-                return mg1:IsExists(Runic.Filter,min1,nil,f1,c,tp,mg2)
-                    and mg2:IsExists(Runic.FilterEx,min,nil,f2,c,tp,mg1)
-            end
+	if c==nil then return true end
+	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1 and Duel.IsExistingMatchingCard(Runic.runfilter1,c:GetControler(),LOCATION_MZONE,0,min1,nil)
 end
-function Auxiliary.RunicTarget(f1,min1,max1,f2,min,max)
-	    return function(e,tp,eg,ep,ev,re,r,rp,chk,c,must,mg1,mg2)
-                if not mg1 then
-                    mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
-                end
-                if not mg2 then
-                    mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
-                end
-				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,mg1+mg2,tp,c,mg1+mg2,REASON_RUNIC)
-				if must then mustg:Merge(must) end                
-				local sg=Group.CreateGroup()
-				local finish=false
-				local cancel=false
-				sg:Merge(mustg)
-				while #sg<(max+1) do
-					local cg=Group.CreateGroup()
-                    if not sg:IsExists(Runic.Filter,max1,nil,f1,c,tp,mg2,LOCATION_MZONE) then
-                        cg=mg1:Filter(Runic.Filter,nil,f1,c,tp,mg2,LOCATION_MZONE)
-                    elseif not sg:IsExists(Runic.FilterEx,max,nil,f2,c,tp,mg1,LOCATION_ONFIELD) then
-                        cg=mg2:Filter(Runic.FilterEx,nil,f2,c,tp,mg1,LOCATION_ONFIELD)
-                    end
-					cg:Remove(Auxiliary.RunicRemove,nil,sg)
-					if #cg==0 then break end
-					finish=#sg>=(min+1) and Auxiliary.RunicCheck(tp,sg,c,f1,f2,min)
-					cancel=Duel.GetCurrentChain()<=0 and #sg==0
-					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RNMATERIAL)
-					local tc=Group.SelectUnselect(cg,sg,tp,finish,cancel,min+1,max+1)
-					if not tc then break end
-					if not sg:IsContains(tc) then
-						sg:AddCard(tc)
-					else
-						sg:RemoveCard(tc)
-					end
-				end
-				
-				if #sg>0 then
-					sg:KeepAlive()
-					e:SetLabelObject(sg)
-					return true
-				else
-					return false
-				end
-            end
-end
-function Auxiliary.RunicOperation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
-	local g=e:GetLabelObject()
+function Auxiliary.RunicOperation(f1,min1,max1,f2,min,max)
+	    return function(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local g=Group.CreateGroup()
+	local mt1=Duel.SelectMatchingCard(tp,Runic.runfilter1,c:GetControler(),LOCATION_MZONE,0,min1,max2,nil,c)
+	local g2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil,c)
+	g:Merge(mt1)
+	g2:Sub(mt1)
+	local mt2=g2:Select(tp,min,max,nil)
+	g:Merge(mt2)
 	c:SetMaterial(g)
 	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNIC)
-	g:DeleteGroup()
 end
 function Runic.SpellTrap(c)
 	return c:IsSpellTrap()
