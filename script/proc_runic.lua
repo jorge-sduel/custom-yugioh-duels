@@ -408,3 +408,6 @@ function Auxiliary.RunicOperation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNIC)
 	g:DeleteGroup()
 end
+function Runic.SpellTrap(c)
+	return c.Is_Runic
+end
