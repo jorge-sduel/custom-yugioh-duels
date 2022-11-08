@@ -356,7 +356,7 @@ function Runic.spcon(f1,f2,min1,max1,min,max)
 	--else
 	--	return aux.SelectUnselectGroup(rg1,e,tp,min1,max1,aux.ChkfMMZ(1),0)
 	--		and aux.SelectUnselectGroup(rg2,e,tp,min,max,aux.ChkfMMZ(1),0)
-	end
+	--end
 	end
 end
 function Runic.sptg(min1,max1,min,max)
