@@ -334,14 +334,14 @@ function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	e10:SetCondition(Runic.Levelcon)
 	c:RegisterEffect(e10)
 end
-function Runic.matfilter1(c,f,sc,tp)
+function Runic.matfilter1(c,f1)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp))
 end
-function Runic.matfilter2(c,f,sc,tp)
+function Runic.matfilter2(c,f2)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
 end
 function Runic.runfilter1(c)
-	return Runic.matfilter1(c,f,sc,tp) and Duel.IsExistingMatchingCard(Runic.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,min,nil,f2,c,tp))
+	return Runic.matfilter1(c,f1) and Duel.IsExistingMatchingCard(Runic.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,min,nil,f2,c,tp)
 end
 function Auxiliary.RunicCondition(f1,min1,max1,f2,min,max)
 	return	function(e,c)
