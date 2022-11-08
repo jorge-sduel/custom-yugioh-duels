@@ -358,6 +358,7 @@ function Runic.spcon(min1,max1,min,max)
 			and aux.SelectUnselectGroup(rg2,e,tp,min,max,aux.ChkfMMZ(1),0)
 	end
 end
+end
 function Runic.sptg(min1,max1,min,max)
 	return function(e,tp,eg,ep,ev,re,r,rp,c,min1,max1,min,max)
 	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
