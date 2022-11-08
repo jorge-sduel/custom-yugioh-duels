@@ -368,12 +368,12 @@ function Runic.sptg(min1,max1,min,max)
 		g1=aux.SelectUnselectGroup(rg1,e,tp,min+min1,max+max1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 	else
 		g1=aux.SelectUnselectGroup(rg1,e,tp,min1,max1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
-		if #g1>=1 then
+		if #g1>=max1 then
 		local g2=aux.SelectUnselectGroup(rg2,e,tp,min,max,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
 		g1:Merge(g2)
 		end
 	end
-	if #g1>2 then
+	if #g1>max1 then
 		g1:KeepAlive()
 		e:SetLabelObject(g1)
 		return true
