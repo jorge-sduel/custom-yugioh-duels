@@ -352,10 +352,10 @@ function Runic.spcon(f1,f2,min1,max1,min,max)
 	local rg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-2 then return false end
 	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		return aux.SelectUnselectGroup(rg1,e,tp,4,4,aux.ChkfMMZ(1),0)
+		return aux.SelectUnselectGroup(rg1,e,tp,min1+min,max+max1,aux.ChkfMMZ(1),0)
 	else
-		return aux.SelectUnselectGroup(rg1,e,tp,2,2,aux.ChkfMMZ(1),0)
-			and aux.SelectUnselectGroup(rg2,e,tp,2,2,aux.ChkfMMZ(1),0)
+		return aux.SelectUnselectGroup(rg1,e,tp,min1,max1,aux.ChkfMMZ(1),0)
+			and aux.SelectUnselectGroup(rg2,e,tp,min,max,aux.ChkfMMZ(1),0)
 	end
 	end
 end
