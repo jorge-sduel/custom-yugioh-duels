@@ -354,7 +354,7 @@ function Runic.spcon(f1,f2,min1,max1,min,max)
  then return false end
                 
                 local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.matfilter1),tp,LOCATION_MZONE,0,nil,f1,c,tp)
-                --local mg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
+                local mg2=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_ONFIELD,0,nil,f1,c,tp)
                 
                 if #mg1<=0 or #mg2<=0 then return false end
                 return mg1:IsExists(Runic.matfilter2,min1,nil,f1,c,tp,mg2)
