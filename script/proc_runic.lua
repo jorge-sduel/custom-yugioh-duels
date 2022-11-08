@@ -359,7 +359,8 @@ function Auxiliary.RunicCondition(f1,min1,max1,f2,min,max)
             end
 end
 function Auxiliary.RunicTarget(f1,min1,max1,f2,min,max)
-	    if not mg1 then
+	    return function(e,tp,eg,ep,ev,re,r,rp,chk,c,must,mg1,mg2)
+                if not mg1 then
                     mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.Filter),tp,LOCATION_MZONE,0,nil,f1,c,tp)
                 end
                 if not mg2 then
