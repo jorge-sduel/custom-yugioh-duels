@@ -348,6 +348,7 @@ function Auxiliary.RunicCondition(f1,min1,max1,f2,min,max)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1 and Duel.IsExistingMatchingCard(Runic.runfilter1,c:GetControler(),LOCATION_MZONE,0,min1,nil)
 end
+end
 function Auxiliary.RunicOperation(f1,min1,max1,f2,min,max)
 	    return function(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
@@ -360,6 +361,7 @@ function Auxiliary.RunicOperation(f1,min1,max1,f2,min,max)
 	g:Merge(mt2)
 	c:SetMaterial(g)
 	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNIC)
+end
 end
 function Runic.SpellTrap(c)
 	return c:IsSpellTrap()
