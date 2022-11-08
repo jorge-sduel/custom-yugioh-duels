@@ -293,6 +293,9 @@ function Runic.synlimit(e,c)
 	if not c then return false end
 	return not c:IsHasEffect(999381001)
 end
+function Runic.SpellTrap(c)
+	return c:IsSpellTrap()
+end
 --Runic Summon 2 or more monsters
 function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	local e1=Effect.CreateEffect(c)
@@ -301,8 +304,9 @@ function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(loc)
-	e1:SetCondition(Runic.runcon(e,c))
-	e1:SetOperation(Runic.runop(e,tp,eg,ep,ev,re,r,rp,c,min1,max1,min,max))
+	e1:SetCondition(Runic.spcon)
+	e1:SetTarget(Runic.sptg)
+	e1:SetOperation(Runic.spop)
     e1:SetValue(SUMMON_TYPE_RUNIC)
 	c:RegisterEffect(e1)
 	--synchro custom
@@ -340,25 +344,42 @@ end
 function Runic.matfilter2(c,f2,sc,tp)
 	return (not f2 or f2(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
 end
-function Runic.runfilter1(c)
-	return Runic.matfilter1(c) and Duel.IsExistingMatchingCard(Runic.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,min,c)
-end
-function Runic.runcon(e,c)
+function Runic.spcon(e,c)
 	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1 and Duel.IsExistingMatchingCard(Runic.runfilter1,c:GetControler(),LOCATION_MZONE,0,2,nil)
+	local tp=c:GetControler()
+	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
+	local rg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-2 then return false end
+	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
+		return aux.SelectUnselectGroup(rg1,e,tp,3,3,aux.ChkfMMZ(1),0)
+	else
+		return aux.SelectUnselectGroup(rg1,e,tp,2,2,aux.ChkfMMZ(1),0)
+			and aux.SelectUnselectGroup(rg2,e,tp,1,1,aux.ChkfMMZ(1),0)
+	end
 end
-function Runic.runop(e,tp,eg,ep,ev,re,r,rp,c)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Group.CreateGroup()
-	local mt1=Duel.SelectMatchingCard(tp,Runic.runfilter1,c:GetControler(),LOCATION_MZONE,0,2,2,nil,c)
-	local g2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil,c)
-	g:Merge(mt1)
-	g2:Sub(mt1)
-	local mt2=g2:Select(tp,2,2,nil)
-	g:Merge(mt2)
-	c:SetMaterial(g)
-	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNIC)
+function Runic.sptg(e,tp,eg,ep,ev,re,r,rp,c)
+	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
+	local rg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil)
+	local g1
+	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
+		g1=aux.SelectUnselectGroup(rg1,e,tp,3,3,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+	else
+		g1=aux.SelectUnselectGroup(rg1,e,tp,2,2,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+		if #g1>=1 then
+		local g2=aux.SelectUnselectGroup(rg2,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+		g1:Merge(g2)
+		end
+	end
+	if #g1>2 then
+		g1:KeepAlive()
+		e:SetLabelObject(g1)
+		return true
+	end
+	return false
 end
-function Runic.SpellTrap(c)
-	return c:IsSpellTrap()
+function Runic.spop(e,tp,eg,ep,ev,re,r,rp,c)
+	local g1=e:GetLabelObject()
+	if not g1 then return end
+	Duel.Remove(g1,POS_FACEUP,REASON_COST)
+	g1:DeleteGroup()
 end
