@@ -350,7 +350,8 @@ function Runic.spcon(f1,f2,min1,max1,min,max)
 				local tp=c:GetControler()
                 
                 if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Runic.matfilter1),tp,LOCATION_MZONE,0,1,nil,f1,c,tp)
-                    --or not Duel.IsExistingMatchingCard(Runic.matfilter1,tp,LOCATION_ONFIELD,0,min,nil,f2,c,tp) then return false end
+                    --or not Duel.IsExistingMatchingCard(Runic.matfilter1,tp,LOCATION_ONFIELD,0,min,nil,f2,c,tp)
+ then return false end
                 
                 local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.matfilter1),tp,LOCATION_MZONE,0,nil,f1,c,tp)
                 local mg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
