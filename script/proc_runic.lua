@@ -379,6 +379,7 @@ function Runic.sptg(min1,max1,min,max)
 	end
 	return false
 	end
+	end
 end
 function Runic.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g1=e:GetLabelObject()
