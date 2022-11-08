@@ -409,5 +409,5 @@ function Auxiliary.RunicOperation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 	g:DeleteGroup()
 end
 function Runic.SpellTrap(c)
-	return c.Is_Runic
+	return c:IsSpellTrap()
 end
