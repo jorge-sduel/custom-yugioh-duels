@@ -348,18 +348,15 @@ function Runic.spcon(f1,f2,min1,max1,min,max)
 	return	function(e,c)
 				if c==nil then return true end
 				local tp=c:GetControler()
-                
-                if not Duel.IsExistingMatchingCard(aux.FaceupFilter(Runic.matfilter1),tp,LOCATION_MZONE,0,1,nil,f1,c,tp)
-                    --or not Duel.IsExistingMatchingCard(Runic.matfilter1,tp,LOCATION_ONFIELD,0,min,nil,f2,c,tp)
- then return false end
-                
-                local mg1=Duel.GetMatchingGroup(aux.FaceupFilter(Runic.matfilter1),tp,LOCATION_MZONE,0,nil,f1,c,tp)
-                local mg2=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_ONFIELD,0,nil,f1,c,tp)
-                
-                if #mg1<=0 or #mg2<=0 then return false end
-                return mg1:IsExists(Runic.matfilter2,min1,nil,f1,c,tp,mg2)
-                    and mg2:IsExists(Runic.matfilter2,min,nil,f2,c,tp,mg1)
-            end
+	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
+	local rg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-2 then return false end
+	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
+		return aux.SelectUnselectGroup(rg1,e,tp,4,4,aux.ChkfMMZ(1),0)
+	else
+		return aux.SelectUnselectGroup(rg1,e,tp,2,2,aux.ChkfMMZ(1),0)
+			and aux.SelectUnselectGroup(rg2,e,tp,2,2,aux.ChkfMMZ(1),0)
+	end
 end
 function Runic.sptg(min1,max1,min,max)
 	return function(e,tp,eg,ep,ev,re,r,rp,c,min1,max1,min,max)
