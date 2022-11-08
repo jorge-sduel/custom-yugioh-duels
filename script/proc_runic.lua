@@ -348,12 +348,12 @@ function Runic.spcon(f1,f2,min1,max1,min,max)
 	return	function(e,c)
 				if c==nil then return true end
 				local tp=c:GetControler()
-	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
-	local rg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil)
+	local rg1=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_MZONE,0,nil)
+	local rg2=Duel.GetMatchingGroup(Runic.FilterEx,tp,LOCATION_ONFIELD,0,nil)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-2 then return false end
                 if #rg1<=0 or #rg2<=0 then return false end
-                return rg1:IsExists(Runic.matfilter1,min1,nil,f1,c,tp)
-                    and rg2:IsExists(Runic.matfilter2,min,nil,f2,c,tp)
+                return rg1:IsExists(Runic.Filter,min1,nil,f1,c,tp)
+                    and rg2:IsExists(Runic.FilterEx,min,nil,f2,c,tp)
 	--if Duel.IsPlayerAffectedByEffect(tp,69832741) then
 	--	return aux.SelectUnselectGroup(rg1,e,tp,min1+min,max+max1,aux.ChkfMMZ(1),0)
 	--else
