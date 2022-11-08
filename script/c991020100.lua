@@ -1,7 +1,7 @@
 --Raviel Lord of Vengeful Spirits
+local s,id=GetID()
 s.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
-local s,id=GetID()
 function s.initial_effect(c)
 	--rune procedure
 	c:EnableReviveLimit()
