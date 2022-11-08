@@ -297,18 +297,7 @@ function Runic.SpellTrap(c)
 	return c:IsSpellTrap()
 end
 --Runic Summon 2 or more monsters
-function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetDescription(1182)
-	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	e1:SetRange(loc)
-	e1:SetCondition(Runic.spcon(min1,max1,min,max))
-	--e1:SetTarget(Runic.sptg(min1,max1,min,max))
-	e1:SetOperation(Runic.spop)
-    e1:SetValue(SUMMON_TYPE_RUNIC)
-	c:RegisterEffect(e1)
+function Auxiliary.AddRunicState(c)
 	--synchro custom
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -337,47 +326,4 @@ function Auxiliary.AddRunicProcedure(c,f1,min1,max1,f2,min,max,loc)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
 	e10:SetCondition(Runic.Levelcon)
 	c:RegisterEffect(e10)
-end
-function Runic.matfilter1(c,f,sc,tp)
-	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp))
-end
-function Runic.runfilter1(c) 
-	return Duel.IsExistingMatchingCard(Runic.FilterEx,c:GetControler(),LOCATION_ONFIELD,0,min,c)
-end
-function Runic.matfilter2(c,f,sc,tp)
-	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
-end
-function Runic.spcon(f1,f2,min1,max1,min,max)
-	return	function(e,c)
-	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-min1 and Duel.IsExistingMatchingCard(Runic.runfilter1,c:GetControler(),LOCATION_MZONE,0,min1,nil)
-end
-end
-function Runic.sptg(min1,max1,min,max)
-	return function(e,tp,eg,ep,ev,re,r,rp,c,min1,max1,min,max)
-	local rg1=Duel.GetMatchingGroup(Runic.matfilter1,tp,LOCATION_MZONE,0,nil)
-	local rg2=Duel.GetMatchingGroup(Runic.matfilter2,tp,LOCATION_ONFIELD,0,nil)
-	local g1
-	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
-		g1=aux.SelectUnselectGroup(rg1,e,tp,min+min1,max+max1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
-	else
-		g1=aux.SelectUnselectGroup(rg1,e,tp,min1,max1,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
-		if #g1>=min1 then
-		local g2=aux.SelectUnselectGroup(rg2,e,tp,min,max,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
-		g1:Merge(g2)
-		end
-	end
-	if #g1>max1 then
-		g1:KeepAlive()
-		e:SetLabelObject(g1)
-		return true
-	end
-	return false
-	end
-end
-function Runic.spop(e,tp,eg,ep,ev,re,r,rp,c)
-	local g1=e:GetLabelObject()
-	c:SetMaterial(g1)
-	Duel.SendtoGrave(g1,REASON_MATERIAL+REASON_RUNIC)
-	g1:DeleteGroup()
 end
