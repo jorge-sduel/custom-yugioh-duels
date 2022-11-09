@@ -47,7 +47,7 @@ function s.runfilter1(c)
 end
 function s.runcon(e,c)
 	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1 and Duel.IsExistingMatchingCard(s.runfilter1,c:GetControler(),LOCATION_MZONE,0,2,nil)
+	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1 and Duel.IsExistingMatchingCard(s.runfilter1,c:GetControler(),LOCATION_ONFIELD,0,2,nil)
 end
 function s.runop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
