@@ -35,12 +35,9 @@ function c952510934.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,sg)
 	end
 end
-function c952510934.drfil(c,tp)
-	local tg=eg:GetFirst()
-	return #eg==1 and tg:IsControler(tp) and tg:GetSummonType()==SUMMON_TYPE_SYNCHRO
-end
+
 function c952510934.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(c952510934.drfil,1,nil,tp)
+	return eg:IsExists(Card.IsSummonType,1,nil,SUMMON_TYPE_RUNIC) and tp==eg:GetFirst():GetSummonPlayer()
 end
 function c952510934.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
