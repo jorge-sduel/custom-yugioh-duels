@@ -149,7 +149,7 @@ function s.splimit(e,c)
 end
 function s.atkcon(e)
 	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
-		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil
+		and e:GetHandler()==Duel.GetAttacker()
 end
 function s.atkval(e,c)
 	return c:GetAttack()*2
