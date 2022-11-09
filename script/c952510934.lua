@@ -36,7 +36,8 @@ function c952510934.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c952510934.drfil(c,tp)
-	return c:IsControler(tp) and c:GetSummonType()==SUMMON_TYPE_RUNIC
+	local tg=eg:GetFirst()
+	return #eg==1 and tg:IsControler(tp) and tg:GetSummonType()==SUMMON_TYPE_SYNCHRO
 end
 function c952510934.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c952510934.drfil,1,nil,tp)
