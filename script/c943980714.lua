@@ -18,15 +18,17 @@ end
 function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
  if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
-	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil)
-	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC)
+	--local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil)
+		e:GetHandler():CancelToGrave()
 end
 function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
-		e:GetHandler():CancelToGrave()
+	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC)
+	if tc:IsLocation(LOCATION_MZONE) then
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT) end
 	end
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+	--Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 end
