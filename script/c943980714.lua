@@ -24,6 +24,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
-	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC)
+		c:CancelToGrave()
+	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC,e:GetHandler())
 	end
 end
