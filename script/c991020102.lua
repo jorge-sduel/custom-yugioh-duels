@@ -1,16 +1,11 @@
 --Uria Lord of Vengeful Hellfire
 local s,id=GetID()
+s.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--rune procedure
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,nil,1,1,aux.FilterBoolFunction(Card.IsType,TYPE_TRAP),2,99)
-	--cannot special summon
-	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e1:SetValue(aux.runlimit)
-	c:RegisterEffect(e1)
+	aux.AddRunicState(c)
 	--atkup
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
