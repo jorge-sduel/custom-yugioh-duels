@@ -43,7 +43,7 @@ function s.matfilter2(c)
 	return c:IsType(TYPE_SPELL)
 end
 function s.runfilter1(c)
-	return s.matfilter1(c) and Duel.IsExistingMatchingCard(s.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,1,c)
+	return s.matfilter2(c) and Duel.IsExistingMatchingCard(s.matfilter1,c:GetControler(),LOCATION_MZONE,0,1,c)
 end
 function s.runcon(e,c)
 	if c==nil then return true end
