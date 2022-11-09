@@ -27,5 +27,6 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 		e:GetHandler():CancelToGrave()
 	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC)
 	end
+		tc:CompleteProcedure()
 	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 end
