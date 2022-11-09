@@ -116,6 +116,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	for i=1,ft do
 		local token=Duel.CreateToken(tp,69890968)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_OWNER_RELATE)
+		e2:SetCode(EFFECT_SET_ATTACK)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e2:SetValue(token:GetAttack()*ft)
+		tc:RegisterEffect(e2)
 	end
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
