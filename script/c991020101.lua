@@ -52,7 +52,7 @@ end
 function s.runop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Group.CreateGroup()
-	local g2=Duel.GetMatchingGroup(s.runfilter1,tp,LOCATION_MZONE,0,nil,c)
+	local g2=Duel.GetMatchingGroup(s.matfilter1,tp,LOCATION_MZONE,0,nil,c)
 	local mt1=Duel.SelectMatchingCard(tp,s.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,1,99,nil,c)
 	g:Merge(mt1)
 	g2:Sub(mt1)
