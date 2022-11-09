@@ -53,7 +53,7 @@ end
 function s.matfilter2(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
-function c961398231.runfilter1(c)
+function s.runfilter1(c)
 	return s.matfilter1(c) and Duel.IsExistingMatchingCard(s.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,1,c)
 end
 function s.runcon(e,c)
