@@ -46,6 +46,15 @@ function s.initial_effect(c)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
+	--atk up
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_SET_ATTACK)
+	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCondition(s.atkcon)
+	e4:SetValue(s.atkval)
+	c:RegisterEffect(e4)
 end
 function s.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
@@ -137,4 +146,11 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.splimit(e,c)
 	return c:IsLocation(LOCATION_EXTRA)
+end
+function s.atkcon(e)
+	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
+		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil
+end
+function s.atkval(e,c)
+	return c:GetAttack()*2
 end
