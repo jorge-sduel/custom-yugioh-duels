@@ -25,6 +25,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	if tc then
 		e:GetHandler():CancelToGrave()
-	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_EVOLUTE,e:GetHandler(),e:GetHandler())
+	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC)
+	Duel.SendtoGrave(e:GetHandler())
 	end
 end
