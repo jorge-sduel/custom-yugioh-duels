@@ -25,6 +25,6 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	if tc then
 		e:GetHandler():CancelToGrave()
-	   Duel.RunicSummon(c,tp,tc,e:GetHandler())
+	   Duel.RunicSummon(tc,tp,e:GetHandler())
 	end
 end
