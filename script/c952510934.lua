@@ -1,4 +1,5 @@
 --Runed Recovery
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c952510934.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -22,7 +23,7 @@ function c952510934.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c952510934.filter(c)
-	return c:IsType(TYPE_RUNE) and c:IsAbleToHand()
+	return c.Is_Runic and c:IsAbleToHand()
 end
 function c952510934.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
@@ -35,7 +36,7 @@ function c952510934.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c952510934.drfil(c,tp)
-	return c:IsControler(tp) and c:GetSummonType()==SUMMON_TYPE_RUNE
+	return c:IsControler(tp) and c:GetSummonType()==SUMMON_TYPE_RUNIC
 end
 function c952510934.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c952510934.drfil,1,nil,tp)
