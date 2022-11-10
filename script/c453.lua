@@ -24,6 +24,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 	e1:SetLabelObject(e2)
 end
+function s.filter(c)
+	return c:IsFaceup() and c:IsSetCard(0x52)
+end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.filter(chkc) end
 	if chk==0 then return e:IsHasType(EFFECT_TYPE_ACTIVATE) 
