@@ -37,9 +37,9 @@ function c905312206.activate(e,tp,eg,ep,ev,re,r,rp)
 	if sc then
 		local mg=Group.FromCards(tc,e:GetHandler())
 		sc:SetMaterial(mg)
-		Duel.SendtoGrave(mg,REASON_EFFECT+REASON_MATERIAL+REASON_RUNE)
+		Duel.SendtoGrave(mg,REASON_EFFECT+REASON_MATERIAL+REASON_RUNIC)
 		Duel.BreakEffect()
-		if Duel.SpecialSummonStep(sc,SUMMON_TYPE_RUNE,tp,tp,false,true,POS_FACEUP) then
+		if Duel.SpecialSummonStep(sc,SUMMON_TYPE_RUNIC,tp,tp,false,true,POS_FACEUP) then
 			--cannot be battle target
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
