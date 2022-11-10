@@ -37,9 +37,6 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	if tc then
 		e:GetHandler():CancelToGrave()
 	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC)
-	if tc:IsLocation(LOCATION_MZONE) then
-	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT) end
-	--Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 	end
 end
 function s.repfilter(c,tp)
