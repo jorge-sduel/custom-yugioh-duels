@@ -31,6 +31,18 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_ONFIELD)
 	e3:SetValue(95515060)
 	c:RegisterEffect(e3)
+	--
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_EQUIP)
+	e4:SetCode(EFFECT_ONLY_BE_ATTACKED)
+	c:RegisterEffect(e4)
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_FIELD)
+	e5:SetCode(EFFECT_ONLY_ATTACK_MONSTER)
+	e5:SetRange(LOCATION_SZONE)
+	e5:SetTargetRange(0,LOCATION_MZONE)
+	e5:SetCondition(s.atkcon)
+	c:RegisterEffect(e5)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x52)
@@ -73,4 +85,7 @@ function s.efilter(e,te)
 	elseif e:GetLabel()==1 then g=TYPE_SPELL
 	else g=TYPE_TRAP end
 	return te:IsActiveType(g) and e:GetHandlerPlayer()~=te:GetHandlerPlayer()
+end
+function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():GetEquipTarget()~=nil
 end
