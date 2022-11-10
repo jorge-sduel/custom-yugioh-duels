@@ -16,7 +16,7 @@ function c905312206.filter1(c,e,tp)
 		and Duel.IsExistingMatchingCard(c905312206.filter2,tp,LOCATION_DECK,0,1,nil,e,tp,c,c:GetRank(),c:GetRace())
 end
 function c905312206.filter2(c,e,tp,mc,lv,rc)
-	return (c:GetRank()>lv and c:GetRank()<=lv+3) and c.Is_Runic and c:IsRace(rc) and c:IsSetCard(0xfe3)
+	return (c:GetRank()>lv and c:GetRank()<=lv+3) and c.Is_Runic and c:IsRace(rc)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNIC,tp,false,true)
 end
 function c905312206.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
