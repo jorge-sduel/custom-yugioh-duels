@@ -11,6 +11,16 @@ function s.initial_effect(c)
 	e1:SetTarget(s.xyztg)
 	e1:SetOperation(s.xyzop)
 	c:RegisterEffect(e1)
+	--replace
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+	e3:SetCode(EFFECT_DESTROY_REPLACE)
+	e3:SetRange(LOCATION_SZONE)
+	e3:SetCountLimit(1)
+	e3:SetTarget(s.reptg)
+	e3:SetValue(s.repval)
+	e3:SetOperation(s.repop)
+	c:RegisterEffect(e3)
 end
 function s.filter(c,e,tp)
 	return c.Is_Runic and c:IsSpecialSummonable()
@@ -31,4 +41,18 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT) end
 	--Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 	end
+end
+function s.repfilter(c,tp)
+	return c:IsFaceup() and c.Is_Runic and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) 
+		and not c:IsReason(REASON_REPLACE)
+end
+function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return eg:IsExists(s.repfilter,1,nil,tp) end
+	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
+end
+function s.repval(e,c)
+	return s.repfilter(c,e:GetHandlerPlayer())
+end
+function s.repop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 end
