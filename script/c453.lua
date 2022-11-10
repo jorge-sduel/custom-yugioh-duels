@@ -57,7 +57,7 @@ end
 function s.eqlimit(e,c)
 	return c:GetControler()==e:GetHandlerPlayer() or e:GetHandler():GetEquipTarget()==c
 end
-function s.value(e,te)
+function s.efilter(e,te)
 	if e:GetLabel()==0 then g=IsMonster()
 	elseif e:GetLabel()==1 then g=IsSpell()
 	else g=IsTrap end
