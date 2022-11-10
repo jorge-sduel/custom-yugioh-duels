@@ -1,5 +1,6 @@
---silver web
+--Galaxy-Eyes Neutrino Dragon 
 local s,id=GetID()
+s.Is_Neutrino=true
 function s.initial_effect(c)
 	--special summon
 	local e1=Effect.CreateEffect(c)
