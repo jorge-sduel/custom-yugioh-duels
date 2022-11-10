@@ -1,4 +1,5 @@
 --Ever-Runic Incantation
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c905312206.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -11,12 +12,12 @@ function c905312206.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c905312206.filter1(c,e,tp)
-	return c:IsFaceup() and c:IsType(TYPE_RUNE)
-		and Duel.IsExistingMatchingCard(c905312206.filter2,tp,LOCATION_DECK,0,1,nil,e,tp,c,c:GetLevel(),c:GetRace())
+	return c:IsFaceup() and c.Is_Runic
+		and Duel.IsExistingMatchingCard(c905312206.filter2,tp,LOCATION_DECK,0,1,nil,e,tp,c,c:GetRank(),c:GetRace())
 end
 function c905312206.filter2(c,e,tp,mc,lv,rc)
-	return (c:GetLevel()>lv and c:GetLevel()<=lv+3) and c:IsType(TYPE_RUNE) and c:IsRace(rc) and c:IsSetCard(0xfe3)
-		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNE,tp,false,true)
+	return (c:GetRank()>lv and c:GetRank()<=lv+3) and c.Is_Runic and c:IsRace(rc) and c:IsSetCard(0xfe3)
+		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNIC,tp,false,true)
 end
 function c905312206.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and c905312206.filter1(chkc,e,tp) end
@@ -31,7 +32,7 @@ function c905312206.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsFacedown() or not tc:IsRelateToEffect(e) or tc:IsImmuneToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c905312206.filter2,tp,LOCATION_DECK,0,1,1,nil,e,tp,tc,tc:GetLevel(),tc:GetRace())
+	local g=Duel.SelectMatchingCard(tp,c905312206.filter2,tp,LOCATION_DECK,0,1,1,nil,e,tp,tc,tc:GetRank(),tc:GetRace())
 	local sc=g:GetFirst()
 	if sc then
 		local mg=Group.FromCards(tc,e:GetHandler())
