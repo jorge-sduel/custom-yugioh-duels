@@ -101,5 +101,5 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.tfilter(e,c)
-	return not e:GetHandler():GetEquipTarget()~=nil
+	return not e:GetHandler():GetEquipTarget()
 end
