@@ -54,7 +54,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 		and re:IsActiveType(TYPE_SPELL) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(ev) and rp~=tp
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x52) and not c:IsCode(id) and c:IsAbleToHand()
+	return c:IsSetCard(0x52) and c:IsAbleToHand() and not c:IsCode(id)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
