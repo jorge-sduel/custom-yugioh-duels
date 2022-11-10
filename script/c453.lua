@@ -61,5 +61,5 @@ function s.efilter(e,te)
 	if e:GetLabel()==0 then g=TYPE_MONSTER
 	elseif e:GetLabel()==1 then g=TYPE_SPELL
 	else g=TYPE_TRAP end
-	return te:IsActiveType(g)
+	return te:IsActiveType(g) and not te:IsCode(id)
 end
