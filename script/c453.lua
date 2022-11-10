@@ -43,6 +43,16 @@ function s.initial_effect(c)
 	e5:SetTargetRange(0,LOCATION_MZONE)
 	e5:SetCondition(s.atkcon)
 	c:RegisterEffect(e5)
+	--cannot be target
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_FIELD)
+	e6:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
+	e6:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
+	e6:SetRange(LOCATION_SZONE)
+	e6:SetTargetRange(LOCATION_MZONE,0)
+	e6:SetTarget(s.tfilter)
+	e6:SetValue(aux.tgoval)
+	c:RegisterEffect(e6)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x52)
@@ -88,4 +98,8 @@ function s.efilter(e,te)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetEquipTarget()~=nil
+end
+
+function s.tfilter(e,c)
+	return not e:GetHandler():GetEquipTarget()~=nil
 end
