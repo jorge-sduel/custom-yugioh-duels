@@ -33,7 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(eg,REASON_EFFECT)
 		if Duel.GetMatchingGroupCount(Card.IsMonster,tp,LOCATION_GRAVE,0,nil)==0 then
 			--Cannot be destroyed by battle if 3+ spells in GY
-			Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
+			Duel.Remove(eg,POS_FACEUP,REASON_EFFECT)
 end
 	end
 end
