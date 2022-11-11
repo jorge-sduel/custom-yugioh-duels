@@ -28,8 +28,7 @@ s.Is_Neutrino=true
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
 end
-s.material_setcode=0x3b
-function s.mfilter(c,fc,sumtype,tp)
+function s.matfilter(c,fc,sumtype,tp)
 	return (c.Is_Neutrino or c:IsRace(RACE_DRAGON,fc,sumtype,tp)) and c:IsLevelAbove(8)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
