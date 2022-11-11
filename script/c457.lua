@@ -27,6 +27,11 @@ s.Is_Neutrino=true
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_ATTACK_ALL)
+	e3:SetValue(1)
+	c:RegisterEffect(e3)
 end
 function s.matfilter(c,fc,sumtype,tp)
 	return (c.Is_Neutrino or c:IsRace(RACE_DRAGON,fc,sumtype,tp)) and c:IsLevelAbove(8)
