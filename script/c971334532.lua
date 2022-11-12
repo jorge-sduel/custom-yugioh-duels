@@ -34,7 +34,7 @@ function c971334532.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0xff0) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP))
 end
 function c971334532.actcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(c971334532.cfilter,tp,LOCATION_ONFIELD,0,2,nil)
+	return Duel.IsExistingMatchingCard(c971334532.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,2,nil)
 end
 function c971334532.dmfilter(c,tp)
 	return c:IsFaceup() and c:IsControler(tp) and c:IsLocation(LOCATION_EXTRA) and c:IsType(TYPE_PENDULUM)
