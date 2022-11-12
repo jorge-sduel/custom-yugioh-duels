@@ -1,7 +1,8 @@
 --Inscriber Denimoji
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c952342321.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(83303851,0))
@@ -11,7 +12,9 @@ function c952342321.initial_effect(c)
 	e1:SetCondition(c952342321.spcon)
 	e1:SetTarget(c952342321.sptg)
 	e1:SetOperation(c952342321.spop)
-	c:RegisterEffect(e1)	--set
+	c:RegisterEffect(e1)
+
+	--set
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
