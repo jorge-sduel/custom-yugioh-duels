@@ -57,7 +57,7 @@ end
 function c971334532.discon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNE and rc:IsCode(918906423)
+	return r==REASON_SPSUMMON and rc:IsCode(918906423)
 end
 function c971334532.disop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
