@@ -1,10 +1,12 @@
 --Inscriber Yamimoji
+c924363413.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c924363413.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),1,1,aux.FilterBoolFunction(Card.IsSetCard,0xff0),1,1,LOCATION_EXTRA)
+	aux.AddRunicProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),c924363413.matfilter,1,1,LOCATION_EXTRA+LOCATION_HAND)
 	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(924363413,0))
@@ -26,6 +28,9 @@ function c924363413.initial_effect(c)
 	e2:SetTarget(c924363413.rmtg)
 	e2:SetOperation(c924363413.rmop)
 	c:RegisterEffect(e2)
+end
+function c924363413.matfilter(c)
+	return c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)
 end
 function c924363413.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable() end
