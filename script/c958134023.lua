@@ -48,7 +48,7 @@ end
 function c958134023.discon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNE and rc:IsCode(915234232)
+	return r==REASON_SPSUMMON and rc:IsCode(915234232)
 end
 function c958134023.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
