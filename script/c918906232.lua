@@ -1,10 +1,12 @@
 --Inscriber Hikarimoji
+c918906232.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c918906232.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),1,1,aux.FilterBoolFunction(Card.IsSetCard,0xff0),1,1,LOCATION_EXTRA)
+	aux.AddRunicProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),c918906232.matfilter,1,1,LOCATION_EXTRA+LOCATION_HAND)
 	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(918906232,0))
