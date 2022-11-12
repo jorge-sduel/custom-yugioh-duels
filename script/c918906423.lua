@@ -26,8 +26,8 @@ function c918906423.initial_effect(c)
 	e4:SetOperation(c918906423.damop)
 	c:RegisterEffect(e4)
 end
-function c918906423.tmatfilter(c)
-	return c:IsSetCard(0xff0) and c:IsType(TYPE_SPELL+TYPE_TRAP)
+function c918906423.matfilter(c)
+	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function c918906423.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable() end
