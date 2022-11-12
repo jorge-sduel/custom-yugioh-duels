@@ -33,8 +33,8 @@ end
 function c995816343.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0xff0) and c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
-function c995816343.actcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(c995816343.cfilter,tp,LOCATION_ONFIELD,0,2,nil)
+function c995816343.actcon(e)
+	return Duel.IsExistingMatchingCard(c995816343.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,2,nil)
 end
 function c995816343.atktarget(e,c)
 	return c:GetSummonLocation()==LOCATION_EXTRA
