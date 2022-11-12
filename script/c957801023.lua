@@ -1,10 +1,12 @@
 --Inscriber Kazemoji
+c957801023.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c957801023.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),1,1,aux.FilterBoolFunction(Card.IsSetCard,0xff0),1,1,LOCATION_EXTRA)
+	aux.AddRunicProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),c957801023.matfilter,1,1,LOCATION_EXTRA)
 	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(957801023,0))
@@ -26,6 +28,9 @@ function c957801023.initial_effect(c)
 	e2:SetTarget(c957801023.destg)
 	e2:SetOperation(c957801023.desop)
 	c:RegisterEffect(e2)
+end
+function c957801023.matfilter(c)
+	return c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)
 end
 function c957801023.runfilter1(c)
 	return c957801023.matfilter1(c) and Duel.IsExistingMatchingCard(c957801023.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,2,c)
