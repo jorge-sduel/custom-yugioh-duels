@@ -1,10 +1,12 @@
 --Inscriber Tsuchimoji
+c968123023.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c968123023.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),1,1,aux.FilterBoolFunction(Card.IsSetCard,0xff0),1,1,LOCATION_EXTRA)
+	aux.AddRunicProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),c968123023.matfilter,1,1,LOCATION_EXTRA+LOCATION_HAND)
 	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(968123023,0))
@@ -22,6 +24,9 @@ function c968123023.initial_effect(c)
 	e2:SetCode(EFFECT_ATTACK_ALL)
 	e2:SetValue(c968123023.atkfilter)
 	c:RegisterEffect(e2)
+end
+function c968123023.matfilter(c)
+	return c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)
 end
 function c968123023.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable() end
