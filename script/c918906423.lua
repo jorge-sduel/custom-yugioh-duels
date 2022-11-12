@@ -1,10 +1,12 @@
 --Inscriber Homoji
+c918906423.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c918906423.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c,c918906423.matfilter1,1,1)
+	Pendulum.AddProcedure(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),1,1,aux.FilterBoolFunction(Card.IsSetCard,0xff0),1,1,LOCATION_EXTRA)
+	aux.AddRunicProcedure2(c,aux.FilterBoolFunction(c918906423.matfilter),aux.FilterBoolFunction(Card.IsSetCard,0xff0),1,1,LOCATION_EXTRA+LOCATION_HAND)
 	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(918906423,0))
@@ -23,6 +25,9 @@ function c918906423.initial_effect(c)
 	e4:SetCondition(c918906423.damcon)
 	e4:SetOperation(c918906423.damop)
 	c:RegisterEffect(e4)
+end
+function c918906423.tmatfilter(c)
+	return c:IsSetCard(0xff0) and c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function c918906423.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable() end
