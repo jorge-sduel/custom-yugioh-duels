@@ -42,7 +42,7 @@ end
 function c995816343.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNE and rc:IsCode(924363413)
+	return r==REASON_SPSUMMON and rc:IsCode(924363413)
 end
 function c995816343.tdfilter(c)
 	return c:IsAbleToDeck() and c:IsSetCard(0xff0)
