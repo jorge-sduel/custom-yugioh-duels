@@ -1,10 +1,10 @@
 --Inscriber Sodaimoji
 function c968123042.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,nil,6,2,nil,nil,5)
+	Xyz.AddProcedure(c,nil,6,2)
 	c:EnableReviveLimit()
 	--pendulum summon
-	aux.EnablePendulumAttribute(c,false)
+	Pendulum.AddProcedure(c)
 	--to hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(968123042,0))
