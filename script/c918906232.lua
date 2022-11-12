@@ -30,7 +30,7 @@ function c918906232.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c918906232.matfilter(c)
-	return c:IsType(TYPE_TRAP) and c:IsType(TYPE_SPELL)
+	return c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)
 end
 function c918906232.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable() end
