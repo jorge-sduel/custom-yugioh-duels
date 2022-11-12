@@ -44,7 +44,7 @@ end
 function c937664242.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNIC and rc:IsCode(918906232)
+	return r==REASON_SPSUMMON and rc:IsSummon(SUMMON_TYPE_RUNIC) and rc:IsCode(918906232)
 end
 function c937664242.thfilter(c)
 	return c:IsAbleToHand()
