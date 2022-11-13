@@ -69,7 +69,7 @@ function Runic.FilterEx(c,f,sc,tp,mg,loc)
     g:AddCard(c)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp))
         and (not loc or c:IsLocation(loc))
-       -- and ((not e:GetHandler():IsLocation(LOCATION_EXTRA)) and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1) or (e:GetHandler():IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0)
+        and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1
 end
 function Runic.Filter(c,f,sc,tp)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
@@ -95,7 +95,7 @@ function Runic.Condition(f1,f2,min,max)
                 if #mg1<=0 or #mg2<=0 then return false end
                 return mg1:IsExists(Runic.FilterEx,1,nil,f1,c,tp,mg2)
                     and mg2:IsExists(Runic.FilterEx,min,nil,f2,c,tp,mg1)
-and (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0) or (not c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0)
+--and (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0) or (not c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0)
             end
 end
 function Runic.Target(f1,f2,min,max)
