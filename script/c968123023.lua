@@ -7,7 +7,7 @@ function c968123023.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
 	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),c968123023.matfilter,1,1)
-	aux.AddRunicProcedure1(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),c957801023.matfilter,1,1)
+	aux.AddRunicProcedure1(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),c968123023.matfilter,1,1)
 	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(968123023,0))
