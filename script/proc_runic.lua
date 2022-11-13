@@ -250,14 +250,14 @@ function Runic.sumcon(e,tp,eg,ep,ev,re,r,rp)
 end
 --Runic Summon other location
 function Auxiliary.AddRunicProcedure2(e,c,f1,f2,min,max,loc)
-				local c=e:GetHandler()
+--	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetDescription(1182)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(loc)
-	if e:GetHandler():IsLocation(LOCATION_EXTRA) then
+	if c:IsLocation(LOCATION_EXTRA) then
 		e1:SetCondition(Runic.Condition(f1,f2,min,max))
 		e1:SetTarget(Runic.Target(f1,f2,min,max))
 	else
