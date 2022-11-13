@@ -249,7 +249,7 @@ function Runic.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_RUNIC)
 end
 --Runic Summon other location
-function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
+function Auxiliary.AddRunicProcedure2(e,c,f1,f2,min,max,loc)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetDescription(1182)
