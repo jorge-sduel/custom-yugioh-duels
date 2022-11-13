@@ -256,7 +256,7 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(loc)
-	if loc~=LOCATION_EXTRA then
+	if e:GetHandler():IsLocation(LOCATION_EXTRA) then
 		e1:SetCondition(Runic.Condition(f1,f2,min,max))
 		e1:SetTarget(Runic.Target(f1,f2,min,max))
 	else
