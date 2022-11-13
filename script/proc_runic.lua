@@ -64,12 +64,12 @@ function Runic.AddProcedure(c,f1,f2,min,max)
 	e10:SetCondition(Runic.Levelcon)
 	c:RegisterEffect(e10)
 end
-function Runic.FilterEx(e,c,f,sc,tp,mg)
+function Runic.FilterEx(c,f,sc,tp,mg)
     local g=mg
     g:AddCard(c)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp))
-        and ((e:GetHandler():IsLocation(LOCATION_EXTRA) and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1)
-        or (Duel.GetLocationCountFromEx(tp,tp,g,sc)>0 and not e:GetHandler():IsLocation(LOCATION_EXTRA)))
+        and (not loc or c:IsLocation(loc))
+        and Duel.GetLocationCountFromEx(tp,tp,g,sc)>0
 end
 function Runic.Filter(c,f,sc,tp)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
