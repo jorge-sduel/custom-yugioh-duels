@@ -56,6 +56,6 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		Duel.Recover(c:GetAttack(),tp,REASON_EFFECT)
+		Duel.Recover(tp,c:GetAttack(),REASON_EFFECT)
 	end
 end
