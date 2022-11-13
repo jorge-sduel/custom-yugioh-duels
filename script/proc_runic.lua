@@ -69,7 +69,7 @@ function Runic.FilterEx(c,f,sc,tp,mg)
     g:AddCard(c)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp))
         and ((c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-1)
-        or (Duel.GetLocationCountFromEx(tp,tp,g,sc)>0 and c:IsLocation(LOCATION_EXTRA))
+        or (Duel.GetLocationCountFromEx(tp,tp,g,sc)>0 and c:IsLocation(LOCATION_EXTRA)))
 end
 function Runic.Filter(c,f,sc,tp)
 	return (not f or f(c,sc,SUMMON_TYPE_SPECIAL,tp)) 
