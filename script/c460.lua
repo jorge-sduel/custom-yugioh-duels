@@ -39,7 +39,7 @@ function s.matfilter(c)
 	return c.Is_Neutrino
 end
 function s.filter(e,c)
-	return not c:IsDefenseAbove(e:GetHandler():GetAttack()) 
+	return c:IsDefenseBelow(e:GetHandler():GetAttack())
 end
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetAttacker()==e:GetHandler() and Duel.GetAttackTarget() 
