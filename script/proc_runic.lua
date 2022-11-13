@@ -424,7 +424,7 @@ function Runic.Condition2(f1,f2,min,max)
                 
                 if #mg1<=0 or #mg2<=0 then return false end
                 return mg1:IsExists(Runic.FilterEx2,1,nil,f1,c,tp,mg2)
-                    and mg2:IsExists(Runic.FilterEx2,min,nil,f2,c,tp,mg) 
+                    and mg2:IsExists(Runic.FilterEx2,min,nil,f2,c,tp,mg1) 
 --and (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0) or (not c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0)
             end
 end
