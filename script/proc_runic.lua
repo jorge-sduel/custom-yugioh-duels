@@ -251,6 +251,13 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e2:SetValue(Runic.synlimit)
 	c:RegisterEffect(e2)
+	--spsummon condition extra
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e3:SetCode(EFFECT_SPSUMMON_CONDITION)
+	e3:SetValue(aux.runExlimit)
+	c:RegisterEffect(e3)
 --
        local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
@@ -297,7 +304,7 @@ end
 function Runic.SpellTrap(c)
 	return c:IsSpellTrap()
 end
---Runic Summon 2 or more monsters
+--Runic Summon no Level
 function Auxiliary.AddRunicState(c)
 	--synchro custom
 	local e2=Effect.CreateEffect(c)
@@ -327,4 +334,10 @@ function Auxiliary.AddRunicState(c)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
 	e10:SetCondition(Runic.Levelcon)
 	c:RegisterEffect(e10)
+end
+function Auxiliary.runlimit(e,se,sp,st)
+	return st&SUMMON_TYPE_RUNIC==SUMMON_TYPE_RUNIC
+end
+function Auxiliary.runExlimit(e,se,sp,st)
+	return e:GetHandler():IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_PENDULUM)>0
 end
