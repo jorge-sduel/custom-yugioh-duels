@@ -140,7 +140,13 @@ function Runic.Target(f1,f2,min,max)
 				else
 					return false
 				end
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_BECOME_LINKED_ZONE)
+	e1:SetValue(0xffffff)
+	Duel.RegisterEffect(e1,tp)
             end
+	e1:Reset()
 end
 function Runic.Operation(e,tp,eg,ep,ev,re,r,rp,c,smat,mg)
 	local g=e:GetLabelObject()
