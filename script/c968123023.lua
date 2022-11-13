@@ -51,5 +51,5 @@ function c968123023.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c968123023.atkfilter(e,c)
-	return bit.band(c:GetSummonType(),SUMMON_TYPE_SPECIAL)==SUMMON_TYPE_SPECIAL
+	return c:IsSummonType(SUMMON_TYPE_SPECIAL)
 end
