@@ -257,17 +257,17 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(loc)
-	if c:IsLocation(LOCATION_EXTRA) then
+	--if c:IsLocation(LOCATION_EXTRA) then
 		e1:SetCondition(Runic.Condition2(f1,f2,min,max))
 		e1:SetTarget(Runic.Target2(f1,f2,min,max))
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
-	else
-		e1:SetCondition(Runic.Condition(f1,f2,min,max))
-		e1:SetTarget(Runic.Target(f1,f2,min,max))
-	e1:SetOperation(Runic.Operation)
-    e1:SetValue(SUMMON_TYPE_RUNIC)
-	end
+	--else
+	--	e1:SetCondition(Runic.Condition(f1,f2,min,max))
+	--	e1:SetTarget(Runic.Target(f1,f2,min,max))
+	--e1:SetOperation(Runic.Operation)
+  --e1:SetValue(SUMMON_TYPE_RUNIC)
+	--end
 	c:RegisterEffect(e1)
 	--synchro custom
 	local e2=Effect.CreateEffect(c)
@@ -378,8 +378,9 @@ function Runic.Condition2(f1,f2,min,max)
                 local mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
                 
                 if #mg1<=0 or #mg2<=0 then return false end
-                return mg1:IsExists(Runic.FilterEx2,1,nil,f1,c,tp,mg2)
-                    and mg2:IsExists(Runic.FilterEx2,min,nil,f2,c,tp,mg1)
+                return (mg1:IsExists(Runic.FilterEx2,1,nil,f1,c,tp,mg2)
+                    and mg2:IsExists(Runic.FilterEx2,min,nil,f2,c,tp,mg1) and c:IsLocation(LOCATION_EXTRA)) or (mg1:IsExists(Runic.FilterEx,1,nil,f1,c,tp,mg2)
+                    and mg2:IsExists(Runic.FilterEx,min,nil,f2,c,tp,mg1) and not c:IsLocation(LOCATION_EXTRA)) 
 --and (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0) or (not c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0)
             end
 end
