@@ -34,7 +34,7 @@ function c967312342.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0xff0) and c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function c967312342.actcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(c967312342.cfilter,tp,LOCATION_ONFIELD,0,2,nil)
+	return Duel.IsExistingMatchingCard(c967312342.cfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD,0,2,nil)
 end
 function c967312342.discon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
