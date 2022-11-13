@@ -257,17 +257,17 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(loc)
-	--if c:IsLocation(LOCATION_EXTRA) then
+	if not c:IsLocation(LOCATION_EXTRA) then
 		e1:SetCondition(Runic.Condition2(f1,f2,min,max))
 		e1:SetTarget(Runic.Target2(f1,f2,min,max))
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
-	--else
-	--	e1:SetCondition(Runic.Condition(f1,f2,min,max))
-	--	e1:SetTarget(Runic.Target(f1,f2,min,max))
-	--e1:SetOperation(Runic.Operation)
-  --e1:SetValue(SUMMON_TYPE_RUNIC)
-	--end
+	else
+		e1:SetCondition(Runic.Condition(f1,f2,min,max))
+		e1:SetTarget(Runic.Target(f1,f2,min,max))
+	e1:SetOperation(Runic.Operation)
+  e1:SetValue(SUMMON_TYPE_RUNIC)
+	end
 	c:RegisterEffect(e1)
 	--synchro custom
 	local e2=Effect.CreateEffect(c)
