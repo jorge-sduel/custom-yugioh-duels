@@ -249,6 +249,57 @@ function Runic.sumcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_RUNIC)
 end
 --Runic Summon other location
+function Auxiliary.AddRunicProcedure1(c,f1,f2,min,max)
+--	local c=e:GetHandler()
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetDescription(1182)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e1:SetRange(LOCATION_EXTRA)
+	--if not c:IsLocation(LOCATION_EXTRA) then
+		e1:SetCondition(Runic.Condition2(f1,f2,min,max))
+		e1:SetTarget(Runic.Target2(f1,f2,min,max))
+	e1:SetOperation(Runic.Operation)
+    e1:SetValue(SUMMON_TYPE_RUNIC)
+	c:RegisterEffect(e1)
+	--synchro custom
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e2:SetValue(Runic.synlimit)
+	c:RegisterEffect(e2)
+	--spsummon condition extra
+	--local e3=Effect.CreateEffect(c)
+	--e3:SetType(EFFECT_TYPE_SINGLE)
+	--e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	--e3:SetCode(EFFECT_SPSUMMON_CONDITION)
+	--e3:SetValue(aux.runExlimit)
+	--c:RegisterEffect(e3)
+--
+       local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e8:SetCode(EFFECT_LEVEL_RANK)
+	c:RegisterEffect(e8)
+--
+        local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e9:SetCode(EFFECT_CHANGE_LEVEL)
+	e9:SetCondition(Runic.Levelcon)
+	e9:SetValue(0)
+	c:RegisterEffect(e9)
+--
+	local e10=Effect.CreateEffect(c)
+	e10:SetType(EFFECT_TYPE_SINGLE)
+	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
+	e10:SetCondition(Runic.Levelcon)
+	c:RegisterEffect(e10)
+end
+--Runic Summon other location no Extra
 function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 --	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
@@ -257,17 +308,11 @@ function Auxiliary.AddRunicProcedure2(c,f1,f2,min,max,loc)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(loc)
-	if not c:IsLocation(LOCATION_EXTRA) then
+	--if not c:IsLocation(LOCATION_EXTRA) then
 		e1:SetCondition(Runic.Condition(f1,f2,min,max))
 		e1:SetTarget(Runic.Target(f1,f2,min,max))
 	e1:SetOperation(Runic.Operation)
     e1:SetValue(SUMMON_TYPE_RUNIC)
-	else
-		e1:SetCondition(Runic.Condition2(f1,f2,min,max))
-		e1:SetTarget(Runic.Target2(f1,f2,min,max))
-	e1:SetOperation(Runic.Operation)
-  e1:SetValue(SUMMON_TYPE_RUNIC)
-	end
 	c:RegisterEffect(e1)
 	--synchro custom
 	local e2=Effect.CreateEffect(c)
@@ -378,9 +423,8 @@ function Runic.Condition2(f1,f2,min,max)
                 local mg2=Duel.GetMatchingGroup(Runic.Filter,tp,LOCATION_ONFIELD,0,nil,f2,c,tp)
                 
                 if #mg1<=0 or #mg2<=0 then return false end
-                return (mg1:IsExists(Runic.FilterEx2,1,nil,f1,c,tp,mg2)
-                    and mg2:IsExists(Runic.FilterEx2,min,nil,f2,c,tp,mg1) and c:IsLocation(LOCATION_EXTRA)) or (mg1:IsExists(Runic.FilterEx,1,nil,f1,c,tp,mg2)
-                    and mg2:IsExists(Runic.FilterEx,min,nil,f2,c,tp,mg1) and not c:IsLocation(LOCATION_EXTRA)) 
+                return mg1:IsExists(Runic.FilterEx2,1,nil,f1,c,tp,mg2)
+                    and mg2:IsExists(Runic.FilterEx2,min,nil,f2,c,tp,mg) 
 --and (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0) or (not c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx()>0)
             end
 end
