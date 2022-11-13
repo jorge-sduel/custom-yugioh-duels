@@ -56,7 +56,7 @@ end
 function c981956432.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	return r==REASON_SPSUMMON and rc:GetSummonType()==SUMMON_TYPE_RUNE and rc:IsCode(957801023)
+	return r==REASON_SPSUMMON and rc:IsCode(957801023)
 end
 function c981956432.thfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
