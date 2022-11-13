@@ -1,7 +1,7 @@
 --Inscriber Sodaimoji
 function c968123042.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,nil,6,2)
+	Xyz.AddProcedure(c,nil,6,2,nil,nil,5)
 	c:EnableReviveLimit()
 	--pendulum summon
 	Pendulum.AddProcedure(c)
@@ -112,6 +112,6 @@ function c968123042.penop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.CheckLocation(tp,LOCATION_SZONE,6) and not Duel.CheckLocation(tp,LOCATION_SZONE,7) then return false end
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
-		Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
