@@ -71,6 +71,10 @@ function Runic.FilterEx(c,f,sc,tp,mg)
         and (not loc or c:IsLocation(loc))
         and Duel.GetLocationCount(tp,LOCATION_MZONE)>-1
 end
+function Runic.Check2(tp,sg,sc,f1,f2,min)
+	return sg:IsExists(Runic.FilterEx2,1,nil,f1,sc,tp,sg,LOCATION_MZONE)
+		and sg:IsExists(Runic.FilterEx2,min,nil,f2,sc,tp,sg,LOCATION_ONFIELD)
+end
 function Runic.FilterEx2(c,f,sc,tp,mg)
     local g=mg
     g:AddCard(c)
@@ -399,7 +403,7 @@ function Runic.Target2(f1,f2,min,max)
                     end
 					cg:Remove(Runic.Remove,nil,sg)
 					if #cg==0 then break end
-					finish=#sg>=(min+1) and Runic.Check(tp,sg,c,f1,f2,min)
+					finish=#sg>=(min+1) and Runic.Check2(tp,sg,c,f1,f2,min)
 					cancel=Duel.GetCurrentChain()<=0 and #sg==0
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RNMATERIAL)
 					local tc=Group.SelectUnselect(cg,sg,tp,finish,cancel,min+1,max+1)
