@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,nil,nil,1,1)
+	Runic.AddProcedure(c,nil,s.matfilter,1,1)
 	--level change
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(84046493,0))
@@ -24,6 +24,9 @@ function s.initial_effect(c)
 	e2:SetTarget(s.etarget)
 	e2:SetValue(s.efilter)
 	c:RegisterEffect(e2)
+end
+function s.matfilter(c)
+	return c:IsType(TYPE_TRAP+TYPE_SPELL)
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetLeftScale()<10 end
