@@ -1,5 +1,7 @@
 --Shimzu Gyogun
 local s,id=GetID()
+s.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
