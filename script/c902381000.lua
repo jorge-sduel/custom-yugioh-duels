@@ -2,6 +2,7 @@
 local s,id=GetID()
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
+ aux.AddRunicTuning(c,LOCATION_MZONE,LOCATION_MZONE,0,LOCATION_EXTRA,0)
 	--search
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(61283655,0))
