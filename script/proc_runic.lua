@@ -475,6 +475,14 @@ end
 --add Level Runic monster and is Synchronable
 --[[loc=Location card loc1 and loc2= Runic monster affected loc3 and loc4=Synchro Monster can use Runic monster as material]]
 function Auxiliary.AddRunicTuning(c,loc,loc1,loc2,loc3,loc4)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
+	e2:SetRange(loc)
+	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e2:SetTarget(Runic.NSML)
+	e2:SetValue(1)
+	c:RegisterEffect(e2)
 	--level
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
@@ -492,4 +500,8 @@ function Auxiliary.AddRunicTuning(c,loc,loc1,loc2,loc3,loc4)
 	e5:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_SYNCHRO))
 	--e5:SetValue(0x5sr)
 	c:RegisterEffect(e5)
+end
+function Runic.NSML(e,c)
+	--local tc=e:GetHandler():GetCardTarget():GetFirst()
+	return not c:IsLevelAbove(1)
 end
