@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
    aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
-	aux.AddRuneProcedure(c,s.monfilter,aux.FilterBoolFunction(Card.IsSetCard,0xff1),1,1)
+	Runic.AddProcedure(c,s.monfilter,aux.FilterBoolFunction(Card.IsSetCard,0xff1),1,1)
 	--Non-tuner
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
