@@ -3,7 +3,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WIND),1,1,nil,1,1)
+   aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WIND),s.matfilter,1,1)
 	--summon success
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -27,8 +28,11 @@ function s.initial_effect(c)
 	e2:SetValue(s.efilter)
 	c:RegisterEffect(e2)
 end
+function s.matfilter(c)
+	return c:IsType(TYPE_TRAP+TYPE_SPELL)
+end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_RUNE)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_RUNIC)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(902381000) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
