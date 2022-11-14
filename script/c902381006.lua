@@ -1,5 +1,7 @@
 --Shimzu Aurora
 local s,id=GetID()
+s.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -33,8 +35,8 @@ function s.tgfilter(c,e,tp)
 	return c:IsFaceup() and c:IsRace(RACE_AQUA) and c:IsAttribute(ATTRIBUTE_WIND)
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(0xff1) and c:IsType(TYPE_RUNE)
-		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNE,tp,false,true)
+	return c:IsSetCard(0xff1) and c.Is_Runic
+		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNIC,tp,false,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter1(chkc,e,tp) end
