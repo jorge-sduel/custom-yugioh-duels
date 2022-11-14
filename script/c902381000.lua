@@ -45,13 +45,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 	--Check for RUne Summon
-function s.rnfilter(c,tp)
-	return c:IsSetCard(0xff1) and c.Is_Runic and c:IsSummonType(SUMMON_TYPE_RUNIC)
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	local tc=eg:GetFirst()
+	return tc:IsControler(tp) and tc:IsSetCard(0xff1) and tc:IsSummonType(SUMMON_TYPE_RUNIC)
 end
 	--If it ever happened
-function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.rnfilter,1,nil,tp)
-end
+--function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+--	return eg:IsExists(s.rnfilter,1,nil,tp)
+--end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
