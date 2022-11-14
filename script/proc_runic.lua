@@ -472,3 +472,24 @@ function Runic.Target2(f1,f2,min,max)
 				end
             end
 end
+--add Level Runic monster and is Synchronable
+--[[loc=Location card loc1 and loc2= Runic monster affected loc3 and loc4=Synchro Monster can use Runic monster as material]]
+function Auxiliary.AddRunicTuning(c,loc,loc1,loc2,loc3,loc4)
+	--level
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetCode(id)
+	e4:SetRange(loc)
+	e4:SetTargetRange(loc1,loc2)
+	e4:SetTarget(aux.TargetBoolFunction(Card.IsRunic))
+	c:RegisterEffect(e4)
+	--level
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_FIELD)
+	e5:SetCode(999381001)
+	e5:SetRange(loc)
+	e5:SetTargetRange(loc3,loc4)
+	e5:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_SYNCHRO))
+	--e5:SetValue(0x5sr)
+	c:RegisterEffect(e5)
+end
