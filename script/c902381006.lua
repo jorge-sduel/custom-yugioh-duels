@@ -59,8 +59,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local mg=Group.CreateGroup()
 		mg:AddCard(tc)
 		sc:SetMaterial(mg)
-		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_MATERIAL+REASON_RUNE)
-		if Duel.SpecialSummonStep(sc,SUMMON_TYPE_RUNE,tp,tp,false,true,POS_FACEUP) then
+		Duel.SendtoGrave(tc,REASON_EFFECT+REASON_MATERIAL+REASON_RUNIC)
+		if Duel.SpecialSummonStep(sc,SUMMON_TYPE_RUNIC,tp,tp,false,true,POS_FACEUP) then
 			Duel.Equip(tp,e:GetHandler(),sc)
 			--Add Equip limit
 			local e1=Effect.CreateEffect(sc)
