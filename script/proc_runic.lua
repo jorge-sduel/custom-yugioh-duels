@@ -486,7 +486,7 @@ function Auxiliary.AddRunicTuning(c,loc,loc1,loc2,loc3,loc4)
 	--level
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetCode(id)
+	e4:SetCode(999381000)
 	e4:SetRange(loc)
 	e4:SetTargetRange(loc1,loc2)
 	e4:SetTarget(aux.TargetBoolFunction(Card.IsRunic))
