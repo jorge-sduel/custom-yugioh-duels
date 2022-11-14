@@ -3,6 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
+   aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
 	Runic.AddProcedure(c,nil,s.matfilter,1,1)
 	--level change
 	local e1=Effect.CreateEffect(c)
