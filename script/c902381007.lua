@@ -1,5 +1,6 @@
 --Ocean of the Shimzu
 local s,id=GetID()
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -41,7 +42,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.atktg(e,c)
-	return c:IsSetCard(0xff1) and (c:IsSummonType(SUMMON_TYPE_RUNE) or c:IsSummonType(SUMMON_TYPE_SYNCHRO))
+	return c:IsSetCard(0xff1) and (c:IsSummonType(SUMMON_TYPE_RUNIC) or c:IsSummonType(SUMMON_TYPE_SYNCHRO))
 end
 function s.settg(e,c)
 	return c:GetMaterial():IsExists(Card.IsSetCard,1,nil,0xff1) and c:IsType(TYPE_SYNCHRO)
