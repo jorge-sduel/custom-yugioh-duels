@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
    aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_AQUA),aux.FilterBoolFunction(Card.IsSpellTrap),1,99)
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_AQUA),aux.FilterBoolFunction(Card.IsSpellTrap),2,2)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(66141736,0))
