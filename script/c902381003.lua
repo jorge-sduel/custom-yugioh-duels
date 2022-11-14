@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
    aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
-	Runic.AddProcedure(c,s.monfilter,aux.FilterBoolFunction(Card.IsSetCard,0xff1),1,1)
+	Runic.AddProcedure(c,s.monfilter,s.matfilter,1,1)
 	--Non-tuner
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -29,6 +29,9 @@ function s.initial_effect(c)
 	e3:SetTarget(s.etarget)
 	e3:SetValue(s.efilter)
 	c:RegisterEffect(e3)
+end
+function s.matfilter(c)
+	return c:IsSetCard(0xff1) and c:IsType(TYPE_TRAP+TYPE_SPELL)
 end
 function s.monfilter(c)
 	return c:IsType(TYPE_EFFECT) and c:IsLevelBelow(4)
