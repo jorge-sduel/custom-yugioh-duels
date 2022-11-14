@@ -1,5 +1,6 @@
 --Shimzu Night
 local s,id=GetID()
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -32,7 +33,7 @@ function s.initial_effect(c)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	return tc:IsControler(tp) and tc:IsSetCard(0xff1) and tc:IsSummonType(SUMMON_TYPE_RUNE)
+	return tc:IsControler(tp) and tc:IsSetCard(0xff1) and tc:IsSummonType(SUMMON_TYPE_RUNIC)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToDeckAsCost() end
