@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,nil,1,1,nil,1,1)
+	Runic.AddProcedure(c,nil,nil,1,1)
 	--level change
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(84046493,0))
