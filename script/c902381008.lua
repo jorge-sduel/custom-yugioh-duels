@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsLevelAbove,5),1,1,aux.NonTuner(nil),1,99)
+	Synchro.AddProcedure(c,aux.FilterBoolFunction(Card.IsLevelAbove,5),1,1,Synchro.NonTuner(nil),1,99)
 	--immune
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
