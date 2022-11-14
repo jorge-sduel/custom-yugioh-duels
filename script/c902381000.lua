@@ -1,5 +1,6 @@
 --Shimzu Sewanin
 local s,id=GetID()
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--search
 	local e1=Effect.CreateEffect(c)
@@ -44,7 +45,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for RUne Summon
 function s.rnfilter(c,tp)
-	return c:IsSetCard(0xff1) and c:IsType(TYPE_RUNE) and c:IsSummonType(SUMMON_TYPE_RUNE)
+	return c:IsSetCard(0xff1) and c.Is_Runic and c:IsSummonType(SUMMON_TYPE_RUNIC)
 end
 	--If it ever happened
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
