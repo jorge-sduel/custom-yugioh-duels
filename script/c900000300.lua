@@ -23,7 +23,7 @@ function s.efilter1(e,re,rp)
 	return not re:IsActiveType(TYPE_RUNE)
 end
 function s.sfilter(c)
-	return c:IsType(TYPE_RUNE) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToHand()
+	return c.Is_Runic and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToHand()
 end
 function s.stg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_DECK,0,1,nil) end
