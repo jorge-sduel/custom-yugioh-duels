@@ -3,6 +3,7 @@ if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c952342321.initial_effect(c)
 	--pendulum summon
 	Pendulum.AddProcedure(c)
+   aux.AddRunicTuning(c,LOCATION_PZONE,LOCATION_MZONE,0,LOCATION_EXTRA,LOCATION_EXTRA)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(83303851,0))
