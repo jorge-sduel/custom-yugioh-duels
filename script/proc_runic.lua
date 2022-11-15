@@ -539,5 +539,5 @@ function Auxiliary.AddRunicTuning2(c,loc,loc3,loc4)
 end
 function Runic.NSML2(e,c)
 	--local tc=e:GetHandler():GetCardTarget():GetFirst()
-	return not c:IsLevelAbove(1)
+	return c.Is_Runic and not c:IsLevelAbove(1)
 end
