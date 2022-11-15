@@ -520,7 +520,7 @@ function Auxiliary.AddRunicTuning2(c,loc,loc3,loc4)
 	--level
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
-	--e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e4:SetCode(999381000)
 	e4:SetRange(loc)
 	--e4:SetTargetRange(loc1,loc2)
