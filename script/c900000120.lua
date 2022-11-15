@@ -7,8 +7,8 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetTarget(s.target)
-	e1:SetOperation(s.activate)
+	e1:SetTarget(s.eqtg)
+	e1:SetOperation(s.eqop)
 	c:RegisterEffect(e1)
 	--todeck
 	local e2=Effect.CreateEffect(c)
@@ -25,33 +25,38 @@ function s.tgfilter(c,tp)
 	return c:IsRace(RACE_PYRO) and c:IsAttribute(ATTRIBUTE_FIRE)
 		and c:IsFaceup() and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil,c)
 end
-function s.cfilter(c,ec)
-	return c:IsType(TYPE_UNION) and c:CheckEquipTarget(ec) and aux.CheckUnionEquip(c,ec)
+function s.eqfilter(c,tp)
+	return c:CheckUniqueOnField(tp) and c:IsMonster() and not c:IsForbidden()
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.tgfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_MZONE,0,1,nil,tp)
-					and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
+function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	local c=e:GetHandler()
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) and chkc~=c end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil,tp)
+		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_MZONE,0,1,1,nil,tp)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil,tp)
+	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_DECK)
 end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
+function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsControler(tp) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-		local sg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,tc)
-		local ec=sg:GetFirst()
-		if ec and aux.CheckUnionEquip(ec,tc) and Duel.Equip(tp,ec,tc) then
-			aux.SetUnionState(ec)
-			local e1=Effect.CreateEffect(e:GetHandler())
-			e1:SetType(EFFECT_TYPE_SINGLE)
-			e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE)
-			e1:SetRange(LOCATION_SZONE)
-			e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-			e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
-			ec:RegisterEffect(e1)
-		end
+	if tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
+	local ec=Duel.SelectMatchingCard(tp,s.eqfilter,tp,LOCATION_DECK,0,1,1,nil,tp,tc):GetFirst()
+	if not ec then return end
+	local loc=ec:GetLocation()
+	if s.equipop(tc,e,tp,ec) and loc==LOCATION_DECK then
 	end
+end
+function s.equipop(c,e,tp,tc)
+	if not c:EquipByEffectAndLimitRegister(e,tp,tc,nil,true) then return false end
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_EQUIP_LIMIT)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e2:SetValue(true)
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+	tc:RegisterEffect(e2)
+	return true
 end
 function s.filter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_EQUIP)
