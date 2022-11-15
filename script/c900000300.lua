@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.efilter1(e,re,rp)
-	return not re:IsActiveType(TYPE_RUNE)
+	return not re:IsActiveType(0x10000000)
 end
 function s.sfilter(c)
 	return c.Is_Runic and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToHand()
