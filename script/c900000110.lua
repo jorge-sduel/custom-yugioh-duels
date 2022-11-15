@@ -1,7 +1,7 @@
 --Grandmaster Osignis Ignile
 local s,id=GetID()
 function s.initial_effect(c)
-	aux.AddFusionProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_UNION),1,99,s.ffilter)
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_UNION),s.ffilter)
 	aux.AddContactFusion(c,s.contactfil,s.contactop,s.splimit)
 	--activate limit
 	local e1=Effect.CreateEffect(c)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	aux.AddEREquipLimit(c,nil,s.eqval,s.equipop,e2)
 end
 function s.ffilter(c,fc,sumtype,tp)
-	return c:IsAttribute(ATTRIBUTE_FIRE,nil,sumtype,tp) and c:IsType(TYPE_RUNE,fc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_FIRE,nil,sumtype,tp) and c.Is_Runic
 end
 function s.contactfil(tp)
 	return Duel.GetReleaseGroup(tp)
