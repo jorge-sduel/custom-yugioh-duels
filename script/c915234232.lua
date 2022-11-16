@@ -29,6 +29,7 @@ function c915234232.initial_effect(c)
 	e2:SetTarget(c915234232.splimit)
 	c:RegisterEffect(e2)
 end
+s.pendulum_level=6
 function c915234232.matfilter(c)
 	return c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)
 end
