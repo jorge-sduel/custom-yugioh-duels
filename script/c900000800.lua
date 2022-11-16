@@ -1,9 +1,11 @@
 --Master Osignis Calorus
 local s,id=GetID()
+s.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--Rune
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,nil,1,1,s.matfilter,2,2)
+	Runic.AddProcedure(c,nil,s.matfilter,2,2)
 	--Union
 	aux.AddUnionProcedure(c,nil)
 	--double attack
