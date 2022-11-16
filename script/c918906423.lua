@@ -27,6 +27,7 @@ function c918906423.initial_effect(c)
 	e4:SetOperation(c918906423.damop)
 	c:RegisterEffect(e4)
 end
+c918906423.pendulum_level=6
 function c918906423.matfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
