@@ -48,8 +48,8 @@ function s.pcfilter2(c)
 end
 function s.pctg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return  Duel.IsExistingMatchingCard(s.pcfilter2,tp,LOCATION_ONFIELD,0,1,nil) and Duel.IsPlayerCanDraw(tp,2) end
-	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(2)
+	--Duel.SetTargetPlayer(tp)
+	--Duel.SetTargetParam(2)
 end
 function s.pcop2(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
@@ -58,8 +58,8 @@ function s.pcop2(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 			Duel.SendtoExtraP(g:GetFirst(),tp,REASON_EFFECT)
 			Duel.SendtoExtraP(c,tp,REASON_EFFECT)
-	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	Duel.Draw(p,d,REASON_EFFECT)
+	--local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Draw(tp,2,REASON_EFFECT)
 	end
 end
 function s.pcfilter(c)
