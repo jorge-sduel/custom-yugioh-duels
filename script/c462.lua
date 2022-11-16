@@ -57,7 +57,7 @@ function s.pcop2(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.pcfilter2,tp,LOCATION_ONFIELD,0,1,1,nil)
 	if #g>0 then
 			Duel.SendtoExtraP(g:GetFirst(),tp,REASON_EFFECT)
-			Duel.SendtoExtraP(c,tp,REASON_EFFECT)
+			Duel.SendtoExtraP(e:GetHandler(),tp,REASON_EFFECT)
 	--local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(tp,2,REASON_EFFECT)
 	end
