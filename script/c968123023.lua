@@ -26,6 +26,7 @@ function c968123023.initial_effect(c)
 	e2:SetValue(c968123023.atkfilter)
 	c:RegisterEffect(e2)
 end
+c968123023.pendulum_level=6
 function c968123023.matfilter(c)
 	return c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)
 end
