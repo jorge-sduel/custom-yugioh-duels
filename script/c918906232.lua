@@ -30,6 +30,7 @@ function c918906232.initial_effect(c)
 	e3:SetOperation(c918906232.drop)
 	c:RegisterEffect(e3)
 end
+c918906232.pendulum_level=6
 function c918906232.matfilter(c)
 	return c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)
 end
