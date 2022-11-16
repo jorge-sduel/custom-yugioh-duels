@@ -38,7 +38,8 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e4:SetCountLimit(1,144)
+	e4:SetCountLimit(1,144)
+
 	e4:SetTarget(c144.thtg)
 	e4:SetOperation(c144.thop)
 	c:RegisterEffect(e4)
@@ -55,7 +56,7 @@ function s.pcop2(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if then return end
 	local g=Duel.SelectMatchingCard(tp,s.pcfilter2,tp,LOCATION_ONFIELD,0,1,1,nil)
-	if #g>0 then
+	--if #g>0 then
 			Duel.SendtoExtraP(g:GetFirst(),tp,REASON_EFFECT)
 			Duel.SendtoExtraP(c,tp,REASON_EFFECT)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
