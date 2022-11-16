@@ -1,5 +1,4 @@
---覇王黒竜オッドアイズ・リベリオン・ドラゴン
---Odd-Eyes Rebellion Dragon
+-- Tuner ssk
 local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon
@@ -28,9 +27,9 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
-	e3:SetCountLimit(1,144)
-	e3:SetTarget(c144.thtg)
-	e3:SetOperation(c144.thop)
+	e3:SetCountLimit(1,id)
+	e3:SetTarget(s.thtg)
+	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
 	--tohand
 	local e4=Effect.CreateEffect(c)
