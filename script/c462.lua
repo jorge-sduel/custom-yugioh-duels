@@ -43,6 +43,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.thop)
 	c:RegisterEffect(e4)
 end
+s.listed_names=13331639
 function s.pcfilter2(c)
 	return c:IsType(TYPE_PENDULUM) and (c:IsSetCard(0x20f8) or c:IsSetCard(0x10f8)) and not c:IsForbidden()
 end
