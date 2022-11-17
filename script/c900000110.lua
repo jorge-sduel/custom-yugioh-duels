@@ -71,7 +71,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if c:IsFaceup() and c:IsRelateToEffect(e) and tc and tc:IsRelateToEffect(e) then
-		aux.EquipByEffectAndLimitRegister(c,e,tp,tc)
+		Card.EquipByEffectAndLimitRegister(c,e,tp,tc)
 		aux.SetUnionState(c)
 	end
 end
