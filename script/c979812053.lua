@@ -4,6 +4,7 @@ if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c979812053.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
+  aux.AddRunicState(c)
 	local r1=Effect.CreateEffect(c)
 	r1:SetType(EFFECT_TYPE_FIELD)
 	r1:SetCode(EFFECT_SPSUMMON_PROC)
@@ -67,31 +68,12 @@ function c979812053.initial_effect(c)
 	e6:SetTarget(c979812053.eqtg)
 	e6:SetOperation(c979812053.eqop)
 	c:RegisterEffect(e6)
---
-       local e8=Effect.CreateEffect(c)
-	e8:SetType(EFFECT_TYPE_SINGLE)
-	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e8:SetCode(EFFECT_LEVEL_RANK)
-	c:RegisterEffect(e8)
---
-        local e9=Effect.CreateEffect(c)
-	e9:SetType(EFFECT_TYPE_SINGLE)
-	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e9:SetCode(EFFECT_CHANGE_LEVEL)
-	e9:SetValue(0)
-	c:RegisterEffect(e9)
---
-	local e10=Effect.CreateEffect(c)
-	e10:SetType(EFFECT_TYPE_SINGLE)
-	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
-	c:RegisterEffect(e10)
 end
 function c979812053.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsRankAbove(5)
 end
 function c979812053.matfilter2(c)
-	return c:IsFaceup() and c:IsType(TYPE_SPELL)
+	return c:IsType(TYPE_SPELL)
 end
 function c979812053.runcon(e,c)
 	if c==nil then return true end
