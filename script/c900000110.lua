@@ -41,12 +41,6 @@ end
 function s.contactfil(tp)
 	return Duel.GetReleaseGroup(tp)
 end
-function s.contactop(g)
-	Duel.Release(g,REASON_COST+REASON_MATERIAL)
-end
-function s.splimit(e,se,sp,st)
-	return e:GetHandler():GetLocation()~=LOCATION_EXTRA
-end
 function s.condition(e)
 	local ph=Duel.GetCurrentPhase()
 	return ph>=PHASE_BATTLE_START and ph<=PHASE_BATTLE
