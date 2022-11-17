@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_UNION),s.ffilter)
-	aux.AddContactFusion(c,s.contactfil,s.contactop,s.splimit)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit,nil,nil,nil,false)
 	--activate limit
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -25,6 +25,15 @@ function s.initial_effect(c)
 	e2:SetOperation(s.eqop)
 	c:RegisterEffect(e2)
 	aux.AddEREquipLimit(c,nil,s.eqval,s.equipop,e2)
+end
+function s.splimit(e,se,sp,st)
+	return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION or e:GetHandler():GetLocation()~=LOCATION_EXTRA 
+end
+function s.contactfil(tp)
+	return Duel.GetReleaseGroup(tp)
+end
+function s.contactop(g)
+	Duel.Release(g,REASON_COST+REASON_MATERIAL)
 end
 function s.ffilter(c,fc,sumtype,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE,nil,sumtype,tp) and c.Is_Runic
