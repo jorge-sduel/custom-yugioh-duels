@@ -69,7 +69,7 @@ function c919832580.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function c919832580.matfilter2(c)
-	return c:IsFaceup() and c:IsType(TYPE_SPELL)
+	return c:IsType(TYPE_SPELL)
 end
 function c919832580.runfilter1(c)
 	return c919832580.matfilter1(c) and Duel.IsExistingMatchingCard(c919832580.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,1,c)
