@@ -1,9 +1,11 @@
 --Numen Osignis Firedrake
 local s,id=GetID()
+s.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--Rune
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_FIRE),1,1,s.matfilter,1,1)
+	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_FIRE),s.matfilter,1,1)
 	--Union
 	aux.AddUnionProcedure(c,nil)
 	--Atk up
