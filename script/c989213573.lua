@@ -72,7 +72,7 @@ function c989213573.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
 end
 function c989213573.matfilter2(c)
-	return c:IsFaceup() and c:IsType(TYPE_SPELL) and c:IsType(TYPE_EQUIP)
+	return c:IsType(TYPE_SPELL) and c:IsType(TYPE_EQUIP)
 end
 function c989213573.runfilter1(c)
 	return c989213573.matfilter1(c) and Duel.IsExistingMatchingCard(c989213573.matfilter2,c:GetControler(),LOCATION_ONFIELD,0,1,c)
