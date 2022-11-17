@@ -1,9 +1,11 @@
 --Numen Osignis Phoenix
 local s,id=GetID()
+s.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function s.initial_effect(c)
 	--Rune
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,nil,1,1,aux.FilterBoolFunction(Card.IsType,TYPE_EQUIP),1,1)
+	Runic.AddProcedure(c,nil,aux.FilterBoolFunction(Card.IsType,TYPE_EQUIP),1,1)
 	--Union
 	aux.AddUnionProcedure(c,nil)
 	--immune
