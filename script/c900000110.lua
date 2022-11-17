@@ -69,3 +69,9 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		aux.SetUnionState(c)
 	end
 end
+function s.eqval(ec,c,tp)
+	return ec:IsControler(tp) and ec:IsSetCard(0xff6)
+end
+function s.equipop(c,e,tp,tc)
+	Card.EquipByEffectAndLimitRegister(c,e,tp,tc,nil,true)
+end
