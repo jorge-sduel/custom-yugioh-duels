@@ -14,7 +14,7 @@ function cid.initial_effect(c)
 	p1:SetCode(EVENT_FREE_CHAIN)
 	p1:SetRange(LOCATION_PZONE)
 	p1:SetCountLimit(1)
-	--p1:SetCost(cid.thcost)
+	p1:SetCost(cid.thcost)
 	p1:SetTarget(cid.thtg)
 	p1:SetOperation(cid.thop)
 	c:RegisterEffect(p1)
@@ -97,6 +97,10 @@ function cid.rcfilter(c,attr)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0xa6e) and c:GetAttribute()~=attr and c:IsAbleToHand()
 end
 --pandemonium effect
+function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
 function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
 	Duel.SetTargetPlayer(tp)
