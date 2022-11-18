@@ -38,7 +38,7 @@ function c63553465.spcostfilter(c,tp,e)
 		and Duel.IsExistingMatchingCard(c63553465.spfilter,tp,LOCATION_DECK,0,1,nil,c:GetLevel(),c:GetAttribute(),e,tp)
 end
 function c63553465.spfilter(c,lv,attr,e,tp)
-	return  c.IsEquilibrium and c:GetLevel()==lv and not c:IsRace(attr)
+	return  c.IsEquilibrium and c:GetLevel()==lv
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c63553465.thcfilter(c,lg)
