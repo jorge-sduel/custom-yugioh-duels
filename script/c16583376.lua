@@ -94,7 +94,7 @@ function cid.cfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and not c:IsAttribute(ATTRIBUTE_FIRE)
 end
 function cid.rcfilter(c,attr)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0xa6e) and c:GetAttribute()~=attr and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:GetAttribute()~=attr and c:IsAbleToHand()
 end
 --pandemonium effect
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
