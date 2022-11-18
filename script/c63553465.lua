@@ -29,8 +29,6 @@ function c63553465.initial_effect(c)
 	e2:SetOperation(c63553465.fdop)
 	c:RegisterEffect(e2)
 end
-c63553465.check_same_level=0
-c63553465.check_other_race=0
 --filters
 function c63553465.matfilter(c)
 	return c.IsEquilibrium
@@ -63,8 +61,6 @@ function c63553465.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if g then
 		Duel.Destroy(g,REASON_COST)
 		local op=Duel.GetOperatedGroup():GetFirst()
-		c63553465.check_same_level=op:GetLevel()
-		c63553465.check_other_race=op:GetRace()
 	end
 end
 function c63553465.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
