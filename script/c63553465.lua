@@ -63,14 +63,14 @@ function c63553465.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function c63553465.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local lv=c63553465.check_same_level
-	local attr=c63553465.check_other_race
+	--local lv=c63553465.check_same_level
+	--local attr=c63553465.check_other_race
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function c63553465.spop(e,tp,eg,ep,ev,re,r,rp)
-	local lv=c63553465.check_same_level
-	local attr=c63553465.check_other_race
+	--local lv=c63553465.check_same_level
+	--local attr=c63553465.check_other_race
 	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
