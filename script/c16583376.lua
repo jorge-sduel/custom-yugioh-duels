@@ -4,7 +4,6 @@ cid.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function cid.initial_effect(c)
    Equilibrium.AddProcedure(c)
-	c:EnableReviveLimit()
 	--pandemonium effect
 	local p1=Effect.CreateEffect(c)
 	p1:SetDescription(aux.Stringid(id,0))
