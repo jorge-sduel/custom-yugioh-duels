@@ -37,7 +37,7 @@ function c63553465.spcostfilter(c,tp,e)
 	return c:IsFaceup() and  c.IsEquilibrium
 end
 function c63553465.spfilter(c,lv,attr,e,tp)
-	return  c.IsEquilibrium and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return  c.IsEquilibrium
 end
 function c63553465.thcfilter(c,lg)
 	return lg:IsContains(c)
