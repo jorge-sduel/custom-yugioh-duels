@@ -8,13 +8,13 @@ function cid.initial_effect(c)
 	--pandemonium effect
 	local p1=Effect.CreateEffect(c)
 	p1:SetDescription(aux.Stringid(id,0))
-	p1:SetCategory(CATEGORY_REMOVE+CATEGORY_TOHAND)
+	p1:SetCategory(CATEGORY_DRAW)
 	p1:SetType(EFFECT_TYPE_QUICK_O)
 	p1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	p1:SetCode(EVENT_FREE_CHAIN)
 	p1:SetRange(LOCATION_PZONE)
-	p1:SetCountLimit(1,id)
-	p1:SetCost(cid.thcost)
+	p1:SetCountLimit(1)
+	--p1:SetCost(cid.thcost)
 	p1:SetTarget(cid.thtg)
 	p1:SetOperation(cid.thop)
 	c:RegisterEffect(p1)
@@ -59,17 +59,6 @@ function cid.initial_effect(c)
 	e4:SetCondition(cid.con)
 	e4:SetOperation(Equilibrium.desop)
 	c:RegisterEffect(e4)
---[[attack up
-	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(id,0))
-	e5:SetType(EFFECT_TYPE_IGNITION)
-	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e5:SetRange(LOCATION_MZONE)
-	e5:SetCondition(cid.condition)
-	e5:SetCost(cid.cost)
-	e5:SetTarget(cid.target)
-	e5:SetOperation(cid.operation)
-	c:RegisterEffect(e5)]]
 end
 function cid.con(e)
 	local tp=e:GetHandler():GetControler()
@@ -108,36 +97,15 @@ function cid.rcfilter(c,attr)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0xa6e) and c:GetAttribute()~=attr and c:IsAbleToHand()
 end
 --pandemonium effect
-function cid.thcost(e,tp,eg,ep,ev,re,r,rp)
-	if chk==0 then return Duel.GetFlagEffect(tp,id)<=0 end
-	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
+function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetParam(2)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 end
-function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and cid.chkfilter(chkc,tp) end
-	if chk==0 then return Duel.IsExistingTarget(cid.chkfilter,tp,LOCATION_REMOVED,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,cid.chkfilter,tp,LOCATION_REMOVED,0,1,1,nil,tp)
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_DECK)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_REMOVED)
-end
-function cid.thop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local g=Duel.SelectMatchingCard(tp,cid.rmfilter,tp,LOCATION_DECK,0,1,1,nil,tp,tc:GetAttribute())
-		if #g>0 then
-			if Duel.Remove(g,POS_FACEUP,REASON_EFFECT)~=0 then
-				local attr=Duel.GetOperatedGroup():GetFirst():GetAttribute()
-				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-				local g2=Duel.SelectMatchingCard(tp,cid.thfilter,tp,LOCATION_REMOVED,0,1,1,nil,attr)
-				if #g2>0 then
-					Duel.SendtoHand(g2,nil,REASON_EFFECT)
-					Duel.ConfirmCards(1-tp,g2)
-				end
-			end
-		end
-	end
+function s.thop(e,tp,eg,ep,ev,re,r,rp)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Draw(p,d,REASON_EFFECT)
 end
 --spsummon proc
 function cid.sprcon(e,c)
