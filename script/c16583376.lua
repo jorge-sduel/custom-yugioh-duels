@@ -59,7 +59,7 @@ function cid.initial_effect(c)
 	e4:SetCondition(cid.con)
 	e4:SetOperation(Equilibrium.desop)
 	c:RegisterEffect(e4)
---attack up
+--[[attack up
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetType(EFFECT_TYPE_IGNITION)
@@ -69,7 +69,7 @@ function cid.initial_effect(c)
 	e5:SetCost(cid.cost)
 	e5:SetTarget(cid.target)
 	e5:SetOperation(cid.operation)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e5)]]
 end
 function cid.con(e)
 	local tp=e:GetHandler():GetControler()
