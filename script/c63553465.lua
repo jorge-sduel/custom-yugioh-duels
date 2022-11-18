@@ -35,7 +35,6 @@ function c63553465.matfilter(c)
 end
 function c63553465.spcostfilter(c,tp,e)
 	return c:IsFaceup() and  c.IsEquilibrium
-		and Duel.IsExistingMatchingCard(c63553465.spfilter,tp,LOCATION_DECK,0,1,nil,c:GetLevel(),c:GetAttribute(),e,tp)
 end
 function c63553465.spfilter(c,lv,attr,e,tp)
 	return  c.IsEquilibrium and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -59,7 +58,7 @@ function c63553465.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.SelectMatchingCard(tp,c63553465.spcostfilter,tp,LOCATION_MZONE,0,1,1,nil,tp,e):GetFirst()
 	if g then
 		Duel.Destroy(g,REASON_COST)
-		local op=Duel.GetOperatedGroup():GetFirst()
+		--local op=Duel.GetOperatedGroup():GetFirst()
 	end
 end
 function c63553465.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
