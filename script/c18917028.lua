@@ -37,14 +37,14 @@ function ref.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 --Pandemonium effect
-function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function ref.acttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tg=Duel.GetAttacker()
 	if chkc then return chkc==tg end
 	if chk==0 then return tg:IsOnField() and tg:IsCanBeEffectTarget(e) end
 	Duel.SetTargetCard(tg)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,tg,1,0,0)
 end
-function s.actop(e,tp,eg,ep,ev,re,r,rp)
+function ref.actop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:CanAttack() and not tc:IsStatus(STATUS_ATTACK_CANCELED)
 		and Duel.Destroy(tc,REASON_EFFECT)~=0 then
