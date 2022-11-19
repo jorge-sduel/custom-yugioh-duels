@@ -82,7 +82,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 			dg:RemoveCard(tc)
 		end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-		aux.GCheckAdditional=aux.RitualCheckAdditional(tc,tc:GetLevel()*2,"Equal")
+		aux.GCheckAdditional=aux.RitualCheckAdditionalLevel(tc,tc:GetLevel()*2,"Equal")
 		local mat=dg:SelectSubGroup(tp,cid.fselect,false,1,tc:GetLevel()*2,tc)
 		aux.GCheckAdditional=nil
 		if not mat or mat:GetCount()==0 then return end
