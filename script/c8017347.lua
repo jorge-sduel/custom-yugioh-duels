@@ -62,7 +62,7 @@ function cid.filter(c,e,tp,m,ft)
 		or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) then return false end
 	local mg=m:Filter(Card.IsCanBeRitualMaterial,c,c)
 	if ft>0 then
-		return mg:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel()*2,c)
+		return mg:CheckWithSumEqual(Card.GetRitualLevel,c:GetLevel()*2,c)
 	else
 		return mg:IsExists(cid.filterF,1,nil,tp,mg,c)
 	end
