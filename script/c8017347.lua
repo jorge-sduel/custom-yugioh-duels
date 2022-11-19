@@ -129,7 +129,7 @@ function cid.cfilter(c)
 	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsCode(id)
 end
 function cid.spfilter(c,e,tp)
-	return bit.band(c:GetType(),TYPE_MONSTER+TYPE_RITUAL)==TYPE_MONSTER+TYPE_PANDEMONIUM+TYPE_RITUAL and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return bit.band(c:GetType(),TYPE_MONSTER+TYPE_RITUAL)==TYPE_MONSTER+TYPE_RITUAL and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function cid.efilter(e,re)
 	return e:GetOwnerPlayer()==re:GetOwnerPlayer() and e:GetHandler()~=re:GetHandler()
