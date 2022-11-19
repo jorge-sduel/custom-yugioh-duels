@@ -109,10 +109,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 --MAINTAIN COST
---filters
-function cid.filter(c)
-	return (c:IsType(TYPE_MONSTER) or c:IsFacedown()) and c:IsSummonType(SUMMON_TYPE_RITUAL)
-end
+--filter
 ---------------
 function cid.pcond(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and Duel.IsExistingMatchingCard(cid.filter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil)
