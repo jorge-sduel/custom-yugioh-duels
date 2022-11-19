@@ -37,8 +37,7 @@ function cid.dfilter(c)
 	return c.IsEquilibrium and c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
 end
 function cid.spfilter(c,e,tp,m)
-	if bit.band(c:GetType(),TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT)~=TYPE_MONSTER+TYPE_RITUAL+TYPE_EFFECT
-	or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) or (c:IsLocation(LOCATION_HAND) and c:IsPublic()) then 
+	if not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) or (c:IsLocation(LOCATION_HAND) and c:IsPublic()) then 
 		return false 
 	end
 	local dg=Duel.GetMatchingGroup(cid.dfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,nil)
