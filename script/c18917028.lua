@@ -7,7 +7,7 @@ function ref.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(18917028,0))
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)
-	e1:SetType(EFFECT_TYPE_ACTIVATE+EFFECT_TYPE_QUICK_O)
+	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -37,22 +37,31 @@ function ref.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 --Pandemonium effect
+function ref.actcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsFacedown() and eg:GetFirst():IsControler(1-tp)
+end
+function ref.actfilter(c)
+	return c:IsAttackPos()
+end
 function ref.acttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local tg=Duel.GetAttacker()
-	if chkc then return chkc==tg end
-	if chk==0 then return tg:IsOnField() and tg:IsCanBeEffectTarget(e) end
-	Duel.SetTargetCard(tg)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,tg,1,0,0)
+	local trigc=eg:GetFirst()
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc~=trigc and ref.actfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(ref.actfilter,tp,0,LOCATION_MZONE,1,trigc) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g=Duel.SelectTarget(tp,ref.actfilter,tp,0,LOCATION_MZONE,1,1,trigc)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,0)
 end
 function ref.actop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and tc:CanAttack() and not tc:IsStatus(STATUS_ATTACK_CANCELED)
-		and Duel.Destroy(tc,REASON_EFFECT)~=0 then
-		Duel.BreakEffect()
-		Duel.Damage(1-tp,1000,REASON_EFFECT)
+	if Duel.NegateAttack() and tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT)==1 then
+		local atk=tc:GetTextAttack()
+		if atk>0 then
+			Duel.Damage(1-tp,atk,REASON_EFFECT,true)
+			Duel.RDComplete()
+		end
 	end
 end
-
 --On Normal Summon effects
 function ref.nstg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end
