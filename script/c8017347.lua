@@ -35,7 +35,7 @@ function cid.initial_effect(c)
 end
 --ACTIVATE
 function cid.dfilter(c)
-	return c.IsEquilibrium and c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
 end
 function cid.spfilter(c,e,tp,m)
 	if not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) or (c:IsLocation(LOCATION_HAND) and c:IsPublic()) then 
@@ -58,7 +58,7 @@ end
 -----------
 function cid.filter(c,e,tp,m,ft)
 
-	if not c.IsEquilibrium or not c:IsType(TYPE_RITUAL)
+	if not c:IsType(TYPE_RITUAL)
 		or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) then return false end
 	local mg=m:Filter(Card.IsCanBeRitualMaterial,c,c)
 	if ft>0 then
