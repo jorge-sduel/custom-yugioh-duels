@@ -62,7 +62,7 @@ function cid.filter(c,e,tp,m,ft)
 		or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) then return false end
 	local mg=m:Filter(Card.IsCanBeRitualMaterial,c,c)
 	if ft>0 then
-		return mg:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel()*2,c)
+		return mg:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
 	else
 		return mg:IsExists(cid.filterF,1,nil,tp,mg,c)
 	end
@@ -70,7 +70,7 @@ end
 function cid.filterF(c,tp,mg,rc)
 	if c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) then
 		Duel.SetSelectedCard(c)
-		return mg:CheckWithSumGreater(Card.GetRitualLevel,rc:GetLevel()*2,rc)
+		return mg:CheckWithSumGreater(Card.GetRitualLevel,rc:GetLevel(),rc)
 	else return false end
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -92,7 +92,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		local mat=nil
 		if ft>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-			mat=mg:SelectWithSumGreater(tp,Card.GetRitualLevel,tc:GetLevel()*2,tc)
+			mat=mg:SelectWithSumGreater(tp,Card.GetRitualLevel,tc:GetLevel(),tc)
 		else
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 			mat=mg:FilterSelect(tp,cid.filterF,1,1,nil,tp,mg,tc)
