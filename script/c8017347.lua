@@ -62,37 +62,37 @@ function cid.filter(c,e,tp,m,ft)
 		or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) then return false end
 	local mg=m:Filter(Card.IsCanBeRitualMaterial,c,c)
 	if ft>0 then
-		return mg:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
+		return mg:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel()*2,c)
 	else
 		return mg:IsExists(cid.filterF,1,nil,tp,mg,c)
 	end
 end
 function cid.filterF(c,tp,mg,rc)
-	if c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) then
+	if c:IsControler(tp) and c:IsLocation(LOCATION_DECK) then
 		Duel.SetSelectedCard(c)
-		return mg:CheckWithSumGreater(Card.GetRitualLevel,rc:GetLevel(),rc)
+		return mg:CheckWithSumGreater(Card.GetRitualLevel,rc:GetLevel()*2,rc)
 	else return false end
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local mg=Duel.GetRitualMaterial(tp)
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		return ft>-1 and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_HAND,0,1,nil,e,tp,mg,ft)
+		return ft>-1 and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp,mg,ft)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_DECK)
 end
 function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetRitualMaterial(tp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp,mg,ft)
+	local tg=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,e,tp,mg,ft)
 	local tc=tg:GetFirst()
 	if tc then
-		mg=mg:Filter(Card.IsCanBeRitualMaterial,tc,tc):Filter(Card.IsAttribute,nil,ATTRIBUTE_DARK)
+		mg=mg:Filter(Card.IsCanBeRitualMaterial,tc,tc)
 		local mat=nil
 		if ft>0 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-			mat=mg:SelectWithSumGreater(tp,Card.GetRitualLevel,tc:GetLevel(),tc)
+			mat=mg:SelectWithSumGreater(tp,Card.GetRitualLevel,tc:GetLevel()*2,tc)
 		else
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 			mat=mg:FilterSelect(tp,cid.filterF,1,1,nil,tp,mg,tc)
