@@ -96,7 +96,7 @@ function ref.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingTarget(ref.mat2,tp,LOCATION_MZONE,0,1,nil) and Duel.IsExistingTarget(ref.setmat1,tp,LOCATION_ONFIELD,0,1,nil) and (not tc1 or not tc2) end
 end
 function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
-	local tc=e:GetHandler()
+	local c=e:GetHandler()
 	local hc=e:GetLabelObject()
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local tc=g:GetFirst()
@@ -109,8 +109,8 @@ then
 	--g:Merge(g2)
 	Duel.ConfirmCards(1-tp,tc)
 	Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-Duel.Overlay(tc,g)
-Duel.Overlay(tc,g2)
+Duel.Overlay(c,tc)
+Duel.Overlay(c,hc)
 		end
 	end
 end
