@@ -120,7 +120,7 @@ function cid.ptarget(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cid.poperation(e,tp,eg,ep,ev,re,r,rp)
 	for p=0,1 do
-		local g=Duel.GetMatchingGroup(cid.filter,p,LOCATION_MZONE,0,nil)
+		local g=Duel.GetMatchingGroup(cid.dfilter,p,LOCATION_MZONE,0,nil)
 		if #g>0 then
 			if Duel.CheckLPCost(p,1000) and Duel.SelectYesNo(p,aux.Stringid(id,2)) then
 				Duel.PayLPCost(p,1000)
