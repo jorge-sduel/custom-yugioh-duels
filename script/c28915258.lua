@@ -90,7 +90,7 @@ end
 function ref.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc1=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,6)
 	local tc2=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,7)
-	if chk==0 then return Duel.IsExistingTarget(ref.mat2,tp,0,LOCATION_MZONE,1,nil) and Duel.IsExistingTarget(ref.setmat1,tp,0,LOCATION_ONFIELD,1,nil) and (not tc1 or not tc2) end
+	if chk==0 then return Duel.IsExistingTarget(ref.mat2,tp,LOCATION_MZONE,0,1,nil) and Duel.IsExistingTarget(ref.setmat1,tp,LOCATION_ONFIELD,0,1,nil) and (not tc1 or not tc2) end
 end
 function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	local tc=e:GetHandler()
