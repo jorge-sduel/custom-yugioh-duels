@@ -1,5 +1,6 @@
 --Protector Statue of Infernoes
 local ref,id=GetID()
+ref.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function ref.initial_effect(c)
    Equilibrium.AddProcedure(c)
