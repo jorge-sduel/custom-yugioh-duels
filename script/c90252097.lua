@@ -27,31 +27,30 @@ function cid.initial_effect(c)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_SZONE)
-	e3:SetHintTiming(0,0x1e0)
+	--e3:SetHintTiming(0,0x1e0)
 	e3:SetCountLimit(1)
-	--e3:SetTarget(cid.destg)
+	e3:SetTarget(cid.destg)
 	e3:SetOperation(cid.desop)
 	c:RegisterEffect(e3)
 end
 function cid.evalue(e,re,rp)
 	return re:IsActiveType(TYPE_TRAP) and rp~=e:GetHandlerPlayer()
 end
-function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(card.IsDestructible,tp,LOCATION_PZONE,0,1,nil) and Duel.IsExistingTarget(nil,tp,0,LOCATION_MZONE,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_PZONE,0,1,nil)
+		and Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g1=Duel.SelectTarget(tp,Card.IsDestructible,tp,LOCATION_PZONE,0,1,1,nil)
-	if #g1<=0 then return end
+	local g1=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_PZONE,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g2=Duel.SelectTarget(tp,nil,tp,0,LOCATION_MZONE,1,1,nil)
-	if #g2<=0 then return end
-	g2:Merge(g1)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g2,#g2,0,0)
+	local g2=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil)
+	g1:Merge(g2)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g1,2,0,0)
 end
 function cid.desop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) then return end
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
-	if g:GetCount()>0 then
-		Duel.Destroy(g,POS_FACEUP,REASON_EFFECT)
+	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
+	if #tg>0 then
+		Duel.Destroy(tg,REASON_EFFECT)
 	end
 end
