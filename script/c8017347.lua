@@ -75,7 +75,7 @@ function cid.filterF(c,tp,mg,rc)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local mg=Duel.GetRitualMaterial(tp)
+		--local mg=Duel.GetRitualMaterial(tp)
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		return ft>-1 and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp,mg,ft)
 	end
