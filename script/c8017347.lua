@@ -101,7 +101,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 			mat:Merge(mat2)
 		end
 		tc:SetMaterial(mat)
-		Duel.ReleaseRitualMaterial(mat)
+		Duel.Remove(mat,POS_FACEUP,REASON_RITUAL+REASON_MATERIAL)
 		Duel.BreakEffect()
 		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,false,true,POS_FACEUP)
 		tc:CompleteProcedure()
