@@ -111,7 +111,7 @@ then
 	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 Duel.Overlay(c,tc)
 Duel.Overlay(c,hc)
-		end
+--		end
 	end
 end
 
