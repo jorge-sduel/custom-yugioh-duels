@@ -10,16 +10,16 @@ function cid.initial_effect(c)
 	e1:SetOperation(cid.activate)
 	c:RegisterEffect(e1)
 	--maintain cost
-	--local e2=Effect.CreateEffect(c)
-	--e2:SetDescription(aux.Stringid(id,1))
-	--e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	--e2:SetCode(EVENT_PHASE+PHASE_END)
-	--e2:SetRange(LOCATION_SZONE)
-	--e2:SetCountLimit(1)
-	--e2:SetCondition(cid.pcond)
-	--e2:SetTarget(cid.ptarget)
-	--(e2:SetOperation(cid.poperation)
-	--c:RegisterEffect(e2)
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,1))
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e2:SetCode(EVENT_PHASE+PHASE_END)
+	e2:SetRange(LOCATION_SZONE)
+	e2:SetCountLimit(1)
+	e2:SetCondition(cid.pcond)
+	e2:SetTarget(cid.ptarget)
+	e2:SetOperation(cid.poperation)
+	c:RegisterEffect(e2)
 	--spsummon
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -35,7 +35,7 @@ function cid.initial_effect(c)
 end
 --ACTIVATE
 function cid.dfilter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
+	return c:IsType(TYPE_RITUAL) and c:IsFaceup()
 end
 function cid.spfilter(c,e,tp,m)
 	if not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) or (c:IsLocation(LOCATION_HAND) and c:IsPublic()) then 
@@ -115,7 +115,7 @@ function cid.pcond(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.ptarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local g=Duel.GetMatchingGroup(cid.filter,0,LOCATION_MZONE,LOCATION_MZONE,nil)
+	local g=Duel.GetMatchingGroup(cid.dfilter,0,LOCATION_MZONE,LOCATION_MZONE,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
 function cid.poperation(e,tp,eg,ep,ev,re,r,rp)
