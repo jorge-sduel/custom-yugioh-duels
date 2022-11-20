@@ -30,7 +30,7 @@ function cid.initial_effect(c)
 	e3:SetHintTiming(0,0x1e0)
 	e3:SetCountLimit(1)
 	e3:SetTarget(cid.destg)
-	e3:SetOperation(cid.desop)
+	--e3:SetOperation(cid.desop)
 	c:RegisterEffect(e3)
 end
 function cid.evalue(e,re,rp)
