@@ -104,7 +104,7 @@ function ref.setcon(e,c)
 	local g2=Duel.GetMatchingGroup(ref.spfilter2,tp,LOCATION_ONFIELD,0,nil)
 	local g=g1:Clone()
 	g:Merge(g2)
-	return Duel.GetLocationCount(tp,LOCATION_PZONE)>0 and #g1>0 and #g2>0 and aux.SelectUnselectGroup(g,e,tp,2,2,ref.rescon,0)
+	return #g1>0 and #g2>0 and aux.SelectUnselectGroup(g,e,tp,2,2,ref.rescon,0)
 end
 function ref.settg(e,tp,eg,ep,ev,re,r,rp,c)
 	local c=e:GetHandler()
