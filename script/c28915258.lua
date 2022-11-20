@@ -90,9 +90,9 @@ end
 function ref.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc1=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,6)
 	local tc2=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,7)
-	local g=Duel.SelectTarget(tp,ref.setmat1,tp,LOCATION_ONFIELD,0,1,1,nil)
+	local g1=Duel.SelectTarget(tp,ref.setmat1,tp,LOCATION_ONFIELD,0,1,1,nil)
 	e:SetLabelObject(g:GetFirst())
-	local g2=Duel.SelectTarget(tp,ref.mat2,tp,LOCATION_MZONE,0,1,1,g:GetFirst())
+	local g2=Duel.SelectTarget(tp,ref.mat2,tp,LOCATION_MZONE,0,1,1,g1:GetFirst())
 	if chk==0 then return Duel.IsExistingTarget(ref.mat2,tp,LOCATION_MZONE,0,1,nil) and Duel.IsExistingTarget(ref.setmat1,tp,LOCATION_ONFIELD,0,1,nil) and (not tc1 or not tc2) end
 end
 function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
@@ -107,8 +107,8 @@ then
 	--e:SetLabelObject(g:GetFirst())
 	--local g2=Duel.SelectTarget(tp,ref.mat2,tp,LOCATION_MZONE,0,1,1,g:GetFirst())
 	--g:Merge(g2)
-	Duel.ConfirmCards(1-tp,tc)
-	Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	Duel.ConfirmCards(1-tp,c)
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 Duel.Overlay(c,tc)
 Duel.Overlay(c,hc)
 		end
