@@ -89,8 +89,7 @@ end
 function ref.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc1=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,6)
 	local tc2=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,7)
-	if chk==0 then return Duel.IsExistingMatchingCard(ref.mat2,tp,LOCATION_ONFIELD,0,1,nil) and e:GetHandler():CheckActivateEffect(false,false,false)~=nil and (not tc1 or not tc2) 
-		and not e:GetHandler():IsStatus(STATUS_CHAINING) end
+	if chk==0 then return Duel.IsExistingMatchingCard(ref.refmat1,tp,LOCATION_ONFIELD,0,1,nil) and (not tc1 or not tc2) end
 end
 function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	local tc=e:GetHandler()
