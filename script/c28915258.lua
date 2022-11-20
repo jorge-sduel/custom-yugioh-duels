@@ -97,10 +97,11 @@ function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.SelectTarget(tp,ref.setmat1,tp,LOCATION_ONFIELD,0,1,1,nil)
 	e:SetLabelObject(g:GetFirst())
 	local g2=Duel.SelectTarget(tp,ref.mat2,tp,LOCATION_MZONE,0,1,1,g:GetFirst())
-	g:Merge(g2)
+	--g:Merge(g2)
 	Duel.ConfirmCards(1-tp,tc)
 	Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 Duel.Overlay(tc,g)
+Duel.Overlay(tc,g2)
 end
 --Negate
 function ref.ssfilter(c,tp,att)
