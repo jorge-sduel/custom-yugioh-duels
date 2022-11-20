@@ -111,7 +111,7 @@ function ref.settg(e,tp,eg,ep,ev,re,r,rp,c)
 	local g1=Duel.GetMatchingGroup(ref.spfilter1,tp,LOCATION_MZONE,0,nil)
 	local g2=Duel.GetMatchingGroup(ref.spfilter2,tp,LOCATION_ONFIELD,0,nil)
 	g1:Merge(g2)
-	local g=aux.SelectUnselectGroup(g1,e,tp,2,2,ref.rescon,1,tp,HINTMSG_TOGRAVE)
+	local g=aux.SelectUnselectGroup(g1,e,tp,2,2,ref.rescon,1,tp)
 	if #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)
