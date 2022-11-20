@@ -10,16 +10,16 @@ function cid.initial_effect(c)
 	e1:SetOperation(cid.activate)
 	c:RegisterEffect(e1)
 	--maintain cost
-	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
-	e2:SetCode(EVENT_PHASE+PHASE_END)
-	e2:SetRange(LOCATION_SZONE)
-	e2:SetCountLimit(1)
-	e2:SetCondition(cid.pcond)
-	e2:SetTarget(cid.ptarget)
-	e2:SetOperation(cid.poperation)
-	c:RegisterEffect(e2)
+	--local e2=Effect.CreateEffect(c)
+	--e2:SetDescription(aux.Stringid(id,1))
+	--e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	--e2:SetCode(EVENT_PHASE+PHASE_END)
+	--e2:SetRange(LOCATION_SZONE)
+	--e2:SetCountLimit(1)
+	--e2:SetCondition(cid.pcond)
+	--e2:SetTarget(cid.ptarget)
+	--(e2:SetOperation(cid.poperation)
+	--c:RegisterEffect(e2)
 	--spsummon
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -57,8 +57,8 @@ function cid.fselect(g,mc)
 end
 -----------
 function cid.filter(c,g,e,tp)
-	return c:IsType(TYPE_RITUAL) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,false)
-		and g:CheckWithSumEqual(Card.GetRitualLevel,c:GetLevel(),1,99)
+	return c:IsType(TYPE_RITUAL) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true)
+		and g:CheckWithSumEqual(Card.GetRitualLevel,c:GetLevel()*2,1,99)
 end
 function cid.rfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
@@ -77,12 +77,10 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil,rg,e,tp)
 	local tc=g:GetFirst()
 	if tc then
-		Duel.ConfirmCards(1-tp,tc)
-		Duel.ShuffleHand(tp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-		local sg=rg:SelectWithSumEqual(tp,Card.GetRitualLevel,tc:GetLevel(),1,99)
+		local sg=rg:SelectWithSumEqual(tp,Card.GetRitualLevel,tc:GetLevel()*2,1,99)
 		if Duel.Remove(sg,POS_FACEUP,REASON_EFFECT)~=0 then
-			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
+			Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,false,true,POS_FACEUP)
 		end
 	end
 end
