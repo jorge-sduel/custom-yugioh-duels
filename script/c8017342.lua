@@ -65,7 +65,7 @@ Duel.MoveToField(shg:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
 --ACT IN HAND
 function cid.doubtfilter(c)
-	return c:IsFaceup() or not c.IsEquilibrium
+	return not c.IsEquilibrium
 end
 -------------
 function cid.handcon(e)
