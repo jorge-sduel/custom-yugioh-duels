@@ -111,7 +111,7 @@ end
 --filter
 ---------------
 function cid.pcond(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp and Duel.IsExistingMatchingCard(cid.filter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil)
+	return Duel.GetTurnPlayer()==tp and Duel.IsExistingMatchingCard(cid.dfilter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil)
 end
 function cid.ptarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
