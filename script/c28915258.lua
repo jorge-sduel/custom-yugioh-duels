@@ -8,7 +8,7 @@ function ref.initial_effect(c)
 	c:EnableReviveLimit()
 	Equilibrium.AddProcedure(c)
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x729),ref.mat2)
-	--Set from Extra
+	--[[Set from Extra
 	local e0=Effect.CreateEffect(c)
 	--e0:SetDescription(id,0)
 	e0:SetType(EFFECT_TYPE_IGNITION)
@@ -18,7 +18,7 @@ function ref.initial_effect(c)
 	--e0:SetCondition(ref.setcon)
 	e0:SetTarget(ref.settg)
 	e0:SetOperation(ref.setop)
-	c:RegisterEffect(e0)
+	c:RegisterEffect(e0)]]
 	--Negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
