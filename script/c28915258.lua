@@ -97,6 +97,12 @@ function ref.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	local tc=e:GetHandler()
+	local hc=e:GetLabelObject()
+	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	local tc=g:GetFirst()
+	if tc==hc then tc=g:GetNext() end
+	if hc:IsFaceup() and hc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsRelateToEffect(e)
+then
 	--local g=Duel.SelectTarget(tp,ref.setmat1,tp,LOCATION_ONFIELD,0,1,1,nil)
 	--e:SetLabelObject(g:GetFirst())
 	--local g2=Duel.SelectTarget(tp,ref.mat2,tp,LOCATION_MZONE,0,1,1,g:GetFirst())
@@ -105,7 +111,10 @@ function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 Duel.Overlay(tc,g)
 Duel.Overlay(tc,g2)
+		end
+	end
 end
+
 --Negate
 function ref.ssfilter(c,tp,att)
 	return c:IsSetCard(0x729) and c:IsType(TYPE_SPELL+TYPE_TRAP)
