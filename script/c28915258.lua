@@ -84,6 +84,52 @@ function ref.fusionfix(e,tp,eg,ep,ev,re,r,rp)
 end
 
 --Set From Extra
+function ref.spfilter1(c)
+	return c:IsFaceup() and c:IsLevelBelow(4)
+end
+function ref.spfilter2(c)
+	return c:IsFaceup() and c:IsSetCard(0x729)
+end
+function ref.rescon(sg,e,tp,mg)
+	return sg:IsExists(ref.chk,1,nil,sg)
+end
+function ref.chk(c,sg)
+	return c:IsLevelBelow(4) and sg:IsExists(Card.IsSetCard,1,c,0x729)
+end
+function ref.setcon(e,c)
+	if c==nil then return true end
+	local tp=e:GetHandlerPlayer()
+	local g1=Duel.GetMatchingGroup(ref.spfilter1,tp,LOCATION_MZONE,0,nil)
+	local g2=Duel.GetMatchingGroup(ref.spfilter2,tp,LOCATION_ONFIELD,0,nil)
+	local g=g1:Clone()
+	g:Merge(g2)
+	return Duel.GetLocationCount(tp,LOCATION_PZONE)>0 and #g1>0 and #g2>0 and aux.SelectUnselectGroup(g,e,tp,2,2,ref.rescon,0)
+end
+function ref.settg(e,tp,eg,ep,ev,re,r,rp,c)
+	local c=e:GetHandler()
+	local g1=Duel.GetMatchingGroup(ref.spfilter1,tp,LOCATION_MZONE,0,nil)
+	local g2=Duel.GetMatchingGroup(ref.spfilter2,tp,LOCATION_ONFIELD,0,nil)
+	g1:Merge(g2)
+	local g=aux.SelectUnselectGroup(g1,e,tp,2,2,ref.rescon,1,tp,HINTMSG_TOGRAVE)
+	if #g>0 then
+		g:KeepAlive()
+		e:SetLabelObject(g)
+		return true
+	end
+	return false
+end
+function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
+	local c=e:GetHandler()
+	local g=e:GetLabelObject()
+	if not g then return end
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+Duel.Overlay(c,g)
+end
+
+
+
+
+
 function ref.setcon(c,e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(ref.setmat1,tp,LOCATION_ONFIELD,0,1,nil) and Duel.IsExistingMatchingCard(ref.setmat1,tp,LOCATION_ONFIELD,0,1,nil)
 end
