@@ -91,7 +91,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		mg=mg:Filter(Card.IsCanBeRitualMaterial,tc,tc)
 		local mat=nil
 		if ft>0 then
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 			mat=mg:SelectWithSumGreater(tp,Card.GetRitualLevel,tc:GetLevel()*2,tc)
 		else
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
@@ -102,7 +102,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 			mat:Merge(mat2)
 		end
 		tc:SetMaterial(mat)
-		Duel.ReleaseRitualMaterial(mat)
+		Duel.Remove(mat,POS_FACEUP,REASON_MATERIAL+REASON_RITUAL)
 		Duel.BreakEffect()
 		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,false,true,POS_FACEUP)
 		tc:CompleteProcedure()
