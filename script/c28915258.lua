@@ -69,7 +69,8 @@ function ref.costov(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function ref.setmat1(c)
-	return c:IsSetCard(0x729) and Duel.IsExistingMatchingCard(ref.mat2,tp,LOCATION_MZONE,0,1,c)
+	return c:IsSetCard(0x729)
+-- and Duel.IsExistingMatchingCard(ref.mat2,tp,LOCATION_MZONE,0,1,c)
 end
 function ref.mat2(c)
 	return c:IsType(TYPE_MONSTER) and c:IsLevelBelow(4)
