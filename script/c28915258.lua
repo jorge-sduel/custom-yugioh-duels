@@ -125,7 +125,7 @@ function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 Duel.Overlay(c,g)
 end
-
+--[[
 
 
 
@@ -160,7 +160,7 @@ Duel.Overlay(c,hc)
 --		end
 	end
 end
-
+]]
 --Negate
 function ref.ssfilter(c,tp,att)
 	return c:IsSetCard(0x729) and c:IsType(TYPE_SPELL+TYPE_TRAP)
