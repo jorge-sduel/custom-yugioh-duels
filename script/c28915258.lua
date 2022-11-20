@@ -95,6 +95,7 @@ end
 function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
 	local tc=e:GetHandler()
 	local g=Duel.SelectTarget(tp,ref.setmat1,tp,LOCATION_ONFIELD,0,1,1,nil)
+	e:SetLabelObject(g:GetFirst())
 	local g2=Duel.SelectTarget(tp,ref.mat2,tp,LOCATION_MZONE,0,1,1,g:GetFirst())
 	g:Merge(g2)
 	Duel.ConfirmCards(1-tp,tc)
