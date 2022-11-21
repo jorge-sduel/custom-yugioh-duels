@@ -104,7 +104,7 @@ function ref.setop(e,tp,eg,ep,ev,re,r,rp)
 		local g2=Duel.SelectMatchingCard(tp,ref.thfilter2,tp,LOCATION_MZONE,0,1,1,nil,tp)
 		g1:Merge(g2)
 		Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-		Duel.Overlay(e:GetHandler(),g)
+		Duel.Overlay(e:GetHandler(),g1)
 	end
 end
 --[[
