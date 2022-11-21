@@ -86,7 +86,7 @@ end
 
 --Set From Extra
 function ref.thfilter(c,tp)
-	return c:IsSetCard(0x729) and Duel.IsExistingMatchingCard(ref.thfilter2,tp,LOCATION_DECK,0,1,c)
+	return c:IsSetCard(0x729) and Duel.IsExistingMatchingCard(ref.thfilter2,tp,LOCATION_ONFIELD,0,1,c)
 end
 function ref.thfilter2(c)
 	return c:IsLevelBelow(4) and c:IsMonster()
