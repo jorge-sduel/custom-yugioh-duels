@@ -101,7 +101,7 @@ function ref.setop(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.SelectMatchingCard(tp,ref.thfilter,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
 	if #g1>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-		local g2=Duel.SelectMatchingCard(tp,ref.thfilter2,tp,LOCATION_MZONE,0,1,1,nil,tp)
+		local g2=Duel.SelectMatchingCard(tp,ref.thfilter2,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
 		g1:Merge(g2)
 		Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		Duel.Overlay(e:GetHandler(),g1)
