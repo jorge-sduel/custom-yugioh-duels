@@ -8,7 +8,7 @@ function ref.initial_effect(c)
 	c:EnableReviveLimit()
 	Equilibrium.AddProcedure(c)
 	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x729),ref.mat2)
-	--[[Set from Extra
+	--Set from Extra
 	local e0=Effect.CreateEffect(c)
 	--e0:SetDescription(id,0)
 	e0:SetType(EFFECT_TYPE_IGNITION)
@@ -18,7 +18,7 @@ function ref.initial_effect(c)
 	--e0:SetCondition(ref.setcon)
 	e0:SetTarget(ref.settg)
 	e0:SetOperation(ref.setop)
-	c:RegisterEffect(e0)]]
+	c:RegisterEffect(e0)
 	--Negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
@@ -85,46 +85,27 @@ function ref.fusionfix(e,tp,eg,ep,ev,re,r,rp)
 end
 
 --Set From Extra
-function ref.spfilter1(c)
-	return c:IsFaceup() and c:IsLevelBelow(4)
+function ref.thfilter(c,tp)
+	return c:IsSetCard(0x729) and Duel.IsExistingMatchingCard(ref.thfilter2,tp,LOCATION_DECK,0,1,c)
 end
-function ref.spfilter2(c)
-	return c:IsFaceup() and c:IsSetCard(0x729)
+function ref.thfilter2(c)
+	return c:IsLevelBelow(4) and c:IsMonster()
 end
-function ref.rescon(sg,e,tp,mg)
-	return sg:IsExists(ref.chk,1,nil,sg)
+function ref.settg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(ref.thfilter,tp,LOCATION_MZONE,0,1,nil,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,tp,LOCATION_ONFIELD)
+	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,EFFECT_FLAG_OATH,1)
 end
-function ref.chk(c,sg)
-	return c:IsLevelBelow(4) and sg:IsExists(Card.IsSetCard,1,c,0x729)
-end
-function ref.setcon(e,c)
-	if c==nil then return true end
-	local tp=e:GetHandlerPlayer()
-	local g1=Duel.GetMatchingGroup(ref.spfilter1,tp,LOCATION_MZONE,0,nil)
-	local g2=Duel.GetMatchingGroup(ref.spfilter2,tp,LOCATION_ONFIELD,0,nil)
-	local g=g1:Clone()
-	g:Merge(g2)
-	return #g1>0 and #g2>0 and aux.SelectUnselectGroup(g,e,tp,2,2,ref.rescon,0)
-end
-function ref.settg(e,tp,eg,ep,ev,re,r,rp,c)
-	local c=e:GetHandler()
-	local g1=Duel.GetMatchingGroup(ref.spfilter1,tp,LOCATION_MZONE,0,nil)
-	local g2=Duel.GetMatchingGroup(ref.spfilter2,tp,LOCATION_ONFIELD,0,nil)
-	g1:Merge(g2)
-	local g=aux.SelectUnselectGroup(g1,e,tp,2,2,ref.rescon,1,tp)
-	if #g>0 then
-		g:KeepAlive()
-		e:SetLabelObject(g)
-		return true
+function ref.setop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local g1=Duel.SelectMatchingCard(tp,ref.thfilter,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
+	if #g1>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+		local g2=Duel.SelectMatchingCard(tp,ref.thfilter2,tp,LOCATION_MZONE,0,1,1,nil,tp)
+		g1:Merge(g2)
+		Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+		Duel.Overlay(e:GetHandler(),g)
 	end
-	return false
-end
-function ref.setop(e,tp,eg,ep,ev,re,r,rp,c)
-	local c=e:GetHandler()
-	local g=e:GetLabelObject()
-	if not g then return end
-	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-Duel.Overlay(c,g)
 end
 --[[
 
