@@ -99,7 +99,7 @@ end
 function ref.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g1=Duel.SelectMatchingCard(tp,ref.thfilter,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
-	if #g1>0 then
+	if #g1>0 and Duel.CheckPendulumZones(tp) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g2=Duel.SelectMatchingCard(tp,ref.thfilter2,tp,LOCATION_ONFIELD,0,1,1,nil,tp,g1:GetFirst())
 		g1:Merge(g2)
