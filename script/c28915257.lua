@@ -5,7 +5,7 @@ function ref.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
-	--Counter
+	--[[Counter
 	if not c28915257.global_check then
 		c28915257.global_check=true
 		c28915257[0]=0
@@ -21,7 +21,7 @@ function ref.initial_effect(c)
 		ge2:SetCondition(ref.regcon)
 		ge2:SetOperation(ref.regop)
 		Duel.RegisterEffect(ge2,tp)
-	end
+	end]]
 	--banish
 	local e4=Effect.CreateEffect(c)
 	e4:SetCategory(CATEGORY_REMOVE)
@@ -58,9 +58,24 @@ function ref.regop(e,tp,eg,ep,ev,re,r,rp)
 		tc=eg:GetNext()
 	end
 end
-
+function ref.turnfilter1(c,e,tp,eg,ep,ev,re,r,rp,tid)
+	local te=c:CheckActivateEffect(false,false,false)
+	if c:GetTurnID()~=tid-1 or not c:IsPreviousPosition(POS_FACEUP) then return false end
+	if (c:IsSpell() or c:IsTrap()) and te then
+		if c:IsSetCard(0x95) then
+			local tg=te:GetTarget()
+			return not tg or tg(e,tp,eg,ep,ev,re,r,rp,0)
+		else
+			return true
+		end
+	end
+	return false
+end
+function ref.turnfilter(c,e,tp,eg,ep,ev,re,r,rp,tid)
+	return c:CheckActivateEffect(false,false,false) and c:GetTurnID()~=tid-1 and (c:IsSpell() or c:IsTrap())
+end
 function ref.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local ct=c28915257[2]
+	local ct=Duel.GetMatchingGroupCount(ref.turnfilter,c:GetControler(),LOCATION_GRAVE,0,nil)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsAbleToRemove() end
 	if chk==0 then return (ct>0) and Duel.IsExistingTarget(Card.IsAbleToRemove,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	local g=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,ct,nil)
