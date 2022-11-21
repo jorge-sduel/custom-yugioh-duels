@@ -48,7 +48,7 @@ function ref.regop(e,tp,eg,ep,ev,re,r,rp)
 	c28915257[1-p]=c28915257[1-p]+1
 	--print(c28915257[1-p])
 end
---[[function ref.regop(e,tp,eg,ep,ev,re,r,rp)
+function ref.regop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	while tc do
 		local p=tc:GetReasonPlayer()
@@ -57,7 +57,7 @@ end
 		end
 		tc=eg:GetNext()
 	end
-end]]
+end
 
 function ref.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=c28915257[2]
