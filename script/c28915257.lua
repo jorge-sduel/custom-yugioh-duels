@@ -72,7 +72,7 @@ function ref.turnfilter1(c,e,tp,eg,ep,ev,re,r,rp,tid)
 	return false
 end
 function ref.turnfilter(c,e,tp,eg,ep,ev,re,r,rp,tid)
-	return c:CheckActivateEffect(false,false,false) and c:GetTurnID()~=tid-1 and (c:IsSpell() or c:IsTrap())
+	return c:CheckActivateEffect(false,false,false) and c:GetTurnID()~=tid-1 and (c:IsSpell() or c:IsTrap()) and c:IsPreviousPosition(POS_FACEUP)
 end
 function ref.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=Duel.GetMatchingGroupCount(ref.turnfilter,c:GetControler(),LOCATION_GRAVE,0,nil)
