@@ -52,7 +52,7 @@ function ref.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function ref.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	if ep~=tp then return false end
+	--if ep~=tp then return false end
 	if (r&REASON_EFFECT)~=0 then return rp~=tp end
 -- 	return 
 --e:GetHandler():IsRelateToBattle()
