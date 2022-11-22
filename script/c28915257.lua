@@ -69,7 +69,7 @@ function ref.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function ref.filter(c)
-	return c:IsSetCard(0x729) and c:IsType(TYPE_SPELL)
+	return c:IsSetCard(0x729) and c:IsSpellTrap()
 end
 function ref.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
