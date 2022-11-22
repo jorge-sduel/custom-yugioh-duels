@@ -23,14 +23,14 @@ function ref.initial_effect(c)
 		ge2:SetCondition(ref.regcon)
 		ge2:SetOperation(ref.regop)
 		Duel.RegisterEffect(ge2,tp)
-	end]]
+	end
 	--Can't disable Link Summon if Counterattack is active
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CANNOT_DISABLE_SPSUMMON)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e2:SetCondition(ref.effcon)
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e2)]]
 	--Can't respond Link Summon if Counterattack is active
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
