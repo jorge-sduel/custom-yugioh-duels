@@ -75,7 +75,7 @@ function ref.turnfilter(c,e,tp,eg,ep,ev,re,r,rp,tid)
 	return c:CheckActivateEffect(false,false,false) and c:GetTurnID()~=tid-1 and (c:IsSpell() or c:IsTrap()) and c:IsPreviousPosition(POS_FACEUP)
 end
 function ref.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local ct=Duel.GetMatchingGroupCount(ref.turnfilter,c:GetControler(),LOCATION_GRAVE,0,nil)
+	local ct=Duel.GetMatchingGroupCount(ref.turnfilter,e:GetHandler():GetControler(),LOCATION_GRAVE,0,nil)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsAbleToRemove() end
 	if chk==0 then return (ct>0) and Duel.IsExistingTarget(Card.IsAbleToRemove,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	local g=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,ct,nil)
