@@ -43,7 +43,7 @@ function ref.initial_effect(c)
 	c:RegisterEffect(e2)
 	--atk
 	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetDescription(aux.Stringid(28915257,0))
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCode(EVENT_DAMAGE)
@@ -79,7 +79,7 @@ function ref.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,ct*100)
 end
 function ref.recop(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(c251.filter,tp,LOCATION_GRAVE,0,nil)
+	local ct=Duel.GetMatchingGroupCount(ref.filter,tp,LOCATION_GRAVE,0,nil)
 	Duel.Damage(1-tp,ct*100,REASON_EFFECT)
 end
 
