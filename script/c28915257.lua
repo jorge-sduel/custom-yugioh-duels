@@ -30,6 +30,17 @@ function ref.initial_effect(c)
 	e4:SetTarget(ref.rmtg)
 	e4:SetOperation(ref.rmop)
 	c:RegisterEffect(e4)]]
+	--damage
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(129,0))
+	e2:SetCategory(CATEGORY_DAMAGE)
+	e2:SetType(EFFECT_TYPE_IGNITION)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e2:SetCountLimit(1)
+	e2:SetTarget(ref.rectg)
+	e2:SetOperation(ref.recop)
+	c:RegisterEffect(e2)
 	--atk
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
@@ -57,7 +68,20 @@ function ref.atkop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1)
 	end
 end
-
+function ref.filter(c)
+	return c:IsSetCard(0x729) and c:IsType(TYPE_SPELL)
+end
+function ref.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	local ct=Duel.GetMatchingGroupCount(ref.filter,tp,LOCATION_GRAVE,0,nil)
+	Duel.SetTargetPlayer(1-tp)
+	Duel.SetTargetParam(ct*100)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,ct*100)
+end
+function ref.recop(e,tp,eg,ep,ev,re,r,rp)
+	local ct=Duel.GetMatchingGroupCount(c251.filter,tp,LOCATION_GRAVE,0,nil)
+	Duel.Damage(1-tp,ct*100,REASON_EFFECT)
+end
 
 --[[function ref.resetcount(e,tp,eg,ep,ev,re,r,rp)
 	c28915257[2]=c28915257[Duel.GetTurnPlayer()]
