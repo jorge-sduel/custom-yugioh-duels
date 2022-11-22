@@ -134,7 +134,7 @@ function ref.ssop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local allzones=31
 	local linkzone=e:GetHandler():GetLinkedZone(tp)
-	local zone=c:GetFreeLinkedZone()&0x1f
+	local zone=e:GetHandler():GetFreeLinkedZone()&0x1f
 	if Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,ref.ssfilter,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst()
