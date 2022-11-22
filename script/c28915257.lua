@@ -21,7 +21,7 @@ function ref.initial_effect(c)
 		ge2:SetCondition(ref.regcon)
 		ge2:SetOperation(ref.regop)
 		Duel.RegisterEffect(ge2,tp)
-	end]]
+	end
 	--banish
 	local e4=Effect.CreateEffect(c)
 	e4:SetCategory(CATEGORY_REMOVE)
@@ -29,10 +29,37 @@ function ref.initial_effect(c)
 	e4:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e4:SetTarget(ref.rmtg)
 	e4:SetOperation(ref.rmop)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4)]]
+	--atk
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetCode(EVENT_DAMAGE)
+	e3:SetCondition(ref.atkcon)
+	e3:SetOperation(ref.atkop)
+	c:RegisterEffect(e3)
+end
+function ref.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	if ep~=tp then return false end
+	if (r&REASON_EFFECT)~=0 then return rp~=tp end
+-- 	return 
+--e:GetHandler():IsRelateToBattle()
+end
+function ref.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsFaceup() and c:IsRelateToEffect(e) then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_UPDATE_ATTACK)
+		e1:SetValue(ev)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+		c:RegisterEffect(e1)
+	end
 end
 
-function ref.resetcount(e,tp,eg,ep,ev,re,r,rp)
+
+--[[function ref.resetcount(e,tp,eg,ep,ev,re,r,rp)
 	c28915257[2]=c28915257[Duel.GetTurnPlayer()]
 	--print("Turn Player: ")
 	--print(c28915257[2])
@@ -84,4 +111,4 @@ end
 function ref.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
-end
+end]]
