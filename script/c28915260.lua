@@ -6,7 +6,7 @@ function ref.initial_effect(c)
 	--Link Summon
 	Link.AddProcedure(c,nil,2,3,ref.lcheck)
 	c:EnableReviveLimit()
-	--Counter
+	--[[Counter
 	if not ref.global_check then
 		ref.global_check=true
 		c28915260[0]=0
@@ -23,7 +23,7 @@ function ref.initial_effect(c)
 		ge2:SetCondition(ref.regcon)
 		ge2:SetOperation(ref.regop)
 		Duel.RegisterEffect(ge2,tp)
-	end
+	end]]
 	--Can't disable Link Summon if Counterattack is active
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -134,7 +134,7 @@ function ref.ssop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local allzones=31
 	local linkzone=e:GetHandler():GetLinkedZone(tp)
-	local zone=allzones-linkzone
+	local zone=linkzone-allzones
 	if Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone)<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,ref.ssfilter,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst()
