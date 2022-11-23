@@ -62,12 +62,12 @@ function s.bcon(e,tp,eg,ep,ev,re,r,rp)
 		and rc:IsFaceup() and rc:IsControler(tp) and rc:IsSetCard(0x52)
 end
 function s.btg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local atk=eg:GetFirst():GetBattleTarget():GetAttack()
+	local atk=eg:GetFirst():GetBattleTarget():GetTextAttack()
 	if chk==0 then return atk>0 end
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,atk,1-tp,0)
 end
 function s.bop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	Duel.Damage(1-tp,eg:GetFirst():GetBattleTarget():GetAttack(),REASON_EFFECT)
+	Duel.Damage(1-tp,eg:GetFirst():GetBattleTarget():GetTextAttack(),REASON_EFFECT)
 end
