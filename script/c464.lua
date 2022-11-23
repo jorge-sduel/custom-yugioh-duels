@@ -86,20 +86,23 @@ end
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x52)
 end
+function s.Efilter(c)
+	return c:IsType(TYPE_EQUIP) and c:IsSpell()
+end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then
 		local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_MZONE,0,nil)
 		e:SetLabel(ct)
-		return Duel.IsExistingMatchingCard(aux.FaceupFilter(aux.TRUE),tp,LOCATION_GRAVE,0,1,c)
+		return Duel.IsExistingMatchingCard(s.Efilter,tp,LOCATION_GRAVE,0,1,c) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,c)
 	end
 	local ct=e:GetLabel()
-	local sg=Duel.GetMatchingGroup(aux.FaceupFilter(aux.TRUE),tp,LOCATION_GRAVE,0,c)
+	local sg=Duel.GetMatchingGroup(s.Efilter,tp,LOCATION_GRAVE,0,c)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,sg,ct,0,0)
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_MZONE,0,nil)
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(aux.TRUE),tp,LOCATION_GRAVE,0,e:GetHandler())
+	local g=Duel.GetMatchingGroup(s.Efilter,tp,LOCATION_GRAVE,0,e:GetHandler())
 	if #g>=ct then
 		--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOHAND)
 		local sg=g:Select(tp,1,ct,nil)
