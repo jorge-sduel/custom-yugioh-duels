@@ -95,7 +95,7 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local ct=Duel.GetMatchingGroupCount(s.cfilter,tp,LOCATION_MZONE,0,nil)
 		e:SetLabel(ct)
-		return Duel.IsExistingMatchingCard(s.Efilter,tp,LOCATION_GRAVE,0,1,c) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,c)
+		return Duel.IsExistingMatchingCard(s.Efilter,tp,LOCATION_GRAVE,0,1,c)
 	end
 	local ct=e:GetLabel()
 	local sg=Duel.GetMatchingGroup(s.Efilter,tp,LOCATION_GRAVE,0,c)
