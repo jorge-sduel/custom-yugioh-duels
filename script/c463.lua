@@ -86,6 +86,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	local tc=Duel.SelectMatchingCard(tp,s.revfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 if tc:IsFaceup() and tc:IsRelateToEffect(e) then
 	local e1=Effect.CreateEffect(e:GetHandler())
