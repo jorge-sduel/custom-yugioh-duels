@@ -20,11 +20,11 @@ function s.initial_effect(c)
 	--Burn
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_DAMAGE)
+	--e3:SetCategory(CATEGORY_DAMAGE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_BATTLE_DESTROYING)
 	e3:SetRange(LOCATION_SZONE)
-	e3:SetCountLimit(1)
+	--e3:SetCountLimit(1)
 	e3:SetCondition(s.bcon)
 	e3:SetTarget(s.btg)
 	e3:SetOperation(s.bop)
@@ -65,9 +65,9 @@ function s.btg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local atk=eg:GetFirst():GetBattleTarget():GetAttack()
 	if chk==0 then return atk>0 end
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,atk,1-tp,0)
+	--Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,atk,1-tp,0)
 end
 function s.bop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
-	Duel.Damage(1-tp,eg:GetFirst():GetBattleTarget():GetAttack(),REASON_EFFECT)
+	Duel.Recover(tp,eg:GetFirst():GetBattleTarget():GetAttack(),REASON_EFFECT)
 end
