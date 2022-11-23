@@ -75,12 +75,12 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		sg=sg:Select(tp,ft,ft,nil)
 	end
 	local ct=Duel.SpecialSummon(sg,0,tp,tp,true,true,POS_FACEUP)
-	Duel.SetLP(tp,Duel.GetLP(tp)-ct*1000)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CANNOT_DIRECT_ATTACK)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		sg:RegisterEffect(e1)
+	Duel.SetLP(tp,Duel.GetLP(tp)-ct*1000)
 end
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x52)
