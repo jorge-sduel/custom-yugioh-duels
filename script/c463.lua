@@ -14,6 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 	--Activate
 	local e2=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,1))
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
@@ -23,7 +24,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 --
 	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCategory(CATEGORY_ATKCHANGE)
 	e3:SetCode(EVENT_FREE_CHAIN)
@@ -86,10 +87,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.revfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
+	if g and g:IsRelateToEffect(e) then
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_REVERSE_UPDATE)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	g:RegisterEffect(e1)
+	end
 end
