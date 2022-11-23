@@ -40,7 +40,7 @@ end
 function c267.value(e,c)
 	local g=Duel.GetMatchingGroup(Card.IsMonster,c:GetControler(),0,LOCATION_GRAVE,nil)
 	local ec=e:GetHandler():GetEquipTarget()
-	if ec:IsRace(RACE_FAIRY) then
+	if ec:IsCode(34022290) then
 		return g:GetSum(Card.GetAttack)
 	else
 		return 1000
