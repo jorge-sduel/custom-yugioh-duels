@@ -23,12 +23,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 --
 	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetType(EFFECT_TYPE_QUICK_O)
-	e3:SetCode(EVENT_CUSTOM+511005071)
-	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e3:SetCategory(CATEGORY_ATKCHANGE)
+	e3:SetCode(EVENT_FREE_CHAIN)
+	e3:SetHintTiming(TIMING_DAMAGE_STEP)
 	e3:SetRange(LOCATION_MZONE)
-	--e3:SetTarget(s.target1)
-	e3:SetOperation(s.operation1)
+	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
+	e3:SetOperation(s.activate2)
 	c:RegisterEffect(e3)
 end
 s.listed_series={0x30}
@@ -82,22 +84,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		if tc:GetPreviousLocation()==LOCATION_DECK then Duel.ShuffleDeck(tp) end
 	end
 end
-function s.target1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,0,0)
-end
-function s.operation1(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	--local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) then
-		local e0=Effect.CreateEffect(c)
-		e0:SetType(EFFECT_TYPE_SINGLE)
-		e0:SetCode(EFFECT_UPDATE_ATTACK)
-		e0:SetValue(2*ev)
-		e0:SetReset(RESET_EVENT+RESETS_STANDARD)
-		re:GetHandler():RegisterEffect(e0)
-	end
+function s.activate2(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.SelectMatchingCard(tp,s.revfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,class,e,tp)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_REVERSE_UPDATE)
+	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	g:RegisterEffect(e1)
 end
