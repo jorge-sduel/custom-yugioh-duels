@@ -87,7 +87,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.revfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
-	if g and g:IsRelateToEffect(e) then
+	if g then
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_REVERSE_UPDATE)
