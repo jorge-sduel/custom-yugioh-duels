@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 --
 	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_CUSTOM+511005071)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_MZONE)
@@ -53,10 +53,11 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.costfilter(c,e,tp)
 	if not c:IsType(TYPE_EQUIP) then return false end
-	return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,c,e,tp)
+	return c.listed_names and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,c,e,tp)
 end
 function s.spfilter(c,class,e,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+		and class.listed_names and c:IsCode(table.unpack(class.listed_names))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_ONFIELD,0,1,nil,e,tp) 
@@ -64,15 +65,15 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_ONFIELD,0,1,1,nil,e,tp)
 --	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	--local code=g:GetFirst():GetOriginalCode()
-	--Duel.SetTargetParam(code)
+	local code=g:GetFirst():GetOriginalCode()
+	Duel.SetTargetParam(code)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_DECK)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	--local code=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
-	--local class=Duel.GetMetatable(code)
-	--if class==nil or class.listed_names==nil then return end
+	local code=Duel.GetChainInfo(0,CHAININFO_TARGET_PARAM)
+	local class=Duel.GetMetatable(code)
+	if class==nil or class.listed_names==nil then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil,class,e,tp)
 	local tc=g:GetFirst()
