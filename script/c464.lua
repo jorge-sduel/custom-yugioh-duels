@@ -52,35 +52,36 @@ function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:IsLocation(LOCATION_EXTRA)
 end
 function s.filter(c,e,tp)
-	return c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,ft,nil,e,tp)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,#g,0,0)
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	--Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,tp,500)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
-	if #sg>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
-	if #sg>ft then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		sg=sg:Select(tp,ft,ft,nil)
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,ft,nil,e,tp)
+	if #g>0 then
+		Duel.HintSelection(g)
+		local tc=g:GetFirst()
+		for tc in aux.Next(g) do
+			Duel.SpecialSummonStep(tc,0,tp,tp,true,true,POS_FACEUP)
+			local e1=Effect.CreateEffect(e:GetHandler())
+			e1:SetType(EFFECT_TYPE_SINGLE)
+			e1:SetCode(EFFECT_CANNOT_DIRECT_ATTACK)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+			tc:RegisterEffect(e1)
+		end
+		Duel.SpecialSummonComplete()
+		local ct=#g*1000
+		Duel.BreakEffect()
+		Duel.SetLP(tp,Duel.GetLP(tp)-ct)
 	end
-	local ct=Duel.SpecialSummon(sg,0,tp,tp,true,true,POS_FACEUP)
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_CANNOT_DIRECT_ATTACK)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		sg:RegisterEffect(e1)
-	Duel.SetLP(tp,Duel.GetLP(tp)-ct*1000)
 end
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x52)
