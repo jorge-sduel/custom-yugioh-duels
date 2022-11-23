@@ -37,7 +37,7 @@ function c267.initial_effect(c)
 	e6:SetValue(1)
 	c:RegisterEffect(e6)
 end
-s.listed_names={34022290}
+c267.listed_names={34022290}
 function c267.value(e,c)
 	local g=Duel.GetMatchingGroup(Card.IsMonster,c:GetControler(),0,LOCATION_GRAVE,nil)
 	local ec=e:GetHandler():GetEquipTarget()
