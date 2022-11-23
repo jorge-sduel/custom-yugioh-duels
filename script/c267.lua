@@ -113,7 +113,7 @@ function c267.operation2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c267.value(e,c)
-	local g=Duel.GetMatchingGroup(c267.Afilter,tp,0,LOCATION_GRAVE,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,0,LOCATION_GRAVE,nil)
 		return g:GetSum(Card.GetAttack)
 end
 function c267.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
