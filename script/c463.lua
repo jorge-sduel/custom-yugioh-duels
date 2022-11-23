@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.activate2)
 	c:RegisterEffect(e3)
 end
-s.listed_series={0x30}
+s.listed_series={0x52}
 function s.filter(c,ec)
 	return c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)
 end
