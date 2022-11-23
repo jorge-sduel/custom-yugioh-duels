@@ -86,12 +86,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
-	local d=Duel.SelectMatchingCard(tp,s.revfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
-	--if then return end
+	local tc=Duel.SelectMatchingCard(tp,s.revfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
+if tc:IsFaceup() and tc:IsRelateToEffect(e) then
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_REVERSE_UPDATE)
 	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-	d:RegisterEffect(e1)
+	tc:RegisterEffect(e1)
+	end
 end
