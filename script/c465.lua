@@ -31,8 +31,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,5,e:GetHandler()) end
-	Duel.DiscardHand(tp,Card.IsDiscardable,5,5,REASON_COST+REASON_DISCARD)
+	if chk==0 then
+		local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
+		g:RemoveCard(e:GetHandler())
+		return #g>0 and g:FilterCount(Card.IsDiscardable,nil)==#g
+	end
+	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
+	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
