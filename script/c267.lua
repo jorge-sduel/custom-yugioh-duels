@@ -39,7 +39,12 @@ function c267.initial_effect(c)
 end
 function c267.value(e,c)
 	local g=Duel.GetMatchingGroup(Card.IsMonster,c:GetControler(),0,LOCATION_GRAVE,nil)
+	local ec=e:GetHandler():GetEquipTarget()
+	if ec:IsRace(RACE_FAIRY) then
 		return g:GetSum(Card.GetAttack)
+	else
+		return 1000
+	end
 end
 function c267.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
