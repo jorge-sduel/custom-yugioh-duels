@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	--Activate
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	--~ e1:SetCost(s.cost)
 	e2:SetTarget(s.target)
