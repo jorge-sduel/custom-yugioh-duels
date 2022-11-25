@@ -3,7 +3,7 @@
 local cid,id=GetID()
 function cid.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,nil,Synchro.NonTuner(nil),1,99)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--set trap
 	local e1=Effect.CreateEffect(c)
@@ -53,7 +53,7 @@ function cid.spfilter(c,e,tp)
 end
 --set trap
 function cid.setcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO) and Duel.GetTurnPlayer()==1-tp
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function cid.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.thcfilter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,nil) end
