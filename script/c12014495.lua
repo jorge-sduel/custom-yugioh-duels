@@ -3,7 +3,7 @@
 local cid,id=GetID()
 function cid.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedureLevelFree(c,cid.mfilter,8,2)
+	Xyz.AddProcedure(c,cid.mfilter,8,2)
 	c:EnableReviveLimit()
 	--draw
 	local e1=Effect.CreateEffect(c)
