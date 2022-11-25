@@ -81,5 +81,5 @@ function c12340613.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectTarget(tp,c12340613.thfilter,tp,LOCATION_GRAVE,0,1,2,nil)
 --	if tc and tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
-	end
+--	end
 end
