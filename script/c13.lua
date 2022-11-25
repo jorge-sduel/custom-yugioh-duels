@@ -44,7 +44,7 @@ function c13.activate(e,tp,eg,ep,ev,re,r,rp)
 		tc:SetMaterial(mat)
 		Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 		tc:SetTurnCounter(0)
-		local e1=Effect.CreateEffect(c)
+		--[[local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetRange(LOCATION_MZONE)
@@ -52,7 +52,7 @@ function c13.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCountLimit(1)
 		e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+RESET_END+RESET_SELF_TURN,tc:GetMaterialCount())
 		e1:SetOperation(c13.retop)
-		tc:RegisterEffect(e1)
+		tc:RegisterEffect(e1)]]
 		tc:CompleteProcedure()
 	end
 end
