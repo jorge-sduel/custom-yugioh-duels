@@ -75,8 +75,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.immval(e,te)
-	return te:IsActiveType(TYPE_MONSTER) and te:IsActivated()
-		and te:GetLocation()~=LOCATION_MZONE
+	return te:GetOwner()~=e:GetHandler() and te:IsActiveType(TYPE_MONSTER) and te:IsActivated()
+		and not te:GetOwner():GetLocation()~=LOCATION_MZONE
 end
 function s.bcon(e)
 	local ph=Duel.GetCurrentPhase()
