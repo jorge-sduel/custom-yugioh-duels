@@ -74,11 +74,11 @@ function c12340613.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and c12340613.thfilter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(c12340613.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectTarget(tp,c12340613.thfilter,tp,LOCATION_GRAVE,0,1,2,nil)
+	--local g=Duel.SelectTarget(tp,c12340613.thfilter,tp,LOCATION_GRAVE,0,1,2,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,g:GetCount(),0,0)
 end
 function c12340613.thop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
+	local tc=Duel.SelectTarget(tp,c12340613.thfilter,tp,LOCATION_GRAVE,0,1,2,nil)
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 	end
