@@ -1,7 +1,11 @@
 --Morhai Ignition
+c12340712.IsIgnition=true
+if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") end
 function c12340712.initial_effect(c)
 	c:EnableReviveLimit()
-	--ignition
+	--ignition summon
+	Ignition.AddProcedure(c,c12340712.exfilter,c12340712.ignfilter,1,1)
+	--[[ignition
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -10,7 +14,7 @@ function c12340712.initial_effect(c)
 	e1:SetCondition(c12340712.igncon)
 	e1:SetOperation(c12340712.ignop)
 	e1:SetValue(SUMMON_TYPE_SPECIAL)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]] 
 	--remove fusion type
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -57,8 +61,8 @@ function c12340712.initial_effect(c)
 	e4:SetOperation(c12340712.thop)
 	c:RegisterEffect(e4)
 end
-function c12340712.exfilter(c,sc,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsFaceup() and Duel.GetLocationCountFromEx(tp,tp,c,sc)>0
+function c12340712.exfilter(c)
+	return c:IsType(TYPE_MONSTER) and c:IsFaceup()
 end
 function c12340712.ignfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsLevelAbove(7)
