@@ -82,5 +82,6 @@ function s.bcon(e)
 	local ph=Duel.GetCurrentPhase()
 	--local tp=Duel.GetTurnPlayer()
 	return
--- tp==e:GetHandlerPlayer() and ph>=PHASE_BATTLE_START and ph<=PHASE_BATTLE
+-- tp==e:GetHandlerPlayer() and 
+ph>=PHASE_BATTLE_START and ph<=PHASE_BATTLE
 end
