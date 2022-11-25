@@ -4,7 +4,7 @@ if not IGNITION_IMPORTED then Duel.LoadScript("proc_ignition.lua") end
 function c12340712.initial_effect(c)
 	c:EnableReviveLimit()
 	--ignition summon
-	Ignition.AddProcedure(c,c12340712.exfilter,c12340712.ignfilter,1,1)
+	Ignition.AddProcedure(c,nil,c12340712.ignfilter,1,1)
 	--[[ignition
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
