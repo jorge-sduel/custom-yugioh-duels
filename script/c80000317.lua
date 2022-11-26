@@ -22,7 +22,6 @@ function s.initial_effect(c)
 	e5:SetOperation(s.eqop)
 	c:RegisterEffect(e5)
 end
-s.listed_series={0x107a}
 function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
@@ -35,7 +34,7 @@ function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousPosition(POS_FACEUP) and c:IsReason(REASON_DESTROY) and c:CheckUniqueOnField(tp)
 end
 function s.eqfilter2(c)
-	return c:IsFaceup() and c:IsSetCard(0xbdf) and c:IsRace(RACE_WARRIOR)
+	return c:IsFaceup() and c:IsRace(RACE_WARRIOR)
 end
 function s.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and s.eqfilter2(chkc) end
