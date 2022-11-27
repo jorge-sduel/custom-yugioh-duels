@@ -49,7 +49,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		aux.ToHandOrElse(g,tp,
 			function(c)
-				return g:GetCode()==40591390
+				return 
+--g:GetCode()==40591390
 					and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 					and g:IsCanBeSpecialSummoned(e,1,tp,false,false)
 			end,
