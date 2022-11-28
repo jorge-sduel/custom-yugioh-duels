@@ -366,10 +366,11 @@ function Auxiliary.ConvergentEvolSummonCondition(cd,loc,excon)
 	return 	function(e,c)
 				if excon and not excon(e,c) then return false end
 				if c==nil then return true end
-				return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
---GetLocationCount
-					and (Duel.IsExistingMatchingCard(Auxiliary.ConvergentEvolSummonFilter,c:GetControler(),loc,0,2,nil,cd)
-					or Duel.IsExistingMatchingCard(Auxiliary.ConvergentEvolSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler()))
+				return
+-- Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+--GetLocationCount and
+ Duel.IsExistingMatchingCard(Auxiliary.ConvergentEvolSummonFilter,c:GetControler(),loc,0,2,nil,cd)
+					or Duel.IsExistingMatchingCard(Auxiliary.ConvergentEvolSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler())
 			end
 end
 function Auxiliary.ConvergentEvolSummonTarget(cd,loc)
