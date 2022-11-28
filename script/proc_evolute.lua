@@ -360,7 +360,7 @@ function Auxiliary.ConvergentEvolSummonFilter(c,cd,lc)
 	return (not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)) or c.Is_Evolute
 -- and Duel.GetLocationCountFromEx(tp,tp,c,lc)>0
 end
-function Auxiliary.ConvergentEvolSummonSubstitute(c,cd,tp)
+function Auxiliary.ConvergentEvolSummonSubstitute(c,cd,tp,lc)
 	return c:IsHasEffect(48829461,tp) and c:IsAbleToGraveAsCost()
 end
 function Auxiliary.ConvergentEvolSummonCondition(cd,loc,excon)
