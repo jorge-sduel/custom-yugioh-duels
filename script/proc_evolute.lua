@@ -357,7 +357,7 @@ function Auxiliary.AddConvergentEvolSummonProcedure(c,code,loc,excon)
     c:RegisterEffect(e0)
 end
 function Auxiliary.ConvergentEvolSummonFilter(c,cd)
-	return (not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)) or c.Is_Evolute
+	return ((not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)) or c.Is_Evolute) and Duel.GetLocationCountFromEx(tp,tp,g,sc)>0
 end
 function Auxiliary.ConvergentEvolSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(48829461,tp) and c:IsAbleToGraveAsCost()
