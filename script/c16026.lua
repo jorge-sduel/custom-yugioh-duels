@@ -66,13 +66,13 @@ end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(s.filter,nil,tp,TYPE_LINK)
 	for tc in aux.Next(g) do
-		local e1=Effect.CreateEffect(e:GetHandler())
+		--[[local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_MUST_USE_MZONE)
 		e1:SetTargetRange(0xff,0xff)
 		e1:SetValue(s.frcval(tc:GetCode(),tc:GetSequence()))
 		e1:SetReset(RESET_PHASE+PHASE_END)
-		Duel.RegisterEffect(e1,1-tp)
+		Duel.RegisterEffect(e1,1-tp)]]
 	end
 	Duel.SendtoGrave(g,nil,REASON_EFFECT)
 end
