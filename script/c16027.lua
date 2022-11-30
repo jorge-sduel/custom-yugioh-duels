@@ -21,7 +21,7 @@ e2:SetCode(EVENT_BATTLE_DESTROYED)
 --e2:SetCondition(s.thcon)
 e2:SetTarget(s.thtg)
 e2:SetOperation(s.thop)
-e2:SetCountLimit(1,id+100)
+--e2:SetCountLimit(1,id+100)
 c:RegisterEffect(e2)
 end
 function s.conf(c)
