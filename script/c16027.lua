@@ -71,3 +71,4 @@ Duel.SendtoHand(c,nil,REASON_EFFECT)
 Duel.ConfirmCards(1-tp,c)
  end
 end
+end
