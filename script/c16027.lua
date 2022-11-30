@@ -18,10 +18,11 @@ local e2=Effect.CreateEffect(c)
 e2:SetCategory(CATEGORY_TOHAND)
 e2:SetType(EFFECT_TYPE_ACTIVATE)
 e2:SetCode(EVENT_BATTLE_DESTROYED)
---e2:SetCondition(s.thcon)
+e2:SetRange(LOCATION_GRAVE)
+e2:SetCondition(s.thcon)
 e2:SetTarget(s.thtg)
 e2:SetOperation(s.thop)
---e2:SetCountLimit(1,id+100)
+e2:SetCountLimit(1,id+100)
 c:RegisterEffect(e2)
 end
 function s.conf(c)
@@ -54,7 +55,8 @@ tc:RegisterEffect(e1)
  end
 end
 function s.cfilter(c,tp)
-return c:IsPreviousPosition(POS_DEFENSE) and c:IsPreviousControler(1-tp)
+return c:IsPreviousPosition(POS_DEFENSE)
+-- and c:IsPreviousControler(1-tp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 return eg:IsExists(s.cfilter,1,nil,1-tp)
