@@ -1,15 +1,5 @@
 --Paracyclis Stun Slammer, Thunderforce
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	--deck check
 	local e1=Effect.CreateEffect(c)
@@ -67,7 +57,7 @@ function s.srcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.filter(c)
-	return c:IsSetCard(0x308) and (c:GetLevel()>=8) and c:IsAbleToHand()
+	return c:IsRace(RACE_INSECT) and (c:GetLevel()>=8) and c:IsAbleToHand()
 end
 function s.srtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
