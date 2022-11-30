@@ -54,7 +54,7 @@ tc:RegisterEffect(e1)
  end
 end
 function s.cfilter(c,tp)
-return c:IsPreviousPosition(POS_DEFENSE) and c:IsPreviousControler(tp)
+return c:IsPreviousPosition(POS_DEFENSE) and c:IsPreviousControler(1-tp)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 return eg:IsExists(s.cfilter,1,nil,1-tp)
