@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsLinkSetCard,0x308),2,2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsLinkSetCard,0x308),2,2)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
