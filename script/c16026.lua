@@ -38,7 +38,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if n==1 then
 		typ=TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ+TYPE_PENDULUM
 	elseif n==2 then
-		typ=TYPE_LINK+TYPE_EVOLUTE
+		typ=TYPE_LINK
 	else
 		return
 	end
