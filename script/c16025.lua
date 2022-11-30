@@ -37,7 +37,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,1)
 				tc:RegisterEffect(e1)
 			else
-				Duel.SendtoGrave(tc,nil,REASON_EFFECT)
+				Duel.SendtoGrave(tc,REASON_EFFECT)
 			end
 		end
 	end
