@@ -74,7 +74,7 @@ function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_PHASE+PHASE_END)
 		Duel.RegisterEffect(e1,1-tp)]]
 	end
-	Duel.SendtoGrave(g,nil,REASON_EFFECT)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end
 function s.frcval(code,seq)
 	return function(e,c,fp,rp,r)
