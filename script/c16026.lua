@@ -64,7 +64,7 @@ function s.activate1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
-	local g=eg:Filter(s.filter,nil,tp,TYPE_LINK+TYPE_EVOLUTE)
+	local g=eg:Filter(s.filter,nil,tp,TYPE_LINK)
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
