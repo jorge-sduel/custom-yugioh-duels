@@ -60,7 +60,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.dircon(e,c)
-	return not Duel.IsExistingMatchingCard(Card.IsFaceup,c:GetControler(),0,LOCATION_MZONE,1,nil)
+	return not Duel.IsExistingMatchingCard(Card.IsFaceup,e:GetHandlerPlayer():GetControler(),0,LOCATION_MZONE,1,nil)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
