@@ -1,5 +1,4 @@
 --Paracyclis Poisonous Sting
-local function getID()
 local s,id=GetID()
 function s.initial_effect(c)
 --[[Activate]]
@@ -70,5 +69,4 @@ if c:IsRelateToEffect(e) then
 Duel.SendtoHand(c,nil,REASON_EFFECT)
 Duel.ConfirmCards(1-tp,c)
  end
-end
 end
