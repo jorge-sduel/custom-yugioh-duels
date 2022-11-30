@@ -1,20 +1,10 @@
 --Paracyclisity Swordmaster, X-Anguish
---Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local scard=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return scard,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
 function s.initial_effect(c)
 	--ss once
 	c:SetSPSummonOnce(id)
 	--xyz summon
-	aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsLinkSetCard,0x308),2,99)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x308),2,99)
 	c:EnableReviveLimit()
 	--pos
 	local e1=Effect.CreateEffect(c)
@@ -86,6 +76,6 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,Card.IsFacedown,tp,0,LOCATION_MZONE,1,1,nil)
 	if g:GetCount()>0 then
 		Duel.HintSelection(g)
-		Duel.SendtoGrave(g,nil,REASON_EFFECT)
+		Duel.SendtoGrave(g,REASON_EFFECT)
 	end
 end
