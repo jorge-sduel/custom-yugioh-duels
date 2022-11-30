@@ -16,7 +16,7 @@ c:RegisterEffect(e1)
 --[[Activate]]
 local e2=Effect.CreateEffect(c)
 e2:SetCategory(CATEGORY_TOHAND)
---e2:SetType(EFFECT_TYPE_ACTIVATE)
+e2:SetType(EFFECT_TYPE_SINGLE)
 e2:SetCode(EVENT_BATTLE_DESTROYED)
 e2:SetRange(LOCATION_GRAVE)
 e2:SetCondition(s.thcon)
