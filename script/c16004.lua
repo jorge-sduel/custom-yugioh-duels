@@ -61,9 +61,9 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsRelateToEffect(e) then return end
 	if Duel.SendtoDeck(tc,nil,1,REASON_EFFECT)==0 or not tc:IsLocation(LOCATION_DECK) then return end
 	Duel.BreakEffect()
-	--local g=Duel.GetDeckTopGroup(1-tp,1)
-	--Duel.ConfirmCards(Duel.GetTurnPlayer(),g)
-	--Duel.ConfirmCards(1-Duel.GetTurnPlayer(),g)
+	local g=Duel.GetDeckTopGroup(1-Duel.GetTurnPlayer(),1)
+	Duel.ConfirmCards(Duel.GetTurnPlayer(),g)
+	Duel.ConfirmCards(1-Duel.GetTurnPlayer(),g)
 	local tc=g:GetFirst()
 	if tc:IsType(TYPE_MONSTER) and tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEDOWN_DEFENSE,1-tp)
 		and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 then
