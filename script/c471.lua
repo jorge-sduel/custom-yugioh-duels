@@ -35,9 +35,9 @@ function s.initial_effect(c)
 	e4:SetValue(69243953)
 	c:RegisterEffect(e4)
 end
-function s.filter(c)
-	return c:IsLocation(LOCATION_ONFIELD)
-end
+--function s.filter(c)
+--	return c:IsLocation(LOCATION_ONFIELD)
+--end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and s.filter(chkc) and chkc~=e:GetHandler() end
 	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,0,LOCATION_ONFIELD,1,e:GetHandler()) end
