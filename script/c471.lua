@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetRange(LOCATION_ONFIELD+LOCATION_GRAVE)
-	e4:SetCode(EFFECT_ADD_CODE)
+	e4:SetCode(EFFECT_CHANGE_CODE)
 	e4:SetValue(69243953)
 	c:RegisterEffect(e4)
 end
