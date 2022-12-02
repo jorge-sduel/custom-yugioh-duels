@@ -60,7 +60,7 @@ end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetPreviousEquipTarget()
 	return e:GetHandler():IsReason(REASON_LOST_TARGET) and ec and ec:IsReason(REASON_DESTROY)
-		and ec:IsLocation(LOCATION_GRAVE) and ec:GetReasonPlayer()==1-tp
+		and ec:IsLocation(LOCATION_GRAVE)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
