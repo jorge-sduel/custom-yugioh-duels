@@ -49,7 +49,7 @@ end
 function s.value(e,c)
 		return c:GetBaseAttack()*2
 end
-function s.eqfilter(e,c)
+function s.eqfilter(c)
 		return c:IsSetCard(0x52)
 end
 function s.condition2(e)
