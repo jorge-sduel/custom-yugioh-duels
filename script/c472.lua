@@ -34,6 +34,7 @@ function s.initial_effect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e6:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e6:SetCode(EVENT_TO_GRAVE)
+	e6:SetCondition(s.con)
 	e6:SetTarget(s.tg)
 	e6:SetOperation(s.op)
 	c:RegisterEffect(e6)
@@ -55,6 +56,11 @@ end
 function s.condition2(e)
 	local ec=e:GetHandler():GetEquipTarget()
 	return not ec:IsSetCard(0x52)
+end
+function s.con(e,tp,eg,ep,ev,re,r,rp)
+	local ec=e:GetHandler():GetPreviousEquipTarget()
+	return e:GetHandler():IsReason(REASON_LOST_TARGET) and ec and ec:IsReason(REASON_DESTROY)
+		and ec:IsLocation(LOCATION_GRAVE) and ec:GetReasonPlayer()==1-tp
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
