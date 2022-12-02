@@ -44,7 +44,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.condition(e)
 	local ec=e:GetHandler():GetEquipTarget()
-	return ec:GetSetCard()=0x52
+	return ec:IsSetCard(0x52)
 end
 function s.value(e,c)
 		return c:GetBaseAttack()*2
