@@ -54,7 +54,7 @@ function s.eqfilter(e,c)
 end
 function s.condition2(e)
 	local ec=e:GetHandler():GetEquipTarget()
-	return not ec:GetSetCard()=0x52
+	return not ec:IsSetCard(0x52)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
