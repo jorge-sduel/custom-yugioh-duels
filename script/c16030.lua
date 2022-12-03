@@ -25,10 +25,8 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
-s.listed_series={0x119}
-s.listed_names={CARD_SALAMANGREAT_SANCTUARY}
 function s.matfilter(c,scard,sumtype,tp)
-	return c:IsLevelBelow(4) and c:IsRace(RACE_CYBERSE,scard,sumtype,tp)
+	return c:IsRace(RACE_INSECT,scard,sumtype,tp)
 end
 function s.thfilter(c)
 	return c:IsType(TYPE_SPELL) and c:IsAbleToHand()
