@@ -55,7 +55,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local g=Duel.GetFieldGroup(p,LOCATION_GRAVE,0)
+	local g=Duel.GetFieldGroup(p,LOCATION_REMOVED,0)
 	if g:GetCount()==0 then return end
 	Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
 	Duel.Draw(tp,2,REASON_EFFECT)
