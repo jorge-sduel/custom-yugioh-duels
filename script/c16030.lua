@@ -58,6 +58,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(p,LOCATION_REMOVED,0)
 	if g:GetCount()==0 then return end
 	Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
+	Duel.SendtoDeck(e:GetHandler(),nil,2,REASON_EFFECT)
 	Duel.Draw(tp,2,REASON_EFFECT)
 	Duel.ShuffleDeck(p)
 	Duel.BreakEffect()
