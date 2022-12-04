@@ -53,8 +53,8 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 			sg:RegisterEffect(e1)
 end
 function s.ffilter(c)
-	return not c:IsPosition(POS_FACEDOWN_DEFENSE)
+	return c:IsPosition(POS_FACEDOWN_DEFENSE)
 end
-function s.adval(e,c)
-	return Duel.GetMatchingGroupCount(s.ffilter,tp,LOCATION_MZONE,0,nil)*500
+function s.adval(e,tp)
+	return Duel.GetMatchingGroupCount(s.ffilter,tp,0,LOCATION_MZONE,nil)*500
 end
