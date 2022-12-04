@@ -55,6 +55,6 @@ end
 function s.ffilter(c)
 	return c:IsPosition(POS_FACEDOWN_DEFENSE)
 end
-function s.adval(e,)
+function s.adval(e,c)
 	return Duel.GetMatchingGroupCount(s.ffilter,c:GetControler(),0,LOCATION_MZONE,nil)*500
 end
