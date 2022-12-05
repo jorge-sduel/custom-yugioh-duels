@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_CANNOT_CHANGE_POSITION)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetTargetRange(0,LOCATION_MZONE)
-	e5:SetTarget(s.postg)
+	--e5:SetTarget(s.postg)
 	c:RegisterEffect(e5)
 end
 function s.filter(c)
