@@ -33,14 +33,13 @@ function s.initial_effect(c)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetValue(s.adval)
 	c:RegisterEffect(e4)
+--
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD)
 	e5:SetCode(EFFECT_CANNOT_CHANGE_POSITION)
-	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetTargetRange(0,LOCATION_MZONE)
 	e5:SetTarget(s.postg)
-	--e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,1)
 	c:RegisterEffect(e5)
 end
 function s.filter(c)
@@ -61,6 +60,6 @@ end
 function s.adval(e,c)
 	return Duel.GetMatchingGroupCount(s.ffilter,c:GetControler(),0,LOCATION_MZONE,nil)*500
 end
-function s.postg(c)
-	return c:IsPosition(POS_FACEDOWN_DEFENSE)
+function s.postg(e,c)
+	return e:GetHandler():IsHasCardTarget(c)
 end
