@@ -1,5 +1,4 @@
---究極伝導恐獣
---Ultimate Conductor Tyranno
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
@@ -26,21 +25,21 @@ function s.initial_effect(c)
 	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 	--atk
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_UPDATE_ATTACK)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetValue(s.adval)
+	c:RegisterEffect(e3)
+	--pos limit
 	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_SINGLE)
-	e4:SetCode(EFFECT_UPDATE_ATTACK)
-	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetCode(EFFECT_CANNOT_CHANGE_POSITION)
+	e4:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetValue(s.adval)
+	e4:SetTargetRange(0,LOCATION_MZONE)
 	c:RegisterEffect(e4)
---
-	local e5=Effect.CreateEffect(c)
-	e5:SetType(EFFECT_TYPE_FIELD)
-	e5:SetCode(EFFECT_CANNOT_CHANGE_POSITION)
-	e5:SetRange(LOCATION_MZONE)
-	e5:SetTargetRange(0,LOCATION_MZONE)
-	--e5:SetTarget(s.postg)
-	c:RegisterEffect(e5)
 end
 function s.filter(c)
 	return c:IsFaceup() and c:IsCanTurnSet()
