@@ -60,6 +60,6 @@ end
 function s.adval(e,c)
 	return Duel.GetMatchingGroupCount(s.ffilter,c:GetControler(),0,LOCATION_MZONE,nil)*500
 end
-function s.postg(e,c)
-	return e:GetHandler():IsHasCardTarget(c)
+function s.postg(c)
+	return c:IsPosition(POS_FACEDOWN)
 end
