@@ -39,6 +39,7 @@ function s.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetTargetRange(0,LOCATION_MZONE)
+	e5:SetTarget(s.postg)
 	--e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,1)
 	c:RegisterEffect(e5)
 end
@@ -59,4 +60,7 @@ function s.ffilter(c)
 end
 function s.adval(e,c)
 	return Duel.GetMatchingGroupCount(s.ffilter,c:GetControler(),0,LOCATION_MZONE,nil)*500
+end
+function s.postg(c)
+	return c:IsPosition(POS_FACEDOWN_DEFENSE)
 end
