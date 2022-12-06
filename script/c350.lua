@@ -4,116 +4,86 @@ function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,5,2)
 	c:EnableReviveLimit()
-	local a1=Effect.CreateEffect(c)
-	a1:SetType(EFFECT_TYPE_XMATERIAL)
-	a1:SetCode(EFFECT_UPDATE_ATTACK)
-	a1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	a1:SetValue(300)
-	c:RegisterEffect(a1)
-	local a2=a1:Clone()
-	a2:SetCode(EFFECT_UPDATE_DEFENSE)
-	a2:SetValue(300)
-	c:RegisterEffect(a2)
+	-- Take no battle damage
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_SPECIAL_SUMMON)
-	e1:SetType(EFFECT_TYPE_QUICK_O)
-	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_MZONE)
-	e1:SetCountLimit(1,id)
-	e1:SetTarget(s.target)
-	e1:SetOperation(s.operation)
-	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_END_PHASE)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+	e1:SetCondition(aux.NOT(s.eqcon))
+	e1:SetValue(1)
 	c:RegisterEffect(e1)
+	-- Cannot be destroyed by battle
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
+	e2:SetCondition(s.eqcon)
+	c:RegisterEffect(e2)
+	--special summon
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_RECOVER)
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetRange(LOCATION_EXTRA)
+	e3:SetCode(EVENT_BATTLE_DAMAGE)
+	e3:SetCondition(s.spcon)
+	e3:SetTarget(s.sptg)
+	e3:SetOperation(s.spop)
+	c:RegisterEffect(e3)
+	--recover
+	local e4=Effect.CreateEffect(c)
+	e4:SetCategory(CATEGORY_RECOVER)
+	e4:SetType(EFFECT_TYPE_IGNITION)
+	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCountLimit(1,{id,1})
+	e4:SetCost(s.cost)
+	e4:SetTarget(s.rectg)
+	e4:SetOperation(s.recop)
+	c:RegisterEffect(e4)
 end
-function s.efcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_XYZ
+function s.eqcon(e)
+	return e:GetHandler():GetEquipCount()>0
 end
-function s.efop(e,tp,eg,ep,ev,re,r,rp)
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	return ep==tp
+end
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,ev)
+end
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local rc=c:GetReasonCard()
-	local e1=Effect.CreateEffect(rc)
-	e1:SetDescription(aux.Stringid(id,1))
-	e1:SetCategory(CATEGORY_ATKCHANGE)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCondition(s.atkcon)
-	e1:SetOperation(s.atkop)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-	rc:RegisterEffect(e1,true)
-	local e2=Effect.CreateEffect(rc)
-	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetCode(EFFECT_CANNOT_ACTIVATE)
-	e2:SetRange(LOCATION_MZONE)
-	e2:SetTargetRange(0,1)
-	e2:SetValue(s.aclimit)
-	e2:SetCondition(s.actcon)
-	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-	rc:RegisterEffect(e2,true)
-	if not rc:IsType(TYPE_EFFECT) then
-		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_SINGLE)
-		e2:SetCode(EFFECT_ADD_TYPE)
-		e2:SetValue(TYPE_EFFECT)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		rc:RegisterEffect(e2,true)
-	end
-end
-function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
-end
-function s.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsFaceup() then
+	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 then
+		Duel.Recover(tp,ev,REASON_EFFECT)
+		--Banish it if it leaves the field
 		local e1=Effect.CreateEffect(c)
+		e1:SetDescription(3300)
 		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(300)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
-		c:RegisterEffect(e1)
+		e1:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
+		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CLIENT_HINT)
+		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
+		e1:SetValue(LOCATION_REMOVED)
+		c:RegisterEffect(e1,true)
 	end
 end
-function s.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
+function s.filter(c)
+	return c:IsFaceup() and c:IsSummonType(SUMMON_TYPE_SPECIAL) and c:GetBaseAttack()>0
 end
-function s.actcon(e)
-	return Duel.GetAttacker()==e:GetHandler()
-end
-function s.spfilter(c,e,tp,mc,pg)
-	return c:IsType(TYPE_XYZ) and c:IsRank(e:GetHandler():GetRank()+1) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
-		and mc:IsCanBeXyzMaterial(c,tp) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
-end
-	--Activation legality
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		local c=e:GetHandler()
-		local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
-		return (#pg<=0 or (#pg==1 and pg:IsContains(c)))
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,e:GetHandler(),pg) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
-end
-	--Add 1 "Double or Nothing!", then Xyz summon 1 "Utopia" Xyz monster by using this card, and if you do, double its ATK
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
+function s.rectg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
-	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
-	if not (c:IsFaceup() and c:IsRelateToEffect(e) and c:IsControler(tp) and not c:IsImmuneToEffect(e)) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,c,pg):GetFirst()
-	if not sc then return end
-	Duel.BreakEffect()
-	sc:SetMaterial(c)
-	Duel.Overlay(sc,c)
-	if Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)==0 then return end
-	sc:CompleteProcedure()
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetCode(EFFECT_CANNOT_ACTIVATE)
-	e2:SetRange(LOCATION_MZONE)
-	e2:SetTargetRange(0,1)
-	e2:SetValue(s.aclimit)
-	e2:SetCondition(s.actcon)
-	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-	sc:RegisterEffect(e2,true)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and c:IsControler(tp) and s.filter(chkc) and chkc~=c end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,c) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
+	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,c)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,g:GetFirst():GetBaseAttack())
+end
+function s.recop(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:GetAttack()>0 then
+		Duel.Recover(tp,tc:GetBaseAttack(),REASON_EFFECT)
+	end
+end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
