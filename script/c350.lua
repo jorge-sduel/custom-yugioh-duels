@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e4:SetCost(s.cost)
 	e4:SetTarget(s.rectg)
 	e4:SetOperation(s.recop)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.eqcon(e)
 	return e:GetHandler():GetEquipCount()>0
