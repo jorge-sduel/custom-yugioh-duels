@@ -80,8 +80,7 @@ function s.atkval(e,c)
 end
 function s.spcond(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_NORMAL) and not c:IsAttack(0)
-		and Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated()
+	return c:IsSummonType(SUMMON_TYPE_XYZ)
 end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
