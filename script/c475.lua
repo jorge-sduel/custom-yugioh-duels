@@ -120,3 +120,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc or not tc:IsMonster() then return end
 	if not s.equipop(c,e,tp,tc) then return end
 end
+function s.eqcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
