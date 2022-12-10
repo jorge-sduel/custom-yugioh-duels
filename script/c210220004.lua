@@ -6,7 +6,7 @@ function card.initial_effect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_TO_GRAVE)
-	--e1:SetProperty(EFFECT_FLAG_DELAY)
+	e1:SetProperty(EFFECT_FLAG_DELAY)
 	e1:SetCondition(card.descon)
 	e1:SetTarget(card.destg)
 	e1:SetOperation(card.desop)
@@ -23,7 +23,7 @@ function card.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function card.descon2(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_DECK)
+	return e:GetHandler():IsPreviousLocation(LOCATION_DECK) and e:GetHandler():IsReason(REASON_EFFECT)
 --	and bit.band(r,REASON_EFFECT)~=0
 end
 function card.destg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -40,7 +40,7 @@ function card.desop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function card.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_HAND)
+	return e:GetHandler():IsPreviousLocation(LOCATION_HAND) and e:GetHandler():IsReason(REASON_EFFECT)
 -- and (r&0x4040)==0x4040
 end
 function card.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
