@@ -75,8 +75,8 @@ function s.damop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(1-tp,dam,REASON_EFFECT)
 end
 function s.con(e,c)
-	--if c==nil then return true end
-	return Duel.GetMatchingGroupCount(Card.IsType,e:GetControler(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,TYPE_MONSTER)>=3
+	if c==nil then return true end
+	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,TYPE_MONSTER)>=3
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x52) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
