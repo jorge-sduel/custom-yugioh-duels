@@ -41,7 +41,7 @@ function card.desop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function card.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetPreviousLocation()==LOCATION_HAND and (r&REASON_DISCARD)~=0
+	return e:GetHandler():GetPreviousLocation()==LOCATION_HAND and (r&0x4040)==0x4040
 -- and (r&0x4040)==0x4040
 end
 function card.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
