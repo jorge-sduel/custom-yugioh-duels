@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e2:SetTarget(s.eqtg2)
 	e2:SetOperation(s.eqop2)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
-	--aux.AddEREquipLimit(c,nil,function(ec,_,tp) return ec:IsControler(1-tp) end,s.equipop2,e2)
+	aux.AddEREquipLimit(c,nil,function(ec,_,tp) return ec:IsControler(1-tp) end,s.equipop2,e2)
 end
 s.listed_series={0x56}
 function s.eqval(ec,c,tp)
