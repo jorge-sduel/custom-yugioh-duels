@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e4:SetRange(LOCATION_SZONE)
 	e4:SetCode(EFFECT_SELF_DESTROY)
-	e4:SetCondition(s.sdcon2)
+	e4:SetCondition(s.con)
 	c:RegisterEffect(e4)
 	--spsummon
 	local e5=Effect.CreateEffect(c)
