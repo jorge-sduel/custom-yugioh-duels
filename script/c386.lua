@@ -26,5 +26,6 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp,c)
 	local mi,ma=c:GetTributeRequirement()
 		local g=Duel.GetMatchingGroup(Card.IsCanChangePosition,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
 	local g1=g:Select(tp,mi,mi,true,nil)
+	Duel.ConfirmCards(1-tp,e:GetHandler())
 Duel.ChangePosition(g1,POS_FACEUP_DEFENSE,POS_FACEDOWN_DEFENSE,POS_FACEUP_ATTACK,POS_FACEUP_ATTACK)
 end
