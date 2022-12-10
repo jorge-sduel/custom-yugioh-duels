@@ -19,14 +19,14 @@ c:EnableReviveLimit()
 	--e2:SetRange(LOCATION_HAND)
 	--e2:SetCondition(card.spcon2)
 	--c:RegisterEffect(e2)
-		--negate
+		--[[negate
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(2407234,0))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetTarget(card.target)
 	e3:SetOperation(card.activate)
-	c:RegisterEffect(e3)
+	c:RegisterEffect(e3)]]
 		--damage
 	--local e4=Effect.CreateEffect(c)
 	--e4:SetDescription(aux.Stringid(65830223,0))
