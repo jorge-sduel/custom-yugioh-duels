@@ -37,7 +37,7 @@ function card.desop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function card.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_HAND)	and bit.band(r,REASON_EFFECT)~=0
+	return e:GetHandler():IsPreviousLocation(LOCATION_HAND)
 end
 function card.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end
