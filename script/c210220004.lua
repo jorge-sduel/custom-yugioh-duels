@@ -3,13 +3,14 @@ local card = c210220004
 function card.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(210220004,0))
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_DESTROY)
+	e1:SetCategory(CATEGORY_DESTROY)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_TO_GRAVE)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
-	e1:SetCondition(card.descon)
-	e1:SetTarget(card.destg)
-	e1:SetOperation(card.desop)
+	--e1:SetCountLimit(1,210220004)
+	e1:SetCondition(s.descon)
+	e1:SetTarget(s.destg)
+	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(210220004,0))
@@ -40,7 +41,7 @@ function card.desop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function card.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_HAND) and e:GetHandler():IsReason(REASON_EFFECT)
+	return e:GetHandler():GetPreviousLocation()==LOCATION_HAND and (r&REASON_DISCARD)~=0
 -- and (r&0x4040)==0x4040
 end
 function card.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
