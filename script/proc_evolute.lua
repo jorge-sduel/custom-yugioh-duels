@@ -360,9 +360,9 @@ function Auxiliary.AddConvergentEvolSummonProcedure(c,f,min,max,specialchk,desc)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(LOCATION_EXTRA)
 	if max==nil then max=min end
-	e1:SetCondition(CEv.Condition(f,min,max,specialchk))
-	e1:SetTarget(CEv.Target(f,min,max,specialchk))
-	e1:SetOperation(CEv.Operation(f,min,max,specialchk))
+	e1:SetCondition(Auxiliary.CEvCondition(f,min,max,specialchk))
+	e1:SetTarget(Auxiliary.CEvTarget(f,min,max,specialchk))
+	e1:SetOperation(Auxiliary.CEvOperation(f,min,max,specialchk))
 	e1:SetValue(SUMMON_TYPE_EVOLUTE)
 	c:RegisterEffect(e1)
     --"Gain ATK"
@@ -457,15 +457,15 @@ end
 function Auxiliary.EvoluteStage(c,tp)
 	return c:IsHasEffect(160001127,tp)
 end
-function CEv.ConditionFilter(c,f,lc,tp)
+function Auxiliary.CEvConditionFilter(c,f,lc,tp)
 	return (not f or f(c,lc,SUMMON_TYPE_EVOLUTE,tp))
 end
-function CEv.GetLinkCount(c)
+function Auxiliary.CEvGetLinkCount(c)
 	if c:IsLinkMonster() and c:GetLink()>1 then
 		return 1+0x10000*c:GetLink()
 	else return 1 end
 end
-function CEv.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
+function Auxiliary.CEvCheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	if #sg>maxc then return false end
 	filt=filt or {}
 	sg:AddCard(c)
@@ -482,12 +482,12 @@ function CEv.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 			return false
 		end
 	end
-	local res=CEv.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
+	local res=Auxiliary.CEvCheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 		or (#sg<maxc and mg:IsExists(CEv.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
 	sg:RemoveCard(c)
 	return res
 end
-function CEv.CheckRecursive2(c,tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
+function Auxiliary.CEvCheckRecursive2(c,tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	if #sg>maxc then return false end
 	sg:AddCard(c)
 	for _,filt in ipairs(filt) do
@@ -505,20 +505,20 @@ function CEv.CheckRecursive2(c,tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og
 	end
 	if #(sg2-sg)==0 then
 		if secondg and #secondg>0 then
-			local res=secondg:IsExists(CEv.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)})
+			local res=secondg:IsExists(Auxiliary.CEvCheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)})
 			sg:RemoveCard(c)
 			return res
 		else
-			local res=CEv.CheckGoal(tp,sg,lc,minc,f,specialchk,{table.unpack(filt)})
+			local res=Auxiliary.CEvCheckGoal(tp,sg,lc,minc,f,specialchk,{table.unpack(filt)})
 			sg:RemoveCard(c)
 			return res
 		end
 	end
-	local res=CEv.CheckRecursive2((sg2-sg):GetFirst(),tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
+	local res=Auxiliary.CEvCheckRecursive2((sg2-sg):GetFirst(),tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	sg:RemoveCard(c)
 	return res
 end
-function CEv.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
+function Auxiliary.CEvCheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 	for _,filt in ipairs(filt) do
 		if not sg:IsExists(filt[2],1,nil,filt[3],tp,sg,Group.CreateGroup(),lc,filt[1],1) then
 			return false
@@ -528,7 +528,7 @@ function CEv.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 --#sg>=minc and sg:CheckWithSumEqual(Link.GetLinkCount,lc:GetLink(),#sg,#sg) and 
 (not specialchk or specialchk(sg,lc,SUMMON_TYPE_EVOLUTE,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
-function CEv.Condition(f,minc,maxc,specialchk)
+function Auxiliary.CEvCondition(f,minc,maxc,specialchk)
 	return	function(e,c,must,g,min,max)
 				if c==nil then return true end
 				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
@@ -536,32 +536,32 @@ function CEv.Condition(f,minc,maxc,specialchk)
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 				end
-				local mg=g:Filter(CEv.ConditionFilter,nil,f,c,tp)
+				local mg=g:Filter(Auxiliary.CEvConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
 				if must then mustg:Merge(must) end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
 				min = min or minc
 				max = max or maxc
-				if mustg:IsExists(aux.NOT(CEv.ConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
+				if mustg:IsExists(aux.NOT(Auxiliary.CEvConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
 				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_EVOLUTE)
-				tg:Match(CEv.ConditionFilter,nil,f,c,tp)
+				tg:Match(Auxiliary.CEvConditionFilter,nil,f,c,tp)
 				local mg_tg=mg+tg
 				local res=mg_tg:Includes(mustg) and #mustg<=max
 				if res then
 					if #mustg==max then
 						local sg=Group.CreateGroup()
-						res=mustg:IsExists(CEv.CheckRecursive,1,sg,tp,sg,mg_tg,c,min,max,f,specialchk,mg,emt)
+						res=mustg:IsExists(Auxiliary.CEvCheckRecursive,1,sg,tp,sg,mg_tg,c,min,max,f,specialchk,mg,emt)
 					elseif #mustg<max then
 						local sg=mustg
-						res=mg_tg:IsExists(CEv.CheckRecursive,1,sg,tp,sg,mg_tg,c,min,max,f,specialchk,mg,emt)
+						res=mg_tg:IsExists(Auxiliary.CEvCheckRecursive,1,sg,tp,sg,mg_tg,c,min,max,f,specialchk,mg,emt)
 					end
 				end
 				aux.DeleteExtraMaterialGroups(emt)
 				return res
 			end
 end
-function CEv.Target(f,minc,maxc,specialchk)
+function Auxiliary.CEvTarget(f,minc,maxc,specialchk)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c,must,g,min,max)
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
@@ -570,11 +570,11 @@ function CEv.Target(f,minc,maxc,specialchk)
 				if max and max > maxc then return false end
 				min = min or minc
 				max = max or maxc
-				local mg=g:Filter(CEv.ConditionFilter,nil,f,c,tp)
+				local mg=g:Filter(Auxiliary.CEvConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
 				if must then mustg:Merge(must) end
 				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_EVOLUTE)
-				tg:Match(CEv.ConditionFilter,nil,f,c,tp)
+				tg:Match(Auxiliary.CEvConditionFilter,nil,f,c,tp)
 				local sg=Group.CreateGroup()
 				local finish=false
 				local cancel=false
@@ -583,11 +583,11 @@ function CEv.Target(f,minc,maxc,specialchk)
 				while #sg<max do
 					local filters={}
 					if #sg>0 then
-						CEv.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg_tg,mg_tg,c,min,max,f,specialchk,mg,emt,filters)
+						Auxiliary.CEvCheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg_tg,mg_tg,c,min,max,f,specialchk,mg,emt,filters)
 					end
-					local cg=mg_tg:Filter(CEv.CheckRecursive,sg,tp,sg,mg_tg,c,min,max,f,specialchk,mg,emt,{table.unpack(filters)})
+					local cg=mg_tg:Filter(Auxiliary.CEvCheckRecursive,sg,tp,sg,mg_tg,c,min,max,f,specialchk,mg,emt,{table.unpack(filters)})
 					if #cg==0 then break end
-					finish=#sg>=min and #sg<=max and CEv.CheckGoal(tp,sg,c,min,f,specialchk,filters)
+					finish=#sg>=min and #sg<=max and Auxiliary.CEvCheckGoal(tp,sg,c,min,f,specialchk,filters)
 					cancel=not og and Duel.IsSummonCancelable() and #sg==0
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_LMATERIAL)
 					local tc=Group.SelectUnselect(cg,sg,tp,finish,cancel,1,1)
@@ -602,7 +602,7 @@ function CEv.Target(f,minc,maxc,specialchk)
 				end
 				if #sg>0 then
 					local filters={}
-					CEv.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg_tg,mg_tg,c,min,max,f,specialchk,mg,emt,filters)
+					Auxiliary.CEvCheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg_tg,mg_tg,c,min,max,f,specialchk,mg,emt,filters)
 					sg:KeepAlive()
 					e:SetLabelObject({sg,filters,emt})
 					return true
@@ -612,7 +612,7 @@ function CEv.Target(f,minc,maxc,specialchk)
 				end
 			end
 end
-function CEv.Operation(f,minc,maxc,specialchk)
+function Auxiliary.CEvOperation(f,minc,maxc,specialchk)
 	return	function(e,tp,eg,ep,ev,re,r,rp,c,must,g,min,max)
 				local g,filt,emt=table.unpack(e:GetLabelObject())
 				for _,ex in ipairs(filt) do
