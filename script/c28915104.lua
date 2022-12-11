@@ -97,7 +97,7 @@ end
 function ref.hspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	return Duel.CheckReleaseGroup(tp,ref.hspfilter,1,false,1,true,c,tp,nil,false,nil,tp,c)
+	return Duel.CheckReleaseGroup(tp,ref.hspfilter,1,false,99,true,c,tp,nil,false,nil,tp,c)
 end
 function ref.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local g=Duel.SelectReleaseGroup(tp,ref.hspfilter,1,99,false,true,true,c,nil,nil,false,nil,tp,c)
