@@ -96,10 +96,10 @@ end
 function ref.hspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	return Duel.CheckReleaseGroup(tp,ref.hspfilter,1,false,1,true,c,tp,nil,false,nil,tp,c)
+	return Duel.CheckGroup(tp,ref.hspfilter,1,false,1,true,c,tp,nil,false,nil,tp,c)
 end
 function ref.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
-	local g=Duel.SelectReleaseGroup(tp,ref.hspfilter,1,99,false,true,true,c,nil,nil,false,nil,tp,c)
+	local g=Duel.SelectGroup(tp,ref.hspfilter,1,99,false,true,true,c,nil,nil,false,nil,tp,c)
 	if g then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -111,6 +111,6 @@ function ref.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
 		c:SetMaterial(g)
-	Duel.Release(g,REASON_COST)
+	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
 	g:DeleteGroup()
 end
