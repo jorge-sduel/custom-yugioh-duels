@@ -97,7 +97,7 @@ end
 function ref.hspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	return Duel.IsExistingMatchingCard(ref.hspfilter,tp,LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(ref.hspfilter,c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
 function ref.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local g=Duel.SelectMatchingCard(tp,ref.hspfilter,tp,LOCATION_MZONE,0,1,99,nil,e,tp)
