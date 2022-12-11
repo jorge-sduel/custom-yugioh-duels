@@ -483,7 +483,7 @@ function Auxiliary.CEvCheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt
 		end
 	end
 	local res=Auxiliary.CEvCheckGoal(tp,sg,lc,minc,f,specialchk,filt)
-		or (#sg<maxc and mg:IsExists(CEv.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
+		or (#sg<maxc and mg:IsExists(Auxiliary.CEvCheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
 	sg:RemoveCard(c)
 	return res
 end
