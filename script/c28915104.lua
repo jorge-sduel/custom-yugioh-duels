@@ -8,7 +8,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	--Convergent Evolute
---aux.AddConvergentEvolSummonProcedure(c,ref.matfilter1,LOCATION_ONFIELD)
+aux.AddConvergentEvolSummonProcedure(c,ref.matfilter1,LOCATION_ONFIELD)
 	--Nontarget
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -96,10 +96,10 @@ end
 function ref.hspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	return Duel.CheckGroup(tp,ref.hspfilter,1,false,1,true,c,tp,nil,false,nil,tp,c)
+	return Duel.CheckReleaseGroup(tp,ref.hspfilter,1,false,1,true,c,tp,nil,false,nil,tp,c)
 end
 function ref.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
-	local g=Duel.SelectGroup(tp,ref.hspfilter,1,99,false,true,true,c,nil,nil,false,nil,tp,c)
+	local g=Duel.SelectReleaseGroup(tp,ref.hspfilter,1,99,false,true,true,c,nil,nil,false,nil,tp,c)
 	if g then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -111,6 +111,6 @@ function ref.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
 		c:SetMaterial(g)
-	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
+	Duel.Release(g,REASON_MATERIAL+REASON_EVOLUTE)
 	g:DeleteGroup()
 end
