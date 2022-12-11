@@ -9,7 +9,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:EnableReviveLimit()
 	--Convergent Evolute
 	c:SetSPSummonOnce(id)
-aux.AddConvergentEvolSummonProcedure(c,nil,LOCATION_ONFIELD)
+aux.AddConvergentEvolSummonProcedure(c,nil,1,99)
 	c:EnableReviveLimit()
 	--Effect 0
 	local e0=Effect.CreateEffect(c)
