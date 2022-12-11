@@ -8,7 +8,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
 	--Convergent Evolute
-aux.AddConvergentEvolSummonProcedure(c,nil,2,99)
+aux.AddConvergentEvolSummonProcedure(c,nil,2,99,ref.matfilter1)
 	--Nontarget
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -46,7 +46,7 @@ aux.AddConvergentEvolSummonProcedure(c,nil,2,99)
 	c:RegisterEffect(e12)]]
 end
 function ref.matfilter1(c,ec,tp)
-	return c:IsAttribute(ATTRIBUTE_FIRE) or c:IsRace(RACE_WARRIOR)
+	return c:IsAttribute(ATTRIBUTE_FIRE)
 end
 function ref.matfilter2(c,ec,tp)
 	return c:IsRace(RACE_WARRIOR)
