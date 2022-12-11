@@ -33,6 +33,16 @@ aux.AddConvergentEvolSummonProcedure(c,ref.matfilter1,LOCATION_ONFIELD)
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
 	c:RegisterEffect(e10)
+	--spsummon
+	local e12=Effect.CreateEffect(c)
+	e12:SetType(EFFECT_TYPE_FIELD)
+	e12:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e12:SetCode(EFFECT_SPSUMMON_PROC)
+	e12:SetRange(LOCATION_EXTRA)
+	e12:SetCondition(ref.hspcon)
+	e12:SetTarget(ref.hsptg)
+	e12:SetOperation(ref.hspop)
+	c:RegisterEffect(e12)
 end
 function ref.matfilter1(c,ec,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) or c:IsRace(RACE_WARRIOR)
@@ -79,4 +89,27 @@ function ref.tgop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.RegisterEffect(e2,tp)
 		end
 	end
+end
+function ref.hspfilter(c,tp,sc)
+	return c:IsType(TYPE_MONSTER,sc,MATERIAL_SYNCHRO,tp) and Duel.GetLocationCountFromEx(tp,tp,c,sc)>0
+end
+function ref.hspcon(e,c)
+	if c==nil then return true end
+	local tp=c:GetControler()
+	return Duel.CheckReleaseGroup(tp,ref.hspfilter,1,false,1,true,c,tp,nil,false,nil,tp,c)
+end
+function ref.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
+	local g=Duel.SelectReleaseGroup(tp,ref.hspfilter,1,99,false,true,true,c,nil,nil,false,nil,tp,c)
+	if g then
+		g:KeepAlive()
+		e:SetLabelObject(g)
+	return true
+	end
+	return false
+end
+function ref.hspop(e,tp,eg,ep,ev,re,r,rp,c)
+	local g=e:GetLabelObject()
+	if not g then return end
+	Duel.Release(g,REASON_COST)
+	g:DeleteGroup()
 end
