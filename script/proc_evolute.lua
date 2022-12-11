@@ -458,7 +458,7 @@ function Auxiliary.EvoluteStage(c,tp)
 	return c:IsHasEffect(160001127,tp)
 end
 function CEv.ConditionFilter(c,f,lc,tp)
-	return c:IsCanBeLinkMaterial(lc,tp) and (not f or f(c,lc,SUMMON_TYPE_LINK|MATERIAL_LINK,tp))
+	return (not f or f(c,lc,SUMMON_TYPE_EVOLUTE,tp))
 end
 function CEv.GetLinkCount(c)
 	if c:IsLinkMonster() and c:GetLink()>1 then
