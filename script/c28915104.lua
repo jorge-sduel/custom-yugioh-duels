@@ -45,6 +45,9 @@ aux.AddConvergentEvolSummonProcedure(c,nil,2,99)
 	e12:SetOperation(ref.hspop)
 	c:RegisterEffect(e12)]]
 end
+function ref.lcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE,lc,sumtype,tp)
+end
 function ref.matfilter1(c,ec,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE)
 end
