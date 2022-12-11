@@ -539,9 +539,10 @@ function Auxiliary.CEvCondition(f,minc,maxc,specialchk)
 				local mg=g:Filter(Auxiliary.CEvConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
 				if must then mustg:Merge(must) end
-				if min and min < minc then return false end
+				--if min and min < minc then return false end
 				if max and max > maxc then return false end
-				min = min or minc
+				min = min
+-- or minc
 				max = max or maxc
 				if mustg:IsExists(aux.NOT(Auxiliary.CEvConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
 				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_EVOLUTE)
