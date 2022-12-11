@@ -92,7 +92,7 @@ function ref.tgop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function ref.hspfilter(c,tp,sc)
-	return c:IsType(TYPE_MONSTER) and Duel.GetLocationCountFromEx(tp,tp,c,sc)>0
+	return c:IsType(TYPE_MONSTER) and Duel.GetLocationCountFromEx(c:GetControler(),c:GetControler(),c,sc)>0
 end
 function ref.hspcon(e,c)
 	if c==nil then return true end
