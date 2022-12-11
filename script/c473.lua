@@ -42,9 +42,9 @@ function s.initial_effect(c)
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(302,2))
 	e5:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e5:SetType(EFFECT_TYPE_QUICK_O)
-	e5:SetRange(LOCATION_MZONE)
-	e5:SetCode(EVENT_FREE_CHAIN)
+	e5:SetType(EFFECT_TYPE_IGNITION)
+	e5:SetRange(LOCATION_SZONE)
+	--e5:SetCode(EVENT_FREE_CHAIN)
 	e5:SetCountLimit(1)
 	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e5:SetTarget(s.sptg)
@@ -76,7 +76,7 @@ function s.damop2(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.con(e,c)
 	if c==nil then return true end
-	return not Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,TYPE_MONSTER)>=3
+	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,nil,TYPE_MONSTER)<3
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x52) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
