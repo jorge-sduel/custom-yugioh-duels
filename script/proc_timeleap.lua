@@ -18,7 +18,7 @@ condition if Timeleap summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_TIMELEAP
 ]]
 --Reunion Summon
-function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
+function Timeleap.AddProcedure(c,f,min,max,excon,specialchk,opp,loc,send)
     -- opp==true >> you can use opponent monsters as materials (default false)
     -- loc default LOCATION_MZONE
 	-- send materials:
@@ -40,7 +40,7 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(LOCATION_EXTRA)
-	e1:SetCondition(Timeleap.Condition(f,min,max,specialchk,opp,loc,send))
+	e1:SetCondition(Timeleap.Condition(f,min,max,excon,specialchk,opp,loc,send))
 	e1:SetTarget(Timeleap.Target(f,min,max,specialchk,opp,loc,send))
 	e1:SetOperation(Timeleap.Operation(f,min,max,specialchk,opp,loc,send))
     e1:SetValue(SUMMON_TYPE_TIMELEAP)
@@ -143,8 +143,9 @@ function Timeleap.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 	return #sg>=minc and sg:CheckWithSumEqual(Timeleap.GetTimeleapCount,lc:GetLevel()-1,#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
-function Timeleap.Condition(f,minc,maxc,specialchk,opp,loc,send)
+function Timeleap.Condition(f,minc,maxc,excon,specialchk,opp,loc,send)
 	return	function(e,c,must,g,min,max)
+                                if excon and not excon(e,c) then return false end
 				if c==nil then return true end
 				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
 				local tp=c:GetControler()
