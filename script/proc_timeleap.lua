@@ -369,9 +369,9 @@ function Auxiliary.TleapSummonCondition(cd,loc,excon)
 	return 	function(e,c)
 				if excon and not excon(e,c) then return false end
 				if c==nil then return true end
-				return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-					and Duel.IsExistingMatchingCard(Auxiliary.TleapSummonFilter,c:GetControler(),loc,0,1,nil,cd)
-					or Duel.IsExistingMatchingCard(Auxiliary.TleapSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler())
+				return aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,0)
+					--and Duel.IsExistingMatchingCard(Auxiliary.TleapSummonFilter,c:GetControler(),loc,0,1,nil,cd)
+					--or Duel.IsExistingMatchingCard(Auxiliary.TleapSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler())
 			end
 end
 function Auxiliary.TleapSummonTarget(cd,loc)
