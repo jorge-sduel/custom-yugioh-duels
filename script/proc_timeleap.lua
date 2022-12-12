@@ -359,7 +359,7 @@ function Auxiliary.AddTimeleapProcedure(c,code,loc,excon)
 	e1:SetOperation(Auxiliary.TleapSummonOperation(code,loc))
 	c:RegisterEffect(e1)
 end
-function Auxiliary.TleapSummonFilter(c,cd,lc,tp)
+function Auxiliary.TleapSummonFilter(c,cd)
 	return not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
 function Auxiliary.TleapSummonSubstitute(c,cd,tp)
