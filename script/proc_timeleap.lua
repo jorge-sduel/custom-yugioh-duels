@@ -359,12 +359,12 @@ function Auxiliary.AddTimeleapProcedure(c,code,loc,excon)
 	e1:SetOperation(Timeleap.hspop)
 	c:RegisterEffect(e1)
 end
-function Auxiliary.TleapSummonFilter(c,cd)
+--[[function Auxiliary.TleapSummonFilter(c,cd)
 	return not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
 function Auxiliary.TleapSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(4882946100,tp) and c:IsAbleToGraveAsCost()
-end
+end]]
 function Auxiliary.TleapSummonCondition(cd,loc,excon)
 	return 	function(e,c)
 				if excon and not excon(e,c) then return false end
@@ -375,7 +375,7 @@ function Auxiliary.TleapSummonCondition(cd,loc,excon)
 	return aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,0)
 			end
 end
-function Tleap.SummonTarget(e,tp,eg,ep,ev,re,r,rp,chk,c)
+--[[function Tleap.SummonTarget(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	--return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
@@ -392,4 +392,4 @@ function Tleap.SummonOperation(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	Duel.Remove(sg,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
-end
+end]]
