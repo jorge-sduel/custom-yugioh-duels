@@ -394,4 +394,3 @@ function Auxiliary.TleapSummonOperation(cd,loc)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
 end
-end
