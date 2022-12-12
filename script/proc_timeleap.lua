@@ -375,7 +375,7 @@ function Auxiliary.TleapSummonCondition(cd,loc,excon)
 	return aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,0)
 			end
 end
-function Auxiliary.TleapSummonTarget(e,tp,eg,ep,ev,re,r,rp,chk,c)
+function Tleap.SummonTarget(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	--return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
