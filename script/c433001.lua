@@ -57,7 +57,7 @@ aux.AddTimeleapProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_F
 	c:RegisterEffect(e4)
 end
 function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0
+	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_HAND,0)==0
 end
 function cid.sscon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
