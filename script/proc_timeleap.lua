@@ -388,9 +388,8 @@ function Auxiliary.TleapSummonTarget(cd,loc)
 	end
 end
 function Auxiliary.TleapSummonOperation(cd,loc)
-		local sg=e:GetLabelObject()
+	local sg=e:GetLabelObject()
 	Duel.Remove(sg,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
-			end
 end
