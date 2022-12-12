@@ -378,7 +378,7 @@ function Auxiliary.TleapSummonTarget(cd,loc)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
 				local g=Duel.GetMatchingGroup(Auxiliary.TleapSummonFilter,tp,loc,0,nil,cd)
 				g:Merge(Duel.GetMatchingGroup(Auxiliary.TleapSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,c:GetControler()))
-				local aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,0)
+				local sg=aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,0)
 				if #sg>0 then
 					sg:KeepAlive()
 					e:SetLabelObject(sg)
