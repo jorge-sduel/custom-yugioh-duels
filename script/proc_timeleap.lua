@@ -34,7 +34,7 @@ function Timeleap.AddProcedure(c,f,min,max,excon,specialchk,opp,loc,send)
 		mt.timeleap_type=1
 		mt.timeleap_parameters={c,f,min,max,control,location,operation}
 	end
-	local e1=Effect.CreateEffect(c)
+	--[[local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetDescription(1181)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
@@ -44,6 +44,16 @@ function Timeleap.AddProcedure(c,f,min,max,excon,specialchk,opp,loc,send)
 	e1:SetTarget(Timeleap.Target(f,min,max,specialchk,opp,loc,send))
 	e1:SetOperation(Timeleap.Operation(f,min,max,specialchk,opp,loc,send))
     e1:SetValue(SUMMON_TYPE_TIMELEAP)
+	c:RegisterEffect(e1)]]
+	--spsummon
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetRange(LOCATION_EXTRA)
+	e1:SetCondition(Timeleap.hspcon)
+	e1:SetTarget(Timeleap.hsptg)
+	e1:SetOperation(Timeleap.hspop)
 	c:RegisterEffect(e1)
 	--Special summon
 	local e2=Effect.CreateEffect(c)
@@ -305,4 +315,35 @@ function Timeleap.Future(e,tp,eg,ep,ev,re,r,rp)
 end
 function Timeleap.Removecon(e,tp,eg,ep,ev,re,r,rp)
 	return not c:IsHasEffect(395)
+end
+function Timeleap.spfilter(c,f,lc,tp)
+	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and c:IsAbleToRemoveAsCost()
+end
+function Timeleap.rescon(sg,e,tp,mg)
+	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0 and sg:FilterCount(Card.IsLocation,nil,LOCATION_HAND)~=#sg
+end
+function Timeleap.hspcon(e,c,excon)
+                                if excon and not excon(e,c) then return false end
+	if c==nil then return true end
+	local tp=c:GetControler()
+	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
+	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_HAND) then return false end
+	return aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,0)
+end
+function Timeleap.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
+	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
+	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
+	if #sg > 0 then
+		sg:KeepAlive()
+		e:SetLabelObject(sg)
+		return true
+	else
+		return false
+	end
+end
+function Timeleap.hspop(e,tp,eg,ep,ev,re,r,rp,c)
+	local sg=e:GetLabelObject()
+	Duel.Remove(sg,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
+	c:SetMaterial(sg)
+	sg:DeleteGroup()
 end
