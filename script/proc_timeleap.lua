@@ -322,7 +322,6 @@ function Timeleap.rescon(sg,e,tp,mg)
 	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0 and sg:FilterCount(Card.IsLocation,nil,LOCATION_HAND)~=#sg
 end
 function Timeleap.hspcon(e,c,excon)
-                                if excon and not excon(e,c) then return false end
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
