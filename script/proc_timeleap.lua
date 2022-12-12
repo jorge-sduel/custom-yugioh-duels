@@ -319,7 +319,8 @@ function Timeleap.spfilter(c,f,lc,tp)
 	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and c:IsAbleToRemoveAsCost()
 end
 function Timeleap.rescon(sg,e,tp,mg)
-	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0 and sg:FilterCount(Card.IsLocation,nil,LOCATION_HAND)~=#sg
+	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
+-- and sg:FilterCount(Card.IsLocation,nil,LOCATION_HAND)~=#sg
 end
 function Timeleap.hspcon(e,c,excon)
 	if c==nil then return true end
@@ -344,4 +345,56 @@ function Timeleap.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Remove(sg,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
+end
+function Auxiliary.AddTimeleapProcedure(c,code,loc,excon)
+	--special summon
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e1:SetRange(LOCATION_EXTRA)
+    e1:SetValue(SUMMON_TYPE_TIMELEAP)
+	e1:SetCondition(Auxiliary.TleapSummonCondition(code,loc,excon))
+	e1:SetTarget(Auxiliary.TleapSummonTarget(code,loc))
+	e1:SetOperation(Auxiliary.TleapSummonOperation(code,loc))
+	c:RegisterEffect(e1)
+end
+function Auxiliary.TleapSummonFilter(c,cd,lc,tp)
+	return not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)
+end
+function Auxiliary.TleapSummonSubstitute(c,cd,tp)
+	return c:IsHasEffect(4882946100,tp) and c:IsAbleToGraveAsCost()
+end
+function Auxiliary.TleapSummonCondition(cd,loc,excon)
+	return 	function(e,c)
+				if excon and not excon(e,c) then return false end
+				if c==nil then return true end
+				return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+					and (Duel.IsExistingMatchingCard(Auxiliary.TleapSummonFilter,c:GetControler(),loc,0,1,nil,cd)
+					or Duel.IsExistingMatchingCard(Auxiliary.TleapSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler()))
+			end
+end
+function Auxiliary.TleapSummonTarget(cd,loc)
+	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
+				local g=Duel.GetMatchingGroup(Auxiliary.TleapSummonFilter,tp,loc,0,nil,cd)
+				g:Merge(Duel.GetMatchingGroup(Auxiliary.TleapSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,c:GetControler()))
+				local aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,0)
+				if #sg>0 then
+					sg:KeepAlive()
+					e:SetLabelObject(sg)
+					return true
+				end
+				return false
+			end
+end
+function Auxiliary.TleapSummonOperation(cd,loc)
+	return	function(e,tp,eg,ep,ev,re,r,rp,c)
+				local g=e:GetLabelObject()
+				if not g then return end
+				local tc=g:GetFirst()
+				if tc:IsHasEffect(4882946100,tp) then tc:IsHasEffect(48829461,tp):UseCountLimit(tp) end
+		c:SetMaterial(tc)
+				Duel.Remove(sg,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
+				g:DeleteGroup()
+			end
 end
