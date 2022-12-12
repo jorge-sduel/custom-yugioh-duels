@@ -330,8 +330,8 @@ function Timeleap.hspcon(e,c,excon)
 	return aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,0)
 end
 function Timeleap.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
-	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
-	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
+	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_MZONE,0,nil)
+	local sg=aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #sg > 0 then
 		sg:KeepAlive()
 		e:SetLabelObject(sg)
