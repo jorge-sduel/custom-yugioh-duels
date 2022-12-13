@@ -62,9 +62,8 @@ aux.AddTimeleapProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_W
 	e4:SetOperation(cid.desop)
 	c:RegisterEffect(e4)
 end
-function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.GetFieldGroupCount(tp,0,LOCATION_ONFIELD)-Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0)>=3
+function cid.TimeCost(e)
+	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),0,LOCATION_ONFIELD)-Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_ONFIELD,0)>=3
 end
 function cid.armacon(e)
      return Duel.GetAttacker()==e:GetHandler()
