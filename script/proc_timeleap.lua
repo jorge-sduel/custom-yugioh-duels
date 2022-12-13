@@ -394,7 +394,7 @@ function Auxiliary.TleapSummonCondition(cd,loc,excon)
 				if excon and not excon(e,c) then return false end
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_MZONE,0,nil)
+	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_MZONE,0,nil,cd)
 	--if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_HAND) then return false end
 	return aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,0)
 			end
