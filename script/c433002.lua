@@ -63,8 +63,8 @@ aux.AddTimeleapProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_W
 	e4:SetOperation(cid.drawop)
 	c:RegisterEffect(e4)
 	end
-function cid.TimeCost(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>=3
+function cid.TimeCost(e)
+	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_HAND,0)>=3
 end
 function cid.buffcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
