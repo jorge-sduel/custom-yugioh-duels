@@ -317,7 +317,7 @@ function Timeleap.Removecon(e,tp,eg,ep,ev,re,r,rp)
 	return not c:IsHasEffect(395)
 end
 function Timeleap.spfilter(e,c,code,lc,tp)
-	return (not code or code(c,lc,SUMMON_TYPE_SPECIAL,tp)) and c:IsLevel(e:GetHandler():GetLevel()-1) and c:IsAbleToRemoveAsCost()
+	return (not code or code(c,lc,SUMMON_TYPE_SPECIAL,tp)) and c:IsAbleToRemoveAsCost()
 end
 function Timeleap.rescon(sg,e,tp,mg)
 	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
