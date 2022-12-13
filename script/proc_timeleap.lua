@@ -355,7 +355,7 @@ function Auxiliary.AddTimeleapProcedure(c,code,loc,excon)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_EXTRA)
     e1:SetValue(SUMMON_TYPE_TIMELEAP)
-	e1:SetCondition(Auxiliary.TleapSummonCondition(code,loc,excon))
+	e1:SetCondition(Auxiliary.TleapSummonCondition(e,code,loc,excon))
 	e1:SetTarget(Timeleap.hsptg)
 	e1:SetOperation(Timeleap.hspop)
 	c:RegisterEffect(e1)
@@ -389,7 +389,7 @@ end
 function Auxiliary.TleapSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(4882946100,tp) and c:IsAbleToGraveAsCost()
 end]]
-function Auxiliary.TleapSummonCondition(cd,loc,excon)
+function Auxiliary.TleapSummonCondition(e,cd,loc,excon)
 	return 	function(e,c)
 				if excon and not excon(e,c) then return false end
 	if c==nil then return true end
