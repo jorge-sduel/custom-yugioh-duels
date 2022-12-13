@@ -6,7 +6,8 @@ function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),1,1,cid.TimeCost)
+--Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),1,1,cid.TimeCost)
+aux.AddTimeleapProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),LOCATION_MZONE,cid.TimeCost)
 	c:EnableReviveLimit() 
 	--Smack dat ass TWICE
 		local e0=Effect.CreateEffect(c)
