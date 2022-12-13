@@ -350,6 +350,7 @@ function Timeleap.hspop(cd,loc)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
 end
+end
 function Auxiliary.AddTimeleapProcedure(c,cd,loc,excon)
 	--special summon
 	local e1=Effect.CreateEffect(c)
