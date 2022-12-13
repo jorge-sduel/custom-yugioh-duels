@@ -330,7 +330,9 @@ function Timeleap.hspcon(e,c,excon)
 	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_HAND) then return false end
 	return aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,0)
 end
-function Timeleap.hsptg(e,cd,tp,eg,ep,ev,re,r,rp,chk,c)
+function Timeleap.hsptg(cd,loc)
+	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
+	return	function(e,cd,tp,eg,ep,ev,re,r,rp,chk,c)
 	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_MZONE,0,nil)
 	local sg=aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
 	if #sg > 0 then
@@ -341,7 +343,8 @@ function Timeleap.hsptg(e,cd,tp,eg,ep,ev,re,r,rp,chk,c)
 		return false
 	end
 end
-function Timeleap.hspop(e,cd,tp,eg,ep,ev,re,r,rp,c)
+function Timeleap.hspop(cd,loc)
+	return	function(e,cd,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
 	Duel.Remove(sg,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
 	c:SetMaterial(sg)
