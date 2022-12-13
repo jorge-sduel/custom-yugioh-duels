@@ -316,8 +316,8 @@ end
 function Timeleap.Removecon(e,tp,eg,ep,ev,re,r,rp)
 	return not c:IsHasEffect(395)
 end
-function Timeleap.spfilter(c,code)
-	return code
+function Timeleap.spfilter(c,cd)
+	return not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
 function Timeleap.rescon(sg,e,tp,mg)
 	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
@@ -347,7 +347,7 @@ function Timeleap.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
 end
-function Auxiliary.AddTimeleapProcedure(c,code,loc,excon)
+function Auxiliary.AddTimeleapProcedure(c,cd,loc,excon)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -355,7 +355,7 @@ function Auxiliary.AddTimeleapProcedure(c,code,loc,excon)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_EXTRA)
     e1:SetValue(SUMMON_TYPE_TIMELEAP)
-	e1:SetCondition(Auxiliary.TleapSummonCondition(code,loc,excon))
+	e1:SetCondition(Auxiliary.TleapSummonCondition(cd,loc,excon))
 	e1:SetTarget(Timeleap.hsptg)
 	e1:SetOperation(Timeleap.hspop)
 	c:RegisterEffect(e1)
