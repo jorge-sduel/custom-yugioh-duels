@@ -316,8 +316,8 @@ end
 function Timeleap.Removecon(e,tp,eg,ep,ev,re,r,rp)
 	return not c:IsHasEffect(395)
 end
-function Timeleap.rescon(sg,e,tp,mg)
-	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
+function Timeleap.rescon(g,e,tp,mg)
+	return Duel.GetLocationCountFromEx(tp,tp,g,e:GetHandler())>0
 -- and sg:FilterCount(Card.IsLocation,nil,LOCATION_HAND)~=#sg
 end
 function Auxiliary.AddTimeleapProcedure(c,cd,loc,excon)
