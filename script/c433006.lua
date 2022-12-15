@@ -93,11 +93,17 @@ end
 function cid.limitcon(e)
 	return (e:GetHandlerPlayer()==e:GetHandler():GetOwner() and cid.totaldraw_oppo>0) or cid.totaldraw_self>0
 end
+function cid.confilter(c,tp,race)
+	if c:IsFacedown() then return false end
+	if not race then
+		return Duel.IsExistingMatchingCard(cid.confilter,tp,LOCATION_MZONE,0,1,c,tp,c:GetRace())
+	else
+		return c:IsRace(race)
+	end
+end
 function cid.sumcon(e,c)
-	local tp=c:GetControler()
-	local g=Duel.GetFieldGroup(tp,LOCATION_MZONE,0):Filter(Card.IsType,nil,TYPE_MONSTER)
-	local sg=g:Filter(cid.sumconfilter,nil)
-	return #g>1 and sg:GetClassCount(Card.GetRace)==1 and not g:IsExists(Card.IsFacedown,1,nil)
+	if c==nil then return true end
+	return Duel.IsExistingMatchingCard(cid.confilter,c:GetControler(),LOCATION_MZONE,0,1,nil,c:GetControler())
 end
 function cid.sumconfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
