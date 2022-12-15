@@ -44,8 +44,8 @@ function Timeleap.AddProcedure(c,f,min,max,excon,specialchk,opp,loc,send)
 	e1:SetTarget(Timeleap.Target(f,min,max,specialchk,opp,loc,send))
 	e1:SetOperation(Timeleap.Operation(f,min,max,specialchk,opp,loc,send))
     e1:SetValue(SUMMON_TYPE_TIMELEAP)
-	c:RegisterEffect(e1)]]
-	--spsummon
+	c:RegisterEffect(e1)
+	--[[spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
@@ -54,7 +54,7 @@ function Timeleap.AddProcedure(c,f,min,max,excon,specialchk,opp,loc,send)
 	e1:SetCondition(Timeleap.hspcon)
 	e1:SetTarget(Timeleap.hsptg)
 	e1:SetOperation(Timeleap.hspop)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	--Special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -153,8 +153,9 @@ function Timeleap.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 	return #sg>=minc and sg:CheckWithSumEqual(Timeleap.GetTimeleapCount,lc:GetLevel()-1,#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
-function Timeleap.Condition(f,minc,maxc,specialchk,opp,loc,send)
+function Timeleap.Condition(f,minc,maxc,excon,specialchk,opp,loc,send)
 	return	function(e,c,must,g,min,max)
+			if excon and not excon(e,c) then return false end
 				if c==nil then return true end
 				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
 				local tp=c:GetControler()
