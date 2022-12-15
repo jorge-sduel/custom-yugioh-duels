@@ -343,14 +343,12 @@ function Timeleap.hsptg(cd,loc)
 		return false
 	end
 end
-end
 function Timeleap.hspop(cd,loc)
 	return	function(e,cd,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
 	Duel.Remove(sg,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
-end
 end
 function Auxiliary.AddTimeleapProcedure(c,cd,loc,excon)
 	--special summon
