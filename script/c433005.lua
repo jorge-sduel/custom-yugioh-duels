@@ -75,7 +75,7 @@ function cid.confilter(c)
 end
 function cid.sumcon(e,c)
 --	if c==nil then return true end
-	local g=Duel.GetMatchingGroup(Card.IsMonster,c:GetControler(),LOCATION_MZONE,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)
 	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),0,LOCATION_MZONE)>Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_MZONE,0)
 		and (g:GetClassCount(Card.GetRace)>=2 or g:IsExists(cid.confilter,1,nil))
 end
