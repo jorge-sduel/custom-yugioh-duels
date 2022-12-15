@@ -50,7 +50,7 @@ function cm.filter2(c)
     return c:IsFaceup() and c:IsType(TYPE_EQUIP)
 end
 function cm.tlfilter(c,e,mg)
-	return c:IsRace(RACE_WARRIOR) and c:GetLevel()==e:GetHandler():GetFuture()-1
+	return c:IsRace(RACE_WARRIOR) and c:GetLevel()==e:GetHandler():GetLevel()-1
 end
 function cm.eqcon2(e)
 	return e:GetHandler():GetEquipGroup():IsExists(nil,1,nil)
@@ -75,7 +75,7 @@ function cm.ssop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cm.confilter(c)
-	return c:GetSummonPlayer()==tp and c:IsRace(RACE_WARRIOR) and c:IsLevelBelow(4) and c:IsFaceup()
+	return c:GetSummonPlayer()==tp and c:IsRace(RACE_WARRIOR) and c:IsLevelBelow(4)
 end
 function cm.thcon(e,tp,eg,ev,re,r,rp)
 return eg:IsExists(cm.confilter,1,nil,tp)
@@ -94,7 +94,7 @@ function cm.thop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	if Duel.SendtoHand(tc,nil,REASON_EFFECT)~=0 and tc:IsLocation(LOCATION_HAND) then
 		Duel.ConfirmCards(1-tp,tc)
-		local e1=Effect.CreateEffect(e:GetHandler())
+		--[[local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CANNOT_ACTIVATE+EFFECT_CANNOT_TRIGGER)
 		e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
@@ -102,6 +102,6 @@ function cm.thop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetTarget(cm.aclimit)
 		e1:SetLabel(tc:GetCode())
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		Duel.RegisterEffect(e1,tp)
+		Duel.RegisterEffect(e1,tp)]]
 	end
 end
