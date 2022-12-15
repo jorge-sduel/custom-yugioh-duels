@@ -39,7 +39,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGH
 	c:RegisterEffect(e3)
 	end
 function cm.sumcon(e,c)
-    local tp=c:GetControler()
+    local tp=e:GetHandlerPlayer()
     return Duel.IsExistingMatchingCard(cm.filter1,tp,LOCATION_MZONE,0,3,nil) or Duel.IsExistingMatchingCard(cm.filter2,tp,LOCATION_SZONE,0,1,nil)
 end
 
