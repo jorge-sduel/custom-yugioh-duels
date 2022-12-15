@@ -73,9 +73,9 @@ cid.maxval=0
 function cid.confilter(c)
 	return c:GetOriginalRace()~=c:GetRace() and not c:IsHasEffect(EFFECT_REMOVE_RACE) and not c:IsHasEffect(EFFECT_CHANGE_RACE)
 end
-function cid.sumcon(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_MZONE,0,nil)
-	return Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)
+function cid.sumcon(e,c)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,e:GetControler(),LOCATION_MZONE,0,nil)
+	return Duel.GetFieldGroupCount(e:GetControler(),0,LOCATION_MZONE)>Duel.GetFieldGroupCount(e:GetControler(),LOCATION_MZONE,0)
 		and (g:GetClassCount(Card.GetRace)>=2 or g:IsExists(cid.confilter,1,nil))
 end
 --BIG MILK DRAW
