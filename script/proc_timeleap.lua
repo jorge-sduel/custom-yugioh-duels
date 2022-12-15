@@ -342,6 +342,7 @@ function Auxiliary.Timeleaphsptg(cd,loc)
 	else
 		return false
 	end
+    end
 end
 function Auxiliary.Timeleaphspop(cd,loc)
 	return	function(e,cd,tp,eg,ep,ev,re,r,rp,c)
