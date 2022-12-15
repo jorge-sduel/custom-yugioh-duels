@@ -356,13 +356,13 @@ function Auxiliary.AddTimeleapProcedure(c,cd,loc,excon)
 	e5:SetValue(TYPE_SYNCHRO)
 	c:RegisterEffect(e5)
 end
---[[function Auxiliary.TleapSummonFilter(c,cd)
+--[[function Auxiliary.TleapSummonFilter(c,cd,lc,tp)
 	return not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
 function Auxiliary.TleapSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(4882946100,tp) and c:IsAbleToGraveAsCost()
 end]]
-function Auxiliary.TleapSummonCondition(cd,loc,excon)
+--[[function Auxiliary.TleapSummonCondition(cd,loc,excon)
 	return 	function(e,c)
 				if excon and not excon(e,c) then return false end
 	if c==nil then return true end
@@ -371,7 +371,7 @@ function Auxiliary.TleapSummonCondition(cd,loc,excon)
 	--if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_HAND) then return false end
 	return aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,0)
 			end
-end
+end]]
 --[[function Tleap.SummonTarget(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	--return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
