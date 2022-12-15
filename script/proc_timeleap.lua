@@ -343,6 +343,7 @@ function Timeleap.hsptg(cd,loc)
 		return false
 	end
 end
+end
 function Timeleap.hspop(cd,loc)
 	return	function(e,cd,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
