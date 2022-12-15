@@ -34,7 +34,7 @@ function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 		mt.timeleap_type=1
 		mt.timeleap_parameters={c,f,min,max,control,location,operation}
 	end
-	--[[local e1=Effect.CreateEffect(c)
+	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetDescription(1181)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
