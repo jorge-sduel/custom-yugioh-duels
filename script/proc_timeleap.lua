@@ -316,8 +316,8 @@ end
 function Timeleap.Removecon(e,tp,eg,ep,ev,re,r,rp)
 	return not c:IsHasEffect(395)
 end
-function Timeleap.rescon(g,e,tp,mg)
-	return Duel.GetLocationCountFromEx(tp,tp,g,e:GetHandler())>0
+function Timeleap.rescon(sg,e,tp,mg)
+	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
 -- and sg:FilterCount(Card.IsLocation,nil,LOCATION_HAND)~=#sg
 end
 function Auxiliary.AddTimeleapProcedure(c,cd,loc,excon)
@@ -394,7 +394,7 @@ function Auxiliary.TleapSummonCondition(cd,loc,excon)
 	return 	function(e,c)
 				if excon and not excon(e,c) then return false end
 				if c==nil then return true end
-				return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+				return aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,0)
 					and (Duel.IsExistingMatchingCard(Auxiliary.TleapSummonFilter,c:GetControler(),loc,0,1,nil,cd)
 					or Duel.IsExistingMatchingCard(Auxiliary.TleapSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler()))
 			end
