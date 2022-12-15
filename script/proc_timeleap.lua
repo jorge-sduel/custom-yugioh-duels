@@ -162,7 +162,7 @@ function Timeleap.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 end
 function Timeleap.Condition(f,minc,maxc,cond,specialchk,opp,loc,send)
 	return	function(e,c,must,g,min,max)
-				if excon and not excon(e,c) then return false end
+				if cond and not cond(e,c) then return false end
 				if c==nil then return true end
 				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
 				local tp=c:GetControler()
