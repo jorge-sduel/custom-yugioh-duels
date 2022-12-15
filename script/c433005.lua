@@ -70,9 +70,13 @@ end
 cid.drawcount=0
 cid.maxval=0
 --Other Tom Lipsia garbage
+function cid.confilter(c)
+	return c:GetOriginalRace()~=c:GetRace() and not c:IsHasEffect(EFFECT_REMOVE_RACE) and not c:IsHasEffect(EFFECT_CHANGE_RACE)
+end
 function cid.sumcon(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),tp,LOCATION_MZONE,0,nil)
-	return g:GetClassCount(Card.GetRace)>1
+	local g=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_MZONE,0,nil)
+	return Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)>Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)
+		and (g:GetClassCount(Card.GetRace)>=2 or g:IsExists(cid.confilter,1,nil))
 end
 --BIG MILK DRAW
 function cid.drawcon(e,tp,eg,ep,ev,re,r,rp)
