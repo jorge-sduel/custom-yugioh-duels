@@ -330,7 +330,7 @@ function Timeleap.hspcon(e,c,excon)
 	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_HAND) then return false end
 	return aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,0)
 end
-function Timeleap.hsptg(cd,loc)
+function Auxiliary.Timeleaphsptg(cd,loc)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	return	function(e,cd,tp,eg,ep,ev,re,r,rp,chk,c)
 	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_MZONE,0,nil)
@@ -343,7 +343,7 @@ function Timeleap.hsptg(cd,loc)
 		return false
 	end
 end
-function Timeleap.hspop(cd,loc)
+function Auxiliary.Timeleaphspop(cd,loc)
 	return	function(e,cd,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
 	Duel.Remove(sg,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
@@ -359,8 +359,8 @@ function Auxiliary.AddTimeleapProcedure(c,cd,loc,excon)
 	e1:SetRange(LOCATION_EXTRA)
     e1:SetValue(SUMMON_TYPE_TIMELEAP)
 	e1:SetCondition(Auxiliary.TleapSummonCondition(cd,loc,excon))
-	e1:SetTarget(Timeleap.hsptg(cd,loc))
-	e1:SetOperation(Timeleap.hspop(cd,loc))
+	e1:SetTarget(Auxiliary.Timeleaphsptg(cd,loc))
+	e1:SetOperation(Auxiliary.Timeleaphspop(cd,loc))
 	c:RegisterEffect(e1)
 	--Special summon
 	local e2=Effect.CreateEffect(c)
