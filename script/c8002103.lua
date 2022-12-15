@@ -7,7 +7,7 @@ function cm.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),1,1,cm.sumcon)
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_WARRIOR),1,1,cm.sumcon)
 	c:EnableReviveLimit()
 	--I am protecc by sword
 	local e1=Effect.CreateEffect(c)
