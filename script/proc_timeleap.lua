@@ -18,7 +18,7 @@ condition if Timeleap summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_TIMELEAP
 ]]
 --Reunion Summon
-function Timeleap.AddProcedure(c,f,min,max,excon,specialchk,opp,loc,send)
+function Timeleap.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
     -- opp==true >> you can use opponent monsters as materials (default false)
     -- loc default LOCATION_MZONE
 	-- send materials:
