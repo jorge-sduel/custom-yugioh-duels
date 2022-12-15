@@ -316,40 +316,9 @@ end
 function Timeleap.Removecon(e,tp,eg,ep,ev,re,r,rp)
 	return not c:IsHasEffect(395)
 end
-function Timeleap.spfilter(c,cd,lc,tp)
-	return not cd or cd(c,lc,SUMMON_TYPE_SPECIAL,tp)
-end
 function Timeleap.rescon(sg,e,tp,mg)
 	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
 -- and sg:FilterCount(Card.IsLocation,nil,LOCATION_HAND)~=#sg
-end
-function Timeleap.hspcon(e,c,excon)
-	if c==nil then return true end
-	local tp=c:GetControler()
-	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
-	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_HAND) then return false end
-	return aux.SelectUnselectGroup(g,e,tp,2,2,Timeleap.rescon,0)
-end
-function Auxiliary.Timeleaphsptg(cd,loc)
-	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
-	return	function(e,cd,tp,eg,ep,ev,re,r,rp,chk,c)
-	local g=Duel.GetMatchingGroup(Timeleap.spfilter,tp,LOCATION_MZONE,0,nil)
-	local sg=aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
-	if #sg > 0 then
-		sg:KeepAlive()
-		e:SetLabelObject(sg)
-		return true
-	else
-		return false
-	end
-    end
-end
-function Auxiliary.Timeleaphspop(cd,loc)
-	return	function(e,cd,tp,eg,ep,ev,re,r,rp,c)
-	local sg=e:GetLabelObject()
-	Duel.Remove(sg,POS_FACEUP,REASON_MATERIAL+REASON_TIMELEAP)
-	c:SetMaterial(sg)
-	sg:DeleteGroup()
 end
 function Auxiliary.AddTimeleapProcedure(c,cd,loc,excon)
 	--special summon
@@ -421,3 +390,35 @@ function Tleap.SummonOperation(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
 end]]
+function Auxiliary.TleapSummonCondition(cd,loc,excon)
+	return 	function(e,c)
+				if excon and not excon(e,c) then return false end
+				if c==nil then return true end
+				return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+					and (Duel.IsExistingMatchingCard(Auxiliary.TleapSummonFilter,c:GetControler(),loc,0,1,nil,cd)
+					or Duel.IsExistingMatchingCard(Auxiliary.TleapSummonSubstitute,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,1,nil,cd,c:GetControler()))
+			end
+end
+function Auxiliary.Timeleaphsptg(cd,loc)
+	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c)
+				local g=Duel.GetMatchingGroup(Auxiliary.TleapSummonFilter,tp,loc,0,nil,cd)
+				g:Merge(Duel.GetMatchingGroup(Auxiliary.TleapSummonSubstitute,tp,LOCATION_ONFIELD+LOCATION_GRAVE,0,nil,c:GetControler()))
+				local sg=aux.SelectUnselectGroup(g,e,tp,1,1,Timeleap.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
+				if #sg>0 then
+					sg:KeepAlive()
+					e:SetLabelObject(sg)
+					return true
+				end
+				return false
+			end
+end
+function Auxiliary.Timeleaphspop(cd,loc)
+	return	function(e,tp,eg,ep,ev,re,r,rp,c)
+				local g=e:GetLabelObject()
+				if not g then return end
+				local tc=g:GetFirst()
+				if tc:IsHasEffect(48829461,tp) then tc:IsHasEffect(48829461,tp):UseCountLimit(tp) end
+				Duel.Remove(tc,POS_FACEUP,REASON_COST)
+				g:DeleteGroup()
+			end
+end
