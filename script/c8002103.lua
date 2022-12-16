@@ -2,6 +2,7 @@
 --Created and Scripted by Swaggy, published by Slick
 local m=8002103
 local cm=_G["c"..m]
+cm.IsTimeleap=true
 if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cm.initial_effect(c)
 	c:EnableReviveLimit()
