@@ -1,18 +1,10 @@
 --Chronospace Wizard
 --Scripted by: XGlitchy30
 --Time Leap by Swaggy
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local id,cid=GetID()
 function cid.initial_effect(c)
 	--time leap procedure
-	aux.AddOrigTimeleapType(c,false)
-	aux.AddTimeleapProc(c,2,cid.sumcon,cid.tlfilter,nil)
+	Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.sumcon)
 	--repeat effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -56,8 +48,8 @@ end
 function cid.sumconfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_SPELLCASTER)
 end
-function cid.tlfilter(c,e,mg)
-	return c:IsType(TYPE_EFFECT) and c:GetLevel()==e:GetHandler():GetFuture()-1
+function cid.tlfilter(c)
+	return c:IsType(TYPE_EFFECT)
 end
 --register coin toss
 function cid.checkop(e,tp,eg,ep,ev,re,r,rp)
