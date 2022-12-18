@@ -1,4 +1,3 @@
---Infernoid Demiurge
 --Design and code by Kindrindra
 local ref=_G['c'..28915513]
 ref.IsBigbang=true
