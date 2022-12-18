@@ -7,14 +7,14 @@ function ref.initial_effect(c)
 c:AddSetcodesRule(28915513,false,0xbb109)
 	c:EnableReviveLimit()
 	Bigbang.AddProcedure(c,nil,2,99)
-	local ge1=Effect.CreateEffect(c)
+	--[[local ge1=Effect.CreateEffect(c)
 	ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	ge1:SetCode(EVENT_ADJUST)
 	ge1:SetRange(0xff)
 	ge1:SetCountLimit(1,555+EFFECT_COUNT_CODE_DUEL)
 	ge1:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
 	ge1:SetOperation(ref.chk)
-	c:RegisterEffect(ge1,tp)
+	c:RegisterEffect(ge1,tp)]]
 
 	--[[fusion material
 	local e1=Effect.CreateEffect(c)
