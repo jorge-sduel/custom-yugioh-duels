@@ -70,7 +70,7 @@ function ref.lvcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function ref.lvop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(28915513,0)) then
-		local e1=Effect.CreateEffect(c)
+		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_LEVEL)
 		e1:SetValue(1)
