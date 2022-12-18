@@ -61,8 +61,7 @@ function ref.voidmatfilter(c)
 end
 function ref.lvcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return (bit.band(c:GetSummonType(),SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION and c:GetMaterial():GetCount()>=3)
-		or (bit.band(c:GetSummonType(),SUMMON_TYPE_SPECIAL+0x555)==SUMMON_TYPE_SPECIAL+0x555 and c:GetMaterial():IsExists(ref.voidmatfilter,1,nil))
+	return (bit.band(c:GetSummonType(),SUMMON_TYPE_BIGBANG)==SUMMON_TYPE_BIGBANGand c:GetMaterial():IsExists(ref.voidmatfilter,1,nil))
 end
 function ref.lvop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(28915513,0)) then
