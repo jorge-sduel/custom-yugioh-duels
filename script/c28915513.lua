@@ -1,7 +1,12 @@
 --Infernoid Demiurge
 --Design and code by Kindrindra
 local ref=_G['c'..28915513]
+ref.IsBigbang=true
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function ref.initial_effect(c)
+c:AddSetcodesRule(28915513,false,0xbb109)
+	c:EnableReviveLimit()
+	Bigbang.AddProcedure(c,nil,2,99)
 	local ge1=Effect.CreateEffect(c)
 	ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	ge1:SetCode(EVENT_ADJUST)
