@@ -65,8 +65,8 @@ function ref.voidmatfilter(c)
 	return c:IsType(TYPE_TRAP) and c:IsSetCard(0xc5)
 end
 function ref.lvcon(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	return bit.band(c:GetSummonType(),SUMMON_TYPE_BIGBANG)==SUMMON_TYPE_BIGBANG c:GetMaterial():IsExists(ref.voidmatfilter,1,nil)
+	--local c=e:GetHandler()
+	return bit.band(e:GetHandler():GetSummonType(),SUMMON_TYPE_BIGBANG)==SUMMON_TYPE_BIGBANG e:GetHandler():GetMaterial():IsExists(ref.voidmatfilter,1,nil)
 end
 function ref.lvop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SelectYesNo(tp,aux.Stringid(28915513,0)) then
