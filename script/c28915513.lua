@@ -75,7 +75,7 @@ function ref.lvop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_CHANGE_LEVEL)
 		e1:SetValue(1)
 		e1:SetReset(RESET_EVENT+0x1fe0000)
-		c:RegisterEffect(e1)
+		e:GetHandler():RegisterEffect(e1)
 	end
 end
 
