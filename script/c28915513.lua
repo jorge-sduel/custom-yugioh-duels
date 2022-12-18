@@ -109,8 +109,8 @@ end
 
 --Create Banish
 function ref.regcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroup(tp,Card.IsAttribute,1,nil,ATTRIBUTE_FIRE) end
-	local g=Duel.SelectReleaseGroup(tp,Card.IsAttribute,1,1,nil,ATTRIBUTE_FIRE)
+	if chk==0 then return Duel.CheckReleaseGroup(tp,Card.IsType,1,nil,TYPE_MONSTER) end
+	local g=Duel.SelectReleaseGroup(tp,Card.IsType,1,1,nil,TYPE_MONSTER)
 	Duel.Release(g,REASON_COST)
 end
 function ref.regop(e,tp,eg,ep,ev,re,r,rp)
