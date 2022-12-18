@@ -62,7 +62,7 @@ end
 
 --Level Down
 function ref.voidmatfilter(c)
-	return c:IsType(TYPE_TRAP) and c:IsSetCard(0xc5)
+	return c:IsAttribute(ATTRIBUTE_FIRE)
 end
 function ref.lvcon(e,tp,eg,ep,ev,re,r,rp)
 	--local c=e:GetHandler()
