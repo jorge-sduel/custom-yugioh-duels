@@ -96,7 +96,7 @@ function ref.tgcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function ref.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return ref.GetLevelCount(tp) < ref.GetLevelCount(1-tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,nil,0,LOCATION_MZONE)
+	--Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,nil,0,LOCATION_MZONE)
 end
 function ref.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(nil,1-tp,LOCATION_MZONE,0,nil)
