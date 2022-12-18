@@ -16,13 +16,13 @@ c:AddSetcodesRule(28915513,false,0xbb109)
 	ge1:SetOperation(ref.chk)
 	c:RegisterEffect(ge1,tp)
 
-	--fusion material
+	--[[fusion material
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_FUSION_MATERIAL)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCondition(ref.fscon)
-	e1:SetOperation(ref.fsop)
+	e1:SetOperation(ref.fsop)]]
 	--Level Down
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
