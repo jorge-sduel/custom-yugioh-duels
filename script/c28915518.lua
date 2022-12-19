@@ -1,7 +1,11 @@
 --Guardian of the Forests,
 --Design and code by Kindrindra
 local ref=_G['c'..28915518]
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function ref.initial_effect(c)
+c:AddSetcodesRule(28915518,false,0xbb109)
+	c:EnableReviveLimit()
+	--[[Bigbang.AddProcedure(c,nil,2,99)
 	local ge1=Effect.CreateEffect(c)
 	ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	ge1:SetCode(EVENT_ADJUST)
@@ -18,7 +22,7 @@ function ref.initial_effect(c)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetCondition(ref.fscon)
 	e0:SetOperation(ref.fsop)
-	c:RegisterEffect(e0)
+	c:RegisterEffect(e0)]]
 	--Special Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOKEN)
