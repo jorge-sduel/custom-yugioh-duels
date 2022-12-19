@@ -1,6 +1,7 @@
 --Guardian of the Forests,
 --Design and code by Kindrindra
 local ref=_G['c'..28915518]
+ref.IsBigbang=true
 if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function ref.initial_effect(c)
 c:AddSetcodesRule(28915518,false,0xbb109)
