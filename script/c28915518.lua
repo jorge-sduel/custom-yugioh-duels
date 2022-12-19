@@ -110,14 +110,14 @@ function ref.sscon2(e,tp,eg,ep,ev,re,r,rp)
 	return rp~=tp
 end
 function ref.sstg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,28915519,0,0x4011,0,0,3,RACE_AQUA,ATTRIBUTE_WATER) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,511001165,0,0x4011,0,0,3,RACE_AQUA,ATTRIBUTE_WATER) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
 end
 function ref.ssop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	if not Duel.IsPlayerCanSpecialSummonMonster(tp,28915519,0,0x4011,0,0,3,RACE_AQUA,ATTRIBUTE_WATER) then return end
-	local token=Duel.CreateToken(tp,28915519)
+	if not Duel.IsPlayerCanSpecialSummonMonster(tp,511001165,0,0x4011,0,0,3,RACE_AQUA,ATTRIBUTE_WATER) then return end
+	local token=Duel.CreateToken(tp,511001165)
 	Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 	local e3=Effect.CreateEffect(e:GetHandler())
 	e3:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
