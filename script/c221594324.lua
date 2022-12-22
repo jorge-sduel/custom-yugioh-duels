@@ -7,7 +7,7 @@ function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),1,1,function(e,c) return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_REMOVED,0)>=10 end)
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),1,1,function(e,c) return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_REMOVED,0)>=10 end)
 	c:EnableReviveLimit() 
 	--[[local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
