@@ -7,7 +7,7 @@ function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),1,1,function(e,c) return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_REMOVED,0)>=10 end)
+Timeleap.AddProcedure(c,cid.tlfilter,1,1,function(e,c) return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_REMOVED,0)>=10 end)
 	c:EnableReviveLimit() 
 	--[[local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -60,8 +60,8 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_FIEND),1,1,fun
 	e3:SetOperation(cid.operation)
 	c:RegisterEffect(e3)
 end
-function cid.tlfilter(c,e,mg)
-	return c:IsCode(id-19) and c:GetLevel()==e:GetHandler():GetFuture()-1
+function cid.tlfilter(c)
+	return c:IsRace(RACE_FIEND)
 end
 function cid.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0xc97)
