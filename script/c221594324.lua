@@ -1,9 +1,14 @@
 --created by Walrus, coded by Lyris
 local cid,id=GetID()
+cid.IsTimeleap=true
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddOrigTimeleapType(c)
-	aux.AddTimeleapProc(c,5,function(e,tc) return Duel.GetFieldGroupCount(tc:GetControler(),LOCATION_REMOVED,0)>=10 end,cid.tlfilter)
+	  --synchro summon
+	--time leap procedure
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),1,1,cid.TimeCost)
+--aux.AddTimeleapProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),LOCATION_MZONE,function(e,tc) return Duel.GetFieldGroupCount(tc:GetControler(),LOCATION_REMOVED,0)>=10 end,cid.tlfilter))
+	c:EnableReviveLimit() 
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
 	e0:SetCode(EFFECT_EXTRA_TIMELEAP_MATERIAL)
