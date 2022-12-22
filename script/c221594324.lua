@@ -15,7 +15,7 @@ Timeleap.AddProcedure(c,nil,1,1,function(e,c) return Duel.GetFieldGroupCount(e:G
 	e0:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e0:SetTargetRange(LOCATION_HAND,0)
 	e0:SetTarget(aux.TargetBoolFunction(Card.IsCode,id-19))
-	c:RegisterEffect(e0)]]
+	c:RegisterEffect(e0)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetRange(LOCATION_MZONE)
@@ -24,7 +24,7 @@ Timeleap.AddProcedure(c,nil,1,1,function(e,c) return Duel.GetFieldGroupCount(e:G
 	e1:SetTargetRange(1,0)
 	e1:SetTarget(cid.sumlimit)
 	c:RegisterEffect(e1)
-	c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsSetCard,0x9c97))
+	c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsSetCard,0x9c97))]] 
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -66,7 +66,7 @@ function cid.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0xc97)
 end
 function cid.tgfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x3c97)
+	return c:IsFaceup() and c:IsRace(RACE_FIEND)
 end
 function cid.tgcon(e)
 	return Duel.IsExistingMatchingCard(cid.tgfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
