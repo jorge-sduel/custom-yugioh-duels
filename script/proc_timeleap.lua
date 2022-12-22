@@ -89,6 +89,9 @@ end
 function Card.IsTimeleap(c)
 	return c.IsTimeleap
 end
+function Card.IsLocTime(c)
+	return c:IsFaceup() or c:IsLocation(LOCATION_HAND)
+end
 function Timeleap.ConditionFilter(c,f,lc,tp)
 	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
@@ -169,7 +172,7 @@ function Timeleap.Condition(f,minc,maxc,cond,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+					g=Duel.GetMatchingGroup(Card.IsLocTime,tp,loc,loc2,nil)
 				end
 				local mg=g:Filter(Timeleap.ConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_TIMELEAP)
@@ -200,7 +203,7 @@ function Timeleap.Target(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+					g=Duel.GetMatchingGroup(Card.IsLocTime,tp,loc,loc2,nil)
 				end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
