@@ -37,11 +37,11 @@ c:AddSetcodesRule(28915518,false,0xbb109)
 	e2:SetCondition(ref.sp1con)
 	e2:SetOperation(ref.sp1op)
 	c:RegisterEffect(e2)
-	local e3=e2:Clone()
+	--[[local e3=e2:Clone()
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCondition(ref.sp2con)
 	e3:SetOperation(ref.sp2op)
-	c:RegisterEffect(e3)
+	c:RegisterEffect(e3)]]
 end
 ref.burst=true
 function ref.trapmaterial(c)
