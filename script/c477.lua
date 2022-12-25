@@ -1,5 +1,6 @@
 --聖なる魔術師
 local s,id=GetID()
+s.Is_Neutrino=true
 function s.initial_effect(c)
 	--flip
 	local e1=Effect.CreateEffect(c)
