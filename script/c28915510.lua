@@ -77,8 +77,8 @@ end
 function ref.sscon2(e,tp,eg,ep,ev,re,r,rp)
 	return rp~=tp
 end
-function ref.getfieldlevel()
-	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+function ref.getfieldlevel(e)
+	local g=Duel.GetMatchingGroup(Card.IsFaceup,e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,nil)
 	local lv=0
 	local c=g:GetFirst()
 	while c do
@@ -88,7 +88,7 @@ function ref.getfieldlevel()
 	return lv
 end
 function ref.ssfilter(c,e,tp)
-	return c:IsLevelBelow(ref.getfieldlevel())
+	return c:IsLevelBelow(ref.getfieldlevel(e))
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function ref.sstg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
