@@ -1,5 +1,6 @@
 --Trap
 local s,id=GetID()
+s.Is_Neutrino=true
 function s.initial_effect(c)
 	--Activate
 	Fusion.RegisterSummonEff(c)
@@ -16,7 +17,8 @@ function s.initial_effect(c)
 	e2:SetTarget(s.settg)
 	e2:SetOperation(s.setop)
 	c:RegisterEffect(e2)
-end
+end
+
 function s.setcond(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_END
 end
