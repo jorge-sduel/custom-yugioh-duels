@@ -30,7 +30,7 @@ function c479.filter(c)
 	return c.Is_Neutrino and c:IsDiscardable()
 end
 function c479.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-if chk==0 then return Duel.IsExistingMatchingCard(479.filter,tp,LOCATION_HAND,0,1,nil) end
+if chk==0 then return Duel.IsExistingMatchingCard(c479.filter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.DiscardHand(tp,c479.filter,1,1,REASON_COST+REASON_DISCARD)
 end
 function c479.target(e,tp,eg,ep,ev,re,r,rp,chk)
