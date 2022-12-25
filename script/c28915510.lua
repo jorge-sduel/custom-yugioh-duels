@@ -1,8 +1,16 @@
 --Lillian, Nomad of the Skies
 --Design and code by Kindrindra
 local ref=_G['c'..28915510]
+ref.IsTimeleap=true
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function ref.initial_effect(c)
-	local ge1=Effect.CreateEffect(c)
+	c:EnableReviveLimit()
+	  --synchro summon
+	--time leap procedure
+Timeleap.AddProcedure(c,nil,1,1)
+--aux.AddTimeleapProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),LOCATION_MZONE,cid.TimeCost)
+	c:EnableReviveLimit() 
+	--[[local ge1=Effect.CreateEffect(c)
 	ge1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	ge1:SetCode(EVENT_ADJUST)
 	ge1:SetRange(0xff)
@@ -13,7 +21,7 @@ function ref.initial_effect(c)
 	
 	--Synchro Monster
 	aux.AddSynchroProcedure(c,nil,aux.NonTuner(nil),1)
-	--c:EnableReviveLimit()
+	--c:EnableReviveLimit()]]
 	--Special Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -38,6 +46,16 @@ function ref.initial_effect(c)
 	e3:SetTarget(ref.lvtg)
 	e3:SetOperation(ref.lvop)
 	c:RegisterEffect(e3)
+	--Special Summon
+	local e4=Effect.CreateEffect(c)
+	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e4:SetType(EFFECT_TYPE_IGNITION)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCountLimit(1)
+	e4:SetCondition(ref.sscon2)
+	e4:SetTarget(ref.sstg)
+	e4:SetOperation(ref.ssop)
+	c:RegisterEffect(e4)
 end
 ref.burst=true
 function ref.trapmaterial(c)
@@ -124,4 +142,7 @@ function ref.lvop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetValue(TYPE_TUNER)
 	e2:SetReset(RESET_EVENT+0x1fe0000)
 	tc:RegisterEffect(e2)
+end
+function ref.sscon2(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummon(SUMMON_TYPE_TIMELEAP2) --e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+0x555
 end
