@@ -144,5 +144,5 @@ function ref.lvop(e,tp,eg,ep,ev,re,r,rp)
 	tc:RegisterEffect(e2)
 end
 function ref.sscon2(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummon(SUMMON_TYPE_TIMELEAP2) --e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+0x555
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP2) --e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+0x555
 end
