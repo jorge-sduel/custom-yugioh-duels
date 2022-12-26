@@ -211,7 +211,7 @@ function c39759364.dryop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,39759364)
 	Duel.Destroy(tc,REASON_EFFECT)
 end
-function c39759364.timeCon(e,c)
+function c39759364.TimeCon(e,c)
 	if c==nil then return true end
 	return Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE,nil)>=2
 end
