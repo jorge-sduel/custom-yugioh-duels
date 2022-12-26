@@ -1,9 +1,14 @@
 --Difensore Scoppio
 --Script by XGlitchy30
+c39759364.IsTimeleap=true
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function c39759364.initial_effect(c)
-	--Deck Master
-	aux.AddOrigDeckmasterType(c)
-	aux.EnableDeckmaster(c,nil,nil,c39759364.mscon,nil,nil,c39759364.penalty)
+	c:EnableReviveLimit()
+	  --synchro summon
+	--time leap procedure
+Timeleap.AddProcedure(c,nil,1,1,c39759364.TimeCon)
+--aux.AddTimeleapProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),LOCATION_MZONE,cid.TimeCost) 
+	--[[Deck Master
 	--Ability: Reaction Blast
 	local ab=Effect.CreateEffect(c)
 	ab:SetDescription(aux.Stringid(c:GetOriginalCode(),0))
@@ -15,7 +20,7 @@ function c39759364.initial_effect(c)
 	ab:SetCondition(c39759364.atcon)
 	ab:SetTarget(c39759364.attg)
 	ab:SetOperation(c39759364.atop)
-	c:RegisterEffect(ab)
+	c:RegisterEffect(ab)]]
 	--Monster Effects--
 	--defense attack
 	local e1=Effect.CreateEffect(c)
@@ -35,7 +40,7 @@ function c39759364.initial_effect(c)
 	e2:SetTarget(c39759364.tgtg)
 	e2:SetOperation(c39759364.tgop)
 	c:RegisterEffect(e2)
-	--Turn Check
+	--[[Turn Check
 	if not c39759364.global_check then
 		c39759364.global_check=true
 		c39759364[0]=0
@@ -53,7 +58,7 @@ function c39759364.initial_effect(c)
 		reg2:SetCountLimit(1)
 		reg2:SetOperation(c39759364.regturn)
 		Duel.RegisterEffect(reg2,0)
-	end
+	end]]
 end
 c39759364.turn={[0]=0;[1]=0}
 --filters
@@ -205,4 +210,8 @@ function c39759364.dryop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler():GetBattleTarget()
 	Duel.Hint(HINT_CARD,0,39759364)
 	Duel.Destroy(tc,REASON_EFFECT)
+end
+function c39759364.timecon(e,c)
+	if c==nil then return true end
+	return Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE,nil)>=2
 end
