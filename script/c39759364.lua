@@ -40,6 +40,16 @@ Timeleap.AddProcedure(c,nil,1,1,c39759364.TimeCon)
 	e2:SetTarget(c39759364.tgtg)
 	e2:SetOperation(c39759364.tgop)
 	c:RegisterEffect(e2)
+	--to deck
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(39759364,0))
+	e4:SetCategory(CATEGORY_TODECK)
+	e4:SetType(EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_SINGLE)
+	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetCondition(Timeleap.Future)
+	e4:SetTarget(c39759364.tdtg)
+	e4:SetOperation(c39759364.tdop)
+	c:RegisterEffect(e4)
 	--[[Turn Check
 	if not c39759364.global_check then
 		c39759364.global_check=true
@@ -214,4 +224,17 @@ end
 function c39759364.TimeCon(e,c)
 	if c==nil then return true end
 	return Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE,nil)>=2
+end
+function c39759364.tdfilter(c)
+	return (c:IsLocation(0x1e) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM))) and c:IsAbleToDeck()
+end
+function c39759364.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	local g=Duel.GetMatchingGroup(c39759364.tdfilter,tp,0x5e,0x5e,e:GetHandler())
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
+	Duel.SetChainLimit(aux.FALSE)
+end
+function c39759364.tdop(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(c39759364.tdfilter,tp,0x5e,0x5e,e:GetHandler())
+	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end
