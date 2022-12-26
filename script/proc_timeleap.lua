@@ -298,7 +298,7 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetRange(LOCATION_REMOVED)
 	e1:SetCode(EVENT_PHASE+PHASE_STANDBY)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,c:GetLevel())
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_STANDBY+RESET_SELF_TURN,99)
 	e1:SetCountLimit(1)
 	e1:SetCondition(Timeleap.spcon2)
 	e1:SetOperation(Timeleap.spop2)
@@ -313,7 +313,7 @@ function Timeleap.spop2(e,tp,eg,ep,ev,re,r,rp)
 	local ct=c:GetTurnCounter()
 	ct=ct+1
 	c:SetTurnCounter(ct)
-	if ct==e:GetHandler():GetLevel() then
+	if ct>=e:GetHandler():GetLevel() then
 		Duel.SpecialSummonStep(c,SUMMON_TYPE_TIMELEAP2,tp,tp,false,false,POS_FACEUP)
 	end
 	Duel.SpecialSummonComplete()
