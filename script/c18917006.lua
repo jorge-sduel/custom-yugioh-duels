@@ -4,7 +4,7 @@ ref.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function ref.initial_effect(c)
 	--rune
-Runic.AddProcedure(c,nil,aux.FilterBoolFunction(Card.IsSpell),1,1)
+Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),aux.FilterBoolFunction(Card.IsSpell),1,1)
 	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(18917006,0))
