@@ -1,6 +1,10 @@
 --Lyrica (FIRE)
 local ref=_G['c'..18917006]
-function ref.initial_effect(c)
+c960212342.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+	--rune
+Runic.AddProcedure(c,nil,aux.FilterBoolFunction(Card.IsSpell),1,1)
+	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(18917006,0))
 	e1:SetCategory(CATEGORY_DAMAGE)
@@ -22,7 +26,7 @@ function ref.initial_effect(c)
 	e2:SetOperation(ref.thop)
 	c:RegisterEffect(e2)
 	
-	if not ref.global_check then
+	--[[if not ref.global_check then
 		ref.global_check=true
 		local ge2=Effect.CreateEffect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -31,15 +35,15 @@ function ref.initial_effect(c)
 		ge2:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
 		ge2:SetOperation(ref.chk)
 		Duel.RegisterEffect(ge2,0)
-	end
+	end]]
 end
-ref.transform=true
+--[[ref.transform=true
 ref.material1=function(mc) return mc:IsRace(RACE_SPELLCASTER) and mc:GetLevel()==3 end
 ref.material2=function(mc2) return mc2:IsAttribute(ATTRIBUTE_FIRE) end
 function ref.chk(e,tp,eg,ep,ev,re,r,rp)
 	Duel.CreateToken(tp,666)
 	Duel.CreateToken(1-tp,666)
-end
+end]]
 
 function ref.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and chkc:IsCode(18917005) end
