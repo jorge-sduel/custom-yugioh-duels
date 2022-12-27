@@ -2,6 +2,7 @@
 local ref=_G['c'..18917006]
 ref.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+function ref.initial_effect(c)
 	--rune
 Runic.AddProcedure(c,nil,aux.FilterBoolFunction(Card.IsSpell),1,1)
 	c:EnableReviveLimit()
