@@ -1,6 +1,6 @@
 --Lyrica (FIRE)
 local ref=_G['c'..18917006]
-c960212342.Is_Runic=true
+ref.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 	--rune
 Runic.AddProcedure(c,nil,aux.FilterBoolFunction(Card.IsSpell),1,1)
