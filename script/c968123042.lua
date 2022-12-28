@@ -53,8 +53,8 @@ function c968123042.initial_effect(c)
 	e5:SetCode(EFFECT_CANNOT_ACTIVATE)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetTargetRange(0,1)
-	e5:SetValue(s.aclimit)
-	e5:SetCondition(s.actcon)
+	e5:SetValue(c968123042.aclimit)
+	e5:SetCondition(c968123042.actcon)
 	c:RegisterEffect(e5)
 --atk up
 	local e6=Effect.CreateEffect(c)
@@ -62,8 +62,8 @@ function c968123042.initial_effect(c)
 	e6:SetCode(EFFECT_UPDATE_ATTACK)
 	e6:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e6:SetRange(LOCATION_MZONE)
-	e6:SetCondition(s.atkcon)
-	e6:SetValue(s.atkval)
+	e6:SetCondition(c968123042.atkcon)
+	e6:SetValue(c968123042.atkval)
 	c:RegisterEffect(e6)
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
@@ -140,16 +140,16 @@ function c968123042.penop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
-function s.aclimit(e,re,tp)
+function c968123042.aclimit(e,re,tp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
-function s.actcon(e)
+function c968123042.actcon(e)
 	return Duel.GetAttacker()==e:GetHandler() and e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,0x10000000)
 end
-function s.atkcon(e)
+function c968123042.atkcon(e)
 	return (Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
 		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil) and e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,0x10000000)
 end
-function s.atkval(e,c)
+function c968123042.atkval(e,c)
 	return Duel.GetAttackTarget():GetAttack()/2
 end
