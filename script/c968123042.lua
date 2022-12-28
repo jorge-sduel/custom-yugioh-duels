@@ -138,11 +138,11 @@ function s.aclimit(e,re,tp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.actcon(e)
-	return Duel.GetAttacker()==e:GetHandler()
+	return Duel.GetAttacker()==e:GetHandler() and e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,0x10000000)
 end
 function s.atkcon(e)
-	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
-		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil
+	return (Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
+		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil) and e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,0x10000000)
 end
 function s.atkval(e,c)
 	return Duel.GetAttackTarget():GetAttack()/2
