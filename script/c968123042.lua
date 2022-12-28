@@ -72,6 +72,7 @@ function c968123042.initial_effect(c)
 	e7:SetCondition(c968123042.pencon)
 	c:RegisterEffect(e7)
 end
+c968123042.pendulum_level=6
 function c968123042.thfilter(c)
 	return c:IsSetCard(0xff0) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
 end
