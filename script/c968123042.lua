@@ -63,7 +63,7 @@ function c968123042.initial_effect(c)
 	e6:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCondition(c968123042.atkcon)
-	e6:SetValue(c968123042.atkval)
+	e6:SetValue(c968123042.atkval2)
 	c:RegisterEffect(e6)
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
@@ -147,9 +147,9 @@ function c968123042.actcon(e)
 	return Duel.GetAttacker()==e:GetHandler() and e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,0x10000000)
 end
 function c968123042.atkcon(e)
-	return (Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
-		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil) and e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,0x10000000)
+	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
+		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil and e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,0x10000000)
 end
-function c968123042.atkval(e,c)
+function c968123042.atkval2(e,c)
 	return Duel.GetAttackTarget():GetAttack()/2
 end
