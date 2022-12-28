@@ -30,7 +30,7 @@ function c924363413.initial_effect(c)
 	e2:SetOperation(c924363413.rmop)
 	c:RegisterEffect(e2)
 end
-c924363413.pendulum_level=7
+c924363413.pendulum_level=6
 function c924363413.matfilter(c)
 	return c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)
 end
