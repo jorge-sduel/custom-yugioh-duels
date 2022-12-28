@@ -42,10 +42,29 @@ function c968123042.initial_effect(c)
 	e4:SetDescription(aux.Stringid(968123042,1))
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetCondition(c968123042.pencon)
+	--e4:SetCondition(c968123042.pencon)
 	e4:SetTarget(c968123042.pentg)
 	e4:SetOperation(c968123042.penop)
 	c:RegisterEffect(e4)
+--actlimit
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e4:SetCode(EFFECT_CANNOT_ACTIVATE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetTargetRange(0,1)
+	e4:SetValue(s.aclimit)
+	e4:SetCondition(s.actcon)
+	c:RegisterEffect(e4)
+--atk up
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetCode(EFFECT_UPDATE_ATTACK)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCondition(s.atkcon)
+	e5:SetValue(s.atkval)
+	c:RegisterEffect(e5)
 end
 function c968123042.thfilter(c)
 	return c:IsSetCard(0xff0) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
@@ -114,4 +133,17 @@ function c968123042.penop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) then
 		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
+end
+function s.aclimit(e,re,tp)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
+end
+function s.actcon(e)
+	return Duel.GetAttacker()==e:GetHandler()
+end
+function s.atkcon(e)
+	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
+		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil
+end
+function s.atkval(e,c)
+	return Duel.GetAttackTarget():GetAttack()/2
 end
