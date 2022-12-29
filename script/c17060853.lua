@@ -59,7 +59,7 @@ function c17060853.cfilter(c)
 	return c:IsFacedown() and not c:IsType(TYPE_PENDULUM)
 end
 function c17060853.pencon(e,c)
-	return not Duel.IsExistingMatchingCard(c17060853.cfilter,tp,LOCATION_MZONE,0,1,nil)
+	return not Duel.IsExistingMatchingCard(c17060853.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function c17060853.spfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsCode(17060853)
