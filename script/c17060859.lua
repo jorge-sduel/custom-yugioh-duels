@@ -1,7 +1,7 @@
 --暗堕丢手机
 function c17060859.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--spsummon success
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(17060859,0))
