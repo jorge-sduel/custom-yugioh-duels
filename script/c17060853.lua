@@ -1,7 +1,7 @@
 --暗堕库垃圾
 function c17060853.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--tuner
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(17060853,0))
