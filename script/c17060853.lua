@@ -34,7 +34,7 @@ function c17060853.filter(c)
 end
 function c17060853.tncost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler() end
-	Duel.Destroy(e:GetHandler(),nil,0,REASON_COST)
+	Duel.Destroy(e:GetHandler(),REASON_COST)
 end
 function c17060853.tntg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and c17060853.filter(chkc) end
@@ -77,6 +77,6 @@ function c17060853.penop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
-		Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
