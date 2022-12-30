@@ -2,7 +2,7 @@ local m=110600004
 local cm=_G["c"..m]
 function cm.initial_effect(c)
 	--pendulum
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,0))
