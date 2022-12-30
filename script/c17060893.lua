@@ -4,10 +4,11 @@ local cm=_G["c"..m]
 function cm.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcCodeFun(c,17060854,cm.ffilter,1,true,true)
+	Fusion.AddProcMixN(c,true,true,cm.ffilter,2)
+Fusion.AddContactProc(c,cm.contactfil,cm.contactop,cm.splimit,nil,nil,nil,false)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c,false)
-	--special summon rule
+	Pendulum.AddProcedure(c,false)
+	--[[special summon rule
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(m,0))
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -16,7 +17,7 @@ function cm.initial_effect(c)
 	e0:SetRange(LOCATION_EXTRA)
 	e0:SetCondition(cm.fpcon)
 	e0:SetOperation(cm.fpop)
-	c:RegisterEffect(e0)
+	c:RegisterEffect(e0)]]
 	--pendulum
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,1))
@@ -67,6 +68,15 @@ cm.is_named_with_Dark_Degenerate=1
 function cm.IsDark_Degenerate(c)
 	local m=_G["c"..c:GetCode()]
 	return m and m.is_named_with_Dark_Degenerate
+end
+function cm.splimit(e,se,sp,st)
+	return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION or e:GetHandler():GetLocation()~=LOCATION_EXTRA 
+end
+function cm.contactfil(tp)
+	return Duel.GetReleaseGroup(tp)
+end
+function cm.contactop(g)
+	Duel.Release(g,REASON_COST+REASON_MATERIAL)
 end
 function cm.ffilter(c,fc)
 	return cm.IsDark_Degenerate(c) and c:IsCanBeFusionMaterial(fc)
@@ -125,7 +135,7 @@ function cm.pspop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SpecialSummon(e:GetHandler(),0,tp,tp,false,false,POS_FACEUP)~=0 then
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
 end
@@ -161,5 +171,5 @@ function cm.repval(e,c)
 end
 function cm.repop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
