@@ -4,9 +4,10 @@ local cm=_G["c"..m]
 function cm.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcFunRep(c,cm.ffilter,2,false)
+	Fusion.AddProcMixN(c,true,true,cm.ffilter,3)
+Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit,nil,nil,nil,false)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c,false)
+	Pendulum.AddProcedure(c,false)
 	--special summon rule
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(m,0))
@@ -53,6 +54,15 @@ function cm.initial_effect(c)
 	e4:SetValue(cm.repval)
 	e4:SetOperation(cm.repop)
 	c:RegisterEffect(e4)
+end
+function cm.splimit(e,se,sp,st)
+	return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION or e:GetHandler():GetLocation()~=LOCATION_EXTRA 
+end
+function cm.contactfil(tp)
+	return Duel.GetReleaseGroup(tp)
+end
+function cm.contactop(g)
+	Duel.Release(g,REASON_COST+REASON_MATERIAL)
 end
 cm.is_named_with_Dark_Degenerate=1
 function cm.IsDark_Degenerate(c)
