@@ -2,7 +2,7 @@ local m=110600007
 local cm=_G["c"..m]
 function cm.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--Destroy 1 card
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,0))
