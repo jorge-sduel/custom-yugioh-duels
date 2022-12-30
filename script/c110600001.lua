@@ -1,7 +1,7 @@
 local m=110600001
 local cm=_G["c"..m]
 function cm.initial_effect(c)
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--SendtoExtraDeck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,0))
