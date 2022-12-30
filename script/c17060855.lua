@@ -1,7 +1,7 @@
 --暗堕佩里诺亚
 function c17060855.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--atk up
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(17060855,0))
