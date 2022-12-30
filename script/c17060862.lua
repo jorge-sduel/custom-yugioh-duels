@@ -8,7 +8,7 @@ function cm.initial_effect(c)
 Fusion.AddContactProc(c,cm.contactfil,cm.contactop,cm.splimit,nil,nil,nil,false)
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
-	--special summon rule
+	--[[special summon rule
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(m,0))
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -17,7 +17,7 @@ Fusion.AddContactProc(c,cm.contactfil,cm.contactop,cm.splimit,nil,nil,nil,false)
 	e0:SetRange(LOCATION_EXTRA)
 	e0:SetCondition(cm.fpcon)
 	e0:SetOperation(cm.fpop)
-	c:RegisterEffect(e0)
+	c:RegisterEffect(e0)]]
 	--pendulum
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,1))
@@ -126,7 +126,7 @@ function cm.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SpecialSummon(e:GetHandler(),0,tp,tp,false,false,POS_FACEUP)~=0 then
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
 end
@@ -160,5 +160,5 @@ function cm.repval(e,c)
 end
 function cm.repop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
