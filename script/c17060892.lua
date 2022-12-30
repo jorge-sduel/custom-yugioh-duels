@@ -1,7 +1,7 @@
 --ダ·ヴィンチ
 function c17060892.initial_effect(c)
     --pendulum summon
-    aux.EnablePendulumAttribute(c)
+    Pendulum.AddProcedure(c)
     --to hand
     local e1=Effect.CreateEffect(c)
     e1:SetDescription(aux.Stringid(17060892,0))
