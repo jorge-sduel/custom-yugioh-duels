@@ -3,7 +3,7 @@ local m=17060861
 local cm=_G["c"..m]
 function cm.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,nil,Synchro.NonTuner(Card.IsType,TYPE_PENDULUM),1)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(Card.IsType,TYPE_PENDULUM),1,99)
 	c:EnableReviveLimit()
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
