@@ -3,10 +3,10 @@ local m=17060861
 local cm=_G["c"..m]
 function cm.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,nil,aux.NonTuner(Card.IsType,TYPE_PENDULUM),1)
+	Synchro.AddProcedure(c,nil,Synchro.NonTuner(Card.IsType,TYPE_PENDULUM),1)
 	c:EnableReviveLimit()
 	--pendulum summon
-	aux.EnablePendulumAttribute(c,false)
+	Pendulum.AddProcedure(c,false)
 	--pendulum
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,0))
@@ -75,7 +75,7 @@ function cm.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SpecialSummon(e:GetHandler(),0,tp,tp,false,false,POS_FACEUP)~=0 then
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
 end
@@ -106,5 +106,5 @@ function cm.repval(e,c)
 end
 function cm.repop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
