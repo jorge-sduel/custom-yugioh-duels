@@ -1,7 +1,7 @@
 --ダ·ヴィンチ
 function c17060891.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c)
+	Pendulum.AddProcedure(c)
 	--search
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(17060891,0))
