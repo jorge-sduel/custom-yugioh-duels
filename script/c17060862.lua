@@ -5,7 +5,7 @@ function cm.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,cm.ffilter,3)
-Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit,nil,nil,nil,false)
+Fusion.AddContactProc(c,cm.contactfil,cm.contactop,cm.splimit,nil,nil,nil,false)
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--special summon rule
