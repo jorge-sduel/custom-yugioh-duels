@@ -3,9 +3,9 @@ local cm=_G["c"..m]
 function cm.initial_effect(c)
 	c:EnableReviveLimit()
 	--pendulum summon
-	aux.EnablePendulumAttribute(c,false)
+	Pendulum.AddProcedure(c,false)
 	--summon
-	aux.AddXyzProcedure(c,cm.matfilter,6,2)
+	Xyz.AddProcedure(c,nil,6,2)
 	--remove
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,1))
