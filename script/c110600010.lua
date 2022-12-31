@@ -15,26 +15,26 @@ function cm.ritualfil(c)
 	return c:IsRitualMonster()
 end
 function cm.mfilter(c)
-	return c:HasLevel() and c:IsAbleToDeck()
+	return c:HasLevel() and c:IsFaceup() and c:IsAbleToDeck()
 end
 function cm.ckfilter(c,e,tp)
 	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsLinkMonster()
 end
 function cm.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	--if Duel.IsExistingMatchingCard(s.ckfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) then
-		return Duel.GetMatchingGroup(cm.mfilter,tp,LOCATION_GRAVE,0,nil)
+		return Duel.GetMatchingGroup(cm.mfilter,tp,LOCATION_EXTRA,0,nil)
 --	end
 --	return Group.CreateGroup()
 end
 function cm.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
-	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_GRAVE):Filter(cm.mfilter,nil)
+	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_EXTRA):Filter(cm.mfilter,nil)
 	mg:Sub(mat2)
 	Duel.ReleaseRitualMaterial(mg)
 	Duel.SendtoDeck(mat2,nil,2,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
 end
 function cm.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_EXTRA)
 end
 
 
