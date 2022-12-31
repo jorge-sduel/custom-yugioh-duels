@@ -1,16 +1,46 @@
 local m=110600010
 local cm=_G["c"..m]
 function cm.initial_effect(c)
-	--Activate
+Ritual.AddProcGreater{handler=c,filter=cm.ritualfil,extrafil=cm.extrafil,extraop=cm.extraop,extratg=cm.extratg}
+	--[[Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(cm.target)
 	e1:SetOperation(cm.activate)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 end
-function cm.filter(c)
+function cm.ritualfil(c)
+	return c:IsRitualMonster()
+end
+function cm.mfilter(c)
+	return c:HasLevel() and c:IsAbleToDeck()
+end
+function cm.ckfilter(c,e,tp)
+	return c:IsAttribute(ATTRIBUTE_FIRE) and c:IsLinkMonster()
+end
+function cm.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
+	--if Duel.IsExistingMatchingCard(s.ckfilter,tp,LOCATION_MZONE,0,1,nil,e,tp) then
+		return Duel.GetMatchingGroup(cm.mfilter,tp,LOCATION_GRAVE,0,nil)
+--	end
+--	return Group.CreateGroup()
+end
+function cm.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
+	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_GRAVE):Filter(cm.mfilter,nil)
+	mg:Sub(mat2)
+	Duel.ReleaseRitualMaterial(mg)
+	Duel.SendtoDeck(mat2,nil,2,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
+end
+function cm.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetPossibleOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_GRAVE)
+end
+
+
+
+
+--[[function cm.filter(c)
 	return c:IsSetCard(0x303)
 end
 function cm.monfilter(c)
@@ -55,4 +85,4 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,false,true,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
-end
+end]]
