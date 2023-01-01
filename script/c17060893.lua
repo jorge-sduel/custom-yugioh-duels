@@ -56,13 +56,13 @@ Fusion.AddContactProc(c,cm.contactfil,cm.contactop,cm.splimit,nil,nil,nil,false)
 	e4:SetValue(cm.repval)
 	e4:SetOperation(cm.repop)
 	c:RegisterEffect(e4)
-	--spsummon condition
+	--[[spsummon condition
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e5:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e5:SetValue(cm.splimit)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e5)]]
 end
 cm.is_named_with_Dark_Degenerate=1
 function cm.IsDark_Degenerate(c)
