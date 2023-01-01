@@ -33,8 +33,7 @@ function cm.mfilter1(c,e)
 	return c:IsFaceup() or (c:IsLocation(LOCATION_HAND) or c:IsLocation(LOCATION_ONFIELD))
 end
 function cm.mfilter2(c,e)
-	return c:IsType(TYPE_MONSTER) and cm.cmfilter(c)
-	and c:IsCanBeFusionMaterial() and c:IsAbleToDeck() and not c:IsImmuneToEffect(e)
+	return c:IsCanBeFusionMaterial() and c:IsAbleToDeck() and not c:IsImmuneToEffect(e)
 end
 function cm.spfilter1(c,e,tp,m,f,chkf)
 	return c:IsType(TYPE_FUSION) and (not f or f(c))
@@ -45,7 +44,7 @@ function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local chkf=tp
 		local mg1=Duel.GetFusionMaterial(tp)
-		local mg2=Duel.GetMatchingGroup(cm.mfilter2,tp,LOCATION_EXTRA,0,nil,e)
+		local mg2=Duel.GetMatchingGroup(cm.spfilter1,tp,LOCATION_EXTRA,0,nil,e)
 		mg2:Merge(mg1)
 		return Duel.IsExistingMatchingCard(cm.spfilter1,tp,LOCATION_EXTRA,0,1,nil,e,tp,mg2,nil,chkf) 
 		and Duel.GetLocationCountFromEx(tp)~=0
