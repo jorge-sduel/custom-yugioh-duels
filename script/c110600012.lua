@@ -30,7 +30,7 @@ function cm.mfilter0(c)
 	return c:IsType(TYPE_MONSTER) and c:IsCanBeFusionMaterial() and c:IsAbleToDeck()
 end
 function cm.mfilter1(c,e)
-	return not c:IsImmuneToEffect(e) and (c:IsLocation(LOCATION_FIELD) or c:IsLocation(LOCATION_HAND))
+	return c:IsFaceup() or (c:IsLocation(LOCATION_HAND) or c:IsLocation(LOCATION_ONFIELD))
 end
 function cm.mfilter2(c,e)
 	return c:IsType(TYPE_MONSTER) and cm.cmfilter(c)
