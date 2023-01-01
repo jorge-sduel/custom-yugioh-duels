@@ -21,7 +21,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cm.cfilter(c)
-	return c:GetSequence()>=5
+	return c:IsFaceup()
 end
 function cm.filter1(c,e)
 	return c:IsAbleToGrave() and not c:IsImmuneToEffect(e)
@@ -43,8 +43,8 @@ function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local chkf=tp
 		local mg1=Duel.GetFusionMaterial(tp):Filter(Card.IsAbleToGrave,nil)
-		--if not Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE,0,1,nil) then
-			local sg=Duel.GetMatchingGroup(cm.exfilter0,tp,LOCATION_GRAVE,0,nil,e)
+		if Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_EXTRA,0,1,nil) then
+			local sg=Duel.GetMatchingGroup(cm.exfilter0,tp,LOCATION_EXTRA,0,nil,e)
 			if sg:GetCount()>0 then
 				mg1:Merge(sg)
 				Auxiliary.FCheckAdditional=cm.fcheck
