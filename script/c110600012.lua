@@ -53,10 +53,9 @@ function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function cm.spop(e,tp,eg,ep,ev,re,r,rp)
-	local tp=e:GetHandlerPlayer()
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local chkf=tp
-	local mg1=Duel.GetFusionMaterial(tp):Filter(cm.mfilter1,nil,e)
+	local mg1=Duel.GetMatchingGroup(cm.mfilter1,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil,e)
 	local mg2=Duel.GetMatchingGroup(cm.mfilter2,tp,LOCATION_EXTRA,0,nil,e)
 	mg2:Merge(mg1)
 	local sg1=Duel.GetMatchingGroup(cm.spfilter1,tp,LOCATION_EXTRA,0,nil,e,tp,mg2,nil,chkf)
