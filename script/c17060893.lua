@@ -79,7 +79,7 @@ function cm.contactop(g)
 	Duel.Release(g,REASON_COST+REASON_MATERIAL)
 end
 function cm.ffilter(c,fc)
-	return cm.IsDark_Degenerate(c) and c:IsCanBeFusionMaterial(fc)
+	return cm.IsDark_Degenerate(c)
 end
 function cm.splimit(e,se,sp,st)
 	return not e:GetHandler():IsLocation(LOCATION_EXTRA) or bit.band(st,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
