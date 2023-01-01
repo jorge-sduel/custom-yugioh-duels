@@ -30,20 +30,20 @@ function cm.exfilter0(c)
 	return c:IsCanBeFusionMaterial() and c:IsAbleToRemove()
 end
 function cm.exfilter1(c,e)
-	return c:IsCanBeFusionMaterial() and c:IsAbleToRemove() and not c:IsImmuneToEffect(e)
+	return c:IsCanBeFusionMaterial() and c:IsFaceup() and not c:IsImmuneToEffect(e)
 end
 function cm.filter2(c,e,tp,m,f,chkf)
-	return c:IsType(TYPE_FUSION) and c:IsRace(RACE_MACHINE) and (not f or f(c))
+	return c:IsType(TYPE_FUSION) and (not f or f(c))
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:CheckFusionMaterial(m,nil,chkf)
 end
 function cm.fcheck(tp,sg,fc)
-	return sg:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)<=1
+	return sg:FilterCount(Card.IsLocation,nil,LOCATION_EXTRA)<=1
 end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local chkf=tp
 		local mg1=Duel.GetFusionMaterial(tp):Filter(Card.IsAbleToGrave,nil)
-		if not Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE,0,1,nil) then
+		--if not Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE,0,1,nil) then
 			local sg=Duel.GetMatchingGroup(cm.exfilter0,tp,LOCATION_GRAVE,0,nil,e)
 			if sg:GetCount()>0 then
 				mg1:Merge(sg)
@@ -70,7 +70,7 @@ function cm.spop(e,tp,eg,ep,ev,re,r,rp)
 	local mg1=Duel.GetFusionMaterial(tp):Filter(cm.filter1,nil,e)
 	local exmat=false
 	if not Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE,0,1,nil) then
-		local sg=Duel.GetMatchingGroup(cm.exfilter1,tp,LOCATION_GRAVE,0,nil,e)
+		local sg=Duel.GetMatchingGroup(cm.exfilter1,tp,LOCATION_EXTRA,0,nil,e)
 		if sg:GetCount()>0 then
 			mg1:Merge(sg)
 			exmat=true
