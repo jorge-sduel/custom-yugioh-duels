@@ -35,7 +35,7 @@ function cm.cfilter(c)
 	return c:IsSetCard(0x303)
 end
 function cm.thfilter(c)
-	return c:IsSetCard(0x303) and c:IsAbleToHand() and Duel.IsExistingMatchingCard(cm.penfilter,tp,LOCATION_DECK,0,1,c)
+	return c:IsSetCard(0x303) and c:IsAbleToHand() and Duel.IsExistingMatchingCard(cm.penfilter,c:GetControler(),LOCATION_DECK,0,1,c)
 end
 function cm.pentg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.thfilter,tp,LOCATION_DECK,0,1,nil) 
