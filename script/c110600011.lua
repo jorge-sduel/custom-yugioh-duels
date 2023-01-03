@@ -11,7 +11,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function cm.filter(c)
-	return c:IsSetCard(0x303) and c:IsType(TYPE_MONSTER) and c:IsType(TYPE_RITUAL) 
+	return c:IsType(TYPE_MONSTER) and c:IsType(TYPE_RITUAL) 
 	and c:IsLocation(LOCATION_PZONE) or c:IsLocation(LOCATION_HAND)
 end
 function cm.mfilter(c)
