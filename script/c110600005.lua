@@ -30,10 +30,10 @@ function cm.initial_effect(c)
 	Duel.AddCustomActivityCounter(m,ACTIVITY_CHAIN,cm.chainfilter)
 end
 function cm.chainfilter(re,tp,cid)
-	return not(re:GetHandler():IsType(TYPE_PENDULUM) and not re:GetHandler():IsSetCard(0x303))
+	return not(re:GetHandler():IsType(TYPE_PENDULUM) or not re:GetHandler():IsSetCard(0x303))
 end
 function cm.aclimit(e,re,tp)
-	return re:GetHandler():IsType(TYPE_PENDULUM) and not re:GetHandler():IsSetCard(0x303)
+	return re:GetHandler():IsType(TYPE_PENDULUM) or not re:GetHandler():IsSetCard(0x303)
 end
 function cm.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetCustomActivityCount(m,tp,ACTIVITY_CHAIN)==0 end
