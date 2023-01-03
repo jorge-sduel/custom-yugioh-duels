@@ -10,10 +10,10 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.fit_monster={id+1}
+--s.fit_monster={id+1}
 function s.filter(c,e,tp,m)
-	local cd=c:GetCode()
-	if c:IsType(TYPE_RITUAL) or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
+	--local cd=c:GetCode()
+	if not c:IsType(TYPE_RITUAL) or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
 		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
