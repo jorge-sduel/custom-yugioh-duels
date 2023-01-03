@@ -48,7 +48,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function cm.matfilter(c,scard,sumtype,tp)
-	return c:IsType(TYPE_PENDULUM,scard,sumtype,tp) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
+	return c:IsType(TYPE_PENDULUM,scard,sumtype,tp)
 end
 function cm.cfilter(c)
 	return c:IsSetCard(0x303)
