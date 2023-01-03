@@ -1,7 +1,7 @@
 --
 local s,id=GetID()
 function s.initial_effect(c)
-	local e1=Ritual.AddProcGreater({handler=c,filter=s.ritualfil,extrafil=s.extrafil,location=LOCATION_HAND|LOCATION_GRAVE,extratg=s.extratg})
+	local e1=Ritual.AddProcGreater({handler=c,filter=s.ritualfil,extrafil=s.extrafil,location=LOCATION_HAND|LOCATION_PZONE,extratg=s.extratg})
 end
 function s.ritualfil(c)
 	return c:IsRitualMonster()
