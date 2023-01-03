@@ -5,7 +5,7 @@ function cm.initial_effect(c)
 	--pendulum summon
 	Pendulum.AddProcedure(c,false)
 	--synchro summon
-	Synchro.AddProcedure(c,cm.matfilter1,1,1,Synchro.NonTuner(nil),1,99)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99,cm.matfilter1)
 	--disable
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,1))
@@ -47,8 +47,8 @@ function cm.initial_effect(c)
 	e4:SetOperation(cm.despenop)
 	c:RegisterEffect(e4)
 end
-function cm.matfilter1(c)
-	return c:IsType(TYPE_TUNER) or (c:IsType(TYPE_PENDULUM) and c:IsSummonType(SUMMON_TYPE_PENDULUM))
+function cm.matfilter(c,scard,sumtype,tp)
+	return c:IsType(TYPE_PENDULUM,scard,sumtype,tp) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function cm.cfilter(c)
 	return c:IsSetCard(0x303)
