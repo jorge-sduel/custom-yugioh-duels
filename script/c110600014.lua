@@ -73,12 +73,8 @@ function cm.disop(e,tp,eg,ep,ev,re,r,rp)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_DISABLE)
+e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e2)
-		local e3=Effect.CreateEffect(c)
-		e3:SetType(EFFECT_TYPE_SINGLE)
-		e3:SetCode(EFFECT_DISABLE_EFFECT)
-		e3:SetValue(RESET_TURN_SET)
-		tc:RegisterEffect(e3)
 	end
 end
 function cm.spfilter(c,e,tp)
