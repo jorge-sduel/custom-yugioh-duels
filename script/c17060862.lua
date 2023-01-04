@@ -133,7 +133,7 @@ end
 function cm.atcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return Duel.GetAttacker()==c and aux.bdocon(e,tp,eg,ep,ev,re,r,rp) and c:GetFlagEffect(m)==0
-		and c:IsChainAttackable()
+		and e:GetHandler():CanChainAttack(2,true)
 end
 function cm.atop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
