@@ -3,7 +3,7 @@ local cm=_G["c"..m]
 function cm.initial_effect(c)
 	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c,false)
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_RITUAL+TYPE_PENDULUM),3)
+	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsType,TYPE_RITUAL+TYPE_PENDULUM),4)
 	--pendulum set
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
