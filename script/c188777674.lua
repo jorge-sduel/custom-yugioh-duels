@@ -2,7 +2,7 @@ local m=188777674
 local cm=_G["c"..m]
 function cm.initial_effect(c)
 	--link summon
-	aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x1a0d),2,2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1a0d),2,2)
 	c:EnableReviveLimit()
 	--attack
 	local e1=Effect.CreateEffect(c)
