@@ -75,7 +75,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			e4:SetType(EFFECT_TYPE_FIELD)
 			e4:SetCode(EFFECT_INDESTRUCTABLE_COUNT)
 			e4:SetTargetRange(LOCATION_MZONE,0)
-			e4:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x161))
+			e4:SetTarget(s.Neutrino)
 			e4:SetValue(s.indct)
 			e4:SetReset(RESET_PHASE+PHASE_END)
 			Duel.RegisterEffect(e4,tp)
@@ -86,4 +86,7 @@ function s.indct(e,re,r)
 	if (r&REASON_BATTLE)>0 then
 		return 1
 	else return 0 end
+end
+function s.Neutrino(c)
+	return c.Is_Neutrino
 end
