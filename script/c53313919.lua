@@ -68,12 +68,12 @@ function c53313919.patg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(c53313919.pcfilter,tp,LOCATION_HAND,0,1,nil) end
 end
 function c53313919.paop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.CheckPendulumZones(tp) then return end
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,c53313919.pcfilter,tp,LOCATION_HAND,0,1,1,nil)
-	local tc=g:GetFirst()
-	if tc then
-		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	if #g>0 then
+		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
 function c53313919.pcfilter(c)
