@@ -64,7 +64,7 @@ function c53313919.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c53313919.patg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_PZONE)>0
 		and Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_HAND,0,1,nil,TYPE_PENDULUM) end
 end
 function c53313919.paop(e,tp,eg,ep,ev,re,r,rp)
