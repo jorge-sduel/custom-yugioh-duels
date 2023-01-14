@@ -1,7 +1,7 @@
 --Mysterious Accel Dragon
 function c53313919.initial_effect(c)
 	--Materials: 1 Tuner + 1 non-Tuner monster
-	aux.AddSynchroProcedure2(c,nil,aux.NonTuner(nil))
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--If this card is Synchro Summoned using a Pandemonium Monster as Material: You can target 1 "Mysterious" card in your GY; add it to your hand, and if you do, you can make this card's Level become equal to that monster's OR increase this card's Level by that monster's. (HOPT1)
 	local e2=Effect.CreateEffect(c)
@@ -25,7 +25,7 @@ function c53313919.initial_effect(c)
 end
 function c53313919.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_SYNCHRO) and c:GetMaterial():IsExists(Card.IsType,1,nil,TYPE_PANDEMONIUM)
+	return c:IsSummonType(SUMMON_TYPE_SYNCHRO) and c:GetMaterial():IsExists(Card.IsType,1,nil,TYPE_PENDULUM)
 end
 function c53313919.tgfilter(c)
 	return c:IsAbleToHand() and c:IsSetCard(0xcf6)
@@ -65,14 +65,14 @@ function c53313919.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c53313919.patg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_HAND,0,1,nil,TYPE_PANDEMONIUM) and aux.PandActCon(e,tp) end
+		and Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_HAND,0,1,nil,TYPE_PENDULUM) end
 end
 function c53313919.paop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or not aux.PandActCon(e,tp) then return end
+	if Duel.GetLocationCount(tp,LOCATION_PZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,Card.IsType,tp,LOCATION_HAND,0,1,1,nil,TYPE_PANDEMONIUM)
+	local g=Duel.SelectMatchingCard(tp,Card.IsType,tp,LOCATION_HAND,0,1,1,nil,TYPE_PENDULUM)
 	local tc=g:GetFirst()
 	if tc then
-		aux.PandAct(tc)(e,tp,eg,ep,ev,re,r,rp)
+		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
