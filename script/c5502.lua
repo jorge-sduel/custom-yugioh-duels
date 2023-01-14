@@ -7,7 +7,7 @@ function c5502.initial_effect(c)
 	e1:SetCode(EFFECT_SUMMON_PROC)
 	e1:SetCondition(c5502.otcon)
 	e1:SetOperation(c5502.otop)
-	e1:SetValue(SUMMON_TYPE_ADVANCE)
+	e1:SetValue(SUMMON_TYPE_TRIBUTE)
 	c:RegisterEffect(e1)
 	--pierce
 	local e2=Effect.CreateEffect(c)
