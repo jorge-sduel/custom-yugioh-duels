@@ -65,14 +65,17 @@ function c53313919.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c53313919.patg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp)
-		and Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_HAND,0,1,nil,TYPE_PENDULUM) end
+		and Duel.IsExistingMatchingCard(c53313919.pcfilter,tp,LOCATION_HAND,0,1,nil) end
 end
 function c53313919.paop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,Card.IsType,tp,LOCATION_HAND,0,1,1,nil,TYPE_PENDULUM)
+	local g=Duel.SelectMatchingCard(tp,c53313919.pcfilter,tp,LOCATION_HAND,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
+end
+function c53313919.pcfilter(c)
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
