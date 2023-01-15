@@ -1,6 +1,6 @@
 --Mysterious Dragon
 function c53313901.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--Once per turn: You can target 1 face-up "Mysterious" monster you control; once during this turn, it cannot be destroyed by battle or by card effects.
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
@@ -8,11 +8,9 @@ function c53313901.initial_effect(c)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCountLimit(1)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetCondition(aux.PandActCheck)
 	e1:SetTarget(c53313901.target)
 	e1:SetOperation(c53313901.operation)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
 	--effect change
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(1102)
