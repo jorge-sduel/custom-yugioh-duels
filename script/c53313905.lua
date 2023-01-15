@@ -1,6 +1,6 @@
 --Mysterious Solar Panel
 function c53313905.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure (c)
 	--During your Main Phase: You can destroy this card from your Spell/Trap Zone, and if you do, Special Summon 1 Level 5 or higher "Mysterious" monster from your Hand, except "Mysterious Solar Panel". You can only use this effect of "Mysterious Solar Panel" once per turn.
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(53313905,0))
@@ -9,11 +9,10 @@ function c53313905.initial_effect(c)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCountLimit(1,53313905)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
-	e1:SetCondition(function(e,tp) local ph=Duel.GetCurrentPhase() return aux.PandActCheck(e) and Duel.GetTurnPlayer()==tp and (ph==PHASE_MAIN1 or ph==PHASE_MAIN2) end)
+	e1:SetCondition(function(e,tp) local ph=Duel.GetCurrentPhase() return Duel.GetTurnPlayer()==tp and (ph==PHASE_MAIN1 or ph==PHASE_MAIN2) end)
 	e1:SetTarget(c53313905.sptg)
 	e1:SetOperation(c53313905.spop)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
 	--During the turn this card was activated, you take no damage.
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
@@ -111,7 +110,7 @@ function c53313905.statfilter(c,tp)
 	return c:GetSummonPlayer()==1-tp
 end
 function c53313905.statcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(c53313905.statfilter,1,nil,tp) and aux.PandActCheck(e)
+	return eg:IsExists(c53313905.statfilter,1,nil,tp)
 end
 function c53313905.stattg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) end
