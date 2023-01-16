@@ -62,14 +62,27 @@ function c53313906.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_SUMMON)
 end
 function c53313906.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
-	if e:GetHandler():IsLocation(LOCATION_GRAVE) then
-		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,e:GetHandler(),1,0,0)
-	end
+	local tc1=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,6)
+	local tc2=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,7)
+	if chk==0 then return e:GetHandler():CheckActivateEffect(false,false,false)~=nil and (not tc1 or not tc2) 
+		and not e:GetHandler():IsStatus(STATUS_CHAINING) end
 end
 function c53313906.thop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=e:GetHandler()
-	if tc:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
-		Duel.ConfirmCards(1-tp,tc)
-	end
+	local c=e:GetHandler()
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	local tpe=c:GetType()
+	local te=c:GetActivateEffect()
+	local tg=te:GetTarget()
+	local co=te:GetCost()
+	local op=te:GetOperation()
+	e:SetCategory(te:GetCategory())
+	e:SetProperty(te:GetProperty())
+	Duel.ClearTargetCard()
+	Duel.Hint(HINT_CARD,0,c:GetCode())
+	c:CreateEffectRelation(te)
+	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
+	if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end
+	Duel.BreakEffect()
+	if op then op(te,tp,eg,ep,ev,re,r,rp) end
+	c:ReleaseEffectRelation(te)
 end
