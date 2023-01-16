@@ -70,19 +70,4 @@ end
 function c53313906.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	local tpe=c:GetType()
-	local te=c:GetActivateEffect()
-	local tg=te:GetTarget()
-	local co=te:GetCost()
-	local op=te:GetOperation()
-	e:SetCategory(te:GetCategory())
-	e:SetProperty(te:GetProperty())
-	Duel.ClearTargetCard()
-	Duel.Hint(HINT_CARD,0,c:GetCode())
-	c:CreateEffectRelation(te)
-	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
-	if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end
-	Duel.BreakEffect()
-	if op then op(te,tp,eg,ep,ev,re,r,rp) end
-	c:ReleaseEffectRelation(te)
 end
