@@ -4,7 +4,7 @@ function c53313906.initial_effect(c)
 	--P-If a monster battles, during damage calculation (in either player's turn): You can make the battle damage you take from this battle 0, then Special Summon this card from your Spell & Trap Zone. 
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetType(EFFECT_TYPE_QUICK_O)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_CAL)
 	e1:SetHintTiming(TIMING_DAMAGE_CAL)
