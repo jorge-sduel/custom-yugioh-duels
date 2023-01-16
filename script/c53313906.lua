@@ -46,7 +46,6 @@ function c53313906.atkop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 	if c:IsRelateToEffect(e) then
 		Duel.BreakEffect()
-		c:SetCardData(CARDDATA_TYPE,TYPE_MONSTER+TYPE_EFFECT)
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
