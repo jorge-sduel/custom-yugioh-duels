@@ -1,17 +1,15 @@
 --Mysterious Starquid
 function c53313907.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--P-When an effect is activated: You can destroy this card, and change that effect to "Both players can add 1 Level 6 or lower Pandemonium monster from their Decks to their hands, except "Mysterious Starquid".". (HOPT1)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_CHAINING)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_TODECK)
-	e1:SetCondition(aux.PandActCheck)
 	e1:SetTarget(c53313907.chtg)
 	e1:SetOperation(c53313907.chop)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
 	--M-When this card is Summoned: You can add 1 "Mysterious" monster from your Deck, Extra Deck or GY to your Hand, except "Mysterious Starquid".
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -39,7 +37,7 @@ function c53313907.initial_effect(c)
 end
 --filters
 function c53313907.filter(c)
-	return c:IsLevelBelow(6) and c:IsType(TYPE_PANDEMONIUM) and not c:IsCode(53313907)
+	return c:IsLevelBelow(6) and c:IsType(TYPE_PENDULUM) and not c:IsCode(53313907)
 end
 function c53313907.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0xcf6) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeck()
@@ -51,7 +49,7 @@ function c53313907.thfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xcf6) and c:IsAbleToHand() and not c:IsCode(53313907)
 end
 function c53313907.setfilter(c)
-	return c:IsSetCard(0xcf6) and c:IsType(TYPE_PANDEMONIUM) and not c:IsCode(53313907)
+	return c:IsSetCard(0xcf6) and c:IsType(TYPE_PENDULUM) and not c:IsCode(53313907)
 end
 --change effect
 function c53313907.chtg(e,tp,eg,ep,ev,re,r,rp,chk)
