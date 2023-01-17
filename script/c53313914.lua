@@ -1,5 +1,6 @@
 --Mysterious Cryophoenix
 function c53313914.initial_effect(c)
+	c:EnableReviveLimit()
 	Pendulum.AddProcedure(c)
 	--Once per turn: You can target 1 "Mysterious" monster you control, it can attack your opponent directly, but it is destroyed during the end phase.
 	local e2=Effect.CreateEffect(c)
@@ -11,7 +12,6 @@ function c53313914.initial_effect(c)
 	e2:SetOperation(c53313914.atop)
 	c:RegisterEffect(e2)
 	--Cannot be Normal Summoned/Set.
-	c:EnableReviveLimit()
 	--Must be Special Summoned (from your hand) by Tributing 1 Level 4 or lower "Mysterious" monster you control.
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -40,7 +40,7 @@ function c53313914.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c53313914.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0xcf6) and c:IsAttackable() and not c:IsHasEffect(EFFECT_DIRECT_ATTACK)
+	return c:IsFaceup() and c:IsSetCard(0xcf6) and not c:IsHasEffect(EFFECT_DIRECT_ATTACK)
 end
 function c53313914.attg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and c53313914.filter(chkc) end
