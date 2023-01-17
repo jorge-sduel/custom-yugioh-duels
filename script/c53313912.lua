@@ -1,6 +1,6 @@
 --Mysterious Crab
 function c53313912.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--P: When a "Mysterious" monster on your side of the field is destroyed by battle or by your opponent's card effect: You can target 1 card on the field; destroy it.
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -12,7 +12,6 @@ function c53313912.initial_effect(c)
 	e1:SetTarget(c53313912.target)
 	e1:SetOperation(c53313912.activate)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
 	--M: You can Tribute this card and 1 other Level 4 or lower "Mysterious" monster, then Special Summon 1 Level 7 or lower "Mysterious" monster from your Deck or GY. You can only use this effect of "Mysterious Crab" once per turn.
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -53,7 +52,7 @@ function c53313912.filter(c,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsControler(tp) and c:IsPreviousLocation(LOCATION_MZONE) and c:IsSetCard(0xcf6) and ((c:GetReasonPlayer()~=tp and c:IsReason(REASON_EFFECT)) or c:IsReason(REASON_BATTLE))
 end
 function c53313912.condition(e,tp,eg,ep,ev,re,r,rp)
-	return aux.PandActCheck(e) and eg:IsExists(c53313912.filter,1,nil,tp)
+	return eg:IsExists(c53313912.filter,1,nil,tp)
 end
 function c53313912.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) end
