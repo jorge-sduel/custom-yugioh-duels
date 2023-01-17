@@ -1,17 +1,15 @@
 	--Mysterious Ferret
 function c53313909.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--You can destroy this card, then Special Summon 1 level 6 or lower "Mysterious" monster from your Deck, except "Mysterious Ferret". You can only use this effect of "Mysterious Ferret" once per turn.
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_QUICK_O)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	e0:SetRange(LOCATION_SZONE)
 	e0:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
-	e0:SetCondition(aux.PandActCheck)
 	e0:SetTarget(c53313909.rptg)
 	e0:SetOperation(c53313909.rpop)
 	c:RegisterEffect(e0)
-	aux.EnablePandemoniumAttribute(c,e0)
 	--This card can attack your opponent directly.
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -52,7 +50,7 @@ function c53313909.pcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and Duel.GetAttackTarget()==nil
 end
 function c53313909.pfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM) and c:IsSetCard(0xcf6) and not c:IsCode(53313909) and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsSetCard(0xcf6) and not c:IsCode(53313909) and c:IsAbleToHand()
 end
 function c53313909.filter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsSetCard(0xcf6) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
