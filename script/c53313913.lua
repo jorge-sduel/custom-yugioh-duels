@@ -51,8 +51,8 @@ function c53313913.initial_effect(c)
 end
 --filters
 function c53313913.cfilter(c,tp)
-	return c:IsReason(REASON_EFFECT) and c:IsPreviousLocation(LOCATION_SZONE)
-		and c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsPreviousPosition(POS_FACEUP)
+	return c:IsReason(REASON_EFFECT) and c:IsPreviousLocation(LOCATION_PZONE)
+		and c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM
 		and c:GetPreviousControler()==tp
 end
 function c53313913.discardfilter(c,tp,e)
