@@ -17,7 +17,7 @@ function c53313913.initial_effect(c)
 	e2:SetDescription(aux.Stringid(53313913,0))
 	e2:SetCategory(CATEGORY_DESTROY)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL+EFFECT_FLAG_CARD_TARGET)
+	--e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL+EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_DESTROYED)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,53313913)
@@ -51,7 +51,7 @@ function c53313913.initial_effect(c)
 end
 --filters
 function c53313913.cfilter(c,tp)
-	return c:IsReason(REASON_EFFECT) and c:IsPreviousLocation(LOCATION_PZONE)
+	return  c:IsPreviousLocation(LOCATION_PZONE)
 		and c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM
 		and c:GetPreviousControler()==tp
 end
