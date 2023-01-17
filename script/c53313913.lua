@@ -1,6 +1,6 @@
 --Mysterious Caterpillar
 function c53313913.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--PANDES EFFECTS
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
@@ -8,11 +8,9 @@ function c53313913.initial_effect(c)
 	e1:SetCode(EVENT_CHAINING)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e1:SetRange(LOCATION_SZONE)
-	e1:SetCondition(aux.PandActCheck)
 	e1:SetTarget(c53313913.target)
 	e1:SetOperation(c53313913.operation)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
 	--MONSTER EFFECTS
 	--destroy
 	local e2=Effect.CreateEffect(c)
@@ -54,7 +52,7 @@ end
 --filters
 function c53313913.cfilter(c,tp)
 	return c:IsReason(REASON_EFFECT) and c:IsPreviousLocation(LOCATION_SZONE)
-		and c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and c:IsPreviousPosition(POS_FACEUP)
+		and c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsPreviousPosition(POS_FACEUP)
 		and c:GetPreviousControler()==tp
 end
 function c53313913.discardfilter(c,tp,e)
