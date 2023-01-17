@@ -1,17 +1,15 @@
 --Mysterious Cryophoenix
 function c53313914.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--Once per turn: You can target 1 "Mysterious" monster you control, it can attack your opponent directly, but it is destroyed during the end phase.
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetCondition(aux.PandActCheck)
 	e2:SetTarget(c53313914.attg)
 	e2:SetOperation(c53313914.atop)
 	c:RegisterEffect(e2)
-	aux.EnablePandemoniumAttribute(c,e2)
 	--Cannot be Normal Summoned/Set.
 	c:EnableReviveLimit()
 	--Must be Special Summoned (from your hand) by Tributing 1 Level 4 or lower "Mysterious" monster you control.
