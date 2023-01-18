@@ -1,11 +1,14 @@
 --Mysterious Cosmic Dragon
 function c53313917.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	--spsummon
+	c:EnableReviveLimit()
+	Synchro.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0xCF6),1,1,Synchro.NonTuner(nil),1,99)
+	Pendulum.AddProcedure(c)
 	--If a monster(s) you control would be destroyed by battle or an opponent’s card effect, you can destroy this card instead. (OPT)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EFFECT_DESTROY_REPLACE)
-	e1:SetRange(LOCATION_SZONE)
+	e1:SetRange(LOCATION_PZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
 	e1:SetTarget(c53313917.reptg)
 	e1:SetValue(c53313917.repval)
@@ -15,16 +18,12 @@ function c53313917.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_DESTROYED)
-	e2:SetRange(LOCATION_SZONE)
+	e2:SetRange(LOCATION_PZONE)
 	e2:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e2:SetCondition(function(e,tp,eg,ep,ev,re,r,rp) return eg:IsExists(c53313917.cfilter) end)
 	e2:SetTarget(c53313917.thtg)
 	e2:SetOperation(c53313917.thop)
 	c:RegisterEffect(e2)
-	aux.EnablePandemoniumAttribute(c,e2,false,TYPE_EFFECT+TYPE_SYNCHRO)
-	--spsummon
-	c:EnableReviveLimit()
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0xCF6),aux.NonTuner(nil),1)
 	--actlimit
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
@@ -62,7 +61,7 @@ function c53313917.filter(c,tp)
 end
 function c53313917.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return aux.PandActCheck(e) and eg:IsExists(c53313917.filter,1,nil,tp) and c:GetFlagEffect(53313917)==0
+	if chk==0 then return eg:IsExists(c53313917.filter,1,nil,tp) and c:GetFlagEffect(53313917)==0
 		and c:IsDestructable(e) and not c:IsStatus(STATUS_DESTROY_CONFIRMED) end
 	return Duel.SelectEffectYesNo(tp,c,96)
 end
@@ -116,13 +115,11 @@ function c53313917.remop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c53313917.sttg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 end
 function c53313917.stop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler()
-	if tc:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) then
-		aux.PandSSet(tc,REASON_EFFECT,TYPE_EFFECT+TYPE_SYNCHRO)(e,tp,eg,ep,ev,re,r,rp)
+	if tc:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
 		Duel.ConfirmCards(1-tp,tc)
 	end
 end
