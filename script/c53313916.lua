@@ -98,9 +98,9 @@ end
 function c53313916.ttfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_PENDULUM)
  end
-function c53313916.ttcon(e,c,minc)
+function c53313916.ttcon(e,c)
 	if c==nil then return true end
-	local pc=Duel.GetFirstMatchingCard(c53313916.ttfilter,tp,LOCATION_PZONE,0,nil)
+	local pc=Duel.GetFirstMatchingCard(c53313916.ttfilter,e:GetHandlerPlayer(),LOCATION_PZONE,0,nil)
 	return pc and Duel.GetTributeGroup(c):IsExists(Card.IsType,2,nil,TYPE_PENDULUM)
 end
 function c53313916.ttop(e,tp,eg,ep,ev,re,r,rp,c)
