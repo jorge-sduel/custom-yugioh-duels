@@ -1,18 +1,16 @@
 --Mysterious Samsara Dragon
 function c53313916.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--P-You can Tribute 1 monster you control; Special Summon 1 Level 5-7 "Mysterious" monster from your hand, Deck, or face-up from your Extra Deck, and if you do, destroy this card. (HOPT1)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
-	e1:SetCondition(aux.PandActCheck)
 	e1:SetCost(c53313916.pspcost)
 	e1:SetTarget(c53313916.psptg)
 	e1:SetOperation(c53313916.pspop)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
 	--P-You cannot Pandemonium Summon monsters, except LIGHT Dragon monsters. This effect cannot be negated.
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -64,7 +62,7 @@ function c53313916.initial_effect(c)
 end
 function c53313916.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsRace(RACE_DRAGON) and c:IsAttribute(ATTRIBUTE_LIGHT) then return false end
-	return aux.PandActCheck(e) and bit.band(sumtype,SUMMON_TYPE_SPECIAL+726)==SUMMON_TYPE_SPECIAL+726
+	return bit.band(sumtype,SUMMON_TYPE_SPECIAL+726)==SUMMON_TYPE_SPECIAL+726
 end
 function c53313916.pspcfilter(c,e,tp)
 	local loc=0
@@ -107,16 +105,16 @@ function c53313916.pspop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c53313916.ttfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM)
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM)
  end
 function c53313916.ttcon(e,c,minc)
 	if c==nil then return true end
 	local pc=Duel.GetFirstMatchingCard(c53313916.ttfilter,tp,LOCATION_SZONE,0,nil)
-	return minc<=3 and pc and Duel.GetTributeGroup(c):IsExists(Card.IsType,2,nil,TYPE_PANDEMONIUM)
+	return minc<=3 and pc and Duel.GetTributeGroup(c):IsExists(Card.IsType,2,nil,TYPE_PENDULUM)
 end
 function c53313916.ttop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TRIBUTE)
-	local g=Duel.GetTributeGroup(c):FilterSelect(tp,Card.IsType,2,2,nil,TYPE_PANDEMONIUM)
+	local g=Duel.GetTributeGroup(c):FilterSelect(tp,Card.IsType,2,2,nil,TYPE_PENDULUM)
 	g=g+Duel.GetFirstMatchingCard(c53313916.ttfilter,tp,LOCATION_SZONE,0,nil)
 	c:SetMaterial(g)
 	Duel.Release(g,REASON_SUMMON+REASON_MATERIAL)
