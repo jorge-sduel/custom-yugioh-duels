@@ -79,7 +79,7 @@ function c53313918.op2(e,tp,eg,ep,ev,re,r,rp)
 end
 function c53313918.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsSummonType(SUMMON_TYPE_SPECIAL+726) and c:IsPreviousLocation(LOCATION_HAND) and c:GetPreviousControler()==c:GetControler()
+	return c:IsSummonType(SUMMON_TYPE_PENDULUM) and c:IsPreviousLocation(LOCATION_HAND) and c:GetPreviousControler()==c:GetControler()
 end
 function c53313918.filter(c,e,tp)
 	local ect=c29724053 and Duel.IsPlayerAffectedByEffect(tp,29724053) and c29724053[tp]
