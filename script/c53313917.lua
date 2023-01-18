@@ -116,10 +116,8 @@ function c53313917.remop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c53313917.sttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc1=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,6)
-
 	local tc2=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,7)
-	if chk==0 then return e:GetHandler():CheckActivateEffect(false,false,false)~=nil and (not tc1 or not tc2) 
-		and not e:GetHandler():IsStatus(STATUS_CHAINING) end
+	if chk==0 then return e:GetHandler():CheckActivateEffect(false,false,false)~=nil and (not tc1 or not tc2) end
 end
 function c53313917.stop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
