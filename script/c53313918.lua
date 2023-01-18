@@ -82,9 +82,7 @@ function c53313918.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsSummonType(SUMMON_TYPE_PENDULUM) and c:IsPreviousLocation(LOCATION_HAND) and c:GetPreviousControler()==c:GetControler()
 end
 function c53313918.filter(c,e,tp)
-	local ect=c29724053 and Duel.IsPlayerAffectedByEffect(tp,29724053) and c29724053[tp]
 	return c:IsLevelBelow(4) and c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and (not ect or ect>0 or c:IsLocation(LOCATION_GRAVE+LOCATION_DECK))
 end
 function c53313918.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=0
