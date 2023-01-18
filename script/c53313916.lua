@@ -106,7 +106,7 @@ end
 function c53313916.ttop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TRIBUTE)
 	local g=Duel.GetTributeGroup(c):FilterSelect(tp,Card.IsType,2,2,nil,TYPE_PENDULUM)
-	g1=g+Duel.GetFirstMatchingCard(c53313916.ttfilter,tp,LOCATION_PZONE,0,nil)
+	g1=g+Duel.SelectMatchingCard(tp,c53313916.ttfilter,tp,LOCATION_PZONE,0,1,1,nil,tp)
 	c:SetMaterial(g1)
 	Duel.Release(g1,REASON_SUMMON+REASON_MATERIAL)
 end
