@@ -100,8 +100,8 @@ function c53313916.ttfilter(c)
  end
 function c53313916.ttcon(e,c,minc)
 	if c==nil then return true end
-	local pc=Duel.GetFirstMatchingCard(c53313916.ttfilter,tp,LOCATION_SZONE,0,nil)
-	return minc<=3 and pc and Duel.GetTributeGroup(c):IsExists(Card.IsType,2,nil,TYPE_PENDULUM)
+	local pc=Duel.GetFirstMatchingCard(c53313916.ttfilter,tp,LOCATION_PZONE,0,nil)
+	return pc and Duel.GetTributeGroup(c):IsExists(Card.IsType,2,nil,TYPE_PENDULUM)
 end
 function c53313916.ttop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TRIBUTE)
