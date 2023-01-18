@@ -115,11 +115,13 @@ function c53313917.remop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c53313917.sttg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
+	local tc1=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,6)
+
+	local tc2=Duel.GetFieldCard(e:GetHandlerPlayer(),LOCATION_SZONE,7)
+	if chk==0 then return e:GetHandler():CheckActivateEffect(false,false,false)~=nil and (not tc1 or not tc2) 
+		and not e:GetHandler():IsStatus(STATUS_CHAINING) end
 end
 function c53313917.stop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=e:GetHandler()
-	if tc:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
-		Duel.ConfirmCards(1-tp,tc)
-	end
+	local c=e:GetHandler()
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
