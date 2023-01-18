@@ -1,14 +1,13 @@
 --Mysterious Cosmicfly
 function c53313918.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--P: Once per turn, if you control 2 or more Pandemonium monsters: You can destroy this card, then add 1 card from your Extra Deck to your Hand. (OPT1)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_SZONE)
+	e1:SetRange(LOCATION_PZONE)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_TOHAND)
 	e1:SetDescription(1006)
-	e1:SetCondition(aux.PandActCheck)
 	e1:SetCost(c53313918.cost)
 	e1:SetTarget(c53313918.tg1)
 	e1:SetOperation(c53313918.op1)
@@ -25,7 +24,6 @@ function c53313918.initial_effect(c)
 	e2:SetTarget(c53313918.tg2)
 	e2:SetOperation(c53313918.op2)
 	c:RegisterEffect(e2)
-	aux.EnablePandemoniumAttribute(c,e1,e2,TYPE_EFFECT+TYPE_TUNER)
 	--M: When this card is Pandemonium summoned from your hand: You can Special Summon 1 level 4 or lower Pandemonium monster from your Deck, Extra Deck or GY.
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -47,7 +45,7 @@ function c53313918.initial_effect(c)
 end
 function c53313918.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsDestructable() and Duel.IsExistingMatchingCard(aux.AND(aux.FilterBoolFunction(Card.IsFaceup),aux.FilterBoolFunction(Card.IsType,TYPE_PANDEMONIUM)),tp,LOCATION_MZONE,0,2,nil) and c:GetFlagEffect(53313918)==0 end
+	if chk==0 then return c:IsDestructable() and Duel.IsExistingMatchingCard(aux.AND(aux.FilterBoolFunction(Card.IsFaceup),aux.FilterBoolFunction(Card.IsType,TYPE_PENDULUM)),tp,LOCATION_MZONE,0,2,nil) and c:GetFlagEffect(53313918)==0 end
 	if not e:IsHasType(EFFECT_TYPE_ACTIVATE) then Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription()) end
 	c:RegisterFlagEffect(53313918,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,1)
 end
@@ -85,7 +83,7 @@ function c53313918.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function c53313918.filter(c,e,tp)
 	local ect=c29724053 and Duel.IsPlayerAffectedByEffect(tp,29724053) and c29724053[tp]
-	return c:IsLevelBelow(4) and c:IsType(TYPE_PANDEMONIUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsLevelBelow(4) and c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and (not ect or ect>0 or c:IsLocation(LOCATION_GRAVE+LOCATION_DECK))
 end
 function c53313918.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
