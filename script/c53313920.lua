@@ -1,7 +1,7 @@
 --Mysterious Hyper Dragon
 function c53313920.initial_effect(c)
 	--Materials: 1 Tuner Synchro + 1+ non-Tuner "Mysterious" Pandemonium monsters
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsType,TYPE_SYNCHRO),aux.NonTuner(c53313920.sfilter),1)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),1,1,Synchro.NonTuner(c53313920.sfilter),1,99)
 	c:EnableReviveLimit()
 	--Once per turn, during your Main Phase 1: You can banish up to 3 cards from your GY and/or face-up cards from your Extra Deck with different names; this card's maximum number of attacks this turn is equal to the number of "Mysterious" cards banished to activate this effect.
 	local e1=Effect.CreateEffect(c)
@@ -25,7 +25,7 @@ function c53313920.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c53313920.sfilter(c)
-	return c:IsType(TYPE_PANDEMONIUM) and c:IsSetCard(0xcf6)
+	return c:IsType(TYPE_PENDULUM)
 end
 function c53313920.filter(c,ct)
 	return (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsAbleToRemoveAsCost() and (c:IsSetCard(0xcf6) or ct>0)
