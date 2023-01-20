@@ -1,7 +1,7 @@
 --Drago Lustro Misterioso
 --Script by XGlitchy30
 function c53313934.initial_effect(c) 
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--PANDEMONIUM EFFECTS
 	--placeholders
 	local ph1=Effect.CreateEffect(c)
@@ -22,7 +22,6 @@ function c53313934.initial_effect(c)
 	pand1:SetCode(EVENT_FREE_CHAIN)
 	pand1:SetRange(LOCATION_SZONE)
 	pand1:SetLabelObject(ph1)
-	pand1:SetCondition(aux.PandActCheck)
 	pand1:SetCost(c53313934.pandcost)
 	pand1:SetTarget(c53313934.pandtg)
 	pand1:SetOperation(c53313934.pandop)
@@ -37,7 +36,6 @@ function c53313934.initial_effect(c)
 	pand3:SetDescription(aux.Stringid(53313934,2))
 	pand3:SetLabelObject(ph3)
 	c:RegisterEffect(pand3)
-	aux.EnablePandemoniumAttribute(c,pand1,pand2,pand3)
 	--MONSTER EFFECTS
 	--spsummon self
 	local e0=Effect.CreateEffect(c)
