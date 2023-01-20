@@ -40,11 +40,10 @@ function c31881000.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_HAND+LOCATION_EXTRA) and chkc:IsControler(tp) and chkc:IsSetCard(0xdd) end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsSetCard,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,nil,0xdd) end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(31881000,1))
-	Duel.SelectTarget(tp,Card.IsSetCard,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil,0xdd)
 end
 function c31881000.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local tc=Duel.GetFirstTarget()
+	local tc=Duel.SelectTarget(tp,Card.IsSetCard,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil,0xdd)
 	if not c:IsRelateToEffect(e) then return end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
