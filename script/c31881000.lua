@@ -36,14 +36,17 @@ function c31881000.initial_effect(c)
 	e5:SetOperation(c31881000.operation)
 	c:RegisterEffect(e5)
 end
+function c31881000.exfilter(c)
+	return c:IsSetCard(0xdd) and c:IsMonster()
+end
 function c31881000.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE+LOCATION_EXTRA) and chkc:IsSetCard(0xdd) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,Card.IsSetCard,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil,0xdd)
+	Duel.IsExistingMatchingCard(c31881000.exfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,nil,tp)
 end
 function c31881000.operation(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
+	local tc=Duel.SelectMatchingCard(tp,c31881000.exfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil)
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) and tc and tc:IsRelateToEffect(e) then
 	local e1=Effect.CreateEffect(c)
