@@ -46,9 +46,12 @@ function c31881000.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.IsExistingMatchingCard(c31881000.exfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,nil,tp)
 end
 function c31881000.operation(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.SelectMatchingCard(tp,c31881000.exfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c31881000.exfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil)
 	local c=e:GetHandler()
 	--if c:IsFaceup() and c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
+		if #g>0 then
+			Duel.ConfirmCards(1-tp,g)
+			local tc=g:GetFirst()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
@@ -56,7 +59,7 @@ function c31881000.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 	e1:SetValue(tc:GetCode())
 	c:RegisterEffect(e1)
-	--end
+	end
 end
 function c31881000.filter(c)
 	return c:IsSetCard(0xdd) and not c:IsCode(31881000) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
