@@ -1,7 +1,7 @@
 --Holy Noble Knight Crusader, Artorigus
 function c56642464.initial_effect(c)
     --synchro summon
-    aux.AddSynchroProcedure(c,nil,aux.NonTuner(Card.IsSetCard,0x107a),1,1)
+    Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(Card.IsSetCard,0x107a),1,99)
     c:EnableReviveLimit()
     --ret&draw
     local e1=Effect.CreateEffect(c)
