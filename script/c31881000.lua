@@ -46,7 +46,7 @@ function c31881000.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SelectMatchingCard(tp,c31881000.exfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil)
 end
 function c31881000.operation(e,tp,eg,ep,ev,re,r,rp)
-	local tc:IsRelateToEffect(e)
+	local tc=Duel.GetFirstTarget()
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 	local e1=Effect.CreateEffect(c)
