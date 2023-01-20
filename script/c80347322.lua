@@ -1,7 +1,7 @@
 --Noble Knight Agravain
 function c80347322.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x107a),2,2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x107a),2,2)
 	--battle indestructable
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
