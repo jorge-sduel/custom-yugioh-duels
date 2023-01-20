@@ -43,12 +43,12 @@ function c31881000.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE+LOCATION_EXTRA) and chkc:IsSetCard(0xdd) end
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.IsExistingMatchingCard(c31881000.exfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,nil,tp)
+	Duel.SelectMatchingCard(tp,c31881000.exfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil)
 end
 function c31881000.operation(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.SelectMatchingCard(tp,c31881000.exfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil)
+	local tc:IsRelateToEffect(e)
 	local c=e:GetHandler()
-	if c:IsFaceup() and c:IsRelateToEffect(e) then
+	if c:IsFaceup() and c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_CODE)
