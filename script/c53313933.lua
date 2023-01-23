@@ -1,7 +1,7 @@
 --Dragocavaliere Misterioso
 --Script by XGlitchy30
 function c53313933.initial_effect(c) 
-	aux.AddOrigPandemoniumType(c)
+	Pendulum.AddProcedure(c)
 	--placeholder
 	local e0=Effect.CreateEffect(c)
 	c:RegisterEffect(e0)
@@ -15,7 +15,6 @@ function c53313933.initial_effect(c)
 	e1:SetCode(EVENT_CHAINING)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCountLimit(1)
-	e1:SetCondition(aux.PandActCheck)
 	e1:SetCost(c53313933.actcost)
 	e1:SetTarget(c53313933.acttg)
 	e1:SetOperation(c53313933.actop)
@@ -30,12 +29,10 @@ function c53313933.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1)
 	e2:SetLabelObject(e0)
-	e2:SetCondition(aux.PandActCheck)
 	e2:SetCost(c53313933.spcost)
 	e2:SetTarget(c53313933.sptg)
 	e2:SetOperation(c53313933.spop)
 	c:RegisterEffect(e2)
-	aux.EnablePandemoniumAttribute(c,e1,e2)
 	--MONSTER EFFECTS
 	--spsummon proc
 	local e3=Effect.CreateEffect(c)
@@ -119,11 +116,11 @@ function c53313933.spfilter(c,e,tp,race,val)
 	return c:IsType(TYPE_XYZ) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:GetRace()==race and c:GetRank()==val+1
 end
 function c53313933.actfilter(c,tp,cc)
-	return c:IsSetCard(0xcf6) and c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and Duel.GetLocationCount(tp,LOCATION_SZONE)>-1 and (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_REMOVED) and c:IsFaceup()))
+	return c:IsSetCard(0xcf6) and c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and Duel.GetLocationCount(tp,LOCATION_SZONE)>-1 and (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_REMOVED) and c:IsFaceup()))
 		and not c:IsForbidden() and not Duel.IsExistingMatchingCard(c53313933.excfilter,tp,LOCATION_SZONE,0,1,c,cc)
 end
 function c53313933.excfilter(c,cc)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and c:IsFaceup() and c:GetFlagEffect(726)>0 and (cc==nil or c~=cc)
+	return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsFaceup() and c:GetFlagEffect(726)>0 and (cc==nil or c~=cc)
 end
 function c53313933.spsumfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0xcf6) and c:IsAbleToDeckAsCost()
