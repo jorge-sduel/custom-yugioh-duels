@@ -157,7 +157,6 @@ function c53313933.actop(e,tp,eg,ep,ev,re,r,rp)
 		local tc=g:GetFirst()
 		if tc then
 			Duel.HintSelection(g)
-			Card.SetCardData(tc,CARDDATA_TYPE,TYPE_TRAP+TYPE_CONTINUOUS)
 			Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 			if not tc:IsLocation(LOCATION_SZONE) then
 				Card.SetCardData(tc,CARDDATA_TYPE,tc:GetOriginalType())
