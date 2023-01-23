@@ -87,6 +87,6 @@ end
 function s.dop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(ep,0,LOCATION_HAND)
 	if #g==0 then return end
-	local sg=g:RandomSelect(tp,1)
+	local sg=g:RandomSelect(1-tp,1)
 	Duel.SendtoGrave(sg,REASON_EFFECT+REASON_DISCARD)
 end
