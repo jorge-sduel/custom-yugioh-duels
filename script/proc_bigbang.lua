@@ -345,7 +345,7 @@ function Auxiliary.BigbangCheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 			return false
 		end
 	end
-	return #sg>=minc and sg:CheckWithSumEqual(Auxiliary.BigbangGetBigbangCount,lc:GetAttack(),#sg,#sg)
+	return #sg>=minc and sg:CheckWithSumGreater(Auxiliary.BigbangGetBigbangCount,Duel.GetLP(tp)-lc:GetAttack(),#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Auxiliary.BigbangCondition(f,minc,maxc,specialchk,opp,loc,send)
