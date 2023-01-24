@@ -291,7 +291,7 @@ function Auxiliary.AddBigbangProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e1:SetCondition(Bigbang.Condition(f,min,max,specialchk,opp,loc,send))
 	e1:SetTarget(Bigbang.Target(f,min,max,specialchk,opp,loc,send))
 	e1:SetOperation(Bigbang.Operation(f,min,max,specialchk,opp,loc,send))
-    e1:SetValue(SUMMON_TYPE_BIGBANG2)
+    e1:SetValue(SUMMON_TYPE_BIGBANG)
 	c:RegisterEffect(e1)
 	--scale
 	local e3=Effect.CreateEffect(c)
