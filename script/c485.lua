@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetCost(s.op)
 	c:RegisterEffect(e2)
 end
-function s.op(e)
+function s.op(e,tp,eg,ep,ev,re,r,rp,c)
 	local c=e:GetHandler()
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
