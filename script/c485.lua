@@ -14,10 +14,13 @@ function s.initial_effect(c)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
 end
+function s.filter2(c)
+	return c:IsFaceup() and c:IsSetCard(0x55) or c:IsSetCard(0x7b)
+end
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and (Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsSetCard,0x55),c:GetControler(),LOCATION_MZONE,0,1,nil) or Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsSetCard,0x7b),c:GetControler(),LOCATION_MZONE,0,1,nil)) 
+		and Duel.IsExistingMatchingCard(s.filter2,c:GetControler(),LOCATION_MZONE,0,1,nil) 
 end
 function s.filter(c)
 	return c:IsFaceup() and c:GetLevel()>0
