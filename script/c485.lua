@@ -1,6 +1,6 @@
 --
 local s,id=GetID()
-function s.initial_effect(c)
+function s.initial_effect(c)
 	--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
