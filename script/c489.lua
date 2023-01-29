@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetCode(EFFECT_CHANGE_CODE)
-	--e2:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e2:SetRange(0x3ff)
 	e2:SetValue(93717133)
 	c:RegisterEffect(e2)
 	--Cannot be destroyed once per turn
