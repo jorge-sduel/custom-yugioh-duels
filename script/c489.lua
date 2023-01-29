@@ -75,3 +75,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
+function s.indct(e,re,r,rp)
+	return (r&REASON_BATTLE+REASON_EFFECT)~=0
+end
