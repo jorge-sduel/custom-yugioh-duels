@@ -1,7 +1,6 @@
 --Lyrica (WATER)
 local ref=_G['c'..18917007]
 ref.Is_Runic=true
-
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function ref.initial_effect(c)
 	--Rune Summon
