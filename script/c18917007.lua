@@ -3,10 +3,10 @@ local ref=_G['c'..18917007]
 ref.Is_Runic=true
 
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+function ref.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
 	aux.AddRunicProcedure1(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),ref.matfilter,1,1)
-function ref.initial_effect(c)
 	--Cannot Target
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
