@@ -64,8 +64,7 @@ function ref.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(c,POS_FACEUP,REASON_EFFECT)
 end
 function ref.thfilter(c)
-	return (c:IsCode(18917005) or c:IsCode(18917008))
-		and c:IsAbleToHand()
+	return c:IsRace(RACE_SPELLCASTER) and c:IsAbleToHand()
 end
 function ref.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(ref.thfilter,tp,LOCATION_DECK,0,1,nil) end
