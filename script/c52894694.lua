@@ -1,7 +1,7 @@
 --Des Beast
 --Scripted by Kedy
 --Concept by XStutzX
-local cid,id=GetID()
+local cod,id=GetID()
 function cod.initial_effect(c)
 	--Synchro Summon
 	c:EnableReviveLimit()
