@@ -13,7 +13,7 @@ local id,cod=ID()
 function cod.initial_effect(c)
 	--Synchro Summon
 	c:EnableReviveLimit()
-	aux.AddSynchroProcedure(c,nil,aux.NonTuner(nil),1,1)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	--Cannot be battle target
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -60,12 +60,12 @@ end
 
 --Custom Attack Count
 function cod.counterfilter(c)
-	return not c:IsCode(52894693)
+	return not c:IsLevelBelow(5)
 end
 
 --Special Summon
 function cod.mfilter(c)
-	return c:GetCode()==52894693 and c:IsPosition(POS_FACEUP_ATTACK)
+	return c:GetType()==TYPE_SYNCHRO and c:IsPosition(POS_FACEUP_ATTACK)
 end
 function cod.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_CHAINING) 
