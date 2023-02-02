@@ -1,15 +1,7 @@
 --Des Beast
 --Scripted by Kedy
 --Concept by XStutzX
-local function ID()
-    local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-    str=string.sub(str,1,string.len(str)-4)
-    local cod=_G[str]
-    local id=tonumber(string.sub(str,2))
-    return id,cod
-end
-
-local id,cod=ID()
+local cid,id=GetID()
 function cod.initial_effect(c)
 	--Synchro Summon
 	c:EnableReviveLimit()
