@@ -26,7 +26,7 @@ function ref.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	return true
 end
 function ref.filter(c)
-	return c:IsFaceup() and c.transform
+	return c:IsFaceup() and c:IsType(TYPE_XYZ)
 end
 function ref.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and ref.filter(chkc) end
@@ -49,7 +49,7 @@ function ref.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function ref.tdfilter(c)
-	return c.transform and c:IsAbleToExtraAsCost()
+	return c:IsType(TYPE_XYZ) and c:IsAbleToExtraAsCost()
 end
 function ref.drcost(e,tp,ev,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
