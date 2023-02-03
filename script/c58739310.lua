@@ -62,97 +62,17 @@ function cid.checkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 --repeat effect
-function cid.tgcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
+function cid.filter(c)
+	return c:IsType(TYPE_MONSTER)
 end
-function cid.tgfilter(c)
-	if not c:IsFaceup() or not c:IsType(TYPE_MONSTER) or c:IsCode(id) then return false end
-	local check=0
-	local egroup={c:IsHasEffect(EFFECT_DEFAULT_CALL)}
-	for _,te1 in ipairs(egroup) do
-		local ce=te1:GetLabelObject()
-		if not ce then
-			te1:Reset()
-		end
-		
-		if ce then
-			local ctmax,ctcode=ce:GetCountLimit()
-			if bit.band(ce:GetType(),EFFECT_TYPE_IGNITION+EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_QUICK_O+EFFECT_TYPE_QUICK_F)>0
-				and bit.band(ce:GetRange(),LOCATION_MZONE)>0 and ctmax==1 then
-					check=check+1
-			end
-		end
-	end
-	return check>0
-end
-function cid.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) and cid.tgfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(cid.tgfilter,tp,LOCATION_MZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,cid.tgfilter,tp,LOCATION_MZONE,0,1,1,nil)
+function cid.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
 end
 function cid.tgop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local tc=Duel.GetFirstTarget()
-	if tc:IsFaceup() and tc:IsRelateToEffect(e) then
-		local flag,desc=1,{}
-		local egroup={tc:IsHasEffect(EFFECT_DEFAULT_CALL)}
-		for _,te1 in ipairs(egroup) do
-			local ce=te1:GetLabelObject()
-			if not ce then
-				te1:Reset()
-			end
-			if ce then
-				local ctmax,ctcode=ce:GetCountLimit()
-				if bit.band(ce:GetType(),EFFECT_TYPE_IGNITION+EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_TRIGGER_F+EFFECT_TYPE_QUICK_O+EFFECT_TYPE_QUICK_F)>0
-					and bit.band(ce:GetRange(),LOCATION_MZONE)>0 and ctmax==1 then
-						local eflag=Effect.CreateEffect(c)
-						eflag:SetType(EFFECT_TYPE_SINGLE)
-						eflag:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_UNCOPYABLE)
-						eflag:SetLabel(id+flag)
-						eflag:SetLabelObject(ce)
-						eflag:SetReset(RESET_PHASE+PHASE_END)
-						tc:RegisterEffect(eflag)
-						if ce:GetDescription() then
-							table.insert(desc,ce:GetDescription())
-						else
-							table.insert(desc,aux.Stringid(id,0))
-						end
-				end
-			end
-		end
-		if #desc>0 then
-			local opt=Duel.SelectOption(tp,table.unpack(desc))+1
-			if opt>0 then
-				local egroup2={tc:IsHasEffect(EFFECT_DEFAULT_CALL)}
-				for _,te2 in ipairs(egroup2) do
-					local ceflag=te2:GetLabelObject()
-					if not ceflag then
-						te2:Reset()
-					end
-					if ceflag and ceflag:GetType()==EFFECT_TYPE_SINGLE and ceflag:GetLabel()==id+opt then
-						local effect=ceflag:GetLabelObject()
-						local ctmax2,ctcode2=effect:GetCountLimit()
-						if ctcode2 then
-							effect:SetCountLimit(2,ctcode2)
-						else
-							effect:SetCountLimit(2)
-						end
-						tc:RegisterFlagEffect(id+100,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
-						local reset=Effect.CreateEffect(c)
-						reset:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-						reset:SetProperty(EFFECT_FLAG_DELAY)
-						reset:SetCode(EVENT_ADJUST)
-						reset:SetLabelObject(effect)
-						reset:SetCountLimit(1)
-						reset:SetCondition(cid.resetcostcon)
-						reset:SetOperation(aux.ResetEffectFunc(effect,'countlimit',ctmax2,ctcode2))
-						Duel.RegisterEffect(reset,tp)
-						break
-					end
-				end
-			end
-		end
+	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
+	local tc=g:GetFirst()
+	if tc then
+		tc:CopyEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD)
 	end
 end
 function cid.resetcostcon(e,tp,eg,ep,ev,re,r,rp)
