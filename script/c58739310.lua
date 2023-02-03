@@ -72,7 +72,7 @@ function cid.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
-		tc:CopyEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD)
+		tc:CopyEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,1)
 	end
 end
 function cid.resetcostcon(e,tp,eg,ep,ev,re,r,rp)
