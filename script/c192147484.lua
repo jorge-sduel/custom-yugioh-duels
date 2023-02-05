@@ -50,7 +50,7 @@ function c192147484.initial_effect(c)
 	e5:SetCost(c192147484.descost)
 	e5:SetTarget(c192147484.destg2)
 	e5:SetOperation(c192147484.desop2)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e5,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function c192147484.ovfilter(c)
 	return c:IsSetCard(0x7f) and c:IsFaceup() and c:GetRank()==4
