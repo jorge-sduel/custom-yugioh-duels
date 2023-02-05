@@ -2,7 +2,7 @@
 function c192147484.initial_effect(c)
 	--Xyz Summon
 	c:EnableReviveLimit()
-	aux.AddXyzProcedure(c,nil,5,3)
+	Xyz.AddProcedure(c,nil,5,3)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
 	e0:SetCode(EFFECT_SPSUMMON_PROC)
