@@ -1,7 +1,7 @@
 --Snowgarde Princess
 function c93832696.initial_effect(c)
     --link summon
-    aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsLinkAttribute,ATTRIBUTE_WATER),2,2)
+    Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_WATER),2,2)
     c:EnableReviveLimit()
     --set
     local e1=Effect.CreateEffect(c)
