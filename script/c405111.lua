@@ -41,30 +41,33 @@ function c405111.atkfilter(c,e,tp)
 	return c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) and (not e or c:IsRelateToEffect(e))
 end
 function c405111.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(c405111.atkfilter,1,nil,nil,1-tp)
+	if #eg~=1 then return false end
+	local tc=eg:GetFirst()
+	return tc~=e:GetHandler() and tc:IsFaceup() and (tc:GetLevel()>0 or tc:GetLevel()>0) and tc:IsSummonPlayer(1-tp)
 end
 function c405111.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsRelateToEffect(e) end
-	Duel.SetTargetCard(eg)
+	if chk==0 then return true end
+	--Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,eg:GetFirst():GetLevel()*200)
 end
 function c405111.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local g=eg:Filter(c405111.atkfilter,nil,e,1-tp)
-	local dg=Group.CreateGroup()
-	local c=e:GetHandler()
-	local tc=g:GetFirst()
-	while tc do
+	local tc=eg:GetFirst()
+	if tc:IsFaceup() and tc:IsLocation(LOCATION_MZONE) and not tc:IsImmuneToEffect(e) then
+		local atk=tc:GetAttack()
+		--local nv=math.min(atk,tc:GetLevel()*200)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(c405111.val)
+		e1:SetValue((c:GetLevel()+c:GetRank())*-100)
 		e1:SetReset(RESET_EVENT+0x1fe0000)
 		tc:RegisterEffect(e1)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_UPDATE_DEFENSE)
-		e2:SetValue(c405111.val)
+		e2:SetValue((c:GetLevel()+c:GetRank())*-100)
 		e2:SetReset(RESET_EVENT+0x1fe0000)
 		tc:RegisterEffect(e2)
+		--if not tc:IsHasEffect(EFFECT_REVERSE_UPDATE) then
+		--end
 	end
 end
 function c405111.val(e,c)
