@@ -1,7 +1,7 @@
 --Galaxy-Eyes Tachyon Particle Ray Dragon
 function c405111.initial_effect(c)
 	--Synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(c405111.mfilter),1,1,Synchro.NonTuner(c405111.mfilter2),1,99)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(c405111.mfilter2),1,1,Synchro.NonTuner(c405111.mfilter2),1,99)
 	c:EnableReviveLimit()
 	--atkdown
 	local e1=Effect.CreateEffect(c)
@@ -68,9 +68,7 @@ function c405111.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c405111.val(e,c)
-	if c:IsType(TYPE_XYZ) then return c:GetRank()*-100
-	else
-		return c:GetLevel()*-100
+		return (c:GetLevel()+c:GetRank())*-100
 	end
 end
 function c405111.discon(e,tp,eg,ep,ev,re,r,rp)
