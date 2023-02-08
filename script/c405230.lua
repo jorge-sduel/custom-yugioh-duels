@@ -45,7 +45,7 @@ function c405230.activate(e,tp,eg,ep,ev,re,r,rp)
 		g2:Remove(Card.IsCode,nil,sg1:GetFirst():GetCode())
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local sg2=g2:Select(tp,1,1,nil,tp)
-		Duel.SendtoGrave(sg1,nil,REASON_EFFECT)
+		Duel.SendtoGrave(sg1,REASON_EFFECT)
 		Duel.SendtoHand(sg2,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,sg2)
 	end
