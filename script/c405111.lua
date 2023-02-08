@@ -69,7 +69,6 @@ function c405111.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c405111.val(e,c)
 		return (c:GetLevel()+c:GetRank())*-100
-	end
 end
 function c405111.discon(e,tp,eg,ep,ev,re,r,rp)
 	return re:GetHandler()~=e:GetHandler() and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
