@@ -1,7 +1,7 @@
 --Galaxy-Eyes Tachyon Dual Lance & Halberd
 function c405106.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(c405106.mfilter),1,1,Synchro.NonTuner(c405106.mfilter2),1,99)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(c405106.mfilter2),1,1,Synchro.NonTuner(c405106.mfilter2),1,99)
 	c:EnableReviveLimit()
 	--add
 	local e1=Effect.CreateEffect(c)
@@ -15,13 +15,13 @@ function c405106.initial_effect(c)
 	e1:SetTarget(c405106.sptg)
 	e1:SetOperation(c405106.spop)
 	c:RegisterEffect(e1)
-	--inactivatable
+	--[[inactivatable
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_CANNOT_INACTIVATE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(c405106.efilter)
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e2)]]
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(405106,1))
 	e3:SetType(EFFECT_TYPE_QUICK_O)
@@ -50,6 +50,20 @@ function c405106.initial_effect(c)
 	e5:SetDescription(aux.Stringid(405106,3))
 	e5:SetCode(EVENT_SPSUMMON)
 	c:RegisterEffect(e5)
+	--Cannot negate the effects of your Normal Traps
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_FIELD)
+	e6:SetCode(EFFECT_CANNOT_DISEFFECT)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetValue(s.chainfilter)
+	c:RegisterEffect(e6)
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_FIELD)
+	e7:SetCode(EFFECT_CANNOT_DISABLE)
+	e7:SetRange(LOCATION_MZONE)
+	e7:SetTargetRange(LOCATION_ONFIELD,0)
+	e7:SetTarget(s.distarget)
+	c:RegisterEffect(e7)
 end
 function c405106.mfilter(c)
 	return c:IsSetCard(0x7b)
@@ -123,4 +137,12 @@ function c405106.operation2(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(c405106.filter2,nil)
 	Duel.NegateSummon(g)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
+end
+function s.chainfilter(e,ct)
+	local p=e:GetHandlerPlayer()
+	local te,tp=Duel.GetChainInfo(ct,CHAININFO_TRIGGERING_EFFECT,CHAININFO_TRIGGERING_PLAYER)
+	return p==tp and te:GetActiveType()==TYPE_MONSTER
+end
+function s.distarget(e,c)
+	return c:IsType(TYPE_MONSTER) and (tc:IsSetCard(0x55) or tc:IsSetCard(0x7b))
 end
