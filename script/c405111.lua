@@ -38,7 +38,7 @@ function c405111.mfilter2(c)
 	return c:IsSetCard(0x55) or c:IsSetCard(0x7b)
 end
 function c405111.atkfilter(c,e,tp)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) and (not e or c:IsRelateToEffect(e))
+	return c:IsLocation(LOCATION_MZONE) and (not e or c:IsRelateToEffect(e))
 end
 function c405111.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c405111.atkfilter,1,nil,nil,1-tp)
