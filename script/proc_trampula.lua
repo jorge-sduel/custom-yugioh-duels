@@ -11,7 +11,7 @@ Trampula.AddProcedure = aux.FunctionWithNamedArgs(
 function(c,reg,desc)
 		local ea=Effect.CreateEffect(c)
  		ea:SetDescription(69,1)
- 		ea:SetType(EFFECT_SPSUMMON_PROC)
+ 		ea:SetType(EFFECT_TYPE_IGNITION)
  		ea:SetRange(LOCATION_HAND)
  		ea:SetOperation(Trampula.SetOp)
  		c:RegisterEffect(ea)
