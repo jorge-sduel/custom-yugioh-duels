@@ -166,21 +166,7 @@ end
 function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
-	local tpe=c:GetType()
-	local te=c:GetActivateEffect()
-	local tg=te:GetTarget()
-	local co=te:GetCost()
-	local op=te:GetOperation()
-	e:SetCategory(te:GetCategory())
-	e:SetProperty(te:GetProperty())
-	Duel.ClearTargetCard()
 	Duel.Hint(HINT_CARD,0,1)
-	c:CreateEffectRelation(te)
-	if co then co(te,tp,eg,ep,ev,re,r,rp,1) end
-	if tg then tg(te,tp,eg,ep,ev,re,r,rp,1) end
-	Duel.BreakEffect()
-	if op then op(te,tp,eg,ep,ev,re,r,rp) end
-	c:ReleaseEffectRelation(te)
 end
 function Trampula.Efpendulum(e,c)
 	return c:IsType(TYPE_PENDULUM)
