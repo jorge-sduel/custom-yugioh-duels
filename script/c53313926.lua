@@ -1,6 +1,9 @@
 --Mysterious Cluster Dragon
 function c53313926.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	--Materials: 3+ Level 9 monsters
+	c:EnableReviveLimit()
+	Xyz.AddProcedure(c,nil,9,3,nil,nil,99)
+	Pendulum.AddProcedure(c)
 	--P: When a card you control is destroyed by battle or an opponent's card effect: You can Special Summon this card from your Pandemonium Zone.
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
@@ -12,10 +15,6 @@ function c53313926.initial_effect(c)
 	e1:SetTarget(c53313926.destg)
 	e1:SetOperation(c53313926.desop)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1,false,TYPE_EFFECT+TYPE_XYZ)
-	--Materials: 3+ Level 9 monsters
-	c:EnableReviveLimit()
-	aux.AddXyzProcedure(c,nil,9,3,nil,nil,99)
 	--M: If this card has a "Mysterious" Xyz or Pandemonium Monster as Xyz Material, it gains this effect. Once per turn (Quick Effect): You can detach 1 material from this card; destroy 1 monster your opponent controls, and if you do, this card gains that monster's original effects (if any) and half of it's original ATK. 
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
@@ -52,13 +51,13 @@ function c53313926.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 --If you can Pandemonium Summon Level 9 monsters, you can Pandemonium Summon this face-up card from your Extra Deck.
-c53313926.pandemonium_level=9
+c53313926.pendulum_level=9
 function c53313926.spcfilter(c,tp)
 	return c:IsReason(REASON_BATTLE+REASON_EFFECT)
 		and c:GetPreviousControler()==tp and c:IsPreviousLocation(LOCATION_ONFIELD) and c:GetReasonPlayer()~=tp
 end
 function c53313926.descon(e,tp,eg,ep,ev,re,r,rp)
-	return aux.PandActCheck(e) and eg:GetCount()==1 and eg:IsExists(c53313926.spcfilter,1,nil,tp)
+	return eg:GetCount()==1 and eg:IsExists(c53313926.spcfilter,1,nil,tp)
 end
 function c53313926.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -73,7 +72,7 @@ function c53313926.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c53313926.cfilter(c)
-	return c:IsType(TYPE_XYZ+TYPE_PANDEMONIUM) and c:IsSetCard(0xcf6)
+	return c:IsType(TYPE_XYZ+TYPE_PENDULUM) and c:IsSetCard(0xcf6)
 end
 function c53313926.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated() and e:GetHandler():GetOverlayGroup():IsExists(c53313926.cfilter,1,nil)
@@ -130,13 +129,11 @@ function c53313926.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c53313926.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 end
 function c53313926.penop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) then
-		aux.PandSSet(c,REASON_EFFECT,TYPE_EFFECT+TYPE_XYZ)(e,tp,eg,ep,ev,re,r,rp)
+	if c:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
 		Duel.ConfirmCards(1-tp,c)
 	end
 end
