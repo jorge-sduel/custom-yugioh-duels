@@ -1,15 +1,13 @@
 --Mysterious Supernova Dragon
 function c53313923.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
 	--You can target 1 monster you control, except during the Battle Phase; destroy all monsters on the field with a different Attribute than that monster, then destroy this card, and if you do, neither player takes damage until the end of the opponent's next turn. (HOPT1)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_QUICK_O)
 	e0:SetCode(EVENT_FREE_CHAIN)
-	e0:SetRange(LOCATION_SZONE)
+	e0:SetRange(LOCATION_PZONE)
 	e0:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e0:SetCategory(CATEGORY_DESTROY)
 	e0:SetCountLimit(1,53313923)
-	e0:SetCondition(aux.PandActCheck)
 	e0:SetTarget(c53313923.target)
 	e0:SetOperation(c53313923.operation)
 	c:RegisterEffect(e0)
@@ -153,7 +151,7 @@ function c53313923.copy(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c53313923.sdreq(c)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM)
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM)
 end
 function c53313923.sdcon(e)
 	return Duel.GetMatchingGroupCount(c53313923.sdreq,tp,LOCATION_MZONE,LOCATION_MZONE,e:GetHandler())*300
@@ -163,13 +161,11 @@ function c53313923.repcon(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(r,REASON_EFFECT+REASON_BATTLE)~=0 and c:IsPreviousLocation(LOCATION_MZONE) and c:IsFaceup()
 end
 function c53313923.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 end
 function c53313923.repop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler()
-	if tc:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) then
-		aux.PandSSet(tc,REASON_EFFECT,TYPE_EFFECT+TYPE_FUSION)(e,tp,eg,ep,ev,re,r,rp)
+	if tc:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
 		Duel.ConfirmCards(1-tp,tc)
 	end
 end
