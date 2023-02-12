@@ -3,7 +3,7 @@ function c53313923.initial_effect(c)
 	Pendulum.AddProcedure(c)
 	--Materials: 1 "Mysterious" Dragon monster + 1 LIGHT monster
 	c:EnableReviveLimit()
-	aux.AddFusionProcFun2(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_LIGHT),c53313923.ffilter,false)
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),c53313923.ffilter)
 	--You can target 1 monster you control, except during the Battle Phase; destroy all monsters on the field with a different Attribute than that monster, then destroy this card, and if you do, neither player takes damage until the end of the opponent's next turn. (HOPT1)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_QUICK_O)
