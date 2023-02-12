@@ -49,6 +49,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local sg=Duel.SelectMatchingCard(tp,s.filter3,tp,LOCATION_REMOVED,0,1,1,nil)
 		if sg:GetCount()>0 then
 			Duel.Overlay(sc,sg)
+end
 	end
 end
 function s.filter3(c)
