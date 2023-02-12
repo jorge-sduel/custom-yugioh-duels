@@ -43,7 +43,7 @@ function c53313926.initial_effect(c)
 	c:RegisterEffect(e2)
 	--pendulum
 	local e7=Effect.CreateEffect(c)
-	e7:SetDescription(aux.Stringid(id,5))
+	e7:SetDescription(aux.Stringid(53313926,5))
 	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e7:SetCode(EVENT_DESTROYED)
 	e7:SetProperty(EFFECT_FLAG_DELAY)
