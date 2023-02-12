@@ -47,13 +47,16 @@ function c53313923.initial_effect(c)
 	e4:SetValue(c53313923.sdcon)
 	c:RegisterEffect(e4)
 	--If this card in the Monster Zone is destroyed by battle or card effect: You can Set it into your Spell/Trap Zone.
-	local e5=Effect.CreateEffect(c)
-	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e5:SetCode(EVENT_DESTROYED)
-	e5:SetCondition(c53313923.repcon)
-	e5:SetTarget(c53313923.reptg)
-	e5:SetOperation(c53313923.repop)
-	c:RegisterEffect(e5)
+	--pendulum
+	local e7=Effect.CreateEffect(c)
+	e7:SetDescription(aux.Stringid(id,5))
+	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e7:SetCode(EVENT_DESTROYED)
+	e7:SetProperty(EFFECT_FLAG_DELAY)
+	e7:SetCondition(c53313923 .pencon)
+	e7:SetTarget(c53313923.pentg)
+	e7:SetOperation(c53313923.penop)
+	c:RegisterEffect(e7)
 end
 function c53313923.splimit(e,se,sp,st)
 	return not se or aux.fuslimit(e,se,sp,st)
@@ -167,5 +170,19 @@ function c53313923.repop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetHandler()
 	if tc:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 then
 		Duel.ConfirmCards(1-tp,tc)
+	end
+end
+function c53313923.pencon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return (r&REASON_EFFECT+REASON_BATTLE)~=0 and c:IsPreviousLocation(LOCATION_MZONE) and c:IsFaceup()
+end
+function c53313923.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckPendulumZones(tp) end
+end
+function c53313923.penop(e,tp,eg,ep,ev,re,r,rp)
+	if not Duel.CheckPendulumZones(tp) then return false end
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
