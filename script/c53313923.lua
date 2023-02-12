@@ -147,7 +147,7 @@ function c53313923.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c53313923.copy(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstMatchingCard(Card.IsMonster,tp,LOCATION_PZONE,LOCATION_PZONE,nil)
+	local tc=Duel.GetFirstMatchingCard(Card.IsFaceup,tp,LOCATION_PZONE,LOCATION_PZONE,nil)
 	if tc and tc:GetFlagEffect(53313923)==0 then
 		e:GetHandler():CopyEffect(tc:GetOriginalCode(),RESET_EVENT+0x1fe0000+RESET_EVENT+EVENT_ADJUST)
 		tc:RegisterFlagEffect(53313923,RESET_EVENT+0x1fe0000+RESET_EVENT+EVENT_ADJUST,EFFECT_FLAG_CANNOT_DISABLE,1)
