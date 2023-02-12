@@ -1,5 +1,9 @@
 --Mysterious Supernova Dragon
 function c53313923.initial_effect(c)
+	Pendulum.AddProcedure(c)
+	--Materials: 1 "Mysterious" Dragon monster + 1 LIGHT monster
+	c:EnableReviveLimit()
+	aux.AddFusionProcFun2(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_LIGHT),c53313923.ffilter,false)
 	--You can target 1 monster you control, except during the Battle Phase; destroy all monsters on the field with a different Attribute than that monster, then destroy this card, and if you do, neither player takes damage until the end of the opponent's next turn. (HOPT1)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_QUICK_O)
@@ -11,10 +15,6 @@ function c53313923.initial_effect(c)
 	e0:SetTarget(c53313923.target)
 	e0:SetOperation(c53313923.operation)
 	c:RegisterEffect(e0)
-	aux.EnablePandemoniumAttribute(c,e0,false,TYPE_EFFECT+TYPE_FUSION)
-	--Materials: 1 "Mysterious" Dragon monster + 1 LIGHT monster
-	c:EnableReviveLimit()
-	aux.AddFusionProcFun2(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_LIGHT),c53313923.ffilter,false)
 	--Must be Fusion Summoned by banishing the above monsters you control or face-up in your Extra Deck. (You do not use "Polymerization").
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
