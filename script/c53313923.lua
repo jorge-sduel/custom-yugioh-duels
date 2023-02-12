@@ -49,7 +49,7 @@ function c53313923.initial_effect(c)
 	--If this card in the Monster Zone is destroyed by battle or card effect: You can Set it into your Spell/Trap Zone.
 	--pendulum
 	local e7=Effect.CreateEffect(c)
-	e7:SetDescription(aux.Stringid(id,5))
+	e7:SetDescription(aux.Stringid(53313923,5))
 	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e7:SetCode(EVENT_DESTROYED)
 	e7:SetProperty(EFFECT_FLAG_DELAY)
