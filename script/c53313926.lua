@@ -80,7 +80,7 @@ function c53313926.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated() and e:GetHandler():GetOverlayGroup():IsExists(c53313926.cfilter,1,nil)
 end
 function c53313926.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,nil) end
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function c53313926.target(e,tp,eg,ep,ev,re,r,rp,chk)
