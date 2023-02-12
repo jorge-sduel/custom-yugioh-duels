@@ -15,7 +15,7 @@ function c53313923.initial_effect(c)
 	e0:SetTarget(c53313923.target)
 	e0:SetOperation(c53313923.operation)
 	c:RegisterEffect(e0)
-	--Must be Fusion Summoned by banishing the above monsters you control or face-up in your Extra Deck. (You do not use "Polymerization").
+	--[[Must be Fusion Summoned by banishing the above monsters you control or face-up in your Extra Deck. (You do not use "Polymerization").
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -30,7 +30,7 @@ function c53313923.initial_effect(c)
 	e2:SetCondition(c53313923.sprcon)
 	e2:SetOperation(c53313923.sprop)
 	e2:SetValue(SUMMON_TYPE_FUSION)
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e2)]]
 	--This card gains the monster effects of cards in your Pandemonium Zone.
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
