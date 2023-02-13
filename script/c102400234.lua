@@ -8,7 +8,7 @@ function cid.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_TOHAND)
-	e1:SetCondition(function(e) return Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsSetCard),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil,0x96b,0xcf6) end)
+	e1:SetCondition(function(e) return Duel.IsExistingMatchingCard(cid.cond,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil) end)
 	e1:SetCost(aux.bfgcost)
 	e1:SetTarget(cid.target)
 	e1:SetOperation(cid.operation)
@@ -16,6 +16,9 @@ function cid.initial_effect(c)
 end
 function cid.filter(c)
 	return c:IsSetCard(0x96b,0xcf6) and c:IsAbleToHand()
+end
+function cid.cond(c)
+	return c:IsSetCard(0x96b,0xcf6) and c:IsFaceup()
 end
 function cid.cfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x96b,0xcf6) and c:IsAbleToGrave() and not c:IsCode(id)
