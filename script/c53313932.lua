@@ -52,7 +52,7 @@ function c53313932.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,aux.NecroValleyFilter(c53313932.thfilter),tp,LOCATION_GRAVE+LOCATION_EXTRA+LOCATION_REMOVED,0,1,1,nil)
 	local tc=g:GetFirst()
 	local op=0
-	if tc:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM then
+	if tc:GetType()&TYPE_PENDULUM==TYPE_PENDULUM then
 		local con1=tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		local con2=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		local check=tc:IsLocation(LOCATION_EXTRA)
