@@ -115,6 +115,5 @@ function c53313903.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=g:GetFirst()
 	if tc then
 		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-		end
 	end
 end
