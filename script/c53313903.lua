@@ -105,15 +105,19 @@ function c53313903.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return (c:IsReason(REASON_BATTLE) or (c:GetReasonPlayer()==1-tp and c:IsReason(REASON_EFFECT)))
 end
+function c53313903.pcfilter(c)
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+end
 function c53313903.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c53313903.actfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,nil,tp) end
+	if chk==0 then return Duel.CheckPendulumZones(tp)
+		and Duel.IsExistingMatchingCard(c53313903.pcfilter,tp,LOCATION_DECK,0,1,nil) end
 end
 function c53313903.thop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_PZONE)<=0 then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c53313903.actfilter),tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil,tp)
-	local tc=g:GetFirst()
-	if tc then
-		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	if not Duel.CheckPendulumZones(tp) then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	local g=Duel.SelectMatchingCard(tp,c53313903.pcfilter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then
+		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
