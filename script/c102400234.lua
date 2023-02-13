@@ -15,13 +15,13 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function cid.filter(c)
-	return c:IsSetCard(0x96b,0xcf6) and c:IsAbleToHand()
+	return (c:IsSetCard(0x96b) or c:IsSetCard(0xcf6)) and c:IsAbleToHand()
 end
 function cid.cond(c)
-	return c:IsSetCard(0x96b,0xcf6) and c:IsFaceup()
+	return (c:IsSetCard(0x96b) or c:IsSetCard(0xcf6)) and c:IsFaceup()
 end
 function cid.cfilter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x96b,0xcf6) and c:IsAbleToGrave() and not c:IsCode(id)
+	return c:IsType(TYPE_MONSTER) and (c:IsSetCard(0x96b) or c:IsSetCard(0xcf6)) and c:IsAbleToGrave() and not c:IsCode(id)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and cid.filter(chkc) end
