@@ -38,12 +38,12 @@ function c53313903.spsumfilter(c,ft)
 	return c:IsFaceup() and c:IsSetCard(0xcf6) and c:IsType(TYPE_MONSTER) and not c:IsDisabled() and (not c:IsType(TYPE_NORMAL) or c:GetOriginalType()&TYPE_EFFECT~=0) and ft>0
 end
 function c53313903.actfilter(c,tp)
-	return c:IsSetCard(0xcf6) and c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and not c:IsForbidden()
+	return c:IsSetCard(0xcf6) and c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and not c:IsForbidden()
 			and not Duel.IsExistingMatchingCard(c53313903.excfilter,tp,LOCATION_SZONE,0,1,c)
 			and (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup()))
 end
 function c53313903.excfilter(c)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and c:IsFaceup()
+	return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsFaceup()
 end
 --spsummon proc
 function c53313903.spsumcon(e,c)
@@ -121,13 +121,13 @@ function c53313903.thop(e,tp,eg,ep,ev,re,r,rp)
 		if not tc:IsLocation(LOCATION_SZONE) then
 			local edcheck=0
 			if tc:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
-			Card.SetCardData(tc,CARDDATA_TYPE,TYPE_MONSTER+TYPE_EFFECT+edcheck+aux.GetOriginalPandemoniumType(tc))
+			Card.SetCardData(tc,CARDDATA_TYPE,TYPE_MONSTER+TYPE_EFFECT+edcheck)
 		else
 			tc:RegisterFlagEffect(726,RESET_EVENT+0x1fe0000,EFFECT_FLAG_CANNOT_DISABLE,1)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-			e1:SetCode(EFFECT_DISABLE_PANDEMONIUM_SUMMON)
+			e1:SetCode(EFFECT_DISABLE_PENDULUM_SUMMON)
 			e1:SetValue(1)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			tc:RegisterEffect(e1)
