@@ -77,7 +77,7 @@ function c53313926.cfilter(c)
 	return c:IsType(TYPE_XYZ+TYPE_PENDULUM) and c:IsSetCard(0xcf6)
 end
 function c53313926.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated() and e:GetHandler():GetOverlayGroup():IsExists(c53313926.cfilter,1,nil)
+	return e:GetHandler():GetOverlayGroup():IsExists(c53313926.cfilter,1,nil)
 end
 function c53313926.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
@@ -105,8 +105,8 @@ function c53313926.activate(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1)
 	end
 end
-function c53313926.cfilter(c,tp)
-	return c:IsControler(tp) and Duel.IsExistingMatchingCard(c53313926.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,c)
+function c53313926.cfilter(e,c,tp)
+	return c:IsControler(e:GetHandlerPlayer()) and Duel.IsExistingMatchingCard(c53313926.filter,e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,1,c)
 end
 function c53313926.filter(c)
 	return c:IsFaceup() and c:GetAttack()>0
