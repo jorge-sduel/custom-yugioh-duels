@@ -77,7 +77,7 @@ function c53313926.cfilter(c)
 	return (c:IsType(TYPE_XYZ) or c:IsType(TYPE_PENDULUM)) and c:IsSetCard(0xcf6)
 end
 function c53313926.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetOverlayGroup():IsExists(c53313926.cfilter,1,nil)
+	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,TYPE_PENDULUM) or e:GetHandler():GetOverlayGroup():IsExists(Card.IsType,1,nil,TYPE_XYZ)
 end
 function c53313926.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
