@@ -74,7 +74,7 @@ function c53313926.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c53313926.cfilter(c)
-	return c:IsType(TYPE_XYZ+TYPE_PENDULUM) and c:IsSetCard(0xcf6)
+	return (c:IsType(TYPE_XYZ) or c:IsType(TYPE_PENDULUM)) and c:IsSetCard(0xcf6)
 end
 function c53313926.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(c53313926.cfilter,1,nil)
@@ -109,7 +109,7 @@ function c53313926.cfilter(e,c,tp)
 	return c:IsControler(e:GetHandlerPlayer()) and Duel.IsExistingMatchingCard(c53313926.filter,e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,1,c)
 end
 function c53313926.filter(c)
-	return c:IsFaceup() and c:GetAttack()>0
+	return c:IsFaceup() and c:IsAttackAbove(0)
 end
 function c53313926.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroup(tp,c53313926.cfilter,1,nil,tp) end
