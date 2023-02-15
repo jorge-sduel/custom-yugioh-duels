@@ -31,7 +31,7 @@ s.material={70902743}
 s.listed_names={70902743}
 s.synchro_nt_required=1
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,nil,TYPE_TUNER)*1000
+	return (Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,nil,TYPE_SYNCHRO)+Duel.GetMatchingGroupCount(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,nil,TYPE_TUNER))*1000
 end
 function s.indval(e,re,tp)
 	return e:GetHandler():GetControler()~=tp
