@@ -3,7 +3,8 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
-	Synchro.AddProcedure(c,nil,5,5,aux.FilterBoolFunction(Card.IsCode,70902743),1,1)
+	--Synchro.AddProcedure(c,nil,1,1,aux.FilterBoolFunction(Card.IsCode,70902743),1,1)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.Nontuner(nil),1,1)
 	--atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -20,6 +21,17 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e3:SetValue(s.indval)
 	c:RegisterEffect(e3)
+	--
+	local e4=Effect.CreateEffect(c)
+	e4:SetCategory(CATEGORY_TOHAND)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
+	e4:SetCountLimit(1,id)
+	e4:SetCondition(s.thcon)
+	e4:SetTarget(s.lptg)
+	e4:SetOperation(s.lpop)
+	c:RegisterEffect(e4)
 	--double tuner
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
@@ -35,4 +47,16 @@ function s.atkval(e,c)
 end
 function s.indval(e,re,tp)
 	return e:GetHandler():GetControler()~=tp
+end
+function s.thcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:IsSummonType(SUMMON_TYPE_SYNCHRO)
+end
+function s.lptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLP(1-tp)>1 end
+	Duel.SetTargetPlayer(1-tp)
+end
+function s.lpop(e,tp,eg,ep,ev,re,r,rp)
+	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	Duel.SetLP(p,1)
 end
