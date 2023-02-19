@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
+	Synchro.AddProcedure(c,nil,2,2,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--damage
 	local e1=Effect.CreateEffect(c)
