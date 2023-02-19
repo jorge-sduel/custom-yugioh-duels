@@ -36,7 +36,6 @@ function cid.filter1(c,e,tp)
 	return rk>0 and c:IsFaceup() and c:IsType(TYPE_XYZ)
 		and Duel.IsExistingMatchingCard(cid.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c,c:GetRank())
 		and Duel.GetLocationCountFromEx(tp,tp,c)>0
-		and aux.MustMaterialCheck(c,tp,EFFECT_MUST_BE_XMATERIAL)
 end
 function cid.filter2(c,e,tp,mc,rk)
 	if c:GetOriginalCode()==6165656 and mc:GetCode()~=48995978 then return false end
