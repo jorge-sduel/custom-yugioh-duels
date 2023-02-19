@@ -1,7 +1,7 @@
 --暗黒方界邪神クリムソン・ノヴァ・トリニティ
 function c155395.initial_effect(c)
 	c:EnableReviveLimit()
-	Fusion.AddProcFunFunRep(c,c155395.mfilter1,c155395.mfilter1,2,2,true)
+	Fusion.AddProcMixN(c,true,true,cm.ffilter,3)
 	--spsummon condition
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -83,6 +83,6 @@ end
 function c155395.efilter(e,te)
 	return te:IsActiveType(TYPE_SPELL) or te:IsActiveType(TYPE_TRAP) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
-function c155395.mfilter1(c)
-	return c:IsFusionCode(70781052) or c:IsFusionSetCard(0x10af)
+function c155395.ffilter(c)
+	return c:IsFusionCode(70781052)
 end
