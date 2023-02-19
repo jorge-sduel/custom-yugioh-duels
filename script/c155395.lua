@@ -84,5 +84,5 @@ function c155395.efilter(e,te)
 	return te:IsActiveType(TYPE_SPELL) or te:IsActiveType(TYPE_TRAP) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()
 end
 function c155395.ffilter(c)
-	return c:IsFusionCode(70781052)
+	return c:IsCode(70781052)
 end
