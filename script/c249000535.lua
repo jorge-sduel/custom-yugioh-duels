@@ -48,10 +48,10 @@ function c249000535.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(lv)
 end
 function c249000535.spfilter(c,e,tp,lv)
-	return c:IsCanBeSpecialSummoned(e,0,tp,true,false) and c:IsLevelAbove(1) and (c:GetLevel()+3 <= lv) and c:IsSetCard(0x1C9)
+	return c:IsCanBeSpecialSummoned(e,0,tp,true,false) and c:IsLevelAbove(1) and (c:GetLevel()+3 <= lv)
 end
 function c249000535.filter(c)
-	return c:IsType(TYPE_SYNCHRO) and c:IsAbleToGrave() and not c:IsSetCard(0x1C9)
+	return c:IsType(TYPE_SYNCHRO) and c:IsAbleToGrave() and not c:IsType(TYPE_TUNER)
 end
 function c249000535.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c249000535.filter,tp,LOCATION_EXTRA,0,1,nil)
