@@ -8,7 +8,7 @@ function c249000535.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
 	e1:SetCost(c249000535.spcost)
-	e1:SetTarget(c249000535.sptg)
+	--e1:SetTarget(c249000535.sptg)
 	e1:SetOperation(c249000535.spop)
 	c:RegisterEffect(e1)
 	--synchro limit
