@@ -8,7 +8,7 @@ function c249000535.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
 	e1:SetCost(c249000535.spcost)
-	--e1:SetTarget(c249000535.sptg)
+	e1:SetTarget(c249000535.sptg)
 	e1:SetOperation(c249000535.spop)
 	c:RegisterEffect(e1)
 	--synchro limit
@@ -48,7 +48,7 @@ function c249000535.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(lv)
 end
 function c249000535.spfilter(c,e,tp,lv)
-	return c:IsCanBeSpecialSummoned(e,0,tp,true,false) and c:IsLevelAbove(1) and (c:GetLevel()+3 <= lv)
+	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,true,false) and c:IsLevelAbove(1) and (c:GetLevel()+3 <= lv)
 end
 function c249000535.filter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsAbleToGrave() and not c:IsType(TYPE_TUNER)
