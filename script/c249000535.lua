@@ -36,13 +36,13 @@ function c249000535.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(c249000535.costfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,nil,1)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and g:GetCount() > 1 and g:IsExists(Card.IsLevelAbove,1,nil,5) end
 	local g1=Duel.SelectMatchingCard(tp,c249000535.costfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,1,nil,5)
-	local g2
-	if g1:GetFirst():IsLocation(LOCATION_HAND) then 
-		g2=Duel.SelectMatchingCard(tp,c249000535.costfilter,tp,LOCATION_GRAVE,0,1,1,g1:GetFirst(),1)
-	else
-		g2=Duel.SelectMatchingCard(tp,c249000535.costfilter,tp,LOCATION_HAND,0,1,1,g1:GetFirst(),1)
-	end
-	g1:Merge(g2)
+	--local g2
+	--if g1:GetFirst():IsLocation(LOCATION_HAND) then 
+	--	g2=Duel.SelectMatchingCard(tp,c249000535.costfilter,tp,LOCATION_GRAVE,0,1,1,g1:GetFirst(),1)
+	--else
+	--	g2=Duel.SelectMatchingCard(tp,c249000535.costfilter,tp,LOCATION_HAND,0,1,1,g1:GetFirst(),1)
+	--end
+	--g1:Merge(g2)
 	Duel.Remove(g1,POS_FACEUP,REASON_COST)
 	local lv=g1:GetSum(Card.GetLevel)
 	e:SetLabel(lv)
