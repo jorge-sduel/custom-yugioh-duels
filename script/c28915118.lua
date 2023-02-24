@@ -77,7 +77,7 @@ function ref.cptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local g=Duel.SelectTarget(tp,ref.cpfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	local te,ceg,cep,cev,cre,cr,crp=g:GetFirst():CheckActivateEffect(false,true,true)
-	Duel.ClearTargetCard()
+	--Duel.ClearTargetCard()
 	g:GetFirst():CreateEffectRelation(e)
 	local tg=te:GetTarget()
 	if tg then tg(e,tp,ceg,cep,cev,cre,cr,crp,1) end
