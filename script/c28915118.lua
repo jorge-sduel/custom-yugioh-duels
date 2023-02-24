@@ -3,10 +3,13 @@ local ref=_G['c'..28915118]
 local id=28915118
 function ref.initial_effect(c)
 	--Evolute Summon
+ref.Is_Evolute=true
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	c:SetSPSummonOnce(id)
-	aux.AddOrigEvoluteType(c)
+	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
-	aux.AddEvoluteProc(c,'Convergent',0,ref.matfilter1,ref.matfilter2,2,99)
+	--Convergent Evolute
+aux.AddConvergentEvolSummonProcedure(c,nil,1,99,ref.lcheck)
 	--Draw+ATK
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
@@ -38,8 +41,8 @@ end
 --Draw+ATK
 function ref.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:IsCanRemoveEC(tp,4,REASON_COST) end
-	c:RemoveEC(tp,4,REASON_COST)
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,4,REASON_COST) end
+	c:RemoveCounter(tp,0x111f,4,REASON_EFFECT)
 end
 function ref.drtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
