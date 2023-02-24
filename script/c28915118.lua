@@ -65,7 +65,7 @@ end
 
 --Float
 function ref.cpfilter(c)
-	return c:IsType(TYPE_CORONA) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToRemove() and c:CheckActivateEffect(false,true,false)~=nil
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToRemove() and c:CheckActivateEffect(false,true,false)~=nil
 end
 function ref.cptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then
