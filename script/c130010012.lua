@@ -37,7 +37,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return g:IsContains(chkc) end
 	if chk==0 then return #g>0 end
 	if g:GetClassCount(Card.GetLevel)==1 then ex=g:GetFirst():GetLevel() end
-	Duel.Hint(HINT_SELECTMSG,tp,HINGMSG_LVRANK)
+	--Duel.Hint(HINT_SELECTMSG,tp,HINGMSG_LVRANK)
 	local lv=Duel.AnnounceLevel(tp,1,4,ex)
 	e:SetLabel(lv)
 end
@@ -58,7 +58,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e3)
 		local e4=e3:Clone()
-		e4:SetCode(EFFECT_CANNOT_BE_TIMELEAP_MATERIAL)
+		e4:SetCode(id)
 		tc:RegisterEffect(e4)
 	end
 end
