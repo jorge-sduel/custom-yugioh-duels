@@ -75,8 +75,8 @@ end
 function s.cfilter(c)
 	return c:IsFacedown() or not c:IsSetCard(0x301)
 end
-function s.handcon(e)
-	return not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
+function s.handcon(e,c)
+	return not Duel.IsExistingMatchingCard(s.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return re and re:GetHandler():IsSetCard(0x301) and not re:GetHandler():IsCode(id)
