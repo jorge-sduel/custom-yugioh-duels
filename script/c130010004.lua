@@ -43,8 +43,8 @@ Timeleap.AddProcedure(c,nil,1,1,s.sumcon)
 	e1:SetCountLimit(1,id+2000)
 	c:RegisterEffect(e1)
 end
-function s.sumcon(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_GRAVE,0,nil,0x301)
+function s.sumcon(e,c)
+	local g=Duel.GetMatchingGroup(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,0x301)
 	return g:GetClassCount(Card.GetCode,nil)>=3
 end
 function s.tlfilter(c,e,mg)
