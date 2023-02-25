@@ -1,19 +1,12 @@
 --Automate ID
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local s=_G[str]
-	local s_id=tonumber(string.sub(str,2))
-	return s,s_id
-end
-
-local s,id=getID()
-
+local s,id=GetID()
+s.IsTimeleap=true
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function s.initial_effect(c)
+	c:EnableReviveLimit()
+	  --synchro summon
 	--time leap procedure
-	aux.AddOrigTimeleapType(c,false)
-	aux.AddTimeleapProc(c,5,s.sumcon,s.tlfilter,nil)
-	c:EnableReviveLimit() 
+Timeleap.AddProcedure(c,nil,1,1,s.sumcon) 
 	--destroy replace
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
