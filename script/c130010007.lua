@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	--destroy
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e2:SetProperty(EFFECT_FLAG_DELAY)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetCode(EVENT_TO_GRAVE)
 	e2:SetCondition(s.descon)
 	e2:SetTarget(s.destg)
