@@ -51,7 +51,7 @@ function s.val(e)
 end
 function s.valcheck(e,c)
 	local g=c:GetMaterial()
-	if g:IsExists(Card.IsLinkCode,1,nil,130010010) then
+	if g:IsExists(Card.IsCode,1,nil,130010010) then
 		e:GetLabelObject():SetLabel(1)
 	else
 		e:GetLabelObject():SetLabel(0)
