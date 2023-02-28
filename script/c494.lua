@@ -73,7 +73,6 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	if not c:IsRelateToEffect(e) then return end
 	for tc in aux.Next(sg) do
 		Card.EquipByEffectAndLimitRegister(c,e,tp,tc)
-	end
 	--	Duel.Draw(tp,6,REASON_EFFECT)
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -82,6 +81,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetRange(0x7f)
 		e3:SetOperation(s.op)
 		tc:RegisterEffect(e3)
+	end
 end
 function s.eqval(ec,c,tp)
 	return ec:IsControler(tp)
