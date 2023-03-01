@@ -27,13 +27,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-		local e3=Effect.CreateEffect(c)
+		--[[local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e3:SetCode(EVENT_ADJUST)
 		e3:SetRange(LOCATION_MZONE)
 		e3:SetOperation(s.op)
-		c:RegisterEffect(e3)
+		c:RegisterEffect(e3)]]
 end
 s.listed_names={455}
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
