@@ -84,7 +84,7 @@ function s.eqop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.eqval(ec,c,tp)
-	return ec:IsControler(tp)
+	return ec:IsControler(tp) and ec:IsType(TYPE_EQUIP)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
