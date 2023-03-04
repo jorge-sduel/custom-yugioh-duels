@@ -1,7 +1,7 @@
 --FNo.39: Anti Utopia
 function c125221.initial_effect(c)
     --xyz summon
-	aux.AddXyzProcedure(c,nil,4,2)
+	Xyz.AddProcedure(c,nil,4,2)
 	c:EnableReviveLimit()
 	--disable atack
 	local e1=Effect.CreateEffect(c)
