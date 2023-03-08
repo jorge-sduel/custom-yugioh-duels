@@ -125,7 +125,7 @@ function c63553470.splimit(e,c,sump,sumtype,sumpos,targetp)
 	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM or bit.band(sumtype,SUMMON_TYPE_SPECIAL+726)==SUMMON_TYPE_SPECIAL+726
 end
 function c63553470.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and (re:GetHandler():IsType(TYPE_PENDULUM) or re:GetHandler():GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and (re:GetHandler():IsType(TYPE_PENDULUM)) 
 end
 --activate from deck
 function c63553470.actcon(e,tp,eg,ep,ev,re,r,rp)
