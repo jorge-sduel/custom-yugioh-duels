@@ -2,7 +2,7 @@
 --Script by XGlitchy30
 function c63553470.initial_effect(c)
 	--link summon
-	aux.AddLinkProcedure(c,c63553470.matfilter,3,3)
+	Link.AddProcedure(c,c63553470.matfilter,3,3)
 	c:EnableReviveLimit()
 	--special summon rule
 	local e0=Effect.CreateEffect(c)
@@ -37,7 +37,7 @@ function c63553470.initial_effect(c)
 	e3:SetTarget(c63553470.thtg)
 	e3:SetOperation(c63553470.thop)
 	c:RegisterEffect(e3)
-	--set
+	--[[set
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(63553470,3))
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
@@ -47,30 +47,28 @@ function c63553470.initial_effect(c)
 	e4:SetCondition(c63553470.setcon)
 	e4:SetTarget(c63553470.settg)
 	e4:SetOperation(c63553470.setop)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4)]]
 	Duel.AddCustomActivityCounter(63553470,ACTIVITY_SPSUMMON,c63553470.counterfilter)
 	Duel.AddCustomActivityCounter(61553470,ACTIVITY_CHAIN,c63553470.chainfilter)
 end
 --filters
 function c63553470.counterfilter(c)
-	return not c:IsSummonType(SUMMON_TYPE_PENDULUM) and not c:IsSummonType(SUMMON_TYPE_SPECIAL+726)
+	return not c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function c63553470.chainfilter(re,tp,cid)
-	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and (re:GetHandler():IsType(TYPE_PENDULUM) or re:GetHandler():GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM))
+	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and (re:GetHandler():IsType(TYPE_PENDULUM)) 
 end
 function c63553470.matfilter(c)
-	return c:IsType(TYPE_PENDULUM) or c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM
+	return c:IsType(TYPE_PENDULUM)
 end
 function c63553470.sprfilter(c)
-	return (c:IsFaceup() and c:IsLocation(LOCATION_SZONE) and c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM)
-		or (c:IsFaceup() and c:IsLocation(LOCATION_PZONE) and c:IsType(TYPE_PENDULUM) and Duel.IsExistingMatchingCard(c63553470.sprfilter1,c:GetControler(),LOCATION_PZONE,0,1,c))
+	return (c:IsFaceup() and c:IsLocation(LOCATION_PZONE) and c:IsType(TYPE_PENDULUM) and Duel.IsExistingMatchingCard(c63553470.sprfilter1,c:GetControler(),LOCATION_PZONE,0,1,c))
 end
 function c63553470.sprfilter1(c)
 	return c:IsType(TYPE_PENDULUM) and c:IsLocation(LOCATION_PZONE) and c:IsFaceup()
 end
 function c63553470.actfilter(c,tp)
 	return (c:IsType(TYPE_PENDULUM) and (Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1)) and not c:IsForbidden())
-		or (c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and not c:IsForbidden()
 			and not Duel.IsExistingMatchingCard(c63553470.excfilter,tp,LOCATION_SZONE,0,1,c))
 end
 function c63553470.drcfilter(c,tp)
@@ -137,19 +135,17 @@ function c63553470.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c63553470.actfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 end
 function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
+	if Duel.GetLocationCount(tp,LOCATION_PZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,c63553470.actfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
 	local tc=g:GetFirst()
 	if tc:IsType(TYPE_PENDULUM) then
-		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	else
-		Card.SetCardData(tc,CARDDATA_TYPE,TYPE_TRAP+TYPE_CONTINUOUS)
 		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 		if not tc:IsLocation(LOCATION_SZONE) then
 			local edcheck=0
 			if tc:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
-			Card.SetCardData(tc,CARDDATA_TYPE,TYPE_MONSTER+TYPE_EFFECT+edcheck+aux.GetOriginalPandemoniumType(tc))
 		else
 			tc:RegisterFlagEffect(726,RESET_EVENT+0x1fe0000,EFFECT_FLAG_CANNOT_DISABLE,1)
 		end
