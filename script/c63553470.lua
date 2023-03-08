@@ -56,7 +56,7 @@ function c63553470.counterfilter(c)
 	return not c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function c63553470.chainfilter(re,tp,cid)
-	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and (re:GetHandler():IsType(TYPE_PENDULUM)) 
+	return not (re:IsHasType(EFFECT_TYPE_ACTIVATE) and (re:GetHandler():IsType(TYPE_PENDULUM)))
 end
 function c63553470.matfilter(c)
 	return c:IsType(TYPE_PENDULUM)
