@@ -69,7 +69,7 @@ function c63553470.sprfilter1(c)
 end
 function c63553470.actfilter(c,tp)
 	return (c:IsType(TYPE_PENDULUM) and (Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1)) and not c:IsForbidden())
-			and not Duel.IsExistingMatchingCard(c63553470.excfilter,tp,LOCATION_SZONE,0,1,c))
+			and not Duel.IsExistingMatchingCard(c63553470.excfilter,tp,LOCATION_SZONE,0,1,c)
 end
 function c63553470.drcfilter(c,tp)
 	return c:IsPreviousLocation(LOCATION_PZONE) and c:GetPreviousControler()==tp
