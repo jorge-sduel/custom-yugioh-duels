@@ -134,6 +134,7 @@ function c63553470.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp) and Duel.IsExistingMatchingCard(c63553470.actfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 end
 function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.CreateToken(tp,946)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
@@ -143,12 +144,11 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	else
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	local tc=Duel.CreateToken(tp,946)
+Duel.Overlay(g:GetFirst(),tc)
 		--if not tc:IsLocation(LOCATION_PZONE) then
 			--local edcheck=0
 			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
 		end
-Duel.Overlay(g:GetFirst(),tc)
 	end
 end
 --to hand
