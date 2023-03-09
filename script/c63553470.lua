@@ -68,7 +68,7 @@ function c63553470.sprfilter1(c)
 	return c:IsType(TYPE_PENDULUM) and c:IsLocation(LOCATION_PZONE) and c:IsFaceup()
 end
 function c63553470.actfilter(c,tp)
-	return c:IsType(TYPE_PENDULUM) and (c:IsLevelBelow(4) or (c.IsEquilibrium and c:IsLevelBelow(8)) and not c:IsForbidden() 
+	return c:IsType(TYPE_PENDULUM) and (c:IsLevelBelow(4) or (c.IsEquilibrium and c:IsLevelBelow(8))) and not c:IsForbidden() 
 end
 function c63553470.drcfilter(c,tp)
 	return c:IsPreviousLocation(LOCATION_PZONE) and c:GetPreviousControler()==tp
