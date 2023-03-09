@@ -124,7 +124,7 @@ function c63553470.splimit(e,c,sump,sumtype,sumpos,targetp)
 	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 function c63553470.aclimit(c)
-	return c:IsType(TYPE_PENDULUM)
+	return c:IsType(TYPE_PENDULUM) and c:IsLevelBelow(4)
 end
 --activate from deck
 function c63553470.actcon(e,tp,eg,ep,ev,re,r,rp)
@@ -134,12 +134,12 @@ function c63553470.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp) and Duel.IsExistingMatchingCard(c63553470.actfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 end
 function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.CreateToken(tp,946)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,c63553470.actfilter,tp,LOCATION_DECK,0,1,1,nil)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	local tc=Duel.CreateToken(tp,g:GetFirst():GetCode())
 	if not g:GetFirst().IsEquilibrium then
 	Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	else
