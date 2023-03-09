@@ -139,14 +139,14 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,c63553470.actfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-	if g:IsType(TYPE_PENDULUM) then
+	--if g:IsType(TYPE_PENDULUM) then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	else
-		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+	--else
+		--Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 		--if not tc:IsLocation(LOCATION_PZONE) then
 			--local edcheck=0
 			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
-		end
+		--end
 	end
 end
 --to hand
