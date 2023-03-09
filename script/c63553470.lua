@@ -142,7 +142,7 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsType(TYPE_PENDULUM) then
 		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	else
-		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 		if not tc:IsLocation(LOCATION_PZONE) then
 			local edcheck=0
 			if tc:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
