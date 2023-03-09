@@ -40,7 +40,7 @@ function c63553469.matfilter(c)
 	return c:IsType(TYPE_PENDULUM)
 end
 function c63553469.spfilter(c,e,tp)
-	return c:GetLevel()<=7 and (c:IsType(TYPE_PENDULUM) or c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:GetLevel()<=7 and c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 --boost stats
 function c63553469.statsval(e,c)
