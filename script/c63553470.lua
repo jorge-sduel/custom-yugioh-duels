@@ -68,7 +68,7 @@ function c63553470.sprfilter1(c)
 	return c:IsType(TYPE_PENDULUM) and c:IsLocation(LOCATION_PZONE) and c:IsFaceup()
 end
 function c63553470.actfilter(c,tp)
-	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and (c:IsLevelBelow(4) or (c.IsEquilibrium and c:IsLevelBelow(8)) and not c:IsForbidden() 
 end
 function c63553470.drcfilter(c,tp)
 	return c:IsPreviousLocation(LOCATION_PZONE) and c:GetPreviousControler()==tp
@@ -124,7 +124,7 @@ function c63553470.splimit(e,c,sump,sumtype,sumpos,targetp)
 	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 function c63553470.aclimit(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsLevelBelow(4)
+	return c:IsType(TYPE_PENDULUM)
 end
 --activate from deck
 function c63553470.actcon(e,tp,eg,ep,ev,re,r,rp)
