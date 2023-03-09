@@ -37,7 +37,7 @@ function c63553469.initial_effect(c)
 end
 --filters
 function c63553469.matfilter(c)
-	return c:IsXyzType(TYPE_PENDULUM) or c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM
+	return c:IsType(TYPE_PENDULUM)
 end
 function c63553469.spfilter(c,e,tp)
 	return c:GetLevel()<=7 and (c:IsType(TYPE_PENDULUM) or c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
