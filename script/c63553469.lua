@@ -3,7 +3,7 @@
 function c63553469.initial_effect(c)
 	--xyz summon
 	c:EnableReviveLimit()
-	aux.AddXyzProcedure(c,c63553469.matfilter,7,2)
+	Xyz.AddProcedure(c,c63553469.matfilter,7,2)
 	--boost stats
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
