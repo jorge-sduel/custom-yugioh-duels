@@ -49,7 +49,7 @@ function c63553470.initial_effect(c)
 	e4:SetOperation(c63553470.setop)
 	c:RegisterEffect(e4)]]
 	Duel.AddCustomActivityCounter(63553470,ACTIVITY_SPSUMMON,c63553470.counterfilter)
-	Duel.AddCustomActivityCounter(61553470,ACTIVITY_CHAIN,c63553470.chainfilter)
+	Duel.AddCustomActivityCounter(61553470,ACTIVITY_CHAIN,c63553470.chainfilter)]]
 end
 --filters
 function c63553470.counterfilter(c)
@@ -122,7 +122,7 @@ function c63553470.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 --limit
 function c63553470.splimit(e,c,sump,sumtype,sumpos,targetp)
-	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM or bit.band(sumtype,SUMMON_TYPE_SPECIAL+726)==SUMMON_TYPE_SPECIAL+726
+	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 function c63553470.aclimit(e,re,tp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and (re:GetHandler():IsType(TYPE_PENDULUM)) 
@@ -139,16 +139,16 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,c63553470.actfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
 	local tc=g:GetFirst()
-	if tc:IsType(TYPE_PENDULUM) then
+	--if tc:IsType(TYPE_PENDULUM) then
 		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	else
+	--[[else
 		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 		if not tc:IsLocation(LOCATION_SZONE) then
 			local edcheck=0
 			if tc:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
 		else
 			tc:RegisterFlagEffect(726,RESET_EVENT+0x1fe0000,EFFECT_FLAG_CANNOT_DISABLE,1)
-		end
+		end]]
 	end
 end
 --to hand
