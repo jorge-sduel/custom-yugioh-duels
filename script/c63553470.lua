@@ -47,7 +47,7 @@ function c63553470.initial_effect(c)
 	e4:SetCondition(c63553470.setcon)
 	e4:SetTarget(c63553470.settg)
 	e4:SetOperation(c63553470.setop)
-	c:RegisterEffect(e4)]]
+	c:RegisterEffect(e4)
 	Duel.AddCustomActivityCounter(63553470,ACTIVITY_SPSUMMON,c63553470.counterfilter)
 	Duel.AddCustomActivityCounter(61553470,ACTIVITY_CHAIN,c63553470.chainfilter)]]
 end
