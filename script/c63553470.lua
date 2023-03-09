@@ -148,8 +148,8 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 			--local edcheck=0
 			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
 		end
-	end
 Duel.Overlay(g:GetFirst(),tc)
+	end
 end
 --to hand
 function c63553470.thcon(e,tp,eg,ep,ev,re,r,rp)
