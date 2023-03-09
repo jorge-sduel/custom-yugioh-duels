@@ -135,7 +135,8 @@ function c63553470.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp) and Duel.IsExistingMatchingCard(c63553470.actfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 end
 function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.CheckPendulumZones(tp) then return end
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,c63553470.actfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
