@@ -144,7 +144,7 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 	else
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	local tc=Duel.CreateToken(tp,946)
-Duel.Overlay(g,tc)
+Duel.Overlay(g:GetFirst(),tc)
 		--if not tc:IsLocation(LOCATION_PZONE) then
 			--local edcheck=0
 			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
