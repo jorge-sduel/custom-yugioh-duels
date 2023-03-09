@@ -139,11 +139,11 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,c63553470.actfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if not g.IsEquilibrium then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	if not g:GetFirst().IsEquilibrium then
 	Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	else
-		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+		--Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 	Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 Duel.Overlay(g:GetFirst(),tc)
 		--if not tc:IsLocation(LOCATION_PZONE) then
