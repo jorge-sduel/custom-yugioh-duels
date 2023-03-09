@@ -140,7 +140,7 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,c63553470.actfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-	if g.IsEquilibrium then
+	if not g.IsEquilibrium then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	else
