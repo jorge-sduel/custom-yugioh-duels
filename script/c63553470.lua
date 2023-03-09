@@ -136,8 +136,8 @@ function c63553470.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.CheckPendulumZones(tp) then return end
-	--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,c63553470.actfilter,tp,LOCATION_DECK,0,1,1,nil,tp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	local g=Duel.SelectMatchingCard(tp,c63553470.actfilter,tp,LOCATION_DECK,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc:IsType(TYPE_PENDULUM) then
 		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
