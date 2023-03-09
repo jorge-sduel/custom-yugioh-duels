@@ -147,8 +147,8 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 			local edcheck=0
 			if tc:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
 		else
-			tc:RegisterFlagEffect(726,RESET_EVENT+0x1fe0000,EFFECT_FLAG_CANNOT_DISABLE,1)
-		end]]
+			tc:RegisterFlagEffect(726,RESET_EVENT+0x1fe0000,EFFECT_FLAG_CANNOT_DISABLE,1)]]
+		end
 	end
 end
 --to hand
