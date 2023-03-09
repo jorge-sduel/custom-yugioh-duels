@@ -143,11 +143,9 @@ function c63553470.actop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	else
 		Duel.MoveToField(tc,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-		if not tc:IsLocation(LOCATION_PZONE) then
-			local edcheck=0
-			if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
-		else
-			tc:RegisterFlagEffect(726,RESET_EVENT+0x1fe0000,EFFECT_FLAG_CANNOT_DISABLE,1)
+		--if not tc:IsLocation(LOCATION_PZONE) then
+			--local edcheck=0
+			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
 		end
 	end
 end
