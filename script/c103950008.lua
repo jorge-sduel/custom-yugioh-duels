@@ -2,7 +2,7 @@
 function c103950008.initial_effect(c)
 
 	--XYZ Summon
-	aux.AddXyzProcedure(c,nil,6,2)
+	Xyz.AddProcedure(c,nil,6,2)
 	c:EnableReviveLimit()
 	
 	--Special Summon
