@@ -62,7 +62,7 @@ function c103950008.spop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=g:Filter(Card.IsRelateToEffect,nil,e):Filter(c103950008.spmatfilter,nil):Filter(Card.IsControler,nil,tp)
 	if sg:GetCount() < 2 then return end
 	
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 and sg:Filter(Card.IsLocation,nil,LOCATION_MZONE):GetCount() <= 0 then return end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 and sg:Filter(Card.IsLocation,nil,LOCATION_MZONE+LOCATION_HAND):GetCount() <= 0 then return end
 	
 	Duel.Overlay(c,sg)
 	Duel.SpecialSummon(c,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
