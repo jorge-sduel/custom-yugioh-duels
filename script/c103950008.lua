@@ -1,10 +1,8 @@
 --Grand Guardian Draco
 function c103950008.initial_effect(c)
-
 	--XYZ Summon
 	Xyz.AddProcedure(c,nil,6,2)
 	c:EnableReviveLimit()
-	
 	--Special Summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(103950008,0))
@@ -17,7 +15,6 @@ function c103950008.initial_effect(c)
 	e1:SetTarget(c103950008.sptgt)
 	e1:SetOperation(c103950008.spop)
 	c:RegisterEffect(e1)
-	
 	--Destruction Replace
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(103950008,1))
@@ -29,23 +26,19 @@ function c103950008.initial_effect(c)
 	e2:SetOperation(c103950008.desop)
 	c:RegisterEffect(e2)
 end
-
 --Special Summon condition
 function c103950008.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return (Duel.GetCurrentPhase()==PHASE_MAIN1 or Duel.GetCurrentPhase()==PHASE_MAIN2) and
 			Duel.GetFlagEffect(tp,103950008)==0
 end
-
 --Special Summon material filter
 function c103950008.spmatfilter(c)
 	return c:GetLevel()==6 and c:IsRace(RACE_DRAGON) and not c:IsHasEffect(EFFECT_CANNOT_BE_XYZ_MATERIAL)
 end
-
 --Special Summon target
 function c103950008.sptgt(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-
 	if chkc then return chkc:IsControler(tp) and
-						(chkc:IsLocation(LOCATION_MZONE) or chkc:IsLocation(LOCATION_HAND)) and
+						chkc:IsLocation(LOCATION_MZONE+LOCATION_HAND) and
 						c103950008.spmatfilter(chkc) end
 	
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>-1 and
