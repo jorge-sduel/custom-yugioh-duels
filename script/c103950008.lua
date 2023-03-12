@@ -33,7 +33,7 @@ function c103950008.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 --Special Summon material filter
 function c103950008.spmatfilter(c)
-	return c:GetLevel()==6 and c:IsRace(RACE_DRAGON) and not c:IsHasEffect(EFFECT_CANNOT_BE_XYZ_MATERIAL)
+	return c:GetLevel()==6 and c:IsRace(RACE_DRAGON)
 end
 --Special Summon target
 function c103950008.sptgt(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
