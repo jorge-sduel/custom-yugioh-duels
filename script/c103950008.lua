@@ -38,7 +38,7 @@ end
 
 --Special Summon material filter
 function c103950008.spmatfilter(c)
-	return c:GetLevel()==6 and c:IsRace(RACE_DRAGON) and (not (c:IsLocation(LOCATION_MZONE) or c:IsFaceup())) and not c:IsHasEffect(EFFECT_CANNOT_BE_XYZ_MATERIAL)
+	return c:GetLevel()==6 and c:IsRace(RACE_DRAGON) and (not (c:IsLocation(LOCATION_MZONE) and c:IsFaceup())) and not c:IsHasEffect(EFFECT_CANNOT_BE_XYZ_MATERIAL)
 end
 
 --Special Summon target
