@@ -1,7 +1,7 @@
 --Dark Solenm Xyz Dragon
 function c7830642.initial_effect(c)
 	--xyz monster
-	aux.AddXyzProcedure(c,nil,7,4)
+	Xyz.AddProcedure(c,nil,7,4)
 	c:EnableReviveLimit()
 	--negate
 	local e1=Effect.CreateEffect(c)
