@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--Contact Summon
 	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,89631139,74677422,5405694)
-	aux.AddContactFusion(c,s.contactfil,s.contactop,s.splimit)
+	--aux.AddContactFusion(c,s.contactfil,s.contactop,s.splimit)
 	--Cannot be Targeted by opponent's effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
