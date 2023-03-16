@@ -2,5 +2,5 @@
 function c23061998.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcCodeRep(c,74677422,3,true,true)
+	Fusion.AddProcCodeRep(c,74677422,3,true,true)
 end
