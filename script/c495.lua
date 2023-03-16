@@ -1,0 +1,76 @@
+--キメラテック・オーバー・ドラゴン
+local s,id=GetID()
+function s.initial_effect(c)
+	c:EnableReviveLimit()
+	--fusion material
+	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),1,99,CARD_BLUEEYES_W_DRAGON)
+	--spsummon condition
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e2:SetCode(EFFECT_SPSUMMON_CONDITION)
+	e2:SetValue(aux.fuslimit)
+	c:RegisterEffect(e2)
+	--spsummon success
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e3:SetOperation(s.sucop)
+	c:RegisterEffect(e3)
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetOperation(s.tgop)
+	c:RegisterEffect(e4)
+	--cannot direct attack
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetCode(EFFECT_CANNOT_DIRECT_ATTACK)
+	c:RegisterEffect(e5)
+	--act limit
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_FIELD)
+	e6:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e6:SetCode(EFFECT_CANNOT_ACTIVATE)
+	e6:SetCondition(s.con)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetTargetRange(0,1)
+	e6:SetValue(s.aclimit)
+	c:RegisterEffect(e6)
+end
+function s.sucop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SET_BASE_ATTACK)
+	e1:SetValue(c:GetMaterialCount()*800)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+	c:RegisterEffect(e1)
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_SET_BASE_DEFENSE)
+	c:RegisterEffect(e2)
+	local e3=e1:Clone()
+	e3:SetCode(EFFECT_EXTRA_ATTACK_MONSTER)
+	e3:SetValue(c:GetMaterialCount()-1)
+	c:RegisterEffect(e3)
+end
+function s.tgop(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,0,e:GetHandler())
+		local ct=Duel.Remove(dg,POS_FACEUP,REASON_EFFECT)
+	if ct>0 and c:IsFaceup() and c:IsRelateToEffect(e) then
+		Duel.BreakEffect()
+		local e4=Effect.CreateEffect(c)
+		e4:SetType(EFFECT_TYPE_SINGLE)
+		e4:SetCode(EFFECT_UPDATE_ATTACK)
+		e4:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
+		e4:SetValue(ct*400)
+		c:RegisterEffect(e4)
+	end
+end
+function s.con(e)
+	local ph=Duel.GetCurrentPhase()
+	return ph>=PHASE_BATTLE_START and ph<=PHASE_BATTLE
+end
+function s.aclimit(e,re,tp)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
+end
