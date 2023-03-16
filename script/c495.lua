@@ -56,7 +56,7 @@ function s.sucop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,0,e:GetHandler())
-		local ct=Duel.Remove(dg,POS_FACEUP,REASON_EFFECT)
+		local ct=Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	if ct>0 and c:IsFaceup() and c:IsRelateToEffect(e) then
 		Duel.BreakEffect()
 		local e4=Effect.CreateEffect(c)
