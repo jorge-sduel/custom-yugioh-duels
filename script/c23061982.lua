@@ -1,6 +1,6 @@
 --Red-Eyes Zwei
 function c23061982.initial_effect(c)
-	aux.EnableDualAttribute(c)
+	--aux.EnableDualAttribute(c)
 	--code
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
