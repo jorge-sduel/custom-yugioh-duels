@@ -36,6 +36,7 @@ function c23061993.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	if tc==c then tc=Duel.GetAttackTarget() end
 	if chk==0 then return tc and tc:IsFaceup() and d:GetAttack()>e:GetHandler():GetAttack()
 end
+end
 function c23061993.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetAttacker()
