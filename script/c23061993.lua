@@ -44,6 +44,6 @@ function c23061993.atkop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
 	e:GetHandler():RegisterEffect(e1)
 end
-function s.indes(e,c)
+function c23061993.indes(e,c)
 	return c:GetAttack()==e:GetHandler():GetAttack()
 end
