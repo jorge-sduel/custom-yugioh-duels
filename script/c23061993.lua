@@ -37,12 +37,17 @@ function c23061993.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return a==c and d and d:IsFaceup() and d:GetAttack()>e:GetHandler():GetAttack()
 end
 function c23061993.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SET_ATTACK_FINAL)
-	e1:SetValue(Duel.GetAttackTarget():GetAttack())
-	e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
-	e:GetHandler():RegisterEffect(e1)
+	local c=e:GetHandler()
+	local tc=Duel.GetAttacker()
+	if tc==c then tc=Duel.GetAttackTarget() end
+	if tc:IsRelateToBattle() and c:IsRelateToBattle() then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_DAMAGE)
+		e1:SetValue(tc:GetAttack())
+		c:RegisterEffect(e1)
+	end
 end
 function c23061993.indes(e,c)
 	return c:GetAttack()==e:GetHandler():GetAttack()
