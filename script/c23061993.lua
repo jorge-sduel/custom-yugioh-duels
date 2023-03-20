@@ -14,7 +14,7 @@ local e1=Effect.CreateEffect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e2:SetCondition(c23061993.atkcon)
+	e2:SetTarget(c23061993.atktg)
 	e2:SetOperation(c23061993.atkop)
 	c:RegisterEffect(e2)
 	--indes
@@ -30,7 +30,7 @@ end
 function c23061993.atkval(e,c)
 	return Duel.GetMatchingGroupCount(c23061993.filter,e:GetHandler():GetControler(),LOCATION_MZONE+LOCATION_GRAVE,LOCATION_GRAVE+LOCATION_MZONE,nil)*-500
 end
-function c23061993.atkcon(e,tp,eg,ep,ev,re,r,rp)
+function c23061993.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local tc=Duel.GetAttacker()
 	if tc==c then tc=Duel.GetAttackTarget() end
