@@ -32,9 +32,9 @@ function c23061993.atkval(e,c)
 end
 function c23061993.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local a=Duel.GetAttacker()
-	local d=Duel.GetAttackTarget()
-	return a==c and d and d:IsFaceup() and d:GetAttack()>e:GetHandler():GetAttack()
+	local tc=Duel.GetAttacker()
+	if tc==c then tc=Duel.GetAttackTarget() end
+	if chk==0 then return tc and tc:IsFaceup() and d:GetAttack()>e:GetHandler():GetAttack()
 end
 function c23061993.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
