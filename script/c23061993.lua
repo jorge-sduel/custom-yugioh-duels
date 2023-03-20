@@ -17,6 +17,12 @@ local e1=Effect.CreateEffect(c)
 	e2:SetCondition(c23061993.atkcon)
 	e2:SetOperation(c23061993.atkop)
 	c:RegisterEffect(e2)
+	--indes
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
+	e3:SetValue(c23061993.indes)
+	c:RegisterEffect(e3)
 end
 function c23061993.filter(c)
 	return c:IsFaceup() and c:IsRace(RACE_DRAGON)
@@ -37,4 +43,7 @@ function c23061993.atkop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(Duel.GetAttackTarget():GetAttack())
 	e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
 	e:GetHandler():RegisterEffect(e1)
+end
+function s.indes(e,c)
+	return c:GetAttack()==e:GetHandler():GetAttack()
 end
