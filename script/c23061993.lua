@@ -28,7 +28,7 @@ function c23061993.filter(c)
 	return c:IsFaceup() and c:IsRace(RACE_DRAGON)
 end
 function c23061993.atkval(e,c)
-	return Duel.GetMatchingGroupCount(c23061993.filter,e:GetHandler():GetControler(),LOCATION_MZONE+LOCATION_GRAVE,0,nil)*-500
+	return Duel.GetMatchingGroupCount(c23061993.filter,e:GetHandler():GetControler(),LOCATION_MZONE+LOCATION_GRAVE,LOCATION_GRAVE+LOCATION_MZONE,nil)*-500
 end
 function c23061993.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
