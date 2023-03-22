@@ -64,7 +64,7 @@ function cid.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return rp~=tp and eg:IsExists(cid.cfilter,1,nil,tp)
 end
 function cid.filter(c)
-	return c:IsType(TYPE_PANDEMONIUM) and c:IsAbleToHand()
+	return c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
 end
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil) end
