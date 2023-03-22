@@ -51,13 +51,13 @@ end
 function cid.discon(e,tp,eg,ep,ev,re,r,rp)
 	local code=e:GetLabel()
 	local code1,code2=re:GetHandler():GetOriginalCodeRule()
-	return re:IsActiveType(TYPE_TRAP) and aux.PandActCheck(e) and (code1==code or code2==code)
+	return re:IsActiveType(TYPE_TRAP) and (code1==code or code2==code)
 end
 function cid.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)
 end
 function cid.cfilter(c,tp)
-	return c:IsPreviousSetCard(0xcf80) and c:GetPreviousTypeOnField()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and c:IsPreviousLocation(LOCATION_SZONE)
+	return c:IsPreviousSetCard(0xcf80) and c:GetPreviousTypeOnField()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsPreviousLocation(LOCATION_PZONE)
 		and c:GetPreviousControler()==tp and c:IsPreviousPosition(POS_FACEUP) and c:IsReason(REASON_EFFECT)
 end
 function cid.spcon(e,tp,eg,ep,ev,re,r,rp)
