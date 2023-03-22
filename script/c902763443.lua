@@ -1,12 +1,5 @@
 --Pandemoniumgraph of Supermacy
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--Activate
 	local e0=Effect.CreateEffect(c)
@@ -18,8 +11,8 @@ function cid.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCountLimit(1,id-900000000)
-	e1:SetTarget(cid.thtg)
-	e1:SetOperation(cid.thop)
+	e1:SetTarget(cid.pctg)
+	e1:SetOperation(cid.pcop)
 	c:RegisterEffect(e1)
 	--If a "Pandemoniumgraph" card in your Pandemonium Zone is destroyed by your opponent's card effect: You can add 1 Pandemonium Monster from your Deck to your Hand. (HOPT2)
 	local e2=Effect.CreateEffect(c)
@@ -34,48 +27,20 @@ function cid.initial_effect(c)
 	e2:SetOperation(cid.spop)
 	c:RegisterEffect(e2)
 end
-function cid.thfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM) and c:IsType(TYPE_MONSTER) and c:IsSetCard(0xcf80)
+function cid.pcfilter(c)
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
-function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(cid.thfilter,nil,LOCATION_EXTRA)(nil,e,tp,eg,ep,ev,re,r,rp) 
-		and Duel.IsExistingMatchingCard(cid.thfilter,tp,LOCATION_EXTRA,0,1,nil) 
-	end
+function cid.pctg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckPendulumZones(tp)
+		and Duel.IsExistingMatchingCard(cid.pcfilter,tp,LOCATION_DECK,0,1,nil) end
 end
-function cid.thop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or not aux.PandSSetCon(cid.thfilter,nil,LOCATION_EXTRA)(nil,e,tp,eg,ep,ev,re,r,rp) then return end
-	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,1601)
-	local g=Duel.SelectMatchingCard(tp,aux.PandSSetFilter(cid.thfilter),tp,LOCATION_EXTRA,0,1,1,nil)
-	if g:GetCount()>0 then
-		aux.PandSSet(g,REASON_EFFECT,aux.GetOriginalPandemoniumType(g:GetFirst()))(e,tp,eg,ep,ev,re,r,rp)
-		Duel.ConfirmCards(1-tp,g)
-		local tc=g:GetFirst()
-		local e1=Effect.CreateEffect(c)
-		e1:SetType(EFFECT_TYPE_FIELD)
-		e1:SetCode(EFFECT_DISABLE)
-		e1:SetTargetRange(LOCATION_SZONE,LOCATION_SZONE)
-		e1:SetTarget(cid.distg)
-		e1:SetLabel(tc:GetOriginalCode())
-		e1:SetReset(RESET_PHASE+PHASE_END)
-		Duel.RegisterEffect(e1,tp)
-		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		e2:SetCode(EVENT_CHAIN_SOLVING)
-		e2:SetCondition(cid.discon)
-		e2:SetOperation(cid.disop)
-		e2:SetLabel(tc:GetOriginalCode())
-		e2:SetReset(RESET_PHASE+PHASE_END)
-		Duel.RegisterEffect(e2,tp)
-		local e3=Effect.CreateEffect(c)
-		e3:SetType(EFFECT_TYPE_SINGLE)
-		e3:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
-		e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
-		e3:SetRange(LOCATION_SZONE)
-		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
-		tc:RegisterEffect(e3)
+function cid.pcop(e,tp,eg,ep,ev,re,r,rp)
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	if not Duel.CheckPendulumZones(tp) then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	local g=Duel.SelectMatchingCard(tp,cid.pcfilter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then
+		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
 function cid.distg(e,c)
