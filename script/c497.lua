@@ -68,9 +68,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e5=Effect.CreateEffect(c)
 		e5:SetType(EFFECT_TYPE_SINGLE)
 		e5:SetCode(EFFECT_SET_ATTACK)
-		e5:SetValue(0)
+		e5:SetValue(sg:GetAttack()*2)
 		e5:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		tc:RegisterEffect(e5)
+		sg:RegisterEffect(e5)
 		end
 	end
 end
