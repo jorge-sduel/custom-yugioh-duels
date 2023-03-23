@@ -70,7 +70,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e5:SetCode(EFFECT_SET_ATTACK)
 		e5:SetValue(sg:GetFirst():GetAttack()*2)
 		e5:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		sg:RegisterEffect(e5)
+		sg:GetFirst():RegisterEffect(e5)
 		end
 	end
 end
