@@ -202,7 +202,7 @@ function Auxiliary.SettVrainsSkillOp(skillcon,skillop,efftype)
 				local e1=Effect.CreateEffect(c)
 				e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 				e1:SetCode(EVENT_CHAIN_END)
-				e1:SetCondition(tskillcon)
+				--e1:SetCondition(tskillcon)
 				e1:SetOperation(tskillop)
 				Duel.RegisterEffect(e1,e:GetHandlerPlayer())
 			--end
