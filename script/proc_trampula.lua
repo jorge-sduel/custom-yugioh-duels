@@ -185,19 +185,19 @@ end
 function Auxiliary.SettVrainsSkillOp(skillcon,skillop,efftype)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		local c=e:GetHandler()
-		--[[if tskillop~=nil then]]
-			local e1=Effect.CreateEffect(c)
+		--[[if tskillop~=nil then
+			local e1=Effect.CreateEffect(c)]]
 			--[[if efftype~=EFFECT_NEGATE_SKILL then
 				e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)]]
-			--else]]
+			--[[else
 				e1:SetType(EFFECT_TYPE_FIELD)
 				e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-				e1:SetTargetRange(1,0)
-			--end
+				e1:SetTargetRange(1,0)]]
+			--[[end
 			e1:SetCode(efftype)
 			e1:SetCondition(tskillcon)
-			e1:SetOperation(tskillop)
-			--Duel.RegisterEffect(e1,e:GetHandlerPlayer())
+			e1:SetOperation(tskillop)]] 
+			--[[Duel.RegisterEffect(e1,e:GetHandlerPlayer())
 			if efftype==EVENT_FREE_CHAIN then]]
 				local e1=Effect.CreateEffect(c)
 				e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
