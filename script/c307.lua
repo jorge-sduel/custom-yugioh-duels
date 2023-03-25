@@ -4,7 +4,7 @@ if not TRAMPULA_IMPORTED then Duel.LoadScript("proc_trampula.lua") end
 function s.initial_effect(c)
 	--pendulum summon
 	Trampula.AddProcedure(c)
-aux.AddVTrampulaSkillProcedure(c,nil,s.flipop)
+aux.AddVTrampulaSkillProcedure(c,s.flipcon,s.flipop)
 	--synchro effect 
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
