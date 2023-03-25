@@ -214,6 +214,6 @@ function Auxiliary.SettVrainsSkillOp(skillcon,skillop,efftype)
 		if e:GetHandler():IsPreviousLocation(LOCATION_HAND) then 
 			Duel.Draw(p,1,REASON_RULE)
 		end
-		e:Reset()
-	end]]
+		e:Reset()]]
+	end
 end
