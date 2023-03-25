@@ -4,7 +4,7 @@ if not TRAMPULA_IMPORTED then Duel.LoadScript("proc_trampula.lua") end
 function s.initial_effect(c)
 	--pendulum summon
 	Trampula.AddProcedure(c)
-aux.AddVTrampulaSkillProcedure(c)
+aux.AddVTrampulaSkillProcedure(c,nil,s.flipop)
 	--synchro effect 
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(id,0))
@@ -282,4 +282,23 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(LOCATION_REMOVED)
 		c:RegisterEffect(e1,true)
 	Duel.SpecialSummonComplete()
+end
+function s.flipop(e,tp,eg,ep,ev,re,r,rp)
+	--opd check and ask if you want to activate the skill or not
+	if Duel.GetFlagEffect(tp,id)>0 or not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then return end
+	--opd register
+	Duel.RegisterFlagEffect(tp,id,0,0,0) 
+	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
+	Duel.Hint(HINT_CARD,tp,id)
+	--check if skill is negated
+	if aux.CheckSkillNegation(e,tp) then return end
+	--Draw
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_DRAW_COUNT)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(1,0)
+	e1:SetValue(2)
+	e1:SetReset(RESET_PHASE+PHASE_DRAW)
+	Duel.RegisterEffect(e1,tp)
 end
