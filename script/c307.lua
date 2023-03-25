@@ -293,10 +293,10 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFlagEffect(tp,id)>0 or not Duel.SelectYesNo(tp,aux.Stringid(id,0)) then return end
 	--opd register
 	Duel.RegisterFlagEffect(tp,id,0,0,0) 
-	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
+	--Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	--check if skill is negated
-	if aux.CheckSkillNegation(e,tp) then return end
+	--if aux.CheckSkillNegation(e,tp) then return end
 	--Draw
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
