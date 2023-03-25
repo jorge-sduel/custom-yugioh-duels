@@ -185,29 +185,29 @@ end
 function Auxiliary.SettVrainsSkillOp(skillcon,skillop,efftype)
 	return function(e,tp,eg,ep,ev,re,r,rp)
 		local c=e:GetHandler()
-		if tskillop~=nil then
+		--[[if tskillop~=nil then]]
 			local e1=Effect.CreateEffect(c)
-			if efftype~=EFFECT_NEGATE_SKILL then
-				e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-			else
+			--[[if efftype~=EFFECT_NEGATE_SKILL then
+				e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)]]
+			--else]]
 				e1:SetType(EFFECT_TYPE_FIELD)
 				e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 				e1:SetTargetRange(1,0)
-			end
+			--end
 			e1:SetCode(efftype)
 			e1:SetCondition(tskillcon)
 			e1:SetOperation(tskillop)
-			Duel.RegisterEffect(e1,e:GetHandlerPlayer())
-			if efftype==EVENT_FREE_CHAIN then
+			--Duel.RegisterEffect(e1,e:GetHandlerPlayer())
+			if efftype==EVENT_FREE_CHAIN then]]
 				local e1=Effect.CreateEffect(c)
 				e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 				e1:SetCode(EVENT_CHAIN_END)
 				e1:SetCondition(tskillcon)
 				e1:SetOperation(tskillop)
 				Duel.RegisterEffect(e1,e:GetHandlerPlayer())
-			end
-		end
-		Duel.DisableShuffleCheck(true)
+			--end
+		--end
+		--[[Duel.DisableShuffleCheck(true)
 		Duel.SendtoDeck(c,tp,-2,REASON_RULE)
 		Duel.Hint(HINT_SKILL_COVER,c:GetControler(),VRAINS_SKILL_COVER)
 		Duel.Hint(HINT_SKILL,c:GetControler(),c:GetCode())
@@ -215,5 +215,5 @@ function Auxiliary.SettVrainsSkillOp(skillcon,skillop,efftype)
 			Duel.Draw(p,1,REASON_RULE)
 		end
 		e:Reset()
-	end
+	end]]
 end
