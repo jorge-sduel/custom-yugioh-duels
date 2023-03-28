@@ -6,7 +6,7 @@ function ref.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-Timeleap.AddProcedure(c,nil,1,1,ref.TimeCon)
+Timeleap.AddProcedure(c,ref.material,1,1,ref.TimeCon)
 	
 	c:EnableCounterPermit(0x1)
 	--attackup
@@ -39,11 +39,11 @@ Timeleap.AddProcedure(c,nil,1,1,ref.TimeCon)
 end
 function ref.TimeCon(e,c)
 	if c==nil then return true end
-	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_GRAVE,0,nil)>=4
+	return Duel.GetMatchingGroupCount(Card.IsSpell,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)>=4
 end
 
 function ref.material(c)
-	return c:IsRace(RACE_SPELLCASTER)
+	return c:IsRace(RACE_SPELLCASTER) and c:IsType(TYPE_SYNCHRO)
 end
 
 function ref.attackup(e,c)
