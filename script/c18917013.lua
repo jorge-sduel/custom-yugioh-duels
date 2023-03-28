@@ -7,7 +7,6 @@ function ref.initial_effect(c)
 	  --synchro summon
 	--time leap procedure
 Timeleap.AddProcedure(c,ref.material,1,1,ref.TimeCon)
-	
 	c:EnableCounterPermit(0x1)
 	--attackup
 	local e1=Effect.CreateEffect(c)
@@ -50,7 +49,7 @@ function ref.attackup(e,c)
 	return c:GetCounter(0x1)*1000
 end
 function ref.addcc(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+269
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL
 end
 function ref.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
