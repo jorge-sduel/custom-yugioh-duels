@@ -35,6 +35,17 @@ Timeleap.AddProcedure(c,ref.material,1,1,ref.TimeCon)
 	e3:SetTarget(ref.rmtg)
 	e3:SetOperation(ref.rmop)
 	c:RegisterEffect(e3)
+--Future
+	--synchro success
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(31924889,0))
+	e4:SetCategory(CATEGORY_COUNTER)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetCondition(Timeleap.Future)
+	e4:SetTarget(ref.addct2)
+	e4:SetOperation(ref.addc2)
+	c:RegisterEffect(e2)
 end
 function ref.TimeCon(e,c)
 	if c==nil then return true end
@@ -53,11 +64,11 @@ function ref.addcc(e,tp,eg,ep,ev,re,r,rp)
 end
 function ref.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,0x1)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,4,0,0x1)
 end
 function ref.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(0x1,2)
+		e:GetHandler():AddCounter(0x1,4)
 	end
 end
 function ref.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -78,5 +89,14 @@ function ref.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsControler(1-tp) then
 		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
+	end
+end
+function ref.addct(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,8,0,0x1)
+end
+function ref.addc(e,tp,eg,ep,ev,re,r,rp)
+	if e:GetHandler():IsRelateToEffect(e) then
+		e:GetHandler():AddCounter(0x1,8)
 	end
 end
