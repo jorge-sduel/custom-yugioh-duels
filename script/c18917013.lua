@@ -1,16 +1,12 @@
 --Arcanite Magus
 local ref=_G['c'..18917013]
+ref.IsTimeleap=true
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function ref.initial_effect(c)
-	if not ref.global_check then
-		ref.global_check=true
-		local ge2=Effect.CreateEffect(c)
-		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge2:SetCode(EVENT_ADJUST)
-		ge2:SetCountLimit(1)
-		ge2:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
-		ge2:SetOperation(ref.chk)
-		Duel.RegisterEffect(ge2,0)
-	end
+	c:EnableReviveLimit()
+	  --synchro summon
+	--time leap procedure
+Timeleap.AddProcedure(c,nil,1,1,ref.TimeCon)
 	
 	c:EnableCounterPermit(0x1)
 	--attackup
@@ -41,12 +37,11 @@ function ref.initial_effect(c)
 	e3:SetOperation(ref.rmop)
 	c:RegisterEffect(e3)
 end
-
-ref.bloom = true
-function ref.chk(e,tp,eg,ep,ev,re,r,rp)
-	Duel.CreateToken(tp,269)
-	Duel.CreateToken(1-tp,269)
+function ref.TimeCon(e,c)
+	if c==nil then return true end
+	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_GRAVE,0,nil)>=4
 end
+
 function ref.material(c)
 	return c:IsRace(RACE_SPELLCASTER)
 end
