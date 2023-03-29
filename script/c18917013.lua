@@ -45,7 +45,17 @@ Timeleap.AddProcedure(c,ref.material,1,1,ref.TimeCon)
 	e4:SetCondition(Timeleap.Future)
 	e4:SetTarget(ref.addct2)
 	e4:SetOperation(ref.addc2)
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e4)
+	--synchro success
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(31924889,0))
+	e5:SetCategory(CATEGORY_COUNTER+CATEGORY_SPECIAL_SUMMON)
+	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e5:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e5:SetCondition(Timeleap.Future)
+	e5:SetTarget(ref.sptg)
+	e5:SetOperation(ref.spop)
+	c:RegisterEffect(e5)
 end
 function ref.TimeCon(e,c)
 	if c==nil then return true end
@@ -99,4 +109,25 @@ function ref.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
 		e:GetHandler():AddCounter(0x1,8)
 	end
+end
+function ref.filter(c,e,tp)
+	return c:IsRace(RACE_SPELLCASTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+end
+function ref.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(ref.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HDG)
+end
+function ref.spop(e,tp,eg,ep,ev,re,r,rp)
+	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+	if ft<=0 then return end
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE,0,ft,ft,nil,e,tp)
+	local c=e:GetHandler()
+	for tc in aux.Next(g) do
+		Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
+		e:GetHandler():AddCounter(0x1,tc:GetLevel())
+	end
+	Duel.SpecialSummonComplete()
 end
