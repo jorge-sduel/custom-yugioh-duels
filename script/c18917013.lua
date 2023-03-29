@@ -38,7 +38,7 @@ Timeleap.AddProcedure(c,ref.material,1,1,ref.TimeCon)
 --Future
 	--synchro success
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(31924889,0))
+	e4:SetDescription(aux.Stringid(18917013,0))
 	e4:SetCategory(CATEGORY_COUNTER)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -48,7 +48,7 @@ Timeleap.AddProcedure(c,ref.material,1,1,ref.TimeCon)
 	c:RegisterEffect(e4)
 	--synchro success
 	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(31924889,0))
+	e5:SetDescription(aux.Stringid(18917013,1))
 	e5:SetCategory(CATEGORY_COUNTER+CATEGORY_SPECIAL_SUMMON)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetCode(EVENT_SPSUMMON_SUCCESS)
