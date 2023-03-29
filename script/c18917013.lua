@@ -101,11 +101,11 @@ function ref.rmop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 	end
 end
-function ref.addct(e,tp,eg,ep,ev,re,r,rp,chk)
+function ref.addct2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,8,0,0x1)
 end
-function ref.addc(e,tp,eg,ep,ev,re,r,rp)
+function ref.addc2(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
 		e:GetHandler():AddCounter(0x1,8)
 	end
