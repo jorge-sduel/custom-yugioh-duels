@@ -20,7 +20,7 @@ Timeleap.AddProcedure(c,ref.material,1,1,ref.TimeCon)
 	e2:SetCategory(CATEGORY_COUNTER)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
-	--e2:SetCondition(ref.addcc)
+	e2:SetCondition(Timeleap.sumcon)
 	e2:SetTarget(ref.addct)
 	e2:SetOperation(ref.addc)
 	c:RegisterEffect(e2)
@@ -127,7 +127,7 @@ function ref.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	for tc in aux.Next(g) do
 		Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
-		e:GetHandler():AddCounter(0x1,tc:GetLevel())
+		tc:AddCounter(0x1,tc:GetLevel())
 	end
 	Duel.SpecialSummonComplete()
 end
