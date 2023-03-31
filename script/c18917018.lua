@@ -1,7 +1,7 @@
 --Supersonic Epee
 local ref=_G['c'..18917018]
 function ref.initial_effect(c)
-	if not ref.global_check then
+	--[[if not ref.global_check then
 		ref.global_check=true
 		local ge2=Effect.CreateEffect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -10,7 +10,7 @@ function ref.initial_effect(c)
 		ge2:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
 		ge2:SetOperation(ref.chk)
 		Duel.RegisterEffect(ge2,0)
-	end
+	end]] 
 	
 	--Banish
 	local e1=Effect.CreateEffect(c)
