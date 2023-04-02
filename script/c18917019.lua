@@ -32,6 +32,14 @@ function ref.initial_effect(c)
 	e2:SetTarget(ref.grtg)
 	e2:SetOperation(ref.grop)
 	c:RegisterEffect(e2)
+	--attack
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_UPDATE_ATTACK)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetValue(ref.atkval)
+	c:RegisterEffect(e3) 
 end
 
 ref.bloom = true
@@ -102,4 +110,12 @@ function ref.grop(e,tp,eg,ep,ev,re,r,rp)
 			end
 		end
 	end
+end
+function ref.afilter(c)
+
+	local tid=Duel.GetTurnCount()
+	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK) and c:GetTurnID()==tid
+end
+function ref.atkval(e,c)
+	return Duel.GetMatchingGroupCount(ref.afilter,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil)*500
 end
