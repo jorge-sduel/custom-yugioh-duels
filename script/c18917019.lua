@@ -117,5 +117,5 @@ function ref.afilter(c)
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_DARK) and c:GetTurnID()==tid
 end
 function ref.atkval(e,c)
-	return Duel.GetMatchingGroupCount(ref.afilter,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil)*500
+	return Duel.GetMatchingGroupCount(ref.afilter,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil)*100
 end
