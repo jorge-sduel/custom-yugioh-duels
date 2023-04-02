@@ -13,7 +13,7 @@ function ref.initial_effect(c)
 	end]] 
 	c:EnableReviveLimit()
 	--fusion material
-	Fusion.AddProcFunRep(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),5,true,true)
+	Fusion.AddProcFunRep(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),2,true,true)
 	--Mill
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DECKDES)
