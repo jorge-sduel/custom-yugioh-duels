@@ -44,7 +44,7 @@ function ref.material(c)
 end
 
 function ref.dkcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+269
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_FUSION
 		and e:GetHandler():GetMaterial():GetCount()>0
 end
 function ref.dktg(e,tp,eg,ep,ev,re,r,rp,chk)
