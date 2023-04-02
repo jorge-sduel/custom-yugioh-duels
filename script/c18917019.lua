@@ -1,7 +1,7 @@
 --Wandering Reaper
 local ref=_G['c'..18917019]
 function ref.initial_effect(c)
-	if not ref.global_check then
+	--[[if not ref.global_check then
 		ref.global_check=true
 		local ge2=Effect.CreateEffect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -10,8 +10,10 @@ function ref.initial_effect(c)
 		ge2:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
 		ge2:SetOperation(ref.chk)
 		Duel.RegisterEffect(ge2,0)
-	end
-	
+	end]] 
+	c:EnableReviveLimit()
+	--fusion material
+	Fusion.AddProcFunRep(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_DARK),5,true,true)
 	--Mill
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DECKDES)
