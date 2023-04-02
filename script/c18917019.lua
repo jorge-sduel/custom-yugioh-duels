@@ -72,7 +72,8 @@ function ref.grfilter(c)
 	return c:IsAbleToGrave()
 end
 function ref.atkfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsLocation(LOCATION_GRAVE)
+	local tid=Duel.GetTurnCount()
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsLocation(LOCATION_GRAVE) and c:GetTurnID()==tid
 end
 function ref.grtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(ref.grfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,nil)
