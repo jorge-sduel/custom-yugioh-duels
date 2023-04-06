@@ -45,5 +45,5 @@ function c32147691.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,32147691,RESET_PHASE+PHASE_END,0,1)
 end
 function c32147691.sumtg(c)
-	return c:IsSetCard(0xbe)
+	return (c:IsLevel(6) or c:IsLevel(8)) and c:IsDefense(1000)
 end
