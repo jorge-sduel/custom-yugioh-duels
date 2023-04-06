@@ -19,7 +19,7 @@ function c32147691.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c32147691.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_ADVANCE
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_TRIBUTE
 end
 function c32147691.filter(c)
 	return c:IsFacedown() and c:IsDestructable()
@@ -45,5 +45,5 @@ function c32147691.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,32147691,RESET_PHASE+PHASE_END,0,1)
 end
 function c32147691.sumtg(c)
-	return c:IsCode(32147691) or c:IsCode(32147690) or c:IsCode(9748752) or c:IsCode(26205777) or c:IsCode(57666212) or c:IsCode(60229110) or c:IsCode(73125233) or c:IsCode(85718645) or c:IsCode(51945556)
+	return c:IsSetCard(0xbe)
 end
