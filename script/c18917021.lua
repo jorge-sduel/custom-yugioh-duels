@@ -1,7 +1,12 @@
 --Blast Fenix
 local ref=_G['c'..18917021]
+ref.IsBigbang=true
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function ref.initial_effect(c)
-	if not ref.global_check then
+c:AddSetcodesRule(18917021,false,0xbb109)
+	c:EnableReviveLimit()
+	Bigbang.AddProcedure(c,nil,3,99)
+	--[[if not ref.global_check then
 		ref.global_check=true
 		local ge2=Effect.CreateEffect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -10,7 +15,7 @@ function ref.initial_effect(c)
 		ge2:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
 		ge2:SetOperation(ref.chk)
 		Duel.RegisterEffect(ge2,0)
-	end
+	end]]
 	
 	--Burn
 	local e1=Effect.CreateEffect(c)
@@ -46,7 +51,7 @@ function ref.material(c)
 end
 
 function ref.damfilter(c)
-	return c.seedling and c:GetLevel()>0
+	return c:GetLevel()>0
 end
 function ref.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(ref.damfilter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil) end
