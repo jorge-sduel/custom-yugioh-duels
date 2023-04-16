@@ -5,7 +5,7 @@ if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function ref.initial_effect(c)
 c:AddSetcodesRule(18917021,false,0xbb109)
 	c:EnableReviveLimit()
-	Bigbang.AddProcedure(c,nil,3,99)
+	Bigbang.AddProcedure(c,nil,2,99)
 	--[[if not ref.global_check then
 		ref.global_check=true
 		local ge2=Effect.CreateEffect(c)
