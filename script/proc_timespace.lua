@@ -1,11 +1,11 @@
-EFFECT_HAND_TIMESPACE	= 601111
-REASON_TIMESPACE		= 0x64001111
-SUMMON_TYPE_TIMESPACE 	= 0x6400111
-HINTMSG_TIMESPACEMATERIAL	= 6400111
+EFFECT_HAND_TIMESPACE	= 1200000
+REASON_TIMESPACE		= 0x12800000
+SUMMON_TYPE_TIMESPACE 	= 0x12800000
+HINTMSG_TIMESPACEMATERIAL	= 12800000
 TIMESPACE_IMPORTED	= true
 if not aux.TimespaceProcedure then
 	aux.TimespaceProcedure = {}
-	Bigbang = aux.TimespaceProcedure
+	Timespace = aux.TimespaceProcedure
 end
 if not Timespace then
 	Timespace = aux.TimespaceProcedure
