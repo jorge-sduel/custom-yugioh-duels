@@ -1,7 +1,12 @@
 --Exaplant
 local ref=_G['c'..18917024]
+ref.IsBigbang=true
+if not BIGBANG_IMPORTED then Duel.LoadScript("proc_bigbang.lua") end
 function ref.initial_effect(c)
-	if not ref.global_check then
+c:AddSetcodesRule(18917024,false,0xbb109)
+	c:EnableReviveLimit()
+	Bigbang.AddProcedure(c,nil,2,99)
+	--[[if not ref.global_check then
 		ref.global_check=true
 		local ge2=Effect.CreateEffect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -10,7 +15,7 @@ function ref.initial_effect(c)
 		ge2:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
 		ge2:SetOperation(ref.chk)
 		Duel.RegisterEffect(ge2,0)
-	end
+	end]]
 	
 	--Special Summon
 	local e1=Effect.CreateEffect(c)
