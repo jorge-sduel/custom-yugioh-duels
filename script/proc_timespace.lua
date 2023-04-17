@@ -1,14 +1,14 @@
-EFFECT_HAND_BIGBANG2	= 601111
-REASON_BIGBANG2		= 0x64001111
-SUMMON_TYPE_BIGBANG2 	= 0x6400111
-HINTMSG_BIGBANGMATERIAL2	= 6400111
-BIGBANG_IMPORTED2	= true
-if not aux.Bigbang2Procedure then
-	aux.BigbangProcedure = {}
-	Bigbang = aux.Bigbang2Procedure
+EFFECT_HAND_TIMESPACE	= 601111
+REASON_TIMESPACE		= 0x64001111
+SUMMON_TYPE_TIMESPACE 	= 0x6400111
+HINTMSG_TIMESPACEMATERIAL	= 6400111
+TIMESPACE_IMPORTED	= true
+if not aux.TimespaceProcedure then
+	aux.TimespaceProcedure = {}
+	Bigbang = aux.TimespaceProcedure
 end
-if not Bigbang2 then
-	Bigbang2 = aux.Bigbang2Procedure
+if not Timespace then
+	Timespace = aux.TimespaceProcedure
 end
 --[[
 add at the start of the script to add bigbang2 procedure
@@ -28,10 +28,10 @@ function Timespace.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	-- 5 >> deck
 	-- 6 >> destroy
 	if loc==nil then loc=LOCATION_MZONE end
-	if c.bigbang2_type==nil then
+	if c.timespace_type==nil then
 		local mt=c:GetMetatable()
-		mt.bigbang_type=1
-		mt.bigbang2_parameters={c,f,min,max,control,location,operation}
+		mt.timespace_type=1
+		mt.timespace_parameters={c,f,min,max,control,location,operation}
 	end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -39,10 +39,10 @@ function Timespace.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(LOCATION_EXTRA)
-	e1:SetCondition(Bigbang2.Condition(f,min,max,specialchk,opp,loc,send))
-	e1:SetTarget(Bigbang2.Target(f,min,max,specialchk,opp,loc,send))
-	e1:SetOperation(Bigbang2.Operation(f,min,max,specialchk,opp,loc,send))
-    e1:SetValue(SUMMON_TYPE_BIGBANG)
+	e1:SetCondition(Timespace.Condition(f,min,max,specialchk,opp,loc,send))
+	e1:SetTarget(Timespace.Target(f,min,max,specialchk,opp,loc,send))
+	e1:SetOperation(Timespace.Operation(f,min,max,specialchk,opp,loc,send))
+    e1:SetValue(SUMMON_TYPE_TIMESPACE)
 	c:RegisterEffect(e1)
 	--scale
 	local e3=Effect.CreateEffect(c)
@@ -149,7 +149,7 @@ function Bigbang.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 	return #sg>=minc and sg:CheckWithSumEqual(Bigbang2.GetBigbangCount,lc:GetAttack(),#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
-function Bigbang2.Condition(f,minc,maxc,specialchk,opp,loc,send)
+function Timespace.Condition(f,minc,maxc,specialchk,opp,loc,send)
 	return	function(e,c,must,g,min,max)
 				if c==nil then return true end
 				if c:IsType(TYPE_PENDULUM) and c:IsFaceup() then return false end
@@ -184,7 +184,7 @@ g:Merge(Duel.GetMatchingGroup(Auxiliary.Bigbang2SummonSubstitute,tp,LOCATION_HAN
 				return res
 			end
 end
-function Bigbang2.Target(f,minc,maxc,specialchk,opp,loc,send)
+function Timespace.Target(f,minc,maxc,specialchk,opp,loc,send)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,c,must,g,min,max)
 				local loc2=0
 				if opp then loc2=loc end
@@ -239,7 +239,7 @@ g:Merge(Duel.GetMatchingGroup(Auxiliary.Bigbang2SummonSubstitute,tp,LOCATION_HAN
 				end
 			end
 end
-function Bigbang2.Operation(f,minc,maxc,specialchk,opp,loc,send)
+function Timespace.Operation(f,minc,maxc,specialchk,opp,loc,send)
 	return	function(e,tp,eg,ep,ev,re,r,rp,c,must,g,min,max)
 				local g,filt,emt=e:GetLabelObject():GetTarget()()
 				e:GetLabelObject():Reset()
@@ -250,19 +250,19 @@ function Bigbang2.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				end
 				c:SetMaterial(g)
 				if send==1 then
-					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_BIGBANG2+REASON_RETURN)
+					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_TIMESPACE+REASON_RETURN)
 				elseif send==2 then
-					Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_BIGBANG2)
+					Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_TIMESPACE)
 				elseif send==3 then
-					Duel.Remove(g,POS_FACEDOWN,REASON_MATERIAL+REASON_BIGBANG2)
+					Duel.Remove(g,POS_FACEDOWN,REASON_MATERIAL+REASON_TIMESPACE)
 				elseif send==4 then
-					Duel.SendtoHand(g,nil,REASON_MATERIAL+REASON_BIGBANG2)
+					Duel.SendtoHand(g,nil,REASON_MATERIAL+REASON_TIMESPACE)
 				elseif send==5 then
-					Duel.SendtoDeck(g,nil,2,REASON_MATERIAL+REASON_BIGBANG2)
+					Duel.SendtoDeck(g,nil,2,REASON_MATERIAL+REASON_TIMESPACE)
 				elseif send==6 then
-					Duel.Destroy(g,REASON_MATERIAL+REASON_BIGBANG2)
+					Duel.Destroy(g,REASON_MATERIAL+REASON_TIMESPACE)
 				else
-					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_BIGBANG2)
+					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_TIMESPACE)
 				end
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
