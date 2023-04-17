@@ -1,7 +1,7 @@
 --Cosmicburst Dragon
 local cid,id=GetID()
 cid.IsSpacet=true
-if not BIGBANG2_IMPORTED then Duel.LoadScript("proc_bigbang2.lua") end
+if not TIMESPACE_IMPORTED then Duel.LoadScript("proc_timespace.lua") end
 function cid.initial_effect(c)
 c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
