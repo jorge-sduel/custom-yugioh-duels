@@ -146,7 +146,7 @@ function Timespace.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 			return false
 		end
 	end
-	return #sg>=minc and sg:CheckWithSumEqual(Timespace.GetTimespaceCount,lc:GetAttack(),#sg,#sg)
+	return #sg>=minc and sg:CheckWithSumEqual(Timespace.GetTimespaceCount,lc:GetAttack()-1000,#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Timespace.Condition(f,minc,maxc,specialchk,opp,loc,send)
