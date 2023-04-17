@@ -17,7 +17,7 @@ condition if Bigbang2 summoned
     return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_BIGBANG2
 ]]
 --Bigbang Summon
-function Bigbang2.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
+function Timespace.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
     -- opp==true >> you can use opponent monsters as materials (default false)
     -- loc default LOCATION_MZONE
 	-- send materials:
