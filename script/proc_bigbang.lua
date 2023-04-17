@@ -346,7 +346,7 @@ function Auxiliary.BigbangCheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 		end
 	end
 	return #sg>=minc
- and sg:CheckWithSumGreater(Auxiliary.BigbangGetBigbangCount,Duel.GetLP(tp)-lc:GetAttack(),#sg,#sg)
+ and sg:CheckWithSumGreater(Bigbang.GetBigbangCount,-Duel.GetLP(tp)+lc:GetAttack(),#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Auxiliary.BigbangCondition(f,minc,maxc,specialchk,opp,loc,send)
@@ -369,15 +369,15 @@ g:Merge(Duel.GetMatchingGroup(Auxiliary.BigbangSummonSubstitute,tp,LOCATION_HAND
 				max = max or maxc
 				if mustg:IsExists(aux.NOT(Auxiliary.BigbangConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
 				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_BIGBANG)
-				tg=tg:Filter(Auxiliary.BigbangConditionFilter,nil,f,c,tp)
+				tg=tg:Filter(Bigbang.ConditionFilter,nil,f,c,tp)
 				local res=(mg+tg):Includes(mustg) and #mustg<=max
 				if res then
 					if #mustg==max then
 						local sg=Group.CreateGroup()
-						res=mustg:IsExists(Auxiliary.BigbangCheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
+						res=mustg:IsExists(Bigbang.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
 					elseif #mustg<max then
 						local sg=mustg
-						res=(mg+tg):IsExists(Auxiliary.BigbangCheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
+						res=(mg+tg):IsExists(Bigbang.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
 					end
 				end
 				aux.DeleteExtraMaterialGroups(emt)
