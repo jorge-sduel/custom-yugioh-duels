@@ -284,11 +284,6 @@ end
 --Space-Time summon
 function Auxiliary.AddBigbangProcedure(c,f,min,max,specialchk,opp,loc,send)
 	if loc==nil then loc=LOCATION_MZONE end
-	if c.bigbang_type==nil then
-		local mt=c:GetMetatable()
-		mt.bigbang_type=1
-		mt.bigbang_parameters={c,f,min,max,control,location,operation}
-	end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetDescription(1181)
