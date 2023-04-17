@@ -73,7 +73,7 @@ function Timespace.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_REMOVE_TYPE)
-	e3:SetRange(LOCATION_ALL)
+	e3:SetRange(LOCATION_ALL+LOCATION_EXTRA)
 	e3:SetValue(TYPE_SYNCHRO)
 	c:RegisterEffect(e3)
 end
