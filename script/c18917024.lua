@@ -50,7 +50,7 @@ function ref.material(c)
 end
 
 function ref.sscon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+269
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_BIGBANG
 end
 function ref.ssfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
