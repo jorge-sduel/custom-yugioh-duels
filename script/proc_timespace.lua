@@ -11,12 +11,12 @@ if not Timespace then
 	Timespace = aux.TimespaceProcedure
 end
 --[[
-add at the start of the script to add bigbang2 procedure
-if not BIGBANG2_IMPORTED then Duel.LoadScript("proc_bigbang2.lua") end
-condition if Bigbang2 summoned
-    return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_BIGBANG2
+add at the start of the script to add tinespace procedure
+if not TIMESPACE_IMPORTED then Duel.LoadScript("proc_timespace.lua") end
+condition if Timespace summoned
+    return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL+SUMMON_TYPE_TIMESPACE
 ]]
---Bigbang Summon
+--Timespace Summon
 function Timespace.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
     -- opp==true >> you can use opponent monsters as materials (default false)
     -- loc default LOCATION_MZONE
@@ -50,7 +50,7 @@ function Timespace.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	--e3:SetCode(EFFECT_CHANGE_RANK)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE)
 	--e3:SetRange(LOCATION_MZONE)
-	--e3:SetValue(Bigbang.Level)
+	--e3:SetValue(Timespace.Level)
 	--c:RegisterEffect(e3)
 	--local e4=e3:Clone()
 	e3:SetCode(EFFECT_REMOVE_TYPE)
@@ -77,17 +77,17 @@ function Timespace.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	e3:SetValue(TYPE_SYNCHRO)
 	c:RegisterEffect(e3)
 end
-function Card.IsBigbang2(c)
-	return c.IsBigbang
+function Card.IsTimespace(c)
+	return c.IsTimeSpace
 end
-function Bigbang2.ConditionFilter(c,f,lc,tp)
+function Timespace.ConditionFilter(c,f,lc,tp)
 	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
-function Bigbang2.GetBigbangCount(c)
+function Timespace.GetTimespaceCount(c)
     if c:GetAttack()>1 then return c:GetAttack() end
     return 1
 end
-function Bigbang2.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
+function Timespace.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	if #sg>maxc then return false end
 	filt=filt or {}
 	sg:AddCard(c)
@@ -104,12 +104,12 @@ function Bigbang2.CheckRecursive(c,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,fil
 			return false
 		end
 	end
-	local res=Bigbang2.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
-		or (#sg<maxc and mg:IsExists(Bigbang2.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
+	local res=Timespace.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
+		or (#sg<maxc and mg:IsExists(Timespace.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)}))
 	sg:RemoveCard(c)
 	return res
 end
-function Bigbang2.CheckRecursive2(c,tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
+function Timespace.CheckRecursive2(c,tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	if #sg>maxc then return false end
 	sg:AddCard(c)
 	for _,filt in ipairs(filt) do
@@ -127,26 +127,26 @@ function Bigbang2.CheckRecursive2(c,tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialc
 	end
 	if #(sg2-sg)==0 then
 		if secondg and #secondg>0 then
-			local res=secondg:IsExists(Bigbang.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)})
+			local res=secondg:IsExists(Timespace.CheckRecursive,1,sg,tp,sg,mg,lc,minc,maxc,f,specialchk,og,emt,{table.unpack(filt)})
 			sg:RemoveCard(c)
 			return res
 		else
-			local res=Bigbang2.CheckGoal(tp,sg,lc,minc,f,specialchk,{table.unpack(filt)})
+			local res=Timespace.CheckGoal(tp,sg,lc,minc,f,specialchk,{table.unpack(filt)})
 			sg:RemoveCard(c)
 			return res
 		end
 	end
-	local res=Bigbang2.CheckRecursive2((sg2-sg):GetFirst(),tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
+	local res=Timespace.CheckRecursive2((sg2-sg):GetFirst(),tp,sg,sg2,secondg,mg,lc,minc,maxc,f,specialchk,og,emt,filt)
 	sg:RemoveCard(c)
 	return res
 end
-function Bigbang.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
+function Timespace.CheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 	for _,filt in ipairs(filt) do
 		if not sg:IsExists(filt[2],1,nil,filt[3],tp,sg,Group.CreateGroup(),lc,filt[1],1) then
 			return false
 		end
 	end
-	return #sg>=minc and sg:CheckWithSumEqual(Bigbang2.GetBigbangCount,lc:GetAttack(),#sg,#sg)
+	return #sg>=minc and sg:CheckWithSumEqual(Timespace.GetTimespaceCount,lc:GetAttack(),#sg,#sg)
 		and (not specialchk or specialchk(sg,lc,SUMMON_TYPE_SPECIAL,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Timespace.Condition(f,minc,maxc,specialchk,opp,loc,send)
@@ -158,26 +158,26 @@ function Timespace.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				if opp then loc2=loc end
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
-g:Merge(Duel.GetMatchingGroup(Auxiliary.Bigbang2SummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
+g:Merge(Duel.GetMatchingGroup(Auxiliary.TimespaceSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
-				local mg=g:Filter(Bigbang2.ConditionFilter,nil,f,c,tp)
-				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_BIGBANG2)
+				local mg=g:Filter(Timespace.ConditionFilter,nil,f,c,tp)
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_TIMESPACE)
 				if must then mustg:Merge(must) end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
 				min = min or minc
 				max = max or maxc
-				if mustg:IsExists(aux.NOT(Bigbang2.ConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
-				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_BIGBANG2)
-				tg=tg:Filter(Bigbang2.ConditionFilter,nil,f,c,tp)
+				if mustg:IsExists(aux.NOT(Timespace.ConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_TIMESPACE)
+				tg=tg:Filter(Timespace.ConditionFilter,nil,f,c,tp)
 				local res=(mg+tg):Includes(mustg) and #mustg<=max
 				if res then
 					if #mustg==max then
 						local sg=Group.CreateGroup()
-						res=mustg:IsExists(Bigbang2.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
+						res=mustg:IsExists(Timespace.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
 					elseif #mustg<max then
 						local sg=mustg
-						res=(mg+tg):IsExists(Bigbang2.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
+						res=(mg+tg):IsExists(Timespace.CheckRecursive,1,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt)
 					end
 				end
 				aux.DeleteExtraMaterialGroups(emt)
@@ -190,17 +190,17 @@ function Timespace.Target(f,minc,maxc,specialchk,opp,loc,send)
 				if opp then loc2=loc end
 				if not g then
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
-g:Merge(Duel.GetMatchingGroup(Auxiliary.Bigbang2SummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
+g:Merge(Duel.GetMatchingGroup(Auxiliary.TimespaceSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
 				min = min or minc
 				max = max or maxc
-				local mg=g:Filter(Bigbang2.ConditionFilter,nil,f,c,tp)
-				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_BIGBANG)
+				local mg=g:Filter(Timespace.ConditionFilter,nil,f,c,tp)
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_TIMESPACE)
 				if must then mustg:Merge(must) end
-				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_BIGBANG2)
-				tg=tg:Filter(Bigbang2.ConditionFilter,nil,f,c,tp)
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_TIMESPACE)
+				tg=tg:Filter(Timespace.ConditionFilter,nil,f,c,tp)
 				local sg=Group.CreateGroup()
 				local finish=false
 				local cancel=false
@@ -208,11 +208,11 @@ g:Merge(Duel.GetMatchingGroup(Auxiliary.Bigbang2SummonSubstitute,tp,LOCATION_HAN
 				while #sg<max do
 					local filters={}
 					if #sg>0 then
-						Bigbang.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg+tg,mg+tg,c,min,max,f,specialchk,mg,emt,filters)
+						Timespace.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg+tg,mg+tg,c,min,max,f,specialchk,mg,emt,filters)
 					end
-					local cg=(mg+tg):Filter(Bigbang2.CheckRecursive,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt,{table.unpack(filters)})
+					local cg=(mg+tg):Filter(Timespace.CheckRecursive,sg,tp,sg,(mg+tg),c,min,max,f,specialchk,mg,emt,{table.unpack(filters)})
 					if #cg==0 then break end
-					finish=#sg>=min and #sg<=max and Bigbang.CheckGoal(tp,sg,c,min,f,specialchk,filters)
+					finish=#sg>=min and #sg<=max and Timespace.CheckGoal(tp,sg,c,min,f,specialchk,filters)
 					cancel=not og and Duel.IsSummonCancelable() and #sg==0
 					Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_LMATERIAL)
 					local tc=Group.SelectUnselect(cg,sg,tp,finish,cancel,1,1)
@@ -227,7 +227,7 @@ g:Merge(Duel.GetMatchingGroup(Auxiliary.Bigbang2SummonSubstitute,tp,LOCATION_HAN
 				end
 				if #sg>0 then
 					local filters={}
-					Bigbang.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg+tg,mg+tg,c,min,max,f,specialchk,mg,emt,filters)
+					Timespace.CheckRecursive2(sg:GetFirst(),tp,Group.CreateGroup(),sg,mg+tg,mg+tg,c,min,max,f,specialchk,mg,emt,filters)
 					sg:KeepAlive()
 					local reteff=Effect.GlobalEffect()
 					reteff:SetTarget(function()return sg,filters,emt end)
@@ -269,22 +269,22 @@ function Timespace.Operation(f,minc,maxc,specialchk,opp,loc,send)
 		--e:GetHandler():SetTurnCounter(e:GetHandler():GetOriginalLevel())
 			end
 end
-function Bigbang2.sumcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_BIGBANG)
+function Timespace.sumcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMESPACE)
 end
-function Bigbang2.Neutral(c,e)
+function Timespace.Neutral(c,e)
 	return c:GetAttack()==c:GetDefense()
 end
-function Bigbang2.negative(c,e)
+function Timespace.negative(c,e)
 	return c:GetAttack()<c:GetDefense()
 end
-function Bigbang2.Positive(c,e)
+function Timespace.Positive(c,e)
 	return c:GetAttack()>c:GetDefense()
 end
-function Bigbang2.Level(e)
+function Timespace.Level(e)
 	local lv=e:GetHandler():GetOriginalLevel()
 	return lv
 end
-function Auxiliary.Bigbang2SummonSubstitute(c,cd,tp)
+function Auxiliary.TimespaceSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(52401238,tp) and c:IsAbleToGraveAsCost()
 end
