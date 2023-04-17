@@ -71,7 +71,7 @@ function Bigbang.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	--c:RegisterEffect(e10)
 	--scale
 	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetTypeEFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e3:SetCode(EFFECT_REMOVE_TYPE)
 	e3:SetRange(LOCATION_EXTRA)
 	e3:SetValue(TYPE_SYNCHRO)
