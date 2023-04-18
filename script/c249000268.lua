@@ -25,7 +25,7 @@ end
 function c249000268.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
 	Duel.SetTargetPlayer(tp)
-	Duel.SetTargetParam(2)
+	Duel.SetTargetParam(5)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 end
 function c249000268.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -34,7 +34,7 @@ function c249000268.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ShuffleHand(p)
 	Duel.BreakEffect()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(p,Card.IsSetCard,p,LOCATION_HAND,0,1,1,nil,0x1CD)
+	local g=Duel.SelectMatchingCard(p,Card.IsType,p,LOCATION_HAND,0,1,1,nil,TYPE_MONSTER)
 	local tg=g:GetFirst()
 	if tg then
 		if 	Duel.SendtoGrave(tg,REASON_EFFECT+REASON_DISCARD)==0 then
