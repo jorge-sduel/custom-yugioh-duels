@@ -47,7 +47,7 @@ function c249000268.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c249000268.cfilter(c,tp)
-	return c:IsFaceup() and c:GetSummonPlayer()==tp and c:IsSetCard(0x1CE)
+	return c:IsFaceup() and c:GetSummonPlayer()==tp and c:IsLevel(4)
 end
 function c249000268.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c249000268.cfilter,1,nil,tp)
