@@ -310,6 +310,7 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_ADD_TYPE)
 	e3:SetValue(TYPE_MONSTER)
+	e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 	mg:RegisterEffect(e3)
 	c:SetTurnCounter(0)
 end
