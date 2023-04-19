@@ -298,7 +298,7 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
        mg:AddMonsterAttributeComplete()]]
 			local tc=mg:GetFirst()
 			for tc in aux.Next(mg) do
-				Duel.SpecialSummonStep(tc,0,tp,1-tp,false,false,POS_FACEUP_DEFENSE)
+				Duel.SpecialSummonStep(tc,0,tp,1-tp,true,false,POS_FACEUP_DEFENSE)
 				if not tc:IsMonster() then
 					local e1=Effect.CreateEffect(e:GetHandler())
 					e1:SetType(EFFECT_TYPE_SINGLE)
