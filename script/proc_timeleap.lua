@@ -305,13 +305,21 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCondition(Timeleap.spcon2)
 	e1:SetOperation(Timeleap.spop2)
 	c:RegisterEffect(e1)
-	--scale
+	local tc=e:GetHandler():GetMaterial()
+	local e3=Effect.CreateEffect(c)
+	e3:SetCode(EFFECT_ADD_TYPE)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e3:SetReset(RESET_EVENT+RESETS_STANDARD)
+	e3:SetValue(TYPE_MONSTER)
+	tc:RegisterEffect(e3)
+	--[[scale
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_ADD_TYPE)
 	e3:SetValue(TYPE_MONSTER)
 	e3:SetReset(RESET_EVENT+RESETS_STANDARD)
-	mg:RegisterEffect(e3)
+	mg:RegisterEffect(e3)]]
 	c:SetTurnCounter(0)
 end
 function Timeleap.spcon2(e,tp,eg,ep,ev,re,r,rp)
