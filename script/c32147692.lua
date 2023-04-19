@@ -34,7 +34,7 @@ function c32147692.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_TRIBUTE
 end
 function c32147692.filter(c)
-	return c:IsCode(15545291) or c:IsCode(23689697) or c:IsCode(69230391) or c:IsCode(69327790) or c:IsCode(87288189) or c:IsCode(87602890) and c:IsAbleToHand()
+	return  c:IsLevel(8) and c:IsAttack(2800) and c:IsDefense(1000) and c:IsAbleToHand()
 end
 function c32147692.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c32147692.filter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil) end
