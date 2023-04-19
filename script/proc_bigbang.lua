@@ -80,6 +80,9 @@ end
 function Card.IsBigbang(c)
 	return c.IsBigbang
 end
+function Card.IsLocBigbang(c)
+	return c:IsFaceup() or c:IsLocation(LOCATION_HAND)
+end
 function Bigbang.ConditionFilter(c,f,lc,tp)
 	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
 end
@@ -157,7 +160,7 @@ function Bigbang.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+					g=Duel.GetMatchingGroup(Card.IsLocBigbang,tp,loc,loc2,nil)
 g:Merge(Duel.GetMatchingGroup(Auxiliary.BigbangSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				local mg=g:Filter(Bigbang.ConditionFilter,nil,f,c,tp)
@@ -189,7 +192,7 @@ function Bigbang.Target(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+					g=Duel.GetMatchingGroup(Card.IsLocBigbang,tp,loc,loc2,nil)
 g:Merge(Duel.GetMatchingGroup(Auxiliary.BigbangSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				if min and min < minc then return false end
@@ -366,7 +369,7 @@ function Auxiliary.BigbangCondition(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+					g=Duel.GetMatchingGroup(Card.IsLocBigbang,tp,loc,loc2,nil)
 g:Merge(Duel.GetMatchingGroup(Auxiliary.BigbangSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				local mg=g:Filter(Auxiliary.BigbangConditionFilter,nil,f,c,tp)
@@ -398,7 +401,7 @@ function Auxiliary.BigbangTarget(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,loc,loc2,nil)
+					g=Duel.GetMatchingGroup(Card.IsLocBigbang,tp,loc,loc2,nil)
 g:Merge(Duel.GetMatchingGroup(Auxiliary.BigbangSummonSubstitute,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,c:GetControler()))
 				end
 				if min and min < minc then return false end
