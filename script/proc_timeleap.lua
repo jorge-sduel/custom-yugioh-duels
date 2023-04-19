@@ -331,6 +331,7 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 	mg:RegisterEffect(e3)]]
 	c:SetTurnCounter(0)
+				end
 end
 function Timeleap.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
