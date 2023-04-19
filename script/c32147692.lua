@@ -31,7 +31,7 @@ function c32147692.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c32147692.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_ADVANCE
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_TRIBUTE
 end
 function c32147692.filter(c)
 	return c:IsCode(15545291) or c:IsCode(23689697) or c:IsCode(69230391) or c:IsCode(69327790) or c:IsCode(87288189) or c:IsCode(87602890) and c:IsAbleToHand()
