@@ -298,14 +298,7 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
        mg:AddMonsterAttributeComplete()]]
 			local tc=mg:GetFirst()
 			for tc in aux.Next(mg) do
-				Duel.SpecialSummonStep(tc,0,tp,tp,true,false,POS_FACEUP_DEFENSE)
-				if not tc:IsMonster() then
-					local e1=Effect.CreateEffect(e:GetHandler())
-					e1:SetType(EFFECT_TYPE_SINGLE)
-					e1:SetCode(EFFECT_UPDATE_LEVEL)
-					e1:SetValue(6)
-					e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-					tc:RegisterEffect(e1)
+				Duel.SpecialSummonStep(tc,0,tp,tp,true,false,POS_FACEUP)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetRange(LOCATION_REMOVED)
@@ -315,6 +308,7 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCondition(Timeleap.spcon2)
 	e2:SetOperation(Timeleap.spop2)
 	c:RegisterEffect(e2)
+				if not tc:IsMonster() then
 	--local tc=e:GetHandler():GetMaterial()
 	local e3=Effect.CreateEffect(c)
 	e3:SetCode(EFFECT_ADD_TYPE)
@@ -332,6 +326,7 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	mg:RegisterEffect(e3)]]
 	c:SetTurnCounter(0)
   end
+			Duel.SpecialSummonComplete()
  end
 end
 function Timeleap.spcon2(e,tp,eg,ep,ev,re,r,rp)
