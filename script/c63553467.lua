@@ -68,7 +68,15 @@ function c63553467.setop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,c63553467.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
---	end
+	if not g:GetFirst().IsEquilibrium then
+	else
+		--Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+Duel.Overlay(g:GetFirst(),e:GetHandler())
+		--if not tc:IsLocation(LOCATION_PZONE) then
+			--local edcheck=0
+			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
+		--end
+	end
 end
 --special summon
 function c63553467.spcon(e,tp,eg,ep,ev,re,r,rp)
