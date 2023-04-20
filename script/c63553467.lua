@@ -59,16 +59,16 @@ function c63553467.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsDiscardable() end
 	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
-function c63553467.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
+function c63553467.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp) and Duel.IsExistingMatchingCard(c63553470.actfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 end
-function c63553467.actop(e,tp,eg,ep,ev,re,r,rp)
+function c63553467.setop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,c63553467.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	end
+--	end
 end
 --special summon
 function c63553467.spcon(e,tp,eg,ep,ev,re,r,rp)
