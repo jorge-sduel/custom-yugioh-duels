@@ -13,14 +13,15 @@ function c63553467.initial_effect(c)
 	tuner:SetValue(TYPE_TUNER)
 	c:RegisterEffect(tuner)]]
 	--set
+	--activate from deck
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(63553467,0))
-	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_HAND)
+	e1:SetDescription(aux.Stringid(63553470,0))
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetCountLimit(1,63553467)
-	e1:SetCost(c63553467.setcost)
-	--e1:SetTarget(c63553467.settg)
-	e1:SetOperation(c63553467.setop)
+	e1:SetCondition(c63553467.actcon)
+	e1:SetTarget(c63553467.acttg)
+	e1:SetOperation(c63553467.actop)
 	c:RegisterEffect(e1)
 	--special summon
 	local e2=Effect.CreateEffect(c)
@@ -59,14 +60,14 @@ function c63553467.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsDiscardable() end
 	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
-function c63553467.settg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckPendulumZones(tp) and Duel.IsExistingMatchingCard(c63553467.setfilter,tp,LOCATION_DECK,0,1,nil,tp) end
+function c63553467.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckPendulumZones(tp) and Duel.IsExistingMatchingCard(c63553467.actfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 end
-function c63553467.setop(e,tp,eg,ep,ev,re,r,rp)
+function c63553467.actop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,c63553470.setfilter,tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c63553467.actfilter,tp,LOCATION_DECK,0,1,1,nil)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	local tc=Duel.CreateToken(tp,g:GetFirst():GetCode())
 	if not g:GetFirst().IsEquilibrium then
