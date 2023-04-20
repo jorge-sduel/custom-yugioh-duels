@@ -4,14 +4,14 @@ c63553467.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function c63553467.initial_effect(c)
 	Equilibrium.AddProcedure(c)
-	--tuner fix
+	--[[tuner fix
 	local tuner=Effect.CreateEffect(c)
 	tuner:SetType(EFFECT_TYPE_SINGLE)
 	tuner:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	tuner:SetCode(EFFECT_ADD_TYPE)
 	tuner:SetCondition(c63553467.tunerfix)
 	tuner:SetValue(TYPE_TUNER)
-	c:RegisterEffect(tuner)
+	c:RegisterEffect(tuner)]]
 	--set
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(63553467,0))
@@ -43,7 +43,7 @@ function c63553467.initial_effect(c)
 	c:RegisterEffect(e3)]]
 end
 --filters
-function c63553467.setfilter(c)
+function c63553467.setfilter(c,tp)
 	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function c63553467.spcheck(c)
