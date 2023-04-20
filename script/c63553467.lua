@@ -44,7 +44,7 @@ function c63553467.initial_effect(c)
 end
 --filters
 function c63553467.setfilter(c)
-	return c:IsType(TYPE_PENDULUM) or c.IsEquilibrium
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function c63553467.spcheck(c)
 	return c.IsEquilibrium and c:IsFaceup()
