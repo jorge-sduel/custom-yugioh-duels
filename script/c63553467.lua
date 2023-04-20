@@ -12,16 +12,15 @@ function c63553467.initial_effect(c)
 	tuner:SetCondition(c63553467.tunerfix)
 	tuner:SetValue(TYPE_TUNER)
 	c:RegisterEffect(tuner)]]
-	--set
-	--activate from deck
+	--pendulum set
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(63553470,0))
+	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetCountLimit(1,63553467)
-	e1:SetRange(LOCATION_HAND)
+	e1:SetRange(LOCATION_PZONE)
+	e1:SetCountLimit(1)
 	e1:SetCost(c63553467.setcost)
-	e1:SetTarget(c63553467.acttg)
-	e1:SetOperation(c63553467.actop)
+	e1:SetTarget(c63553467.pctg)
+	e1:SetOperation(c63553467.pcop)
 	c:RegisterEffect(e1)
 	--special summon
 	local e2=Effect.CreateEffect(c)
@@ -60,26 +59,20 @@ function c63553467.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return c:IsAbleToGraveAsCost() and c:IsDiscardable() end
 	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
-function c63553467.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckPendulumZones(tp) and Duel.IsExistingMatchingCard(c63553467.actfilter,tp,LOCATION_DECK,0,1,nil,tp) end
+function c63553467.pcfilter(c)
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
-function c63553467.actop(e,tp,eg,ep,ev,re,r,rp)
+function c63553467.pctg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckPendulumZones(tp)
+		and Duel.IsExistingMatchingCard(c63553467.pcfilter,tp,LOCATION_DECK,0,1,nil) end
+end
+function c63553467.pcop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,c63553467.actfilter,tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c63553467.pcfilter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-	local tc=Duel.CreateToken(tp,g:GetFirst():GetCode())
-	if not g:GetFirst().IsEquilibrium then
-	Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
-	else
-		--Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-	Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
-Duel.Overlay(g:GetFirst(),tc)
-		--if not tc:IsLocation(LOCATION_PZONE) then
-			--local edcheck=0
-			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
-		--end
 	end
 end
 --special summon
