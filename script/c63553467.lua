@@ -66,12 +66,15 @@ function c63553467.setop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,c63553467.setfilter,tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c63553470.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	local tc=Duel.CreateToken(tp,g:GetFirst():GetCode())
 	if not g:GetFirst().IsEquilibrium then
+	Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	else
 		--Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-Duel.Overlay(g:GetFirst(),e:GetHandler())
+	Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
+Duel.Overlay(g:GetFirst(),tc)
 		--if not tc:IsLocation(LOCATION_PZONE) then
 			--local edcheck=0
 			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
