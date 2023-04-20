@@ -14,7 +14,7 @@ function c63553467.initial_effect(c)
 	c:RegisterEffect(tuner)]]
 	--pendulum set
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetDescription(aux.Stringid(63553467,0))
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCountLimit(1)
