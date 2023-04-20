@@ -1,7 +1,9 @@
 --Proxima Synchron
 --Script by XGlitchy30
+c63553467.IsEquilibrium=true
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function c63553467.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	Equilibrium.AddProcedure(c)
 	--tuner fix
 	local tuner=Effect.CreateEffect(c)
 	tuner:SetType(EFFECT_TYPE_SINGLE)
@@ -10,7 +12,6 @@ function c63553467.initial_effect(c)
 	tuner:SetCondition(c63553467.tunerfix)
 	tuner:SetValue(TYPE_TUNER)
 	c:RegisterEffect(tuner)
-	aux.EnablePandemoniumAttribute(c,tuner,true,TYPE_EFFECT+TYPE_TUNER)
 	--set
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(63553467,0))
@@ -32,21 +33,21 @@ function c63553467.initial_effect(c)
 	e2:SetTarget(c63553467.sptg)
 	e2:SetOperation(c63553467.spop)
 	c:RegisterEffect(e2)
-	--quick activation
+	--[[quick activation
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_BE_MATERIAL)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_CANNOT_DISABLE)
 	e3:SetCondition(c63553467.synchrocon)
 	e3:SetOperation(c63553467.synchroop)
-	c:RegisterEffect(e3)
+	c:RegisterEffect(e3)]]
 end
 --filters
 function c63553467.setfilter(c)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM
+	return c:IsType(TYPE_PENDULUM) or c.IsEquilibrium
 end
 function c63553467.spcheck(c)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and c:IsFaceup()
+	return c.IsEquilibrium and c:IsFaceup()
 end
 --tuner fix
 function c63553467.tunerfix(e,tp,eg,ep,ev,re,r,rp)
@@ -60,16 +61,14 @@ function c63553467.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c63553467.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(c63553467.setfilter,nil,LOCATION_DECK)(nil,e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(c63553467.setfilter,tp,LOCATION_DECK,0,1,nil)
 	end
 end
 function c63553467.setop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or not aux.PandSSetCon(c63553467.setfilter,nil,LOCATION_DECK)(nil,e,tp,eg,ep,ev,re,r,rp) then return end
+	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.PandSSetFilter(c63553467.setfilter),tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c63553467.setfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
-		aux.PandSSet(g,REASON_EFFECT,aux.GetOriginalPandemoniumType(g:GetFirst()))(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
@@ -101,21 +100,3 @@ function c63553467.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 --quick_activate
-function c63553467.synchrocon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_SYNCHRO
-end
-function c63553467.synchroop(e,tp,eg,ep,ev,re,r,rp)
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
-	e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetRange(LOCATION_MZONE+LOCATION_DECK+LOCATION_GRAVE+LOCATION_REMOVED+LOCATION_HAND+LOCATION_SZONE+LOCATION_EXTRA)
-	e1:SetTargetRange(LOCATION_SZONE,0)
-	e1:SetTarget(c63553467.quickact)
-	e1:SetCountLimit(1,63553427)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	e:GetHandler():RegisterEffect(e1)
-end
-function c63553467.quickact(e,c)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM
-end
