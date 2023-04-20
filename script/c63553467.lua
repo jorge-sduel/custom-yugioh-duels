@@ -19,7 +19,7 @@ function c63553467.initial_effect(c)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCountLimit(1,63553467)
 	e1:SetCost(c63553467.setcost)
-	e1:SetTarget(c63553467.settg)
+	--e1:SetTarget(c63553467.settg)
 	e1:SetOperation(c63553467.setop)
 	c:RegisterEffect(e1)
 	--special summon
