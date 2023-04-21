@@ -64,13 +64,13 @@ function c63553467.pcfilter(c)
 end
 function c63553467.pctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp)
-		and Duel.IsExistingMatchingCard(c63553467.pcfilter,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil) end
+		and Duel.IsExistingMatchingCard(c63553467.pcfilter,tp,LOCATION_HAND,0,1,nil) end
 end
 function c63553467.pcop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,c63553467.pcfilter,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c63553467.pcfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if #g>0 then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
