@@ -82,7 +82,7 @@ Duel.Overlay(g:GetFirst(),e:GetHandler())
 		--if not tc:IsLocation(LOCATION_PZONE) then
 			--local edcheck=0
 			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
-		--end
+		end
 	end
 end
 --special summon
