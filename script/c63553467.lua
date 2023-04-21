@@ -19,7 +19,7 @@ function c63553467.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCountLimit(1)
-	e1:SetCost(c63553467.setcost)
+	--e1:SetCost(c63553467.setcost)
 	e1:SetTarget(c63553467.pctg)
 	e1:SetOperation(c63553467.pcop)
 	c:RegisterEffect(e1)
@@ -74,6 +74,15 @@ function c63553467.pcop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,c63553467.pcfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	if not g:GetFirst().IsEquilibrium then
+	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
+	else
+		--Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
+Duel.Overlay(g:GetFirst(),e:GetHandler())
+		--if not tc:IsLocation(LOCATION_PZONE) then
+			--local edcheck=0
+			--if g:IsLocation(LOCATION_EXTRA) then edcheck=TYPE_PENDULUM end
+		--end
 	end
 end
 --special summon
