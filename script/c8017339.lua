@@ -32,7 +32,7 @@ function cid.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(cid.spcost)
@@ -181,7 +181,8 @@ function cid.cfilter1(c,tp)
 	return c:IsSummonPlayer(tp) and c:IsSummonType(SUMMON_TYPE_EQUILIBRIUM)
 end
 function cid.spcon1(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(cid.cfilter1,1,nil,tp)
+	local tg=eg:GetFirst()
+	return #eg==1 and tg~=e:GetHandler() and tg:GetSummonType()==SUMMON_TYPE_EQUILIBRIUM
 end
 function cid.filter1(c,e,tp)
 	return c:IsType(TYPE_MONSTER) and c.IsEquilibrium and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
