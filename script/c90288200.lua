@@ -1,27 +1,19 @@
 --Pandemoniumgraph Berserker 
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local id,cid=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
 	--Negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_CHAINING)
-	e1:SetRange(LOCATION_SZONE)
+	e1:SetRange(LOCATION_PZONE)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e1:SetCondition(cid.condition)
+	e1:SetCost(cid.cost)
 	e1:SetTarget(cid.target)
 	e1:SetOperation(cid.operation)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
 	--set
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,1))
@@ -33,22 +25,24 @@ function cid.initial_effect(c)
 	e2:SetOperation(cid.setop)
 	c:RegisterEffect(e2)
 end
+function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
 function cid.setfilter(c)
-	return c:IsSetCard(0xcf80) and c:IsType(TYPE_PANDEMONIUM) and not c:IsCode(id)
+	return c:IsSetCard(0xcf80) and c.IsEquilibrium and not c:IsCode(id)
 end
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(cid.setfilter,nil,LOCATION_DECK)(nil,e,tp,eg,ep,ev,re,r,rp)
-		and Duel.IsExistingMatchingCard(cid.setfilter,tp,LOCATION_DECK,0,1,nil) 
-	end
+	if chk==0 then return Duel.CheckPendulumZones(tp)
+		and Duel.IsExistingMatchingCard(cid.setfilter,tp,LOCATION_DECK,0,1,nil) end
 end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 or not aux.PandSSetCon(cid.setfilter,nil,LOCATION_DECK)(nil,e,tp,eg,ep,ev,re,r,rp) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectMatchingCard(tp,aux.PandSSetFilter(cid.setfilter),tp,LOCATION_DECK,0,1,1,nil)
-	if g:GetCount()>0 then
-		aux.PandSSet(g,REASON_EFFECT,aux.GetOriginalPandemoniumType(g:GetFirst()))(e,tp,eg,ep,ev,re,r,rp)
-		Duel.ConfirmCards(1-tp,g)
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	if not Duel.CheckPendulumZones(tp) then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	local g=Duel.SelectMatchingCard(tp,cid.setfilter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then
+		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
 function cid.filter(c,tp)
@@ -57,23 +51,23 @@ end
 function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
-	return aux.PandActCheck(e) and g and g:IsExists(cid.filter,1,nil,tp)
+	return g and g:IsExists(cid.filter,1,nil,tp)
 		and Duel.IsChainNegatable(ev)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
-	if e:GetHandler():IsDestructable(e) and e:GetHandler():IsRelateToEffect(e) then
-		Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
-	end
+	--if e:GetHandler():IsRelateToEffect(e) then
+	--	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
+	--end
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) then return end
+	--if not e:GetHandler():IsRelateToEffect(e) then return end
 	if Duel.NegateActivation(ev) then
-		if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
+		if re:IsHasType(EFFECT_TYPE_ACTIVATE) then
 			Duel.SendtoGrave(eg,REASON_EFFECT)
 		end
 		Duel.BreakEffect()
-		Duel.Destroy(e:GetHandler(),REASON_EFFECT)
+		--Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 	end
 end
