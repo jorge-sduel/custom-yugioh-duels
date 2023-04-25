@@ -1,4 +1,4 @@
---Pandemoniumgraph Berserker 
+--Equilibriumgraph Berserker 
 local cid,id=GetID()
 cid.IsEquilibrium=true
 if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
