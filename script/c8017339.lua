@@ -129,7 +129,7 @@ end
 --SPSUMMON
 function cid.spfilter(c,e,tp)
 	return c:IsFaceup() and ((c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) 
-		or (c:GetFlagEffect(726)>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,false) and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),0,nil,c:GetTextAttack(),c:GetTextDefense(),c:GetOriginalLevel(),c:GetOriginalRace(),c:GetOriginalAttribute())))
+		or (c:GetFlagEffect(726)>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,false)))
 end
 -------------
 function cid.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
