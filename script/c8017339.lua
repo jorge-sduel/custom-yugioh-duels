@@ -139,13 +139,13 @@ function cid.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
 	e1:SetTargetRange(1,0)
---s.conditionsum)
+--cid.conditionsum)
 	e1:SetCondition(function (e,tp) return Duel.GetActivityCount(tp,ACTIVITY_SPSUMMON)>=1 end)
 	e1:SetTarget(s.splimit)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
-function s.conditionsum(e,tp,eg,ep,ev,re,r,rp,chk)
+function cid.conditionsum(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetActivityCount(tp,ACTIVITY_SUMMON)==1 and Duel.GetActivityCount(tp,ACTIVITY_FLIPSUMMON)==0
 		and Duel.GetActivityCount(tp,ACTIVITY_SPSUMMON)==1 end
 end
