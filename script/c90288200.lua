@@ -38,11 +38,14 @@ function cid.initial_effect(c)
 	e2:SetOperation(cid.setop)
 	c:RegisterEffect(e2)
 end
+function cid.filter(c)
+	return c:IsType(TYPE_PENDULUM)
+end
 function cid.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.desfilter(chkc) and chkc~=e:GetHandler() end
+	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.filter(chkc) and chkc~=e:GetHandler() end
 	if chk==0 then return Duel.IsExistingTarget(cid.filter,tp,LOCATION_PZONE,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,cid.desfilter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
+	local g=Duel.SelectTarget(tp,cid.filter,tp,LOCATION_PZONE,0,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -65,13 +68,13 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
-function cid.filter(c,tp)
+function cid.filter2(c,tp)
 	return c:IsControler(tp) and c:IsType(TYPE_MONSTER) and c:IsFaceup() and c:IsSetCard(0xcf80)
 end
 function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
-	return g and g:IsExists(cid.filter,1,nil,tp)
+	return g and g:IsExists(cid.filter2,1,nil,tp)
 		and Duel.IsChainNegatable(ev)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
