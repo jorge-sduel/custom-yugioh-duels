@@ -141,7 +141,7 @@ function cid.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetTargetRange(1,0)
 --cid.conditionsum)
 	e1:SetCondition(function (e,tp) return Duel.GetActivityCount(tp,ACTIVITY_SPSUMMON)>=1 end)
-	e1:SetTarget(s.splimit)
+	e1:SetTarget(cid.splimit)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
