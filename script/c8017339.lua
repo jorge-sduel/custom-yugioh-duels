@@ -184,7 +184,7 @@ function cid.spcon1(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(cid.cfilter1,1,nil,tp)
 end
 function cid.filter1(c,e,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_MONSTER) and c.IsEquilibrium and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cid.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
