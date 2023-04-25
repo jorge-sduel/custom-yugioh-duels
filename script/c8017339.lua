@@ -155,7 +155,7 @@ function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local ct=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if Duel.IsPlayerAffectedByEffect(tp,59822133) then ct=1 end
-	local gct=Duel.GetMatchingGroupCount(s.spfilter,tp,LOCATION_PZONE,0,nil,e,tp)
+	local gct=Duel.GetMatchingGroupCount(cid.spfilter,tp,LOCATION_PZONE,0,nil,e,tp)
 	if ct>gct then
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,gct,tp,LOCATION_PZONE)
 	else
