@@ -127,8 +127,8 @@ function cid.limfilter(c)
 end
 -------------
 --SPSUMMON
-function cid.spfilter(c,e,tp)
-	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+function cid.spfilter(c,e,sp)
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,sp,true,false)
 end
 -------------
 function cid.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -155,7 +155,7 @@ function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local ct=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if Duel.IsPlayerAffectedByEffect(tp,59822133) then ct=1 end
-	local gct=Duel.GetMatchingGroup(cid.spfilter,tp,LOCATION_PZONE,0,nil,e,tp)
+	local gct=Duel.GetMatchingGroupCount(cid.spfilter,tp,LOCATION_PZONE,0,nil,e,tp)
 	if ct>gct then
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,gct,tp,LOCATION_PZONE)
 	else
