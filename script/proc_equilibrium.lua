@@ -52,11 +52,27 @@ function(c,reg,desc)
 		e3:SetValue(TYPE_TRAP)
 		e3:SetRange(LOCATION_PZONE)
 		c:RegisterEffect(e3)
-		local e4=Effect.CreateEffect(c)
-		e4:SetType(EFFECT_REMOVE_TYPE)
-		e4:SetValue(TYPE_PENDULUM)
-		e4:SetRange(LOCATION_PZONE)
-		c:RegisterEffect(e4)
+	--level up
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCode(EFFECT_UPDATE_LEVEL)
+	e4:SetValue(Equilibrium.oval)
+	c:RegisterEffect(e4)
+	--level up
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCode(EFFECT_UPDATE_LEVEL)
+	e5:SetValue(Equilibrium.oval2)
+	c:RegisterEffect(e5) 
+		local e6=Effect.CreateEffect(c)
+		e6:SetType(EFFECT_REMOVE_TYPE)
+		e6:SetValue(TYPE_PENDULUM)
+		e6:SetRange(LOCATION_PZONE)
+		c:RegisterEffect(e6)
 	end
 end,"handler","register","desc")
 function Equilibrium.Filter(c,e,tp,lscale,rscale,lvchk)
@@ -201,4 +217,10 @@ Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
 function Equilibrium.desfilter(c)
 	return c:IsType(TYPE_PENDULUM)
+end
+function Equilibrium.oval(e,c)
+	return c:GetOverlayCount()
+end
+function Equilibrium.oval2(e,c)
+	return c:GetOverlayCount()*100
 end
