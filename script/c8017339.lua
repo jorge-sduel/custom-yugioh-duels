@@ -187,7 +187,7 @@ function cid.cfilter1(c,tp)
 end
 function cid.spcon1(e,tp,eg,ep,ev,re,r,rp)
 	local tg=eg:GetFirst()
-	return #eg==1 and tg~=e:GetHandler() and tg:GetSummonType()==SUMMON_TYPE_EQUILIBRIUM
+	return #eg==1 and tg~=e:GetHandler() and tg:IsSummonType(SUMMON_TYPE_EQUILIBRIUM)
 end
 function cid.filter1(c,e,tp)
 	return c:IsType(TYPE_MONSTER) and c.IsEquilibrium and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
