@@ -21,7 +21,7 @@ function cid.initial_effect(c)
 	p2:SetCode(EFFECT_IMMUNE_EFFECT)
 	p2:SetRange(LOCATION_PZONE)
 	p2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	p2:SetTarget(function(e,c) return c:IsSummonType(SUMMON_TYPE_EQUILIBRIUM) and c:IsStatus(STATUS_SPSUMMON_TURN) end)
+	p2:SetTarget(function(e,c) return c:IsSummonType(SUMMON_TYPE_EQUILIBRIUM) end)
 	p2:SetValue(function(e,te) return te:GetOwnerPlayer()~=e:GetHandlerPlayer() end)
 	c:RegisterEffect(p2)
 	--End the Battle Phase
