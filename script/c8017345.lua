@@ -93,7 +93,7 @@ end
 function cid.bpop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(1-tp,Duel.GetLP(1-tp)/2)
 end
-function cid.bpop(e,tp,eg,ep,ev,re,r,rp)
+function cid.bpop3(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLp(Duel.GetTurnPlayer(),PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)
 end
 function cid.actcost(e,tp,eg,ep,ev,re,r,rp,chk)
