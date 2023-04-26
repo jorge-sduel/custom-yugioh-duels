@@ -82,7 +82,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 --GENERIC FILTERS
 function cid.counterfilter(c)
-	return c:GetSummonLocation()~=LOCATION_EXTRA
+	return not c:IsSummonLocation(LOCATION_EXTRA)
 end
 function cid.destarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_PZONE) and cid.desfilter(chkc) and chkc~=e:GetHandler() end
