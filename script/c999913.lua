@@ -16,7 +16,7 @@ function c999913.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c999913.costfilter(c)
-	return c:IsSetCard(0x344) and c:IsAbleToDeckAsCost()
+	return c:IsRed() and c:IsAbleToDeckAsCost()
 end
 function c999913.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c999913.costfilter,tp,LOCATION_GRAVE,0,1,nil) end
