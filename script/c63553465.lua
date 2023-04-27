@@ -91,7 +91,7 @@ end
 function c63553465.fdop(e,tp,eg,ep,ev,re,r,rp)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local ft2=Duel.CheckPendulumZones(tp)
-	if ft1<=0 and ft2<=0 then return end
+	if ft1<=0 and not ft2<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(22499034,3))
 	local g=Duel.SelectMatchingCard(tp,c63553465.fdfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 	local tc=g:GetFirst()
