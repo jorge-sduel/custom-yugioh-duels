@@ -98,7 +98,7 @@ function c63553465.fdop(e,tp,eg,ep,ev,re,r,rp)
 	if tc then
 		local b1=tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		local b2=tc:IsForbidden()
-		if (b1 and ft1>0) and (not b2 or ft2<=0 or Duel.SelectYesNo(tp,aux.Stringid(63553465,2))) then
+		if (b1 and ft1>0) and (not b2 or ft2<=0) and Duel.SelectYesNo(tp,aux.Stringid(63553465,2)) then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 		else
 			--tc:SetCardData(CARDDATA_TYPE,TYPE_TRAP+TYPE_CONTINUOUS)
