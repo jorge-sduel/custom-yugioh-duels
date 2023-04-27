@@ -62,7 +62,7 @@ function c405106.initial_effect(c)
 	e7:SetCode(EFFECT_CANNOT_DISABLE)
 	e7:SetRange(LOCATION_MZONE)
 	e7:SetTargetRange(LOCATION_ONFIELD,0)
-	e7:SetTarget(s.distarget)
+	e7:SetTarget(c405106.distarget)
 	c:RegisterEffect(e7)
 end
 function c405106.mfilter(c)
