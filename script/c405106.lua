@@ -55,7 +55,7 @@ function c405106.initial_effect(c)
 	e6:SetType(EFFECT_TYPE_FIELD)
 	e6:SetCode(EFFECT_CANNOT_DISEFFECT)
 	e6:SetRange(LOCATION_MZONE)
-	e6:SetValue(s.chainfilter)
+	e6:SetValue(c405106.chainfilter)
 	c:RegisterEffect(e6)
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_FIELD)
@@ -138,11 +138,11 @@ function c405106.operation2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateSummon(g)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 end
-function s.chainfilter(e,ct)
+function c405106.chainfilter(e,ct)
 	local p=e:GetHandlerPlayer()
 	local te,tp=Duel.GetChainInfo(ct,CHAININFO_TRIGGERING_EFFECT,CHAININFO_TRIGGERING_PLAYER)
 	return p==tp and te:GetActiveType()==TYPE_MONSTER
 end
-function s.distarget(e,c)
+function c405106.distarget(e,c)
 	return c:IsType(TYPE_MONSTER) and (tc:IsSetCard(0x55) or tc:IsSetCard(0x7b))
 end
