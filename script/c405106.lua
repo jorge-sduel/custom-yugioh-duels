@@ -144,5 +144,5 @@ function c405106.chainfilter(e,ct)
 	return p==tp and te:GetActiveType()==TYPE_MONSTER
 end
 function c405106.distarget(e,c)
-	return c:IsType(TYPE_MONSTER) and (tc:IsSetCard(0x55) or tc:IsSetCard(0x7b))
+	return c:IsType(TYPE_MONSTER) and (c:IsSetCard(0x55) or c:IsSetCard(0x7b))
 end
