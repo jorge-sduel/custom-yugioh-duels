@@ -43,7 +43,7 @@ function c63553465.thcfilter(c,lg)
 	return lg:IsContains(c)
 end
 function c63553465.fdfilter(c,e,tp)
-	return  c.IsEquilibrium and (c:IsCanBeSpecialSummoned(e,0,tp,false,false) or c:GetActivateEffect():IsActivatable(tp))
+	return  c.IsEquilibrium and (c:IsCanBeSpecialSummoned(e,0,tp,false,false) or not c:IsForbidden())
 end
 function c63553465.excfilter(c)
 	return  c.IsEquilibrium and c:IsFaceup()
