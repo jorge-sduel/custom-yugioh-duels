@@ -308,6 +308,8 @@ function Timeleap.spop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCondition(Timeleap.spcon2)
 	e2:SetOperation(Timeleap.spop2)
 	c:RegisterEffect(e2)
+	c:SetTurnCounter(0)
+			Duel.SpecialSummonComplete()
 				if not tc:IsMonster() then
 	--local tc=e:GetHandler():GetMaterial()
 	local e3=Effect.CreateEffect(c)
