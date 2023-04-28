@@ -36,10 +36,10 @@ end
 function c63553465.spcostfilter(c,tp,e)
 	return c:IsFaceup() and  c.IsEquilibrium
 end
-function c63553465.spfilter(c,lv,attr)
-	local clv=c:GetLevel()
-	local attr=c:GetAttribute()
-	return clv>0 and c.IsEquilibrium
+function c63553465.spfilter(c)
+	--local clv=c:GetLevel()
+	--local attr=c:GetAttribute()
+	return c.IsEquilibrium
 end
 function c63553465.thcfilter(c,lg)
 	return lg:IsContains(c)
@@ -72,12 +72,12 @@ end
 function c63553465.spop(e,tp,eg,ep,ev,re,r,rp)
 	--local lv=c63553465.check_same_level
 	--local attr=c63553465.check_other_race
-	local c=e:GetHandler()
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,c63553465.spcostfilter,tp,LOCATION_MZONE,0,1,1,nil,tp,e):GetFirst()
 	local lv=g1:GetFirst():GetLevel()
 	local attr=g1:GetAttribute()
+	local c=e:GetHandler()
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g2=Duel.SelectMatchingCard(tp,c63553465.spfilter,tp,LOCATION_DECK,0,1,1,nil,lv,attr,e,tp)
 	if g1:GetCount()>0 and g2:GetCount()>0 then
 		Duel.Destroy(g1,REASON_COST)
