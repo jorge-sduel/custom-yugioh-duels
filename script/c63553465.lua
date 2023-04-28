@@ -80,7 +80,7 @@ function c63553465.spop(e,tp,eg,ep,ev,re,r,rp)
 	local attr=g1:GetAttribute()
 	local g2=Duel.SelectMatchingCard(tp,c63553465.spfilter,tp,LOCATION_DECK,0,1,1,nil,lv,attr,e,tp)
 	if g1:GetCount()>0 and g2:GetCount()>0 then
-		Duel.Destroy(g,REASON_COST)
+		Duel.Destroy(g1,REASON_COST)
 		Duel.SpecialSummon(g2:GetFirst(),0,tp,tp,false,false,POS_FACEUP)
 	end
 end
