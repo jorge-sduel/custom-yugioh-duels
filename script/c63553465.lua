@@ -73,7 +73,7 @@ function c63553465.spop(e,tp,eg,ep,ev,re,r,rp)
 	--local lv=c63553465.check_same_level
 	--local attr=c63553465.check_other_race
 	local g1=Duel.SelectMatchingCard(tp,c63553465.spcostfilter,tp,LOCATION_MZONE,0,1,1,nil,tp,e):GetFirst()
-	local lv=g1:GetFirst():GetLevel()
+	local lv=g1:GetLevel()
 	local attr=g1:GetAttribute()
 	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
