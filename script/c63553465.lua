@@ -39,7 +39,7 @@ end
 function c63553465.spfilter(c,lv,attr)
 	--local clv=c:GetLevel()
 	--local attr=c:GetAttribute()
-	return c.IsEquilibrium and c:IsLevel(lv) and c:IsAttribute(attr)
+	return c.IsEquilibrium and c:IsLevelBelow(lv) and not c:IsRace(attr)
 end
 function c63553465.thcfilter(c,lg)
 	return lg:IsContains(c)
@@ -74,7 +74,7 @@ function c63553465.spop(e,tp,eg,ep,ev,re,r,rp)
 	--local attr=c63553465.check_other_race
 	local g1=Duel.SelectMatchingCard(tp,c63553465.spcostfilter,tp,LOCATION_MZONE,0,1,1,nil,tp,e):GetFirst()
 	local lv=g1:GetLevel()
-	local attr=g1:GetAttribute()
+	local attr=g1:GetRace()
 	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
