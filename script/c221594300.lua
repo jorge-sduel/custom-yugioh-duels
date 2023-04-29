@@ -101,7 +101,7 @@ function cid.sfilter1(c,e,tp)
 	local rg=Duel.GetMatchingGroup(cid.sfilter2,tp,LOCATION_HAND+LOCATION_GRAVE,0,nil)
 	aux.GCheckAdditional=function(g) return g:GetSum(Card.GetLevel)<=lv end
 	local res=c:IsType(TYPE_SYNCHRO) and lv>0 and c:IsSetCard(0xc97) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false)
-		and rg:CheckWithSumEqual(Card.GetLevel,lv,#rg,#rg)
+		and rg:CheckWithSumEqual(Card.GetLevel,lv,1,99)
 	aux.GCheckAdditional=nil
 	return res
 end
