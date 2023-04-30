@@ -76,7 +76,7 @@ function cid.disfilter(c)
 	return c:GetSummonLocation()==LOCATION_EXTRA
 end
 function cid.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return tp~=ep and Duel.GetCurrentChain()==0 and eg:IsExists(cid.disfilter,1,nil)
+	return tp~=ep and eg:IsExists(cid.disfilter,1,nil)
 end
 function cid.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
