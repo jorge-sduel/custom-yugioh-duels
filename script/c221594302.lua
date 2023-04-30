@@ -72,10 +72,11 @@ function cid.rtop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
 end
+function cid.disfilter(c)
+	return c:GetSummonLocation()==LOCATION_EXTRA
+end
 function cid.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	local tc=eg:GetFirst()
-	return not Duel.IsExistingMatchingCard(aux.FilterEqualFunction(Card.GetSummonLocation,LOCATION_EXTRA),tp,LOCATION_MZONE,0,1,nil)
-		and tp~=ep and Duel.GetCurrentChain()==0 and #eg==1 and tc:GetSummonLocation()==LOCATION_EXTRA
+	return tp~=ep and Duel.GetCurrentChain()==0 and eg:IsExists(cid.disfilter,1,nil)
 end
 function cid.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
