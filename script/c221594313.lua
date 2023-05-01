@@ -77,5 +77,5 @@ function cid.rev(e,re,dam,r,rp,rc)
 	local _,_,rec=coroutine.resume(co,e:GetHandlerPlayer(),dam,REASON_EFFECT),coroutine.resume(co)
 	Duel.DisableActionCheck(false)
 	return rec>0 and 0 or dam]]
-Duel.Recover(ec,e:GetHandlerPlayer(),REASON_EFFECT)
+Duel.Recover(e:GetHandlerPlayer(),dam,REASON_EFFECT)
 end
