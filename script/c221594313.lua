@@ -72,9 +72,10 @@ function cid.rev(e,re,dam,r,rp,rc)
 	local ec=e:GetHandler():GetEquipTarget()
 	if r&REASON_BATTLE==0 or not ec
 		or not (Duel.GetAttacker()==ec or Duel.GetAttackTarget()==ec) then return dam end
-	local co=coroutine.create(Duel.Recover)
+	--[[local co=coroutine.create(Duel.Recover)
 	Duel.DisableActionCheck(true)
 	local _,_,rec=coroutine.resume(co,e:GetHandlerPlayer(),dam,REASON_EFFECT),coroutine.resume(co)
 	Duel.DisableActionCheck(false)
-	return rec>0 and 0 or dam
+	return rec>0 and 0 or dam]]
+Duel.Recover(ec,e:GetHandlerPlayer(),REASON_EFFECT)
 end
