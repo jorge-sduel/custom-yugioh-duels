@@ -21,11 +21,11 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cid.cfilter(c,tp)
-	return c:GetSummonPlayer()==tp and (c:IsPreviousLocation(LOCATION_EXTRA) or c:GetSummonLocation()==LOCATION_EXTRA)
+	return c:GetSummonLocation()==LOCATION_EXTRA
 end
 function cid.con(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(cid.cfilter,1,nil,1-tp) and not Duel.IsExistingMatchingCard(aux.AND(cid.cfilter,aux.FilterBoolFunction(Card.IsSetCard,0xc97)),tp,LOCATION_MZONE,0,1,nil,tp)
-		and #(Duel.GetFieldGroup(tp,LOCATION_ONFIELD,0)-e:GetHandler())>0 and not Duel.IsExistingMatchingCard(aux.OR(Card.IsFacedown,Card.IsSetCard),tp,LOCATION_ONFIELD,0,1,c,0xc97)
+	return eg:IsExists(cid.cfilter,1,nil) and not Duel.IsExistingMatchingCard(aux.AND(cid.cfilter,aux.FilterBoolFunction(Card.IsSetCard,0xc97)),tp,LOCATION_MZONE,0,1,nil,tp)
+		--and #(Duel.GetFieldGroup(tp,LOCATION_ONFIELD,0)-e:GetHandler())>0 and not Duel.IsExistingMatchingCard(aux.OR(Card.IsFacedown,Card.IsSetCard),tp,LOCATION_ONFIELD,0,1,c,0xc97)
 end
 function cid.filter(c,e)
 	return aux.disfilter1(c) and c:IsRelateToEffect(e)
