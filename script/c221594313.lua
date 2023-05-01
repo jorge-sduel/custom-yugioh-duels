@@ -41,7 +41,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e6)
 	--damage double
 	local e7=Effect.CreateEffect(c)
-	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e7:SetRange(LOCATION_SZONE)
 	e7:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e7:SetCondition(cid.damcon)
@@ -92,7 +92,8 @@ function cid.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function cid.dop(e,tp,eg,ep,ev,re,r,rp)
+	local dam=Duel.GetBattleDamage(1-tp)
 	Duel.ChangeBattleDamage(1-tp,0)
-	Duel.Recover(tp,Duel.GetBattleDamage(1-tp),REASON_EFFECT)
+	Duel.Recover(tp,dam,REASON_EFFECT)
 
 end
