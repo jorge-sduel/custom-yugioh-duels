@@ -39,7 +39,7 @@ function cid.initial_effect(c)
 	e5:SetTarget(cid.target)
 	e5:SetOperation(cid.operation)
 	c:RegisterEffect(e5)
---
+--[[
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD)
 	e6:SetCode(EFFECT_SET_ATTACK)
@@ -55,7 +55,7 @@ function cid.initial_effect(c)
 	e7:SetTargetRange(LOCATION_HAND+LOCATION_MZONE,0)
 	e7:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_MONSTER))
 	e7:SetValue(1000)
-	c:RegisterEffect(e7)
+	c:RegisterEffect(e7)]]
 end
 function cid.rmtarget(e,c)
 	return not c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0xc97)
