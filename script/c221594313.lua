@@ -1,7 +1,7 @@
 --created by Walrus, coded by Lyris
 local cid,id=GetID()
 function cid.initial_effect(c)
-	c:SetUniqueOnField(c,1,0,id)
+	c:SetUniqueOnField(c,1,0,cid)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_EQUIP)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
