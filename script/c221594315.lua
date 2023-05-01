@@ -28,7 +28,7 @@ function cid.con(e,tp,eg,ep,ev,re,r,rp)
 		--and #(Duel.GetFieldGroup(tp,LOCATION_ONFIELD,0)-e:GetHandler())>0 and not Duel.IsExistingMatchingCard(aux.OR(Card.IsFacedown,Card.IsSetCard),tp,LOCATION_ONFIELD,0,1,c,0xc97)
 end
 function cid.filter(c,e)
-	return aux.disfilter1(c) and c:IsRelateToEffect(e)
+	return Card.IsNegatableMonster(c) and c:IsRelateToEffect(e)
 end
 function cid.rfilter(c)
 	return c:IsSetCard(0xc97) and c:IsAbleToRemove()
