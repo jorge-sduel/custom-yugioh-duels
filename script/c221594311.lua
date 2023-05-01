@@ -39,6 +39,7 @@ function cid.initial_effect(c)
 	e5:SetTarget(cid.target)
 	e5:SetOperation(cid.operation)
 	c:RegisterEffect(e5)
+--
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD)
 	e6:SetCode(EFFECT_UPDATE_ATTACK)
