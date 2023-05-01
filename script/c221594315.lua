@@ -36,7 +36,7 @@ end
 function cid.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local g=eg:Filter(cid.cfilter,nil,1-tp)
-	if chk==0 then return g:IsExists(aux.disfilter1,1,nil) and Duel.IsExistingMatchingCard(cid.rfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,2,nil) end
+	if chk==0 then return g:IsExists(Card.IsNegatableMonster,1,nil) and Duel.IsExistingMatchingCard(cid.rfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,2,nil) end
 	Duel.SetTargetCard(g)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,2,tp,LOCATION_HAND+LOCATION_GRAVE)
 end
