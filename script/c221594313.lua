@@ -42,9 +42,10 @@ function cid.initial_effect(c)
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_FIELD)
 	e7:SetRange(LOCATION_SZONE)
-	e7:SetCode(EFFECT_CHANGE_DAMAGE)
-	e7:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e7:SetTargetRange(0,1)
+	e7:SetCode(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+	--e7:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	--e7:SetTargetRange(0,1)
+	e7:SetCondition(cid.atkcon)
 	e7:SetValue(cid.rev)
 	c:RegisterEffect(e7)
 end
@@ -68,14 +69,18 @@ end
 function cid.atktg(e,c)
 	return c~=e:GetHandler():GetEquipTarget()
 end
-function cid.rev(e,re,dam,r,rp,rc)
-	local ec=e:GetHandler():GetEquipTarget()
-	if r&REASON_BATTLE==0 or not ec
-		or not (Duel.GetAttacker()==ec or Duel.GetAttackTarget()==ec) then return dam end
-	--[[local co=coroutine.create(Duel.Recover)
-	Duel.DisableActionCheck(true)
-	local _,_,rec=coroutine.resume(co,e:GetHandlerPlayer(),dam,REASON_EFFECT),coroutine.resume(co)
-	Duel.DisableActionCheck(false)
-	return rec>0 and 0 or dam]]
-Duel.Recover(e:GetHandlerPlayer(),dam,REASON_EFFECT)
+function cid.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local eq=c:GetEquipTarget()
+	local a=Duel.GetAttacker()
+	local d=Duel.GetAttackTarget()
+	if not d then return false end
+	return ep~=tp and (eq==Duel.GetAttacker() or eq==Duel.GetAttackTarget())
+end
+function cid.rev(e,tp,eg,ep,ev,re,r,rp)
+	local dam=ev
+	Duel.ChangeBattleDamage(ep,0)
+	if dam>0 then
+		Duel.Recover(tp,dam,REASON_EFFECT)
+	end
 end
