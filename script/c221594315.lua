@@ -41,7 +41,7 @@ function cid.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,2,tp,LOCATION_HAND+LOCATION_GRAVE)
 end
 function cid.op(e,tp,eg,ep,ev,re,r,rp)
-	if #(Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0))==0 or not Duel.IsExistingMatchingCard(aux.OR(Card.IsFacedown,Card.IsSetCard),tp,LOCATION_ONFIELD,0,1,c,0xc97) then return end
+	--if #(Duel.GetFieldGroupCount(tp,LOCATION_ONFIELD,0))==0 or not Duel.IsExistingMatchingCard(aux.OR(Card.IsFacedown,Card.IsSetCard),tp,LOCATION_ONFIELD,0,1,c,0xc97) then return end
 	local ct=0
 	local g=eg:Filter(cid.cfilter,nil,1-tp):Filter(cid.filter,nil,e)
 	for tc in aux.Next(g) do
