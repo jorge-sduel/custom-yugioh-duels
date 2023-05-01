@@ -39,14 +39,13 @@ function cid.initial_effect(c)
 	e6:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 	e6:SetValue(1)
 	c:RegisterEffect(e6)
+	--damage double
 	local e7=Effect.CreateEffect(c)
-	e7:SetType(EFFECT_TYPE_EQUIP)
+	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e7:SetRange(LOCATION_SZONE)
-	e7:SetCode(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	--e7:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	--e7:SetTargetRange(0,1)
-	--e7:SetCondition(cid.atkcon)
-	e7:SetValue(cid.rev)
+	e7:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
+	e7:SetCondition(cid.damcon)
+	e7:SetOperation(cid.damop)
 	c:RegisterEffect(e7)
 end
 function cid.eqlimit(e,c)
@@ -69,18 +68,31 @@ end
 function cid.atktg(e,c)
 	return c~=e:GetHandler():GetEquipTarget()
 end
-function cid.atkcon(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local eq=c:GetEquipTarget()
-	local a=Duel.GetAttacker()
-	local d=Duel.GetAttackTarget()
-	if not d then return false end
-	return ep~=tp and (eq==Duel.GetAttacker() or eq==Duel.GetAttackTarget())
-end
-function cid.rev(e,tp,eg,ep,ev,re,r,rp)
-	local dam=ev
-	Duel.ChangeBattleDamage(ep,0)
-	if dam>0 then
-		Duel.Recover(tp,dam,REASON_EFFECT)
+function cid.damcon(e,tp,eg,ep,ev,re,r,rp)
+	local tc=e:GetHandler():GetEquipTarget()
+	local bc=tc:GetBattleTarget()
+	if not bc or Duel.GetBattleDamage(1-tp)<=0 then return false end
+	if bc:IsHasEffect(EFFECT_INDESTRUCTABLE_BATTLE) then
+		local tcind={bc:GetCardEffect(EFFECT_INDESTRUCTABLE_BATTLE)}
+		for i,te in ipairs(tcind) do
+			local f=te:GetValue()
+			if type(f)=='function' then
+				if f(te,tc) then return false end
+			else return false end
+		end
 	end
+	return true
+end
+function cid.damop(e,tp,eg,ep,ev,re,r,rp)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	e1:SetOperation(cid.dop)
+	e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
+	Duel.RegisterEffect(e1,tp)
+end
+function cid.dop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.ChangeBattleDamage(1-tp,0)
+	Duel.Recover(tp,Duel.GetBattleDamage(1-tp),REASON_EFFECT)
+
 end
