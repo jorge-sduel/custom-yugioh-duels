@@ -1,7 +1,7 @@
 --created by Walrus, coded by Lyris
 local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.CannotBeEDMaterial(c,nil,LOCATION_MZONE)
+	--aux.CannotBeEDMaterial(c,nil,LOCATION_MZONE)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
