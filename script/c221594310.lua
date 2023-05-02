@@ -2,7 +2,7 @@
 local cid,id=GetID()
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.CannotBeEDMaterial(c,nil,LOCATION_ONFIELD)
+	--aux.CannotBeEDMaterial(c,nil,LOCATION_ONFIELD)
 	c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsSetCard,0x9c97))
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
