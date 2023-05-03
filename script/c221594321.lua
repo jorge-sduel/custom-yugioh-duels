@@ -1,7 +1,7 @@
 --created by Walrus, coded by Lyris
 local cid,id=GetID()
 function cid.initial_effect(c)
-	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_GREATER,extrafil=cid.extrafil,extraop=cid.extraop,matfilter=cid.forcedgroup})
+	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_GREATER,extraop=cid.extraop,matfilter=cid.forcedgroup})
 --
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
