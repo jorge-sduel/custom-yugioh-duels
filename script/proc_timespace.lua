@@ -288,3 +288,34 @@ end
 function Auxiliary.TimespaceSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(52401238,tp) and c:IsAbleToGraveAsCost()
 end
+ion Auxiliary.AddConvergentTSSummonProcedure(c,f,min,max,specialchk,desc)
+--AddConvergentEvolSummonProcedure(c,code,loc,excon)
+	--[[special summon
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e1:SetRange(LOCATION_EXTRA)
+    e1:SetValue(SUMMON_TYPE_TIMESPACE)
+	e1:SetCondition(Auxiliary.ConvergentTSSummonCondition(code,loc,excon))
+	e1:SetTarget(Auxiliary.ConvergentTSSummonTarget(code,loc))
+	e1:SetOperation(Auxiliary.ConvergentTSSummonOperation(code,loc))
+	c:RegisterEffect(e1)]] 
+--
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	if desc then
+		e1:SetDescription(desc)
+	else
+		e1:SetDescription(1174)
+	end
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e1:SetRange(LOCATION_EXTRA)
+	if max==nil then max=min end
+	e1:SetCondition(Auxiliary.CTSCondition(f,min,max,specialchk))
+	e1:SetTarget(Auxiliary.CTSTarget(f,min,max,specialchk))
+	e1:SetOperation(Auxiliary.CTSOperation(f,min,max,specialchk))
+	e1:SetValue(SUMMON_TYPE_TIMESPACE)
+	c:RegisterEffect(e1)
+end
