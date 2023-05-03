@@ -3,6 +3,7 @@ local cid,id=GetID()
 cid.IsSpacet=true
 if not TIMESPACE_IMPORTED then Duel.LoadScript("proc_timespace.lua") end
 function cid.initial_effect(c)
+	aux.AddConvergentTSSummonProcedure(c,cid.lcheck,1,1)
 c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
 	--.AddProcedure(c,cid.excon2,LOCATION_MZONE)
