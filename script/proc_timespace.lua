@@ -320,7 +320,7 @@ function Auxiliary.AddConvergentTSSummonProcedure(c,f,min,max,specialchk,desc)
 	c:RegisterEffect(e1)
 end
 function Auxiliary.CTSConditionFilter(c,f,lc,tp)
-	return (not f or f(c,lc,SUMMON_TYPE_EVOLUTE,tp))
+	return (not f or f(c,lc,SUMMON_TYPE_TIMESPACE,tp))
 end
 function Auxiliary.CTSGetCount(c)
 	if c:IsLinkMonster() and c:GetLink()>1 then
@@ -388,7 +388,7 @@ function Auxiliary.CTSCheckGoal(tp,sg,lc,minc,f,specialchk,filt)
 	end
 	return 
 --#sg>=minc and sg:CheckWithSumEqual(Auxiliary.CTSGetCount,4,#sg,#sg) and 
-(not specialchk or specialchk(sg,lc,SUMMON_TYPE_EVOLUTE,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
+(not specialchk or specialchk(sg,lc,SUMMON_TYPE_TIMESPACE,tp)) and Duel.GetLocationCountFromEx(tp,tp,sg,lc)>0
 end
 function Auxiliary.CTSCondition(f,minc,maxc,specialchk)
 	return	function(e,c,must,g,min,max)
@@ -399,7 +399,7 @@ function Auxiliary.CTSCondition(f,minc,maxc,specialchk)
 					g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 				end
 				local mg=g:Filter(Auxiliary.CTSConditionFilter,nil,f,c,tp)
-				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_TIMESPACE)
 				if must then mustg:Merge(must) end
 				--if min and min < minc then return false end
 				if max and max > maxc then return false end
@@ -407,7 +407,7 @@ function Auxiliary.CTSCondition(f,minc,maxc,specialchk)
 -- or minc
 				max = max or maxc
 				if mustg:IsExists(aux.NOT(Auxiliary.CTSConditionFilter),1,nil,f,c,tp) or #mustg>max then return false end
-				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_EVOLUTE)
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_TIMESPACE)
 				tg:Match(Auxiliary.CTSConditionFilter,nil,f,c,tp)
 				local mg_tg=mg+tg
 				local res=mg_tg:Includes(mustg) and #mustg<=max
@@ -434,9 +434,9 @@ function Auxiliary.CTSTarget(f,minc,maxc,specialchk)
 				min = min or minc
 				max = max or maxc
 				local mg=g:Filter(Auxiliary.CTSConditionFilter,nil,f,c,tp)
-				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
+				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_TIMESPACE)
 				if must then mustg:Merge(must) end
-				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_EVOLUTE)
+				local emt,tg=aux.GetExtraMaterials(tp,mustg+mg,c,SUMMON_TYPE_TIMESPACE)
 				tg:Match(Auxiliary.CTSConditionFilter,nil,f,c,tp)
 				local sg=Group.CreateGroup()
 				local finish=false
@@ -480,14 +480,14 @@ function Auxiliary.CTSOperation(f,minc,maxc,specialchk)
 				local g,filt,emt=table.unpack(e:GetLabelObject())
 				for _,ex in ipairs(filt) do
 					if ex[3]:GetValue() then
-						ex[3]:GetValue()(1,SUMMON_TYPE_EVOLUTE,ex[3],ex[1]&g,c,tp)
+						ex[3]:GetValue()(1,SUMMON_TYPE_TIMESPACE,ex[3],ex[1]&g,c,tp)
 						if ex[3]:CheckCountLimit(tp) then
 							ex[3]:UseCountLimit(tp,1)
 						end
 					end
 				end
 				c:SetMaterial(g)
-				Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE)
+				Duel.SendtoGrave(g,REASON_MATERIAL+REASON_TIMESPACE)
 				g:DeleteGroup()
 				aux.DeleteExtraMaterialGroups(emt)
 			end
