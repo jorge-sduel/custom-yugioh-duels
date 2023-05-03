@@ -6,6 +6,7 @@ function cid.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetCountLimit(1,id)
+	e1:SetTarget(cid.settg)
 	e1:SetOperation(cid.setop)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
@@ -38,13 +39,18 @@ end
 function cid.filter(c)
 	return c:IsSetCard(0xac97) and c:IsSSetable()
 end
+function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil) end
+end
 function cid.setop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
-	local c=e:GetHandler()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_DECK,0,1,1,nil)
-	local tc=g:GetFirst()
-	if tc and Duel.SSet(tp,tc)~=0 then
+	if g:GetCount()>0 then
+		local c=e:GetHandler()
+		local tc=g:GetFirst()
+		local fid=c:GetFieldID()
+		Duel.SSet(tp,tc)
+   Duel.ConfirmCards(1-tp,tc)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
@@ -56,6 +62,8 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e2)
 	end
 end
+
+
 function cid.rmfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0xac97) and c:IsAbleToRemove()
 end
