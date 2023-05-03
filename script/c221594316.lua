@@ -65,7 +65,7 @@ end
 
 
 function cid.rmfilter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0xac97) and c:IsAbleToRemove()
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0xc97) and c:IsAbleToRemove()
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -77,7 +77,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then Duel.Remove(g,POS_FACEUP,REASON_EFFECT) end
 end
 function cid.atkfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xac97) and c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsFaceup() and c:IsSetCard(0xc97) and c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function cid.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.AND(cid.atkfilter,Card.IsAbleToHand),tp,LOCATION_REMOVED,0,1,nil) end
