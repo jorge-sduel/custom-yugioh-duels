@@ -6,7 +6,7 @@ function cid.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetCountLimit(1,id)
-	--e1:SetTarget(cid.settg)
+	e1:SetTarget(cid.settg)
 	e1:SetOperation(cid.setop)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
@@ -37,7 +37,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function cid.filter(c)
-	return c:IsSetCard(0xac97) and c:IsSSetable()
+	return c:IsSetCard(0xc97) and c:IsSSetable()
 end
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil) end
