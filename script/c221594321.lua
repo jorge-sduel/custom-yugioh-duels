@@ -15,13 +15,13 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cid.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
-	return Duel.GetFieldGroup(tp,LOCATION_GRAVE,0)
+	return Duel.GetFieldGroup(tp,LOCATION_HAND+LOCATION_ONFIELD,0)
 end
 function cid.extraop(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	return Duel.Remove(mat,POS_FACEUP,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
 end
 function cid.forcedgroup(c,e,tp)
-	return c:IsLocation(LOCATION_GRAVE) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_FIEND) and c:IsAbleToRemove()
+	return c:IsLocation(LOCATION_HAND+LOCATION_ONFIELD) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_FIEND) and c:IsAbleToRemove()
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
