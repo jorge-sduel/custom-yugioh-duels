@@ -69,13 +69,13 @@ function Timespace.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	--e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	--e10:SetCode(EFFECT_ALLOW_NEGATIVE)
 	--c:RegisterEffect(e10)
-	--scale
+	--[[scale
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_REMOVE_TYPE)
 	e3:SetRange(LOCATION_EXTRA)
 	e3:SetValue(TYPE_SYNCHRO)
-	c:RegisterEffect(e3)
+	c:RegisterEffect(e3)]]
 end
 function Card.IsTimespace(c)
 	return c.IsTimeSpace
