@@ -1,7 +1,8 @@
 --created by Walrus, coded by Lyris
 local cid,id=GetID()
 function cid.initial_effect(c)
-	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_GREATER,extraop=cid.extraop,matfilter=cid.forcedgroup})
+	local e1=Ritual.AddProcGreater({handler=c,filter=cid.ritualfil,extraop=cid.extraop,matfilter=cid.forcedgroup,location=LOCATION_HAND|LOCATION_ONFIELD,})
+	--local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_GREATER,extraop=cid.extraop,matfilter=cid.forcedgroup})
 --
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -13,6 +14,9 @@ function cid.initial_effect(c)
 	e2:SetTarget(cid.tg)
 	e2:SetOperation(cid.op)
 	c:RegisterEffect(e2)
+end
+function cid.ritualfil(c)
+	return c:IsSetCard(0xc97) and c:IsRitualMonster()
 end
 function cid.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetFieldGroup(tp,LOCATION_HAND+LOCATION_ONFIELD,0)
