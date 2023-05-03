@@ -288,7 +288,7 @@ end
 function Auxiliary.TimespaceSummonSubstitute(c,cd,tp)
 	return c:IsHasEffect(52401238,tp) and c:IsAbleToGraveAsCost()
 end
-ion Auxiliary.AddConvergentTSSummonProcedure(c,f,min,max,specialchk,desc)
+function Auxiliary.AddConvergentTSSummonProcedure(c,f,min,max,specialchk,desc)
 --AddConvergentEvolSummonProcedure(c,code,loc,excon)
 	--[[special summon
 	local e1=Effect.CreateEffect(c)
