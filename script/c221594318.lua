@@ -91,12 +91,11 @@ end
 function cid.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsForbidden() then return end
-	local b=Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(c,nil,c:GetLocation(),c:GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp)
-	if b and Duel.SelectOption(tp,1159,1105)==0 then
-		aux.PandSSet(c,REASON_EFFECT)(e,tp,eg,ep,ev,re,r,rp)
+	local b1=Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1)
+	if b1 and Duel.SelectOption(tp,1160,1105)==0 then
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	else
 		Duel.SelectOption(tp,1105)
-		aux.PandEnableFUInED(c,REASON_EFFECT)(e,tp,eg,ep,ev,re,r,rp)
+		Duel.SendtoExtraP(c,nil,REASON_EFFECT)
 	end
 end
