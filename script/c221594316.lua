@@ -51,7 +51,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 		local fid=c:GetFieldID()
 		Duel.SSet(tp,tc)
    Duel.ConfirmCards(1-tp,tc)
-		--[[local e1=Effect.CreateEffect(c)
+		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
 		e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
@@ -59,7 +59,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e1)
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_QP_ACT_IN_SET_TURN)
-		tc:RegisterEffect(e2)]]
+		tc:RegisterEffect(e2)
 	end
 end
 
