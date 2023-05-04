@@ -69,7 +69,7 @@ function cid.rmfilter(c)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.GetMatchingGroup(cid.rmfilter,tp,LOCATION_GRAVE+LOCATION_HAND,0,nil),1,0,0)
+	Duel.GetMatchingGroup(cid.rmfilter,tp,LOCATION_GRAVE+LOCATION_HAND,0,nil)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
