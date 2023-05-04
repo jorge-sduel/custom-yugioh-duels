@@ -1,14 +1,28 @@
 --created by Walrus, coded by Lyris
 local cid,id=GetID()
-function cid.initial_effect(c)
-	local e0=Effect.CreateEffect(c)
-	e0:SetType(EFFECT_TYPE_FIELD)
-	e0:SetRange(LOCATION_SZONE)
-	e0:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e0:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
-	e0:SetTargetRange(1,0)
-	e0:SetTarget(cid.splimit)
-	c:RegisterEffect(e0)
+cid.IsEquilibrium=true
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
+function s.initial_effect(c)
+	--
+	Equilibrium.AddProcedure(c)
+	--destroy
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(97268402,0))
+	e1:SetCategory(CATEGORY_DAMAGE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetType(EFFECT_TYPE_IGNITION)
+	e1:SetRange(LOCATION_HAND)
+	e1:SetCondition(cid.con)
+	e1:SetOperation(Equilibrium.desop)
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetRange(LOCATION_SZONE)
+	e2:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
+	e2:SetTargetRange(1,0)
+	e2:SetTarget(cid.splimit)
+	c:RegisterEffect(e2)
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_QUICK_O)
 	e6:SetCode(EVENT_FREE_CHAIN)
@@ -56,6 +70,16 @@ function cid.initial_effect(c)
 	e5:SetTarget(cid.tg)
 	e5:SetOperation(cid.op)
 	c:RegisterEffect(e5)
+end
+function cid.con(e)
+	local tp=e:GetHandler():GetControler()
+	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
+	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+	if not tc1 or not tc2 then return false end
+	return tc1:GetLevel()==tc2:GetLevel()
+end
+function cid.cfilter(c)
+	return c:IsType(TYPE_PENDULUM)
 end
 function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsSetCard(0xc97) then return false end
