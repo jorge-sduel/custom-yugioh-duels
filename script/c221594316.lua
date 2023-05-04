@@ -68,7 +68,7 @@ function cid.rmfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0xc97) and c:IsAbleToRemove()
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 and Duel.GetMatchingGroup(cid.rmfilter,tp,LOCATION_GRAVE+LOCATION_HAND,0,nil) then return true end
+	if chk==0 and Duel.IsExistingMatchingCard(cid.rmfilter,tp,LOCATION_GRAVE+LOCATION_HAND,0,1,nil) then return true end
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
