@@ -1,10 +1,14 @@
 --created by Walrus, coded by Lyris
 local cid,id=GetID()
+cid.IsEquilibrium=true
+if not EQUILIBRIUM_IMPORTED then Duel.LoadScript("proc_equilibrium.lua") end
 function cid.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
+	--
+	Equilibrium.AddProcedure(c)
+	
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
-	e0:SetRange(LOCATION_SZONE)
+	e0:SetRange(LOCATION_PZONE)
 	e0:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e0:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
 	e0:SetTargetRange(1,0)
@@ -13,15 +17,13 @@ function cid.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_SZONE)
+	e1:SetRange(LOCATION_PZONE)
 	e1:SetCountLimit(1)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetCondition(aux.PandActCheck)
 	e1:SetTarget(cid.settg)
 	e1:SetOperation(cid.setop)
 	c:RegisterEffect(e1)
-	aux.EnablePandemoniumAttribute(c,e1)
-	aux.CannotBeEDMaterial(c,nil,LOCATION_MZONE)
+	--aux.CannotBeEDMaterial(c,nil,LOCATION_MZONE)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
@@ -41,7 +43,7 @@ function cid.initial_effect(c)
 end
 function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsSetCard(0xc97) then return false end
-	return bit.band(sumtype,SUMMON_TYPE_PANDEMONIUM)==SUMMON_TYPE_PANDEMONIUM
+	return bit.band(sumtype,SUMMON_TYPE_EQUILIBRIUM)==SUMMON_TYPE_EQUILIBRIUM
 end
 function cid.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0xac97) and c:IsSSetable()
