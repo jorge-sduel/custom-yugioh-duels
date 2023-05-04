@@ -126,7 +126,8 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToRemoveAsCost,tp,LOCATION_GRAVE,0,1,nil) and e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	local tc=Duel.SelectMatchingCard(tp,Card.IsAbleToRemoveAsCost,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
 	e:SetLabelObject(tc)
-	Duel.Remove(tc,POS_FACEUP,REASON_COST) and e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+	Duel.Remove(tc,POS_FACEUP,REASON_COST)
+ e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
