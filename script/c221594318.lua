@@ -46,7 +46,7 @@ function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	return bit.band(sumtype,SUMMON_TYPE_EQUILIBRIUM)==SUMMON_TYPE_EQUILIBRIUM
 end
 function cid.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0xac97) and c:IsSSetable()
+	return c:IsFaceup() and c:IsSetCard(0xc97) and c:IsSSetable()
 end
 function cid.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and cid.filter(chkc) end
