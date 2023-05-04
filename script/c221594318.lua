@@ -59,7 +59,7 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) and Duel.SSet(tp,tc)~=0
-		and Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsSetCard),tp,LOCATION_MZONE,0,1,nil,0x6c97,0x9c97) then
+		and Duel.IsExistingMatchingCard(cid.rmfilter,tp,LOCATION_MZONE,0,1,nil) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
@@ -70,6 +70,9 @@ function cid.setop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCode(EFFECT_QP_ACT_IN_SET_TURN)
 		tc:RegisterEffect(e2)
 	end
+end
+function cid.rmfilter(c)
+	return c:IsFaceup() and c:IsSetCard(0x4c97) or c:IsSetCard(0x6c97) and c:IsSSetable()
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0 end
