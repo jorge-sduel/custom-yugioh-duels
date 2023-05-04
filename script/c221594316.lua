@@ -72,7 +72,7 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(cid.rmfilter),tp,LOCATION_GRAVE+LOCATION_HAND,LOCATION_GRAVE+LOCATION_HAND,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(cid.rmfilter),tp,LOCATION_GRAVE+LOCATION_HAND,0,1,1,nil)
 	if #g>0 then Duel.Remove(g,POS_FACEUP,REASON_EFFECT) end
 end
 function cid.atkfilter(c)
