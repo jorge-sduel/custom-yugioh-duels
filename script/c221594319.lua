@@ -1,7 +1,7 @@
 --created by Walrus, coded by Lyris
 local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.CannotBeEDMaterial(c,nil,LOCATION_MZONE)
+	--aux.CannotBeEDMaterial(c,nil,LOCATION_MZONE)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
@@ -43,10 +43,10 @@ function cid.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.tglimit(e,c)
-	return c:IsFaceup() and c:IsSetCard(0xc97) and (c:IsLocation(LOCATION_PZONE) or c:IsType(TYPE_PANDEMONIUM))
+	return c:IsFaceup() and c:IsSetCard(0xc97) and c:IsLocation(LOCATION_PZONE)
 end
 function cid.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0x3c97) and c:IsType(TYPE_PANDEMONIUM+TYPE_PENDULUM) and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsSetCard(0x3c97) and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
 end
 function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_EXTRA,0,1,nil) end
