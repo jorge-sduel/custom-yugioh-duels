@@ -27,7 +27,8 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	-- 4 >> hand
 	-- 5 >> deck
 	-- 6 >> destroy
-	if loc==nil then loc=LOCATION_MZONE end
+	if loc==nil then loc=LOCATION_MZONE+LOCATION_HAND end
+	if loc==LOCATION_HAND then loc=LOCATION_HAND end
 	--if e:GetHandler():IsCode(221594325) then loc=LOCATION_HAND+LOCATION_MZONE end
 	if c.evolute_type==nil then
 		local mt=c:GetMetatable()
@@ -73,6 +74,7 @@ function Card.IsEvoluteTuner(c)
 end
 function Evolute.IsLocation(c,e,loc,loc1)
 	if loc==nil then loc1=LOCATION_MZONE end
+	if loc==LOCATION_HAND then loc1=LOCATION_HAND end
 	--if c:IsCode(221594325) then loc1=LOCATION_HAND end
 	return (c:IsLocation(loc1) and (c:IsFaceup() or c:IsLocation(LOCATION_HAND)) or c:IsHasEffect(16000820,tp)) and not c:IsType(TYPE_LINK)
 end
