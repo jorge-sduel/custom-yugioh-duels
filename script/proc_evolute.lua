@@ -72,10 +72,10 @@ function Card.IsEvoluteTuner(c)
 	return c.Is_Evolute and c:IsType(TYPE_TUNER)
 end
 function Evolute.IsLocation(c,e,loc)
-	if loc==nil then loc1=c:IsFaceup() end
-	if loc==LOCATION_HAND then loc1=c:IsFacedown() or loc1=c:IsPublic() end
+	if loc==nil then loc1=POSITION_FACEDOWN end
+	if loc==LOCATION_HAND then loc1=POSITION_FACEDOWN end
 	--if c:IsCode(221594325) then loc1=LOCATION_HAND end
-	return ((c:IsLocation(loc) and loc1) or c:IsHasEffect(16000820,tp)) and not c:IsType(TYPE_LINK)
+	return ((c:IsLocation(loc) and c:IsPosition(loc1)) or c:IsHasEffect(16000820,tp)) and not c:IsType(TYPE_LINK)
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
 	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and not c:IsHasEffect(50031787,tp)
