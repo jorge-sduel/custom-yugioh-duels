@@ -25,7 +25,7 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,function(e,c) return Duel.GetFieldGroup
 	e1:SetTargetRange(1,0)
 	e1:SetTarget(cid.sumlimit)
 	c:RegisterEffect(e1)
-	c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsSetCard,0x4c97))
+	c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsSetCard,0x6c97))
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
