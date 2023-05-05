@@ -27,7 +27,7 @@ function Evolute.AddProcedure(c,f,min,max,specialchk,opp,loc,send)
 	-- 4 >> hand
 	-- 5 >> deck
 	-- 6 >> destroy
-	if loc==nil then loc=LOCATION_MZONE+LOCATION_HAND end
+	if loc==nil then loc=LOCATION_MZONE end
 	--if e:GetHandler():IsCode(221594325) then loc=LOCATION_HAND+LOCATION_MZONE end
 	if c.evolute_type==nil then
 		local mt=c:GetMetatable()
@@ -74,7 +74,7 @@ end
 function Evolute.IsLocation(c,e,loc,loc1)
 	if loc==nil then loc1=LOCATION_MZONE end
 	--if c:IsCode(221594325) then loc1=LOCATION_HAND end
-	return ((c:IsLocation(loc1) and c:IsFaceup()) or c:IsHasEffect(16000820,tp)) and not c:IsType(TYPE_LINK)
+	return ((c:IsLocation(loc1) and (c:IsFaceup() or c:IsLocation(LOCATION_HAND)) or c:IsHasEffect(16000820,tp)) and not c:IsType(TYPE_LINK)
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
 	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and not c:IsHasEffect(50031787,tp)
@@ -154,7 +154,7 @@ function Evolute.Condition(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Evolute.IsLocation,tp,loc,loc2,nil)
+					g=Duel.GetMatchingGroup(Evolute.IsLocation,tp,LOCATION_HAND+LOCATION_MZONE,loc2,nil)
 				end
 				local mg=g:Filter(Evolute.ConditionFilter,nil,f,c,tp)
 				local mustg=Auxiliary.GetMustBeMaterialGroup(tp,g,tp,c,mg,REASON_EVOLUTE)
@@ -185,7 +185,7 @@ function Evolute.Target(f,minc,maxc,specialchk,opp,loc,send)
 				local loc2=0
 				if opp then loc2=loc end
 				if not g then
-					g=Duel.GetMatchingGroup(Evolute.IsLocation,tp,loc,loc2,nil)
+					g=Duel.GetMatchingGroup(Evolute.IsLocation,tp,LOCATION_HAND+LOCATION_MZONE,loc2,nil)
 				end
 				if min and min < minc then return false end
 				if max and max > maxc then return false end
