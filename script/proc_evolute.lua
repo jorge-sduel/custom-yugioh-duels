@@ -72,7 +72,7 @@ end
 function Card.IsEvoluteTuner(c)
 	return c.Is_Evolute and c:IsType(TYPE_TUNER)
 end
-function Evolute.IsLocation(c,e,tp)
+function Evolute.IsLocation(c,e,tp,loc)
 	if loc==nil then loc1=LOCATION_MZONE and loc2=LOCATION_HAND end
 	if loc==LOCATION_HAND then loc1=LOCATION_HAND and loc2=LOCATION_MZONE end
 	--if c:IsCode(221594325) then loc1=LOCATION_HAND end
