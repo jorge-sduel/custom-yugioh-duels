@@ -16,7 +16,7 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,function(e,c) return Duel.GetFieldGroup
 	e0:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e0:SetTargetRange(LOCATION_HAND,0)
 	e0:SetTarget(aux.TargetBoolFunction(Card.IsCode,id-19))
-	c:RegisterEffect(e0)]] 
+	c:RegisterEffect(e0)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetRange(LOCATION_MZONE)
@@ -24,7 +24,7 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,function(e,c) return Duel.GetFieldGroup
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetTargetRange(1,0)
 	e1:SetTarget(cid.sumlimit)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsSetCard,0x4c97))
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
