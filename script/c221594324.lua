@@ -76,7 +76,7 @@ function cid.efilter(e,re)
 	return e:GetOwnerPlayer()~=re:GetOwnerPlayer()
 end
 function cid.disable(e,c)
-	return c:IsType(TYPE_EFFECT) and c.IsTimeleap
+	return c:IsType(TYPE_EFFECT) and c:IsHasEffect(id)
 end
 function cid.cfilter(c,tp)
 	return c:IsOnField() and c:IsControler(tp)
