@@ -76,7 +76,7 @@ function Evolute.IsLocation(c,e)
 	--if loc==nil then loc1=LOCATION_MZONE end
 	--if loc==LOCATION_HAND then loc1=POSITION_FACEDOWN end
 	--if c:IsCode(221594325) then loc1=LOCATION_HAND end
-	return c:IsLocation(LOCATION_HAND) and c:IsFacedown()
+	return c:IsLocation(LOCATION_HAND) or c:IsFacedown()
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
 	return ((not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and ((c:IsLocation(LOCATION_MZONE) and c:IsFaceup()) or c:IsHasEffect(16000820,tp))) and not (c:IsType(TYPE_LINK) or c:IsHasEffect(50031787,tp))
