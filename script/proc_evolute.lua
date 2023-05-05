@@ -73,7 +73,7 @@ function Card.IsEvoluteTuner(c)
 end
 function Evolute.IsLocation(c,e,loc)
 	if loc==nil then loc1=POSITION_FACEDOWN end
-	if loc==LOCATION_HAND then loc1=POSITION_FACEDOWN end
+	--if loc==LOCATION_HAND then loc1=POSITION_FACEDOWN end
 	--if c:IsCode(221594325) then loc1=LOCATION_HAND end
 	return ((c:IsLocation(loc) and c:IsPosition(loc1)) or c:IsHasEffect(16000820,tp)) and not c:IsType(TYPE_LINK)
 end
