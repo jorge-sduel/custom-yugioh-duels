@@ -79,7 +79,7 @@ function Evolute.IsLocation(c,e,tp,loc,loc1)
 	return (c:IsLocation(loc1) and c:IsFaceup()) or c:IsHasEffect(16000820,tp)
 end
 function Evolute.ConditionFilter(c,f,lc,tp)
-	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and not (c:IsType(TYPE_LINK) or c:IsHasEffect(50031787,tp))
+	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and not (c:IsType(TYPE_LINK) or c:IsHasEffect(50031787,tp) or (c:IsHasEffect(221594300) and c:IsLocation(LOCATION_MZONE)))
 end
 function Evolute.GetEvoluteCount(c)
     if c:GetLevel()>=1 then return c:GetLevel()
