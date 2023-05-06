@@ -248,7 +248,7 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				c:SetMaterial(g)
 				if send==1 then
 					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE+REASON_RETURN)
-				elseif send==2 or (e:GetHandler():IsHasEffect(221594300) and g:IsHasEffect16000820)) then
+				elseif send==2 or (e:GetHandler():IsHasEffect(221594300) and g:IsHasEffect(16000820)) then
 					Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_EVOLUTE)
 				elseif send==3 then
 					Duel.Remove(g,POS_FACEDOWN,REASON_MATERIAL+REASON_EVOLUTE)
