@@ -49,7 +49,7 @@ function Card.IsReunion(c)
 	return c.IsReunion
 end
 function Reunion.ConditionFilter(c,f,lc,tp)
-	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
+	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and not (c:IsHasEffect(50031787,tp) or (c:IsHasEffect(221594300) and c:IsLocation(LOCATION_MZONE)))
 end
 function Reunion.GetReunionCount(c)
     if c:GetLevel()>0 then return c:GetLevel()
