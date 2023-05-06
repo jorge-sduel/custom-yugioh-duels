@@ -99,7 +99,7 @@ function Card.IsLocTime(c)
 	return c:IsFaceup() or c:IsLocation(LOCATION_HAND)
 end
 function Timeleap.ConditionFilter(c,f,lc,tp)
-	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
+	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp) and not (c:IsHasEffect(50031787,tp) or (c:IsHasEffect(221594300) and c:IsLocation(LOCATION_MZONE)))
 end
 function Timeleap.GetTimeleapCount(c)
     if c:GetLevel()>0 then return c:GetLevel()
