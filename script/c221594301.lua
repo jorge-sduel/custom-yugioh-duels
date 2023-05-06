@@ -38,7 +38,7 @@ function cid.initial_effect(c)
 	local e6=e4:Clone()
 	e6:SetCode(EFFECT_CANNOT_BE_XYZ_MATERIAL)
 	c:RegisterEffect(e6)
-	local e7=e1:Clone()
+	local e7=e4:Clone()
 	e7:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
 	c:RegisterEffect(e7)
 end
