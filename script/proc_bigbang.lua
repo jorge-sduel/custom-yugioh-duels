@@ -84,7 +84,7 @@ function Card.IsLocBigbang(c)
 	return c:IsFaceup() or c:IsLocation(LOCATION_HAND)
 end
 function Bigbang.ConditionFilter(c,f,lc,tp)
-	return not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)
+	return (not f or f(c,lc,SUMMON_TYPE_SPECIAL,tp)) and not (c:IsHasEffect(50031787,tp) or (c:IsHasEffect(221594300) and c:IsLocation(LOCATION_MZONE)))
 end
 function Bigbang.GetBigbangCount(c)
     if c:GetAttack()>1 then return c:GetAttack() end
