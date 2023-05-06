@@ -23,7 +23,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e2)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(221594301)
+	e3:SetCode(221594300)
 	c:RegisterEffect(e3)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
