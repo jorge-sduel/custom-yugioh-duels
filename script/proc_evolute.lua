@@ -1,4 +1,4 @@
-EFFECT_HAND_EVOLUTE	= 6011000
+%EFFECT_HAND_EVOLUTE	= 6011000
 REASON_EVOLUTE		= 0x1600
 SUMMON_TYPE_EVOLUTE 	= 0x1600
 HINTMSG_EVMATERIAL	= 1600000
@@ -248,7 +248,7 @@ function Evolute.Operation(f,minc,maxc,specialchk,opp,loc,send)
 				c:SetMaterial(g)
 				if send==1 then
 					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_EVOLUTE+REASON_RETURN)
-				elseif send==2 then
+				elseif send==2 or g:IsHasEffect(221594300) then
 					Duel.Remove(g,POS_FACEUP,REASON_MATERIAL+REASON_EVOLUTE)
 				elseif send==3 then
 					Duel.Remove(g,POS_FACEDOWN,REASON_MATERIAL+REASON_EVOLUTE)
