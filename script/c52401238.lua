@@ -14,7 +14,7 @@ c:AddSetcodesRule(id,false,0xbb109)
 	--c:RegisterEffect(e1)
 end
 function cid.lcheck(c)
-	return (c:IsCode(52401237) or c.IsBigbang)
+	return c:IsCode(id-1)
 end
 function cid.lcheck2(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsAttackAbove,1,nil,Duel.GetLP(tp)-3500)
