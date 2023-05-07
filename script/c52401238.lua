@@ -7,14 +7,14 @@ function cid.initial_effect(c)
 c:AddSetcodesRule(id,false,0xbb109)
 	c:EnableReviveLimit()
 	--.AddProcedure(c,cid.excon2,LOCATION_MZONE)
-	Timespace.AddProcedure(c,cid.excon2,1,1)
+	--Timespace.AddProcedure(c,cid.excon2,1,1)
 	--local e1=Effect.CreateEffect(c)
 	--e1:SetType(EFFECT_TYPE_SINGLE)
 	--e1:SetCode(52401238)
 	--c:RegisterEffect(e1)
 end
 function cid.lcheck(e,c)
-	return c:IsCode(52401237) and c:IsAttackAbove(Duel.GetLP(e:GetHandlerPlayer())-e:GetAttack())
+	return c:IsCode(52401237) and c:IsAttackAbove(Duel.GetLP(e:GetHandlerPlayer())-e:GetHandler():GetAttack())
 end
 function cid.excon(e)
 	return Duel.GetLP(e:GetHandlerPlayer())<=6000
