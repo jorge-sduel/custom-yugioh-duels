@@ -17,7 +17,7 @@ function cid.lcheck(c)
 	return (c:IsCode(52401237) or c.IsBigbang)
 end
 function cid.lcheck2(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsAttackAbove,1,nil,Duel.GetLP(tp))
+	return g:IsExists(Card.IsAttackAbove,1,nil,Duel.GetLP(tp)-3500)
 end
 function cid.excon(e)
 	return Duel.GetLP(e:GetHandlerPlayer())<=6000
