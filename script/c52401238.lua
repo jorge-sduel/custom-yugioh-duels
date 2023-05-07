@@ -13,8 +13,8 @@ c:AddSetcodesRule(id,false,0xbb109)
 	--e1:SetCode(52401238)
 	--c:RegisterEffect(e1)
 end
-function cid.lcheck(e,c)
-	return c:IsCode(52401237)
+function cid.lcheck(c)
+	return c:IsCode(52401237) or c.IsBigbang
 end
 function cid.excon(e)
 	return Duel.GetLP(e:GetHandlerPlayer())<=6000
