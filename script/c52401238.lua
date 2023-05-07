@@ -14,7 +14,7 @@ c:AddSetcodesRule(id,false,0xbb109)
 	--c:RegisterEffect(e1)
 end
 function cid.lcheck(e,c)
-	return c:IsCode(52401237) and c:IsAttackAbove(Duel.GetLP(e:GetHandlerPlayer())
+	return c:IsCode(52401237) and c:IsAttackAbove(Duel.GetLP(e:GetHandlerPlayer()))
 end
 function cid.excon(e)
 	return Duel.GetLP(e:GetHandlerPlayer())<=6000
