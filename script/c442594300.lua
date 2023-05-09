@@ -4,7 +4,7 @@ function cid.initial_effect(c)
     c:SetUniqueOnField(1,0,id)
 	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc97),2)
-    --Enviar un GY
+    --send to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
