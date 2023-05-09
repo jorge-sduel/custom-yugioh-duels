@@ -41,7 +41,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function cid.splimit(e,se,sp,st)
-	return Duel.IsExistingMatchingCard(cid.ffilter2,e:GetHandlerPlayer(),LOCATION_GRAVE,0,3,nil)
+	return Duel.IsExistingMatchingCard(cid.ffilter2,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,3,nil)
 end
 function cid.ffilter2(c)
 	return c:IsType(TYPE_FUSION)
