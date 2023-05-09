@@ -4,7 +4,7 @@ function cid.initial_effect(c)
     c:SetUniqueOnField(1,0,id)
 	c:EnableReviveLimit()
 	
-    --Send to GY
+    --Enviar a GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOGRAVE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
