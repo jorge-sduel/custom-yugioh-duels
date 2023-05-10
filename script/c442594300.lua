@@ -3,7 +3,7 @@ local cid,id=GetID()
 function cid.initial_effect(c)
     c:SetUniqueOnField(1,0,id)
 	c:EnableReviveLimit()
-	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc97),2)
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsCode,221594307),aux.FilterBoolFunctionEx(Card.IsSetCard,0xc97))
     --send to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOGRAVE)
