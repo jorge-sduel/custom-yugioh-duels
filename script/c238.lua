@@ -80,6 +80,6 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		Duel.SpecialSummon(mg:GetFirst(),0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
 			--Duel.SpecialSummonComplete()
-  end
+ --end
  end
 end
