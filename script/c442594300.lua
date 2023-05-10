@@ -3,7 +3,7 @@ local cid,id=GetID()
 function cid.initial_effect(c)
     c:SetUniqueOnField(1,0,id)
 	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsCode,221594307),aux.FilterBoolFunctionEx(Card.IsSetCard,0xc97))
+	Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsCode,221594307),cid.matfilter)
     --send to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOGRAVE)
@@ -39,6 +39,9 @@ function cid.initial_effect(c)
 	e4:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e4:SetValue(cid.splimit)
 	c:RegisterEffect(e4)
+end
+function cid.matfilter(c,fc,sumtype,tp)
+	return c:IsSetCard(0xc97,fc,sumtype,tp)
 end
 function cid.splimit(e,se,sp,st)
 	return Duel.IsExistingMatchingCard(cid.ffilter2,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,3,nil)
