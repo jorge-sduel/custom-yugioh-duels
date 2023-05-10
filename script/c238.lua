@@ -79,6 +79,6 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and Duel.SelectYesNo(tp,aux.Stringid(238,0)) then
 		Duel.BreakEffect()
-		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
+		Duel.SpecialSummon(mg,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
 	end
 end
