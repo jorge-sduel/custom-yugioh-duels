@@ -78,7 +78,9 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if sumable and Duel.SelectYesNo(tp,aux.Stringid(16000226,0)) then
 		Duel.BreakEffect()
-		Duel.SpecialSummonStep(mg,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
+			local mg1=mg:GetFirst()
+			for tc in aux.Next(mg) do
+		Duel.SpecialSummonStep(mg1,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
 			Duel.SpecialSummonComplete()
 	end
 end
