@@ -63,8 +63,9 @@ function c238.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
 function c238.mgfilter(c,e,tp,fusc,mg)
-	return c:IsControler(tp) and c:IsLocation(LOCATION_GRAVE)
-		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return 
+--c:IsControler(tp)andc:IsLocation(LOCATION_GRAVE)and
+ c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 		and fusc:CheckFusionMaterial(mg,c,PLAYER_NONE|FUSPROC_NOTFUSION)
 end
 function c238.activate(e,tp,eg,ep,ev,re,r,rp)
