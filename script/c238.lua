@@ -80,7 +80,7 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.SelectYesNo(tp,aux.Stringid(238,0)) then
 		Duel.BreakEffect()
 		Duel.SpecialSummonStep(mg,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
-if not tc:IsMonster() then
+if not mg:IsMonster() then
 	--local tc=e:GetHandler():GetMaterial()
 	local e3=Effect.CreateEffect(c)
 	e3:SetCode(EFFECT_ADD_TYPE)
