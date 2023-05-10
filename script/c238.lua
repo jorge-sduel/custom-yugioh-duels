@@ -80,7 +80,6 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.SelectYesNo(tp,aux.Stringid(238,0)) then
 		Duel.BreakEffect()
 		Duel.SpecialSummonStep(mg,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
-Duel.SpecialSummonComplete()
 if not tc:IsMonster() then
 	--local tc=e:GetHandler():GetMaterial()
 	local e3=Effect.CreateEffect(c)
@@ -90,7 +89,7 @@ if not tc:IsMonster() then
 	e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 	e3:SetValue(TYPE_MONSTER)
 	tc:RegisterEffect(e3)
-			Duel.SpecialSummonComplete()
   end
+			Duel.SpecialSummonComplete()
 	end
 end
