@@ -72,10 +72,10 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup()) then return end
 	local mg=tc:GetMaterial()
-	local ct=#mg
+	--local ct=#mg
 --	local sumtype=tc:GetSummonType()
-	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)~=0 and ct>0 and ct>=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	--[[	and mg:FilterCount(aux.NecroValleyFilter(c238.mgfilter),nil,e,tp,tc,mg)<=ct]]
+	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)~=0
+ --[[and ct>0 and ct>=Duel.GetLocationCount(tp,LOCATION_MZONE) and mg:FilterCount(aux.NecroValleyFilter(c238.mgfilter),nil,e,tp,tc,mg)<=ct]]
 		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and Duel.SelectYesNo(tp,aux.Stringid(238,0)) then
 		Duel.BreakEffect()
