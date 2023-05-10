@@ -93,5 +93,4 @@ if not mg:IsMonster() then
 	tc:RegisterEffect(e3)
   end
 			Duel.SpecialSummonComplete()
-	end
 end
