@@ -80,8 +80,8 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 			local mg1=mg:GetFirst()
 			for tc in aux.Next(mg) do
-		Duel.SpecialSummonStep(mg1,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
-			Duel.SpecialSummonComplete()
+		Duel.SpecialSummon(mg1,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
+			--Duel.SpecialSummonComplete()
   end
  end
 end
