@@ -77,11 +77,8 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
  --[[and ct>0 and ct>=Duel.GetLocationCount(tp,LOCATION_MZONE) and mg:FilterCount(aux.NecroValleyFilter(c238.mgfilter),nil,e,tp,tc,mg)<=ct]]
 		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and
-Duel.SelectYesNo(tp,aux.Stringid(238,0))
-
-then Duel.BreakEffect()
-
-		Duel.SpecialSummonStep(mg,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
+Duel.SelectYesNo(tp,aux.Stringid(238,0)) then Duel.BreakEffect()
+		Duel.SpecialSummon(mg,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
 --[[if not mg:IsMonster() then
 	--local tc=e:GetHandler():GetMaterial()
 	local e3=Effect.CreateEffect(c)
@@ -92,5 +89,5 @@ then Duel.BreakEffect()
 	e3:SetValue(TYPE_MONSTER)
 	tc:RegisterEffect(e3)]]
   end
-			Duel.SpecialSummonComplete()
+	--		Duel.SpecialSummonComplete()
 end
