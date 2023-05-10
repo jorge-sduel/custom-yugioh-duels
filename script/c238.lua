@@ -73,16 +73,16 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not (tc:IsRelateToEffect(e) and tc:IsFaceup()) then return end
 	local mg=tc:GetMaterial()
 	--local ct=#mg
---	local sumtype=tc:GetSummonType() Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)
- --[[and ct>0 and ct>=Duel.GetLocationCount(tp,LOCATION_MZONE) and mg:FilterCount(aux.NecroValleyFilter(c238.mgfilter),nil,e,tp,tc,mg)<=ct
+--	local sumtype=tc:GetSummonType() Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)~=0
+ --[[and ct>0 and ct>=Duel.GetLocationCount(tp,LOCATION_MZONE) and mg:FilterCount(aux.NecroValleyFilter(c238.mgfilter),nil,e,tp,tc,mg)<=ct]]
 		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and
-Duel.SelectYesNo(tp,aux.Stringid(238,0))]]
+Duel.SelectYesNo(tp,aux.Stringid(238,0))
 
---thenDuel.BreakEffect()
+then Duel.BreakEffect()
 
 		Duel.SpecialSummonStep(mg,0,tc:GetControler(),tc:GetControler(),true,false,POS_FACEUP)
-if not mg:IsMonster() then
+--[[if not mg:IsMonster() then
 	--local tc=e:GetHandler():GetMaterial()
 	local e3=Effect.CreateEffect(c)
 	e3:SetCode(EFFECT_ADD_TYPE)
@@ -90,7 +90,7 @@ if not mg:IsMonster() then
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 	e3:SetValue(TYPE_MONSTER)
-	tc:RegisterEffect(e3)
+	tc:RegisterEffect(e3)]]
   end
 			Duel.SpecialSummonComplete()
 end
