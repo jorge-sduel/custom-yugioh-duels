@@ -62,12 +62,12 @@ function c500311550.cost(e,tp,eg,ep,ev,re,r,rp,chk)
   --  e1:SetTarget(c50031569.splimit)
    -- Duel.RegisterEffect(e1,tp)
 end
-function c500311550.tgfilter(c)
+function c500311550.tgfilter(c,tp)
 	 return  c:IsAbleToGrave()
 		and Duel.IsExistingMatchingCard(c500311550.thfilter,tp,LOCATION_DECK,0,1,c,c:GetCode())
 end
 function c500311550.thfilter(c,code)
-	return c:IsType(TYPE_MONSTER) and not c:IsCode(code) and not c:IsForbidden() and c:IsAbleToHand()
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToHand() and not (c:IsCode(code) and c:IsForbidden())
 end
 function c500311550.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	 if chk==0 then return Duel.IsExistingMatchingCard(c500311550.tgfilter,tp,LOCATION_DECK,0,1,nil,tp) end
