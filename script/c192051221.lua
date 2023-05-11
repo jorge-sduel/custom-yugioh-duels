@@ -31,6 +31,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
+	e3:SetCondition(c192051221.rmcon)
 	e3:SetTarget(c192051221.atktg)
 	e3:SetOperation(c192051221.atkop)
 	c:RegisterEffect(e3)
@@ -76,6 +77,7 @@ function c192051221.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
 end
 function c192051221.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
@@ -85,10 +87,12 @@ function c192051221.atkop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1:SetValue(-700)
 		tc:RegisterEffect(e1)
+c:RemoveCounter(tp,0x111f,1,REASON_EFFECT)
 	end
 end
 function c192051221.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
+	local c=e:GetHandler()
+	return Duel.GetTurnPlayer()==tp and c:GetCounter(0x111f)>0
 end
 function c192051221.rmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
