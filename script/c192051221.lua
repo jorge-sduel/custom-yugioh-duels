@@ -35,7 +35,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e3:SetTarget(c192051221.atktg)
 	e3:SetOperation(c192051221.atkop)
 	c:RegisterEffect(e3)
-	--During each of your End Phases: Remove one E-Counter from this card.
+	--[[During each of your End Phases: Remove one E-Counter from this card.
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e4:SetCode(EVENT_PHASE+PHASE_END)
@@ -43,7 +43,7 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e4:SetCountLimit(1)
 	e4:SetCondition(c192051221.rmcon)
 	e4:SetOperation(c192051221.rmop)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4)]]
 	--Negate this card's effects while it has no E-Counters.
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
