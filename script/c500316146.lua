@@ -48,10 +48,10 @@ local g=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST) 
 end
 function cid.distg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.disfilter1,tp,0,LOCATION_ONFIELD,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.disfilter,tp,0,LOCATION_ONFIELD,1,nil) end
 end
 function cid.disop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.disfilter1,tp,0,LOCATION_ONFIELD,nil)
+	local g=Duel.GetMatchingGroup(cid.disfilter,tp,0,LOCATION_ONFIELD,nil)
 	local tc=g:GetFirst()
 	if not tc then return end
 	local c=e:GetHandler()
@@ -76,7 +76,9 @@ function cid.disop(e,tp,eg,ep,ev,re,r,rp)
 		tc=g:GetNext()
 	end
 end
-
+function cid.disfilter(c)
+	return c:IsLocation(LOCATION_ONFIELD)
+end
 function cid.postg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE)  and chkc:IsDestructable() and chkc~=c end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsDestructable,tp,LOCATION_ONFIELD,0,1,c) end
