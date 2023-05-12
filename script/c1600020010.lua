@@ -88,7 +88,7 @@ function cid.hdcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveCounter(tp,0x111f,2,REASON_COST)
 end
 function cid.thfilter2(c)
-	return aux.IsCodeListed(c,22702055) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable()
+	return Card.ListsCode(c,22702055) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable()
 end
 function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
  if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
