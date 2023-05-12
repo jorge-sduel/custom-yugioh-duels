@@ -1,6 +1,6 @@
 --Psy-Smokai, Magma Gas Dragon
 function c160008460.initial_effect(c)
-c160008460.IsEvolute=true
+c160008460.Is_Evolute=true
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
 	c:EnableReviveLimit()
