@@ -53,7 +53,7 @@ aux.AddEvoluteSummonProcedure(c,cid.spfilter,LOCATION_ONFIELD)
 	c:RegisterEffect(e4)
 end
 function cid.rcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DARK)
+	return g:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER)
 		and g:IsExists(Card.IsRace,1,nil,RACE_AQUA+RACE_FISH+RACE_SEASERPENT)
 end
 function cid.econ(e)
