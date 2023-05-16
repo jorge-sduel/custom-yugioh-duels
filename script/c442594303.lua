@@ -3,7 +3,7 @@ local cid,id=GetID()
 function cid.initial_effect(c)
     c:SetUniqueOnField(1,0,id)
 	c:EnableReviveLimit()
-	Xyz.AddProcedure(c,nil,10,2,aux.FilterBoolFunctionEx(Card.IsCode,221594309),aux.Stringid(id,0))
+	Xyz.AddProcedure(c,nil,10,2,cid.ovfilter,aux.Stringid(id,0))
     --Send to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOGRAVE)
@@ -44,6 +44,9 @@ end
 cid.listed_names={221594309} 
 cid.listed_series={0xc97} 
 cid.material_setcode={0xc97} 
+function cid.ovfilter(c,tp,xyzc)
+	return c:IsFaceup() and c:IsCode(221594309,xyzc,SUMMON_TYPE_XYZ,tp)
+end
 function cid.splimit(e,se,sp,st)
 	return Duel.IsExistingMatchingCard(cid.ffilter2,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,3,nil) 
 end 
