@@ -40,7 +40,7 @@ function cid.initial_effect(c)
 	e4:SetValue(cid.splimit)
 	c:RegisterEffect(e4)
 end
-cid.listed_names={221594307}
+cid.listed_names={221594308}
 cid.listed_series={0xc97}
 cid.material_setcode={0xc97}
 function cid.splimit(e,se,sp,st)
