@@ -31,6 +31,21 @@ function cid.initial_effect(c)
 	e3:SetTarget(cid.sptg)
 	e3:SetOperation(cid.spop)
 	c:RegisterEffect(e3)
+ --splimit 
+ local e4=Effect.CreateEffect(c) 
+ e4:SetType(EFFECT_TYPE_SINGLE) 
+e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE) 
+e4:SetCode(EFFECT_SPSUMMON_CONDITION)                      
+e4:SetValue(cid.splimit) 
+ c:RegisterEffect(e4) 
+end 
+cid.listed_series={0xc97} 
+cid.material_setcode={0xc97} 
+function cid.splimit(e,se,sp,st) 
+         return Duel.IsExistingMatchingCard(cid.ffilter2,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,3,nil) 
+end 
+function cid.ffilter2(c) 
+        return c:IsType(TYPE_RITUAL) 
 end
 function cid.tgfilter(c)
 	return c:IsType(TYPE_RITUAL) and c:IsAbleToGrave()
