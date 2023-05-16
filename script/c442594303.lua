@@ -45,7 +45,7 @@ cid.listed_names={221594309}
 cid.listed_series={0xc97} 
 cid.material_setcode={0xc97} 
 function cid.ovfilter(c,tp,xyzc)
-	return c:IsFaceup() and c:IsCode(221594309,xyzc,SUMMON_TYPE_XYZ,tp)
+	return c:IsFaceup() and c:IsCode(221594309)
 end
 function cid.splimit(e,se,sp,st)
 	return Duel.IsExistingMatchingCard(cid.ffilter2,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,3,nil) 
