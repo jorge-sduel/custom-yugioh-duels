@@ -15,8 +15,8 @@ if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	e1:SetRange(LOCATION_MZONE)
 		e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetCondition(cid.condition)
-	e1:SetTarget(cid.target)
-	e1:SetOperation(cid.operation)
+	e1:SetTarget(cid.target2)
+	e1:SetOperation(cid.operation2)
 	c:RegisterEffect(e1)
 	--remove
 	local e2=Effect.CreateEffect(c)
@@ -125,5 +125,18 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsPosition(POS_FACEUP_ATTACK) and c:IsRelateToEffect(e) then
 		Duel.SetLP(tp,Duel.GetLP(tp)*2)
+	end
+end
+function cid.target2(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetParam(1000)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,1000)
+end
+function cid.operation2(e,tp,eg,ep,ev,re,r,rp)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	local c=e:GetHandler()
+	if c:IsPosition(POS_FACEUP_ATTACK) and c:IsRelateToEffect(e) then
+		Duel.Recover(tp,e:GetHandler():GetAttack())
 	end
 end
