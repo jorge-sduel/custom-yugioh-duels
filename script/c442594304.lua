@@ -42,7 +42,10 @@ function cid.initial_effect(c)
 end 
 cid.listed_names={221594306} 
 cid.listed_series={0xc97} 
-cid.material_setcode={0xc97} 
+cid.material_setcode={0xc97}
+function cid.lcheck(g,lc,sumtype,tp)
+	return g:IsExists(Card.IsCode,1,nil,221594306,lc,sumtype,tp)
+end
 function cid.splimit(e,se,sp,st) 
        return Duel.IsExistingMatchingCard(cid.ffilter2,e:GetHandlerPlayer(),LOCATION_GRAVE,LOCATION_GRAVE,3,nil) 
 end 
