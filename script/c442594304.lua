@@ -3,7 +3,7 @@ local cid,id=GetID()
 function cid.initial_effect(c)
     c:SetUniqueOnField(1,0,id)
 	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc97),2,cid,lcheck)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xc97),2,99,cid,lcheck)
     --Send to GY
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOGRAVE)
