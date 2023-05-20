@@ -34,7 +34,9 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e3)
 --splimit 
  local e4=Effect.CreateEffect(c) 
- e4:SetType(EFFECT_TYPE_SINGLE)    e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)     e4:SetCode(EFFECT_SPSUMMON_CONDITION)  e4:SetValue(cid.splimit) c:RegisterEffect(e4) 
+ e4:SetType(EFFECT_TYPE_SINGLE)
+    e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE) 
+    e4:SetCode(EFFECT_SPSUMMON_CONDITION)  e4:SetValue(cid.splimit) c:RegisterEffect(e4) 
 end 
 cid.listed_names={221594306} 
 cid.listed_series={0xc97} 
