@@ -18,7 +18,7 @@ function c999915.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c999915.cfilter,1,nil,tp)
 end
 function c999915.filter(c,e,tp)
-	return c:IsSetCard(0x344) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsHasEffect(EFFECT_NECRO_VALLEY)
+	return c:IsRace(RACE_FIEND) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and not c:IsHasEffect(EFFECT_NECRO_VALLEY)
 end
 function c999915.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
