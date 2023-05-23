@@ -48,7 +48,7 @@ end
 function scard.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectTarget(tp,scard.filter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
-	local tc=Duel.GetFirst()
+	local tc=g:GetFirst()
 	if tc:IsRelateToEffect(e) then
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 			local e1=Effect.CreateEffect(e:GetHandler())
