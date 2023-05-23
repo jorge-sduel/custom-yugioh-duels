@@ -12,7 +12,7 @@ function scard.initial_effect(c)
 	e1:SetTarget(scard.sptg)
 	e1:SetOperation(scard.spop)
 	c:RegisterEffect(e1)
-	--[[if not scard.global_check then
+	if not scard.global_check then
 		scard.global_check=true
 		local ge2=Effect.CreateEffect(c)
 		ge2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -21,7 +21,7 @@ function scard.initial_effect(c)
 		ge2:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
 		ge2:SetOperation(scard.archchk)
 		Duel.RegisterEffect(ge2,0)
-	end]]
+	end
 end
 function scard.archchk(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFlagEffect(0,30000)==0 then 
