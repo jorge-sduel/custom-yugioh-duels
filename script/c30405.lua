@@ -3,7 +3,7 @@
 local scard,s_id=GetID()
 function scard.initial_effect(c)
 	Card.IsZHERO=Card.IsZHERO or (function(tc) return (tc:GetCode()>30400 and tc:GetCode()<30420) and tc:IsSetCard(0x8) end)
-	aux.AddFusionProcFun2(c,scard.zhe,scard.zhe,true)
+	Fusion.AddProcMixN(c,true,true,scard.zhe,2)
 	c:EnableReviveLimit()
 	--spsummon condition
 	local e0=Effect.CreateEffect(c)
