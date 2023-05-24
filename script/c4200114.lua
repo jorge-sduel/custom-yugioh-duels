@@ -4,7 +4,7 @@ cid.dfc_front_side=id+1
 function cid.initial_effect(c)
 	Link.AddProcedure(c,nil,2)
 	c:EnableReviveLimit()
-	c:SetSPSummonOnce(id)
+	--c:SetSPSummonOnce(id)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
