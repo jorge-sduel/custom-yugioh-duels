@@ -57,7 +57,7 @@ end
 function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		local c=e:GetHandler()
 		local tcode=c.dfc_front_side
-	--	if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
+		if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
 	--change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -71,6 +71,40 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 		tg:AddCard(token)
 			token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
+		--change name
+		local e1b=e1:Clone()
+		e1b:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e1b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+		token:RegisterEffect(e1b)
+		--change atk
+		local e2b=e2:Clone()
+		e2b:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e2b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+		token:RegisterEffect(e2b)
+		--change def
+		local e3b=e3:Clone()
+		e3b:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e3b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+		token:RegisterEffect(e3b)
+		--token type
+		local e4b=e4:Clone()
+		e4b:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e4b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+		token:RegisterEffect(e4b)
+		--avoid battle damage
+		local e5=Effect.CreateEffect(c)
+		e5:SetType(EFFECT_TYPE_SINGLE)
+		e5:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+		e5:SetValue(1)
+		e5:SetReset(RESET_EVENT+RESETS_STANDARD)
+		token:RegisterEffect(e5)
+		--destroy damage
+		local e6=Effect.CreateEffect(c)
+		e6:SetCategory(CATEGORY_DAMAGE)
+		e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+		e6:SetCode(EVENT_LEAVE_FIELD)
+		e6:SetOperation(s.damop)
+		token:RegisterEffect(e6)
 	end
 end
 function cid.lcheck(g)
