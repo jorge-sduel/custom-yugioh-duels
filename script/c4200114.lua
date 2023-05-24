@@ -72,7 +72,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		local token=Duel.CreateToken(tp,id,TYPES_TOKEN,500,500,3,RACE_FIEND,ATTRIBUTE_DARK)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 		tg:AddCard(token)
-			token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
+			--token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 	end
 end
 function cid.lcheck(g)
