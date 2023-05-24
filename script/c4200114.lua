@@ -112,21 +112,22 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		e4b:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e4b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 		token:RegisterEffect(e4b)
-		--avoid battle damage
-		local e5=Effect.CreateEffect(c)
-		e5:SetType(EFFECT_TYPE_SINGLE)
-		e5:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
-		e5:SetValue(1)
-		e5:SetReset(RESET_EVENT+RESETS_STANDARD)
-		token:RegisterEffect(e5)
 		--destroy damage
 		local e6=Effect.CreateEffect(c)
 		e6:SetCategory(CATEGORY_DAMAGE)
 		e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e6:SetCode(EVENT_LEAVE_FIELD)
-		e6:SetOperation(s.damop)
+		e6:SetOperation(cid.damop)
 		token:RegisterEffect(e6)
 	end
+end
+function s.damop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsReason(REASON_DESTROY) then
+		local d=c:GetPreviousAttackOnField()
+	end
+	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
+	e:Reset()
 end
 function cid.lcheck(g)
 	return g:GetClassCount(Card.GetLinkAttribute)==g:GetCount() and g:GetClassCount(Card.GetLinkRace)==g:GetCount()
