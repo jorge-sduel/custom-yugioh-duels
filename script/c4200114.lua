@@ -60,9 +60,8 @@ function cid.initial_effect(c)
 		local token=Duel.CreateToken(tp,id,TYPES_TOKEN,500,500,3,RACE_FIEND,ATTRIBUTE_DARK)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 		tg:AddCard(token)
-		
-		token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
-	end
+			token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
+	end)
 	c:RegisterEffect(e4)
 --place
 	local e5=Effect.CreateEffect(c)
