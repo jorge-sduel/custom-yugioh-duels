@@ -73,7 +73,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 		--tg:AddCard(token)
 			--token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
-	end
+--	end
 end
 function cid.lcheck(g)
 	return g:GetClassCount(Card.GetLinkAttribute)==g:GetCount() and g:GetClassCount(Card.GetLinkRace)==g:GetCount()
