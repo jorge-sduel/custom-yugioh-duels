@@ -79,8 +79,8 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	e4:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	e4:SetValue(TYPE_TOKEN)
 	c:RegisterEffect(e4)]]
-	local tg=Group.FromCards(c)
-	while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
+	--local tg=Group.FromCards(c)
+	--while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
 		local token=Duel.CreateToken(tp,id+1,TYPES_TOKEN,500,2,3,RACE_FIEND,ATTRIBUTE_DARK)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 		--tg:AddCard(token)
@@ -107,7 +107,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		e6:SetCode(EVENT_LEAVE_FIELD)
 		e6:SetOperation(cid.damop)
 		token:RegisterEffect(e6)]]
-	end
+--	end
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
