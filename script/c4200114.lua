@@ -42,7 +42,19 @@ function cid.initial_effect(c)
 		if chk==0 then return c.dfc_front_side end
 		Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	end)
-	e4:SetOperation(function(e,tp,eg,ep,ev,re,r,rp,chk)
+	e4:SetOperation(cid.ope)
+	c:RegisterEffect(e4)
+--place
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,1))
+	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e5:SetCode(EVENT_SUMMON_SUCCESS)
+	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
+	e5:SetTarget(cid.targetf)
+	e5:SetOperation(cid.operationf)
+	c:RegisterEffect(e5)
+end
+function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		local c=e:GetHandler()
 		local tcode=c.dfc_front_side
 		if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
@@ -61,17 +73,6 @@ function cid.initial_effect(c)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 		tg:AddCard(token)
 			token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
-	end)
-	c:RegisterEffect(e4)
---place
-	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(id,1))
-	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e5:SetCode(EVENT_SUMMON_SUCCESS)
-	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e5:SetTarget(cid.targetf)
-	e5:SetOperation(cid.operationf)
-	c:RegisterEffect(e5)
 end
 function cid.lcheck(g)
 	return g:GetClassCount(Card.GetLinkAttribute)==g:GetCount() and g:GetClassCount(Card.GetLinkRace)==g:GetCount()
