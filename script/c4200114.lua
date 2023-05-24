@@ -68,8 +68,8 @@ function cid.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetCode(EVENT_SUMMON_SUCCESS)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e5:SetTarget(s.targetf)
-	e5:SetOperation(s.operationf)
+	e5:SetTarget(cid.targetf)
+	e5:SetOperation(cid.operationf)
 	c:RegisterEffect(e5)
 end
 function cid.lcheck(g)
@@ -122,11 +122,11 @@ function cid.synop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND,0,1,nil)
+function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end
 end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
+function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND,0,1,1,nil)
