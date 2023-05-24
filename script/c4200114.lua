@@ -67,7 +67,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterEffect(e1)
 	--local tg=Group.FromCards(c)
 	--while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
-		local token=Duel.CreateToken(tp,id+1,TYPES_TOKEN,500,2,3,RACE_FIEND,ATTRIBUTE_DARK)
+		local token=Duel.CreateToken(tp,id+1,TYPE_TOKEN,500,2,3,RACE_FIEND,ATTRIBUTE_DARK)
 		Duel.SpecialSummon(id+1,0,tp,tp,false,false,POS_FACEUP)
 		--tg:AddCard(token)
 			--token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
