@@ -1,7 +1,6 @@
 --created & coded by Swag
 local cid,id=GetID()
 cid.dfc_front_side=id+1
-xpcall(function() require("expansions/script/c37564765") end,function() require("script/c37564765") end)
 function cid.initial_effect(c)
 	Link.AddProcedure(c,nil,2)
 	c:EnableReviveLimit()
@@ -57,7 +56,7 @@ function cid.initial_effect(c)
 	e1:SetValue(tcode)
 	c:RegisterEffect(e1)
 		local token=Duel.CreateToken(tp,id,TYPES_TOKEN,500,500,3,RACE_FIEND,ATTRIBUTE_DARK)
-		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
+		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEDOWN_ATTACK)
 		tg:AddCard(token)
 		
 		token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
