@@ -109,7 +109,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		token:RegisterEffect(e6)]]
 --	end
 end
-function s.damop(e,tp,eg,ep,ev,re,r,rp)
+function cid.damop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsReason(REASON_DESTROY) then
 		local d=c:GetPreviousAttackOnField()
