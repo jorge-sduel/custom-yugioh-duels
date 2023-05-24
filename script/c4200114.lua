@@ -57,7 +57,7 @@ end
 function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		local c=e:GetHandler()
 		local tcode=c.dfc_front_side
-		if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
+	--	if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
 	--change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
