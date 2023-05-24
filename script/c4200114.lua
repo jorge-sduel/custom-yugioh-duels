@@ -62,7 +62,7 @@ function cid.initial_effect(c)
 		tg:AddCard(token)
 		
 		token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
-	end)
+	end
 	c:RegisterEffect(e4)
 --place
 	local e5=Effect.CreateEffect(c)
