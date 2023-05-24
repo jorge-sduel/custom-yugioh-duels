@@ -58,8 +58,6 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		local c=e:GetHandler()
 		local tcode=c.dfc_front_side
 		if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
-	Duel.ChangePosition(c,POS_FACEDOWN_ATTACK)
-	
 	--change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -69,8 +67,8 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterEffect(e1)
 	--local tg=Group.FromCards(c)
 	--while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
-		local token=Duel.CreateToken(tp,id,TYPES_TOKEN,500,500,3,RACE_FIEND,ATTRIBUTE_DARK)
-		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
+		local token=Duel.CreateToken(tp,tcode,TYPES_TOKEN,500,2,3,RACE_FIEND,ATTRIBUTE_DARK)
+		Duel.SpecialSummon(tcode,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 		--tg:AddCard(token)
 			--token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 --	end
