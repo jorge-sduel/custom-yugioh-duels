@@ -65,7 +65,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetValue(id+1)
 	c:RegisterEffect(e1)
-	--[[change atk
+	change atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_SET_BASE_ATTACK)
@@ -78,14 +78,14 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	e4:SetCode(EFFECT_ADD_TYPE)
 	e4:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	e4:SetValue(TYPE_TOKEN)
-	c:RegisterEffect(e4)]]
+	c:RegisterEffect(e4)
 	--local tg=Group.FromCards(c)
 	--while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
 		local token=Duel.CreateToken(tp,id+1,TYPES_TOKEN,500,2,3,RACE_FIEND,ATTRIBUTE_DARK)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 		--tg:AddCard(token)
 			--token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
-		--[[change name
+		change name
 		local e1b=e1:Clone()
 		e1b:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -106,7 +106,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e6:SetCode(EVENT_LEAVE_FIELD)
 		e6:SetOperation(cid.damop)
-		token:RegisterEffect(e6)]]
+		token:RegisterEffect(e6)
 --	end
 end
 function cid.damop(e,tp,eg,ep,ev,re,r,rp)
