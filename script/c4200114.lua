@@ -1,6 +1,7 @@
 --created & coded by Swag
 local cid,id=GetID()
 cid.dfc_front_side=id+1
+xpcall(function() require("expansions/script/c37564765") end,function() require("script/c37564765") end)
 function cid.initial_effect(c)
 	Link.AddProcedure(c,nil,2)
 	c:EnableReviveLimit()
@@ -55,6 +56,7 @@ function cid.initial_effect(c)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetValue(tcode)
 	c:RegisterEffect(e1)
+Senya.TransformDFCCard(c)
 	end)
 	c:RegisterEffect(e4)
 --place
