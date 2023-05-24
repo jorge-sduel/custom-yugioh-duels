@@ -85,7 +85,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 		tg:AddCard(token)
 			token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
-		--change name
+		--[[change name
 		local e1b=e1:Clone()
 		e1b:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -106,7 +106,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e6:SetCode(EVENT_LEAVE_FIELD)
 		e6:SetOperation(cid.damop)
-		token:RegisterEffect(e6)
+		token:RegisterEffect(e6)]]
 	end
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
