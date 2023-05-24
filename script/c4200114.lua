@@ -65,7 +65,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetCode(EFFECT_CHANGE_CODE)
 	e1:SetValue(id+1)
 	c:RegisterEffect(e1)
-	change atk
+	--change atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_SET_BASE_ATTACK)
