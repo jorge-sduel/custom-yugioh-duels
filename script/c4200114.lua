@@ -44,7 +44,7 @@ function cid.initial_effect(c)
 	end)
 	e4:SetOperation(cid.ope)
 	c:RegisterEffect(e4)
---place
+--[[place
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -52,7 +52,7 @@ function cid.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e5:SetTarget(cid.targetf)
 	e5:SetOperation(cid.operationf)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e5)]]
 end
 function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		local c=e:GetHandler()
