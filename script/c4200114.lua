@@ -75,6 +75,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	--local tg=Group.FromCards(c)
 	--while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
 		local token=Duel.CreateToken(tp,id+1,TYPES_TOKEN,500,2,3,RACE_FIEND,ATTRIBUTE_DARK)
+	Duel.SendtoDeck(c,nil,0,REASON_RULE)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
 		Duel.MoveToField(token,tp,tp,LOCATION_MZONE,POS_FACEUP,true)
 		--tg:AddCard(token)
