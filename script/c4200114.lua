@@ -74,7 +74,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	c:RegisterEffect(e4)
 	--local tg=Group.FromCards(c)
 	--while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
-		local token=Duel.CreateToken(tp,id+1,TYPES_TOKEN,500,2,3,RACE_FIEND,ATTRIBUTE_DARK)
+		local token=Duel.CreateToken(tp,id+1)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
 	Duel.SendtoDeck(c,nil,0,REASON_RULE)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
