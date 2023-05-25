@@ -76,7 +76,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	--while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
 		local token=Duel.CreateToken(tp,id+1,TYPES_TOKEN,500,2,3,RACE_FIEND,ATTRIBUTE_DARK)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
-		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
+		Duel.MoveToField(token,tp,tp,LOCATION_MZONE,POS_FACEUP,true)
 		--tg:AddCard(token)
 			--token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 		--token type
