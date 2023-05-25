@@ -86,7 +86,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		e4b:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e4b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 		token:RegisterEffect(e4b)
-		--destroy damage
+		--[[destroy damage
 		local e6=Effect.CreateEffect(c)
 		e6:SetCategory(CATEGORY_DAMAGE)
 		e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -99,7 +99,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e7:SetCode(EVENT_LEAVE_FIELD)
 		e7:SetOperation(cid.damop)
-		c:RegisterEffect(e7)
+		c:RegisterEffect(e7)]]
 --	end
 end
 function cid.damop(e,tp,eg,ep,ev,re,r,rp)
