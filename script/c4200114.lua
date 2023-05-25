@@ -91,6 +91,13 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		e6:SetCode(EVENT_LEAVE_FIELD)
 		e6:SetOperation(cid.damop)
 		token:RegisterEffect(e6)
+	--destroy damage
+		local e7=Effect.CreateEffect(c)
+		e7:SetCategory(CATEGORY_DAMAGE)
+		e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+		e7:SetCode(EVENT_LEAVE_FIELD)
+		e7:SetOperation(cid.damop)
+		c:RegisterEffect(e7)
 --	end
 end
 function cid.damop(e,tp,eg,ep,ev,re,r,rp)
