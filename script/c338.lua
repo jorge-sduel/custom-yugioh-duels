@@ -128,11 +128,11 @@ function s.fustg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
-s.synfilter=aux.FilterFaceupFunction(Card.IsType,TYPE_SYNCHRO)
+--s.synfilter=aux.FilterFaceupFunction(Card.IsType,TYPE_SYNCHRO)
 function s.syntg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) end
 end
-s.xyzfilter=aux.FilterFaceupFunction(Card.IsType,TYPE_XYZ)
+--s.xyzfilter=aux.FilterFaceupFunction(Card.IsType,TYPE_XYZ)
 function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
 end
