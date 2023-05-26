@@ -31,7 +31,7 @@ local e3=Effect.CreateEffect(c)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetValue(aux.indoval)
-	e3:SetCondition(cm.indescon)
+	--e3:SetCondition(cm.indescon)
 c:RegisterEffect(e3)
 --Two Quickies for the price of none
 local e4=Effect.CreateEffect(c)
