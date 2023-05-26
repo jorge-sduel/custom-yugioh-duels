@@ -113,13 +113,13 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
---s.ritfilter=aux.FaceupFilter(Card.IsRitualMonster)
+s.ritfilter=aux.FaceupFilter(Card.IsRitualMonster)
 function s.rittg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,tp,2)
 end
---s.fusfilter=aux.FilterFaceupFunction(Card.IsType,TYPE_FUSION)
+s.fusfilter=aux.FaceupFilter(Card.IsType,TYPE_FUSION)
 function s.spfilter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
@@ -128,11 +128,11 @@ function s.fustg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
---s.synfilter=aux.FilterFaceupFunction(Card.IsType,TYPE_SYNCHRO)
+s.synfilter=aux.FaceupFilter(Card.IsType,TYPE_SYNCHRO)
 function s.syntg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) end
 end
---s.xyzfilter=aux.FilterFaceupFunction(Card.IsType,TYPE_XYZ)
+s.xyzfilter=aux.FaceupFilter(Card.IsType,TYPE_XYZ)
 function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
 end
