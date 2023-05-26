@@ -113,7 +113,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
-s.ritfilter=aux.FilterFaceupFunction(Card.IsRitualMonster)
+s.ritfilter=aux.FaceupFilter(Card.IsRitualMonster)
 function s.rittg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
