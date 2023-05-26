@@ -30,6 +30,19 @@ function cid.initial_effect(c)
 	--e3:SetCondition(function(e) local tc=e:GetHandler():GetBattleTarget() return tc:IsType(TYPE_MONSTER) and tc:IsReason(REASON_BATTLE) and tc:IsLocation(LOCATION_GRAVE) and e:GetHandler():IsChainAttackable() end)
 	--e3:SetOperation(function(e,tp,eg,ep,ev,re,r,rp) Duel.ChainAttack() end)
 	--c:RegisterEffect(e3)
+--hand synchro
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_SINGLE)
+	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e7:SetCode(EFFECT_ADD_TYPE)
+	e7:SetValue(TYPE_MONSTER)
+	c:RegisterEffect(e7)
+--hand synchro
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e8:SetCode(16000820)
+	c:RegisterEffect(e8)
 end
 function cid.cfilter(c)
 	return c:IsFacedown() or not c.Is_Evolute
