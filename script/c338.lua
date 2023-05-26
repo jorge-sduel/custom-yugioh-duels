@@ -119,7 +119,7 @@ function s.rittg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,tp,2)
 end
-s.fusfilter=aux.FilterFaceupFunction(Card.--IsType,TYPE_FUSION)
+--s.fusfilter=aux.FilterFaceupFunction(Card.IsType,TYPE_FUSION)
 function s.spfilter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
