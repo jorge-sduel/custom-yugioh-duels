@@ -113,13 +113,13 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
-s.ritfilter=aux.FaceupFilter(Card.IsRitualMonster)
+--s.ritfilter=aux.FaceupFilter(Card.IsRitualMonster)
 function s.rittg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 	Duel.SetOperationInfo(0,CATEGORY_HANDES,nil,0,tp,2)
 end
-s.fusfilter=aux.FilterFaceupFunction(Card.IsType,TYPE_FUSION)
+s.fusfilter=aux.FilterFaceupFunction(Card.--IsType,TYPE_FUSION)
 function s.spfilter(c,e,tp)
 	return c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
