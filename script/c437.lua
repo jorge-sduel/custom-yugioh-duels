@@ -35,6 +35,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.spfilter(c)
+	return c:IsSetCard(0x1034) and c:IsMonster() and c:IsLocation(LOCATION_DECK)
+end
+function s.spfilter(c)
 	return c:IsSetCard(0x1034) and c:IsMonster() and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.spcon(e,c)
@@ -69,7 +72,7 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetFieldGroup(tp,LOCATION_REMOVED,LOCATION_REMOVED)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
-	local ct=g:FilterCount(Card.IsLocation,nil,LOCATION_DECK)
+	local ct=g:FilterCount(s.deckfilter,nil)
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
