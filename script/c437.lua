@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.op)
 	c:RegisterEffect(e3)
 end
-function s.spfilter(c)
+function s.deckfilter(c)
 	return c:IsSetCard(0x1034) and c:IsMonster() and c:IsLocation(LOCATION_DECK)
 end
 function s.spfilter(c)
