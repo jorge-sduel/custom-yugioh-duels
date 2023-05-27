@@ -27,10 +27,8 @@ function s.coscost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.cosoperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end
-	Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x1034,TYPES_TOKEN,s.getprops(tc)) then
-		local token=Duel.CreateToken(tp,id+1)
+	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end Duel.IsPlayerCanSpecialSummonMonster(tp,58371672,0x1034,TYPES_TOKEN,s.getprops(tc)) then
+		local token=Duel.CreateToken(tp,58371672)
 		-- Change Type, Attribute, Level, and ATK/DEF
 		token:Race(tc:GetOriginalRace())
 		token:Attribute(tc:GetOriginalAttribute())
