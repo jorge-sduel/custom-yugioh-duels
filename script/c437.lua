@@ -26,9 +26,10 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(12341406,0))
 	e3:SetCategory(CATEGORY_TOHAND)
-	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e3:SetCondition(s.condition)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetCountLimit(1,id)
 	e3:SetCost(s.cost)
 	e3:SetTarget(s.tg)
 	e3:SetOperation(s.op)
@@ -85,6 +86,9 @@ e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 end
 function s.costfilter(c)
 	return c:IsSetCard(0x1034) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemoveAsCost()
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return not eg:IsContains(e:GetHandler()) and eg:IsExists(aux.NOT(Card.IsSummonPlayer),1,nil,tp)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,2,nil) end
