@@ -1,47 +1,41 @@
 --
 local s,id=GetID()
 function s.initial_effect(c)
-	--cos
+	--special summon
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(89312388,0))
-	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetCountLimit(1)
-	e1:SetRange(LOCATION_MZONE)
-	e1:SetCost(s.coscost)
-	e1:SetOperation(s.cosoperation)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_SPSUMMON_PROC)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e1:SetRange(LOCATION_HAND)
+	e1:SetCondition(s.spcon)
+	e1:SetTarget(s.sptg)
+	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
-function s.getprops(c)
-	return math.max(0,c:GetTextAttack()),math.max(0,c:GetTextDefense()),
-		c:GetOriginalLevel(),c:GetOriginalRace(),c:GetOriginalAttribute()
+function s.spfilter(c)
+	return c:IsSetCard(0x1034) and c:IsMonster() and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
-function s.filter(c,code)
-	return c:IsAbleToGraveAsCost() and c:IsMonster() and Duel.IsPlayerCanSpecialSummonMonster(tp,id+1,0x1034,TYPES_TOKEN,s.getprops(c))
+function s.spcon(e,c)
+	if c==nil then return true end
+	local tp=e:GetHandlerPlayer()
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	return #rg>0 and aux.SelectUnselectGroup(rg,e,tp,7,7,aux.ChkfMMZ(1),0)
 end
-function s.coscost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,e:GetHandler():GetCode()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local cg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,e:GetHandler():GetCode())
-	Duel.SendtoGrave(cg,REASON_COST)
-	e:SetLabel(cg:GetFirst())
-end
-function s.cosoperation(e,tp,eg,ep,ev,re,r,rp)
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) or c:IsFacedown() then return end Duel.IsPlayerCanSpecialSummonMonster(tp,58371672,0x1034,TYPES_TOKEN,s.getprops(tc)) then
-		local token=Duel.CreateToken(tp,58371672)
-		-- Change Type, Attribute, Level, and ATK/DEF
-		token:Race(tc:GetOriginalRace())
-		token:Attribute(tc:GetOriginalAttribute())
-		token:Level(tc:GetOriginalLevel())
-		token:Attack(math.max(0,tc:GetTextAttack()))
-		token:Defense(math.max(0,tc:GetTextDefense()))
-		Duel.BreakEffect()
-		Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
+	local g=nil
+	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local g=aux.SelectUnselectGroup(rg,e,tp,7,7,aux.ChkfMMZ(1),1,tp,HINTMSG_REMOVE,nil,nil,true)
+	if #g>0 then
+		g:KeepAlive()
+		e:SetLabelObject(g)
+		return true
+	end
+	return false
 end
-function s.rstop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local e1=e:GetLabelObject()
-	e1:Reset()
-	Duel.HintSelection(Group.FromCards(c))
-	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
+function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
+	local g=e:GetLabelObject()
+	if not g then return end
+	Duel.Remove(g,POS_FACEUP,REASON_COST)
+	g:DeleteGroup()
 end
