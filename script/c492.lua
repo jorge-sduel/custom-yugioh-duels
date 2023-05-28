@@ -73,13 +73,21 @@ function s.initial_effect(c)
 	e7:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e7:SetValue(aux.tgoval)
 	c:RegisterEffect(e7)
---negate
+--[[negate
 	local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
 	e8:SetRange(LOCATION_MZONE)
 	e8:SetCode(EFFECT_DISABLE)
 	e8:SetCondition(function(e) return Duel.GetLP(e:GetHandlerPlayer())>=1000 and e:GetHandler():IsLocation(LOCATION_MZONE) end)
-	c:RegisterEffect(e8)
+	c:RegisterEffect(e8)]]
+	--selfdes
+	local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e9:SetCode(EFFECT_SELF_DESTROY)
+	e9:SetRange(LOCATION_MZONE)
+	e9:SetCondition(s.descon)
+	c:RegisterEffect(e9)
 end
 s.material={70902743}
 s.listed_names={70902743}
@@ -159,4 +167,7 @@ function s.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Remove(sg,POS_FACEUP,REASON_COST)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
+end
+function s.descon(e)
+	return Duel.GetLP(e:GetHandlerPlayer())>=1000
 end
