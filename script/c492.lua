@@ -5,6 +5,11 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--Synchro.AddProcedure(c,nil,1,1,aux.FilterBoolFunction(Card.IsCode,70902743),1,1)
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,1)
+	--pierce
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_PIERCE)
+	c:RegisterEffect(e1)
 	--atk
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
