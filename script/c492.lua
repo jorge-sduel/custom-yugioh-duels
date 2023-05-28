@@ -54,6 +54,14 @@ function s.initial_effect(c)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e6:SetCode(21142671)
 	c:RegisterEffect(e6)
+	--cannot target
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_SINGLE)
+	e7:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e7:SetRange(LOCATION_MZONE)
+	e7:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
+	e7:SetValue(aux.tgoval)
+	c:RegisterEffect(e7)
 end
 s.material={70902743}
 s.listed_names={70902743}
