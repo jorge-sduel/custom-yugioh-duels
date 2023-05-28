@@ -37,6 +37,17 @@ function s.initial_effect(c)
 	e4:SetTarget(s.lptg)
 	e4:SetOperation(s.lpop)
 	c:RegisterEffect(e4)
+	--damage
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,0))
+	e5:SetCategory(CATEGORY_DAMAGE)
+	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e5:SetCode(EVENT_BATTLE_DESTROYING)
+	e5:SetCondition(s.damcon)
+	e5:SetTarget(s.damtg)
+	e5:SetOperation(s.damop)
+	c:RegisterEffect(e5)
 	--double tuner
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
@@ -64,4 +75,28 @@ end
 function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.SetLP(p,1)
+end
+function s.damcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local bc=c:GetBattleTarget()
+	return c:IsRelateToBattle() and bc:IsLocation(LOCATION_GRAVE) and bc:IsMonster()
+end
+function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	local bc=e:GetHandler():GetBattleTarget()
+	Duel.SetTargetCard(bc)
+	local dam=bc:GetAttack()
+	if dam<0 then dam=0 end
+	Duel.SetTargetPlayer(1-tp)
+	Duel.SetTargetParam(dam)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
+end
+function s.damop(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) then
+		local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+		local dam=tc:GetAttack()
+		if dam<0 then dam=0 end
+		Duel.Damage(p,dam,REASON_EFFECT)
+	end
 end
