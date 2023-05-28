@@ -124,7 +124,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c)
-	return c:IsAbleToRemoveAsCost() and ((c:IsType(TYPE_TUNER) and c:IsLocation(LOCATION_GRAVE)) or (c:IsCode(70902743) and c:IsLocation(LOCATION_MZONE))
+	return c:IsAbleToRemoveAsCost() and ((c:IsType(TYPE_TUNER) and c:IsLocation(LOCATION_GRAVE)) or (c:IsCode(70902743) and c:IsLocation(LOCATION_MZONE)))
 end
 function s.rescon(sg,e,tp,mg)
 	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0 and sg:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)~=#sg
