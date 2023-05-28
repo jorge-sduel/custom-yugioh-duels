@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
-	--Synchro.AddProcedure(c,nil,1,1,aux.FilterBoolFunction(Card.IsCode,70902743),1,1)
+	--Synchro.AddProcedure(c,nil,5,5,aux.FilterBoolFunction(Card.IsType,TYPE_SYNCHRO),1,1)
 	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,1)
 	--pierce
 	local e1=Effect.CreateEffect(c)
