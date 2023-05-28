@@ -79,10 +79,14 @@ end
 function s.lptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLP(1-tp)>1 end
 	Duel.SetTargetPlayer(1-tp)
+	Duel.SetChainLimit(s.climit)
 end
 function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.SetLP(p,1)
+end
+function s.climit(e,lp,tp)
+	return lp==tp or not e:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
