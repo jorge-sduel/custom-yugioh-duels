@@ -5,6 +5,17 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	Synchro.AddProcedure(c,nil,5,5,aux.FilterBoolFunction(Card.IsCode,70902743),1,1)
 --	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,1)
+	--spsummon
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_FIELD)
+	e0:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e0:SetCode(EFFECT_SPSUMMON_PROC)
+	e0:SetRange(LOCATION_EXTRA)
+	e0:SetValue(SUMMON_TYPE_SYNCHRO)
+	e0:SetCondition(s.hspcon)
+	e0:SetTarget(s.hsptg)
+	e0:SetOperation(s.hspop)
+	c:RegisterEffect(e0)
 	--pierce
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -111,4 +122,34 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 		if dam<0 then dam=0 end
 		Duel.Damage(p,dam,REASON_EFFECT)
 	end
+end
+function s.spfilter(c)
+	return c:IsAbleToRemoveAsCost() and (c:IsType(TYPE_TUNER) or c:IsCode(70902743))
+end
+function s.rescon(sg,e,tp,mg)
+	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0 and sg:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE)~=#sg
+end
+function s.hspcon(e,c)
+	if c==nil then return true end
+	local tp=c:GetControler()
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,nil)
+	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_GRAVE) then return false end
+	return aux.SelectUnselectGroup(g,e,tp,6,6,s.rescon,0)
+end
+function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
+	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_GRAVE|LOCATION_MZONE,0,nil)
+	local sg=aux.SelectUnselectGroup(g,e,tp,6,6,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
+	if #sg > 0 then
+		sg:KeepAlive()
+		e:SetLabelObject(sg)
+		return true
+	else
+		return false
+	end
+end
+function s.hspop(e,tp,eg,ep,ev,re,r,rp,c)
+	local sg=e:GetLabelObject()
+	Duel.Remove(sg,POS_FACEUP,REASON_COST)
+	c:SetMaterial(sg)
+	sg:DeleteGroup()
 end
