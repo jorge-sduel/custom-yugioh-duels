@@ -78,7 +78,7 @@ function s.initial_effect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
 	e8:SetRange(LOCATION_MZONE)
 	e8:SetCode(EFFECT_DISABLE)
-	e8:SetCondition(function(e) return Duel.GetLP(e:GetHandlerPlayer())<=1000 and e:GetHandler():IsLocation(LOCATION_MZONE) end)
+	e8:SetCondition(function(e) return Duel.GetLP(e:GetHandlerPlayer())>=1000 and e:GetHandler():IsLocation(LOCATION_MZONE) end)
 	c:RegisterEffect(e8)
 end
 s.material={70902743}
