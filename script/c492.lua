@@ -73,6 +73,13 @@ function s.initial_effect(c)
 	e7:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e7:SetValue(aux.tgoval)
 	c:RegisterEffect(e7)
+--negate
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetRange(LOCATION_MZONE)
+	e8:SetCode(EFFECT_DISABLE)
+	e8:SetCondition(function(e) return e:GetHandler():Duel.GetLP()<=1000 and e:GetHandler():IsLocation(LOCATION_MZONE) end)
+	c:RegisterEffect(e8)
 end
 s.material={70902743}
 s.listed_names={70902743}
