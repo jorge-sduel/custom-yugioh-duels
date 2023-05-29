@@ -76,10 +76,12 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	--local tg=Group.FromCards(c)
 	--while Duel.GetLocationCount(tp,LOCATION_MZONE)>0 do
 		local token=Duel.CreateToken(tp,id+1)
+	Duel.ChangePosition(c,POS_FACEDOWN_ATTACK)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
 	Duel.SendtoDeck(c,nil,0,REASON_RULE)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
-		Duel.MoveToField(token,tp,tp,LOCATION_MZONE,POS_FACEUP,true,(1<<seq))
+		Duel.MoveToField(token,tp,tp,LOCATION_MZONE,POS_FACEDOWN_ATTACK,true,(1<<seq))
+	Duel.ChangePosition(c,POS_FACEUP_ATTACK)
 		--tg:AddCard(token)
 			--token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 		--token type
