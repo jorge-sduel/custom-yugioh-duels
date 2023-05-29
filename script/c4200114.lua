@@ -79,7 +79,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
 	Duel.SendtoDeck(c,nil,0,REASON_RULE)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
-		Duel.MoveToField(token,tp,tp,LOCATION_MZONE,POS_FACEUP,true,seq)
+		Duel.MoveToField(token,tp,tp,LOCATION_MZONE,POS_FACEUP,true,c:GetPreviousSequence())
 		--tg:AddCard(token)
 			--token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 		--token type
