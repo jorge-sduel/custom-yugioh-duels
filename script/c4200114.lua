@@ -89,6 +89,12 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		e4b:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e4b:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 		token:RegisterEffect(e4b)
+	--change name
+	local e5b=Effect.CreateEffect(c)
+	e5b:SetType(EFFECT_TYPE_SINGLE)
+	e5b:SetCode(EFFECT_SET_PROC)
+	e5b:SetValue(SUMMON_TYPE_LINK)
+	token:RegisterEffect(e5b)
 		--[[destroy damage
 		local e6=Effect.CreateEffect(c)
 		e6:SetCategory(CATEGORY_DAMAGE)
