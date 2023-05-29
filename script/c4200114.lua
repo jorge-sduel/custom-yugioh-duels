@@ -56,7 +56,7 @@ function cid.initial_effect(c)
 end
 function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		local c=e:GetHandler()
-		local c:GetSequence()
+		local seq=c:GetSequence()
 		local tcode=c.dfc_front_side
 	--	if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
 	--change name
