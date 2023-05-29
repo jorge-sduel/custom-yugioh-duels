@@ -56,6 +56,7 @@ function cid.initial_effect(c)
 end
 function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 		local c=e:GetHandler()
+		local c:GetSequence()
 		local tcode=c.dfc_front_side
 	--	if not c:IsRelateToEffect(e) or c:IsImmuneToEffect(e) or not tcode then return false end
 	--change name
@@ -78,7 +79,7 @@ function cid.ope(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
 	Duel.SendtoDeck(c,nil,0,REASON_RULE)
 	Duel.SendtoDeck(c,nil,-2,REASON_RULE)
-		Duel.MoveToField(token,tp,tp,LOCATION_MZONE,POS_FACEUP,true)
+		Duel.MoveToField(token,tp,tp,LOCATION_MZONE,POS_FACEUP,true,seq)
 		--tg:AddCard(token)
 			--token:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
 		--token type
