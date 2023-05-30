@@ -37,7 +37,6 @@ function cid.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,cid.filter,tp,LOCATION_MZONE,0,1,1,nil)
 	if #g>0 then
 		local lv=g:GetFirst():GetLevel()
-		Duel.Hint(HINT_SELECTMSG,tp,HINGMSG_LVRANK)
 		e:SetLabel(Duel.AnnounceLevel(tp,1,5,lv))
 	end
 end
