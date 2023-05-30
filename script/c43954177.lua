@@ -1,6 +1,6 @@
 --Divine Lord's Grace
 --Scripted by: XGlitchy30
-local cid,cid=GetID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
