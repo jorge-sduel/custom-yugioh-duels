@@ -47,7 +47,7 @@ function cid.afilter(c)
 	return c:GetAttack()>0
 end
 function cid.ffilter(c,fc)
-	return c:IsFusionSetCard(0xfe9) or c:IsFusionCode(table.unpack(c43954163.FELGRAND))
+	return c:IsSetCard(0xfe9) or c:IsFusionCode(table.unpack(c43954163.FELGRAND))
 end
 --CHANGE ATK
 function cid.atkfilter(c)
