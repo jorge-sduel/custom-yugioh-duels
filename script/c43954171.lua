@@ -119,7 +119,7 @@ function cid.caop1(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.caop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if e:GetLabelObject():GetLabel()==1 and c:IsRelateToBattle() and c:IsChainAttackable() then
+	if e:GetLabelObject():GetLabel()==1 and c:IsRelateToBattle() and c:CanChainAttack(2,true) then
 		Duel.ChainAttack()
 	end
 end
