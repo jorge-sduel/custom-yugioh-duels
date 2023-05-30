@@ -3,7 +3,7 @@
 local cid,id=GetID()
 function cid.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,cid.ffilter,7,2)
+	Xyz.AddProcedure(c,cid.ffilter,7,2)
 	c:EnableReviveLimit()
 	--change position
 	local e1=Effect.CreateEffect(c)
