@@ -167,7 +167,7 @@ function cid.ssop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(cid.ssfilter),tp,LOCATION_GRAVE,0,nil)
 	if g:GetCount()==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local sg=g:SelectSubGroup(tp,aux.dncheck,false,1,2)
+	        local sg=aux.SelectUnselectGroup(g,e,tp,1,2,aux.ChkfMMZ(2),1,tp,HINTMSG_REMOVE,nil,nil,true)
 	Duel.SendtoHand(sg,nil,REASON_EFFECT)
 	Duel.ConfirmCards(1-tp,sg)
 end
