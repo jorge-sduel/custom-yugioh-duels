@@ -54,7 +54,7 @@ function cid.ffilter(c)
 end
 --NEGATE
 function cid.cfilter(c)
-	return (c:IsLinkSetCard(0xfe9) or c:IsLinkCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeckAsCost()
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeckAsCost()
 end
 --------
 function cid.discon(e,tp,eg,ep,ev,re,r,rp)
