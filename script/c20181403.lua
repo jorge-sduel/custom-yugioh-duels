@@ -44,7 +44,7 @@ function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsRace(RACE_DINOSAUR) then return false end
 end
 function cid.cfilter(c)
-	return c:IsAbleToGraveAsCost() and c:IsSetCard(0x9b5) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM+TYPE_PENDULUM) or c:IsLocation(LOCATION_HAND))
+	return c:IsAbleToGraveAsCost() and c:IsSetCard(0x9b5) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() and c:IsType(TYPE_PENDULUM) or c:IsLocation(LOCATION_HAND))
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.spcfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nil,e,tp) end
