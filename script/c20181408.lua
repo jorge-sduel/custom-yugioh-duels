@@ -49,7 +49,7 @@ function cid.teop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,3))
 	local g=Duel.SelectMatchingCard(tp,cid.tefilter,tp,LOCATION_DECK,0,1,1,nil)
 	if g:GetCount()>0 then
-	
+			Duel.SendtoHand(g,nil,REASON_EFFECT)
 	end
 end
 function cid.cfilter(c,tp)
