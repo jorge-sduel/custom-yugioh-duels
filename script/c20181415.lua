@@ -23,10 +23,11 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cid.filter(c,tp)
-	return c:IsFaceup() and c:IsRace(RACE_DINOSAUR) and Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_DECK,0,1,nil,{c:GetCode()})
+	local code=c:GetCode()
+	return c:IsFaceup() and c:IsRace(RACE_DINOSAUR) and Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_DECK,0,1,nil,code)
 end
 function cid.cfilter(c,t)
-	return c:IsAbleToGrave() and c:IsSetCard(0x9b5) and not c:IsCode(table.unpack(t))
+	return c:IsAbleToGrave() and c:IsSetCard(0x9b5) and not c:IsCode(code)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and cid.filter(chkc,tp) end
@@ -59,7 +60,8 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_PHASE+PHASE_END)
 		Duel.RegisterEffect(e2,tp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local g=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetCode())
+	local code=tc:GetCode()
+		local g=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_DECK,0,1,1,nil,code)
 		if #g>0 then
 			Duel.BreakEffect()
 			Duel.SendtoGrave(g,REASON_EFFECT)
