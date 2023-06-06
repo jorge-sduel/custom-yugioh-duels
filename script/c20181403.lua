@@ -1,27 +1,27 @@
 --created by Swag, coded by Lyris
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 local cid,id=GetID()
 function cid.initial_effect(c)
-	aux.AddOrigPandemoniumType(c)
-	local e4=Effect.CreateEffect(c)
+   RPendulum.AddProcedure(c)
+c:AddSetcodesRule(id,false,0xbb00)
+	--[[local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetRange(LOCATION_SZONE)
+	e4:SetRange(LOCATION_PZONE)
 	e4:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
 	e4:SetTargetRange(1,0)
 	e4:SetTarget(cid.splimit)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4)]]
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_QUICK_O)
 	e5:SetCode(EVENT_FREE_CHAIN)
-	e5:SetRange(LOCATION_SZONE)
+	e5:SetRange(LOCATION_PZONE)
 	e5:SetCountLimit(1)
 	e5:SetCategory(CATEGORY_DAMAGE)
-	e5:SetCondition(aux.PandActCheck)
 	e5:SetCost(cid.cost)
 	e5:SetTarget(cid.target)
 	e5:SetOperation(cid.activate)
 	c:RegisterEffect(e5)
-	aux.EnablePandemoniumAttribute(c,e5)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
 	e2:SetCode(EVENT_SUMMON_SUCCESS)
@@ -42,7 +42,6 @@ function cid.initial_effect(c)
 end
 function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsRace(RACE_DINOSAUR) then return false end
-	return bit.band(sumtype,SUMMON_TYPE_SPECIAL+726)==SUMMON_TYPE_SPECIAL+726
 end
 function cid.cfilter(c)
 	return c:IsAbleToGraveAsCost() and c:IsSetCard(0x9b5) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM+TYPE_PENDULUM) or c:IsLocation(LOCATION_HAND))
