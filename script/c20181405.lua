@@ -78,7 +78,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.filter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PANDEMONIUM+TYPE_PENDULUM) and c:IsSetCard(0x9b5)
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsSetCard(0x9b5)
 end
 function cid.spcon(e,c)
 	if c==nil then return true end
