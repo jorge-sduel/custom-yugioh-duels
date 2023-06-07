@@ -18,7 +18,6 @@ if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua"
 	e5:SetRange(LOCATION_SZONE)
 	e5:SetCountLimit(1)
 	e5:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e5:SetCondition(aux.PandActCheck)
 	e5:SetCost(cid.cost)
 	e5:SetTarget(cid.sptg)
 	e5:SetOperation(cid.spop)
