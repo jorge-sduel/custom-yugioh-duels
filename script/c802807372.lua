@@ -21,10 +21,10 @@ end
 function c802807372.filter1(c,e,tp)
 	local code=c:GetCode()
 	local tcode=c802807372.list[code]
-	return tcode and c:IsType(TYPE_SYNCHRO) and Duel.IsExistingMatchingCard(c802807372.filter2,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,tcode,e,tp)
+	return c:IsType(TYPE_SYNCHRO) and (ft>0 or (c:GetSequence()<5 and c:IsControler(tp))) and Duel.IsExistingMatchingCard(c802807372.filter2,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,tcode,e,tp)
 end
 function c802807372.filter2(c,tcode,e,tp)
-	return c:IsCode(tcode) and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
+	return c:IsSetCard(0x104f) and c.assault_mode and c.assault_mode==tcode and c:IsCanBeSpecialSummoned(e,0,tp,true,false)
 end
 function c802807372.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
