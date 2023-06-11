@@ -1,7 +1,6 @@
 --Assault Mode Activate II
 function c802807372.initial_effect(c)
 --バスター・モードII
-function c802807372.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
