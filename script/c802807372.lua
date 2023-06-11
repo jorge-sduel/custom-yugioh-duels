@@ -17,7 +17,7 @@ function c802807372.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	return true
 end
-function c802807372.filter1(c,e,tp)
+function c802807372.filter1(c,e,tp,ft)
 	local code=c:GetCode()
 --	local tcode=c802807372.list[code]
 	return c:IsType(TYPE_SYNCHRO) and (ft>0 or (c:GetSequence()<5 and c:IsControler(tp))) and Duel.IsExistingMatchingCard(c802807372.filter2,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,c:GetCode(),e,tp)
