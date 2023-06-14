@@ -59,7 +59,7 @@ function cm.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function cm.activate(e,tp,eg,ep,ev,re,r,rp)
-	local c=aux.ExceptThisCard(e)
+	local c=e:GetHandler()
 	if e:GetLabel()==0 then
 		local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
 		if #g~=2 or g:GetClassCount(Card.GetLevel)~=1 or Duel.GetLocationCountFromEx(tp)<=0 then return end
