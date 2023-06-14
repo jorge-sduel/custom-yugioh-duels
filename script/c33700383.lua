@@ -23,10 +23,10 @@ function cm.spfilter2(c,e,tp)
 	local lv=0
 	if c:IsLevelAbove(1) then lv=c:GetLevel() end
 	if c:IsRankAbove(1) then lv=c:GetRank() end
-	return c:IsSetCard(0x445) and c:IsFaceup() and lv>0 and Duel.GetLocationCountFromEx(tp)>0 and Duel.IsExistingMatchingCard(cm.spfilter4,tp,LOCATION_EXTRA,0,1,nil,e,tp,lv) and not c:IsImmuneToEffect(e)
+	return c:IsFaceup() and lv>0 and Duel.GetLocationCountFromEx(tp)>0 and Duel.IsExistingMatchingCard(cm.spfilter4,tp,LOCATION_EXTRA,0,1,nil,e,tp,lv) and not c:IsImmuneToEffect(e)
 end
 function cm.spfilter4(c,e,tp,lv)
-	return c:IsType(TYPE_XYZ) and c:IsSetCard(0x445) and c:IsRankBelow(lv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_XYZ) and c:IsRankBelow(lv) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then
