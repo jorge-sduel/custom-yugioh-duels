@@ -26,14 +26,14 @@ function cid.initial_effect(c)
   --  local e4=e2:Clone()
   --  e4:SetCode(EVENT_SPSUMMON_SUCCESS)
    -- c:RegisterEffect(e4)
-	--become material
+	--[[become material
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetCode(EVENT_BE_MATERIAL)
 	e5:SetCondition(cid.condition2)
 	e5:SetOperation(cid.operation2)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e5)]]
 end
 function cid.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0xab5)
