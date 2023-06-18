@@ -36,7 +36,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e5)]]
 end
 function cid.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0xab5)
+	return c:IsLocation(LOCATION_EXTRA) and not c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function cid.cfilter(c)
 	return c:IsFaceup() and  c:GetSummonLocation()==LOCATION_EXTRA  and c:IsType(TYPE_EFFECT)
