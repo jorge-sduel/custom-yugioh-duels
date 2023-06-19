@@ -151,7 +151,7 @@ function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
-	e2:SetValue(cid.atkval)
+	e2:SetValue(500)
 	rc:RegisterEffect(e2,true)
   
 	if not rc:IsType(TYPE_EFFECT) then
