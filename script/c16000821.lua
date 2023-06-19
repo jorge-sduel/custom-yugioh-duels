@@ -2,8 +2,7 @@
 local cid,id=GetID()
 local ref=_G['c'..id]
 function cid.initial_effect(c)
-
- aux.AddOrigPandemoniumType(c)
+ Pendulum.AddProcedure(c)
 --spsummon limit
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -16,14 +15,11 @@ function cid.initial_effect(c)
 --Activate by targeting 3 of your Banished cards; Shuffle them into the Deck. When a "Medivatale" Evolute Monster(s) is Special Summoned: You can inflict  Damage to your opponent equal to their E-C x100, then destroy this card. You can only use each effect of "Medivatale Alice" once per turn.
 	--Activate
 	local p1=Effect.CreateEffect(c)
-	p1:SetType(EFFECT_TYPE_ACTIVATE+EFFECT_TYPE_QUICK_O)
-	p1:SetCode(EVENT_FREE_CHAIN)
-	p1:SetCondition(aux.PandActCheck)
+	p1:SetType(EFFECT_TYPE_IGNITION)
+	p1:SetRange(LOCATION_PZONE)
 	p1:SetTarget(cid.target)
 	p1:SetOperation(cid.activate)
 	c:RegisterEffect(p1)
-	
- 
 	--reduce
 	local p3=Effect.CreateEffect(c)
 	p3:SetDescription(aux.Stringid(id,0))
@@ -36,8 +32,6 @@ function cid.initial_effect(c)
 	p3:SetTarget(cid.target2)
 	p3:SetOperation(cid.operation2)
 	c:RegisterEffect(p3)
-
-  aux.EnablePandemoniumAttribute(c,p2)
 
 --MONSTER EFFECTO
    --special summon
@@ -68,10 +62,10 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function cid.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0xab5)
+	return c:IsLocation(LOCATION_EXTRA) and not c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function cid.counterfilter(c)
-	return c:GetSummonLocation()~=LOCATION_EXTRA or c:IsSetCard(0xab5)
+	return c:GetSummonLocation()~=LOCATION_EXTRA
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp)  end
