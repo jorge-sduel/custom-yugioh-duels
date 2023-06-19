@@ -136,7 +136,8 @@ function cid.ffilter(c)
 	return c:IsSetCard(0xab5) 
 end
 function cid.mtcon(e,tp,eg,ep,ev,re,r,rp)
-	local ec=e:GetHandler():GetReasonCard()
+	local c=e:GetHandler()
+	local rc=c:GetReasonCard()
 	return r==REASON_SPSUMMON and rc.Is_Evolute
 end
 function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
