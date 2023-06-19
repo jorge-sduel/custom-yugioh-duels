@@ -83,7 +83,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	if g:IsExists(Card.IsLocation,1,nil,LOCATION_DECK) then Duel.ShuffleDeck(tp) end
 end
 function cid.gfilter(c,tp)
-	return c:IsSetCard(0xab5) and c:GetStage()>0  and c:GetSummonPlayer()==tp
+	return c:IsSetCard(0xab5) and c:GetLevel()>0  and c:GetSummonPlayer()==tp
 end
 
 function cid.condition2(e,tp,eg,ep,ev,re,r,rp)
