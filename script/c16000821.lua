@@ -132,7 +132,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 end
 function cid.ffilter(c)
-	return c:IsSetCard(0xab5) c.Is_Evolute
+	return c:IsSetCard(0xab5) and c.Is_Evolute
 end
 function cid.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetReasonCard()
