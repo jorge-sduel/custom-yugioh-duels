@@ -137,7 +137,7 @@ function cid.ffilter(c)
 end
 function cid.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetReasonCard()
-	return r & (REASON_EVOLUTE)~=0
+	return r==REASON_SPSUMMON and rc.Is_Evolute
 end
 function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
