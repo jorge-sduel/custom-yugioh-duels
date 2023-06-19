@@ -141,7 +141,7 @@ end
 function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	if Duel.GetFlagEffect(tp,id)~=0 and rc.Is_Evolute then return end
+	if Duel.GetFlagEffect(tp,id)~=0 and not rc.Is_Evolute then return end
 	Duel.Hint(HINT_CARD,0,id)
 --gain ATK
 	local e1=Effect.CreateEffect(e:GetHandler())
