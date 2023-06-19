@@ -96,7 +96,7 @@ end
 function cid.operation2(e,tp,eg,ep,ev,re,r,rp)
 	 local tc=eg:GetFirst()
 	if tc:IsFaceup() and tc:IsLocation(LOCATION_MZONE) and not tc:IsImmuneToEffect(e) then
-   Duel.Damage(1-tp,tc:GetStage()*100,REASON_EFFECT)
+   Duel.Damage(1-tp,tc:GetLevel()*100,REASON_EFFECT)
 	end
 end
 function cid.spfilter(c,e,tp)
