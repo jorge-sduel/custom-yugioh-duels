@@ -136,7 +136,7 @@ function cid.ffilter(c)
 end
 function cid.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetReasonCard()
-	return  ec:GetMaterial():IsExists(cid.ffilter,1,nil) and  r==REASON_EVOLUTE 
+	return  ec:GetMaterial():IsExists(cid.ffilter,1,nil) and  r==REASON_MATERIAL+REASON_EVOLUTE 
 end
 function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFlagEffect(tp,id)~=0 then return end
