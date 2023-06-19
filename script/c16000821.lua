@@ -136,13 +136,13 @@ function cid.ffilter(c)
 end
 function cid.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetReasonCard()
-	return  ec:GetMaterial():IsExists(cid.ffilter,1,nil) and  r==REASON_EVOLUTE ~=0 
+	return  ec:GetMaterial():IsExists(cid.ffilter,1,nil) and  r==REASON_EVOLUTE ~=0
 end
 function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetFlagEffect(tp,id)~=0 then return end
-	Duel.Hint(HINT_CARD,0,id)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
+	if Duel.GetFlagEffect(tp,id)~=0 and rc.Is_Evolute then return end
+	Duel.Hint(HINT_CARD,0,id)
 --gain ATK
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetProperty(EFFECT_FLAG_CLIENT_HINT)
