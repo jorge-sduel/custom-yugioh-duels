@@ -1,6 +1,7 @@
 --Medivatale Alice
 local cid,id=GetID()
 local ref=_G['c'..id]
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function cid.initial_effect(c)
  Pendulum.AddProcedure(c)
 --spsummon limit
@@ -136,7 +137,7 @@ function cid.ffilter(c)
 end
 function cid.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetReasonCard()
-	return  ec:GetMaterial():IsExists(cid.ffilter,1,nil) and  r==REASON_EVOLUTE ~=0
+	return r & (REASON_EVOLUTE)~=0
 end
 function cid.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
