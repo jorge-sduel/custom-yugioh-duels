@@ -23,17 +23,17 @@ function cid.initial_effect(c)
 	e1:SetTarget(cid.target)
 	e1:SetOperation(cid.operation)
 	c:RegisterEffect(e1)  
-  --become material
+  --[[become material
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetCode(EVENT_BE_MATERIAL)
 	e5:SetCondition(cid.condition2)
 	e5:SetOperation(cid.operation2)
-	c:RegisterEffect(e5) 
+	c:RegisterEffect(e5)]]
 end
 function cid.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0xab5)
+	return c:IsLocation(LOCATION_EXTRA) and not (c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_DARK))
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
