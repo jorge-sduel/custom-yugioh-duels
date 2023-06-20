@@ -16,7 +16,7 @@ function cid.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
-	e1:SetHintTiming(0,0x11e0)
+	--e1:SetHintTiming(0,0x11e0)
 	e1:SetCountLimit(1,id)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_HAND)
@@ -42,7 +42,7 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function cid.filter(c,e,tp)
-	return c.Is_Evolute and c:IsSetCard(0xab5) and c:IsSpecialSummonable(SUMMON_TYPE_SPECIAL+388)
+	return c.Is_Evolute and c:IsSpecialSummonable(SUMMON_TYPE_EVOLUTE)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
  if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_EXTRA,0,1,nil) end
