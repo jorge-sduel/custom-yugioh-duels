@@ -1,5 +1,6 @@
 --Medivatale Sunangel
 local cid,id=GetID()
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 function cid.initial_effect(c)
  --spsummon limit
 	local e0=Effect.CreateEffect(c)
@@ -52,7 +53,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_EXTRA,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
-	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_SPECIAL+388)
+	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_EVOLUTE)
 	end
 end
 function cid.ffilter(c)
