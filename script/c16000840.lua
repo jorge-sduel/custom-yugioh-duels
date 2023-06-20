@@ -41,7 +41,7 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(c,REASON_COST+REASON_DISCARD)
 end
 function cid.filter(c,e,tp)
-	return c:IsType(TYPE_EVOLUTE) and c:IsSetCard(0xab5) and c:IsSpecialSummonable(SUMMON_TYPE_SPECIAL+388)
+	return c.Is_Evolute and c:IsSetCard(0xab5) and c:IsSpecialSummonable(SUMMON_TYPE_SPECIAL+388)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
  if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_EXTRA,0,1,nil) end
