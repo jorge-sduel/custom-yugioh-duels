@@ -86,7 +86,7 @@ function cid.operation2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
 end
 function cid.con(e,tp,eg,ep,ev,re,r,rp)
-	return  e:GetHandler():GetECounter(tp)>=4
+	return  e:GetHandler():GetCounter(0x111f)>=4
    
 end
 function cid.damcon(e,tp,eg,ep,ev,re,r,rp)
