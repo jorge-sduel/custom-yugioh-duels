@@ -36,7 +36,7 @@ function cid.initial_effect(c)
 end
 
 function cid.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0xab5)
+	return c:IsLocation(LOCATION_EXTRA) and not (c:IsRace(RACE_FAIRY) and c:IsAttribute(ATTRIBUTE_DARK))
 end
 function cid.filter(c,e,tp)
 	return   c:IsSetCard(0xab5) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
@@ -56,9 +56,10 @@ end
 function cid.ffilter(c)
 	return  c:IsSetCard(0xab5)
 end
-		function cid.condition2(e,tp,eg,ep,ev,re,r,rp)
-	local ec=e:GetHandler():GetReasonCard()
-	return  ec:GetMaterial():IsExists(cid.ffilter,1,nil) and   r==REASON_EVOLUTE 
+function cid.condition2(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local rc=c:GetReasonCard()
+	return r==REASON_SPSUMMON and rc.Is_Evolute
 end
 function cid.operation2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -90,7 +91,7 @@ function cid.con(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return ep~=tp and e:GetHandler():GetECounter(tp)>=4 and  c==Duel.GetAttacker() and Duel.GetAttackTarget() and Duel.GetAttackTarget():IsDefensePos()
+	return ep~=tp and e:GetHandler():GetCounter(0x111f)>=4 and  c==Duel.GetAttacker() and Duel.GetAttackTarget() and Duel.GetAttackTarget():IsDefensePos()
 end
 function cid.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ChangeBattleDamage(ep,ev*2)
