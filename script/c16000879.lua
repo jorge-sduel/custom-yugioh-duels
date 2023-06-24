@@ -1,7 +1,7 @@
 --Medivatale 
 local cid,id=GetID()
 function cid.initial_effect(c)
-   --spsummon limit
+   --[[spsummon limit
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
 	e0:SetRange(LOCATION_MZONE)
@@ -9,7 +9,7 @@ function cid.initial_effect(c)
 	e0:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetTargetRange(1,0)
 	e0:SetTarget(cid.sumlimit)
-	c:RegisterEffect(e0)
+	c:RegisterEffect(e0)]]
 --summon success
 	local e2=Effect.CreateEffect(c)
 	--e2:SetCategory(CATEGORY_HAND)
@@ -26,14 +26,14 @@ function cid.initial_effect(c)
 	local e4=e2:Clone()
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	c:RegisterEffect(e4)
-	--become material
+	--[[become material
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetCode(EVENT_BE_MATERIAL)
 	e5:SetCondition(cid.mtcon)
 	e5:SetOperation(cid.mtop)
-	c:RegisterEffect(e5)	
+	c:RegisterEffect(e5)]]	
 end
 function cid.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0xab5)
