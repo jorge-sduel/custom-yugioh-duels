@@ -6,7 +6,7 @@ if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua"
    c:AddSetcodesRule(id,false,0xbb00)
 	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DINOSAUR),1,99,id-3)
 	c:EnableReviveLimit()
-	[[local e4=Effect.CreateEffect(c)
+	--[[local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_PZONE)
 	e4:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
