@@ -47,7 +47,7 @@ function s.nametg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local code=e:GetHandler():GetCode()
 	--"Gadget" monster, except this card's current name
-	s.announce_filter={0x33,OPCODE_ISSETCARD,code,OPCODE_ISCODE,OPCODE_NOT,OPCODE_AND,TYPE_MONSTER,OPCODE_ISTYPE,OPCODE_AND}
+	s.announce_filter={0x8,OPCODE_ISSETCARD,code,OPCODE_ISCODE,OPCODE_NOT,OPCODE_AND,TYPE_MONSTER,OPCODE_ISTYPE,OPCODE_AND}
 	local ac=Duel.AnnounceCard(tp,table.unpack(s.announce_filter))
 	Duel.SetTargetParam(ac)
 	Duel.SetOperationInfo(0,CATEGORY_ANNOUNCE,nil,0,tp,ANNOUNCE_CARD_FILTER)
