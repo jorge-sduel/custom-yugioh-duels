@@ -5,6 +5,7 @@ if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua"
  RPendulum.AddProcedure(c)   
  c:AddSetcodesRule(id,false,0xbb00)
  c:SetSPSummonOnce(id)
+	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DINOSAUR),1,99,cid.mfilter)
 	c:EnableReviveLimit()
 	--[[local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
@@ -24,7 +25,7 @@ if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua"
 	e0:SetTarget(cid.destg)
 	e0:SetOperation(cid.activate)
 	c:RegisterEffect(e0)
-	aux.AddFusionProcFunFun(c,cid.mfilter,aux.FilterBoolFunction(Card.IsSetCard,0x9b5),2,true,true)
+	--aux.AddFusionProcFunFun(c,cid.mfilter,aux.FilterBoolFunction(Card.IsSetCard,0x9b5),2,true,true)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
@@ -88,7 +89,7 @@ function cid.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Release(g,REASON_COST)
 end
 function cid.filter(c)
-	return c:IsType(TYPE_PANDEMONIUM) and c:IsAbleToGraveAsCost()
+	return c:IsType(TYPE_PENDULUM) and c:IsAbleToGraveAsCost()
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToGraveAsCost() and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_HAND,0,1,nil) end
@@ -110,7 +111,7 @@ function cid.mfilter(c,fc,sub,mg,sg)
 end
 function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsRace(RACE_DINOSAUR) then return false end
-	return bit.band(sumtype,SUMMON_TYPE_PANDEMONIUM)==SUMMON_TYPE_PANDEMONIUM
+	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 function cid.efilter(e,te)
 	return te:IsActiveType(TYPE_MONSTER) and te:GetOwner()~=e:GetOwner()
@@ -126,15 +127,12 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function cid.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) end
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1500)
+	if chk==0 then return Duel.CheckPendulumZones(tp) end
 end
 function cid.penop(e,tp,eg,ep,ev,re,r,rp)
+	if not Duel.CheckPendulumZones(tp) then return false end
 	local c=e:GetHandler()
-	if Duel.Damage(1-tp,1500,REASON_EFFECT)>0 and c:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 
-	and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) then
-		aux.PandSSet(c,REASON_EFFECT,TYPE_EFFECT+TYPE_FUSION)(e,tp,eg,ep,ev,re,r,rp)
-		Duel.ConfirmCards(1-tp,c)
+	if c:IsRelateToEffect(e) then
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
