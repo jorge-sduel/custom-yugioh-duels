@@ -1,10 +1,14 @@
 -- Terradication Tormentor, Calamitybringer HADES
 -- Created and scripted by Swaggy
 local cid,id=GetID()
+cid.IsTimeleap=true
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
-	--time leap procedure
-	aux.AddTimeleapProc(c,8,cid.sumcon,cid.tlfilter,cid.customop)
 	c:EnableReviveLimit()
+	  --synchro summon
+	--time leap procedure
+Timeleap.AddProcedure(c,ref.material,1,1,cid.tlfilter)
+	--time leap procedure
 	--Toadally Gaiaemperor.
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -45,14 +49,14 @@ return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and
 	Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x9b5)>=5
 end
 function cid.tlfilter(c,e,mg)
-	return c:IsCode(20184107) and c:GetLevel()==e:GetHandler():GetFuture()-1
+	return c:IsCode(20184107)
 end
 function cid.actfilter(c,tp)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and c:IsSetCard(0x9b5) and (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_HAND) or (c:IsLocation(LOCATION_GRAVE) (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup()))))
+	return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and Duel.GetLocationCount(tp,LOCATION_PZONE)>0 and c:IsSetCard(0x9b5) and (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_HAND) or (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup()))))
 		and not c:IsForbidden() and not Duel.IsExistingMatchingCard(cid.excfilter,tp,LOCATION_SZONE,0,1,c)
 end
 function cid.excfilter(c)
-	return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and c:IsFaceup()
+	return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsFaceup()
 end
  function cid.actcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
