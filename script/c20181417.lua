@@ -1,16 +1,8 @@
 -- Terradication Tormentor, Calamitybringer HADES
 -- Created and scripted by Swaggy
-local function getID()
-	local str=string.match(debug.getinfo(2,'S')['source'],"c%d+%.lua")
-	str=string.sub(str,1,string.len(str)-4)
-	local cod=_G[str]
-	local id=tonumber(string.sub(str,2))
-	return id,cod
-end
-local id,cid=getID()
+local cid,id=GetID()
 function cid.initial_effect(c)
 	--time leap procedure
-	aux.AddOrigTimeleapType(c,false)
 	aux.AddTimeleapProc(c,8,cid.sumcon,cid.tlfilter,cid.customop)
 	c:EnableReviveLimit()
 	--Toadally Gaiaemperor.
@@ -43,16 +35,16 @@ function cid.initial_effect(c)
 	e3:SetTarget(cid.damtg)
 	e3:SetOperation(cid.damop)
 	c:RegisterEffect(e3)
-	end
-	function cid.customop
-	 Duel.SendToDeck(g,nil,REASON_MATERIAL+0x10000000000)
-	 end
-	function cid.sumcon(e,c)
-	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and
-		Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x9b5)>=5
 end
-	function cid.tlfilter(c,e,mg)
+function cid.customop
+ Duel.SendToDeck(g,nil,REASON_MATERIAL+0x10000000000)
+end
+function cid.sumcon(e,c)
+if c==nil then return true end
+return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and
+	Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x9b5)>=5
+end
+function cid.tlfilter(c,e,mg)
 	return c:IsCode(20184107) and c:GetLevel()==e:GetHandler():GetFuture()-1
 end
 function cid.actfilter(c,tp)
