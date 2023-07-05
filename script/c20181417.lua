@@ -7,7 +7,7 @@ function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-Timeleap.AddProcedure(c,ref.material,1,1,cid.tlfilter)
+Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon)
 	--time leap procedure
 	--Toadally Gaiaemperor.
 	local e1=Effect.CreateEffect(c)
@@ -40,13 +40,17 @@ Timeleap.AddProcedure(c,ref.material,1,1,cid.tlfilter)
 	e3:SetOperation(cid.damop)
 	c:RegisterEffect(e3)
 end
-function cid.customop
- Duel.SendToDeck(g,nil,REASON_MATERIAL+0x10000000000)
+function cid.TimeCon(e,c)
+	if c==nil then return true end
+	return Duel.GetMatchingGroupCount(cid.terfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)>=5
 end
 function cid.sumcon(e,c)
 if c==nil then return true end
 return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and
 	Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x9b5)>=5
+end
+function cid.terfilter(c,e,mg)
+	return c:IsSetCard(0x)
 end
 function cid.tlfilter(c,e,mg)
 	return c:IsCode(20184107)
