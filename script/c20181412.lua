@@ -120,8 +120,9 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.descost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveEC(tp,5,REASON_COST) end
-	e:GetHandler():RemoveEC(tp,5,REASON_COST)
+	local c=e:GetHandler()
+	if chk==0 then return c:IsCanRemoveCounter(tp,0x111f,5,REASON_COST) end
+	c:RemoveCounter(tp,0x111f,5,REASON_COST)
 end
 function cid.desfilter(c,atk)
 	return c:IsFaceup() and c:IsAttackBelow(atk)
