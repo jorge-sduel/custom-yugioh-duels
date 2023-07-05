@@ -3,6 +3,7 @@ if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua"
 if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
 	--c:EnableCounterPermit(0x88)
  local cid,id=GetID()   
+cid.Is_Evolute=true
    function cid.initial_effect(c)   
       RPendulum.AddProcedure(c)   
    c:AddSetcodesRule(id,false,0xbb00)
