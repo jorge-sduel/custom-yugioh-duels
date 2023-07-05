@@ -1,21 +1,25 @@
 --created by Swag, coded by Lyris
-local cid,id=GetID()
-function cid.initial_effect(c)
+if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end   
+if not EVOLUTE_IMPORTED then Duel.LoadScript("proc_evolute.lua") end
+	--c:EnableCounterPermit(0x88)
+ local cid,id=GetID()   
+   function cid.initial_effect(c)   
+      RPendulum.AddProcedure(c)   
+   c:AddSetcodesRule(id,false,0xbb00)
+ Evolute.AddProcedure(c,nil,2,99)
 	c:EnableReviveLimit()
-	aux.AddOrigEvoluteType(c)
-	aux.AddOrigPandemoniumType(c)
-	local e1=Effect.CreateEffect(c)
+	--[[local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetRange(LOCATION_SZONE)
+	e1:SetRange(LOCATION_PZONE)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetTargetRange(1,0)
 	e1:SetTarget(cid.splimit)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e2:SetRange(LOCATION_SZONE)
+	e2:SetRange(LOCATION_PZONE)
 	e2:SetCode(EFFECT_IMMUNE_EFFECT)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetTarget(cid.etarget)
@@ -24,16 +28,13 @@ function cid.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_SZONE)
+	e3:SetRange(LOCATION_PZONE)
 	e3:SetCountLimit(1)
 	e3:SetCategory(CATEGORY_DESTROY)
-	e3:SetCondition(aux.PandActCheck)
 	e3:SetCost(cid.cost)
 	e3:SetTarget(cid.target)
 	e3:SetOperation(cid.activate)
 	c:RegisterEffect(e3)
-	aux.EnablePandemoniumAttribute(c,e3,true,TYPE_EFFECT+TYPE_EVOLUTE+TYPE_XYZ)
-	aux.AddEvoluteProc(c,nil,10,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_FIRE),aux.FilterBoolFunction(Card.IsRace,RACE_DINOSAUR))
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -70,7 +71,7 @@ function cid.initial_effect(c)
 end
 function cid.splimit(e,c,sump,sumtype,sumpos,targetp)
 	if c:IsRace(RACE_DINOSAUR) then return false end
-	return bit.band(sumtype,SUMMON_TYPE_PANDEMONIUM)==SUMMON_TYPE_PANDEMONIUM
+	return bit.band(sumtype,SUMMON_TYPE_PENDULUM)==SUMMON_TYPE_PENDULUM
 end
 function cid.etarget(e,c)
 	return c:IsType(TYPE_FUSION) and c:IsRace(RACE_DINOSAUR)
@@ -79,7 +80,7 @@ function cid.efilter(e,te)
 	return te:IsActiveType(TYPE_SPELL+TYPE_TRAP) and te:GetOwner()~=e:GetOwner()
 end
 function cid.cfilter(c)
-	return c:IsAbleToGraveAsCost() and c:IsType(TYPE_PANDEMONIUM)
+	return c:IsAbleToGraveAsCost() and c:IsType(TYPE_PENDULUM)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -102,7 +103,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.filter(c,e,tp)
-	return c:IsType(TYPE_PANDEMONIUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cid.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and cid.filter(chkc,e,tp) end
@@ -140,13 +141,12 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Destroy(g,REASON_EFFECT)
 end
 function cid.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-		and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) end
+	if chk==0 then return Duel.CheckPendulumZones(tp) end
 end
 function cid.penop(e,tp,eg,ep,ev,re,r,rp)
+	if not Duel.CheckPendulumZones(tp) then return false end
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and aux.PandSSetCon(e:GetHandler(),nil,e:GetHandler():GetLocation(),e:GetHandler():GetLocation())(nil,e,tp,eg,ep,ev,re,r,rp) then
-		aux.PandSSet(c,REASON_EFFECT,TYPE_EFFECT+TYPE_EVOLUTE)(e,tp,eg,ep,ev,re,r,rp)
-		Duel.ConfirmCards(1-tp,c)
+	if c:IsRelateToEffect(e) then
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
