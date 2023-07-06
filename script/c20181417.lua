@@ -59,10 +59,10 @@ function cid.actfilter(c,tp)
 	return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and Duel.GetLocationCount(tp,LOCATION_PZONE)>0 and c:IsSetCard(0x9b5) and (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_HAND) or (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup()))))
 		and not c:IsForbidden() and not Duel.IsExistingMatchingCard(cid.excfilter,tp,LOCATION_SZONE,0,1,c)
 end
-function cid.excfilter(c)
+--[[function cid.excfilter(c)
 	return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsFaceup()
 end
- function cid.actcon(e,tp,eg,ep,ev,re,r,rp)
+function cid.actcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
 end
 function cid.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -86,7 +86,7 @@ function cid.actop(e,tp,eg,ep,ev,re,r,rp)
 			tc:RegisterFlagEffect(725,RESET_PHASE+PHASE_END,EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE,1)
 		end
 	end
-end
+end]]
 function cid.dmgfilter(c,tp)
 return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsFaceup() and c:IsSetCard(0x9b5)
 end
