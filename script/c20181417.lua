@@ -95,7 +95,7 @@ function cid.bdogcon(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
 	if not d then return false end
 	if d:IsControler(tp) then a,d=d,a end
-	return (a:IsType(TYPE_PANDEMONIUM) and a:IsSetCard(0x9b5)) and d:IsStatus(STATUS_BATTLE_DESTROYED)
+	return (a:IsType(TYPE_PENDULUM) and a:IsSetCard(0x9b5)) and d:IsStatus(STATUS_BATTLE_DESTROYED)
 end
 function cid.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
