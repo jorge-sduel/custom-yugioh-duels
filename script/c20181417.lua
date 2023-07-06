@@ -100,7 +100,7 @@ end
 function cid.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local bc=e:GetHandler():GetBattleTarget()
-	Duel.SetTargetCard(bc)
+	--Duel.SetTargetCard(bc)
 	local dam=bc:GetBaseAttack()
 	if dam<0 then dam=0 end
 	Duel.SetTargetPlayer(1-tp)
@@ -110,9 +110,9 @@ end
 function cid.damop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+		--local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 		local dam=tc:GetBaseAttack()
 		if dam<0 then dam=0 end
-		Duel.Damage(p,dam,REASON_EFFECT)
+		Duel.Damage(1-tp,dam,REASON_EFFECT)
 	end
 end
