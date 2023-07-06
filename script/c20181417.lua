@@ -47,9 +47,9 @@ end
 function cid.sumcon(e,c)
 if c==nil then return true end
 return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and
-	Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x9b5)>=5
+	Duel.GetMatchingGroupCount(cid.terfilter,c:GetControler(),LOCATION_GRAVE,0,nil,0x9b5)>=5
 end
-function cid.terfilter(c,e,mg)
+function cid.terfilter(c)
 	return c:IsSetCard(0x9b5)
 end
 function cid.tlfilter(c,e,mg)
