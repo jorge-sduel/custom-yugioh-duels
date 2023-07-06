@@ -53,7 +53,7 @@ function cid.terfilter(c)
 	return c:IsSetCard(0x9b5)
 end
 function cid.tlfilter(c,e,mg)
-	return c:IsCode(20184107)
+	return c:IsCode(20181407)
 end
 function cid.actfilter(c,tp)
 	return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and Duel.GetLocationCount(tp,LOCATION_PZONE)>0 and c:IsSetCard(0x9b5) and (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_HAND) or (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup()))))
