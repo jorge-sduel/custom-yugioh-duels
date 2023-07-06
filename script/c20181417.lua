@@ -42,7 +42,7 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon)
 end
 function cid.TimeCon(e,c)
 	if c==nil then return true end
-	return Duel.GetMatchingGroupCount(cid.terfilter,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)>=5
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,0x9b5)>4
 end
 function cid.sumcon(e,c)
 if c==nil then return true end
