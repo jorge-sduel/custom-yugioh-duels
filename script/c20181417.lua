@@ -17,7 +17,7 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(20181407)
 	c:RegisterEffect(e1)
-	-- Is This Ivory?
+	-- [[Is This Ivory?
 	local e2=Effect.CreateEffect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -26,7 +26,7 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon)
 	e2:SetCondition(cid.actcon)
 	e2:SetTarget(cid.acttg)
 	e2:SetOperation(cid.actop)
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e2)]] 
 	-- GAUNTLET HA-DUMBASS!
 		local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_DAMAGE)
@@ -88,7 +88,7 @@ function cid.actop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.dmgfilter(c,tp)
-return c:GetType()&TYPE_PANDEMONIUM==TYPE_PANDEMONIUM and c:IsFaceup() and c:IsSetCard(0x9b5)
+return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsFaceup() and c:IsSetCard(0x9b5)
 end
 function cid.bdogcon(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()
