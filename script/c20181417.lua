@@ -17,7 +17,7 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(20181407)
 	c:RegisterEffect(e1)
-	-- [[Is This Ivory?
+	--[[Is This Ivory?
 	local e2=Effect.CreateEffect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
