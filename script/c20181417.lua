@@ -26,7 +26,7 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon)
 	e2:SetCondition(cid.actcon)
 	e2:SetTarget(cid.acttg)
 	e2:SetOperation(cid.actop)
-	c:RegisterEffect(e2)]] 
+	c:RegisterEffect(e2) 
 	-- GAUNTLET HA-DUMBASS!
 		local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_DAMAGE)
@@ -38,6 +38,18 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon)
 	e3:SetCondition(cid.bdogcon)
 	e3:SetTarget(cid.damtg)
 	e3:SetOperation(cid.damop)
+	c:RegisterEffect(e3)]]
+	--Burn
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,0))
+	--e3:SetCategory(CATEGORY_DAMAGE)
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetCode(EVENT_BATTLE_DESTROYING)
+	e3:SetRange(LOCATION_MZONE)
+	--e3:SetCountLimit(1)
+	e3:SetCondition(cid.bcon)
+	e3:SetTarget(cid.btg)
+	e3:SetOperation(cid.bop)
 	c:RegisterEffect(e3)
 end
 function cid.TimeCon(e,c)
@@ -115,4 +127,19 @@ function cid.damop(e,tp,eg,ep,ev,re,r,rp)
 		if dam<0 then dam=0 end
 		Duel.Damage(1-tp,dam,REASON_EFFECT)
 	end
+end
+function cid.bcon(e,tp,eg,ep,ev,re,r,rp)
+	local rc=eg:GetFirst()
+	return rc:IsRelateToBattle() and rc:IsStatus(STATUS_OPPO_BATTLE)
+		and rc:IsFaceup() and rc:IsControler(tp) and rc:IsSetCard(0x52) and rc:IsType(TYPE_PENDULUM)
+end
+function cid.btg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local atk=eg:GetFirst():GetBattleTarget():GetAttack()
+	if chk==0 then return atk>0 end
+	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
+	--Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,atk,1-tp,0)
+end
+function cid.bop(e,tp,eg,ep,ev,re,r,rp)
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	Duel.Damage(1-tp,eg:GetFirst():GetBattleTarget():GetAttack(),REASON_EFFECT)
 end
