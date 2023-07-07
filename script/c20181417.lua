@@ -145,17 +145,17 @@ function cid.bop(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.patg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp)
-		and Duel.IsExistingMatchingCard(cid.pcfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) end
+		and Duel.IsExistingMatchingCard(cid.pcfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA+LOCATION_DECK,0,1,nil) end
 end
 function cid.paop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,cid.pcfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,cid.pcfilter,tp,LOCATION_GRAVE+LOCATION_EXTRA+LOCATION_DECK,0,1,1,nil)
 	if #g>0 then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
 function cid.pcfilter(c)
-	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden() and (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup())
 end
