@@ -7,7 +7,7 @@ function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon)
+Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon,nil,nil,nil,3)
 	--time leap procedure
 	--Toadally Gaiaemperor.
 	local e1=Effect.CreateEffect(c)
