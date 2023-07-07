@@ -157,5 +157,5 @@ function cid.paop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.pcfilter(c)
-	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden() and (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup())
+	return c:IsType(TYPE_PENDULUM) and not (c:IsForbidden() and c:IsLocation(LOCATION_EXTRA) and c:IsFaceup())
 end
