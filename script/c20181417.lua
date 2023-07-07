@@ -17,17 +17,17 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(20181407)
 	c:RegisterEffect(e1)
-	--[[Is This Ivory?
+	--Is This Ivory?
 	local e2=Effect.CreateEffect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
     e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetCountLimit(1,20181417)
 	e2:SetCondition(cid.actcon)
-	e2:SetTarget(cid.acttg)
-	e2:SetOperation(cid.actop)
+	e2:SetTarget(cid.patg)
+	e2:SetOperation(cid.paop)
 	c:RegisterEffect(e2) 
-	-- GAUNTLET HA-DUMBASS!
+	--[[ GAUNTLET HA-DUMBASS!
 		local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_DAMAGE)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -71,13 +71,13 @@ function cid.actfilter(c,tp)
 	return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and Duel.GetLocationCount(tp,LOCATION_PZONE)>0 and c:IsSetCard(0x9b5) and (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_HAND) or (c:IsLocation(LOCATION_GRAVE) or (c:IsLocation(LOCATION_EXTRA) and c:IsFaceup()))))
 		and not c:IsForbidden() and not Duel.IsExistingMatchingCard(cid.excfilter,tp,LOCATION_SZONE,0,1,c)
 end
---[[function cid.excfilter(c)
+function cid.excfilter(c)
 	return c:GetType()&TYPE_PENDULUM==TYPE_PENDULUM and c:IsFaceup()
 end
 function cid.actcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP)
 end
-function cid.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
+--[[function cid.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.actfilter,tp,LOCATION_GRAVE+LOCATION_HAND+LOCATION_DECK+LOCATION_EXTRA,0,1,nil,tp) end
 end
 function cid.actop(e,tp,eg,ep,ev,re,r,rp)
@@ -142,4 +142,20 @@ end
 function cid.bop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Damage(1-tp,eg:GetFirst():GetBattleTarget():GetAttack(),REASON_EFFECT)
+end
+function cid.patg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckPendulumZones(tp)
+		and Duel.IsExistingMatchingCard(cid.pcfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) end
+end
+function cid.paop(e,tp,eg,ep,ev,re,r,rp)
+	if not e:GetHandler():IsRelateToEffect(e) then return end
+	if not Duel.CheckPendulumZones(tp) then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	local g=Duel.SelectMatchingCard(tp,cid.pcfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
+	if #g>0 then
+		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	end
+end
+function cid.pcfilter(c)
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
