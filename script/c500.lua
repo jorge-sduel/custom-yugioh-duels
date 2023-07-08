@@ -31,6 +31,8 @@ function s.initial_effect(c)
 	e4:SetCondition(s.spcon)
 	c:RegisterEffect(e4)
 end
+s.listed_series={0x6008}
+s.listed_names={CARD_DARK_FUSION}
 function s.filter(c,code)
 	return c:IsMonster() and c:IsSetCard(0x6008) and c:IsAbleToGraveAsCost() and not c:IsCode(code)
 end
