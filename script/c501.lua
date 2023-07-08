@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(90953320,0))
 	e3:SetCategory(CATEGORY_DRAW)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_QUICK_O)
-	e3:SetProperty(EFFECT_FLAG_BOTH_SIDE+EFFECT_FLAG_PLAYER_TARGET)
+	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCondition(s.condition)
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	e5:SetOperation(s.skipop)
 	c:RegisterEffect(e5)
 end
-s.listed_series={0x3008,0x46}
+s.listed_series={0x6008,0x46}
 function s.thfilter(c)
 	return c:IsSetCard(0x46) and c:IsAbleToHand()
 end
@@ -66,7 +66,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.cfilter(c,e,tp)
 	return c:IsFaceup() and c:IsType(TYPE_FUSION) and c:IsSummonType(SUMMON_TYPE_FUSION)
-		and c:IsSetCard(0x3008) and c:IsControler(tp)
+		and c:IsSetCard(0x6008) and c:IsControler(tp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 return eg:IsExists(s.cfilter,1,nil,e,tp)
