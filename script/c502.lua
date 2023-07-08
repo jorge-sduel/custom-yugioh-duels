@@ -103,39 +103,38 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_FUSION_MATERIAL)
-	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e1:SetCode(EFFECT_CHAIN_MATERIAL)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(1,0)
 	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetTarget(s.chain_target)
+	e1:SetOperation(s.chain_operation)
+	e1:SetValue(aux.TRUE)
 	Duel.RegisterEffect(e1,tp)
 end
-function s.chcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.CheckLPCost(e:GetHandlerPlayer(),1000)
+function s.filter1(c,e)
+	return c:IsMonster() and c:IsCanBeFusionMaterial() and c:IsAbleToRemove() and not c:IsImmuneToEffect(e)
 end
-function s.chfilter(c,e,tp)
-	return c:IsMonster() and (c:IsFaceup() or c:IsControler(tp)) and c:IsCanBeFusionMaterial() and not c:IsImmuneToEffect(e)
+function s.chain_target(e,te,tp,value)
+	if not value or value&SUMMON_TYPE_FUSION==0 then return Group.CreateGroup() end
+	if Duel.IsPlayerAffectedByEffect(tp,69832741) then
+		return Duel.GetMatchingGroup(s.filter1,tp,LOCATION_MZONE+LOCATION_HAND+LOCATION_DECK,0,nil,te)
+	else
+		return Duel.GetMatchingGroup(s.filter1,tp,LOCATION_MZONE+LOCATION_GRAVE+LOCATION_HAND+LOCATION_DECK,0,nil,te)
+	end
 end
-function s.chtg(e,te,tp,value)
-	if value&SUMMON_TYPE_FUSION==0 then return Group.CreateGroup() end
-	return Duel.GetMatchingGroup(s.chfilter,tp,LOCATION_MZONE+LOCATION_HAND,LOCATION_MZONE,nil,te,tp)
-end
-function s.chop(e,te,tp,tc,mat,sumtype,sg,sumpos)
+function s.chain_operation(e,te,tp,tc,mat,sumtype,sg,sumpos)
 	if not sumtype then sumtype=SUMMON_TYPE_FUSION end
 	tc:SetMaterial(mat)
-	Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
-	if mat:IsExists(Card.IsControler,1,nil,1-tp) then
-		Duel.PayLPCost(tp,1000)
-	end
+	Duel.Remove(mat,POS_FACEUP,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	Duel.BreakEffect()
 	if sg then
 		sg:AddCard(tc)
+		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD-(RESET_TOFIELD+RESET_TURN_SET),0,1)
 	else
-		Duel.SpecialSummon(tc,sumtype,tp,tp,false,false,sumpos)
+		Duel.SpecialSummonStep(tc,sumtype,tp,tp,false,false,sumpos)
+		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET,0,1)
 	end
-end
-function s.chk(tp,sg,fc)
-	return sg:FilterCount(Card.IsControler,nil,1-tp)<=1
-end
-function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and e:GetLabel()==1
 end
