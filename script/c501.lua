@@ -47,10 +47,9 @@ function s.initial_effect(c)
 	e5:SetOperation(s.skipop)
 	c:RegisterEffect(e5)
 end
-s.listed_series={0x3008}
-s.listed_names={CARD_POLYMERIZATION}
+s.listed_series={0x3008,0x46}
 function s.thfilter(c)
-	return c:IsCode(CARD_POLYMERIZATION) and c:IsAbleToHand()
+	return c:IsSetCard(0x46) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil) end
@@ -66,7 +65,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(Card.IsSummonType,1,nil,SUMMON_TYPE_FUSION) and eg:IsControler(tp) and eg:IsSetCard(0x3008)
+	return eg:IsExists(Card.IsSummonType,1,nil,SUMMON_TYPE_FUSION) and eg:IsSetCard(0x3008)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local p=eg:GetFirst():GetSummonPlayer()
