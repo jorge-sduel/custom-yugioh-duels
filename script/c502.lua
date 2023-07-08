@@ -19,12 +19,6 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(aux.EvilHeroLimit)
 	c:RegisterEffect(e1)
-	--summon success
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_MATERIAL_CHECK)
-	e3:SetValue(s.matcheck)
-	c:RegisterEffect(e3)
 		--Dark Fusion Ignore
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
@@ -34,20 +28,13 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(1,0)
 	c:RegisterEffect(e2)
-end
-s.dark_calling=true
-s.listed_names={CARD_DARK_FUSION}
-function s.lizcon(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
-end
-function s.ffilter(c,fc)
-	return c:IsSetCard(0x3008)
-end
-function s.matcheck(e,c)
-	local ct=c:GetMaterial():Filter(s.ffilter,nil)
-	if ct>1 then
-			--chain material
+	local e5=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_MATERIAL_CHECK)
+	e3:SetValue(s.valcheck)
+	e3:SetLabelObject(e4)
+	c:RegisterEffect(e3)
+	--chain material
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetType(EFFECT_TYPE_FIELD)
@@ -63,19 +50,33 @@ function s.matcheck(e,c)
 	local e5=Effect.CreateEffect(c)
 	e5:SetOperation(s.chk)
 	e4:SetLabelObject(e5)
+	--spsummon
+	local e6=Effect.CreateEffect(c)
+	e6:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e6:SetDescription(aux.Stringid(id,0))
+	e6:SetType(EFFECT_TYPE_IGNITION)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetCondition(s.descon)
+	e6:SetTarget(s.target)
+	e6:SetOperation(s.operation)
+	c:RegisterEffect(e6)
+end
+s.dark_calling=true
+s.listed_names={CARD_DARK_FUSION}
+function s.lizcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
+end
+function c151.valcheck(e,c)
+	local g=c:GetMaterial()
+	if g:IsExists(Card.IsSetCard,1,nil,0x3008) then
+		e:GetLabelObject():SetLabel(1)
+	else
+		e:GetLabelObject():SetLabel(0)
 	end
-	if ct>=1 then
-		--spsummon
-	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetType(EFFECT_TYPE_IGNITION)
-	e1:SetRange(LOCATION_MZONE)
-	e1:SetTarget(s.target)
-	e1:SetOperation(s.operation)
-	c:RegisterEffect(e1)
-
-	end
+end
+function s.ffilter(c,fc)
+	return c:IsSetCard(0x3008)
 end
 function s.filter(c,e,tp)
 	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x3008) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
@@ -92,7 +93,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.chcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.CheckLPCost(tp,1000)
+	return Duel.CheckLPCost(tp,1000) and e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and e:GetLabel()==1
 end
 function s.chfilter(c,e,tp)
 	return c:IsMonster() and (c:IsFaceup() or c:IsControler(tp)) and c:IsCanBeFusionMaterial() and not c:IsImmuneToEffect(e)
@@ -117,4 +118,7 @@ function s.chop(e,te,tp,tc,mat,sumtype,sg,sumpos)
 end
 function s.chk(tp,sg,fc)
 	return sg:FilterCount(Card.IsControler,nil,1-tp)<=1
+end
+function s.descon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) and e:GetLabel()==1
 end
