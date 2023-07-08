@@ -57,9 +57,6 @@ function s.valcheck(e,c)
 		e:GetLabelObject():SetLabel(0)
 	end
 end
-function s.ffilter(c,fc)
-	return c:IsSetCard(0x3008)
-end
 function s.filter(c,e,tp)
 	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x3008) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
@@ -74,7 +71,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP_ATTACK)
 	end
 end
-function c218.tnop(e,tp,eg,ep,ev,re,r,rp)
+function s.tncon(e,tp,eg,ep,ev,re,r,rp)
+
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO) and e:GetLabel()==1
+
+end
+function s.tnop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--chain material
 	local e4=Effect.CreateEffect(c)
