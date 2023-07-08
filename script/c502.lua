@@ -67,7 +67,7 @@ function s.lizcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
 end
-function c151.valcheck(e,c)
+function s.valcheck(e,c)
 	local g=c:GetMaterial()
 	if g:IsExists(Card.IsSetCard,1,nil,0x3008) then
 		e:GetLabelObject():SetLabel(1)
