@@ -103,7 +103,7 @@ function s.tnop(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetLabelObject(e5)
 end	
 function s.chcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.CheckLPCost(tp,1000)
+	return Duel.CheckLPCost(e:GetHandlerPlayer(),1000)
 end
 function s.chfilter(c,e,tp)
 	return c:IsMonster() and (c:IsFaceup() or c:IsControler(tp)) and c:IsCanBeFusionMaterial() and not c:IsImmuneToEffect(e)
