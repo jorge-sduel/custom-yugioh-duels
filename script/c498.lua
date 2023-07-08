@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.nameop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={0x33}
+s.listed_series={0x8}
 function s.poscon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetAttackedCount()>0
 end
