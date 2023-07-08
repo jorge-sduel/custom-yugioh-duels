@@ -64,8 +64,12 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
+function s.cfilter(c,e,tp)
+	return c:IsFaceup() and c:IsType(TYPE_FUSION) and c:IsSummonType(SUMMON_TYPE_FUSION)
+		and c:IsSetCard(0x3008) and c:IsControler(tp)
+end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(Card.IsSummonType,1,nil,SUMMON_TYPE_FUSION) and eg:IsSetCard(0x3008)
+return eg:IsExists(s.cfilter,1,nil,e,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local p=eg:GetFirst():GetSummonPlayer()
