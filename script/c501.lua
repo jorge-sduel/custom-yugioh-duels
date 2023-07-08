@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
 	e4:SetRange(LOCATION_FZONE)
 	e4:SetTargetRange(LOCATION_MZONE,0)
-	e4:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x33))
+	e4:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x8))
 	e4:SetValue(500)
 	c:RegisterEffect(e4)
 	--end battle phase
@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	e5:SetOperation(s.skipop)
 	c:RegisterEffect(e5)
 end
-s.listed_series={0x6008,0x46}
+s.listed_series={0x6008,0x46,0x8}
 function s.thfilter(c)
 	return c:IsSetCard(0x46) and c:IsAbleToHand()
 end
