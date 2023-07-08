@@ -51,7 +51,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.thfilter1(c)
-	return c:IsMonster() and c:IsSetCard(0x6008) and c:IsAbleToGraveAsCost()
+	return c:IsMonster() and c:IsSetCard(0x6008) and c:IsAbleToHand()
 end
 function s.thtg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter1,tp,LOCATION_GRAVE,0,1,nil) end
