@@ -65,7 +65,8 @@ function c88800014.initial_effect(c)
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
 	e6:SetCode(EFFECT_DESTROY_REPLACE)
-	e6:SetRange(LOCATION_MZONE)
+	e6:SetRange(LOCATION_MZONE)
+
 	e6:SetTarget(c88800014.destg)
 	e6:SetValue(c88800014.value)
 	e6:SetOperation(c88800014.desop)
@@ -147,7 +148,7 @@ end
 function c88800014.value(e,c)
 	return c:IsFaceup() and c:GetLocation()==LOCATION_MZONE
 end
-function s.desop(e,tp,eg,ep,ev,re,r,rp)
+function c8880014.desop(e,tp,eg,ep,ev,re,r,rp)
 	local count=e:GetLabel()
 	Duel.RemoveCounter(tp,1,0,0x3008,count,REASON_COST)
 end
