@@ -49,14 +49,6 @@ function s.lizcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
 end
-function s.valcheck(e,c)
-	local g=c:GetMaterial()
-	if g:IsExists(Card.IsSetCard,1,nil,0x3008) then
-		e:GetLabelObject():SetLabel(1)
-	else
-		e:GetLabelObject():SetLabel(0)
-	end
-end
 function s.filter(c,e,tp)
 	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x3008) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
@@ -71,10 +63,16 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP_ATTACK)
 	end
 end
+function s.valcheck(e,c)
+	local g=c:GetMaterial()
+	if g:IsExists(Card.IsSetCard,1,nil,0x3008) then
+		e:GetLabelObject():SetLabel(1)
+	else
+		e:GetLabelObject():SetLabel(0)
+	end
+end
 function s.tncon(e,tp,eg,ep,ev,re,r,rp)
-
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO) and e:GetLabel()==1
-
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SYNCHRO and e:GetLabel()==1
 end
 function s.tnop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
