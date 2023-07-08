@@ -76,6 +76,15 @@ function s.tncon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tnop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
+		--spsummon
+	local e6=Effect.CreateEffect(c)
+	e6:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e6:SetDescription(aux.Stringid(id,0))
+	e6:SetType(EFFECT_TYPE_IGNITION)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetTarget(s.target)
+	e6:SetOperation(s.operation)
+	c:RegisterEffect(e6)
 	--chain material
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
@@ -92,15 +101,6 @@ function s.tnop(e,tp,eg,ep,ev,re,r,rp)
 	local e5=Effect.CreateEffect(c)
 	e5:SetOperation(s.chk)
 	e4:SetLabelObject(e5)
-	--spsummon
-	local e6=Effect.CreateEffect(c)
-	e6:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e6:SetDescription(aux.Stringid(id,0))
-	e6:SetType(EFFECT_TYPE_IGNITION)
-	e6:SetRange(LOCATION_MZONE)
-	e6:SetTarget(s.target)
-	e6:SetOperation(s.operation)
-	c:RegisterEffect(e6)
 end	
 function s.chcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.CheckLPCost(tp,1000)
@@ -117,7 +117,7 @@ function s.chop(e,te,tp,tc,mat,sumtype,sg,sumpos)
 	tc:SetMaterial(mat)
 	Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	if mat:IsExists(Card.IsControler,1,nil,1-tp) then
-		Duel.PayLPCost(tp,2000)
+		Duel.PayLPCost(tp,1000)
 	end
 	Duel.BreakEffect()
 	if sg then
