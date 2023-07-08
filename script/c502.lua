@@ -25,6 +25,15 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_MATERIAL_CHECK)
 	e3:SetValue(s.matcheck)
 	c:RegisterEffect(e3)
+		--Dark Fusion Ignore
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,0))
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_SUPREME_CASTLE)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetTargetRange(1,0)
+	c:RegisterEffect(e2)
 end
 s.dark_calling=true
 s.listed_names={CARD_DARK_FUSION}
@@ -36,20 +45,20 @@ function s.ffilter(c,fc)
 	return c:IsSetCard(0x3008)
 end
 function s.matcheck(e,c)
-	local ct=c:GetMaterial():GetClassCount(Card.GetCode)
-	if ct>0 then
+	local ct=c:GetMaterial():Filter(s.ffilter,nil)
+	if ct>1 then
 			--chain material
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_CHAIN_MATERIAL)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e4:SetRange(LOCATION_FZONE)
+	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(1,0)
 	e4:SetCondition(s.chcon)
 	e4:SetTarget(s.chtg)
 	e4:SetOperation(s.chop)
-	e4:SetValue(aux.FilterBoolFunction(Card.IsType,TYPE_FUSION))
+	e4:SetValue(aux.FilterBoolFunction(Card.IsType,TYPE_MONSTER))
 	c:RegisterEffect(e4)
 	local e5=Effect.CreateEffect(c)
 	e5:SetOperation(s.chk)
@@ -64,7 +73,8 @@ function s.matcheck(e,c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)
+
 	end
 end
 function s.filter(c,e,tp)
