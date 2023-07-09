@@ -107,7 +107,7 @@ function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CHAIN_MATERIAL)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e1:SetTargetRange(1,0)
+	e1:SetTargetRange(1,1)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	e1:SetTarget(s.chain_target)
 	e1:SetOperation(s.chain_operation)
@@ -128,7 +128,7 @@ end
 function s.chain_operation(e,te,tp,tc,mat,sumtype,sg,sumpos)
 	if not sumtype then sumtype=SUMMON_TYPE_FUSION end
 	tc:SetMaterial(mat)
-	Duel.Remove(mat,POS_FACEUP,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
+	Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_FUSION)
 	Duel.BreakEffect()
 	if sg then
 		sg:AddCard(tc)
