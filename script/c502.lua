@@ -42,6 +42,14 @@ function s.initial_effect(c)
 	e4:SetValue(s.valcheck)
 	e4:SetLabelObject(e3)
 	c:RegisterEffect(e4)
+	--race
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_FIELD)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetTargetRange(0,LOCATION_MZONE)
+	e5:SetCode(EFFECT_CHANGE_RACE)
+	e5:SetValue(RACE_FIEND)
+	c:RegisterEffect(e5)
 end
 s.dark_calling=true
 s.listed_names={CARD_DARK_FUSION}
