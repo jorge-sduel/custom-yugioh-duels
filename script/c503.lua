@@ -103,5 +103,5 @@ function s.damtg1(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop1(e,tp,eg,ep,ev,re,r,rp)
 	local atk=e:GetHandler():GetAttack()
-	Duel.Damage(atk,1-tp,REASON_EFFECT)
+	Duel.Damage(5000,1-tp,REASON_EFFECT)
 end
