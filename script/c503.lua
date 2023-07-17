@@ -95,13 +95,12 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(p,1)
 end
 function s.damtg1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLP(tp)>2000 end
-	Duel.SetTargetPlayer(1-tp)
-	Duel.SetTargetParam(5000)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,5000)
+	if chk==0 then return Duel.GetLP(tp)<=2000 end
+	--Duel.SetTargetPlayer(1-tp)
+	--Duel.SetTargetParam(5000)
+	--Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,5000)
 	Duel.SetChainLimit(s.climit)
 end
 function s.damop1(e,tp,eg,ep,ev,re,r,rp)
-	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Damage(e:GetHandler():GetAttack(),1-tp,REASON_EFFECT)
 end
