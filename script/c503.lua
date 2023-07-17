@@ -26,6 +26,7 @@ function s.initial_effect(c)
 	e6:SetCategory(CATEGORY_DAMAGE)
 	e6:SetType(EFFECT_TYPE_QUICK_O)
 	e6:SetRange(LOCATION_MZONE)
+	e6:SetCode(EVENT_FREE_CHAIN)
 	e6:SetTarget(s.damtg1)
 	e6:SetOperation(s.damop1)
 	c:RegisterEffect(e6)
@@ -94,7 +95,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(p,1)
 end
 function s.damtg1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLP(1-tp)>2000 end
+	if chk==0 then return Duel.GetLP(tp)>2000 end
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetTargetParam(5000)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,5000)
