@@ -99,7 +99,7 @@ function s.damtg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	--Duel.SetTargetPlayer(1-tp)
 	--Duel.SetTargetParam(5000)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,5000)
-	Duel.SetChainLimit(s.climit)
+	--Duel.SetChainLimit(s.climit)
 end
 function s.damop1(e,tp,eg,ep,ev,re,r,rp)
 	local atk=e:GetHandler():GetAttack()
