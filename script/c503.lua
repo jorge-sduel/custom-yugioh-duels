@@ -27,6 +27,7 @@ function s.initial_effect(c)
 	e6:SetType(EFFECT_TYPE_QUICK_O)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCode(EVENT_FREE_CHAIN)
+	e6:SetCountLimit(1)
 	e6:SetTarget(s.damtg1)
 	e6:SetOperation(s.damop1)
 	c:RegisterEffect(e6)
@@ -90,7 +91,6 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetPlayer(1-tp)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.SetLP(p,1)
 end
@@ -98,9 +98,10 @@ function s.damtg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLP(tp)<=2000 end
 	--Duel.SetTargetPlayer(1-tp)
 	--Duel.SetTargetParam(5000)
-	--Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,5000)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,5000)
 	Duel.SetChainLimit(s.climit)
 end
 function s.damop1(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Damage(e:GetHandler():GetAttack(),1-tp,REASON_EFFECT)
+	local atk=e:GetHandler():GetAttack()
+	Duel.Damage(atk,1-tp,REASON_EFFECT)
 end
