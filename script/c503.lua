@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	--e7:SetCategory(CATEGORY_DAMAGE)
 	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e7:SetCode(EVENT_ATTACK_ANNOUNCE)
-	e7:SetCondition(s.damcon)
+	--e7:SetCondition(s.damcon)
 	e7:SetTarget(s.damtg)
 	e7:SetOperation(s.damop)
 	c:RegisterEffect(e7)
@@ -88,7 +88,8 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLP(1-tp)>1 end
 	Duel.SetTargetPlayer(1-tp)
 end
-function s.damop(e,tp,eg,ep,ev,re,r,rp)
+function s.damop(e,tp,eg,ep,ev,re,r,rp)
+
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.SetLP(p,1)
 end
