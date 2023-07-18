@@ -33,14 +33,14 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetCountLimit(1,{id,1})
+	e4:SetCountLimit(1)
 	e4:SetCost(s.cost)
 	e4:SetTarget(s.rectg)
 	e4:SetOperation(s.recop)
 	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.eqcon(e)
-	return e:GetHandler():GetEquipCount()>0
+	return not e:GetHandler():GetEquipCount()>0
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp
