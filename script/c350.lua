@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.eqcon(e)
-	return not e:GetHandler():GetEquipCount()>0
+	return e:GetHandler():GetEquipCount()<0
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return ep==tp
