@@ -95,7 +95,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(p,1)
 end
 function s.damtg1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+	if chk==0 then return Duel.GetLP(1-tp)<=2000 end
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,e:GetHandler():GetAttack()/2)
 end
