@@ -97,10 +97,9 @@ end
 function s.damtg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(1-tp)
-	Duel.SetTargetParam(5000)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,5000)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,e:GetHandler():GetAttack()/2)
 end
 function s.damop1(e,tp,eg,ep,ev,re,r,rp)
-	local atk=e:GetHandler():GetAttack()
-	Duel.Damage(atk,1-tp,REASON_EFFECT)
+	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	Duel.Damage(p,e:GetHandler():GetAttack(),REASON_EFFECT)
 end
