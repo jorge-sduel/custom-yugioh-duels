@@ -42,6 +42,26 @@ function s.initial_effect(c)
 	e7:SetTarget(s.damtg)
 	e7:SetOperation(s.damop)
 	c:RegisterEffect(e7)
+	--avoid battle damage
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_FIELD)
+	e8:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+	e8:SetRange(LOCATION_MZONE)
+	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e8:SetTargetRange(1,0)
+	c:RegisterEffect(e8)
+	--reduce
+	local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_FIELD)
+	e9:SetCode(EFFECT_CHANGE_DAMAGE)
+	e9:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e9:SetRange(LOCATION_PZONE)
+	e9:SetTargetRange(1,0)
+	e9:SetValue(s.damval)
+	c:RegisterEffect(e9)
+	local e10=e9:Clone()
+	e10:SetCode(EFFECT_NO_EFFECT_DAMAGE)
+	c:RegisterEffect(e10)
 end
 function s.pmfilter(c,sc)
 	return c:IsCode(93717133)
@@ -106,4 +126,10 @@ end
 function s.damop1(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.Damage(p,e:GetHandler():GetAttack(),REASON_EFFECT)
+end
+function s.damval(e,re,val,r,rp,rc)
+	if bit.band(r,REASON_EFFECT)~=0 then 
+	return 0
+	else return val
+	end
 end
