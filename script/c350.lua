@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	-- Cannot be destroyed by battle
 	local e2=e1:Clone()
 	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
-	e2:SetCondition(s.eqcon)
+	e2:SetCondition(aux.NOT(s.eqcon))
 	c:RegisterEffect(e2)
 	--special summon
 	local e3=Effect.CreateEffect(c)
