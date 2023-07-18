@@ -28,6 +28,7 @@ function s.initial_effect(c)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCode(EVENT_FREE_CHAIN)
 	e6:SetCountLimit(1)
+	e6:SetCondition(s.damcon1)
 	e6:SetTarget(s.damtg1)
 	e6:SetOperation(s.damop1)
 	c:RegisterEffect(e6)
@@ -86,6 +87,9 @@ end
 function s.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
 end
+function s.damcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetLP(1-tp)<=2000
+end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLP(1-tp)>1 end
 	Duel.SetTargetPlayer(1-tp)
@@ -95,7 +99,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SetLP(p,1)
 end
 function s.damtg1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLP(1-tp)<=2000 end
+	if chk==0 then return true end
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,e:GetHandler():GetAttack()/2)
 end
