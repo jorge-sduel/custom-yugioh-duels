@@ -5,17 +5,8 @@ local card = c210310068
 local id = 210310068
 function card.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(
-		c,
-		aux.FilterBoolFunctionEx(Card.IsAttribute, ATTRIBUTE_LIGHT),
-		1,
-		1,
-		aux.NonTunerEx(Card.IsLevel, 8),
-		1,
-		1
-	)
+	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),1,1,Synchro.NonTuner(Card.IsLevel, 8),1,1)
 	c:EnableReviveLimit()
-
 	--Banish upon Synchro Summon
 	local e1 = Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id, 0))
