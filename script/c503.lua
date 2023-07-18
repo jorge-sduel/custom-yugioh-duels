@@ -88,7 +88,7 @@ function s.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetLP(1-tp)<=2000
+	return Duel.GetLP(1-tp)<2001
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLP(1-tp)>1 end
