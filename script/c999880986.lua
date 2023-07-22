@@ -1,6 +1,12 @@
 -- Evil HERO Supreme King Neos
 local s,id=GetID()
 function s.initial_effect(c)
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetCode(EFFECT_CHANGE_CODE)
+	e0:SetRange(LOCATION_MZONE+LOCATION_GRAVE)
+	e0:SetValue(CARD_NEOS)
+	c:RegisterEffect(e0)
     --Add 1 Super Polymerization or Dark Fusion
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
