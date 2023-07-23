@@ -4,7 +4,7 @@ function c210310060.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcCode2(c,CARD_NEOS,22160245,true,true)
-	Fusion.AddContactProc(c,c210310060.contactfil,c210310060.contactop,c210310060.splimit)
+	Fusion.AddContactProc(c,c210310060.contactfil,c210310060.contactop,c210310060.splimit,nil,nil,nil,false)
 	--damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(35809262,0))
@@ -43,7 +43,7 @@ function c210310060.contactop(g,tp)
 	Duel.SendtoDeck(g,nil,2,REASON_COST+REASON_MATERIAL)
 end
 function c210310060.splimit(e,se,sp,st)
-	return not e:GetHandler():IsLocation(LOCATION_EXTRA)
+	return (st&SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
 end
 function c210310060.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
