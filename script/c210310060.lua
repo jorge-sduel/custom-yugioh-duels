@@ -70,7 +70,7 @@ function c210310060.damop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c210310060.spcfilter(c,e,tp)
-	return (c:IsSetCard(0x3008) or c:IsSetCard(0x1f)) and c:IsReleasable() and c:IsFaceup() and Duel.IsExistingMatchingCard(c210310060.spfilter,tp,LOCATION_EXTRA,0,1,nil,c,e,tp)
+	return (c:IsSetCard(0x8) or c:IsSetCard(0x1f)) and c:IsReleasable() and c:IsFaceup() and Duel.IsExistingMatchingCard(c210310060.spfilter,tp,LOCATION_EXTRA,0,1,nil,c,e,tp)
 end
 function c210310060.spfilter(c,mc,e,tp)
 	return c:IsType(TYPE_FUSION) and c.material and mc:IsCode(table.unpack(c.material)) and c:IsCanBeSpecialSummoned(e,0,tp,true,false) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
