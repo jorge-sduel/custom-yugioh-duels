@@ -43,7 +43,7 @@ function c210310060.contactop(g,tp)
 	Duel.SendtoDeck(g,nil,2,REASON_COST+REASON_MATERIAL)
 end
 function c210310060.splimit(e,se,sp,st)
-	return bit.band(st,SUMMON_TYPE_FUSION)==SUMMON_TYPE_FUSION
+	return not e:GetHandler():IsLocation(LOCATION_EXTRA)
 end
 function c210310060.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
