@@ -4,7 +4,7 @@ function c210310060.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcCode2(c,CARD_NEOS,22160245,true,true)
-	Fusion.AddContactProc(c210310060.contactfil,c210310060.contactop,c210310060.splimit)
+	Fusion.AddContactProc(c,c210310060.contactfil,c210310060.contactop,c210310060.splimit)
 	--damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(35809262,0))
