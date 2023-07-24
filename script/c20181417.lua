@@ -51,6 +51,14 @@ Timeleap.AddProcedure(c,cid.tlfilter,1,1,cid.TimeCon,nil,nil,nil,5)
 	e3:SetTarget(cid.btg)
 	e3:SetOperation(cid.bop)
 	c:RegisterEffect(e3)
+	local e4=Effect.CreateEffect(c)
+	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+    e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetCountLimit(1,20181417)
+	e4:SetCondition(Timeleap.Future)
+	e4:SetOperation(cid.paop2)
+	c:RegisterEffect(e4) 
 end
 function cid.TimeCon(e,c)
 	if c==nil then return true end
@@ -158,4 +166,8 @@ function cid.paop(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.pcfilter(c)
 	return (c:IsType(TYPE_PENDULUM) and not c:IsForbidden()) and not (c:IsLocation(LOCATION_EXTRA) and not c:IsFaceup())
+end
+function cid.bop2(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Damage(1-tp,10000,REASON_EFFECT)
+	Duel.Recover(tp,10000,REASON_EFFECT)
 end
