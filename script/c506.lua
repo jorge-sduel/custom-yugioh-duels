@@ -1,4 +1,4 @@
---clear hellfiend
+--Crystal Beast Amalgate Chimera
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
@@ -49,7 +49,7 @@ function s.val(e,re,dam,r,rp,rc)
 	return math.floor(dam/2)
 end
 function s.filter(c,e,tp)
-	return 	c:IsSetCard(0x1034) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return 	c:IsSetCard(0x1034) and c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_SZONE,0,1,nil,e,tp) end
