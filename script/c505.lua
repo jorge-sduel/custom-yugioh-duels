@@ -9,7 +9,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x9d}
 function s.fextra(e,tp,mg)
-	local g=Duel.GetMatchingGroup(s.spfilter,c:GetControler(),LOCATION_ONFIELD+LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.spfilter,e:GetHandlerPlayer(),LOCATION_ONFIELD+LOCATION_GRAVE,0,nil)
 	local ct=g:GetClassCount(Card.GetCode)
 	if ct>6 then
 		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToGrave),tp,LOCATION_DECK,0,nil)
