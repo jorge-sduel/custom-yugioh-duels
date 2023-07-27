@@ -13,6 +13,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
+		--effect gain
+	local e3=Effect.CreateEffect(c)
+	e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e3:SetCode(EVENT_BE_MATERIAL)
+	e3:SetCondition(s.atkcon)
+	e3:SetOperation(s.atkop)
+	c:RegisterEffect(e3)
 end
 function s.filter(c,e,tp)
 	return c:IsLevelAbove(0) and c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -40,4 +48,17 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			c:RegisterEffect(e4)
 		end
 	end
+end
+function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	return r==REASON_SYNCHRO
+end
+function s.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local rc=c:GetReasonCard()
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_UPDATE_ATTACK)
+	e1:SetValue(500)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	rc:RegisterEffect(e1)
 end
