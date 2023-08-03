@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return (e:GetHandler():GetPreviousLocation()==LOCATION_HAND or e:GetHandler():GetPreviousLocation()==LOCATION_HAND+LOCATION_DECK) and (r&0x4040)==0x4040
+	return (e:GetHandler():GetPreviousLocation()==LOCATION_HAND or e:GetHandler():GetPreviousLocation()==LOCATION_DECK) and (r&0x4040)==0x4040
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
