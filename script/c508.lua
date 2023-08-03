@@ -1,6 +1,4 @@
---スレッショルド・ボーグ
---Threshold Borg
---Scripted by AlphaKretin
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -49,5 +47,5 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function s.discard(c)
-	return c:IsType(TYPE_NORMAL) and c:IsSetCard(SET_ARCHFIEND) and c:IsDiscardable(REASON_EFFECT)
+	return (c:IsType(TYPE_NORMAL) or c:IsSetCard(SET_ARCHFIEND)) and c:IsDiscardable(REASON_EFFECT)
 end
