@@ -30,5 +30,16 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.HintSelection(g)
 			Duel.GetControl(tc,tp)
 		Duel.SpecialSummon(c,1,tp,1-tp,false,false,POS_FACEUP)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
+	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+	e1:SetTargetRange(1,1)
+	e1:SetTarget(s.splimit)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e1,tp)
 	end
+end
+function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
+	return not c:IsType(TYPE_FUSION) and c:IsLocation(LOCATION_EXTRA)
 end
