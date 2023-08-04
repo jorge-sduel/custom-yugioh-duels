@@ -16,9 +16,8 @@ function s.filter(c)
 	return c:IsControlerCanBeChanged()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_MZONE,1,nil) and e:GetHandler():IsCanBeSpecialSummoned(e,1,tp,false,false,POS_FACEUP,1-tp) end
 	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE,nil)
-		and e:GetHandler():IsCanBeSpecialSummoned(e,1,tp,false,false,POS_FACEUP,1-tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_CONTROL,g,1,0,0)
  end
