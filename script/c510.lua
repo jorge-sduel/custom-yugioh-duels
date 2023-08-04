@@ -16,8 +16,7 @@ function s.initial_effect(c)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and Duel.GetFieldGroupCount(c:GetControler(),LOCATION_MZONE,0,nil)<Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE,nil)
+	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)<Duel.GetFieldGroupCount(e:GetHandlerPlayer(),0,LOCATION_MZONE,nil)
 end
 function s.filter(c)
 	return c:IsControlerCanBeChanged()
