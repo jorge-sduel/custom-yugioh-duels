@@ -1,5 +1,4 @@
---サイレント・ウォビー
---Silent Wooby
+--Evil HERO missy
 local s,id=GetID()
 function s.initial_effect(c)
 	--Special Sumon itself to the opponent's field
