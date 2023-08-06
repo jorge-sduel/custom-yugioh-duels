@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.atkval(e,c)
-	local rec=c:GetAttack()
+	local rec=e:GetHandler():GetAttack()
 	if rec<0 then rec=0 end
 	return rec*-1/2
 end
