@@ -22,13 +22,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_series={0x52}
-function s.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x52)
-end
-function s.ntcon(e,c)
+function s.spcon(e,c)
 	if c==nil then return true end
-	local tp=c:GetControler()
-	return Duel.GetLocationCount(tp,LOCATION_MZONE,tp)>0
-		and (Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil))
+	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x52),c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
+
 
