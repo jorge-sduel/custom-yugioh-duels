@@ -76,7 +76,7 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter1(c,e,tp)
-	return c:IsFaceup() and c:IsType(TYPE_SPELL) and c:IsType(TYPE_SPELL) and c:IsAbleToGrave()
+	return c:IsFaceup() and c:IsType(TYPE_EQUIP) and c:IsType(TYPE_SPELL) and c:IsAbleToGrave()
 end
 function s.filter2(c,e,tp)
 	return c:IsFaceup()
