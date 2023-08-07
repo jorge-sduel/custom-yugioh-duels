@@ -33,12 +33,12 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
-	local rg=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_SZONE,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_SZONE,0,e:GetHandler())
 	return aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),0,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
-	local rg=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,LOCATION_SZONE,0,e:GetHandler())
+	local rg=Duel.GetMatchingGroup(s.filter1,tp,LOCATION_SZONE,0,e:GetHandler())
 	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_DISCARD,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
@@ -75,8 +75,11 @@ function s.nameop(e,tp,eg,ep,ev,re,r,rp)
 		c:RegisterEffect(e1)
 	end
 end
+function s.filter1(c,e,tp)
+	return c:IsFaceup() and c:IsType(TYPE_SPELL) and c:IsType(TYPE_SPELL) and c:IsAbleToGrave()
+end
 function s.filter2(c,e,tp)
-	return c:IsFaceup() and (c:GetAttack()>0 or not c:IsDisabled())
+	return c:IsFaceup()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,tp,0,LOCATION_MZONE,1,nil) end
