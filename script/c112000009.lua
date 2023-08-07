@@ -1,5 +1,6 @@
 --Odd-Eyes Reverse Dragon
-function c112000009.initial_effect(c)
+local s,id=GetID()
+function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,16178681,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
