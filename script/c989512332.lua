@@ -1,8 +1,10 @@
---Odd-Eyes Sign Dragon
+--Odd-Eyes Sign Dragon 
+c989512332.Is_Runic=true
+if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c989512332.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	aux.AddRuneProcedure(c,c989512332.MonMatFilter,1,1,aux.FilterBoolFunction(Card.IsType,TYPE_PENDULUM),1,1)
+ Runic.AddProcedure(c,c989512332.MonMatFilter,aux.FilterBoolFunction(Card.IsType,TYPE_PENDULUM),1,1)
 	--search
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(989512332,1))
