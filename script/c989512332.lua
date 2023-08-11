@@ -26,6 +26,9 @@ end
 function c989512332.MonMatFilter(c)
 	return c:GetLevel()==7 and c:IsRace(RACE_DRAGON)
 end
+function c989512332.MonMatFilter2(c)
+	return c:IsType(TYPE_PENDULUM) and (c:IsLocate(LOCATION_PZONE) or c:IsLocate(LOCATION_SZONE))
+end
 function c989512332.filter(c)
 	return c:IsType(TYPE_PENDULUM) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
