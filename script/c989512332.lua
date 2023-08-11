@@ -4,7 +4,7 @@ if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
 function c989512332.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
- Runic.AddProcedure(c,c989512332.MonMatFilter,aux.FilterBoolFunction(Card.IsType,TYPE_PENDULUM),1,1)
+ Runic.AddProcedure(c,c989512332.MonMatFilter,c989512332.MonMatFilter2,1,1)
 	--search
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(989512332,1))
