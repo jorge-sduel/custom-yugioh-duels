@@ -27,6 +27,13 @@ function c999911.initial_effect(c)
 	e3:SetCode(EFFECT_SYNCHRO_LEVEL)
 	e3:SetValue(c999911.slevel)
 	c:RegisterEffect(e3)
+	--nontuner
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCode(EFFECT_NONTUNER)
+	c:RegisterEffect(e1)
 end
 function c999911.filter(c,e,tp)
 	return c:IsSetCard(0x344) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
