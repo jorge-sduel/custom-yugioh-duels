@@ -1,7 +1,8 @@
 --Dark Android Empress
 function c99200180.initial_effect(c)
-	--fusion material
 	c:EnableReviveLimit()
+	--fusion material
+	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),2,2,99200151)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
