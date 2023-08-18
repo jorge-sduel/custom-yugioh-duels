@@ -1,7 +1,7 @@
 --Dark Android Gearman
 function c99200154.initial_effect(c)
 		--fusion summon
-	local params = {nil,Fusion.CheckWithHandler(Fusion.InHandMat(aux.FilterBoolFunction(Card.IsType,TYPE_FUSION))),nil,nil,Fusion.ForcedHandler}
+	local params = {aux.FilterBoolFunction(Card.IsType,TYPE_FUSION),Fusion.InHandMat,nil,nil,Fusion.ForcedHandler}
 	local e0=Effect.CreateEffect(c)
 	e0:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e0:SetType(EFFECT_TYPE_IGNITION)
