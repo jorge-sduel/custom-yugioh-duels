@@ -54,7 +54,7 @@ function s.filter2(c,e,tp,lv,mc)
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,lv+c:GetLevel(),mc)
 end
 function s.filter3(c,e,tp,lv,mc)
-	return c:GetLevel()==lv and c:IsRace(RACE_DRAGON) and c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) 
+	return c:GetLevel()==lv and c:IsCanBeSpecialSummoned(e,0,tp,false,false) 
 		and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
