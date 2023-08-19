@@ -37,24 +37,24 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
-	local g=Duel.AnnounceLevel(tp,1,5,0)
+	local lv=Duel.AnnounceLevel(tp,1,5,0)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_LEVEL)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetValue(1)
+		e1:SetValue(lv)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 	end
 end
 function s.filter2(c,e,tp,lv,mc)
-	return c:IsType(TYPE_FUSION) and c:IsAbleToRemove() and aux.SpElimFilter(c,true) 
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToRemove() and aux.SpElimFilter(c,true) 
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,lv+c:GetLevel(),mc)
 end
 function s.filter3(c,e,tp,lv,mc)
-	return c:GetLevel()==lv and c:IsCanBeSpecialSummoned(e,0,tp,false,false) 
+	return c:GetLevel()==lv and c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) 
 		and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
