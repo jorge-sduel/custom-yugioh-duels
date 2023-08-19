@@ -54,7 +54,7 @@ function s.filter2(c,e,tp,lv,mc)
 		and Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_EXTRA,0,1,nil,e,tp,lv+c:GetLevel(),mc) and not c:IsCode(id)
 end
 function s.filter3(c,e,tp,lv,mc)
-	return c:GetLevel()==lv and c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) 
+	return c:GetLevel()==lv and c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) 
 		and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -78,7 +78,7 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=Duel.SelectMatchingCard(tp,s.filter3,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,lv,g)
 		if #sg>0 then
-			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
+			Duel.SpecialSummon(sg,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
 		end
 	end
 end
