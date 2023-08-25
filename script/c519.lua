@@ -60,6 +60,6 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetFieldGroup(tp,0,LOCATION_SZONE)
 	local ct=Duel.Remove(sg,POS_FACEUP,REASON_EFFECT)
 	if ct>0 and c:IsFaceup() and c:IsRelateToEffect(e) then
-		Duel.Damage(tp,ct*200,REASON_EFFECT)
+		Duel.Damage(1-tp,ct*200,REASON_EFFECT)
 	end
 end
