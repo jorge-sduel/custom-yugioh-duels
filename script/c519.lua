@@ -23,7 +23,6 @@ function s.initial_effect(c)
 	Duel.AddCustomActivityCounter(id,ACTIVITY_SPSUMMON,s.counterfilter)
 end
 s.listed_series={0x6008}
-
 function s.counterfilter(c)
 	return c:IsSetCard(0x6008)
 end
@@ -52,13 +51,15 @@ function s.desfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.desfilter,tp,0,LOCATION_ONFIELD,1,nil) end
-	local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_ONFIELD,nil)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
+	if chk==0 then return Duel.GetFieldGroupCount(tp,0,LOCATION_SZONE)>0 end
+	local sg=Duel.GetFieldGroup(tp,0,LOCATION_SZONE)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,sg,#sg,0,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_ONFIELD,nil)
-	if #g>0 then
-		Duel.Destroy(g,REASON_EFFECT)
+	local c=e:GetHandler()
+	local sg=Duel.GetFieldGroup(tp,0,LOCATION_SZONE)
+	local ct=Duel.Remove(g,POS_FACEUP)
+	if ct>0 and c:IsFaceup() and c:IsRelateToEffect(e) then
+		Duel.Damage(tp,ct*200,REASON_EFFECT)
 	end
 end
