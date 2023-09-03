@@ -26,7 +26,7 @@ end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and s.tgfilter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATODECK)
+--	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATODECK)
 	local sg=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,sg,#sg,0,0)
 end
