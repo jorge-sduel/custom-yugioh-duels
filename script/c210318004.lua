@@ -63,7 +63,7 @@ end
 function c210318004.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and c210318004.thfilter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(c210318004.thfilter,tp,LOCATION_REMOVED,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATODECK)
+--	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATODECK)
 	local g=Duel.SelectTarget(tp,c210318004.thfilter,tp,LOCATION_REMOVED,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,1,0,0)
 end
