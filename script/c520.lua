@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e5:SetRange(LOCATION_SZONE)
 	e5:SetTarget(aux.TargetBoolFunction(Card.IsAbleToRemove))
 	e5:SetOperation(Fusion.BanishMaterial)
-	--e2:SetValue(s.mtval)
+	e5:SetValue(s.mtval)
 	c:RegisterEffect(e5)
 end
 s.Is_Neutrino=true
@@ -79,4 +79,8 @@ function s.fcond(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.forcedmat(e,tp,eg,ep,ev,re,r,rp,chk)
 	return e:GetHandler():GetEquipTarget()
+end
+function s.mtval(e,c)
+	if not c then return false end
+	return c:IsControler(e:GetHandlerPlayer())
 end
