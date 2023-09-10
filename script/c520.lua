@@ -3,7 +3,7 @@ local s,id=GetID()
 s.Is_Neutrino=true
 function s.initial_effect(c)
 	--spsummon
-	local params = {aux.FilterBoolFunction(Card.IsSetCard,0x9d),nil,nil,nil,s.forcedmat}
+	local params = {aux.FilterBoolFunction(Card.IsType,TYPE_FUSION),nil,nil,nil,s.forcedmat}
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
