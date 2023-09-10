@@ -24,11 +24,15 @@ function s.initial_effect(c)
 	e4:SetTarget(s.target)
 	e4:SetOperation(s.operation)
 	c:RegisterEffect(e4)
-	--[[local e5=Effect.CreateEffect(c)
+--Extra Material
+	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
-	e5:SetRange(LOCATION_SZONE)
 	e5:SetCode(EFFECT_EXTRA_FUSION_MATERIAL)
-	c:RegisterEffect(e5)]]
+	e5:SetRange(LOCATION_SZONE)
+	e5:SetTarget(aux.TargetBoolFunction(Card.IsAbleToRemove))
+	e5:SetOperation(Fusion.BanishMaterial)
+	--e2:SetValue(s.mtval)
+	c:RegisterEffect(e5)
 end
 s.Is_Neutrino=true
 function s.spfilter(c,e,tp)
