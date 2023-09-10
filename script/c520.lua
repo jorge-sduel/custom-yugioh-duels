@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetRange(LOCATION_SZONE)
-	e5:SetCode(id)
+	e5:SetCode(511015101)
 	e5:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e5)
 end
