@@ -63,3 +63,9 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end
+function s.fcond(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():IsControler(tp)
+end
+function s.forcedmat(e,tp,eg,ep,ev,re,r,rp,chk)
+	return e:GetHandler():GetEquipTarget()
+end
