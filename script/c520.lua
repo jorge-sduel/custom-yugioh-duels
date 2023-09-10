@@ -31,7 +31,6 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.Is_Neutrino=true
-function s.initial_effect(c)
 function s.spfilter(c,e,tp)
 	return c.Is_Neutrino and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
