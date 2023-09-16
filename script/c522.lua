@@ -29,7 +29,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		local atk2=Duel.GetFieldGroup(tp,LOCATION_MZONE,0):GetSum(Card.GetAttack)
@@ -38,7 +38,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
 		e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 		e1:SetValue(0)
-		tc:RegisterEffect(e1)
+		g:RegisterEffect(e1)
 	Duel.Recover(tp,atk2,REASON_EFFECT)
 	end
 end
