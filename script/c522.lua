@@ -2,6 +2,8 @@
 local s,id=GetID()
 s.Is_Neutrino=true
 function s.initial_effect(c)
+	--fusion summon
+	Fusion.AddProcMixN(c,true,true,s.matfilter,2)
 	--summon/special summon success
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
@@ -11,6 +13,9 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
+end
+function s.matfilter(c)
+	return c.Is_Neutrino
 end
 function s.filter(c,e,tp)
 	return c.Is_Neutrino and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
