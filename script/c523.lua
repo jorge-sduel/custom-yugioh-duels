@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.matfilter(c)
-	return c.Is_Neutrino and c:IsSetCard(0x7b) and c:GetLevel()=8
+	return c.Is_Neutrino and c:IsSetCard(0x7b) and c:IsLevel(8)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
