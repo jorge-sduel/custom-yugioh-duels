@@ -49,17 +49,17 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e1)
 	end
 end
-function s.filter(e,c)
-	return c:IsFaceup() and c:IsLevelBelow(e:GetHandler():GetLevel()-1)
+function s.filter(c,lv)
+	return c:IsFaceup() and c:IsLevelBelow(lv-1)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,c,c:GetAttack())
 	if chk==0 then return ct>0 end
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ct*500)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
-	Duel.Damage(p,ct*500,REASON_EFFECT)
+	local ct=Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,c,c:GetAttack())
+	Duel.Damage(p,ct*300,REASON_EFFECT)
 end
