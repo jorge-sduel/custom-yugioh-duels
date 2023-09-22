@@ -38,11 +38,13 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 	--Gain ATK
 	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(id,1))
+	e5:SetDescription(aux.Stringid(id,1))
+
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetCountLimit(1)
 	e5:SetRange(LOCATION_MZONE)
-	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
+
 	e5:SetOperation(s.atkop)
 	c:RegisterEffect(e5)
 end
@@ -62,14 +64,16 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
+	local c=e:GetHandler()
+
 	if c:IsFaceup() and not c:IsType(TYPE_TUNER) then
 		
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_REMOVE_TYPE)
+		e1:SetCode(EFFECT_ADD_TYPE)
 		e1:SetValue(TYPE_TUNER)
 		e1:SetReset(RESET_EVENT+0x1fe0000)
-		c:RegisterEffect(e1)
+		c:RegisterEffect(e1)
+
 	end
 end
