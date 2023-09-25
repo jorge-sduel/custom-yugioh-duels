@@ -81,7 +81,7 @@ function s.hdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.hdop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
+		local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
 		if #g==0 then return end
 		local sg=g:RandomSelect(tp,1)
 		Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
