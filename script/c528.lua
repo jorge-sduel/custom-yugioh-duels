@@ -75,3 +75,15 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	e:GetHandler():RegisterEffect(e1)
 end
+function s.hdtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_HANDES,0,0,tp,1)
+end
+function s.hdop(e,tp,eg,ep,ev,re,r,rp)
+	if e:GetHandler():IsRelateToEffect(e) then
+		local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
+		if #g==0 then return end
+		local sg=g:RandomSelect(tp,1)
+		Duel.SendtoGrave(sg,REASON_DISCARD+REASON_EFFECT)
+	end
+end
