@@ -66,17 +66,6 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e3,tp)
 	end
 	Duel.SpecialSummonComplete()
-	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
-	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetTargetRange(1,0)
-	e4:SetTarget(s.splimit)
-	e4:SetReset(RESET_PHASE+PHASE_END)
-	Duel.RegisterEffect(e4,tp)
-	--lizard check
-	aux.addTempLizardCheck(e:GetHandler(),tp,s.lizfilter)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
@@ -90,10 +79,4 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	Duel.Destroy(tc,REASON_EFFECT)
-end
-function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return c:IsLocation(LOCATION_EXTRA) and not c:IsAttribute(ATTRIBUTE_DARK)
-end
-function s.lizfilter(e,c)
-	return not c:IsOriginalAttribute(ATTRIBUTE_DARK)
 end
