@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL and e:GetHandler():GetPreviusLocation()==LOCATION_EXTRA
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SPECIAL and e:GetHandler():GetPreviousLocation()==LOCATION_EXTRA
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
