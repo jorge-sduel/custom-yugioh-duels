@@ -76,7 +76,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
-	Duel.SenToHand(tc,nil,REASON_EFFECT)
+	Duel.SendtoHand(tc,nil,REASON_EFFECT)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp and (Duel.IsAbleToEnterBP() or (Duel.GetCurrentPhase()>=PHASE_BATTLE_START and Duel.GetCurrentPhase()<=PHASE_BATTLE))
