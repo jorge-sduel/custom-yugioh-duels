@@ -28,30 +28,30 @@ function s.filter(c,e,tp)
 	return c:IsType(TYPE_TUNER)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
-function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,LOCATION_HAND)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function s.sumop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil,e,tp)
-	if #g>0 then
-		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+	local tc=g:GetFirst()
+	if tc then
+		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 		local fid=c:GetFieldID()
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		g:RegisterEffect(e1)
+		tc:RegisterEffect(e1)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_DISABLE_EFFECT)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		g:RegisterEffect(e2)
-		g:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1,fid)
+		tc:RegisterEffect(e2)
+		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1,fid)
 		local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e3:SetCode(EVENT_PHASE+PHASE_END)
@@ -63,7 +63,6 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetOperation(s.desop)
 		Duel.RegisterEffect(e3,tp)
 	end
-	Duel.SpecialSummonComplete()
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
