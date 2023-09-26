@@ -42,7 +42,7 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.GetMatchingGroup(cid.filter,tp,LOCATION_REMOVED,0,nil,e)
 	if chk==0 then
 		aux.GCheckAdditional=cid.check
-		local res=g:CheckSubGroup(aux.TRUE,1,5)
+	local res=g:Select(tp,1,5,nil)
 		aux.GCheckAdditional=nil
 		return res
 	end
