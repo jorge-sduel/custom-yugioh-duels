@@ -29,7 +29,8 @@ end
 function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		aux.GCheckAdditional=cid.lvcheck
-		local res=Duel.GetMatchingGroup(aux.AND(Card.IsLevelAbove,cid.thfilter,Card.IsAbleToHand),tp,LOCATION_DECK,0,nil,4):CheckSubGroup(aux.TRUE,2,2)
+		local res1=Duel.GetMatchingGroup(aux.AND(Card.IsLevelAbove,cid.thfilter,Card.IsAbleToHand),tp,LOCATION_DECK,0,nil,4)
+	local res=res1:Select(tp,2,2,nil)
 		aux.GCheckAdditional=nil
 		return res
 	end
