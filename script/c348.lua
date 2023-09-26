@@ -13,7 +13,7 @@ end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local mg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_GRAVE,0,nil)
-		return Duel.IsExistingMatchingCard(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,1,nil,nil,mg)
+		return Duel.IsExistingMatchingCard(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,2,nil,nil,mg)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
@@ -22,24 +22,8 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=g:Select(tp,1,1,nil)
+		local sg=g:Select(tp,1,2,nil)
 		local sc=sg:GetFirst()
 		Duel.SynchroSummon(tp,sc,nil,mg)
-		Duel.SynchroSummon(tp,sc,nil,mg)
 	end
-end
-function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	local rc=e:GetOwner()
-	local c=e:GetHandler()
-	local e1=Effect.CreateEffect(rc)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_DISABLE)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-	c:RegisterEffect(e1,true)
-	local e2=Effect.CreateEffect(rc)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_DISABLE_EFFECT)
-	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-	c:RegisterEffect(e2,true)
-	e:Reset()
 end
