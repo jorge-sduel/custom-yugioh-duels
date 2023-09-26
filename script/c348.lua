@@ -53,7 +53,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Group.FromCards(tun,nt)
 	Duel.SendtoGrave(g,REASON_COST)
 	Duel.SetTargetCard(g)
-	local c=e:GetHandler() return not c:IsOriginalType(TYPE_SYNCHRO) end)
+	local c=e:GetHandler() return not c:IsOriginalType(TYPE_SYNCHRO) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
