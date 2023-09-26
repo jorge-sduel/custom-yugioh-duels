@@ -22,7 +22,7 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sc=g:Select(tp,1,2,nil)
+		local sc=g:Select(tp,1,1,nil)
 		--local sc=sg:GetFirst()
 		Duel.SynchroSummon(tp,sc,nil,mg)
 		--local sg2=g:Select(tp,1,1,nil)
