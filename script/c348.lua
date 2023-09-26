@@ -27,7 +27,7 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 		Synchro.Send=2
 		Duel.SynchroSummon(tp,sc,nil,mg)
 	end
-		--local mg2=mg 
+		local mg2=mg:FilterSelect(tp,sc,1,1,nil)
 		local sg2=g:Select(tp,1,1,nil)
 		local sc2=sg2:GetFirst()
 		--local sc2=sg2:GetFirst()
