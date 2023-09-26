@@ -42,7 +42,7 @@ function cid.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	aux.GCheckAdditional=cid.lvcheck
 	local sg=g:SelectSubGroup(tp,aux.TRUE,false,2,2)
---	aux.GCheckAdditional=nil
+	aux.GCheckAdditional=nil
 	Duel.ConfirmCards(1-tp,sg)
 	local tc=sg:Select(1-tp,1,1,nil):GetFirst()
 	if tc and tc:IsAbleToHand() then
