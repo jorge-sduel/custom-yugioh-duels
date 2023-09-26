@@ -35,13 +35,11 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	local rc=e:GetOwner()
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
 	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	local sg=g:Select(tp,1,1,nil)
 	local sc=sg:GetFirst()
-	Duel.SynchroSummon(tp,sc,nil,mg2)
-	e:Reset()
+	Duel.SynchroSummon(tp,sc,nil,mg)
 end
  
