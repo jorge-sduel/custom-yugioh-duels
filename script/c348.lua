@@ -3,74 +3,43 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--synchro effect
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetTarget(s.target)
-	e1:SetOperation(s.activate)
+	e1:SetTarget(s.sctg)
+	e1:SetOperation(s.scop)
 	c:RegisterEffect(e1)
 end
-function s.fusfilter(c,e,tp,fe)
-	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false)
-		and Duel.IsExistingMatchingCard(s.synfilter,tp,LOCATION_EXTRA,0,1,c,e,tp,c,fe)
-		and Duel.GetLocationCountFromEx(tp,fe,nil,c)>1
+function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then
+		local mg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_GRAVE,0,nil)
+		return Duel.IsExistingMatchingCard(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,1,nil,nil,mg)
+	end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
-function s.filter(c,e,fc,sc)
-	return c:IsFaceup() and c:IsCanBeSynchroMaterial(sc) and c:IsCanBeSynchroMaterial(fc) and (not e or not c:IsImmuneToEffect(e))
+function s.scop(e,tp,eg,ep,ev,re,r,rp)
+	local mg=Duel.GetMatchingGroup(Card.IsCanBeSynchroMaterial,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
+	if #g>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local sg=g:Select(tp,1,1,nil)
+		local sc=sg:GetFirst()
+		Duel.SynchroSummon(tp,sc,nil,mg)
+		Duel.SynchroSummon(tp,sc,nil,mg)
+	end
 end
-function s.synfilter(c,e,tp,fc,fe)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil,fe,fc,c)
-	return c:IsType(TYPE_SYNCHRO) and aux.SelectUnselectGroup(g,e,tp,fc.min_material_count,fc.max_material_count,s.rescon(fc,c,fe),0)
-end
-function s.rescon(fc,sc,fe)
-	return  function(sg,e,tp,mg)
-				local t={}
-				local tc=sg:GetFirst()
-				local prop=EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE
-				if not fe then prop=prop|EFFECT_FLAG_IGNORE_IMMUNE end
-				while tc do
-					local e1=Effect.CreateEffect(e:GetHandler())
-					e1:SetType(EFFECT_TYPE_FIELD)
-					e1:SetProperty(prop)
-					e1:SetRange(LOCATION_MZONE)
-					e1:SetCode(EFFECT_MUST_BE_MATERIAL)
-					e1:SetValue(REASON_SYNCHRO)
-					e1:SetTargetRange(1,0)
-					e1:SetReset(RESET_CHAIN)
-					tc:RegisterEffect(e1)
-					t[tc]=e1
-					tc=sg:GetNext()
-				end
-				local res=fc:IsSynchroSummonable(sg,nil,sg) and sc:IsSynchroSummonable(nil,sg)
-				tc=sg:GetFirst()
-				while tc do
-					t[tc]:Reset()
-					tc=sg:GetNext()
-				end
-				return res
-			end
-end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return aux.CheckSummonGate(tp,2) and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
-		and Duel.IsExistingMatchingCard(s.fusfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,e) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_EXTRA)
-end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if not aux.CheckSummonGate(tp,2) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local fc=Duel.SelectMatchingCard(tp,s.fusfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,e):GetFirst()
-	if not fc then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,s.synfilter,tp,LOCATION_EXTRA,0,1,1,fc,e,tp,fc,e):GetFirst()
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil,e,fc,sc)
-	local mat=aux.SelectUnselectGroup(g,e,tp,fc.min_material_count,fc.max_material_count,s.rescon(fc,sc,e),1,tp,HINTMSG_SMATERIAL,s.rescon(fc,sc,e))
-	fc:SetMaterial(mat)
-	sc:SetMaterial(mat)
-	Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)
-	Duel.BreakEffect()
-	Duel.SpecialSummonStep(fc,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
-	Duel.SpecialSummonStep(sc,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
-	Duel.SpecialSummonComplete()
-	fc:CompleteProcedure()
-	sc:CompleteProcedure()
+function s.regop(e,tp,eg,ep,ev,re,r,rp)
+	local rc=e:GetOwner()
+	local c=e:GetHandler()
+	local e1=Effect.CreateEffect(rc)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_DISABLE)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	c:RegisterEffect(e1,true)
+	local e2=Effect.CreateEffect(rc)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_DISABLE_EFFECT)
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+	c:RegisterEffect(e2,true)
+	e:Reset()
 end
