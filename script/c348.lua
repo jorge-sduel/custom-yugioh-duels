@@ -24,7 +24,7 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	sc:Merge(g)
-	local sc2=sc:Select(tp,1,2,nil)
+	local sc2=sc:Select(tp,1,1,nil)
 	--sc:Merge(mt2)
 		Duel.SynchroSummon(tp,sc2,nil,mg)
 		--local sg2=g:Select(tp,1,1,nil)
