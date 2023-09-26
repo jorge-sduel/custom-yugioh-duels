@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.fusfilter(c,e,tp,fe)
-	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false) 
+	return c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false)
 		and Duel.IsExistingMatchingCard(s.synfilter,tp,LOCATION_EXTRA,0,1,c,e,tp,c,fe)
 		and Duel.GetLocationCountFromEx(tp,fe,nil,c)>1
 end
@@ -23,7 +23,7 @@ function s.synfilter(c,e,tp,fc,fe)
 	return c:IsType(TYPE_SYNCHRO) and aux.SelectUnselectGroup(g,e,tp,fc.min_material_count,fc.max_material_count,s.rescon(fc,c,fe),0)
 end
 function s.rescon(fc,sc,fe)
-	return	function(sg,e,tp,mg)
+	return  function(sg,e,tp,mg)
 				local t={}
 				local tc=sg:GetFirst()
 				local prop=EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CANNOT_DISABLE
@@ -41,7 +41,7 @@ function s.rescon(fc,sc,fe)
 					t[tc]=e1
 					tc=sg:GetNext()
 				end
-				local res=fc:IsSynchroSummonable(nil,sg) and sc:IsSynchroSummonable(nil,sg)
+				local res=fc:IsSynchroSummonable(sg,nil,sg) and sc:IsSynchroSummonable(nil,sg)
 				tc=sg:GetFirst()
 				while tc do
 					t[tc]:Reset()
@@ -51,7 +51,7 @@ function s.rescon(fc,sc,fe)
 			end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return aux.CheckSummonGate(tp,2) and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
+	if chk==0 then return aux.CheckSummonGate(tp,2) and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and Duel.IsExistingMatchingCard(s.fusfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,e) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_EXTRA)
 end
@@ -68,7 +68,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	sc:SetMaterial(mat)
 	Duel.SendtoGrave(mat,REASON_EFFECT+REASON_MATERIAL+REASON_SYNCHRO)
 	Duel.BreakEffect()
-	Duel.SpecialSummonStep(fc,SUMMON_TYPE_SYNCRO,tp,tp,false,false,POS_FACEUP)
+	Duel.SpecialSummonStep(fc,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
 	Duel.SpecialSummonStep(sc,SUMMON_TYPE_SYNCHRO,tp,tp,false,false,POS_FACEUP)
 	Duel.SpecialSummonComplete()
 	fc:CompleteProcedure()
