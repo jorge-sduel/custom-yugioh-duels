@@ -16,7 +16,7 @@ function s.fusfilter(c,e,tp,fe)
 		and Duel.GetLocationCountFromEx(tp,fe,nil,c)>1
 end
 function s.filter(c,e,fc,sc)
-	return c:IsFaceup() and c:IsCanBeSynchroMaterial(sc) and c:IsCanBeFusionMaterial(fc) and (not e or not c:IsImmuneToEffect(e))
+	return c:IsFaceup() and c:IsCanBeSynchroMaterial(sc) and c:IsCanBeSynchroMaterial(fc) and (not e or not c:IsImmuneToEffect(e))
 end
 function s.synfilter(c,e,tp,fc,fe)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil,fe,fc,c)
