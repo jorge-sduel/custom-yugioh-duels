@@ -33,7 +33,7 @@ function s.filter(c)
 	return c:IsType(TYPE_MONSTER)
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil)*200
+	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),0,LOCATION_MZONE,nil)*200
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x7b) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
