@@ -86,7 +86,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return (r&REASON_EFFECT)~=0 and re:GetHandler():IsControler(1-tp)
+	return (r&REASON_EFFECT)~=0 and re and re:GetHandler():GetCode()~=id
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
