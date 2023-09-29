@@ -8,9 +8,9 @@ function s.initial_effect(c)
 	--lvup
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(81974607,0))
-	e1:SetType(EFFECT_TYPE_IGNITION)
+	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetTarget(s.lvtg)
+	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetOperation(s.lvop)
 	c:RegisterEffect(e1)
 	--damage
@@ -68,9 +68,6 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if g:GetCount()>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
-end
-function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.lvfilter,tp,LOCATION_MZONE,0,1,e:GetHandler()) end
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
