@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e5:SetCode(EFFECT_EXTRA_FUSION_MATERIAL)
 	e5:SetRange(LOCATION_SZONE)
 	e5:SetTarget(aux.TargetBoolFunction(Card.IsAbleToRemove))
-	e5:SetOperation(Fusion.BanishMaterial)
+	--e5:SetOperation(Fusion.BanishMaterial)
 	e5:SetValue(s.mtval)
 	c:RegisterEffect(e5)
 end
