@@ -22,6 +22,12 @@ function c249000991.initial_effect(c)
 	e2:SetTarget(c249000991.sptg)
 	e2:SetOperation(c249000991.spop)
 	c:RegisterEffect(e2)
+		--Dual race
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_ADD_RACE)
+	e2:SetValue(RACE_DRAGON)
+	c:RegisterEffect(e2)
 end
 function c249000991.tfilter(c,race,e,tp,lv)
 	return c:IsType(TYPE_SYNCHRO) and c:IsRace(race) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SYNCHRO,tp,false,false)
