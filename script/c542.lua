@@ -4,7 +4,7 @@ s.Is_Neutrino=true
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--Fusion material
-	Fusion.AddProcMixN(c,true,true,s.matfilter,5)
+	Fusion.AddProcMixN(c,true,true,s.matfilter,3)
 	--damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.matfilter(c)
-	return c:IsType(TYPE FUSION) and c:IsAttribute(ATTRIBUTE_DARK)
+	return c:IsType(TYPE_FUSION) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -37,7 +37,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		val=val+a
 	end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_ONFIELD,1,nil) end
