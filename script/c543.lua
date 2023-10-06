@@ -23,7 +23,8 @@ function s.initial_effect(c)
 	--Def
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
-	e3:SetValue(s.val)
+	e3:SetTarget(s.val)
+	e3:SetValue(-1000)
 	c:RegisterEffect(e3)
 	--cannot be target
 	local e4=Effect.CreateEffect(c)
