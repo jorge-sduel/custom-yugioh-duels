@@ -44,7 +44,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.matfilter(c)
-	return c.Is_Neutrino and c:IsGalaxy()
+	return c.Is_Neutrino and c:IsSetCard(0x7b)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -70,7 +70,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=sg:GetFirst()
 	local c=e:GetHandler()
 	while tc do
-		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
+		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
+
 		end
 		tc=sg:GetNext()
 	end
