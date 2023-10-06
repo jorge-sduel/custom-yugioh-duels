@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	--Def
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
-	e3:SetTarget(aux.FaceupFilter(Card.IsAttributeExcept,ATTRIBUTE_DARK))
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsAttributeExcept,ATTRIBUTE_DARK))
 	e3:SetValue(-1000)
 	c:RegisterEffect(e3)
 	--cannot be target
