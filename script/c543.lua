@@ -41,6 +41,6 @@ end
 function s.val1(c)
 	return c:IsAttribute(ATTRIBUTE_DARK)
 end
-function s.val1(c)
+function s.val(c)
 	return not c:IsAttribute(ATTRIBUTE_DARK)
 end
