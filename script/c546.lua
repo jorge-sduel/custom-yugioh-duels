@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.spfilter(c)
-	return c.Is_Neutrino
+	return c.Is_Neutrino and c:IsFaceup()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
