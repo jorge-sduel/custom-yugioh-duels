@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.filter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToDeck()
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToDeck() and c:IsLocate(LOCATION_GRAVE+LOCATION_REMOVED)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
