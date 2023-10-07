@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.filter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToDeck() and c:IsLocate(LOCATION_GRAVE+LOCATION_REMOVED)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsAbleToDeck()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
@@ -44,7 +44,7 @@ function s.spcon(e,c)
 	return aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),0,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
+	--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local rg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,e:GetHandler())
 	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_TODECK,nil,nil,true)
 	if #g>0 then
