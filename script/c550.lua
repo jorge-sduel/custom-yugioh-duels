@@ -50,7 +50,7 @@ function s.extratg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
 end
 function s.filter(c)
-	return c:IsFaceup() and c:IsStatus(STATUS_SPSUMMON_TURN) and c:IsPreviusLocation(LOCATION_EXTRA) 
+	return c:IsFaceup() and c:IsStatus(STATUS_SPSUMMON_TURN) and c:IsSummonLocation(LOCATION_EXTRA) 
 end
 function s.handcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),0,LOCATION_MZONE,1,nil)
