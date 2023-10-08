@@ -59,13 +59,11 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local tc=Duel.GetMatchingGroup(Card.IsFaceup,tp,0, LOCATION_MZONE,nil)
-	if tc:IsFaceup() and tc:IsRelateToEffect(e) then
+	local tc=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
+	if tc:IsRelateToEffect(e) then
 	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
-	e1:SetRange(LOCATION_MZONE)
-	e1:SetTargetRange(0,LOCATION_MZONE)
 	e1:SetValue(-500)
 	tc:RegisterEffect(e1)
 	local e2=e1:Clone()
