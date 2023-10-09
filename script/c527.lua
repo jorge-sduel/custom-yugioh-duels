@@ -72,11 +72,11 @@ end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local atk=c:GetAttack()
-	local g=Duel.GetMatchingGroup(s.lvfilter,tp,LOCATION_MZONE,0,nil)
+	--[[local g=Duel.GetMatchingGroup(s.lvfilter,tp,LOCATION_MZONE,0,nil)
 	local tc=g:GetFirst()
-	while tc do
+	while tc do]] 
 	Duel.Recover(tp,atk,REASON_EFFECT)
 Duel.Release(e:GetHandler(),REASON_COST)
-		tc=g:GetNext()
-	end
+		--tc=g:GetNext()
+	--end
 end
