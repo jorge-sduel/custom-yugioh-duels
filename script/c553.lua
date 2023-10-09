@@ -57,7 +57,7 @@ e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e1)
 end
 function s.climit(e,lp,tp)
-	return lp==tp or not e:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return lp==tp
 end
 function s.val(e,re,dam,r,rp,rc)
 	return math.floor(dam/2)
