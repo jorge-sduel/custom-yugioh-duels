@@ -29,6 +29,7 @@ function s.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_EXTRA_FUSION_MATERIAL)
 	e5:SetRange(LOCATION_SZONE)
+	e5:SetCondition(s.handcon)
 	e5:SetTarget(aux.TargetBoolFunction(Card.IsAbleToRemove))
 	--e5:SetOperation(Fusion.BanishMaterial)
 	e5:SetValue(s.mtval)
@@ -83,4 +84,10 @@ end
 function s.mtval(e,c)
 	if not c then return false end
 	return c:IsControler(e:GetHandlerPlayer())
+end
+function s.filter(c)
+	return c:IsFaceup() and (c:IsLevelAbove(8) or c:IsRankAbove(8))
+end
+function s.handcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),0,LOCATION_MZONE,1,nil)
 end
