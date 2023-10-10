@@ -45,7 +45,7 @@ end
 s.synchro_tuner_required=1
 s.synchro_nt_required=1
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetLP(tp)<2001
+	return Duel.GetLP(e:GetHandlerPlayer())<2001
 end
 function s.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
