@@ -7,7 +7,8 @@ e1:SetDescription(aux.Stringid(4012,8))
 e1:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE+CATEGORY_RECOVER)
 e1:SetType(EFFECT_TYPE_ACTIVATE)
 e1:SetCode(EVENT_FREE_CHAIN)
-e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_IGNORE_IMMUNE)
+e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_IGNORE_IMMUNE)
+
 e1:SetTarget(c238.tg)
 e1:SetOperation(c238.op)
 c:RegisterEffect(e1)
@@ -78,7 +79,8 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	if sumable and Duel.SelectYesNo(tp,aux.Stringid(16000226,0)) then
 		Duel.BreakEffect()
-		Duel.SpecialSummon(mg,0,tc:GetControler(),tc:GetControler(),false,false,POS_FACEUP)
+			local smg=mg:Select(tp,1,99,nil)
+		Duel.SpecialSummon(smg,0,tc:GetControler(),tc:GetControler(),false,false,POS_FACEUP)
 			--Duel.SpecialSummonComplete()
  --end
  end
