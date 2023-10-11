@@ -82,6 +82,12 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 			local smg=mg:Select(tp,1,99,nil)
 		Duel.SpecialSummon(smg,0,tc:GetControler(),tc:GetControler(),false,false,POS_FACEUP)
 			--Duel.SpecialSummonComplete()
+	local e2=Effect.CreateEffect(e:GetHandler())
+	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_ADD_TYPE)
+	e2:SetValue(TYPE_MONSTER)
+	smg:RegisterEffect(e2)
  --end
  end
 end
