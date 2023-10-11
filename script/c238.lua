@@ -80,7 +80,7 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 	if sumable and Duel.SelectYesNo(tp,aux.Stringid(16000226,0)) then
 		Duel.BreakEffect()
 			local smg=mg:Select(tp,1,99,nil)
-		Duel.SpecialSummon(smg,0,tc:GetControler(),tc:GetControler(),false,false,POS_FACEUP)
+		Duel.SpecialSummon(smg,0,tc:GetControler(),tc:GetControler(),true,true,POS_FACEUP)
 			--Duel.SpecialSummonComplete()
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
