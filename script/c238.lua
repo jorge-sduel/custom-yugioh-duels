@@ -92,6 +92,7 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 	--	Duel.SpecialSummon(smg,0,tc:GetControler(),tc:GetControler(),true,true,POS_FACEUP)
 			--Duel.SpecialSummonComplete()
   end
+ end
 			Duel.SpecialSummonComplete()
  end
 end
