@@ -78,7 +78,6 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc1=g2:GetFirst()
 	if tc1 then
 	   Duel.SpecialSummonRule(tp,tc1,0)
-	end
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x7b) and c:IsSpecialSummonable()
