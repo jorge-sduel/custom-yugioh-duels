@@ -70,6 +70,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	for tc in sg:Iter() do
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 		end
+		Duel.SpecialSummonComplete()
 	local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil)
 	local sg2=g2:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
