@@ -69,13 +69,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	for tc in sg:Iter() do
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
-	local g2=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil)
+	local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil)
 	--[[local tc1=g2:GetFirst()
 	if tc1 then]] 
 	   Duel.SpecialSummonRule(tp,g2,0)
 		end
 	end
 end
-function s.filter(c,e,tp)
+function s.filter2(c,e,tp)
 	return c:IsSetCard(0x7b) and c:IsSpecialSummonable()
 end
