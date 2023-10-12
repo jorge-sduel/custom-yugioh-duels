@@ -27,7 +27,7 @@ function s.initial_effect(c)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	return Duel.CheckReleaseGroup(e:GetHandlerPlayer(),Card.IsLevelAbove,1,false,1,true,c,c:GetControler(),nil,false,nil,8)
+	return Duel.CheckReleaseGroup(e:GetHandlerPlayer(),Card.IsLevelAbove,1,false,1,true,c,e:GetHandlerPlayer(),nil,false,nil,8)
 end
 function s.costfilter(c)
 	return c:IsLevelAbove(8)
