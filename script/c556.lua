@@ -73,7 +73,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--[[local tc1=g2:GetFirst()
 	if tc1 then]] 
 	   Duel.SpecialSummonRule(tp,g2,0)
-		--end
+		end
 	end
 end
 function s.filter(c,e,tp)
