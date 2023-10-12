@@ -74,7 +74,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil)
 	local sg2=g2:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
-	   Duel.SpecialSummonRule(tp,sg2,0)
+	   Duel.SpecialSummonRule(tp,sc,0)
 	end
 end
 function s.filter2(c,e,tp)
