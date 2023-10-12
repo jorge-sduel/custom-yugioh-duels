@@ -59,7 +59,7 @@ function s.filter(c,e,tp)
 	return c:IsLevelBelow(8) and (c:IsSetCard(0x55) or c:IsSetCard(0x7b)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.Damage(tp,0,REASON_EFFECT)==0 then return end
+	--if Duel.Damage(tp,0,REASON_EFFECT)==0 then return end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft<=0 then return end
 	if ft>2 then ft=2 end
