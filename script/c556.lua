@@ -73,6 +73,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP_DEFENSE) then
 				--Prevent the activation of the effects
 			end
+		end
 		Duel.SpecialSummonComplete()
 	local g2=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil)
 	local tc1=g2:GetFirst()
