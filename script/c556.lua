@@ -71,11 +71,11 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 		end
 		Duel.SpecialSummonComplete()
+	end
 	local g2=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_EXTRA,0,1,1,nil)
 	local sg2=g2:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
-	   Duel.SpecialSummonRule(tp,sc,0)
-	end
+	Duel.SpecialSummonRule(tp,sc,0)
 end
 function s.filter2(c,e,tp)
 	return c:IsSetCard(0x7b) and c:IsSpecialSummonable()
