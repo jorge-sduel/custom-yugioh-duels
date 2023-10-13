@@ -81,6 +81,6 @@ end
 function s.bttg(e,c)
 	return c:IsFacedown() or not (c:IsHasEffect(id) and c:IsAttackBelow(e:GetHandler():GetAttack()))
 end
-function s.imval2(e,c)
-	return Auxiliary.imval1(e,c) and c:GetControler()~=e:GetHandlerPlayer() and c:IsAttackAbove(e:GetHandler():GetAttack()) 
+function s.inval2(e,c)
+	return aux.imval1(e,c) and c:GetControler()~=e:GetHandlerPlayer() and c:IsAttackAbove(e:GetHandler():GetAttack()) 
 end
