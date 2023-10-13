@@ -28,7 +28,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(e:GetHandler(),REASON_COST+REASON_DISCARD)
 end
 function s.thfilter(c)
-	return (c:IsCode(70) or c:IsCode(71) or c:IsCode(249000211) or c:IsCode(249000991)) and c:IsAbleToHand()
+	return (c:IsCode(71) or c:IsCode(72) or c:IsCode(249000211) or c:IsCode(249000991)) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_DECK) and chkc:IsControler(tp) and s.thfilter(chkc) end
