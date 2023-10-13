@@ -22,6 +22,19 @@ function s.initial_effect(c)
 	e2:SetCondition(s.imcon)
 	e2:SetOperation(s.imop)
 	c:RegisterEffect(e2)
+	--atklimit
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetTargetRange(0,LOCATION_ALL)
+	e3:SetValue(s.bttg)
+	c:RegisterEffect(e3)
+	--atklimit
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(id)
+	c:RegisterEffect(e4)
 end
 function s.pmfilter(c,sc)
 	return c:IsCode(93717133)
@@ -64,4 +77,7 @@ function s.imop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
+end
+function s.bttg(e,c)
+	return c:IsFacedown() or not (c:IsHasEffect(id) and c:IsAttackBelow(e:GetHandler():GetAttack()))
 end
