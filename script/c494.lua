@@ -109,7 +109,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter(c,e,tp)
-	return ((c:IsCode(467) or c:IsCode(493) or c:IsCode(12632096) or c:IsCode(68396121) or c:IsCode(39272762) or c:IsCode(48348921) or c:IsCode(1497) or c:IsCode(249001043)) or c:IsHasEffect(555)) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return ((c:IsCode(467) or c:IsCode(493) or c:IsCode(12632096) or c:IsCode(68396121) or c:IsCode(39272762) or c:IsCode(48348921) or c:IsCode(1497) or c:IsCode(249001043)) or c:IsHasEffect(555)) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
@@ -119,7 +119,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	if #g>0 then
-		Duel.SpecialSummon(g,SUMMON_TYPE_EXTRA,tp,tp,false,false,POS_FACEUP_ATTACK)
+		Duel.SpecialSummon(g,SUMMON_TYPE_FUSION+SUMMON_TYPE_SYNCHRO+SUMMON_TYPE_XYZ+SUMMON_TYPE_LINK,tp,tp,true,true,POS_FACEUP)
 		--g:SetStatus(STATUS_PROC_COMPLETE,true)
 	end
 end
