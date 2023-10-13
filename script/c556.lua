@@ -53,7 +53,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
-function s.con(e,tp,eg,ep,ev,re,r,rp)
+function s.cond(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsBattlePhase() 
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
