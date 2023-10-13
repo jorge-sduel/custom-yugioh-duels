@@ -4,7 +4,7 @@ s.Is_Neutrino=true
 function s.initial_effect(c)
 	--Fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,455,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK))
+	Fusion.AddProcMix(c,true,true,467,s.matfilter)
 --equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -36,7 +36,10 @@ function s.initial_effect(c)
 		e3:SetOperation(s.op)
 		c:RegisterEffect(e3)]]
 end
-s.listed_names={455}
+s.listed_names={467}
+function s.matfilter(c)
+	return c.Is_Neutrino
+end
 function s.eqcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
