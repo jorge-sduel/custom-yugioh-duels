@@ -55,6 +55,17 @@ function s.initial_effect(c)
 	e6:SetCode(EFFECT_UPDATE_ATTACK)
 	e6:SetValue(s.flagval)
 	c:RegisterEffect(e6)
+		--indes
+	local e7=Effect.CreateEffect(c)
+	e7:SetDescription(aux.Stringid(id,0))
+	e7:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e7:SetType(EFFECT_TYPE_QUICK_O)
+	e7:SetRange(LOCATION_MZONE)
+	e7:SetCountLimit(1)
+	e7:SetCode(EVENT_FREE_CHAIN)
+	e7:SetTarget(s.target)
+	e7:SetOperation(s.operation)
+	c:RegisterEffect(e7)
 end
 function s.pmfilter(c,sc)
 	return c:IsCode(93717133)
@@ -178,4 +189,26 @@ end
 --attack down
 function s.flagval(e,c)
 	return e:GetHandler():GetFlagEffectLabel(id) and -e:GetHandler():GetFlagEffectLabel(id) or 0
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsControler(tp) and chkc:IsOnField() and chkc:IsFaceup() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_ONFIELD,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_ONFIELD,0,1,1,nil)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_INDESTRUCTABLE_COUNT)
+		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+		e1:SetCountLimit(1)
+		e1:SetValue(s.valcon)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		tc:RegisterEffect(e1)
+	end
+end
+function s.valcon(e,re,r,rp)
+	return (r&REASON_BATTLE+REASON_EFFECT)~=0
 end
