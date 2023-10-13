@@ -22,14 +22,14 @@ function s.initial_effect(c)
 	e2:SetCondition(s.imcon)
 	e2:SetOperation(s.imop)
 	c:RegisterEffect(e2)
-	--atklimit
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_FIELD)
-	e3:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
-	e3:SetRange(LOCATION_MZONE)
-	e3:SetTargetRange(0,LOCATION_MZONE)
-	e3:SetValue(s.bttg)
-	c:RegisterEffect(e3)
+	--cannot be battle target
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCode(EFFECT_CANNOT_BE_BATTLE_TARGET)
+	e1:SetValue(s.inval2)
+	c:RegisterEffect(e1)
 	--atklimit
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
@@ -80,4 +80,7 @@ function s.efilter(e,te)
 end
 function s.bttg(e,c)
 	return c:IsFacedown() or not (c:IsHasEffect(id) and c:IsAttackBelow(e:GetHandler():GetAttack()))
+end
+function s.imval2(e,c)
+	return Auxiliary.imval1(e,c) and c:GetControler()~=e:GetHandlerPlayer() and c:IsAttackAbove(e:GetHandler():GetAttack()) 
 end
