@@ -65,9 +65,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetValue(ec:GetTextDefense())
 		ec:RegisterEffect(e3)
 			ec:CopyEffect(ec:GetOriginalCode(),RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,1)
-		end
 	end
-  end
 end
 function s.eqlimit(e,c)
 	return c==e:GetLabelObject()
