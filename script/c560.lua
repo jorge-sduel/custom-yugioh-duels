@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function s.filter2(c)
-	return c:IsFaceup() and c:IsMonster()
+	return c:IsFaceup() and c:IsMonster() and (c:IsSetCard(0x55) or c:IsSetCard(0x7b))
 end
 function s.eqfilter(c,tp)
 	return c:IsMonster() and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,0,1,c)
