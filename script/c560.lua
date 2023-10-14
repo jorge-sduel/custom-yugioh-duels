@@ -25,7 +25,7 @@ end
 function s.filter2(c)
 	return c:IsFaceup() and c:IsMonster()
 end
-function s.eqfilter(e,c)
+function s.eqfilter(c,tp)
 	return c:IsMonster() and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,0,1,c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
