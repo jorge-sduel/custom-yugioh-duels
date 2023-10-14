@@ -22,16 +22,19 @@ function s.initial_effect(c)
 	e2:SetOperation(s.repop)
 	c:RegisterEffect(e2)
 end
-function s.eqfilter(c)
-	return c:IsMonster()
+function s.filter2(c)
+	return c:IsFaceup() and c:IsMonster()
+end
+function s.eqfilter(e,c)
+	return c:IsMonster() and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_MZONE,0,1,c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 	if e:GetHandler():IsLocation(LOCATION_MZONE+LOCATION_GRAVE) then ft=ft-1 end
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
-	if chk==0 then return ft>0 and Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil)
+	if chk==0 then return ft>0 and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(s.eqfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
-	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
+	Duel.SelectTarget(tp,s.filter2,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,nil,1,tp,LOCATION_MZONE+LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -39,7 +42,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not tc then return end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(12152769,2))
-	local ec=Duel.SelectMatchingCard(tp,s.eqfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,tc:GetFirst())
+	local ec=Duel.SelectMatchingCard(tp,s.eqfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil):GetFirst()
 	if ec then
 		if not Duel.Equip(tp,ec,tc,true) then return end
 		local e1=Effect.CreateEffect(e:GetHandler())
@@ -60,7 +63,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetType(EFFECT_TYPE_EQUIP)
 		e3:SetProperty(EFFECT_FLAG_OWNER_RELATE+EFFECT_FLAG_IGNORE_IMMUNE)
-		e3:SetCode(EFFECT_UPDATE_ATTACK)
+		e3:SetCode(EFFECT_UPDATE_DEFENSE)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e3:SetValue(ec:GetTextDefense())
 		ec:RegisterEffect(e3)
