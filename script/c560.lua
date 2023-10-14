@@ -42,7 +42,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not tc then return end
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(12152769,2))
-	local ec=Duel.SelectMatchingCard(tp,s.eqfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil):GetFirst()
+	local ec=Duel.SelectMatchingCard(tp,s.eqfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,1,nil,tp):GetFirst()
 	if ec then
 		if not Duel.Equip(tp,ec,tc,true) then return end
 		local e1=Effect.CreateEffect(e:GetHandler())
