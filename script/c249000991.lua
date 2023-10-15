@@ -79,6 +79,12 @@ function c249000991.activate(e,tp,eg,ep,ev,re,r,rp)
 		e4:SetValue(sc:GetLevel()*100)
 		e4:SetReset(RESET_EVENT+RESETS_STANDARD)
 		sc:RegisterEffect(e4)
+		local e5=Effect.CreateEffect(e:GetHandler())
+		e5:SetType(EFFECT_TYPE_SINGLE)
+		e5:SetCode(EFFECT_UPDATE_DEFENSE)
+		e5:SetValue(sc:GetLevel()*100)
+		e5:SetReset(RESET_EVENT+RESETS_STANDARD)
+		sc:RegisterEffect(e5)
 		sc:CompleteProcedure()
 	end
 end
