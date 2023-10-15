@@ -115,6 +115,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.damval(e,re,val,r,rp,rc)
+	if r&REASON_BATTLE+REASON_EFFECT~=REASON_BATTLE+REASON_EFFECT then
 	if then return val end
 	local g=Duel.GetMatchingGroup(s.filter,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)
 	local g2=g:Clone()
