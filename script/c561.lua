@@ -86,7 +86,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e10)
 end
 function s.xyzfilter(c,xyz,sumtype,tp)
-	return c:IsType(TYPE FUSION) and c:IsLevelAbove(10) and c:IsAttribute(ATTRIBUTE_DARK)
+	return c:IsType(TYPE_FUSION) and c:IsLevelAbove(10) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsRace,1,nil,RACE_DRAGON)
