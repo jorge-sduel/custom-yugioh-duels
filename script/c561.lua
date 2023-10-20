@@ -53,7 +53,7 @@ function s.initial_effect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
 	e6:SetCode(EFFECT_CANNOT_CHANGE_CONTROL)
 	c:RegisterEffect(e6)
---unaffected by no equip card
+--unaffected by card
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
 	e7:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -100,7 +100,7 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local dam=math.abs(Duel.GetLP(0)-Duel.GetLP(1))
+	local dam=math.abs(Duel.GetLP(tp)-Duel.GetLP(1-tp))
 	Duel.Damage(p,dam,REASON_EFFECT)
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
@@ -128,14 +128,14 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 		if e:GetHandler():GetSequence()<5 then ft=ft+1 end
 		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and ft>1 
-			and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,3,nil,e,tp)
+			and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,3,nil,e,tp)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_GRAVE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 then return end
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if #g>=3 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:Select(tp,3,3,nil)
