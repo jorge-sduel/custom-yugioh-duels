@@ -149,7 +149,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilter(e,te)
-	return not te:IsLevelAbove(12)
+	return te:GetOwner()~=e:GetOwner()
 	--((te:IsCode(467) or te:IsCode(493) or te:IsCode(12632096) or te:IsCode(68396121) or te:IsCode(39272762) or te:IsCode(48348921) or te:IsCode(1497) or te:IsCode(249001043)) or te:IsHasEffect(555))
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
