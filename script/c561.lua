@@ -111,8 +111,6 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 Duel.Damage(1-tp,Duel.GetLP(tp)-Duel.GetLP(1-tp),REASON_EFFECT)
 	end
 end
-	
-end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
 end
