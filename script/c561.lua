@@ -95,12 +95,12 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(1-tp)
 	local tp=e:GetHandler():GetControler()
-	if Duel.GetLP(tp)<=Duel.GetLP(1-tp) then
+	--[[if Duel.GetLP(tp)<=Duel.GetLP(1-tp) then
 		return dam=Duel.GetLP(1-tp)-Duel.GetLP(tp)
 	else
 		return dam=Duel.GetLP(tp)-Duel.GetLP(1-tp)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)]]
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
