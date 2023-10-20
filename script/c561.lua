@@ -94,14 +94,14 @@ end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(1-tp)
-	local dam=math.abs(Duel.GetLP(0)-Duel.GetLP(1))
+	local dam=math.abs(Duel.GetLP(tp)-Duel.GetLP(1-tp))
 	Duel.SetTargetParam(dam)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	--local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local dam=math.abs(Duel.GetLP(tp)-Duel.GetLP(1-tp))
-	Duel.Damage(p,dam,REASON_EFFECT)
+	Duel.Damage(1-tp,dam,REASON_EFFECT)
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
@@ -138,13 +138,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
 	if #g>=3 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=g:Select(tp,3,3,nil)
-		local tc=sg:GetFirst()
-		Duel.SpecialSummonStep(tc,121,tp,tp,false,false,POS_FACEUP)
-		tc:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD_DISABLE,0,0)
+		local sg=g:Select(tp,1,3,nil)
+		--local tc=sg:GetFirst()
+		Duel.SpecialSummonStep(sg,0,tp,tp,false,false,POS_FACEUP)
+		--tc:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD_DISABLE,0,0)
 		tc=sg:GetNext()
-		Duel.SpecialSummonStep(tc,121,tp,tp,false,false,POS_FACEUP)
-		tc:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD_DISABLE,0,0)
+		Duel.SpecialSummonStep(sg,0,tp,tp,false,false,POS_FACEUP)
+		--tc:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD_DISABLE,0,0)
 		Duel.SpecialSummonComplete()
 	end
 end
