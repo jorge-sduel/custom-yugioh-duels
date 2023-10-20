@@ -124,29 +124,16 @@ function s.filter(c,e,tp)
 	return not c:IsCode(id) and c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,121,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		if e:GetHandler():GetSequence()<5 then ft=ft+1 end
-		return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) and ft>1 
-			and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,3,nil,e,tp)
-	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_GRAVE)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) 
+		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<3 then return end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
-	if #g>=3 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=g:Select(tp,1,3,nil)
-		--local tc=sg:GetFirst()
-		Duel.SpecialSummonStep(sg,0,tp,tp,false,false,POS_FACEUP)
-		--tc:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD_DISABLE,0,0)
-		tc=sg:GetNext()
-		Duel.SpecialSummonStep(sg,0,tp,tp,false,false,POS_FACEUP)
-		--tc:RegisterFlagEffect(tc:GetOriginalCode(),RESET_EVENT+RESETS_STANDARD_DISABLE,0,0)
-		Duel.SpecialSummonComplete()
-	end
+	if #g<3 then return end
+	local sg=g:Select(tp,3,3,nil)
+	Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
