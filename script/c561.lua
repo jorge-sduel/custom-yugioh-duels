@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetCondition(s.damcon)
-	e2:SetTarget(s.damtg)
+	--e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
 	--reduce
 	local e3=Effect.CreateEffect(c)
@@ -106,12 +106,12 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local tp=e:GetHandler():GetControler()
 	if Duel.GetLP(tp)<=Duel.GetLP(1-tp) then
-		return dam=Duel.GetLP(1-tp)-Duel.GetLP(tp)
+ Duel.Damage(1-tp,Duel.GetLP(1-tp)-Duel.GetLP(tp),REASON_EFFECT)
 	else
-		return dam=Duel.GetLP(tp)-Duel.GetLP(1-tp)
+Duel.Damage(1-tp,Duel.GetLP(tp)-Duel.GetLP(1-tp),REASON_EFFECT)
 	end
 end
-	Duel.Damage(1-tp,dam,REASON_EFFECT)
+	
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
