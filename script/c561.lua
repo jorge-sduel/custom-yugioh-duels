@@ -19,6 +19,7 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetCondition(s.damcon)
+	e2:SetRange(LOCATION_MZONE)
 	--e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
 	--reduce
