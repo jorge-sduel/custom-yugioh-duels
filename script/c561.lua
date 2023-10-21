@@ -17,9 +17,9 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	--e2:SetCondition(s.damcon)
+	e2:SetCondition(s.damcon)
 	e2:SetRange(LOCATION_MZONE)
-	--e2:SetTarget(s.damtg)
+	e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
 	--reduce
 	local e3=Effect.CreateEffect(c)
@@ -92,19 +92,16 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsRace,1,nil,RACE_DRAGON)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+	local ct=math.abs(Duel.GetLP(0)-Duel.GetLP(1))
+	if chk==0 then return ct>0 end
 	Duel.SetTargetPlayer(1-tp)
-	local tp=e:GetHandler():GetControler()
-	--[[if Duel.GetLP(tp)<=Duel.GetLP(1-tp) then
-		return dam=Duel.GetLP(1-tp)-Duel.GetLP(tp)
-	else
-		return dam=Duel.GetLP(tp)-Duel.GetLP(1-tp)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ct*500)
+end
+function c27.damop(e,tp,eg,ep,ev,re,r,rp)
+	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	local ct=math.abs(Duel.GetLP(0)-Duel.GetLP(1))
+	Duel.Damage(p,ct,REASON_EFFECT)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)]]
-end
-function s.damop(e,tp,eg,ep,ev,re,r,rp)
- Duel.Damage(1-tp,55555,REASON_EFFECT)
-end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
 end
