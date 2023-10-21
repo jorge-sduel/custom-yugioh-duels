@@ -105,7 +105,7 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local tp=e:GetHandler():GetControler()
- Duel.Damage(1-tp,math.abs(Duel.GetLP(0)-Duel.GetLP(1)),REASON_EFFECT)
+ Duel.Damage(1-tp,55555),REASON_EFFECT)
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
