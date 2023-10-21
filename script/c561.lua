@@ -17,8 +17,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetCondition(s.damcon)
+	--e2:SetCondition(s.damcon)
 	e2:SetRange(LOCATION_MZONE)
 	--e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
@@ -104,7 +103,6 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)]]
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local tp=e:GetHandler():GetControler()
  Duel.Damage(1-tp,55555,REASON_EFFECT)
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
