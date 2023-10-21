@@ -103,13 +103,8 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)]]
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local tp=e:GetHandler():GetControler()
-	if Duel.GetLP(tp)<=Duel.GetLP(1-tp) then
- Duel.Damage(1-tp,Duel.GetLP(1-tp)-Duel.GetLP(tp),REASON_EFFECT)
-	else
-Duel.Damage(1-tp,Duel.GetLP(tp)-Duel.GetLP(1-tp),REASON_EFFECT)
-	end
+ Duel.Damage(1-tp,math.abs(Duel.GetLP(0)-Duel.GetLP(1)),REASON_EFFECT)
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsRace,1,nil,RACE_WARRIOR)
