@@ -21,6 +21,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
+	c:RegisterEffect(e2)
 	--reduce
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
