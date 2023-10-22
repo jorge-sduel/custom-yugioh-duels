@@ -79,9 +79,9 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 --	local sumtype=tc:GetSummonType()
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)==0 then
 	end
-	if sumable and Duel.SelectYesNo(tp,aux.Stringid(16000226,0)) and ct>=mg then
+	if sumable and Duel.SelectYesNo(tp,aux.Stringid(16000226,0)) then
 		Duel.BreakEffect() 
-			local smg=mg:Select(tp,1,99,nil)
+			local smg=mg:Select(tp,1,ct,nil)
 		local c=e:GetHandler()
 	for smg in smg:Iter() do
 		if Duel.SpecialSummonStep(smg,0,tp,tp,true,true,POS_FACEUP) then
