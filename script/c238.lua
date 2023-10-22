@@ -84,7 +84,7 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 			local smg=mg:Select(tp,1,ct,nil)
 		local c=e:GetHandler()
 	for smg in smg:Iter() do
-		if Duel.SpecialSummonStep(smg,0,tp,tp,true,true,POS_FACEUP) then
+		if Duel.SpecialSummonStep(smg,0,tp,p,true,true,POS_FACEUP) then
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetCategory(CATEGORY_TOGRAVE+CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_SINGLE)
