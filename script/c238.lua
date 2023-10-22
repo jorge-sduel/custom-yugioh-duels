@@ -73,14 +73,14 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsFacedown() or not tc:IsRelateToEffect(e) then return end
 	local mg=tc:GetMaterial()
-	local p=tc:GetControler()
-	local ct=Duel.GetLocationCount(p,LOCATION_MZONE) 
+	local p=tc:GetControler() 
 	local sumable=true
 --	local sumtype=tc:GetSummonType()
 	if Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)==0 then
 	end
 	if sumable and Duel.SelectYesNo(tp,aux.Stringid(16000226,0)) then
 		Duel.BreakEffect() 
+		local ct=Duel.GetLocationCount(p,LOCATION_MZONE)
 			local smg=mg:Select(tp,1,ct,nil)
 		local c=e:GetHandler()
 	for smg in smg:Iter() do
