@@ -91,7 +91,7 @@ function c238.activate(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCode(EFFECT_ADD_TYPE)
 	e2:SetValue(TYPE_MONSTER)
 	smg:RegisterEffect(e2)
-	--	Duel.SpecialSummon(smg,0,tp,p,true,true,POS_FACEUP)
+	--	Duel.SpecialSummon(smg,0,p,p,true,true,POS_FACEUP)
 			--Duel.SpecialSummonComplete()
   end
  end
