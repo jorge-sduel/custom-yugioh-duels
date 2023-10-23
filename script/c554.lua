@@ -105,25 +105,23 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetDescription(aux.Stringid(id,2))
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(1,0)
+	e1:SetValue(1)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e1,tp)
+	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CHANGE_DAMAGE)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetTargetRange(1,0)
 	e1:SetValue(s.damval)
-	e1:SetReset(RESET_PHASE|PHASE_END)
+	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.damval(e,re,val,r,rp,rc)
-	if r&REASON_BATTLE+REASON_EFFECT~=REASON_BATTLE+REASON_EFFECT then
-	return val end
-	local g=Duel.GetMatchingGroup(s.filter,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)
-	local g2=g:Clone()
-	for c in aux.Next(g) do
-		if g2:FilterCount(Card.IsType,nil,TYPE_SYNCHRO)>1 then
-			g2:RemoveCard(c)
-		end
-	end
-	local dam=g2*500
-	if val<=dam then return 0 else return val end
+	if bit.band(r,REASON_EFFECT)~=0 then return 0
+	else return val end
 end
