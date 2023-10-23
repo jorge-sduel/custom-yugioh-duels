@@ -103,7 +103,9 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(0)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		mg:RegisterEffect(e1)
-	   end
+		end
+		end
+		Duel.SpecialSummonComplete()
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
