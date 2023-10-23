@@ -21,6 +21,12 @@ function s.initial_effect(c)
 	e2:SetValue(s.repval)
 	e2:SetOperation(s.repop)
 	c:RegisterEffect(e2)
+	--act in hand
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_TRAP_ACT_IN_HAND)
+	e3:SetCondition(s.handcon)
+	c:RegisterEffect(e3)
 end
 function s.filter2(c)
 	return c:IsFaceup() and c:IsMonster() and (c:IsSetCard(0x55) or c:IsSetCard(0x7b) or c.Is_Neutrino)
@@ -87,4 +93,10 @@ function s.repval(e,c)
 end
 function s.repop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT+REASON_REPLACE)
+end
+function s.filter(c)
+	return c:IsFaceup() and c:IsSummonLocation(LOCATION_EXTRA) 
+end
+function s.handcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),0,LOCATION_MZONE,1,nil)
 end
