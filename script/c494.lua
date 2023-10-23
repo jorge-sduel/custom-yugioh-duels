@@ -246,6 +246,7 @@ function s.activate2(e,tp,eg,ev,ep,re,r,rp)
 		Duel.BreakEffect()
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	end
+end
 function s.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end
 	Duel.Release(e:GetHandler(),REASON_COST)
