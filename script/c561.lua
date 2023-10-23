@@ -132,8 +132,8 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<1 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,nil,e,tp)
-	if #g<3 then return end
-	local sg=g:Select(tp,3,3,nil)
+	if #g<1 then return end
+	local sg=g:Select(tp,1,3,nil)
 	Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 end
 function s.efilter(e,te)
