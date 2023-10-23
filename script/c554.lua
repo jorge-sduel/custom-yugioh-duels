@@ -78,7 +78,6 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if ft>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
 	if #mg<=ft and mg:FilterCount(aux.NecroValleyFilter(s.mgfilter),nil,e,tp,e:GetHandler())==#mg then
-		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP)
 		local e1=Effect.CreateEffect(e:GetHandler()) 
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_ATTACK)
@@ -101,6 +100,7 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(0)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		mg:RegisterEffect(e1)
+		Duel.SpecialSummon(mg,0,tp,tp,false,false,POS_FACEUP) 
 	end
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
