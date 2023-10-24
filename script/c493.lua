@@ -109,7 +109,7 @@ function s.climit(e,lp,tp)
 	return lp==tp or not e:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
 function s.imcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function s.imop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
