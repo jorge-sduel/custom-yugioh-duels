@@ -66,6 +66,20 @@ function s.initial_effect(c)
 	e7:SetTarget(s.target)
 	e7:SetOperation(s.operation)
 	c:RegisterEffect(e7)
+		--add type
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e8:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e8:SetCondition(s.tncon)
+	e8:SetOperation(s.tnop)
+	c:RegisterEffect(e8)
+	local e9=Effect.CreateEffect(c)
+	e9:SetType(EFFECT_TYPE_SINGLE)
+	e9:SetCode(EFFECT_MATERIAL_CHECK)
+	e9:SetValue(s.valcheck)
+	e9:SetLabelObject(e8)
+	c:RegisterEffect(e9)
 end
 function s.pmfilter(c,sc)
 	return c:IsCode(93717133)
@@ -211,4 +225,28 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.valcon(e,re,r,rp)
 	return (r&REASON_BATTLE+REASON_EFFECT)~=0
+end
+function s.valcheck(e,c)
+	local g=c:GetMaterial()
+	if g:IsExists(Card.IsCode,1,nil,93717133) then
+		e:GetLabelObject():SetLabel(1)
+	else
+		e:GetLabelObject():SetLabel(0)
+	end
+end
+function s.filter(c)
+	return c:IsLocation(LOCATION_ONFIELD)
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_ONFIELD,1,nil) end
+	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD,nil)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
+	Duel.SetChainLimit(s.climit)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD,nil)
+	Duel.Destroy(g,REASON_EFFECT)
+end
+function s.climit(e,lp,tp)
+	return lp==tp or not e:IsHasType(EFFECT_TYPE_ACTIVATE)
 end
