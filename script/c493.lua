@@ -235,6 +235,9 @@ function s.valcheck(e,c)
 		e:GetLabelObject():SetLabel(0)
 	end
 end
+function s.tncon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SYNCHRO and e:GetLabel()==1
+end
 function s.filter(c)
 	return c:IsLocation(LOCATION_ONFIELD)
 end
