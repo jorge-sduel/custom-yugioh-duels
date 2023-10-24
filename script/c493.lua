@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	--xyz summon
 	Synchro.AddProcedure(c,nil,2,2,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
-	--damage
+	--[[damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCondition(s.thcon)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	--Unaffected by other cards' effects
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
