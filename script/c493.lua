@@ -72,6 +72,7 @@ function s.initial_effect(c)
 	e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e8:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e8:SetCondition(s.tncon)
+	e8:SetTarget(s.tntg)
 	e8:SetOperation(s.tnop)
 	c:RegisterEffect(e8)
 	local e9=Effect.CreateEffect(c)
@@ -237,13 +238,13 @@ end
 function s.filter(c)
 	return c:IsLocation(LOCATION_ONFIELD)
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.tntg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,0,LOCATION_ONFIELD,1,nil) end
 	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 	Duel.SetChainLimit(s.climit)
 end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
+function s.tnop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_ONFIELD,nil)
 	Duel.Destroy(g,REASON_EFFECT)
 end
