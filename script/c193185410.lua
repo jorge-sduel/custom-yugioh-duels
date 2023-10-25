@@ -39,9 +39,9 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ZOMBIE),1,1,ci
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCountLimit(1)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e3:SetCondition(s.damcon)
-	e3:SetTarget(s.damtg)
-	e3:SetOperation(s.damop)
+	e3:SetCondition(cid.damcon)
+	e3:SetTarget(cid.damtg)
+	e3:SetOperation(cid.damop)
 	c:RegisterEffect(e3)
 end
 function cid.material(c)
