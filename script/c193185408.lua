@@ -27,29 +27,19 @@ function cid.lvcheck(g)
 	return g:FilterCount(Card.IsLevel,nil,4)==1
 end
 function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		aux.GCheckAdditional=cid.lvcheck
-		local res1=Duel.GetMatchingGroup(aux.AND(Card.IsLevelAbove,cid.thfilter,Card.IsAbleToHand),tp,LOCATION_DECK,0,nil,4)
-	local res=res1:Select(tp,2,2,nil)
-		aux.GCheckAdditional=nil
-		return res
-	end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,0,tp,LOCATION_DECK)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToHand,tp,LOCATION_DECK,0,2,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function cid.thop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.AND(Card.IsLevelAbove,cid.thfilter),tp,LOCATION_DECK,0,nil,4)
-	if not Duel.IsPlayerCanDiscardDeck(tp,1) or #g<2 then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	aux.GCheckAdditional=cid.lvcheck
-	local sg=g:SelectSubGroup(tp,aux.TRUE,false,2,2)
-	aux.GCheckAdditional=nil
-	Duel.ConfirmCards(1-tp,sg)
-	local tc=sg:Select(1-tp,1,1,nil):GetFirst()
-	if tc and tc:IsAbleToHand() then
-		Duel.SendtoHand(tc,nil,REASON_EFFECT)
-		sg:RemoveCard(tc)
-	end
-	Duel.SendtoGrave(sg,REASON_EFFECT)
+	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToHand,tp,LOCATION_DECK,0,2,2,nil)
+	if #g<2 then return end
+	Duel.ConfirmCards(1-tp,g)
+	Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(id,1))
+	local sg=g:Select(1-tp,1,1,nil)
+	Duel.SendtoHand(sg,nil,REASON_EFFECT)
+	g:Sub(sg)
+	Duel.SendtoGrave(g,REASON_EFFECT)
 end
 function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT) and re and re:GetHandler():IsSetCard(0xd78)
