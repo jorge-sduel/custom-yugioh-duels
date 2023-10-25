@@ -41,15 +41,15 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and cid.filter(chkc,e) end
 	local g=Duel.GetMatchingGroup(cid.filter,tp,LOCATION_REMOVED,0,nil,e)
 	if chk==0 then
-		aux.GCheckAdditional=cid.check
+		--aux.GCheckAdditional=cid.check
 	local res=g:Select(tp,1,5,nil)
-		aux.GCheckAdditional=nil
+		--aux.GCheckAdditional=nil
 		return res
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	aux.GCheckAdditional=cid.check
+	--aux.GCheckAdditional=cid.check
 	local rg=g:SelectSubGroup(tp,aux.TRUE,false,1,5)
-	aux.GCheckAdditional=nil
+	--aux.GCheckAdditional=nil
 	Duel.SetTargetCard(rg)
 	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,rg,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,rg,#rg-1,0,0)
