@@ -22,7 +22,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.T
 	e2:SetCountLimit(1,id+100)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCategory(CATEGORY_DESTROY)
-	e2:SetCondition(function(e,tp) local ph=Duel.GetCurrentPhase() return Duel.GetTurnPlayer()~=tp and (ph==PHASE_MAIN1 or ph==PHASE_MAIN2) end)
+	--e2:SetCondition(function(e,tp) local ph=Duel.GetCurrentPhase() return Duel.GetTurnPlayer()~=tp and (ph==PHASE_MAIN1 or ph==PHASE_MAIN2) end)
 	e2:SetCost(cid.cost)
 	e2:SetTarget(cid.target)
 	e2:SetOperation(cid.desop)
