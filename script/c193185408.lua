@@ -24,7 +24,7 @@ function cid.thfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xd78)
 end
 function cid.filter1(c)
-	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xd78) and c:IsLevel(8) and c:IsAbleToHand()
+	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xd78) and c:IsLevelAbove(5) and c:IsAbleToHand()
 end
 function cid.filter2(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xd78) and c:IsLevel(4) and c:IsAbleToHand()
@@ -39,7 +39,7 @@ end
 function cid.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_DECK,0,1,1,nil)
-	local g1=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_DECK,0,1,1,nil)
+	local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_DECK,0,1,1,nil)
 	g1:Merge(g2)
 	if #g1<2 then return end
 	Duel.ConfirmCards(1-tp,g1)
