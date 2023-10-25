@@ -45,7 +45,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	--Duel.ConfirmCards(1-tp,g)
 	Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(id,1))
 	local sg=g:Select(tp,1,1,nil)
-	Duel.SendtoHand(sg,nil,REASON_EFFECT)
+	Duel.SendtoGrave(sg,REASON_EFFECT)
 	g:Sub(sg)
 	Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
 end
