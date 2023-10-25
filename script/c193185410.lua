@@ -6,7 +6,7 @@ function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
 	--time leap procedure
-Timeleap.AddProcedure(aux.FilterBoolFunctionEx(Card.IsRace,RACE_ZOMBIE),1,1,cid.TimeCon)
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ZOMBIE),1,1,cid.TimeCon)
 	--aux.AddTimeleapProc(c,5,function(e,tc) return Duel.IsExistingMatchingCard(cid.mfilter,tc:GetControler(),LOCATION_GRAVE,0,1,nil) end,aux.FilterBoolFunction(Card.IsRace,RACE_ZOMBIE),cid.sumop)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
