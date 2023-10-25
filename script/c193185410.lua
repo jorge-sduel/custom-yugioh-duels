@@ -101,7 +101,7 @@ function cid.filter(c,tp)
 	return c:IsFaceup() and c:IsControler(tp) and c:IsRace(RACE_ZOMBIE)
 end
 function cid.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(cid.filter,1,nil,tp) 
+	return eg:IsExists(cid.filter,1,nil,tp) and e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP2)
 end
 function cid.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
