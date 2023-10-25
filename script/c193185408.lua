@@ -23,23 +23,31 @@ end
 function cid.thfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xd78)
 end
+function cid.filter1(c)
+	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xd78) and c:IsLevel(8) and c:IsAbleToHand()
+end
+function cid.filter2(c)
+	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0xd78) and c:IsLevel(4) and c:IsAbleToHand()
+end
 function cid.lvcheck(g)
 	return g:FilterCount(Card.IsLevel,nil,4)==1
 end
 function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToHand,tp,LOCATION_DECK,0,2,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter1,tp,LOCATION_DECK,0,1,nil) and Duel.IsExistingMatchingCard(cid.filter2,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function cid.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToHand,tp,LOCATION_DECK,0,2,2,nil)
-	if #g<2 then return end
-	Duel.ConfirmCards(1-tp,g)
+	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_DECK,0,1,1,nil)
+	local g1=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_DECK,0,1,1,nil)
+	g1:Merge(g2)
+	if #g1<2 then return end
+	Duel.ConfirmCards(1-tp,g1)
 	Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(id,1))
-	local sg=g:Select(1-tp,1,1,nil)
+	local sg=g1:Select(1-tp,1,1,nil)
 	Duel.SendtoHand(sg,nil,REASON_EFFECT)
 	g:Sub(sg)
-	Duel.SendtoGrave(g,REASON_EFFECT)
+	Duel.SendtoGrave(g1,REASON_EFFECT)
 end
 function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT) and re and re:GetHandler():IsSetCard(0xd78)
