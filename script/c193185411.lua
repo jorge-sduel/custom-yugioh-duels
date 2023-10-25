@@ -27,6 +27,19 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.T
 	e2:SetTarget(cid.target)
 	e2:SetOperation(cid.desop)
 	c:RegisterEffect(e2)
+	--direct attack
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_DIRECT_ATTACK)
+	e3:SetCondition(Timeleap.Future)
+	c:RegisterEffect(e3)
+	--direct attack
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_EXTRA_ATTACK)
+	e4:SetCondition(Timeleap.Future)
+	e4:SetValue(1)
+	c:RegisterEffect(e4)
 end
 function cid.material(c)
 	return c:IsLevelAbove(7) and c:IsSetCard(0xd78) and c:IsType(TYPE_MONSTER)
