@@ -46,7 +46,7 @@ function cid.thop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(id,1))
 	local sg=g1:Select(1-tp,1,1,nil)
 	Duel.SendtoHand(sg,nil,REASON_EFFECT)
-	g:Sub(sg)
+	g1:Sub(sg)
 	Duel.SendtoGrave(g1,REASON_EFFECT)
 end
 function cid.condition(e,tp,eg,ep,ev,re,r,rp)
