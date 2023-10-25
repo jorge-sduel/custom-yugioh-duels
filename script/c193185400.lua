@@ -34,32 +34,20 @@ end
 function cid.filter(c,e)
 	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_MONSTER) and c:IsCanBeEffectTarget(e)
 end
-function cid.check(g)
-	return g:IsExists(Card.IsAbleToDeck,4,nil)
-end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_REMOVED) and chkc:IsControler(tp) and cid.filter(chkc,e) end
-	local g=Duel.GetMatchingGroup(cid.filter,tp,LOCATION_REMOVED,0,nil,e)
-	if chk==0 then
-		--aux.GCheckAdditional=cid.check
-	local sg=g:Select(tp,1,5,nil)
-		--aux.GCheckAdditional=nil
-		--return res
-	--end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	--aux.GCheckAdditional=cid.check
-	--local rg=g:SelectSubGroup(tp,aux.TRUE,false,1,5)
-	--aux.GCheckAdditional=nil
-	Duel.SetTargetCard(sg)
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,rg,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,rg,#rg-1,0,0)
- end
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_REMOVED,0,5,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local dg=g:Select(tp,1,1,nil)
-	if Duel.SendtoGrave(dg,REASON_EFFECT+REASON_RETURN)>0 then Duel.SendtoDeck(g-dg,nil,2,REASON_EFFECT) end
+	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_REMOVED,0,5,5,nil)
+	if #g<5 then return end
+	--Duel.ConfirmCards(1-tp,g)
+	Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(id,1))
+	local sg=g:Select(tp,1,1,nil)
+	Duel.SendtoHand(sg,nil,REASON_EFFECT)
+	g:Sub(sg)
+	Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
 end
 function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT) and re and re:GetHandler():IsSetCard(0xd78)
