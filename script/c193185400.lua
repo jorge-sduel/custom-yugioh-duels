@@ -53,6 +53,7 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetTargetCard(sg)
 	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,rg,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,rg,#rg-1,0,0)
+ end
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
