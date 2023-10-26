@@ -59,8 +59,8 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.T
 	e6:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e6:SetProperty(EFFECT_FLAG_DELAY)
 	e6:SetCondition(Timeleap.Future)
-	e6:SetTarget(s.destg)
-	e6:SetOperation(s.desop)
+	e6:SetTarget(cid.destg)
+	e6:SetOperation(cid.desop)
 	c:RegisterEffect(e6)
 end
 function cid.material(c)
@@ -139,12 +139,12 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetOperatedGroup():FilterCount(cid.cfilter,nil)
 	if ct>0 then Duel.NegateActivation(ev) end
 end
-function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
 	if chk==0 then return #g>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 end
-function s.desop(e,tp,eg,ep,ev,re,r,rp)
+function cid.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
 	if #g>0 then
 		Duel.Destroy(g,REASON_EFFECT)
