@@ -1,4 +1,5 @@
 --created by Swag, coded by Lyris
+local cid,id=GetID()
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	  --synchro summon
