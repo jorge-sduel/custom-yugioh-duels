@@ -43,6 +43,25 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.T
 	e4:SetTarget(cid.target)
 	e4:SetOperation(cid.operation)
 	c:RegisterEffect(e4)
+	--Skip Draw Phase
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_FIELD)
+	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCondition(Timeleap.Future)
+	e5:SetTargetRange(0,1)
+	e5:SetCode(EFFECT_SKIP_DP)
+	c:RegisterEffect(e5)
+	--destroy
+	local e6=Effect.CreateEffect(c)
+	e6:SetCategory(CATEGORY_DESTROY)
+	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e6:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e6:SetProperty(EFFECT_FLAG_DELAY)
+	e6:SetCondition(Timeleap.Future)
+	e6:SetTarget(s.destg)
+	e6:SetOperation(s.desop)
+	c:RegisterEffect(e6)
 end
 function cid.material(c)
 	return c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_MONSTER) and c:IsLevelAbove(5)
@@ -119,4 +138,15 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DiscardDeck(tp,3,REASON_EFFECT)
 	local ct=Duel.GetOperatedGroup():FilterCount(cid.cfilter,nil)
 	if ct>0 then Duel.NegateActivation(ev) end
+end
+function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
+	if chk==0 then return #g>0 end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
+end
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
+	if #g>0 then
+		Duel.Destroy(g,REASON_EFFECT)
+	end
 end
