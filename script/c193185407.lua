@@ -24,7 +24,7 @@ function cid.filter(c,e,tp)
 end
 function cid.spfilter(c,e,tp,mc)
 	--if not (
-	return c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_TIMELEAP,tp,false,false) and c:IsHasEffect(221594324)
+	return c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_TIMELEAP,tp,false,false) and c:IsHasEffect(221594324) and c:IsSpecialSummonable()
 --) then return false end
 	--[[local et=global_card_effect_table[c]
 	for _,e in ipairs(et) do
