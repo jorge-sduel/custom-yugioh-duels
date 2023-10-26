@@ -23,7 +23,7 @@ function cid.filter(c,e,tp)
 	return c:IsRace(RACE_ZOMBIE) and c:IsLevelAbove(5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cid.spfilter(c,e,tp,mc)
-	if not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_TIMELEAP,tp,false,false) or not mc:IsCanBeTimeleapMaterial(c) then return false end
+	if not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_TIMELEAP,tp,false,false) then return false end
 	local et=global_card_effect_table[c]
 	for _,e in ipairs(et) do
 		if e:GetCode()==EFFECT_SPSUMMON_PROC then
