@@ -49,7 +49,7 @@ function cid.material(c)
 end
 function cid.TimeCon(e,c)
 	if c==nil then return true end
-	return Duel.GetMatchingGroupCount(cid.material,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)>=5
+	return Duel.GetMatchingGroupCount(cid.material,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)>=3
 end
 function cid.sumcon(e,c)
 	return Duel.IsExistingMatchingCard(cid.mfilter,c:GetControler(),LOCATION_GRAVE,0,3,nil)
