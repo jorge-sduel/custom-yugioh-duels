@@ -32,7 +32,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cid.mfilter(c)
-	return c:IsLinkRace(RACE_ZOMBIE) and not c:IsType(TYPE_TOKEN)
+	return c:IsRace(RACE_ZOMBIE) and not c:IsType(TYPE_TOKEN)
 end
 function cid.afilter(c)
 	return (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsHasEffect(221594324)
