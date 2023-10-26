@@ -48,18 +48,18 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)~=0 then
 		local g=Duel.GetMatchingGroup(cid.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp,tc)
 		if #g>0 and Duel.SelectEffectYesNo(tp,e:GetHandler()) then
-			local e1=Effect.CreateEffect(e:GetHandler())
+			--[[local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_FIELD)
 			e1:SetRange(LOCATION_MZONE)
 			e1:SetCode(EFFECT_MUST_BE_TIMELEAP_MATERIAL)
 			e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 			e1:SetTargetRange(1,0)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-			tc:RegisterEffect(e1,true)
+			tc:RegisterEffect(e1,true)]]
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sc=g:Select(tp,1,1,nil):GetFirst()
 			Duel.SpecialSummonRule(tp,sc)
-			e1:Reset()
+			--e1:Reset()
 		end
 	end
 end
