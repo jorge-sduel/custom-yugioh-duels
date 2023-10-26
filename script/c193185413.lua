@@ -1,9 +1,12 @@
 --created by Swag, coded by Lyris
-local cid,id=GetID()
+ local cid,id=GetID()
+cid.IsTimeleap=true
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddOrigTimeleapType(c)
-	aux.AddTimeleapProc(c,9,cid.sumcon,aux.FilterBoolFunction(Card.IsSetCard,0xd78),cid.sumop)
+	  --synchro summon
+	--time leap procedure
+Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.TimeCon,nil,nil,nil,2)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
@@ -41,8 +44,12 @@ function cid.initial_effect(c)
 	e4:SetOperation(cid.operation)
 	c:RegisterEffect(e4)
 end
-function cid.mfilter(c)
-	return c:IsLevelAbove(5) and c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_MONSTER)
+function cid.material(c)
+	return c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_MONSTER) and c:IsLevelAbove(5)
+end
+function cid.TimeCon(e,c)
+	if c==nil then return true end
+	return Duel.GetMatchingGroupCount(cid.material,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)>=5
 end
 function cid.sumcon(e,c)
 	return Duel.IsExistingMatchingCard(cid.mfilter,c:GetControler(),LOCATION_GRAVE,0,3,nil)
