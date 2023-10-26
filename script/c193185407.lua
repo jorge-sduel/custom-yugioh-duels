@@ -64,7 +64,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.repfilter(c,tp)
-	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_TIMELEAP) and c:IsLocation(LOCATION_MZONE)
+	return c:IsFaceup() and c:IsRace(RACE_ZOMBIE) and c:IsHasEffect(221594324) and c:IsLocation(LOCATION_MZONE)
 		and c:IsControler(tp) and not c:IsReason(REASON_REPLACE)
 end
 function cid.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
