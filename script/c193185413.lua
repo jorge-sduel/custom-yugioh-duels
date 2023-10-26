@@ -81,13 +81,16 @@ end
 function cid.filter(c)
 	return c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_MONSTER)
 end
+function cid.filtert(c)
+	return c:IsSetCard(0xd78) and c:IsType(TYPE_MONSTER)
+end
 function cid.op(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsPlayerCanDiscardDeck(tp,1) then return end
 	local g=Duel.GetDecktopGroup(tp,10)
 	Duel.ConfirmCards(tp,g)
 	local tg=g:Filter(aux.AND(Card.IsAbleToGrave,Card.IsRace),nil,RACE_ZOMBIE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local sg=g:FilterSelect(tp,Card.IsSetCard,1,1,nil):GetFirst()
+	local sg=g:FilterSelect(tp,cid.filtert,1,1,nil):GetFirst()
 	if sg and sg:IsAbleToHand() then
 		Duel.SendtoHand(sg,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,sg)
