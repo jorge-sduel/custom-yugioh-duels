@@ -2,7 +2,7 @@
 local cid,id=GetID()
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddLinkProcedure(c,cid.mfilter,3,3)
+	Link.AddProcedure(c,cid.mfilter,3,3)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -35,7 +35,7 @@ function cid.mfilter(c)
 	return c:IsLinkRace(RACE_ZOMBIE) and not c:IsType(TYPE_TOKEN)
 end
 function cid.afilter(c)
-	return (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_TIMELEAP)
+	return (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsHasEffect(221594324)
 end
 function cid.filter(c,e,sp)
 	return c:IsSetCard(0xd78) and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
