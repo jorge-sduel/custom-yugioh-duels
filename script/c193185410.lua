@@ -49,7 +49,7 @@ function cid.material(c)
 end
 function cid.TimeCon(e,c)
 	if c==nil then return true end
-	return Duel.GetMatchingGroupCount(cid.IsMaterial,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)>=1
+	return Duel.GetMatchingGroupCount(cid.material,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)>=1
 end
 function cid.sumop(e,tp,eg,ep,ev,re,r,rp,c,g)
 	Duel.SendtoGrave(g,REASON_MATERIAL+REASON_TIMELEAP)
