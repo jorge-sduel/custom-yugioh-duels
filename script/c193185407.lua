@@ -23,8 +23,10 @@ function cid.filter(c,e,tp)
 	return c:IsRace(RACE_ZOMBIE) and c:IsLevelAbove(5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cid.spfilter(c,e,tp,mc)
-	if not (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_TIMELEAP,tp,false,false) and c:IsHasEffect(221594324)) then return false end
-	local et=global_card_effect_table[c]
+	--if not (
+	return c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_TIMELEAP,tp,false,false) and c:IsHasEffect(221594324)
+--) then return false end
+	--[[local et=global_card_effect_table[c]
 	for _,e in ipairs(et) do
 		if e:GetCode()==EFFECT_SPSUMMON_PROC then
 			local ev=e:GetValue()
@@ -32,7 +34,7 @@ function cid.spfilter(c,e,tp,mc)
 			if ev and (aux.GetValueType(ev)=="function" and ev(ef,c) or ev&825==825) and (not ec or ec(e,c)) then return true end
 		end
 	end
-	return false
+	return false]]
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and cid.filter(chkc,e,tp) end
