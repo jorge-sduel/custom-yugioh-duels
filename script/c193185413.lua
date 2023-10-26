@@ -7,7 +7,7 @@ function cid.initial_effect(c)
 	  --synchro summon
 	--time leap procedure
 Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.TimeCon,nil,nil,nil,2)
-	local e1=Effect.CreateEffect(c)
+	--[[local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
@@ -15,7 +15,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.T
 	e1:SetCondition(cid.hspcon)
 	e1:SetOperation(cid.hspop)
 	e1:SetValue(SUMMON_TYPE_TIMELEAP)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
