@@ -7,7 +7,7 @@ function cid.initial_effect(c)
 	  --synchro summon
 	--time leap procedure
 Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.TimeCon,nil,nil,nil,2)
-	--[[local e1=Effect.CreateEffect(c)
+	--local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
@@ -15,7 +15,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.T
 	e1:SetCondition(cid.hspcon)
 	e1:SetOperation(cid.hspop)
 	e1:SetValue(SUMMON_TYPE_TIMELEAP)
-	c:RegisterEffect(e1)]]
+	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
@@ -59,8 +59,8 @@ function cid.sumop(e,tp,eg,ep,ev,re,r,rp,c,g)
 	aux.TimeleapHOPT(tp)
 end
 function cid.hspfilter(c,tp)
-	return c:IsFuture(8) and c:IsSetCard(0xd78) and c:IsType(TYPE_TIMELEAP) and c:IsAbleToGraveAsCost()
-		and Duel.GetLocationCountFromEx(tp,tp,c,TYPE_TIMELEAP)>0
+	return c:IsLevelAbove(8) and c:IsSetCard(0xd78) and c:IsHasEffect(221594324) and c:IsAbleToGraveAsCost()
+		and Duel.GetLocationCountFromEx(tp,tp,c,0)>0
 end
 function cid.hspcon(e,c)
 	if c==nil then return true end
