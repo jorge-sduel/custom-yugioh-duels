@@ -37,6 +37,12 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xd78),1,1,cid.T
 	e3:SetTarget(cid.distg2)
 	e3:SetOperation(cid.disop2)
 	c:RegisterEffect(e3)
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetCondition(Timeleap.Future)
+	e4:SetOperation(cid.spop3)
+	c:RegisterEffect(e4)
 end
 function cid.material(c)
 	return c:IsRace(RACE_ZOMBIE) and c:IsType(TYPE_MONSTER)
@@ -102,5 +108,8 @@ end
 function cid.disop2(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.DiscardDeck(tp,1,REASON_EFFECT)==0 or Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)<40 then return end
 	Duel.BreakEffect()
+	Duel.Win(tp,0xd78)
+end
+function cid.disop3(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Win(tp,0xd78)
 end
