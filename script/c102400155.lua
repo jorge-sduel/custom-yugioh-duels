@@ -23,7 +23,7 @@ function cid.filter3(c,e,tp)
 		and Duel.IsExistingMatchingCard(cid.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 function cid.filter2(c,e,tp,mc)
-	return c:IsRace(mc:GetRace()) and c:IsAttribute(mc:GetAttribute()) and c:IsRank(mc:GetRank()+1)
+	return  c:IsRank(mc:GetRank()+1)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
