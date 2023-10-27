@@ -48,7 +48,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetTarget(cid.target2)
 	        e1:SetOperation(cid.operation2)
 		sc:RegisterEffect(e1)]]
-		Duel.XyzSummon(tp,sc,nil,mg)
+		Duel.XyzSummon(tp,sc,nil,mg,99,99)
 	end
 end
 	--Check for "Utopia" Xyz monster, excluding "Number 39: Utopia Double"
