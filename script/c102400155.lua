@@ -40,13 +40,14 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tc2=g2:GetFirst()
 		if tc2 then
 			Duel.BreakEffect()
-		Duel.XyzSummon(tp,tc,nil)
-			local xmg=tc:GetOverlayGroup()
+		local tc1=Duel.XyzSummon(tp,tc,nil)
+		local tc3=tc1:GetFirst()
+			local xmg=tc3:GetOverlayGroup()
 			--if xmg:GetCount()~=0 then
 				Duel.Overlay(tc2,xmg)
 		--end
-			tc2:SetMaterial(tc)
-			Duel.Overlay(tc2,tc)
+			tc2:SetMaterial(tc3)
+			Duel.Overlay(tc2,tc3)
 		if Duel.SpecialSummon(tc2,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP) then	
 			tc2:CompleteProcedure()
 		end
