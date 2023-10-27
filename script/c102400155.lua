@@ -40,7 +40,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		local m=tc1:GetMetatable(true)
 		if not m then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc,tc:GetRace(),tc:GetAttribute())
+		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,tc1:GetRace(),tc1:GetAttribute())
 		local tc2=g2:GetFirst()
 		if tc2 then
 			Duel.BreakEffect()
