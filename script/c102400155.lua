@@ -39,7 +39,8 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	local tc1=Duel.XyzSummon(tp,tc,nil)
 	--if tc1 then
-end
+ while tc1 do
+	end
 		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,tc1:GetRace(),tc1:GetAttribute())
 		local tc2=g2:GetFirst()
 		if tc2 then
@@ -47,7 +48,7 @@ end
 			local xmg=tc1:GetOverlayGroup()
 			if xmg:GetCount()~=0 then
 				Duel.Overlay(tc2,xmg)
-			
+		end
 			tc2:SetMaterial(g1)
 			Duel.Overlay(tc2,g1)
 			Duel.SpecialSummon(tc2,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
