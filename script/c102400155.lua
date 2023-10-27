@@ -38,12 +38,12 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc,tc:GetRace(),tc:GetAttribute())
 	while tc do
 	end
-	local tc1=Duel.XyzSummon(tp,tc,nil)
+	Duel.XyzSummon(tp,tc,nil)
 	--if tc1 then
 		local tc2=g2:GetFirst()
 		if tc2 then
 			Duel.BreakEffect()
-			local xmg=tc1:GetOverlayGroup()
+			local xmg=tc:GetOverlayGroup()
 			if xmg:GetCount()~=0 then
 				Duel.Overlay(tc2,xmg)
 		end
