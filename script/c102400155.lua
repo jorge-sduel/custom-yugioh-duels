@@ -42,10 +42,11 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		local sg=g:Select(tp,1,1,nil)
 		local sc=sg:GetFirst()
 		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
-		e1:SetOperation(cid.regop)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		e1:SetTarget(cid.target2)
+	        e1:SetOperation(cid.operation2)
 		sc:RegisterEffect(e1)
 		Duel.XyzSummon(tp,sc,nil,mg,99,99)
 	end
@@ -63,7 +64,6 @@ function cid.regop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetOperation(cid.operation2)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	
 end
 	--Check for "Utopia" Xyz monster, excluding "Number 39: Utopia Double"
 function cid.spfilter(c,e,tp,mc,pg)
