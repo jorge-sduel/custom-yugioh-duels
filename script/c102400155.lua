@@ -34,16 +34,58 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_XYZ)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
-	local tc=g1:GetFirst()
-	local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc,tc:GetRace(),tc:GetAttribute())
+	local tc1=g1:GetFirst()
+	if tc1 and Duel.XyzSummon(tp,tc,nil)~=0 then
+		local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(tc1),tp,nil,nil,REASON_XYZ)
+		local m=tc1:GetMetatable(true)
+		if not m then return end
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc,tc:GetRace(),tc:GetAttribute())
+		local tc2=g2:GetFirst()
+		if tc2 then
+			Duel.BreakEffect()
+			local xmg=g1:GetOverlayGroup()
+			Duel.Overlay(tc2,xmg)
+			tc2:SetMaterial(g1)
+			Duel.Overlay(tc2,g1)
+			Duel.SpecialSummon(tc2,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
+			tc2:CompleteProcedure()
+		end
+	end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	--[[local 
 	--if tc then
 		local tc2=g2:GetFirst()
 		if tc2 then
 			Duel.BreakEffect()
-		local tc1=Duel.XyzSummon(tp,tc,nil)
+		local tc1=
 		local tc3=tc1:GetFirst()
 			local xmg=tc3:GetOverlayGroup()
-			--if xmg:GetCount()~=0 then
+			if xmg:GetCount()~=0 then
 				Duel.Overlay(tc2,xmg)
 		--end
 			tc2:SetMaterial(tc3)
@@ -52,4 +94,4 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 			tc2:CompleteProcedure()
 		end
 	end
-end
+end]]
