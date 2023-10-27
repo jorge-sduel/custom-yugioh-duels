@@ -43,10 +43,11 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		--sg:Merge(sg1)
 		--tc=mg:GetNext()
 	end
+	local tc1=Duel.XyzSummon(tp,tc1,nil)
 	--Duel.SendtoGrave(sg,REASON_RULE)
 	--tc1:SetMaterial(mg)
 	--Duel.Overlay(tc1,mg)
-	if tc1 and Duel.XyzSummon(tp,tc1,nil) then
+	if tc1 then
 		--tc1:CompleteProcedure()
 		--if Duel.GetLocationCountFromEx(tp,tp,tc1)<=0 then return end
 		--if not aux.MustMaterialCheck(tc1,tp,EFFECT_MUST_BE_XMATERIAL) then return end
