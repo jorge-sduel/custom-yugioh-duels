@@ -36,18 +36,15 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	local tc1=g1:GetFirst()
 	if tc1 and Duel.XyzSummon(tp,tc1,nil)~=0 then
-		local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(tc1),tp,nil,nil,REASON_XYZ)
-		local m=tc1:GetMetatable(true)
-		if not m then return end
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,tc1:GetRace(),tc1:GetAttribute())
+		local smg=tc1:Select(tp,1,1,nil)
+		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,smg:GetRace(),smg:GetAttribute())
 		local tc2=g2:GetFirst()
 		if tc2 then
 			Duel.BreakEffect()
 			--local xmg=tc1:GetOverlayGroup()
 			--Duel.Overlay(tc2,xmg)
-			tc2:SetMaterial(g1)
-			Duel.Overlay(tc2,g1)
+			tc2:SetMaterial(smg)
+			Duel.Overlay(tc2,smg)
 			Duel.SpecialSummon(tc2,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
 			tc2:CompleteProcedure()
 		end
