@@ -45,28 +45,28 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
-		e1:SetTarget(s.target2)
-	        e1:SetOperation(s.operation2)
+		e1:SetTarget(cid.target2)
+	        e1:SetOperation(cid.operation2)
 		sc:RegisterEffect(e1)
 		Duel.SynchroSummon(tp,sc,nil,mg)
 	end
 end
 	--Check for "Utopia" Xyz monster, excluding "Number 39: Utopia Double"
-function s.spfilter(c,e,tp,mc,pg)
+function cid.spfilter(c,e,tp,mc,pg)
 	return c:IsType(TYPE_XYZ) and c:IsRank(mc:GetRank()+1) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 		and mc:IsCanBeXyzMaterial(c,tp) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
 end
 	--Activation legality
-function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
+function cid.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local c=e:GetHandler()
 		local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
 		return (#pg<=0 or (#pg==1 and pg:IsContains(c)))
-		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
+		and Duel.IsExistingMatchingCard(cid.thfilter,tp,LOCATION_DECK,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 	--Add 1 "Double or Nothing!", then Xyz summon 1 "Utopia" Xyz monster by using this card, and if you do, double its ATK
-function s.operation2(e,tp,eg,ep,ev,re,r,rp)
+function cid.operation2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	--[[Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
@@ -78,7 +78,7 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
 	if not (c:IsFaceup() and c:IsRelateToEffect(e) and c:IsControler(tp) and not c:IsImmuneToEffect(e)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,c,pg):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,c,pg):GetFirst()
 	if not sc then return end
 	Duel.BreakEffect()
 	sc:SetMaterial(c)
