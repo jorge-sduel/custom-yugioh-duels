@@ -11,8 +11,9 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cid.filter1(c,e,tp)
-	local ect=c29724053 and Duel.IsPlayerAffectedByEffect(tp,29724053) and c29724053[tp]
-	return c:IsXyzSummonable(nil) and (not ect or ect>1)
+	--local ect=c29724053 and Duel.IsPlayerAffectedByEffect(tp,29724053) and c29724053[tp]
+	return c:IsXyzSummonable(nil)
+	--and (not ect or ect>1)
 		and Duel.IsExistingMatchingCard(cid.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 function cid.filter2(c,e,tp,mc)
@@ -34,24 +35,10 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	local tc1=g1:GetFirst()
-	--local mt=getmetatable(tc1)
-	--local mg=Duel.SelectXyzMaterial(tp,tc1,aux.FilterBoolFunction(cid.filter3,tc1,mt.material_filter),tc1:GetRank(),mt.material_minct,mt.material_maxct)
-	--local sg=Group.CreateGroup()
-	--local tc=g1:GetFirst()
 	while tc do
-		--local sg1=tc:GetOverlayGroup()
-		--sg:Merge(sg1)
-		--tc=mg:GetNext()
 	end
 	local tc1=Duel.XyzSummon(tp,tc1,nil)
-	--Duel.SendtoGrave(sg,REASON_RULE)
-	--tc1:SetMaterial(mg)
-	--Duel.Overlay(tc1,mg)
-	if tc1 then
-		--tc1:CompleteProcedure()
-		--if Duel.GetLocationCountFromEx(tp,tp,tc1)<=0 then return end
-		--if not aux.MustMaterialCheck(tc1,tp,EFFECT_MUST_BE_XMATERIAL) then return end
-		--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	--if tc1 then
 		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,tc1:GetRace(),tc1:GetAttribute())
 		local tc2=g2:GetFirst()
 		if tc2 then
