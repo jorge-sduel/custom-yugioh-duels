@@ -45,7 +45,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
-		e1:SetOperation(s.regop)
+		e1:SetOperation(cid.regop)
 		sc:RegisterEffect(e1)
 		Duel.XyzSummon(tp,sc,nil,mg,99,99)
 	end
