@@ -51,6 +51,6 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Overlay(tc2,g1)
 			Duel.SpecialSummon(tc2,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
 			tc2:CompleteProcedure()
-		end
+		--end
 	end
 end
