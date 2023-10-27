@@ -28,11 +28,13 @@ function cid.filter2(c,e,tp,mc,rk)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerCanSpecialSummonCount(tp,2)
-		and Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_XYZ)>0
-		--and aux.MustMaterialCheck(nil,tp,EFFECT_MUST_BE_XMATERIAL)
-		and Duel.IsExistingMatchingCard(cid.filter1,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
+	local tid=Duel.GetTurnCount()
+	if chkc then return chkc:IsLocation(LOCATION_EXTRA) and chkc:IsControler(tp) and cid.filter1(chkc,e,tp,tid) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonCount(tp,2) 
+		and Duel.GetLocationCountFromEx(tp)>0 and Duel.IsExistingTarget(cid.filter1,tp,LOCATION_EXTRA,0,1,nil,e,tp,tid) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectTarget(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tid)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,2,tp,LOCATION_EXTRA)
 end
 function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
