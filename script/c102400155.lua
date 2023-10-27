@@ -28,76 +28,61 @@ function cid.filter2(c,e,tp,mc,rk)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local tid=Duel.GetTurnCount()
-	if chkc then return chkc:IsLocation(LOCATION_EXTRA) and chkc:IsControler(tp) and cid.filter1(chkc,e,tp,tid) end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonCount(tp,2) 
-		and Duel.GetLocationCountFromEx(tp)>0 and Duel.IsExistingTarget(cid.filter1,tp,LOCATION_EXTRA,0,1,nil,e,tp,tid) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tid)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,2,tp,LOCATION_EXTRA)
+	if chk==0 then
+		local mg=Duel.GetMatchingGroup(Card.IsCanBeXyzMaterial,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,nil)
+		return Duel.IsExistingMatchingCard(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,1,nil,nil,mg)
+	end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function cid.activate(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 or Duel.GetLocationCountFromEx(tp)<=0 then return end
-	local tc=Duel.GetFirstTarget()
-	if not tc or not tc:IsRelateToEffect(e) or tc:IsImmuneToEffect(e) 
-		or not Duel.XyzSummon(tp,tc,nil) then return end 
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc,tc:GetRank())
-	local sc=g:GetFirst()
-	if sc then
-		Duel.BreakEffect()
-		sc:SetMaterial(Group.FromCards(tc))
-		Duel.Overlay(sc,Group.FromCards(tc))
-		if Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)>0 then
-			sc:CompleteProcedure()
-			if c:IsRelateToEffect(e) and e:IsHasType(EFFECT_TYPE_ACTIVATE) then
-				c:CancelToGrave()
-				Duel.Overlay(sc,Group.FromCards(c))
-			end
-		end
+	local mg=Duel.GetMatchingGroup(Card.IsCanBeXyzMaterial,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
+	if #g>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local sg=g:Select(tp,1,1,nil)
+		local sc=sg:GetFirst()
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
+		e1:SetTarget(s.target2)
+	        e1:SetOperation(s.operation2)
+		sc:RegisterEffect(e1)
+		Duel.SynchroSummon(tp,sc,nil,mg)
 	end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	--[[local 
-	--if tc then
-		local tc2=g2:GetFirst()
-		if tc2 then
-			Duel.BreakEffect()
-		local tc1=
-		local tc3=tc1:GetFirst()
-			local xmg=tc3:GetOverlayGroup()
-			if xmg:GetCount()~=0 then
-				Duel.Overlay(tc2,xmg)
-		--end
-			tc2:SetMaterial(tc3)
-			Duel.Overlay(tc2,tc3)
-		if Duel.SpecialSummon(tc2,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP) then	
-			tc2:CompleteProcedure()
-		end
-	end
-end]]
+	--Check for "Utopia" Xyz monster, excluding "Number 39: Utopia Double"
+function s.spfilter(c,e,tp,mc,pg)
+	return c:IsType(TYPE_XYZ) and c:IsRank(mc:GetRank()+1) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
+		and mc:IsCanBeXyzMaterial(c,tp) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
+end
+	--Activation legality
+function s.target2(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then
+		local c=e:GetHandler()
+		local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
+		return (#pg<=0 or (#pg==1 and pg:IsContains(c)))
+		and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
+end
+	--Add 1 "Double or Nothing!", then Xyz summon 1 "Utopia" Xyz monster by using this card, and if you do, double its ATK
+function s.operation2(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	--[[Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g==0 then return end
+	Duel.SendtoHand(g,nil,REASON_EFFECT)
+	Duel.ConfirmCards(1-tp,g)
+	Duel.ShuffleHand(tp)
+	Duel.BreakEffect()]]
+	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
+	if not (c:IsFaceup() and c:IsRelateToEffect(e) and c:IsControler(tp) and not c:IsImmuneToEffect(e)) then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local sc=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,c,pg):GetFirst()
+	if not sc then return end
+	Duel.BreakEffect()
+	sc:SetMaterial(c)
+	Duel.Overlay(sc,c)
+	if Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)==0 then return end
+	sc:CompleteProcedure()
+end
