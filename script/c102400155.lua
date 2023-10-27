@@ -35,7 +35,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	local tc1=g1:GetFirst()
-	if tc1 and Duel.XyzSummon(tp,tc,nil)~=0 then
+	if tc1 and Duel.XyzSummon(tp,tc,nil) then
 		local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(tc1),tp,nil,nil,REASON_XYZ)
 		local m=tc1:GetMetatable(true)
 		if not m then return end
