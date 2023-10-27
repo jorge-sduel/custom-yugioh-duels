@@ -35,20 +35,20 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	local tc1=g1:GetFirst()
-	local mt=getmetatable(tc1)
-	local mg=Duel.SelectXyzMaterial(tp,tc1,aux.FilterBoolFunction(cid.filter3,tc1,mt.material_filter),tc1:GetRank(),mt.material_minct,mt.material_maxct)
-	local sg=Group.CreateGroup()
-	local tc=mg:GetFirst()
+	--local mt=getmetatable(tc1)
+	--local mg=Duel.SelectXyzMaterial(tp,tc1,aux.FilterBoolFunction(cid.filter3,tc1,mt.material_filter),tc1:GetRank(),mt.material_minct,mt.material_maxct)
+	--local sg=Group.CreateGroup()
+	--local tc=g1:GetFirst()
 	while tc do
-		local sg1=tc:GetOverlayGroup()
-		sg:Merge(sg1)
-		tc=mg:GetNext()
+		--local sg1=tc:GetOverlayGroup()
+		--sg:Merge(sg1)
+		--tc=mg:GetNext()
 	end
-	Duel.SendtoGrave(sg,REASON_RULE)
-	tc1:SetMaterial(mg)
-	Duel.Overlay(tc1,mg)
-	if tc1 and Duel.SpecialSummon(tc1,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)~=0 then
-		tc1:CompleteProcedure()
+	--Duel.SendtoGrave(sg,REASON_RULE)
+	--tc1:SetMaterial(mg)
+	--Duel.Overlay(tc1,mg)
+	if tc1 and Duel.XyzSummon(tp,tc1,nil) then
+		--tc1:CompleteProcedure()
 		if Duel.GetLocationCountFromEx(tp,tp,tc1)<=0 then return end
 		if not aux.MustMaterialCheck(tc1,tp,EFFECT_MUST_BE_XMATERIAL) then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
