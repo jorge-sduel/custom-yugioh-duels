@@ -45,11 +45,25 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
-		e1:SetTarget(cid.target2)
-	        e1:SetOperation(cid.operation2)
+		e1:SetOperation(cid.regop)
 		sc:RegisterEffect(e1)
 		Duel.XyzSummon(tp,sc,nil,mg,99,99)
 	end
+end
+function cid.regop(e,tp,eg,ep,ev,re,r,rp)
+	local rc=e:GetOwner()
+	local c=e:GetHandler()
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetTarget(cid.target1)
+	e1:SetOperation(cid.operation1)
+	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_END_PHASE)
+	c:RegisterEffect(e1)
+	e:Reset()
 end
 	--Check for "Utopia" Xyz monster, excluding "Number 39: Utopia Double"
 function cid.spfilter(c,e,tp,mc,pg)
@@ -68,13 +82,6 @@ end
 	--Add 1 "Double or Nothing!", then Xyz summon 1 "Utopia" Xyz monster by using this card, and if you do, double its ATK
 function cid.operation2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	--[[Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g==0 then return end
-	Duel.SendtoHand(g,nil,REASON_EFFECT)
-	Duel.ConfirmCards(1-tp,g)
-	Duel.ShuffleHand(tp)
-	Duel.BreakEffect()]]
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
 	if not (c:IsFaceup() and c:IsRelateToEffect(e) and c:IsControler(tp) and not c:IsImmuneToEffect(e)) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
