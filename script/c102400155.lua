@@ -14,6 +14,12 @@ function cid.filter1(c,e,tp)
 	--local ect=c29724053 and Duel.IsPlayerAffectedByEffect(tp,29724053) and c29724053[tp]
 	return c:IsXyzSummonable(nil)
 	--and (not ect or ect>1)
+		--and Duel.IsExistingMatchingCard(cid.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
+end
+function cid.filter3(c,e,tp)
+	--local ect=c29724053 and Duel.IsPlayerAffectedByEffect(tp,29724053) and c29724053[tp]
+	return c:IsType(TYPE_XYZ)
+	--and (not ect or ect>1)
 		and Duel.IsExistingMatchingCard(cid.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 function cid.filter2(c,e,tp,mc)
@@ -34,11 +40,12 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_XYZ)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
-	local tc1=g1:GetFirst()
-	local tcg=Duel.XyzSummon(tp,tc1,nil)
-	local tcg1=tcg:GetFirst()
+	local tc=g1:GetFirst()
+	Duel.XyzSummon(tp,tc,nil)
+	local g3=Duel.SelectMatchingCard(tp,cid.filter3,tp,LOCATION_MZONE,0,1,1,nil,e,tp)
+	local tc1=g3:GetFirst()
 	if tc1 then
-		local smg=tcg1:Select(tp,1,1,nil)
+		local smg=tc1:Select(tp,1,1,nil)
 		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,smg:GetRace(),smg:GetAttribute())
 		local tc2=g2:GetFirst()
 		if tc2 then
