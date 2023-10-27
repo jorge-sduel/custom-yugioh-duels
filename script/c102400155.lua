@@ -28,7 +28,7 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function cid.filter3(c,sc,f)
-	return c:IsCanBeXyzMaterial(sc) and (not f or f(c))
+	return (not f or f(c))
 end
 function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_XYZ)<=0 then return end
@@ -49,7 +49,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Duel.Overlay(tc1,mg)
 	if tc1 and Duel.XyzSummon(tp,tc1,nil) then
 		--tc1:CompleteProcedure()
-		if Duel.GetLocationCountFromEx(tp,tp,tc1)<=0 then return end
+		--if Duel.GetLocationCountFromEx(tp,tp,tc1)<=0 then return end
 		--if not aux.MustMaterialCheck(tc1,tp,EFFECT_MUST_BE_XMATERIAL) then return end
 		--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,tc1:GetRace(),tc1:GetAttribute())
