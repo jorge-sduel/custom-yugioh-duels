@@ -67,7 +67,7 @@ function cid.regop(e,tp,eg,ep,ev,re,r,rp)
 end
 	--Check for "Utopia" Xyz monster, excluding "Number 39: Utopia Double"
 function cid.spfilter(c,e,tp,mc,pg)
-	return c:IsType(TYPE_XYZ) and c:IsRank(mc:GetRank()+1) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
+	return c:IsType(TYPE_XYZ) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 		and mc:IsCanBeXyzMaterial(c,tp) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,false,false)
 end
 	--Activation legality
