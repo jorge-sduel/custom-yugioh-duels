@@ -35,8 +35,9 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	local tc1=g1:GetFirst()
-	if tc1 and Duel.XyzSummon(tp,tc1,nil)~=0 then
-		local smg=tc1:Select(tp,1,1,nil)
+	local tcg=Duel.XyzSummon(tp,tc1,nil)~=0
+	if tc1 then
+		local smg=tcg:Select(tp,1,1,nil)
 		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,smg:GetRace(),smg:GetAttribute())
 		local tc2=g2:GetFirst()
 		if tc2 then
