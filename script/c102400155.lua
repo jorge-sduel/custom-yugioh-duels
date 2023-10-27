@@ -45,10 +45,11 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 			if xmg:GetCount()~=0 then
 				Duel.Overlay(tc2,xmg)
 		end
+		end
 			tc2:SetMaterial(g1)
 			Duel.Overlay(tc2,g1)
 			Duel.SpecialSummon(tc2,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)
 			tc2:CompleteProcedure()
-		end
+		--end
 	end
 end
