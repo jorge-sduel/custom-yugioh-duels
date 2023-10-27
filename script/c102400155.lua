@@ -50,8 +50,8 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc1 and Duel.XyzSummon(tp,tc1,nil) then
 		--tc1:CompleteProcedure()
 		if Duel.GetLocationCountFromEx(tp,tp,tc1)<=0 then return end
-		if not aux.MustMaterialCheck(tc1,tp,EFFECT_MUST_BE_XMATERIAL) then return end
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		--if not aux.MustMaterialCheck(tc1,tp,EFFECT_MUST_BE_XMATERIAL) then return end
+		--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,tc1:GetRace(),tc1:GetAttribute())
 		local tc2=g2:GetFirst()
 		if tc2 then
