@@ -63,7 +63,7 @@ function cid.regop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetOperation(cid.operation2)
 	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_END_PHASE)
 	c:RegisterEffect(e1)
-	e:Reset()
+	
 end
 	--Check for "Utopia" Xyz monster, excluding "Number 39: Utopia Double"
 function cid.spfilter(c,e,tp,mc,pg)
