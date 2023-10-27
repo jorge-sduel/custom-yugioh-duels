@@ -34,10 +34,10 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCountFromEx(tp,tp,nil,TYPE_XYZ)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
-	local tc1=g1:GetFirst()
+	local tc=g1:GetFirst()
 	while tc do
 	end
-	local tc1=Duel.XyzSummon(tp,tc1,nil)
+	local tc1=Duel.XyzSummon(tp,tc,nil)
 	--if tc1 then
 		local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc1,tc1:GetRace(),tc1:GetAttribute())
 		local tc2=g2:GetFirst()
