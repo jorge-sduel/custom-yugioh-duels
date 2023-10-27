@@ -38,6 +38,8 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc,tc:GetRace(),tc:GetAttribute())
 	--if tc and Duel.XyzSummon(tp,tc,nil) then
 	local tc1=Duel.XyzSummon(tp,tc,nil)
+	while tc1 do
+	end
 		local tc2=g2:GetFirst()
 		if tc2 then
 			Duel.BreakEffect()
