@@ -36,8 +36,6 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.SelectMatchingCard(tp,cid.filter1,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	local tc=g1:GetFirst()
 	local g2=Duel.SelectMatchingCard(tp,cid.filter2,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc,tc:GetRace(),tc:GetAttribute())
-	while tc do
-	end
 	Duel.XyzSummon(tp,tc,nil)
 	--if tc1 then
 		local tc2=g2:GetFirst()
