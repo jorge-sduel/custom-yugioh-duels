@@ -1,7 +1,7 @@
 --Blue-Eyes Bright Dragon
 --designed by Xeno Disturbia#5235, scripted by Naim
 function c210777032.initial_effect(c)
-	aux.EnablePendulumAttribute(c,false)
+	Pendulum.AddProcedure(c,false)
 	--change name
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
