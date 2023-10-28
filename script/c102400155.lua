@@ -95,7 +95,7 @@ end
 function cid.operation3(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()     
 	local sc=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,c)
-	local sc=sg:GetFirst()
+	local sg=sc:GetFirst()
 	Duel.BreakEffect()
 	sg:SetMaterial(c)
 	Duel.Overlay(sg,c)
