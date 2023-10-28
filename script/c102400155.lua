@@ -95,9 +95,10 @@ end
 function cid.operation3(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()     
 	local sc=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,c)
+	local sc=sg:GetFirst()
 	Duel.BreakEffect()
-	sc:SetMaterial(c)
-	Duel.Overlay(sc,c)
-	if Duel.SpecialSummon(sc,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)==0 then return end
-	sc:CompleteProcedure()
+	sg:SetMaterial(c)
+	Duel.Overlay(sg,c)
+	if Duel.SpecialSummon(sg,SUMMON_TYPE_XYZ,tp,tp,false,false,POS_FACEUP)==0 then return end
+	sg:CompleteProcedure()
 end
