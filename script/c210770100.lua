@@ -15,7 +15,8 @@ function c210770100.filter(c,code)
 	return c:IsCode(code) and c:IsAbleToHand() and (code==11082056 or c:IsType(TYPE_TRAP))
 end
 function c210770100.exfilter(c,tp)
-	return c:IsCode(58293343,84687358,100241003,22804644) and c.material_trap
+	return --c:IsCode(58293343,84687358,100241003,22804644) and 
+	c.material_trap
 		and Duel.IsExistingMatchingCard(c210770100.filter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil,c.material_trap)
 end
 function c210770100.cost(e,tp,eg,ep,ev,re,r,rp,chk)
