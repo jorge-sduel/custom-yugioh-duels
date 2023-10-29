@@ -19,11 +19,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
-		local tc=g:Select(tp,1,1,nil)
-	--if tc and tc:IsRelateToEffect(e) then 	
-	Duel.SendtoHand(tc,nil,REASON_EFFECT)
+		--local tc=g:Select(tp,1,1,nil)
+	local tc=g:GetFirst()
+	if tc and Duel.SendtoHand(tc,nil,REASON_EFFECT) then
 	Duel.Recover(tp,tc:GetAttack(),REASON_EFFECT)
 	Duel.Damage(tp,tc:GetLevel()*500,REASON_EFFECT)
 	Duel.ConfirmCards(1-tp,tc)
-	--end
+	--if tc and tc:IsRelateToEffect(e) then
+	end
 end
