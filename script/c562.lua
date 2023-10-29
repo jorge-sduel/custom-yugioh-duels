@@ -10,22 +10,22 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-function s.filter(c)
-	return c:IsMonster() and c:IsAbleToHand()
+function s.tgfilter(c)
+	return c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
+	if chkc then return chkc:IsLocation(LOCATION_DECK) and chkc:IsControler(tp) and s.tgfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tgfilter,tp,LOCATION_DECK,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local sg=Duel.SelectTarget(tp,s.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,sg,#sg,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
-	if #g>0 then
-		--local atk=g:GetAttack()
-		local lv=g:GetLevel()
-		Duel.SendtoHand(g,nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,g)
-		Duel.Recover(tp,atk,REASON_EFFECT)
-		Duel.Damage(tp,lv*500,REASON_EFFECT)
+	local tc=Duel.GetFirstTarget()
+	if tc and tc:IsRelateToEffect(e) then
+		Duel.SendtoHand(tc,nil,REASON_EFFECT)
+		Duel.ConfirmCards(1-tp,tc)
+		Duel.Recover(tp,tc:GetAttack(),REASON_EFFECT)
+		Duel.Damage(tp,tc:GetLevel()*500,REASON_EFFECT)
 	end
 end
