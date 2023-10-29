@@ -23,7 +23,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
-		Duel.Recover(tp,g:GetBaseAttack(),REASON_EFFECT)
-		Duel.Damage(p,g:GetLevel()*500,REASON_EFFECT)
+		Duel.Recover(tp,g:GetAttack(),REASON_EFFECT)
+		Duel.Damage(tp,g:GetLevel()*500,REASON_EFFECT)
 	end
 end
