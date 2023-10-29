@@ -20,10 +20,12 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil)
+	local atk=g:GetAttack()
+	local lv=g:GetLevel()
 	if #g>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
-		Duel.Recover(tp,g:GetAttack(),REASON_EFFECT)
-		Duel.Damage(tp,g:GetLevel()*500,REASON_EFFECT)
+		Duel.Recover(tp,atk,REASON_EFFECT)
+		Duel.Damage(tp,lv*500,REASON_EFFECT)
 	end
 end
