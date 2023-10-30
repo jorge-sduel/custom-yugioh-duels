@@ -46,7 +46,7 @@ function c210555556.activate(e,tp,eg,ep,ev,re,r,rp)
   if g:GetCount()>0 then
    --Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOGRAVE)
     local sg=g:Select(tp,1,1,nil)
-    Duel.SendtoGrave(sg,nil,REASON_EFFECT)
+    Duel.SendtoGrave(sg,REASON_EFFECT)
   end
 end
 function c210555556.destfilter(c)
