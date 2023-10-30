@@ -1,6 +1,6 @@
 --Cyber Hive Mind
 --Continuous spell
---When this card is activated: Send 1 “Cyber Dragon” monster from your deck to your GY. Once while face-up on the field: you can Normal Summon a “Cyber Dragon” monster in addition to your Normal Summon or Set. (You can only gain this effect once per turn.) If this face-up card in the Spell & Trap Zone is destroyed by a card effect: You can take 1 “Cyber” Spell/Trap from your Deck or GY except “Cyber Hive Mind”, and either add it to your hand or set it to your side of the field. You can only use each effect of “Cyber Hive Mind” once per turn.
+--When this card is activated: Send 1 â€œCyber Dragonâ€ monster from your deck to your GY. Once while face-up on the field: you can Normal Summon a â€œCyber Dragonâ€ monster in addition to your Normal Summon or Set. (You can only gain this effect once per turn.) If this face-up card in the Spell & Trap Zone is destroyed by a card effect: You can take 1 â€œCyberâ€ Spell/Trap from your Deck or GY except â€œCyber Hive Mindâ€, and either add it to your hand or set it to your side of the field. You can only use each effect of â€œCyber Hive Mindâ€ once per turn.
  
 function c210555556.initial_effect(c)
   --Send Cydra To Grave
@@ -44,7 +44,7 @@ function c210555556.activate(e,tp,eg,ep,ev,re,r,rp)
   if not e:GetHandler():IsRelateToEffect(e) then return end
   local g=Duel.GetMatchingGroup(c210555556.filter,tp,LOCATION_DECK,0,nil)
   if g:GetCount()>0 then
-    Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOGRAVE)
+   --Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOGRAVE)
     local sg=g:Select(tp,1,1,nil)
     Duel.SendtoGrave(sg,nil,REASON_EFFECT)
   end
