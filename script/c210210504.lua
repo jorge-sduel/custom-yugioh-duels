@@ -2,7 +2,6 @@
 --AlphaKretin
 function c210210504.initial_effect(c)
 	--pendulum summon
-	aux.EnablePendulumAttribute(c,true)
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -26,7 +25,7 @@ function c210210504.initial_effect(c)
 	e3:SetDescription(aux.Stringid(12525049,0))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_PZONE)
+	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1,210210504+EFFECT_COUNT_CODE_DUEL)
 	e3:SetCost(c210210504.spcost)
 	e3:SetTarget(c210210504.sptg)
