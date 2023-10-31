@@ -77,7 +77,7 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local p=1
 	local lv=tc:GetRank()
 	for i=1,7 do
-		if lv~=i then t[p]=i p=p+1 end
+		if lv==i then t[p]=i p=p+1 end
 	end
 	t[p]=nil
 	Duel.Hint(HINT_SELECTMSG,tp,567)
