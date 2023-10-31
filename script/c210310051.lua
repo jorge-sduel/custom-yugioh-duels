@@ -3,7 +3,7 @@
 function c210310051.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
-	aux.AddMajesticSynchroProcedure(c,aux.FilterBoolFunction(Card.IsCode,21159309),true,aux.FilterBoolFunction(Card.IsCode,25862681),true,aux.NonTuner(nil),false)
+	Synchro.AddMajesticProcedure(c,aux.FilterBoolFunction(Card.IsCode,21159309),true,aux.FilterBoolFunction(Card.IsCode,25862681),true,Synchro.NonTuner(nil),false)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(4033,3))
@@ -40,6 +40,8 @@ function c210310051.initial_effect(c)
 	e3:SetOperation(c210310051.spop)
 	c:RegisterEffect(e3)
 end
+s.material={25862681,21159309}
+s.listed_names={25862681,21159309}
 --special summon
 function c210310051.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
