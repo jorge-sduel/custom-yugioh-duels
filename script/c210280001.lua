@@ -6,13 +6,13 @@ function c210280001.initial_effect(c)
 	--Fusion Material
 	c:EnableReviveLimit()
 	Fusion.AddProcFun2(c,c210280001.matfilter1,c210280001.matfilter2,true)
-	--SpSummon condition
+	--[[SpSummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(c210280001.splimit)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	--Negate
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(210280001,0))
@@ -49,13 +49,13 @@ end
 c210280001.listed_series={0x8,0xc008}
 c210280001.material_setcode={0x8,0xc008}
 function c210280001.mfilter1(c)
-	return c:IsSetCard(0xc008) and c:GetLevel()==8
+	return c:IsSetCard(0xc008) and c:IsLevel(8) 
 end
-function c210280001.mfilter2(c,fc,sumtype,tp)
-	return c:IsType(TYPE_FUSION,fc,sumtype,tp) and c:IsSetCard(0xc008)
+function c210280001.mfilter2(c)
+	return c:IsType(TYPE_FUSION) and c:IsSetCard(0xc008)
 end
 function c210280001.splimit(e,se,sp,st)
-	return not e:GetHandler():IsLocation(LOCATION_EXTRA) or aux.fuslimit(e,se,sp,st)
+	return not e:GetHandler():IsLocation(LOCATION_EXTRA)
 end
 function c210280001.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsFaceup() end
