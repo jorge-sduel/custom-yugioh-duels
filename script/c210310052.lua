@@ -36,8 +36,8 @@ function c210310052.initial_effect(c)
 	e3:SetOperation(c210310052.spop)
 	c:RegisterEffect(e3)
 end
-s.material={25165047,2403771,21159309}
-s.listed_names={25165047,2403771,21159309}
+c210310052.material={25165047,2403771,21159309}
+c210310052.listed_names={25165047,2403771,21159309}
 function c210310052.synfilter(c)
 	return c:IsCode(2403771) or c:IsCode(25165047)
 end
