@@ -3,7 +3,7 @@
 function c210310050.initial_effect(c)
 	--synchro summon
 	c:EnableReviveLimit()
-	aux.AddMajesticSynchroProcedure(c,aux.FilterBoolFunction(Card.IsCode,21159309),true,aux.FilterBoolFunction(Card.IsCode,73580471),true,aux.NonTuner(nil),false)
+	Synchro.AddMajesticProcedure(c,aux.FilterBoolFunction(Card.IsCode,21159309),true,aux.FilterBoolFunction(Card.IsCode,73580471),true,Synchro.NonTuner(nil),false)
 	--banish
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(4033,0))
@@ -38,6 +38,8 @@ function c210310050.initial_effect(c)
 	e3:SetOperation(c210310050.spop)
 	c:RegisterEffect(e3)
 end
+s.material={73580471,21159309}
+s.listed_names={73580471,21159309}
 --banish
 function c210310050.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SYNCHRO
