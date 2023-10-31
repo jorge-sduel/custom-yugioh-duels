@@ -48,10 +48,10 @@ function c210280001.initial_effect(c)
 end
 c210280001.listed_series={0x8,0xc008}
 c210280001.material_setcode={0x8,0xc008}
-function s.matfilter1(c,fc,sumtype,tp)
+function c210280001.matfilter1(c,fc,sumtype,tp)
 	return c:IsSetCard(0xc008,fc,sumtype,tp) and c:IsLevel(8)
 end
-function s.matfilter2(c,fc,sumtype,tp)
+function c210280001.matfilter2(c,fc,sumtype,tp)
 	return c:IsSetCard(0xc008,fc,sumtype,tp) and c:IsType(TYPE_FUSION,fc,sumtype,tp)
 end
 function c210280001.splimit(e,se,sp,st)
