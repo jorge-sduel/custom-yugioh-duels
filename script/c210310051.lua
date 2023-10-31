@@ -40,8 +40,8 @@ function c210310051.initial_effect(c)
 	e3:SetOperation(c210310051.spop)
 	c:RegisterEffect(e3)
 end
-s.material={25862681,21159309}
-s.listed_names={25862681,21159309}
+c210310051 .material={25862681,21159309}
+c210310051.listed_names={25862681,21159309}
 --special summon
 function c210310051.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
