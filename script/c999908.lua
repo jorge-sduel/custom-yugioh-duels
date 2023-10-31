@@ -59,7 +59,7 @@ function c999908.drop1(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
-function s.spfilter(c,e,tp)
+function c999908.spfilter(c,e,tp)
 	return c:IsType(TYPE_SYNCHRO) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c999908.drtarg(e,tp,eg,ep,ev,re,r,rp,chk)
