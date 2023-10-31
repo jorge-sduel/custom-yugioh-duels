@@ -38,8 +38,8 @@ function c210310050.initial_effect(c)
 	e3:SetOperation(c210310050.spop)
 	c:RegisterEffect(e3)
 end
-s.material={73580471,21159309}
-s.listed_names={73580471,21159309}
+c210310050 .material={73580471,21159309}
+c210310050.listed_names={73580471,21159309}
 --banish
 function c210310050.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SYNCHRO
