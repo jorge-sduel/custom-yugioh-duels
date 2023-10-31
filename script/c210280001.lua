@@ -5,7 +5,7 @@
 function c210280001.initial_effect(c)
 	--Fusion Material
 	c:EnableReviveLimit()
-	aux.AddFusionProcMix(c,true,true,c210280001.mfilter1,c210280001.mfilter2)
+	Fusion.AddProcFun2(c,c210280001.matfilter1,c210280001.matfilter2,true)
 	--SpSummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -46,6 +46,7 @@ function c210280001.initial_effect(c)
 	e4:SetOperation(c210280001.spop)
 	c:RegisterEffect(e4)
 end
+c210280001.listed_series={0x8,0xc008}
 c210280001.material_setcode={0x8,0xc008}
 function c210280001.mfilter1(c)
 	return c:IsFusionSetCard(0xc008) and c:GetLevel()==8
