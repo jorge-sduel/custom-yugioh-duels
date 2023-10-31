@@ -49,19 +49,19 @@ end
 c210280001.listed_series={0x8,0xc008}
 c210280001.material_setcode={0x8,0xc008}
 function c210280001.mfilter1(c)
-	return c:IsFusionSetCard(0xc008) and c:GetLevel()==8
+	return c:IsSetCard(0xc008) and c:GetLevel()==8
 end
 function c210280001.mfilter2(c,fc,sumtype,tp)
-	return c:IsType(TYPE_FUSION,fc,sumtype,tp) and c:IsFusionSetCard(0xc008)
+	return c:IsType(TYPE_FUSION,fc,sumtype,tp) and c:IsSetCard(0xc008)
 end
 function c210280001.splimit(e,se,sp,st)
 	return not e:GetHandler():IsLocation(LOCATION_EXTRA) or aux.fuslimit(e,se,sp,st)
 end
 function c210280001.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and aux.disfilter1(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(aux.disfilter1,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
+	if chkc then return chkc:IsOnField() and chkc:IsFaceup() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	local g=Duel.SelectTarget(tp,aux.disfilter1,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
+	local g=Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE,g,1,0,0)
 end
 function c210280001.operation(e,tp,eg,ep,ev,re,r,rp)
