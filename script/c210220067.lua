@@ -9,9 +9,14 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetCost(s.cost)
 	e1:SetTarget(s.sctg)
 	e1:SetOperation(s.scop)
 	c:RegisterEffect(e1)
+end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLP(tp)>100 end
+	Duel.SetLP(tp,100)
 end
 function s.filter2(c,e,tp,m)
 	return c:IsType(TYPE_FUSION) and c:CheckFusionMaterial(m)
