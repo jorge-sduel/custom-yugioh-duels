@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.scop)
 	c:RegisterEffect(e1)
 end
-function s.filter2(c,e,tpm)
+function s.filter2(c,e,tp,m)
 	return c:IsType(TYPE_FUSION) and c:CheckFusionMaterial(m)
 end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
