@@ -60,11 +60,11 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	tc:CompleteProcedure()
 	local lv=mg:Select(tp,1,1,nil)
 	local lv1=lv:GetFirst()
-		for mg in aux.Next(lv) do
+		for mg do
 	local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_XYZ_LEVEL)
-		e1:SetValue(lv1:GetLevel())
+		e1:SetValue(4)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		mg:RegisterEffect(e1)
 	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
