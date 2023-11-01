@@ -49,11 +49,12 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local mg=c:GetMaterial()
 	local lv=mg:Select(tp,1,1,nil)
 	local lv1=lv:GetFirst()
+			for lv1 in aux.Next(lv) do
 	local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_XYZ_LEVEL)
 		e1:SetValue(lv1:GetLevel())
-		mg:RegisterEffect(e1)
+		lv1:RegisterEffect(e1)
 		local sg=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_EXTRA,0,nil,e,tp,mg)
 	if sg:GetCount()>0 then
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -77,6 +78,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
 	Duel.XyzSummon(tp,sc,nil,mg,99,99)
+		end
 	end
 	e1:Reset()
 end
