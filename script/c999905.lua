@@ -5,12 +5,16 @@ function c999905.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetCondition(c999905.con)
 	e1:SetTarget(c999905.tg)
 	e1:SetOperation(c999905.op)
 	c:RegisterEffect(e1)
 end
+function c999905.con(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetLP(tp)<Duel.GetLP(1-tp)
+end
 function c999905.filter(c,e,tp)
-	return c:IsSetCard(0x344) or c:IsCode(70902743) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsAttackBelow(3000) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c999905.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
