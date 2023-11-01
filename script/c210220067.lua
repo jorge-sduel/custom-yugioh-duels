@@ -39,10 +39,10 @@ end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
-	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
+	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	local sg=g:Select(tp,1,1,nil)
 	local sc=sg:GetFirst()
-	Duel.SynchroSummon(tp,sc,nil,mg)
+	--Duel.SynchroSummon(tp,sc,nil,mg)
 	Duel.XyzSummon(tp,sc,nil,mg)
 	Duel.FusionSummon(tp,sc,nil,mg)
 end
