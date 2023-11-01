@@ -11,7 +11,7 @@ function c999905.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c999905.con(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetLP(tp)<Duel.GetLP(1-tp)
+	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 and Duel.GetLP(tp)<Duel.GetLP(1-tp)
 end
 function c999905.filter(c,e,tp)
 	return c:IsAttackBelow(3000) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
