@@ -42,11 +42,7 @@ end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
-	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
-	local sg2=g:Select(tp,1,1,nil)
-	local sc=sg2:GetFirst()
-	Duel.XyzSummon(tp,sc,nil,mg,99,99)
-	local sg=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_EXTRA,0,nil,e,tp,mg)
+		local sg=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_EXTRA,0,nil,e,tp,mg)
 	if sg:GetCount()>0 then
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tg=sg:Select(tp,1,1,nil)
@@ -57,5 +53,9 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	tc:SetMaterial(mat)
 	Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 	tc:CompleteProcedure()
+	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
+	local sg2=g:Select(tp,1,1,nil)
+	local sc=sg2:GetFirst()
+	Duel.XyzSummon(tp,sc,nil,mg,99,99)
 	end
 end
