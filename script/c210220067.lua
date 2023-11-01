@@ -28,12 +28,12 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.rmfilter1(c,e,tp)
 	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsAbleToRemove()
-		and c:IsSummonType(SUMMON_TYPE_PENDULUM) and c:IsType(TYPE_TUNER)
+		and c:IsType(TYPE_TUNER)
 		and Duel.IsExistingTarget(s.rmfilter2,tp,LOCATION_MZONE,0,1,nil,e,tp,c)
 end
 function s.rmfilter2(c,e,tp,tc)
 	if c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsAbleToRemove()
-		and c:IsSummonType(SUMMON_TYPE_PENDULUM) and not c:IsType(TYPE_TUNER)
+		and not c:IsType(TYPE_TUNER)
 		and Duel.GetLocationCountFromEx(tp,tp,Group.FromCards(c,tc))>2 then
 		local g=Group.FromCards(tc,c)
 		local fb=Duel.IsExistingMatchingCard(s.fusfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,g)
