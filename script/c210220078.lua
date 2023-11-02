@@ -48,13 +48,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetMatchingGroup(s.matfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,nil)
 	local tc=e:GetLabelObject()
 	if not tc:IsLocation(LOCATION_EXTRA) then return end
-	local e1=Effect.CreateEffect(e:GetHandler())
+	--[[local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_LEVEL)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_EXTRA)
 	e1:SetValue(tc:GetLevel()*2)
-	tc:RegisterEffect(e1)
+	tc:RegisterEffect(e1)]]
 	if not tc:IsSynchroSummonable(nil,mg) then return end
 	--Auxiliary.SynchroSend=2
 	Duel.SynchroSummon(tp,tc,nil,mg)
