@@ -58,6 +58,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsSynchroSummonable(nil,mg) then return end
 	Auxiliary.SynchroSend=2
 	Duel.SynchroSummon(tp,tc,nil,mg)
-	Auxiliary.SynchroSend=0
+	--Auxiliary.SynchroSend=0
 	e1:Reset()
 end
