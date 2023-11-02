@@ -60,7 +60,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	tc:SetMaterial(mat)
 	Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 	tc:CompleteProcedure()
-	local mat1=tc:GetMaterial()
+	local mat1=c:GetMaterial()
 	for mat2 in mat1:Iter() do
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -75,11 +75,10 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	mat2:RegisterEffect(e2)
 	--Duel.SpecialSummon(mat,0,tp,tp,false,false,POS_FACEUP)
 	--for mat in aux.Next(lv) do
-		
 	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
-	Duel.XyzSummon(tp,sc,nil,mat1,99,99)
+	Duel.XyzSummon(tp,sc,nil,c:GetMatterial(),99,99)
 		end
 	end
 	e1:Reset()
