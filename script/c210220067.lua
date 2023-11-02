@@ -69,7 +69,7 @@ end
 function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
-	local lv=mg:Select(tp,1,1,nil)
+	--[[local lv=mg:Select(tp,1,1,nil)
 	for tc in mg:Iter() do
 	if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 	local e2=Effect.CreateEffect(e:GetHandler())
@@ -78,12 +78,12 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetValue(lv:GetFirst():GetLevel())
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	tc:RegisterEffect(e2,true)
-	Duel.SpecialSummonComplete()
-	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,tc)
+	Duel.SpecialSummonComplete()]]
+	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst() 
-	Duel.XyzSummon(tp,sc,nil)
-   end
+	Duel.XyzSummon(tp,sc,nil,mg)
+  --[[end
 --e1:Reset()
-end
+end]]
 end
