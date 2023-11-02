@@ -20,7 +20,7 @@ function s.matfilter(c)
 		and (c:IsPreviousLocation(LOCATION_ONFIELD) or not c:IsLocation(LOCATION_GRAVE))
 end
 function s.filter(c,e,tp,mg)
-	if c:IsType(TYPE_SYNCHRO) then return end
+	if not c:IsType(TYPE_SYNCHRO) then return end
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_LEVEL)
@@ -56,7 +56,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(tc:GetLevel()*2)
 	tc:RegisterEffect(e1)
 	if not tc:IsSynchroSummonable(nil,mg) then return end
-	Auxiliary.SynchroSend=2
+	--Auxiliary.SynchroSend=2
 	Duel.SynchroSummon(tp,tc,nil,mg)
 	--Auxiliary.SynchroSend=0
 	e1:Reset()
