@@ -21,11 +21,11 @@ function s.matfilter(c)
 end
 function s.filter(c,e,tp,mg)
 	if not c:IsType(TYPE_SYNCHRO) then return end
-	--[[local e1=Effect.CreateEffect(e:GetHandler())
+	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_LEVEL)
 	e1:SetValue(c:GetLevel()*2)
-	c:RegisterEffect(e1)]]
+	c:RegisterEffect(e1)
 	local res=c:IsSynchroSummonable(nil,mg)
 	--e1:Reset()
 	return res
