@@ -66,14 +66,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.xyzmatfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,nil)
 	local mg=g:Filter(s.filter,nil,g,tp)
 	if #mg<2 then return end
-	local matg=aux.SelectUnselectGroup(mg,e,tp,1,99,s.matcond,1,tp,HINTMSG_XMATERIAL)
+	local matg=aux.SelectUnselectGroup(mg,e,tp,2,99,s.matcond,1,tp,HINTMSG_XMATERIAL)
 	local xyzg=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_EXTRA,0,nil,matg)
 	if #xyzg>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local xyz=xyzg:Select(tp,1,1,nil):GetFirst()
 		matg:KeepAlive()
-		Duel.XyzSummon(tp,xyz,nil,matg,99,99)
-	end
+		if Duel.XyzSummon(tp,xyz,nil,matg,99,99) then
 local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 	local xg=Duel.GetMatchingGroup(s.setcfilter,tp,LOCATION_EXTRA,0,nil,xyz:GetCode())
 	if #xg>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
@@ -95,7 +94,8 @@ local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 		e1:SetTargetRange(1,0)
 		e1:SetTarget(s.sumlimit)
 		Duel.RegisterEffect(e1,tp)
-	  
+			end
+		end
 	end
 end
 function s.setcfilter(c,cd)
