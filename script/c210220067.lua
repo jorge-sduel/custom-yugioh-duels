@@ -62,19 +62,19 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	tc:CompleteProcedure()
 	local mat1=c:GetMaterial()
 	for mat2 in mat1:Iter() do
-	if Duel.SpecialSummonStep(mat2,0,tp,tp,false,false,POS_FACEUP) then
+	--[[if Duel.SpecialSummonStep(mat2,0,tp,tp,false,false,POS_FACEUP) then
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_BECOME_LINKED_ZONE)
 	e1:SetValue(0xffffff)
-	Duel.RegisterEffect(e1,tp)
+	Duel.RegisterEffect(e1,tp)]]
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_XYZ_LEVEL)
 	e2:SetValue(lv1:GetLevel())
 	--e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	mat2:RegisterEffect(e2,true)
-	Duel.SpecialSummonComplete()
+	--Duel.SpecialSummonComplete()
 	--Duel.SpecialSummon(mat2,0,tp,tp,false,false,POS_FACEUP)
 	--for mat in aux.Next(lv) do
 		end 
