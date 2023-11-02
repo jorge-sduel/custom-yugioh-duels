@@ -43,7 +43,7 @@ function c999915.operation(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCode(EFFECT_CHANGE_DAMAGE)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetTargetRange(1,0)
-	e2:SetValue(s.val1)
+	e2:SetValue(c999915.val1)
 	e2:SetReset(RESET_PHASE|PHASE_END,1)
 	Duel.RegisterEffect(e2,tp)
 			end
@@ -51,7 +51,7 @@ function c999915.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummonComplete()
 	end
 end
-function s.val1(e,re,dam,r,rp,rc)
+function c999915.val1(e,re,dam,r,rp,rc)
 	if r&(REASON_BATTLE+REASON_EFFECT)~=0 then
 		return dam/2
 	else return dam end
