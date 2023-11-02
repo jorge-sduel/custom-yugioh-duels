@@ -75,14 +75,14 @@ end
 function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
-	local e1=Effect.CreateEffect(e:GetHandler())
+	--[[local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_BECOME_LINKED_ZONE)
 	e1:SetValue(0xffffff)
-	Duel.RegisterEffect(e1,tp)
+	Duel.RegisterEffect(e1,tp)]]
 	local lv=mg:Select(tp,1,1,nil)
 	for tc in mg:Iter() do
-	if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
+	--if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_XYZ_LEVEL)
@@ -90,8 +90,8 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	tc:RegisterEffect(e2,true)
   end
-Duel.SpecialSummonComplete() 
-e1:Reset()
+--Duel.SpecialSummonComplete() 
+--e1:Reset()
 end
 end
 function s.regop3(e,tp,eg,ep,ev,re,r,rp)
