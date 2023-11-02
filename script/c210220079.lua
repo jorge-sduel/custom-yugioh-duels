@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id+EFFECT_COUNT_CODE_OATH)
 	--e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
-	e1:SetOperation(s.activate)
+	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -32,54 +32,48 @@ end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return e:GetLabelObject()~=se
 end
-function s.filter(c,e,tp)
-	return c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+function s.filter(c,g,tp)
+	local mg=g:Filter(Card.IsCode,nil,c:GetCode())
+	return Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,mg)
 end
-function s.xyzfilter(c,mg,ct)
-	return c:IsXyzSummonable(mg,ct,ct)
-end
-function s.matcon(sg,e,tp,mg)
-	return sg:GetClassCount(Card.GetCode)==1 and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,sg,#sg)
-end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return false end
-	local mg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp)
-	local ct=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return Duel.IsPlayerCanSpecialSummonCount(tp,2)
-		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
-		and ct>1 and aux.SelectUnselectGroup(mg,e,tp,2,ct,s.matcon,0) end
-	local g=aux.SelectUnselectGroup(mg,e,tp,2,ct,s.matcon,1,tp,HINTMSG_SPSUMMON)
-	Duel.SetTargetCard(g)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,#g,0,0)
-end
-function s.filter2(c,e,tp)
-	return c:IsRelateToEffect(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(s.filter2,nil,e,tp)
-	local tc=g:GetFirst()
-	while tc do
-		Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_DISABLE)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		tc:RegisterEffect(e1)
-		local e2=e1:Clone()
-		e2:SetCode(EFFECT_DISABLE_EFFECT)
-		tc:RegisterEffect(e2)
-		tc=g:GetNext()
+function s.mfilter(c,g,tg,ct,tp)
+	local mg=g:Filter(Card.IsCode,nil,c:GetCode())
+	local xct=ct+1
+	mg:RemoveCard(c)
+	tg:AddCard(c)
+	local res=false
+	if xct==3 then
+		local res=Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,tg)
+	else
+		local res=mg:IsExists(s.mfilter,1,c,mg,tg,xct,tp)
 	end
-	Duel.SpecialSummonComplete()
-	if Duel.GetLocationCountFromEx(tp,tp,g)<=0 then return end
-	Duel.BreakEffect()
-	local xyzg=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_EXTRA,0,nil,g)
-	if #xyzg==0 then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local xyz=xyzg:Select(tp,1,1,nil):GetFirst()
-	Duel.XyzSummon(tp,xyz,g)
-	local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
+	tg:RemoveCard(c)
+	return res
+end
+function s.xyzfilter(c,g)
+	return c:IsXyzSummonable(nil,g,3,3)
+end
+function s.matcond(sg,e,tp)
+	return sg:GetClassCount(Card.GetCode)==1 and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,sg)
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	local g=Duel.GetMatchingGroup(s.xyzmatfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	if chk==0 then return g:IsExists(s.filter,1,nil,g,tp) and
+		Duel.GetLocationCountFromEx(tp,tp,g:Filter(Card.IsLocation,nil,LOCATION_MZONE))>0 end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(s.xyzmatfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local mg=g:Filter(s.filter,nil,g,tp)
+	if #mg<2 then return end
+	local matg=aux.SelectUnselectGroup(mg,e,tp,1,99,s.matcond,1,tp,HINTMSG_XMATERIAL)
+	local xyzg=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_EXTRA,0,nil,matg)
+	if #xyzg>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local xyz=xyzg:Select(tp,1,1,nil):GetFirst()
+		matg:KeepAlive()
+		Duel.XyzSummon(tp,xyz,nil,matg)
+local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 	local xg=Duel.GetMatchingGroup(s.setcfilter,tp,LOCATION_EXTRA,0,nil,xyz:GetCode())
 	if #xg>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
@@ -100,6 +94,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetTargetRange(1,0)
 		e1:SetTarget(s.sumlimit)
 		Duel.RegisterEffect(e1,tp)
+	  end
 	end
 end
 function s.setcfilter(c,cd)
