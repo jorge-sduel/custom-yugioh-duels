@@ -60,6 +60,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	tc:SetMaterial(mat)
 	Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 	tc:CompleteProcedure()
+	local mat1=tc:GetMaterial()
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_BECOME_LINKED_ZONE)
@@ -71,6 +72,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetValue(lv1:GetLevel())
 	--e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	mat:RegisterEffect(e2)
+	for mat1 in mat:Iter() do
 	Duel.SpecialSummon(mat,0,tp,tp,false,false,POS_FACEUP)
 	--for mat in aux.Next(lv) do
 		
@@ -78,7 +80,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
 	Duel.XyzSummon(tp,sc,nil,mg,99,99)
-		--end
+		end
 	end
 	e1:Reset()
 	e2:Reset()
