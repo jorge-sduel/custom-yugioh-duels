@@ -79,7 +79,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetOperation(s.regop)
 		xyz:RegisterEffect(e1)
 		Duel.XyzSummon(tp,xyz,nil,matg,99,99)
-		end
+		--end
 	end
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
