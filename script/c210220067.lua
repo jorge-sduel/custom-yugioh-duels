@@ -80,7 +80,7 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetValue(lv:GetFirst():GetLevel())
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	tc:RegisterEffect(e2,true)
-	Duel.XyzSummon(tp,sc,nil,c:GetMaterial(),99,99)
+	Duel.XyzSummon(tp,sc,nil,tc,99,99)
    end
 --e1:Reset()
 end
