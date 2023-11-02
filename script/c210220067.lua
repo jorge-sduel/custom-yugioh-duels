@@ -47,6 +47,12 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
 		e2:SetOperation(s.regop2)
 		sc:RegisterEffect(e2)
+		local e3=Effect.CreateEffect(e:GetHandler())
+		e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+		e3:SetCode(EVENT_SPSUMMON_SUCCESS)
+		e3:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
+		e3:SetOperation(s.regop3)
+		sc:RegisterEffect(e3)
 		Duel.SynchroSummon(tp,sc,nil,mg)
 	end
 end
@@ -69,6 +75,22 @@ end
 function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
+	local lv=mg:Select(tp,1,1,nil)
+	for tc in mg:Iter() do
+	if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
+	local e2=Effect.CreateEffect(e:GetHandler())
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_XYZ_LEVEL)
+	e2:SetValue(lv:GetFirst():GetLevel())
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	tc:RegisterEffect(e2,true)
+  end
+--e1:Reset()
+--end]]
+end
+function s.regop3(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local mg=c:GetMaterial()
 	--[[local lv=mg:Select(tp,1,1,nil)
 	for tc in mg:Iter() do
 	if Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
@@ -82,7 +104,7 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst() 
-	Duel.XyzSummon(tp,sc,nil,mg)
+	Duel.XyzSummon(tp,sc,nil,mg,99,99)
   --[[end
 --e1:Reset()
 end]]
