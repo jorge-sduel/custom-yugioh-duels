@@ -43,15 +43,15 @@ function s.mfilter(c,g,tg,ct,tp)
 	tg:AddCard(c)
 	local res=false
 	if xct==3 then
-		local res=Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,tg)
+		local res=Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,tg,ct)
 	else
 		local res=mg:IsExists(s.mfilter,1,c,mg,tg,xct,tp)
 	end
 	tg:RemoveCard(c)
 	return res
 end
-function s.xyzfilter(c,g)
-	return c:IsXyzSummonable(nil,g,1,99)
+function s.xyzfilter(c,g,tg,ct,tp)
+	return c:IsXyzSummonable(nil,g,ct,ct)
 end
 function s.matcond(sg,e,tp)
 	return sg:GetClassCount(Card.GetCode)==1 and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,sg)
