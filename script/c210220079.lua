@@ -94,7 +94,7 @@ local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 		e1:SetTargetRange(1,0)
 		e1:SetTarget(s.sumlimit)
 		Duel.RegisterEffect(e1,tp)
-			end
+			--end
 		end
 	end
 end
