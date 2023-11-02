@@ -86,7 +86,7 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	tc:RegisterEffect(e2,true)
   end
 --e1:Reset()
---end]]
+end
 end
 function s.regop3(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
