@@ -93,7 +93,7 @@ function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 --Duel.SpecialSummonComplete() 
 --e1:Reset()
 end
-end
+--end
 function s.regop3(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
