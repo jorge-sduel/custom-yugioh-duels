@@ -73,15 +73,15 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCode(EFFECT_XYZ_LEVEL)
 	e2:SetValue(lv1:GetLevel())
 	--e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-	mat2:RegisterEffect(e2)
+	mat2:RegisterEffect(e2,true)
 	Duel.SpecialSummonComplete()
 	--Duel.SpecialSummon(mat2,0,tp,tp,false,false,POS_FACEUP)
 	--for mat in aux.Next(lv) do
 	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,c:GetMaterial())
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
-	Duel.XyzSummon(tp,sc,nil,c:GetMaterial(),99,99)
 		end
+	Duel.XyzSummon(tp,sc,nil,c:GetMaterial(),99,99) 
 	end
 end
 	e1:Reset()
