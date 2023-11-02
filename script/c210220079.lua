@@ -17,7 +17,7 @@ function s.initial_effect(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetActivityCount(tp,ACTIVITY_SPSUMMON)==0 and Duel.CheckLPCost(tp,1500) end
-	local e1=Effect.CreateEffect(e:GetHandler())
+	--[[local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
@@ -26,7 +26,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetTargetRange(1,0)
 	e1:SetTarget(s.sumlimit)
 	Duel.RegisterEffect(e1,tp)
-	e:SetLabelObject(e1)
+	e:SetLabelObject(e1)]]
 	Duel.PayLPCost(tp,1500)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
@@ -95,7 +95,7 @@ local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 	local sc=sg:Select(tp,1,1,nil):GetFirst()
 	Duel.SSet(tp,sc)
 	Duel.ConfirmCards(1-tp,sc)
-	--e:GetLabelObject():Reset()
+	--[[e:GetLabelObject():Reset()
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
@@ -104,7 +104,7 @@ local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 	e1:SetLabelObject(sc:GetActivateEffect())
 	e1:SetTargetRange(1,0)
 	e1:SetTarget(s.sumlimit)
-	Duel.RegisterEffect(e1,tp)
+	Duel.RegisterEffect(e1,tp)]]
 	end
 end
 function s.setcfilter(c,cd)
