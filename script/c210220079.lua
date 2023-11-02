@@ -73,6 +73,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		local xyz=xyzg:Select(tp,1,1,nil):GetFirst()
 		matg:KeepAlive()
 		Duel.XyzSummon(tp,xyz,nil,matg,99,99)
+	end
 local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 	local xg=Duel.GetMatchingGroup(s.setcfilter,tp,LOCATION_EXTRA,0,nil,xyz:GetCode())
 	if #xg>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
@@ -94,7 +95,7 @@ local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 		e1:SetTargetRange(1,0)
 		e1:SetTarget(s.sumlimit)
 		Duel.RegisterEffect(e1,tp)
-	  end
+	  
 	end
 end
 function s.setcfilter(c,cd)
