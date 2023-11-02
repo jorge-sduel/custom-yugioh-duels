@@ -66,7 +66,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(mat,0,tp,tp,false,false,POS_FACEUP)
 	local lv=mg:Select(tp,1,1,nil)
 	local lv1=lv:GetFirst()
-	for Lv1 in aux.Next(mg) do
+	for mat in aux.Next(lv) do
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_XYZ_LEVEL)
