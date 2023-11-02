@@ -77,7 +77,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
 	Duel.XyzSummon(tp,sc,nil,mg,99,99)
-		end
+		--end
 	end
 	e1:Reset()
 	e2:Reset()
