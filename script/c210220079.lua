@@ -51,7 +51,7 @@ function s.mfilter(c,g,tg,ct,tp)
 	return res
 end
 function s.xyzfilter(c,g)
-	return c:IsXyzSummonable(nil,g,3,3)
+	return c:IsXyzSummonable(nil,g,1,99)
 end
 function s.matcond(sg,e,tp)
 	return sg:GetClassCount(Card.GetCode)==1 and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,sg)
@@ -98,7 +98,7 @@ local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 	end
 end
 function s.setcfilter(c,cd)
-	return c:IsType(TYPE_XYZ) and aux.IsCodeListed(c,cd) and not c:IsCode(cd) and c:IsFacedown()
+	return c:IsType(TYPE_XYZ) and Card.ListsCode(c,cd) and not c:IsCode(cd) and c:IsFacedown()
 end
 function s.setfilter(c)
 	return c:GetType()==TYPE_SPELL and c:IsSetCard(0x95) and c:IsSSetable()
