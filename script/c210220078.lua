@@ -59,5 +59,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	--Auxiliary.SynchroSend=2
 	Duel.SynchroSummon(tp,tc,nil,mg)
 	--Auxiliary.SynchroSend=0
-	e1:Reset()
+	--e1:Reset()
 end
