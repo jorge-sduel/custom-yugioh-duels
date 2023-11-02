@@ -31,7 +31,7 @@ function c999915.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,c999915.filter,tp,LOCATION_GRAVE,0,1,3,nil,e,tp)
 	if g:GetCount()>0 then
 		for tc in g:Iter() do
-		local e1=Effect.CreateEffect(c)
+		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_ATTACK)
 		e1:SetValue(0)
