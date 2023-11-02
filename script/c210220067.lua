@@ -78,7 +78,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
-	Duel.XyzSummon(tp,sc,nil,c:GetMatterial(),99,99)
+	Duel.XyzSummon(tp,sc,nil,c:GetMaterial(),99,99)
 		end
 	end
 	e1:Reset()
