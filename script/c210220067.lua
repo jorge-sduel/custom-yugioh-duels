@@ -66,20 +66,21 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	tc:CompleteProcedure() 
 	end
 end
-function s.regop(e,tp,eg,ep,ev,re,r,rp)
+function s.regop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local mg=c:GetMaterial()
 	local lv=mg:Select(tp,1,1,nil)
 	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,c:GetMaterial())
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
+	for tc in mg:Iter() do
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_XYZ_LEVEL)
 	e2:SetValue(lv:GetFirst():GetLevel())
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-	mg:RegisterEffect(e2,true)
+	tc:RegisterEffect(e2,true)
 	Duel.XyzSummon(tp,sc,nil,c:GetMaterial(),99,99)
---end
+   end
 --e1:Reset()
 end
