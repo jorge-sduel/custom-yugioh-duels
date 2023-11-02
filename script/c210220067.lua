@@ -77,9 +77,9 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_XYZ_LEVEL)
 	e2:SetValue(lv1:GetLevel())
-	--e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	mg:RegisterEffect(e2,true)
 	Duel.XyzSummon(tp,sc,nil,c:GetMaterial(),99,99)
-end
-e1:Reset()
+--end
+--e1:Reset()
 end
