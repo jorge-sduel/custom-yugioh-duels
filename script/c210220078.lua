@@ -27,7 +27,7 @@ function s.filter(c,e,tp,mg)
 	e1:SetValue(c:GetLevel()*2)
 	c:RegisterEffect(e1)
 	local res=c:IsSynchroSummonable(nil,mg)
-	--e1:Reset()
+	e1:Reset()
 	return res
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
