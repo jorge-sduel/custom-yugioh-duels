@@ -82,6 +82,7 @@ local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 		Duel.ConfirmCards(1-tp,xc)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 		local sc=sg:Select(tp,1,1,nil):GetFirst()
+		Duel.XyzSummon(tp,xyz,nil,matg,99,99)
 		Duel.SSet(tp,sc)
 		Duel.ConfirmCards(1-tp,sc)
 		--e:GetLabelObject():Reset()
@@ -94,7 +95,6 @@ local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
 		e1:SetTargetRange(1,0)
 		e1:SetTarget(s.sumlimit)
 		Duel.RegisterEffect(e1,tp)
-			Duel.XyzSummon(tp,xyz,nil,matg,99,99)
 			--end
 		end
 	end
