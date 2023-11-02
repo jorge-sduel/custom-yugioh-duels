@@ -16,8 +16,8 @@ function s.initial_effect(c)
 end
 function s.matfilter(c)
 	return c:IsCanBeSynchroMaterial()
-		and (c:IsFaceup() or not c:IsLocation(LOCATION_ONFIELD))
-		and (c:IsPreviousLocation(LOCATION_ONFIELD) or not c:IsLocation(LOCATION_GRAVE))
+		--[[and (c:IsFaceup() or not c:IsLocation(LOCATION_ONFIELD))
+		and (c:IsPreviousLocation(LOCATION_ONFIELD) or not c:IsLocation(LOCATION_GRAVE))]]
 end
 function s.filter(c,e,tp,mg)
 	if not c:IsType(TYPE_SYNCHRO) then return end
