@@ -30,6 +30,12 @@ function c999915.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,c999915.filter,tp,LOCATION_GRAVE,0,1,3,nil,e,tp)
 	if g:GetCount()>0 then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_SET_ATTACK)
+		e1:SetValue(0)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
+		g:RegisterEffect(e1)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
 	end
 end
