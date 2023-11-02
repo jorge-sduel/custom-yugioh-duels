@@ -20,14 +20,14 @@ function s.matfilter(c)
 		and (c:IsPreviousLocation(LOCATION_ONFIELD) or not c:IsLocation(LOCATION_GRAVE))
 end
 function s.filter(c,e,tp,mg)
-	if not c:IsType(TYPE_SYNCHRO) then return end
+	if c:IsType(TYPE_SYNCHRO) then return end
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_LEVEL)
 	e1:SetValue(c:GetLevel()*2)
 	c:RegisterEffect(e1)
 	local res=c:IsSynchroSummonable(nil,mg)
-	e1:Reset()
+	--e1:Reset()
 	return res
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
