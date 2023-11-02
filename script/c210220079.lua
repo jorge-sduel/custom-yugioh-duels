@@ -72,10 +72,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local xyz=xyzg:Select(tp,1,1,nil):GetFirst()
 		matg:KeepAlive()
-local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil)
-	Duel.XyzSummon(tp,xyz,nil,matg,99,99) 
+local sg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_DECK,0,nil) 
 		local xg=Duel.GetMatchingGroup(s.setcfilter,tp,LOCATION_EXTRA,0,nil,xyz:GetCode())
-	if #xg>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+	Duel.XyzSummon(tp,xyz,nil,matg,99,99)
+		if #xg>0 and #sg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 		local xc=xg:Select(tp,1,1,nil)
