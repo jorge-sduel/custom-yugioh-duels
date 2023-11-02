@@ -75,7 +75,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	mat2:RegisterEffect(e2)
 	--Duel.SpecialSummon(mat,0,tp,tp,false,false,POS_FACEUP)
 	--for mat in aux.Next(lv) do
-	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
+	local g=Duel.GetMatchingGroup(Card.IsXyzSummonable,tp,LOCATION_EXTRA,0,nil,nil,c:GetMaterial())
 	local sg2=g:Select(tp,1,1,nil)
 	local sc=sg2:GetFirst()
 	Duel.XyzSummon(tp,sc,nil,c:GetMaterial(),99,99)
