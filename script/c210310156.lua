@@ -114,7 +114,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_DAMAGE)
-		e1:SetValue(tc:GetAttack())
+		e1:SetValue(tc:GetAttack()+100)
 		c:RegisterEffect(e1)
 	end
 end
