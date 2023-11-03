@@ -48,7 +48,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e0:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e0,tp)
 	for tc in aux.Next(g) do
-		local e1=Effect.CreateEffect(c)
+		--[[local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_ATTRIBUTE)
 		e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -60,21 +60,24 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_CHANGE_RACE)
 		e2:SetValue(s.propval(rc))
-		tc:RegisterEffect(e2)
+		tc:RegisterEffect(e2)]]
 		local e3=Effect.CreateEffect(c)
-		e3:SetType(EFFECT_TYPE_SINGLE)
+		e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 		e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 		e3:SetRange(LOCATION_MZONE)
-		e3:SetCondition(s.propcon(st))
+		e3:SetCondition(s.propcon(ct))
 		e3:SetOperation(s.ope(rc,attr))
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e3)
 	end
 end
-function s.propcon(st)
-	return function(scard,sumtype,tp)
-		return sumtype&st==st
+function s.propcon(ct)
+	return function(e,tp,eg,ep,ev,re,r,rp)
+		return eg:IsExists(s.cfilter,1,nil,tp,ct)
 	end
+end
+function s.cfilter(c,tp,ct)
+	return c:IsFaceup() and c:GetSummonPlayer()==tp and c:IsType(ct)
 end
 function s.propval(rc)
 	return function(e,c,rp)
