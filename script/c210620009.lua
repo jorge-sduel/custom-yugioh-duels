@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_ATKCHANGE)
 	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetCountLimit(1,id)
+	e3:SetCountLimit(1)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTarget(s.atktg)
 	e3:SetOperation(s.atkop)
@@ -70,10 +70,11 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.HasLevel),tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.Faceup,tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local tg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.HasLevel),tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	local tg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.HasLevel),tp,LOCATION_MZONE,0,nil)
+	local sum=g:GetSum(Card.GetRank)*200
 	if #tg>0 then
 		local c=e:GetHandler()
 		for sc in aux.Next(tg) do
@@ -82,7 +83,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_UPDATE_ATTACK)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_OPPO_TURN)
-			e1:SetValue(sc:GetLevel()*200)
+			e1:SetValue(sum)
 			sc:RegisterEffect(e1)
 		end
 	end
