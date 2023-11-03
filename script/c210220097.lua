@@ -24,7 +24,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RACE)
 	local rc=Duel.AnnounceRace(tp,1,RACE_ALL)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE)
-	local attr=Duel.AnnounceAttribute(tp,1,0xff)
+	local attr=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CARDTYPE)
 	local op=Duel.SelectOption(tp,table.unpack({1056,1063,1073,1076}))+1
 	local reteff=Effect.GlobalEffect()
