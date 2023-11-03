@@ -33,7 +33,7 @@ function c999908.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCountLimit(1)
 	e3:SetTarget(c999908.target)
-	e3:SetCondition(c999908.condition)
+	--e3:SetCondition(c999908.condition)
 	e3:SetOperation(c999908.operation)
 	c:RegisterEffect(e3)
 end
