@@ -25,12 +25,22 @@ function s.initial_effect(c)
 	e2:SetOperation(s.mtop)
 	c:RegisterEffect(e2)
 	--remove att
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e3:SetCode(EFFECT_ADD_ATTRIBUTE)
+	e3:SetValue(ATTRIBUTE_LIGHT)
+	c:RegisterEffect(e3)
+	--destroy
 	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_SINGLE)
-	e4:SetRange(LOCATION_MZONE)
-	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e4:SetCode(EFFECT_ADD_ATTRIBUTE)
-	e4:SetValue(ATTRIBUTE_LIGHT)
+	e4:SetDescription(aux.Stringid(7338,2))
+	e4:SetCategory(CATEGORY_DESTROY)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e4:SetCode(EVENT_DESTROYED)
+	e4:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
+	e4:SetTarget(s.destg)
+	e4:SetOperation(s.desop)
 	c:RegisterEffect(e4)
 end
 function s.efilter(e,te)
@@ -66,5 +76,26 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e1)
 		--tc:RegisterFlagEffect(51102591,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1,fid)
+	end
+end
+function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
+	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,0)
+end
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+ local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
+	if Duel.Destroy(g,REASON_EFFECT)>0 then
+		local dg=Duel.GetOperatedGroup()
+		local atk=0
+		local tc=dg:GetFirst()
+		while tc do
+			if tc:IsPreviousPosition(POS_FACEUP) then
+				atk=atk+tc:GetPreviousAttackOnField()
+			end
+			tc=dg:GetNext()
+		end
+		Duel.Damage(1-tp,atk,REASON_EFFECT)
 	end
 end
