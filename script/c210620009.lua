@@ -73,7 +73,7 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(aux.Faceup,tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local tg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.HasLevel),tp,LOCATION_MZONE,0,nil)
+	local tg=Duel.GetMatchingGroup(aux.Faceup,tp,LOCATION_MZONE,0,nil)
 	local sum=tg:GetSum(Card.GetRank)*200
 	if #tg>0 then
 		local c=e:GetHandler()
