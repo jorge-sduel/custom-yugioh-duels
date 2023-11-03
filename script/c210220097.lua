@@ -99,8 +99,8 @@ function s.splimit(rc,attr,ct)
 	end
 end
 function s.ope(rc,attr)
-	return function(e,c,tp)
-	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	return function(e,c)
+	local g=Duel.GetMatchingGroup(Card.IsFaceup,e:GetHandlerPlayer(),LOCATION_MZONE,LOCATION_MZONE,nil)
 for tc in aux.Next(g) do 
 local e1=Effect.CreateEffect(c)
 e1:SetType(EFFECT_TYPE_SINGLE)
