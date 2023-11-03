@@ -33,7 +33,7 @@ function c999915.operation(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetTargetRange(1,0)
 	e2:SetValue(c999915.val1)
 	e2:SetReset(RESET_PHASE|PHASE_END,1)
-	Duel.RegisterEffect(e2)
+	Duel.RegisterEffect(e2,tp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,c999915.filter,tp,LOCATION_GRAVE,0,1,3,nil,e,tp)
