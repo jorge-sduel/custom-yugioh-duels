@@ -74,7 +74,7 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.HasLevel),tp,LOCATION_MZONE,0,nil)
-	local sum=g:GetSum(Card.GetRank)*200
+	local sum=tg:GetSum(Card.GetRank)*200
 	if #tg>0 then
 		local c=e:GetHandler()
 		for sc in aux.Next(tg) do
