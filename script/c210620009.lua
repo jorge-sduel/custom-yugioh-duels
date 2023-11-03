@@ -70,10 +70,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(aux.Faceup,tp,LOCATION_MZONE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.Faceup,tp,LOCATION_MZONE,0,1,nil) end
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local tg=Duel.GetMatchingGroup(aux.Faceup,tp,LOCATION_MZONE,0,nil)
+	local tg=Duel.GetMatchingGroup(Card.Faceup,tp,LOCATION_MZONE,0,nil)
 	local sum=tg:GetSum(Card.GetRank)*100
 	if #tg>0 then
 		local c=e:GetHandler()
