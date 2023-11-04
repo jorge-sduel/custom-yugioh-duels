@@ -42,7 +42,7 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local d=a:GetBattleTarget()
 		return c:GetFlagEffect(id)==0 and d
 			and lg:IsContains(a) and lg:IsContains(d)
-			and lg:IsExists(aux.nzatk,1,Group.FromCards(a,d))
+			and lg:IsExists(Card.NonZeroAttack,1,Group.FromCards(a,d))
 	end
 	c:RegisterFlagEffect(id,RESET_CHAIN,0,1)
 end
@@ -55,7 +55,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	if not d or not d:IsRelateToBattle() then return end
 	if not a:IsControler(tp) then a,d=d,a end
 	local lg=c:GetLinkedGroup()
-	local ag=lg:Filter(aux.nzatk,Group.FromCards(a,d))
+	local ag=lg:Filter(Card.NonZeroAttack,Group.FromCards(a,d))
 	if ag:GetCount()==0 then return end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
