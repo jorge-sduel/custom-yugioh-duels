@@ -55,7 +55,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	if not d or not d:IsRelateToBattle() then return end
 	if not a:IsControler(tp) then a,d=d,a end
 	local lg=c:GetLinkedGroup()
-	local ag=lg:Filter(Card.NonZeroAttack,Group.FromCards(a,d))
+	local ag=lg:Filter(Card.IsFaceup,Group.FromCards(a,d))
 	if ag:GetCount()==0 then return end
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
