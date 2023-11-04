@@ -42,7 +42,7 @@ function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local d=a:GetBattleTarget()
 		return c:GetFlagEffect(id)==0 and d
 			and lg:IsContains(a) and lg:IsContains(d)
-			and lg:IsExists(Card.NonZeroAttack,1,Group.FromCards(a,d))
+			and lg:IsExists(Card.IsFaceup,1,Group.FromCards(a,d))
 	end
 	c:RegisterFlagEffect(id,RESET_CHAIN,0,1)
 end
