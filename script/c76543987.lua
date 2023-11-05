@@ -1,11 +1,11 @@
 --Cyber Dragon Null
 function c76543987.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,c76543987.mfilter,8,3,c76543987.ovfilter, aux.Stringid(76543987,0),3,c76543987.xyzop)
+	Xyz.AddProcedure(c,c76543987.mfilter,8,3,c76543987.ovfilter, aux.Stringid(76543987,0),3,c76543987.xyzop)
 	c:EnableReviveLimit()
 	--Xyz revive
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription (76543987, 1)
+	e1:SetDescription(76543987,1)
 	e1:SetCountLimit(1)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_IGNITION)
