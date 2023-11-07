@@ -46,7 +46,7 @@ function c500310045.filter2(c,ec,tp)
 	return c:IsAttribute(ATTRIBUTE_DARK) or c:IsRace(RACE_CYBERSE)
 end
 
-function c500310045.spfilter(c)
+function c500310045.spfilter(c,tp)
 	return c:IsFaceup() and c:IsRace(RACE_CYBERSE) and c:IsType(TYPE_LINK) and c:IsLinkAbove(4) and Duel.GetLocationCountFromEx(tp,tp,c)>0
 end
 function c500310045.hspcon(e,c)
