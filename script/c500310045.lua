@@ -57,8 +57,8 @@ function c500310045.hspcon(e,c)
 		and Duel.IsExistingMatchingCard(c500310045.spfilter,tp,LOCATION_MZONE,0,1,nil,tp)
 end
 function c500310045.hspop(e,tp,eg,ep,ev,re,r,rp)
-	   Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_MATERIAL)
-	local g=Duel.SelectMatchingCard(tp,c500310045.spfilter,tp,LOCATION_MZONE,0,1,1,nil)
+	  --Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_MATERIAL)
+	local g=Duel.SelectMatchingCard(tp,c500310045.spfilter,tp,LOCATION_MZONE,0,1,1,nil,tp)
    Duel.SendtoGrave(g,REASON_MATERIAL+0x10000000)
 	Duel.RegisterFlagEffect(tp,500310045,RESET_PHASE+PHASE_END,0,1)
 end
