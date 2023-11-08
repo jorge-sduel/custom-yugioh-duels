@@ -27,7 +27,7 @@ function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function cid.filter(c,e,tp)
-	return c.Is_Evolute and not c:IsType(TYPE_EFFECT) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c.Is_Evolute and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
    if chkc then return (chkc:IsLocation(LOCATION_GRAVE) or chkc:IsLocation(LOCATION_REMOVED)) and chkc:IsControler(tp) and cid.filter(chkc,e,tp) end
@@ -41,7 +41,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	  local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)~=0 then
-tc:AddEC(1)
+tc:AddCounter(0x111f,1)
 end
 end
 function cid.ffilter(c)
