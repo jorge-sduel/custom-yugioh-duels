@@ -48,6 +48,8 @@ function c24108326.initial_effect(c)
 	e5:SetOperation(c24108326.spop)
 	c:RegisterEffect(e5)
 end
+c24108326.listed_names={CARD_ASSAULT_MODE,2403771}
+c24108326.assault_mode=2403771
 function c24108326.thfilter(c)
 	return c:IsType(TYPE_EQUIP) and c:IsAbleToHand()
 end
