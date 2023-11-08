@@ -46,6 +46,8 @@ function c92834757.initial_effect(c)
 	e5:SetOperation(c92834757.spop)
 	c:RegisterEffect(e5)
 end
+s.listed_names={CARD_ASSAULT_MODE,73580471}
+s.assault_mode=73580471
 function c92834757.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDestructable,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	local g=Duel.GetMatchingGroup(Card.IsDestructable,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
