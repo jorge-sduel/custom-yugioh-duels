@@ -42,6 +42,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)~=0 then
 tc:AddCounter(0x111f,1)
+	Duel.SpecialSummonComplete() 
 end
 end
 function cid.ffilter(c)
@@ -85,14 +86,14 @@ end
 function cid.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_EVOLUTE)
 end
-function cid.filter(c)
+function cid.filter2(c)
 	return c:IsFaceup() and c:IsSetCard(0xab5)
 end
 function cid.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
   if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) end
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_MZONE,0,1,e:GetHandler())
 		and Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_ONFIELD,1,nil) end
-	local ct=Duel.GetMatchingGroupCount(cid.filter,tp,LOCATION_MZONE,0,e:GetHandler())
+	local ct=Duel.GetMatchingGroupCount(cid.filter2,tp,LOCATION_MZONE,0,e:GetHandler())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_ONFIELD,1,ct,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,g:GetCount(),0,0)
