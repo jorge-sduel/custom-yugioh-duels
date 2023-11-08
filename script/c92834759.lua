@@ -43,8 +43,8 @@ function c92834759.initial_effect(c)
 	e5:SetOperation(c92834759.spop)
 	c:RegisterEffect(e5)
 end
-s.listed_names={CARD_ASSAULT_MODE,25862681}
-s.assault_mode=25862681
+c92834759 .listed_names={CARD_ASSAULT_MODE,25862681}
+c92834759.assault_mode=25862681
 function c92834759.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
