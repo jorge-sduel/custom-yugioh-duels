@@ -53,8 +53,8 @@ function c92834758.initial_effect(c)
 	e5:SetOperation(c92834758.spop)
 	c:RegisterEffect(e5)
 end
-s.listed_names={CARD_ASSAULT_MODE,9012916}
-s.assault_mode=9012916
+c92834758.listed_names={CARD_ASSAULT_MODE,9012916}
+c92834758.assault_mode=9012916
 function c9012916.damval(e,re,val,r,rp,rc)
 	if bit.band(r,REASON_EFFECT)~=0 then
 		e:GetHandler():AddCounter(0x10,1)
