@@ -13,7 +13,8 @@ function s.initial_effect(c)
 	--multi
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_PIERCE)
+	e2:SetCode(EFFECT_EXTRA_ATTACK)
+	e2:SetValue(2)
 	c:RegisterEffect(e2)
 	--multi
 	local e3=Effect.CreateEffect(c)
