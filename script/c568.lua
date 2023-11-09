@@ -1,6 +1,4 @@
---月の守護者
---Penumbral Keeper
---fixed by MLD & Larry126
+--eatos fusion
 local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
@@ -10,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCode(EFFECT_SET_ATTACK)
+	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetValue(s.value)
 	c:RegisterEffect(e1)
 	--Double damage
