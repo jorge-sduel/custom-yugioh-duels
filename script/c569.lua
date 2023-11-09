@@ -47,16 +47,16 @@ s.listed_series={0x52}
 s.listed_names={511000453}
 s.material_setcode=0x52
 function s.spfilter(c)
-	return c:IsAbleToGraveAsCost() and ((c:IsLocation(LOCATION_ONFIELD) and c:IsCode(511000453)) or (c:IsSetCard(0x52) and c:IsType(TYPE_MONSTER)))
+	return c:IsAbleToGraveAsCost() and ((c:IsLocation(LOCATION_SZONE) and c:IsCode(511000453)) or (c:IsSetCard(0x52) and c:IsType(TYPE_MONSTER)))
 end
 function s.rescon(sg,e,tp,mg)
-	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0 and sg:FilterCount(Card.IsLocation,nil,LOCATION_ONFIELD)~=#sg
+	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0 and sg:FilterCount(Card.IsLocation,nil,LOCATION_SZONE)~=#sg
 end
 function s.hspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local g=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_SZONE|LOCATION_MZONE,0,nil)
-	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_ONFIELD) then return false end
+	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_SZONE) then return false end
 	return aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon,0)
 end
 function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
