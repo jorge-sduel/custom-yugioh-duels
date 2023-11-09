@@ -44,10 +44,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x52}
-s.listed_names={34022290}
+s.listed_names={511000453}
 s.material_setcode=0x52
 function s.spfilter(c)
-	return c:IsAbleToGraveAsCost() and ((c:IsLocation(LOCATION_ONFIELD) and c:IsCode(34022290)) or (c:IsSetCard(0x52) and c:IsType(TYPE_MONSTER)))
+	return c:IsAbleToGraveAsCost() and ((c:IsLocation(LOCATION_ONFIELD) and c:IsCode(511000453)) or (c:IsSetCard(0x52) and c:IsType(TYPE_MONSTER)))
 end
 function s.rescon(sg,e,tp,mg)
 	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0 and sg:FilterCount(Card.IsLocation,nil,LOCATION_ONFIELD)~=#sg
