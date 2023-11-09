@@ -72,6 +72,7 @@ function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
 end
 function s.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
+	Duel.ConfirmCards(1-tp,sg)
 	Duel.Release(sg,REASON_COST+REASON_MATERIAL)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
