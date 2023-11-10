@@ -8,6 +8,7 @@ function c80000017.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCondition(c80000017.spcon)
+	e1:SetOperation(c80000017.operation)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
 	--to hand
@@ -55,6 +56,14 @@ function c80000017.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c80000017.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
+	if tc and tc:IsRelateToEffect(e) then
+		Duel.SendtoHand(tc,nil,REASON_EFFECT)
+		Duel.ShuffleHand(tp)
+	end
+end
+function c80000017.operation2(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.SelectTarget(tp,c80000017.filter,tp,LOCATION_DECK,0,1,1,nil)
+	local tc=g:GetFirst()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SendtoHand(tc,nil,REASON_EFFECT)
 		Duel.ShuffleHand(tp)
