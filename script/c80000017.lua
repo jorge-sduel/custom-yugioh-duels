@@ -8,7 +8,7 @@ function c80000017.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCondition(c80000017.spcon)
-	e1:SetOperation(c80000017.operation)
+	e1:SetOperation(c80000017.operation2)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
 	--to hand
