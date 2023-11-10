@@ -8,7 +8,8 @@ function c80000017.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCondition(c80000017.spcon)
-	e1:SetOperation(c80000017.operation2)
+	e1:SetTarget(c80000017.thtg)
+	e1:SetOperation(c80000017.thop)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
 	--to hand
@@ -61,11 +62,15 @@ function c80000017.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ShuffleHand(tp)
 	end
 end
-function c80000017.operation2(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.SelectTarget(tp,c80000017.filter,tp,LOCATION_DECK,0,1,1,nil)
-	local tc=g:GetFirst()
-	if tc and tc:IsRelateToEffect(e) then
-		Duel.SendtoHand(tc,nil,REASON_EFFECT)
-		Duel.ShuffleHand(tp)
+function c80000017.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(c80000017.filter,tp,LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
+end
+function c80000017.thop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local g=Duel.SelectMatchingCard(tp,c80000017.filter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then
+		Duel.SendtoHand(g,nil,REASON_EFFECT)
+		Duel.ConfirmCards(1-tp,g)
 	end
 end
