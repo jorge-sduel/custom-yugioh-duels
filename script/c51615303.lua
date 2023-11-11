@@ -1,5 +1,6 @@
 --created by LeonDuvall, coded by Lyris
 local cid,id=GetID()
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -61,7 +62,9 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoGrave(Duel.SelectMatchingCard(tp,aux.AND(Card.IsSetCard,Card.IsAbleToGrave),tp,LOCATION_DECK,0,1,1,nil,0xcfd),REASON_EFFECT)
 end
 function cid.shcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_TIMELEAP and e:GetHandler():GetReasonCard():IsSetCard(0xcfd)
+	local c=e:GetHandler()
+	local rc=c:GetReasonCard()
+	return r==REASON_SPSUMMON and rc:IsSetCard(0xcfd) and rc:IsHasEffect(221594324)
 end
 function cid.filter(c)
 	return c:IsSetCard(0xcfd) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
