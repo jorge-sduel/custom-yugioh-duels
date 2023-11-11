@@ -68,7 +68,7 @@ end
 function cid.condition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	return r==REASON_SPSUMMON and rc:IsSetCard(0xcfd) and rc:
+	return r==REASON_SPSUMMON and rc:IsSetCard(0xcfd) and rc:IsHasEffect(221594324)
 end
 function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) and chkc:IsType(TYPE_SPELL+TYPE_TRAP) end
