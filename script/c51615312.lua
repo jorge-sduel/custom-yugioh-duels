@@ -7,7 +7,7 @@ function cid.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetOperation(cid.operation)
+	--e1:SetOperation(cid.operation)
 	c:RegisterEffect(e1)
 	--If you control 2+ "Epochborn Paragon" monsters with different names, This card cannot be targeted or destroyed by card effects.
 	local e2=Effect.CreateEffect(c)
