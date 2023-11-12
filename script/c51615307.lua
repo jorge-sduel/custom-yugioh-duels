@@ -5,7 +5,7 @@ if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	--time leap procedure
-Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsCode,id-6),1,1,cid.timecon)
+Timeleap.AddProcedure(c,cid.matfilter,1,1,cid.timecon)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -24,13 +24,15 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsCode,id-6),1,1,cid.timec
 	e4:SetValue(cid.efilter)
 	c:RegisterEffect(e4)
 end
-cid.material={id-6}
-function cid.material(e,c)
-	return c:IsFaceup() and c:IsCode(id-6)
-end
+cid.listed_names={51615301}
+cid.material={51615301}
 function cid.timecon(e)
-	return not Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsCode),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil,id) 
+	return not Duel.IsExistingMatchingCard(cid.confilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil) 
 end
+function cid.confilter(c)
+	return c:IsFaceup() and c:IsCode(id)
+end
+
 function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(1-tp) and chkc:IsType(TYPE_SPELL+TYPE_TRAP) end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,0,LOCATION_ONFIELD,1,nil,TYPE_SPELL+TYPE_TRAP) end
