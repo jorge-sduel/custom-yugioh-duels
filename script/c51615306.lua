@@ -10,7 +10,6 @@ Timeleap.AddProcedure(c,cid.material,1,1,cid.TimeCon)
 	--time leap procedure
 Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsCode,id-6),function(e,tc) return not Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsCode),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil,id) end )
 function cid.initial_effect(c)
-	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
