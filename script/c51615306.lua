@@ -27,6 +27,15 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsCode,id-6),1,1,cid.timec
 	e2:SetTarget(cid.negtg)
 	e2:SetOperation(cid.negop)
 	c:RegisterEffect(e2)
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetTargetRange(LOCATION_MZONE,0)
+	e3:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
+	e3:SetCondition(Timeleap.Future)
+	e3:SetTarget(cid.tglim)
+	e3:SetValue(cid.efilter2)
+	c:RegisterEffect(e3)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_MZONE)
@@ -56,12 +65,15 @@ end
 function cid.efilter(e,re,rp)
 	return re:IsActiveType(TYPE_MONSTER) and rp~=e:GetHandlerPlayer()
 end
+function cid.efilter2(e,re,rp)
+	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp~=e:GetHandlerPlayer()
+end
 function cid.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or not g:IsContains(c) then return false end
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and c:IsSummonType(SUMMON_TYPE_TIMELEAP2)
+	return (re:IsHasType(EFFECT_TYPE_ACTIVATE) or re:IsActiveType(TYPE_MONSTER)) and c:IsSummonType(SUMMON_TYPE_TIMELEAP2)
 end
 function cid.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
