@@ -1,5 +1,6 @@
 --created by LeonDuvall, coded by Lyris
 local cid,id=GetID()
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
@@ -22,7 +23,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cid.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xcfd) and c:IsType(TYPE_TIMELEAP)
+	return c:IsFaceup() and c:IsSetCard(0xcfd) and c:IsHasEffect(221594324)
 end
 function cid.counterfilter(c)
 	return c:IsSetCard(0xcfd) or c:GetSummonLocation()~=LOCATION_EXTRA
@@ -61,28 +62,28 @@ end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-1 then return false end
-		local ef=Effect.CreateEffect(e:GetHandler())
+		--[[local ef=Effect.CreateEffect(e:GetHandler())
 		ef:SetType(EFFECT_TYPE_FIELD)
 		ef:SetCode(EFFECT_EXTRA_TIMELEAP_SUMMON)
 		ef:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 		ef:SetTargetRange(1,0)
 		ef:SetTarget(aux.TRUE)
-		Duel.RegisterEffect(ef,tp)
+		Duel.RegisterEffect(ef,tp)]]
 		local res=Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp)
-		ef:Reset()
+		--ef:Reset()
 		return res
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
-	local ef=Effect.CreateEffect(e:GetHandler())
+	--[[local ef=Effect.CreateEffect(e:GetHandler())
 	ef:SetType(EFFECT_TYPE_FIELD)
 	ef:SetCode(EFFECT_EXTRA_TIMELEAP_SUMMON)
 	ef:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	ef:SetDescription(aux.Stringid(id,0))
 	ef:SetTargetRange(1,0)
 	ef:SetTarget(aux.TRUE)
-	Duel.RegisterEffect(ef,tp)
+	Duel.RegisterEffect(ef,tp)]]
 	local g=Duel.GetMatchingGroup(cid.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
