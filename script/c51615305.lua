@@ -1,5 +1,6 @@
 --created by LeonDuvall, coded by Lyris
 local cid,id=GetID()
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
