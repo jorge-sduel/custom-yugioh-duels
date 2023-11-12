@@ -5,7 +5,7 @@ if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
 	--time leap procedure
-Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsCode,id-6),1,1,cid.timecon)
+Timeleap.AddProcedure(c,cid.material,1,1,cid.timecon)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -25,6 +25,9 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsCode,id-6),1,1,cid.timec
 	c:RegisterEffect(e4)
 end
 cid.material={id-6}
+function cid.material(e,c)
+	return c:IsFaceup() and c:IsCode(id-6)
+end
 function cid.timecon(e)
 	return not Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsCode),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil,id) 
 end
