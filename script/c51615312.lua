@@ -1,5 +1,6 @@
 local cid,id=GetID()
 --Epochborn Field of Dreams
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	--When this card is activated, you can: Immediately after this effect resolves, Time Leap Summon an "Epochborn" monster, ignoring the Time Leap Limit. You can only use this effect of "Epochborn Field of Dreams" once per turn.
 	local e1=Effect.CreateEffect(c)
@@ -75,14 +76,14 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or Duel.GetFlagEffect(tp,id)>0 or Duel.GetLocationCount(tp,LOCATION_MZONE)<=-1
 		or not Duel.SelectEffectYesNo(tp,c) then return end
-	local ef=Effect.CreateEffect(c)
+	--[[local ef=Effect.CreateEffect(c)
 	ef:SetType(EFFECT_TYPE_FIELD)
 	ef:SetCode(EFFECT_EXTRA_TIMELEAP_SUMMON)
 	ef:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	ef:SetDescription(aux.Stringid(id,0))
 	ef:SetTargetRange(1,0)
 	ef:SetTarget(aux.TRUE)
-	Duel.RegisterEffect(ef,tp)
+	Duel.RegisterEffect(ef,tp)]]
 	local g=Duel.GetMatchingGroup(cid.spfilter,tp,LOCATION_EXTRA,0,nil,e,tp)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
