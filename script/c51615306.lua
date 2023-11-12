@@ -24,7 +24,7 @@ Timeleap.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsCode,id-6),1,1,cid.timec
 	e4:SetValue(cid.efilter)
 	c:RegisterEffect(e4)
 end
-function cid.timecon(e,tc)
+function cid.timecon(e)
 	return not Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsCode),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil,id) 
 end
 function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
