@@ -93,7 +93,7 @@ function Timeleap.AddProcedure(c,f,min,max,cond,specialchk,opp,loc,send)
 	c:RegisterEffect(e6)]] 
 end
 function Card.IsTimeleap(c)
-	return c.IsTimeleap
+	return c:IsHasEffect(221594324)
 end
 function Card.IsLocTime(c)
 	return c:IsFaceup() or c:IsLocation(LOCATION_HAND)
