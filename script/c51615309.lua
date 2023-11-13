@@ -1,10 +1,11 @@
 --created by LeonDuvall, coded by Lyris
 local cid,id=GetID()
+cid.IsTimeleap=true
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddOrigTimeleapType(c)
-	aux.AddTimeleapProc(c,4,function(e,tc) return not Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsCode),tp,LOCATION_MZONE,0,1,nil,id) end,aux.FilterBoolFunction(Card.IsCode,id-7))
-	aux.AddCodeList(c,id-7)
+	--time leap procedure
+Timeleap.AddProcedure(c,cid.matfilter,1,1,cid.timecon)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
@@ -29,6 +30,17 @@ function cid.initial_effect(c)
 	e3:SetTarget(cid.tglimit)
 	e3:SetValue(aux.tgoval)
 	c:RegisterEffect(e3)
+end
+cid.listed_names={id-7}
+cid.material={id-7}
+function cid.timecon(e)
+	return not Duel.IsExistingMatchingCard(cid.confilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil) 
+end
+function cid.confilter(c)
+	return c:IsFaceup() and c:IsCode(id)
+end
+function cid.matfilter(c)
+	return c:IsCode(id-7)
 end
 function cid.con(set)
 	return function(e) return Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsSetCard),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,e:GetHandler(),set) end
