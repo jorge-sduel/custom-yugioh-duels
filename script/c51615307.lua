@@ -32,7 +32,9 @@ end
 function cid.confilter(c)
 	return c:IsFaceup() and c:IsCode(id)
 end
-
+function cid.matfilter(c)
+	return c:IsCode(id-6)
+end
 function cid.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsControler(1-tp) and chkc:IsType(TYPE_SPELL+TYPE_TRAP) end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsType,tp,0,LOCATION_ONFIELD,1,nil,TYPE_SPELL+TYPE_TRAP) end
