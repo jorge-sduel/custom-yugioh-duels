@@ -40,11 +40,13 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
-function cid.cfilter(c,tp)
-	return c:IsAbleToGrave() and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
+function cid.cfilter(c,code,sc,tp)
+	return c:IsAbleToGrave() and code==c:GetCode()
 end
-function cid.filter(c,ec)
-	return c:ListsCodeAsMaterial(ec) and c:IsSetCard(0x1cfd) 
+function cid.filter(c,e,tp)
+	local code=c.material
+	if not code then return false end
+	return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_ONFIELD,0,1,nil,code,c,tp) and c:IsSetCard(0x1cfd) 
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_EXTRA,0,1,nil,tp) end
