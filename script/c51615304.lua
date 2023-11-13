@@ -41,10 +41,10 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e1,tp)
 end
 function cid.cfilter(c,tp)
-	return c:IsSetCard(0x1cfd) and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c)
+	return c:IsAbleToGrave() and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 end
 function cid.filter(c,ec)
-	return ec:ListsCodeAsMaterial(c:GetCode()) and c:IsAbleToGrave()
+	return c:ListsCodeAsMaterial(ec) and c:IsSetCard(0x1cfd) 
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_EXTRA,0,1,nil,tp) end
@@ -52,11 +52,11 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
-	local tc=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_EXTRA,0,1,1,nil,tp):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_EXTRA,0,1,1,nil,tp):GetFirst()
 	if not tc then return end
 	Duel.ConfirmCards(1-tp,tc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	Duel.SendtoGrave(Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_DECK,0,1,1,nil,tc),REASON_EFFECT)
+	Duel.SendtoGrave(Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_DECK,0,1,1,nil,tc),REASON_EFFECT)
 end
 function cid.cfilter(c)
 	return c:IsSummonType(SUMMON_TYPE_TIMELEAP) and c:IsSetCard(0xcfd)
