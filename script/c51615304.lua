@@ -44,7 +44,7 @@ function cid.cfilter(c,tp)
 	return c:IsSetCard(0x1cfd) and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c)
 end
 function cid.filter(c,ec)
-	return aux.IsCodeListed(ec,c:GetCode()) and c:IsAbleToGrave()
+	return ec:ListsCodeAsMaterial(c:GetCode()) and c:IsAbleToGrave()
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_EXTRA,0,1,nil,tp) end
