@@ -34,6 +34,9 @@ end
 function cid.confilter(c)
 	return c:IsFaceup() and c:IsCode(id)
 end
+function cid.matfilter(c)
+	return c:IsCode(id-6)
+end
 function cid.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x1cfd) and c:IsDefenseAbove(1)
 end
