@@ -45,7 +45,7 @@ function cid.cfilter(c,code)
 end
 function cid.filter(c,tp)
 	local code=c.material
-	--if not code then return false end
+	if not code then return false end
 	return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_DECK,0,1,nil,code) and c:IsSetCard(0x1cfd) 
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -56,9 +56,11 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 	local tc=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_EXTRA,0,1,1,nil,tp)
 	local code=tc.material
-	if not tc then return end
-	Duel.ConfirmCards(1-tp,tc)
+	local tc1=tc:GetFirst()
+	if not tc1 then return end
+	Duel.ConfirmCards(1-tp,tc1)
 	local tg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,code) 
+	tg:AddCard(e:GetHandler())
 	--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	Duel.SendtoGrave(tg,REASON_EFFECT)
 end
