@@ -26,8 +26,8 @@ Timeleap.AddProcedure(c,cid.matfilter,1,1,cid.timecon)
 	e4:SetValue(cid.bvalue)
 	c:RegisterEffect(e4)
 end
-cid.listed_names={id-6}
-cid.material={id-6}
+cid.listed_names={51615303}
+cid.material={id-5}
 function cid.timecon(e)
 	return not Duel.IsExistingMatchingCard(cid.confilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil) 
 end
@@ -35,7 +35,7 @@ function cid.confilter(c)
 	return c:IsFaceup() and c:IsCode(id)
 end
 function cid.matfilter(c)
-	return c:IsCode(id-6)
+	return c:IsCode(id-5)
 end
 function cid.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x1cfd) and c:IsDefenseAbove(1)
