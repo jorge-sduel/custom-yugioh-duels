@@ -1,10 +1,11 @@
 --created by LeonDuvall, coded by Lyris
 local cid,id=GetID()
+cid.IsTimeleap=true
+if not TIMELEAP_IMPORTED then Duel.LoadScript("proc_timeleap.lua") end
 function cid.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddOrigTimeleapType(c)
-	aux.AddTimeleapProc(c,4,function(e,tc) return not Duel.IsExistingMatchingCard(aux.AND(Card.IsFaceup,Card.IsCode),tp,LOCATION_MZONE,0,1,nil,id) end,aux.FilterBoolFunction(Card.IsCode,id-6))
-	aux.AddCodeList(c,id-6)
+	--time leap procedure
+Timeleap.AddProcedure(c,cid.matfilter,1,1,cid.timecon)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
@@ -24,6 +25,14 @@ function cid.initial_effect(c)
 	e4:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
 	e4:SetValue(cid.bvalue)
 	c:RegisterEffect(e4)
+end
+cid.listed_names={id-6}
+cid.material={id-6}
+function cid.timecon(e)
+	return not Duel.IsExistingMatchingCard(cid.confilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil) 
+end
+function cid.confilter(c)
+	return c:IsFaceup() and c:IsCode(id)
 end
 function cid.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x1cfd) and c:IsDefenseAbove(1)
