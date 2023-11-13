@@ -43,7 +43,7 @@ end
 function cid.cfilter(c,code)
 	return c:IsAbleToGrave() and code==c:GetCode()
 end
-function cid.filter(c,e,tp)
+function cid.filter(c,tp)
 	local code=c.material
 	--if not code then return false end
 	return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_DECK,0,1,nil,code) and c:IsSetCard(0x1cfd) 
