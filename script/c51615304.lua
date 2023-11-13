@@ -45,7 +45,7 @@ function cid.cfilter(c,code)
 end
 function cid.filter(c,e,tp)
 	local code=c.material
-	if not code then return false end
+	--if not code then return false end
 	return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_DECK,0,1,nil,code) and c:IsSetCard(0x1cfd) 
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
