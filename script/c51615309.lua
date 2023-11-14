@@ -30,6 +30,26 @@ Timeleap.AddProcedure(c,cid.matfilter,1,1,cid.timecon)
 	e3:SetTarget(cid.tglimit)
 	e3:SetValue(aux.tgoval)
 	c:RegisterEffect(e3)
+		--level
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_FIELD)
+	e5:SetCode(EFFECT_UPDATE_LEVEL)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCondition(Timeleap.Future)
+	e5:SetTargetRange(LOCATION_REMOVED,0)
+	e5:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_MONSTER))
+	e5:SetValue(-1)
+	c:RegisterEffect(e5)
+	--Atk
+	local e6=e5:Clone()
+	e6:SetCode(EFFECT_UPDATE_ATTACK)
+	e6:SetTargetRange(LOCATION_MZONE,0)
+	e6:SetValue(400)
+	c:RegisterEffect(e6)
+	--Def
+	local e7=e6:Clone()
+	e7:SetCode(EFFECT_UPDATE_DEFENSE)
+	c:RegisterEffect(e7)
 end
 cid.listed_names={id-7}
 cid.material={id-7}
