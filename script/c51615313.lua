@@ -43,11 +43,11 @@ function cid.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsSetCard(0xcfd) and c:IsLocation(LOCATION_EXTRA)
 end
 function cid.mfilter(c,tp,sc)
-	return c:IsCanBeTimeleapMaterial(sc) and c:GetLevel()==sc:GetFuture()-1 and Duel.GetMZoneCount(tp,c)>0
+	return c:IsCanBeTimeleapMaterial(c) and Duel.GetMZoneCount(tp,c)>0
 end
 function cid.spfilter(c,e,tp)
 	if not Duel.IsExistingMatchingCard(cid.mfilter,tp,LOCATION_MZONE,0,1,nil,tp,c) or not c:IsSetCard(0xcfd)
-		or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_TIMELEAP,tp,false,false) then return false end
+		or not c:IsSpecialSummonable() then return false end
 	local et=global_card_effect_table[c]
 	local res=false
 	for _,e in ipairs(et) do
