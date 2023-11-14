@@ -47,17 +47,7 @@ function cid.mfilter(c,tp,sc)
 end
 function cid.spfilter(c,e,tp)
 	if not Duel.IsExistingMatchingCard(cid.mfilter,tp,LOCATION_MZONE,0,1,nil,tp,c) or not c:IsSetCard(0xcfd)
-		or not c:IsSpecialSummonable() then return false end
-	local et=global_card_effect_table[c]
-	local res=false
-	for _,e in ipairs(et) do
-		if e:GetCode()==EFFECT_SPSUMMON_PROC then
-			local ev=e:GetValue()
-			local ec=e:GetCondition()
-			if ev and (aux.GetValueType(ev)=="function" and ev(ef,c) or ev&825==825) and (not ec or ec(e,c)) then res=true end
-		end
-	end
-	return res
+	return c:IsSpecialSummonable() and c:IsHasEffect(221594324)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
@@ -69,7 +59,7 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		ef:SetTargetRange(1,0)
 		ef:SetTarget(aux.TRUE)
 		Duel.RegisterEffect(ef,tp)]]
-		local res=Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp)
+ 		local res=Duel.IsExistingMatchingCard(cid.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp)
 		--ef:Reset()
 		return res
 	end
