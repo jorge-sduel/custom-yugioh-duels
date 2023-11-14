@@ -95,6 +95,9 @@ end
 function Card.IsTimeleap(c)
 	return c:IsHasEffect(221594324)
 end
+function Card.IsTimeleapMaterial(c)
+	return not (c:IsHasEffect(221594300) and c:IsLocation(LOCATION_MZONE)))
+end
 function Card.IsLocTime(c)
 	return c:IsFaceup() or c:IsLocation(LOCATION_HAND)
 end
