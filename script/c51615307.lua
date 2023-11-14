@@ -15,6 +15,18 @@ Timeleap.AddProcedure(c,cid.matfilter,1,1,cid.timecon)
 	e1:SetTarget(cid.destg)
 	e1:SetOperation(cid.desop)
 	c:RegisterEffect(e1)
+	--Negate an opponent's card or effect and destroy that card
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,1))
+	e2:SetCategory(CATEGORY_DISABLE+CATEGORY_DESTROY)
+	e2:SetType(EFFECT_TYPE_QUICK_O)
+	e2:SetCode(EVENT_CHAINING)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetCountLimit(1,id)
+	e2:SetCondition(cid.discon)
+	e2:SetTarget(cid.distg)
+	e2:SetOperation(cid.disop)
+	c:RegisterEffect(e2)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetRange(LOCATION_MZONE)
@@ -51,4 +63,21 @@ function cid.tglim(e,c)
 end
 function cid.efilter(e,re,rp)
 	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp~=e:GetHandlerPlayer()
+end
+function cid.discon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsBattlePhase() and ep==1-tp and Duel.IsExistingMatchingCard(nil,tp,LOCATION_MZONE,0,1,e:GetHandler())
+		and Duel.IsChainDisablable(ev) and e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP2)
+end
+function cid.distg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_DISABLE,eg,1,0,0)
+	local rc=re:GetHandler()
+	if rc:IsDestructable() and rc:IsRelateToEffect(re) then
+		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,0,0)
+	end
+end
+function cid.disop(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.NegateEffect(ev) and re:GetHandler():IsRelateToEffect(re) then
+		Duel.Destroy(eg,REASON_EFFECT)
+	end
 end
