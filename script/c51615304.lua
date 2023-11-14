@@ -40,29 +40,31 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
-function cid.cfilter(c,code)
-	return c:IsAbleToGrave() and code==c:GetCode()
+function cid.exfilter(c,e,tp,filter_func)
+	return c.material and c:IsType(TYPE_FUSION) and not c:IsPublic()
+		and Duel.IsExistingMatchingCard(filter_func,tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,nil,e,tp,c)
 end
-function cid.filter(c,tp)
-	local code=c.material
-	if not code then return false end
-	return Duel.IsExistingMatchingCard(cid.cfilter,tp,LOCATION_DECK,0,1,nil,code) and c:IsSetCard(0x1cfd) 
+function cid.spfilter(c,e,tp,fc)
+	if not c:IsCode(table.unpack(fc.material)) then return false end
+	if c:IsLocation(LOCATION_DECK) then
+		return c:IsType(TYPE_MONSTER)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_EXTRA,0,1,nil,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	local filter_func=cid.spfilter
+	if chk==0 then return Duel.IsExistingMatchingCard(cid.exfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,filter_func) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA|LOCATION_GRAVE)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
+	local filter_func=aux.NecroValleyFilter(cid.spfilter)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
-	local tc=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_EXTRA,0,1,1,nil,tp)
-	local code=tc.material
-	local tc1=tc:GetFirst()
-	if not tc1 then return end
-	Duel.ConfirmCards(1-tp,tc1)
-	local tg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,code) 
-	tg:AddCard(e:GetHandler())
-	--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	Duel.SendtoGrave(tg,REASON_EFFECT)
+	local rc=Duel.SelectMatchingCard(tp,cid.exfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,filter_func):GetFirst()
+	if not rc then return end
+	Duel.ConfirmCards(1-tp,rc)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local sc=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,1,rc,e,tp,rc):GetFirst()
+	if sc and Duel.SendtoGrave(sc,REASON_EFFECT) then
+		local c=e:GetHandler()
+	end
 end
 function cid.cfilter(c)
 	return c:IsSummonType(SUMMON_TYPE_TIMELEAP) and c:IsSetCard(0xcfd)
