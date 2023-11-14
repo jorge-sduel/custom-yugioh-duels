@@ -25,6 +25,20 @@ Timeleap.AddProcedure(c,cid.matfilter,1,1,cid.timecon)
 	e4:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
 	e4:SetValue(cid.bvalue)
 	c:RegisterEffect(e4)
+	--Attack while in defense position
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetCode(EFFECT_DEFENSE_ATTACK)
+	e5:SetCondition(Timeleap.Future)
+	e5:SetValue(1)
+	c:RegisterEffect(e5)
+	--Attack
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetCode(EFFECT_SET_DEFENSE)
+	e6:SetCondition(Timeleap.Future)
+	e6:SetValue(3500)
+	c:RegisterEffect(e6)
 end
 cid.listed_names={51615303}
 cid.material={id-5}
