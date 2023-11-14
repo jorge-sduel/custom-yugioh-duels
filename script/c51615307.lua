@@ -65,7 +65,7 @@ function cid.efilter(e,re,rp)
 	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp~=e:GetHandlerPlayer()
 end
 function cid.discon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsBattlePhase() and ep==1-tp and Duel.IsExistingMatchingCard(nil,tp,LOCATION_MZONE,0,1,e:GetHandler())
+	return Duel.IsBattlePhase() and ep==1-tp
 		and Duel.IsChainDisablable(ev) and e:GetHandler():IsSummonType(SUMMON_TYPE_TIMELEAP2)
 end
 function cid.distg(e,tp,eg,ep,ev,re,r,rp,chk)
