@@ -41,8 +41,8 @@ function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e1,tp)
 end
 function cid.exfilter(c,e,tp,filter_func)
-	return c.material and c:IsType(TYPE_FUSION) and not c:IsPublic()
-		and Duel.IsExistingMatchingCard(filter_func,tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,nil,e,tp,c)
+	return c.material and not c:IsPublic()
+		and Duel.IsExistingMatchingCard(filter_func,tp,LOCATION_DECK,0,1,nil,e,tp,c)
 end
 function cid.spfilter(c,e,tp,fc)
 	if not c:IsCode(table.unpack(fc.material)) then return false end
@@ -52,7 +52,7 @@ end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local filter_func=cid.spfilter
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.exfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,filter_func) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA|LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local filter_func=aux.NecroValleyFilter(cid.spfilter)
@@ -61,7 +61,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	if not rc then return end
 	Duel.ConfirmCards(1-tp,rc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sc=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_EXTRA|LOCATION_GRAVE,0,1,1,rc,e,tp,rc):GetFirst()
+	local sc=Duel.SelectMatchingCard(tp,cid.spfilter,tp,LOCATION_DECK,0,1,1,rc,e,tp,rc):GetFirst()
 	if sc and Duel.SendtoGrave(sc,REASON_EFFECT) then
 		local c=e:GetHandler()
 	end
