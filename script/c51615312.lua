@@ -94,7 +94,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.con(e,tp)
 	local g=Duel.GetMatchingGroup(cid.confilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)
-	return g:GetClassCount(Card.GetCode)>=e:GetLabel()
+	return g:GetClassCount(Card.GetCode)>=e:GetLabel()+1
 end
 function cid.confilter(c)
 	return c:IsSetCard(0x1cfd) and c:IsMonster()
