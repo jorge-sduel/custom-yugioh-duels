@@ -30,18 +30,21 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetCustomActivityCount(id,tp,ACTIVITY_SPSUMMON)==0 end
+	if chk==0 then return end
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
 	e1:SetTargetRange(1,0)
-	e1:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0xcfd))
+	e1:SetTarget(cid.splimit)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
+function cid.splimit(e,c,sump,sumtype,sumpos,targetp,se)
+	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0xcfd)
+end
 function cid.exfilter(c,e,tp,filter_func)
-	return c.material and not c:IsPublic()
+	return c.material and not c:IsPublic() and c:IsSetCard(0xcfd)
 		and Duel.IsExistingMatchingCard(filter_func,tp,LOCATION_DECK,0,1,nil,e,tp,c)
 end
 function cid.spfilter(c,e,tp,fc)
