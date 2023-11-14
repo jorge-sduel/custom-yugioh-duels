@@ -38,7 +38,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e5)
 	local e6=e4:Clone()
 	e6:SetCode(EFFECT_IMMUNE_EFFECT)
-	e6:SetValue(aux.TargetBoolFunction(Effect.IsHasProperty,EFFECT_FLAG_CARD_TARGET))
+	e6:SetValue(cid.imfilter))
 	c:RegisterEffect(e6)
 	--If you control 4+ "Epochborn Paragon" monsters with different names, "Epochborn" monsters you control gain 500 ATK and DEF.
 	local e7=Effect.CreateEffect(c)
@@ -98,4 +98,7 @@ function cid.con(e,tp)
 end
 function cid.confilter(c)
 	return c:IsSetCard(0x1cfd) and c:IsMonster()
+end
+function cid.imfiter(e,re,r,rp)
+	return not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET)
 end
