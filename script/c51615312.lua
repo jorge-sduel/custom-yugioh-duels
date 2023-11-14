@@ -99,6 +99,6 @@ end
 function cid.confilter(c)
 	return c:IsSetCard(0x1cfd) and c:IsMonster()
 end
-function cid.imfiter(e,re,r,rp)
+function cid.imfilter(e,re,r,rp)
 	return not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET)
 end
