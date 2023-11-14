@@ -46,7 +46,7 @@ function cid.mfilter(c,tp,sc)
 	return c:IsCanBeTimeleapMaterial(c) and Duel.GetMZoneCount(tp,c)>0
 end
 function cid.spfilter(c,e,tp)
-	if not Duel.IsExistingMatchingCard(cid.mfilter,tp,LOCATION_MZONE,0,1,nil,tp,c) or not c:IsSetCard(0xcfd)
+	--if not Duel.IsExistingMatchingCard(cid.mfilter,tp,LOCATION_MZONE,0,1,nil,tp,c) or not c:IsSetCard(0xcfd)
 	return c:IsSpecialSummonable() and c:IsHasEffect(221594324)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
