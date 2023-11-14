@@ -93,5 +93,9 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
 end
 function cid.con(e,tp)
-	return Duel.GetMatchingGroup(aux.AND(Card.IsFaceup,Card.IsSetCard),e:GetHandlerPlayer(),LOCATION_MZONE,0,nil,0x1cfd):GetClassCount(Card.GetCode)>1
+	local g=Duel.GetMatchingGroup(cid.confilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)
+	return g:GetClassCount(Card.GetCode)>=e:GetLabel()
+end
+function cid.confilter(c)
+	return c:IsSetCard(0x1cfd) and c:IsMonster()
 end
