@@ -38,7 +38,7 @@ function cid.initial_effect(c)
 	c:RegisterEffect(e5)
 	local e6=e4:Clone()
 	e6:SetCode(EFFECT_IMMUNE_EFFECT)
-	e6:SetValue(cid.imfilter))
+	e6:SetValue(cid.imfilter)
 	c:RegisterEffect(e6)
 	--If you control 4+ "Epochborn Paragon" monsters with different names, "Epochborn" monsters you control gain 500 ATK and DEF.
 	local e7=Effect.CreateEffect(c)
