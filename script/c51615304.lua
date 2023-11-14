@@ -46,7 +46,6 @@ function cid.exfilter(c,e,tp,filter_func)
 end
 function cid.spfilter(c,e,tp,fc)
 	if not c:IsCode(table.unpack(fc.material)) then return false end
-	if c:IsLocation(LOCATION_DECK) then
 		return c:IsType(TYPE_MONSTER)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
