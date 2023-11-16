@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,nil,4,2,99)
+	Xyz.AddProcedure(c,nil,4,2,nil,nil,99)
 	c:EnableReviveLimit()
 	--token
 	local e0=Effect.CreateEffect(c)
@@ -52,18 +52,18 @@ end
 function s.upfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_DINOSAUR)
 end
-function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.spcost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
-function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,572,0,TYPES_TOKEN,1000,1000,3,RACE_DINOSAUR,ATTRIBUTE_EARTH) end
 	local ft=Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,ft,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,ft,tp,0)
 end
-function s.spop(e,tp,eg,ep,ev,re,r,rp)
+function s.spop1(e,tp,eg,ep,ev,re,r,rp)
 	local ft=Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
 	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,572,0,TYPES_TOKEN,1000,1000,3,RACE_DINOSAUR,ATTRIBUTE_EARTH) then return end
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
