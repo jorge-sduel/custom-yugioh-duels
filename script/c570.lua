@@ -25,6 +25,9 @@ function s.initial_effect(c)
 	e2:SetOperation(s.copyop)
 	c:RegisterEffect(e2)
 end
+function s.ffilter2(c,fc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_DARK,fc,sumtype,tp)
+end
 function s.aclimit(e,re,tp)
 	return re:IsActiveType(TYPE_MONSTER)
 end
