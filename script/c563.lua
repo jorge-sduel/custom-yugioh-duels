@@ -54,6 +54,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(tc:GetAttack()*2)
 		tc:RegisterEffect(e1)
 		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1,fid)
+		local e1=Effect.CreateEffect(e:GetHandler())
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_CHANGE_DAMAGE)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e2:SetTargetRange(1,0)
+	e2:SetValue(s.val1)
+	e2:SetReset(RESET_PHASE|PHASE_END,1)
+	Duel.RegisterEffect(e2,tp)
 	end
 	sg:KeepAlive()
 	--[[local e2=Effect.CreateEffect(c)
@@ -67,4 +75,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetCondition(s.descon)
 	e2:SetOperation(s.desop)
 	Duel.RegisterEffect(e2,tp)]]
+end
+function s.val1(e,re,dam,r,rp,rc)
+	if r&(REASON_BATTLE+REASON_EFFECT)~=0 then
+		return dam/2
+	else return dam end
 end
