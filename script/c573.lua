@@ -70,7 +70,7 @@ function s.spop1(e,tp,eg,ep,ev,re,r,rp)
 	local fid=e:GetHandler():GetFieldID()
 	local g=Group.CreateGroup()
 	for i=1,ft do
-		local token=Duel.CreateToken(tp,10389143)
+		local token=Duel.CreateToken(tp,572)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		g:AddCard(token)
 	end
