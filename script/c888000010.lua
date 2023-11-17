@@ -32,7 +32,6 @@ function c888000010.initial_effect(c)
 	--indes
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetRange(LOCATION_MZONE)
 	e3:SetCode(EFFECT_PIERCE)
 	c:RegisterEffect(e3)
 end
