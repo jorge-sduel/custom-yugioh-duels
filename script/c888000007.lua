@@ -27,7 +27,6 @@ function c888000007.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_EXTRA_ATTACK)
-	e3:SetCondition(c888000007 .con)
 	e3:SetValue(c888000007.val)
 	c:RegisterEffect(e3)
 end
@@ -38,10 +37,7 @@ function c888000007.lizcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
 end
-function c888000007.con(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsCode,1,nil,53701457)
-end
 function c888000007.val(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(s.atfilter,e:GetHandlerPlayer(),0,LOCATION_HAND,nil)-1
+	local ct=Duel.GetMatchingGroupCount(s.atfilter,e:GetHandlerPlayer(),LOCATION_SZONE,0,nil)-1
     return ct
 end
