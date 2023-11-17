@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 
 Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093),3,3,s.lcheck)
-Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsOriginalCode,46724542),1,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),2)
+Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsCode,46724542),1,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),2)
 		--add type
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -28,7 +28,7 @@ Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsOriginalCode,4672
 end
 s.material_setcode={0x93,0x1093}
 function s.lcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsSummonCode,1,nil,lc,sumtype,tp,46724542)
+	return g:IsExists(Card.IsCode,1,nil,lc,sumtype,tp,46724542)
 end
 function s.valcheck(e,c)
 	local g=c:GetMaterial()
