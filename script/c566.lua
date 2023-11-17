@@ -43,15 +43,15 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil,e,tp)
---local ogatk=2100
+local ogatk=2100
 	if #g>0 then Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_ATTACK) 
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
 	e2:SetCountLimit(1)
-	--e2:SetLabel(ogatk)
+	e2:SetLabel(ogatk)
 	e2:SetLabelObject(g)
-	--e2:SetCondition(s.damcon)
+	e2:SetCondition(s.damcon)
 	e2:SetOperation(s.damop)
 	Duel.RegisterEffect(e2,tp)
 end
