@@ -23,26 +23,13 @@ function c888000007.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_DIRECT_ATTACK)
 	c:RegisterEffect(e2)
-	--to attack
+	 --attack time
 	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_QUICK_O)
-	e3:SetCode(EVENT_FREE_CHAIN)
-	e3:SetRange(LOCATION_MZONE)
-	e3:SetCondition(c888000007.poscon)
-	e3:SetOperation(c888000007.posop)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_EXTRA_ATTACK)
+	e3:SetCondition(c888000007 .con)
+	e3:SetValue(c888000007.val)
 	c:RegisterEffect(e3)
-	--unaffectable
-	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_SINGLE)
-	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e4:SetRange(LOCATION_MZONE)
-	e4:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
-	e4:SetCondition(c888000007.efcon)
-	e4:SetValue(1)
-	c:RegisterEffect(e4)
-	local e5=e4:Clone()
-	e5:SetCode(EFFECT_IMMUNE_EFFECT)
-	c:RegisterEffect(e5)
 end
 c888000007.material_setcode={0x8,0x3008}
 c888000007.dark_calling=true
@@ -51,15 +38,10 @@ function c888000007.lizcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
 end
-function c888000007.poscon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp and Duel.GetCurrentPhase()==PHASE_BATTLE and e:GetHandler():IsDefencePos()
+function c888000007.con(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsCode,1,nil,53701457)
 end
-function c888000007.efcon(e)
-	return Duel.GetTurnPlayer()==e:GetHandler():GetControler() and Duel.GetCurrentPhase()==PHASE_BATTLE
-end
-function c888000007.posop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if c:IsDefencePos() then
-		Duel.ChangePosition(c,POS_FACEUP_ATTACK)
-	end
+function c888000007.val(e,tp,eg,ep,ev,re,r,rp)
+	local ct=Duel.GetMatchingGroupCount(s.atfilter,e:GetHandlerPlayer(),0,LOCATION_HAND,nil)-1
+    return ct
 end
