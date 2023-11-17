@@ -25,8 +25,8 @@ function s.initial_effect(c)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e1)
 end
-function s.matfilter(c,scard,sumtype,tp)
-	return c:IsCode(CARD_CYBER_DRAGON,scard,sumtype,tp)
+function s.matfilter(c)
+	return c:IsCode(CARD_CYBER_DRAGON)
 end
 function s.lcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsSummonCode,1,nil,lc,sumtype,tp,CARD_CYBER_DRAGON)
