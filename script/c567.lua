@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 
 Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093),3,3,s.lcheck)
-Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093),2,2,46724542)
+Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093),2,2,CARD_CYBER_DRAGON)
 		--add type
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -28,7 +28,7 @@ Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093)
 end
 s.material_setcode={0x93,0x1093}
 function s.lcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsCode,1,nil,lc,sumtype,tp,46724542)
+	return g:IsExists(Card.IsSummonCode,1,nil,lc,sumtype,tp,CARD_CYBER_DRAGON)
 end
 function s.valcheck(e,c)
 	local g=c:GetMaterial()
@@ -39,7 +39,7 @@ function s.valcheck(e,c)
 	end
 end
 function s.tncon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetSummonType()==SUMMON_TYPE_FUSION and e:GetLabel()==1
+	return (e:GetHandler():GetSummonType()==SUMMON_TYPE_FUSION or e:GetHandler():GetSummonType()==SUMMON_TYPE_LINK) and e:GetLabel()==1
 end
 function s.tnop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
