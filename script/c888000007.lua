@@ -29,6 +29,13 @@ function c888000007.initial_effect(c)
 	e3:SetCode(EFFECT_EXTRA_ATTACK)
 	e3:SetValue(c888000007.val)
 	c:RegisterEffect(e3)
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCode(EFFECT_IMMUNE_EFFECT)
+	e4:SetValue(c888000007.efilter)
+	c:RegisterEffect(e4)
 end
 c888000007.material_setcode={0x8,0x3008}
 c888000007.dark_calling=true
@@ -40,4 +47,7 @@ end
 function c888000007.val(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(s.atfilter,e:GetHandlerPlayer(),LOCATION_SZONE,0,nil)-1
     return ct
+end
+function c888000007.efilter(e,te)
+	return te:IsActiveType(TYPE_TRAP)
 end
