@@ -76,6 +76,6 @@ function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Damage(e:GetLabelObject():GetControler(),e:GetLabel(),REASON_EFFECT)
+	Duel.Recover(e:GetLabelObject():GetControler(),e:GetLabel(),REASON_EFFECT)
 end
 
