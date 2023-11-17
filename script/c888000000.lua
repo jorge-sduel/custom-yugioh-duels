@@ -51,7 +51,7 @@ function c888000000.lizcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
 end
 function c888000000.atkfilter(c)
-	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_WATER)
+	return c:IsFaceup() and c:IsRace(RACE_FIEND)
 end
 function c888000000.atkup(e,c)
 	return Duel.GetMatchingGroupCount(c888000000.atkfilter,0,LOCATION_MZONE,LOCATION_MZONE,nil)*500
