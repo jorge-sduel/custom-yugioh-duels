@@ -49,7 +49,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(id)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	tc:RegisterEffect(e1,true)
-	tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0) 
+	--tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0) 
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP_ATTACK) 
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -62,8 +62,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetLabelObject():IsHasEffect(id) then e:Reset() return false end
-	return Duel.GetTurnPlayer()==tp
+	--if e:GetLabelObject():IsHasEffect(id) then e:Reset() return false end
+	return Duel.GetTurnPlayer()==tp and e:GetLabelObject():IsHasEffect(id)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Recover(tp,2100,REASON_EFFECT)
