@@ -48,7 +48,7 @@ function c888000007.atfilter(c)
 	return c:IsLocation(LOCATION_SZONE)
 end
 function c888000007.val(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(c888000007.atfilter,e:GetHandlerPlayer(),LOCATION_SZONE,0,nil)-1
+	local ct=Duel.GetMatchingGroupCount(c888000007.atfilter,e:GetHandlerPlayer(),LOCATION_SZONE,0,nil)
     return ct
 end
 function c888000007.efilter(e,te)
