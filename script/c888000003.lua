@@ -26,14 +26,6 @@ function c888000003.initial_effect(c)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetValue(c888000003.atkup)
 	c:RegisterEffect(e2)
-	--atkup
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e3:SetRange(LOCATION_MZONE)
-	e3:SetCode(EFFECT_UPDATE_ATTACK)
-	e3:SetValue(c888000003.atkup2)
-	c:RegisterEffect(e3)
 	--pierce
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
@@ -52,7 +44,4 @@ function c888000003.atfilter(c)
 end
 function c888000003.atkup(e,c)
 	return Duel.GetMatchingGroupCount(c888000003.afilter,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil,0x8)*200
-end
-function c888000003.atkup2(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil,0x8)*200
 end
