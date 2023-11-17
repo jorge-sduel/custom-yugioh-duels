@@ -5,7 +5,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsCode,CARD_CYBER_DRAGON),1,1)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSummonCode,CARD_CYBER_DRAGON),1,1)
 	--Change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
