@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 
 Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093),3,3,s.lcheck)
-Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsCode,46724542),1,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),2)
+Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093),2,2,46724542)
 		--add type
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
