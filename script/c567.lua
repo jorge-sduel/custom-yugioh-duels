@@ -4,7 +4,8 @@ function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
 
-Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093),3,3,s.lcheck)	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSummonCode,46724542),1,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),2)
+Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1093),3,3,s.lcheck)
+Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsOriginalCode,46724542),1,aux.FilterBoolFunctionEx(Card.IsRace,RACE_MACHINE),2)
 		--add type
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
