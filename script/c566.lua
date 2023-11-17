@@ -62,7 +62,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e2,tp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetLabelObject():GetFlagEffect(id)==0 then e:Reset() return false end
+	if e:GetLabelObject():GetHasEffect(id)==0 then e:Reset() return false end
 	return Duel.GetTurnPlayer()==tp
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
