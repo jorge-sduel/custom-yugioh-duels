@@ -28,13 +28,13 @@ function c888000006.initial_effect(c)
 	e3:SetValue(1000)
 	c:RegisterEffect(e3)
 	--atk up
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e1:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
-	e1:SetRange(LOCATION_MZONE)
-	e1:SetCondition(c888000006.atkcon)
-	e1:SetOperation(c888000006.atkop)
-	c:RegisterEffect(e1)
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e4:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCondition(c888000006.atkcon)
+	e4:SetOperation(c888000006.atkop)
+	c:RegisterEffect(e4)
 end
 c888000006.material_setcode={0x8,0x3008}
 c888000006.dark_calling=true
