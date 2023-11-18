@@ -30,6 +30,14 @@ function c888000005.initial_effect(c)
 	e2:SetCost(c888000005.atkcost)
 	e2:SetOperation(c888000005.atkop)
 	c:RegisterEffect(e2)
+		--double damage
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+	e3:SetRange(LOCATION_SZONE)
+	e3:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	e3:SetCondition(c888000005.condition)
+	e3:SetOperation(c888000005.operation)
+	c:RegisterEffect(e3)
 end
 c888000005.material_setcode={0x8,0x3008}
 c888000005.dark_calling=true
@@ -70,4 +78,13 @@ function c888000005.atkop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e2)
 		tc=tg:GetNext()
 	end
+end
+function c888000005.condition(e,tp,eg,ep,ev,re,r,rp)
+	local a=Duel.GetAttacker()
+	local d=Duel.GetAttackTarget()
+	return (a:IsControler(tp) and a:IsSetCard(0x6008)) 
+		or (d and d:IsControler(tp) and d:IsSetCard(0x6008))
+end
+function c888000005.operation(e,tp,eg,ep,ev,re,r,rp)
+	Duel.ChangeBattleDamage(1-tp,ev*2)
 end
