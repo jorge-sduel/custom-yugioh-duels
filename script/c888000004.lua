@@ -29,6 +29,16 @@ function c888000004.initial_effect(c)
 	e2:SetTarget(c888000004.atktg)
 	e2:SetOperation(c888000004.atkop)
 	c:RegisterEffect(e2)
+		--atk/def down
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetCode(EFFECT_SET_ATTACK_FINAL)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetTargetRange(0,LOCATION_MZONE)
+	e3:SetCondition(c888000004.adcon)
+	e3:SetTarget(c888000004.adtg)
+	e3:SetValue(c888000004.atkval)
+	c:RegisterEffect(e3)
 end
 c888000004.material_setcode={0x8,0x3008}
 c888000004.dark_calling=true
@@ -66,4 +76,13 @@ function c888000004.atkop(e,tp,eg,ep,ev,re,r,rp)
 			c:RegisterEffect(e2)
 		end
 	end
+end
+function c888000004.adcon(e)
+	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL and e:GetHandler():GetBattleTarget()
+end
+function c888000004.adtg(e,c)
+	return c==e:GetHandler():GetBattleTarget()
+end
+function c888000004.atkval(e,c)
+	return c:GetAttack()/2
 end
