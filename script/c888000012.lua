@@ -42,6 +42,14 @@ function c888000012.initial_effect(c)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
 	e4:SetValue(c888000012.atkup)
 	c:RegisterEffect(e4)
+	--Cannot be destroyed by an opponent's effects
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
+	e5:SetValue(aux.indoval)
+	c:RegisterEffect(e5)
 end
 c888000012.material_setcode={0x8,0x3008}
 c888000012.dark_calling=true
@@ -66,5 +74,5 @@ function c888000012.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 end
 function c888000012.atkup(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE,0,nil,0x8)*300
+	return Duel.GetMatchingGroupCount(Card.IsSetCard,c:GetControler(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,0x8)*300
 end
