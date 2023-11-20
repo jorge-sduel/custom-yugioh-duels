@@ -52,9 +52,12 @@ end
 function s.atlimit(e,c)
 	return c~=e:GetHandler() and c:IsFaceup()
 end
+function s.filter(c)
+	return  c:IsSetCard(6008) and c:IsType(TYPE_FUSION) and c:IsFaceup()
+end
 function s.val(e,c)
 	local def=0
-	local g=Duel.GetMatchingGroup(Card.IsPosition,c:GetControler(),LOCATION_MZONE,0,c,POS_FACEUP)
+	local g=Duel.GetMatchingGroup(s.filter,c:GetControler(),LOCATION_MZONE,0,c)
 	if g then
 		for tc in aux.Next(g) do
 			local cdef=tc:GetBaseDefense()
