@@ -53,13 +53,13 @@ function c888000002.initial_effect(c)
 	e6:SetCode(EFFECT_UPDATE_ATTACK)
 	e6:SetValue(c888000002.val)
 	c:RegisterEffect(e6)
-	aux.GlobalCheck(s,function()
-		s.attr_list={}
-		s.attr_list[0]=0
-		s.attr_list[1]=0
+	aux.GlobalCheck(c888000002,function()
+		c888000002.attr_list={}
+		c888000002.attr_list[0]=0
+		c888000002.attr_list[1]=0
 		aux.AddValuesReset(function()
-				s.attr_list[0]={}
-				s.attr_list[1]={}
+			c888000002.attr_list[0]={}
+			c888000002.attr_list[1]={}
 				end)
 		end) 
 end
@@ -125,7 +125,7 @@ function c888000002.ancop(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e4)
 	end
-	s.attr_list[tp]=s.attr_list[tp]|att
+	c888000002.attr_list[tp]=c888000002.attr_list[tp]|att
 	for _,str in aux.GetAttributeStrings(att) do
 		e:GetHandler():RegisterFlagEffect(0,RESET_EVENT|RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,str)
 end
