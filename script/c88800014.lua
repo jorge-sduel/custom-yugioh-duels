@@ -1,4 +1,5 @@
 --Evil HERO Stormeye
+local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
@@ -28,6 +29,17 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
+	--
+	local e3=Effect.CreateEffect(c)
+	e3:SetCategory(CATEGORY_DESTROY)
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetCode(EVENT_DESTROYED)
+	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetCondition(s.descon)
+	e3:SetTarget(s.destg)
+	e3:SetOperation(s.desop)
+	c:RegisterEffect(e3)
 end
 s.material_setcode={0x8,0x3008}
 s.dark_calling=true
@@ -40,7 +52,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
-	Duel.SendtoGrave(g,REASON_COST)
+	Duel.Destroy(g,REASON_EFFECT)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) end
@@ -86,5 +98,24 @@ function s.indtg(e,c)
 		return c:GetFlagEffect(id)~=0
 	else
 		return e:GetHandler():IsHasCardTarget(c)
+	end
+end
+function s.cfilter(c,tp)
+	return c:IsPreviousControler(tp)
+end
+function s.descon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(s.cfilter,1,nil,tp)
+end
+function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) end
+	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,0,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g=Duel.SelectTarget(tp,aux.TRUE,tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
+end
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc and tc:IsRelateToEffect(e) then
+		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end
