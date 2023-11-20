@@ -59,7 +59,7 @@ end
 function c888000011.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and c888000011.filter(chkc,c:GetAttack()) end
-	if chk==0 then return Duel.IsExistingTarget(c888000011.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,c:GetAttack()) end
+	if chk==0 then return Duel.IsExistingTarget(c888000011.filter,tp,0,LOCATION_MZONE,1,nil,c:GetAttack()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,c888000011.filter,tp,0,LOCATION_MZONE,1,1,nil,c:GetAttack())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
