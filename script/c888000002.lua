@@ -42,7 +42,7 @@ function c888000002.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetCountLimit(1)
-	e5:SetOperation(s.ancop)
+	e5:SetOperation(c888000002.ancop)
 	c:RegisterEffect(e5)
 	--atk
 	local e6=Effect.CreateEffect(c)
@@ -78,7 +78,7 @@ end
 function c888000002.val(e,c)
 	return Duel.GetMatchingGroupCount(c888000002.atkfilter,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil,c:GetAttribute())*500
 end
-function s.ancop(e,tp,eg,ep,ev,re,r,rp)
+function c888000002.ancop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE)
