@@ -27,7 +27,7 @@ function c888000005.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	--e2:SetCountLimit(1)
 	--e2:SetCondition(c888000005.atkcon)
-	e2:SetCost(c888000005.atkcost)
+	--e2:SetCost(c888000005.atkcost)
 	e2:SetOperation(c888000005.atkop)
 	c:RegisterEffect(e2)
 		--double damage
