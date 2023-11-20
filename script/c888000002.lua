@@ -53,6 +53,15 @@ function c888000002.initial_effect(c)
 	e6:SetCode(EFFECT_UPDATE_ATTACK)
 	e6:SetValue(c888000002.val)
 	c:RegisterEffect(e6)
+	aux.GlobalCheck(s,function()
+		s.attr_list={}
+		s.attr_list[0]=0
+		s.attr_list[1]=0
+		aux.AddValuesReset(function()
+				s.attr_list[0]={}
+				s.attr_list[1]={}
+				end)
+		end) 
 end
 c888000002.material_setcode={0x8,0x3008}
 c888000002.dark_calling=true
@@ -84,7 +93,7 @@ function c888000002.ancop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE)
-		e:GetLabelObject():SetLabel(att) 
+		--e:GetLabelObject():SetLabel(att) 
 		local attribute=Duel.AnnounceAttribute(tp,1,att&(att-1)==0 and ~att or ATTRIBUTE_ALL)
 		--disable
 	local e1=Effect.CreateEffect(c)
@@ -116,4 +125,7 @@ function c888000002.ancop(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e4)
 	end
+	s.attr_list[tp]=s.attr_list[tp]|att
+	for _,str in aux.GetAttributeStrings(att) do
+		e:GetHandler():RegisterFlagEffect(0,RESET_EVENT|RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,str)
 end
