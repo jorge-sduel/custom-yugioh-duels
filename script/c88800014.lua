@@ -89,6 +89,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e5:SetCode(EFFECT_INDESTRUCTABLE_EFFECT)
 	e5:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e5:SetTarget(s.indtg)
+	e5:SetValue(1)
 	e5:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e5)
 	end
