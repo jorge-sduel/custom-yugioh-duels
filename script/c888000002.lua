@@ -52,16 +52,7 @@ function c888000002.initial_effect(c)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCode(EFFECT_UPDATE_ATTACK)
 	e6:SetValue(c888000002.val)
-	c:RegisterEffect(e6)
-	aux.GlobalCheck(c888000002,function()
-		c888000002.attr_list={}
-		c888000002.attr_list[0]=0
-		c888000002.attr_list[1]=0
-		aux.AddValuesReset(function()
-			c888000002.attr_list[0]={}
-			c888000002.attr_list[1]={}
-				end)
-		end) 
+	c:RegisterEffect(e6) 
 end
 c888000002.material_setcode={0x8,0x3008}
 c888000002.dark_calling=true
@@ -89,12 +80,10 @@ function c888000002.val(e,c)
 	return Duel.GetMatchingGroupCount(c888000002.atkfilter,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil,c:GetAttribute())*500
 end
 function c888000002.ancop(e,tp,eg,ep,ev,re,r,rp)
-	local att=e:GetLabel()
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE) 
-		local attribute=Duel.AnnounceAttribute(tp,1,att&(att-1)==0 and ~att or ATTRIBUTE_ALL)
-		e:SetLabel(attribute)
+		local attribute=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
 		--disable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -125,8 +114,4 @@ function c888000002.ancop(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetReset(RESET_EVENT+RESETS_STANDARD)
 	c:RegisterEffect(e4)
 	end
-	c888000002.attr_list[tp]=c888000002.attr_list[tp]|att
-	for _,str in aux.GetAttributeStrings(att) do
-		e:GetHandler():RegisterFlagEffect(0,RESET_EVENT|RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,str)
-end
 end
