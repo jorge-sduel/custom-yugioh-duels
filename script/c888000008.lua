@@ -54,7 +54,7 @@ function s.atlimit(e,c)
 end
 function s.val(e,c)
 	local def=0
-	local g=Duel.GetMatchingGroup(Card.IsPosition,c:GetControler(),LOCATION_MZONE,0,c,POS_FACEUP_DEFENSE)
+	local g=Duel.GetMatchingGroup(Card.IsPosition,c:GetControler(),LOCATION_MZONE,0,c,POS_FACEUP)
 	if g then
 		for tc in aux.Next(g) do
 			local cdef=tc:GetBaseDefense()
