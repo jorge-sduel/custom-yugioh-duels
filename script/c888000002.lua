@@ -92,9 +92,9 @@ function c888000002.ancop(e,tp,eg,ep,ev,re,r,rp)
 	local att=e:GetLabel()
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE)
-		--e:GetLabelObject():SetLabel(att) 
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE) 
 		local attribute=Duel.AnnounceAttribute(tp,1,att&(att-1)==0 and ~att or ATTRIBUTE_ALL)
+		e:SetLabel(attribute)
 		--disable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
