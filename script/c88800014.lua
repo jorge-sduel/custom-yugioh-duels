@@ -49,8 +49,8 @@ function s.lizcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDestructible,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
 	Duel.Destroy(g,REASON_EFFECT)
 end
