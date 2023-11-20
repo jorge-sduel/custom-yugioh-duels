@@ -80,6 +80,7 @@ function c888000002.val(e,c)
 	return Duel.GetMatchingGroupCount(c888000002.atkfilter,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil,c:GetAttribute())*500
 end
 function c888000002.ancop(e,tp,eg,ep,ev,re,r,rp)
+	local att=e:GetLabel()
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE)
