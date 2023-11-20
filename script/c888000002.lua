@@ -36,17 +36,6 @@ function c888000002.initial_effect(c)
 	e4:SetTarget(c888000002.rettg)
 	e4:SetOperation(c888000002.retop)
 	c:RegisterEffect(e4)
-	--return
-	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(888000002,0))
-	e5:SetCategory(CATEGORY_TODECK)
-	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e5:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e5:SetCondition(c888000002.retcon)
-	e5:SetCost(c888000002.fuscost)
-	e5:SetTarget(c888000002.fustg)
-	e5:SetOperation(c888000002.fusop)
-	c:RegisterEffect(e5)
 	--atk
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
@@ -76,24 +65,8 @@ function c888000002.retop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
 end
 function c888000002.atkfilter(c,att)
-	return c:IsFaceup() and c:IsAttribute(att)
+	return c:IsFaceup() and c:IsAttack(0)
 end
 function c888000002.val(e,c)
-	return Duel.GetMatchingGroupCount(c888000002.atkfilter,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil,c:GetAttribute())*300
-end
-function c888000002.fuscost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckLPCost(tp,1000)
-	else Duel.PayLPCost(tp,1000) end
-end
-function c888000002.fusfilter(c)
-	return c:IsAbleToDeck() and c:IsType(TYPE_SPELL)
-end
-function c888000002.fustg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c888000002.fusfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	local g=Duel.GetMatchingGroup(c888000002.fusfilter,tp,LOCATION_GRAVE,0,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,g:GetCount(),0,0)
-end
-function c888000002.fusop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(c888000002.fusfilter,tp,LOCATION_GRAVE,0,nil)
-	Duel.SendtoDeck(g,nil,2,REASON_EFFECT)
+	return Duel.GetMatchingGroupCount(c888000002.atkfilter,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil,c:GetAttribute())*500
 end
