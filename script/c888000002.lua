@@ -129,3 +129,4 @@ function c888000002.ancop(e,tp,eg,ep,ev,re,r,rp)
 	for _,str in aux.GetAttributeStrings(att) do
 		e:GetHandler():RegisterFlagEffect(0,RESET_EVENT|RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,str)
 end
+end
