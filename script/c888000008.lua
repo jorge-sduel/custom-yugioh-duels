@@ -53,7 +53,7 @@ function s.atlimit(e,c)
 	return c~=e:GetHandler() and c:IsFaceup()
 end
 function s.filter(c)
-	return  c:IsSetCard(6008) and c:IsType(TYPE_FUSION) and c:IsFaceup()
+	return  c:IsSetCard(0x6008) and c:IsType(TYPE_FUSION) and c:IsFaceup()
 end
 function s.val(e,c)
 	local def=0
