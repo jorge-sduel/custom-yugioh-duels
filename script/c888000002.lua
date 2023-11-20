@@ -36,6 +36,14 @@ function c888000002.initial_effect(c)
 	e4:SetTarget(c888000002.rettg)
 	e4:SetOperation(c888000002.retop)
 	c:RegisterEffect(e4)
+	--to defense
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(888000002,1))
+	e5:SetType(EFFECT_TYPE_IGNITION)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCountLimit(1)
+	e5:SetOperation(s.ancop)
+	c:RegisterEffect(e5)
 	--atk
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
@@ -69,4 +77,28 @@ function c888000002.atkfilter(c,att)
 end
 function c888000002.val(e,c)
 	return Duel.GetMatchingGroupCount(c888000002.atkfilter,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil,c:GetAttribute())*500
+end
+function s.ancop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsFaceup() and c:IsRelateToEffect(e) then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE)
+		local att=Duel.AnnounceAttribute(tp,ct,ATTRIBUTE_ALL)
+		--disable
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetTargetRange(0,LOCATION_MZONE)
+	e1:SetCode(EFFECT_DISABLE)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	c:RegisterEffect(e1)
+	--disable
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetTargetRange(0,LOCATION_MZONE)
+	e4:SetCode(EFFECT_SET_ATTACK)
+	e4:SetValue(0)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	c:RegisterEffect(e4)
+	end
 end
