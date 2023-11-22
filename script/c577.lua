@@ -34,7 +34,7 @@ function s.tktg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and c:IsFaceup() then
+	--if c:IsRelateToEffect(e) and c:IsFaceup() then
 	--[[local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
@@ -44,8 +44,8 @@ function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)]]
 local rc=Duel.AnnounceRace(tp,1,RACE_ALL)
-		if not c:IsImmuneToEffect(e1) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-			and Duel.IsPlayerCanSpecialSummonMonster(tp,75524093,0,TYPES_TOKEN,2500,2500,7,RACE_FIEND,ATTRIBUTE_DARK,POS_FACEUP,tp) then
+		--if not c:IsImmuneToEffect(e1) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+			--and Duel.IsPlayerCanSpecialSummonMonster(tp,75524093,0,TYPES_TOKEN,2500,2500,7,RACE_FIEND,ATTRIBUTE_DARK,POS_FACEUP,tp) then
 			local token=Duel.CreateToken(tp,EVIL_TOKEN)
 			Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 local e2=Effect.CreateEffect(c)
@@ -54,8 +54,8 @@ local e2=Effect.CreateEffect(c)
 	e2:SetValue(rc)
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 	token:RegisterEffect(e2)
-		end
-	end
+	--	end
+	--end
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsSetCard(0x6008) or c:IsCode(75524093)
