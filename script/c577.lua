@@ -46,7 +46,7 @@ function s.tkop(e,tp,eg,ep,ev,re,r,rp)
 local rc=Duel.AnnounceRace(tp,1,RACE_ALL)
 		--if not c:IsImmuneToEffect(e1) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 			--and Duel.IsPlayerCanSpecialSummonMonster(tp,75524093,0,TYPES_TOKEN,2500,2500,7,RACE_FIEND,ATTRIBUTE_DARK,POS_FACEUP,tp) then
-			local token=Duel.CreateToken(tp,EVIL_TOKEN)
+			local token=Duel.CreateToken(tp,75524093)
 			Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
