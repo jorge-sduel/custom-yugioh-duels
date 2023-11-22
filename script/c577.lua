@@ -58,7 +58,7 @@ local e2=Effect.CreateEffect(c)
 	end
 end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsSetCard(0x6008) and c:IsCode(75524093)
+	return not c:IsSetCard(0x6008) or c:IsCode(75524093)
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE)
