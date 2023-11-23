@@ -29,8 +29,7 @@ function s.spcon(e,c)
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.filter2(c)
-	return c:IsMonster()
-	--c.dark_calling
+	return c:IsMonster() and c.dark_calling
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 local c=e:GetHandler()
@@ -44,10 +43,25 @@ local lc=g:GetFirst()
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_EXTRA)
 	e1:SetValue(SUMMON_TYPE_FUSION)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	e1:SetCondition(Fusion.ContactCon(s.contactfil,nil))
 	e1:SetTarget(Fusion.ContactTg(s.contactfil))
 	e1:SetOperation(Fusion.ContactOp(s.contactop))
 	lc:RegisterEffect(e1)
+		--to deck
+	local e7=Effect.CreateEffect(c)
+	e7:SetDescription(aux.Stringid(id,1))
+	e7:SetCategory(CATEGORY_TODECK)
+	e7:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e7:SetCode(EVENT_PHASE+PHASE_STANDBY)
+	e7:SetProperty(EFFECT_FLAG_REPEAT)
+	e7:SetCountLimit(1)
+	e7:SetRange(LOCATION_MZONE)
+	e7:SetReset(RESET_PHASE+PHASE_END)
+	e7:SetCondition(s.tdcon)
+	e7:SetTarget(s.tdtg)
+	e7:SetOperation(s.tdop)
+	lc:RegisterEffect(e7)
 	end
 end
 function s.contactfil(tp)
@@ -57,7 +71,17 @@ function s.contactop(g,tp)
 	Duel.ConfirmCards(1-tp,g)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST+REASON_MATERIAL)
 end
-function s.splimit(e,se,sp,st)
-	return not e:GetHandler():IsLocation(LOCATION_EXTRA)
+function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnPlayer()==tp
+end
+function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,0,0)
+end
+function s.tdop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and c:IsFaceup() and c:IsAbleToDeck() then
+		Duel.SendtoDeck(c,nil,2,REASON_EFFECT)
+	end
 end
 
