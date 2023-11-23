@@ -48,6 +48,7 @@ local lc=g:GetFirst()
 	e1:SetTarget(Fusion.ContactTg(s.contactfil))
 	e1:SetOperation(Fusion.ContactOp(s.contactop))
 	lc:RegisterEffect(e1)
+	end
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_ONFIELD,0,nil)
