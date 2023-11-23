@@ -45,7 +45,7 @@ local e1=Effect.CreateEffect(c)
 	e1:SetCondition(Fusion.ContactCon(s.contactfil,s.splimit))
 	e1:SetTarget(Fusion.ContactTg(s.contactfil))
 	e1:SetOperation(Fusion.ContactOp(s.contactop))
-	c:RegisterEffect(e1)
+	tc:RegisterEffect(e1)
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_ONFIELD,0,nil)
