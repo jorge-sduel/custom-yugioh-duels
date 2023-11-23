@@ -28,40 +28,19 @@ function s.spcon(e,c)
 		and	Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE)>0
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
-function s.activate(c,group,op,sumcon,condition,sumtype,desc,cannotBeLizard)
+function s.activate(e,tp,eg,ep,ev,re,r,rp)
 local tc=Duel.GetMatchingGroup(s.filter2,c:GetControler(),LOCATION_EXTRA,LOCATION_EXTRA,nil,e,c:GetControler())
 local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
-	if not desc then
-		e1:SetDescription(2)
-	else
-		e1:SetDescription(desc)
-	end
+	e1:SetDescription(2)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_EXTRA)
-	if sumtype then
-		e1:SetValue(sumtype)
-	end
-	e1:SetCondition(Fusion.ContactCon(group,condition))
-	e1:SetTarget(Fusion.ContactTg(group))
-	e1:SetOperation(Fusion.ContactOp(op))
+	e1:SetValue(SUMMON_TYPE_FUSION)
+	--e1:SetCondition(Fusion.ContactCon(group,condition))
+	--e1:SetTarget(Fusion.ContactTg(group))
+	--e1:SetOperation(Fusion.ContactOp(op))
 	c:RegisterEffect(e1)
-	if sumcon then
-		--spsummon condition
-		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_SINGLE)
-		e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-		e2:SetCode(EFFECT_SPSUMMON_CONDITION)
-		if type(sumcon)=='function' then
-			e2:SetValue(sumcon)
-		end
-		c:RegisterEffect(e2)
-	end
-	--lizard check
-	if cannotBeLizard~=false then
-		Auxiliary.addLizardCheck(c)
-	end
 end
 function s.contactfil(tp)
 	return Duel.GetMatchingGroup(Card.IsAbleToDeckOrExtraAsCost,tp,LOCATION_ONFIELD,0,nil)
