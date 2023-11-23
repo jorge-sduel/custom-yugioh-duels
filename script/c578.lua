@@ -29,7 +29,7 @@ function s.spcon(e,c)
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.filter2(c)
-	return c:IsMonster() and c.dark_calling
+	return c:IsMonster()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 local c=e:GetHandler()
@@ -43,12 +43,12 @@ local lc=g:GetFirst()
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_EXTRA)
 	e1:SetValue(SUMMON_TYPE_FUSION)
-	--e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	e1:SetCondition(Fusion.ContactCon(s.contactfil,nil))
 	e1:SetTarget(Fusion.ContactTg(s.contactfil))
 	e1:SetOperation(Fusion.ContactOp(s.contactop))
 	lc:RegisterEffect(e1)
-		--[[to deck
+		to deck
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(id,1))
 	e7:SetCategory(CATEGORY_TODECK)
@@ -61,7 +61,7 @@ local lc=g:GetFirst()
 	e7:SetCondition(s.tdcon)
 	e7:SetTarget(s.tdtg)
 	e7:SetOperation(s.tdop)
-	lc:RegisterEffect(e7)]]
+	lc:RegisterEffect(e7)
 	end
 end
 function s.contactfil(tp)
