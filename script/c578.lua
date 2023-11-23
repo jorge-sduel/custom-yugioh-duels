@@ -48,7 +48,7 @@ local lc=g:GetFirst()
 	e1:SetTarget(Fusion.ContactTg(s.contactfil))
 	e1:SetOperation(Fusion.ContactOp(s.contactop))
 	lc:RegisterEffect(e1)
-		--to deck
+		--[[to deck
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(id,1))
 	e7:SetCategory(CATEGORY_TODECK)
@@ -61,7 +61,7 @@ local lc=g:GetFirst()
 	e7:SetCondition(s.tdcon)
 	e7:SetTarget(s.tdtg)
 	e7:SetOperation(s.tdop)
-	lc:RegisterEffect(e7)
+	lc:RegisterEffect(e7)]]
 	end
 end
 function s.contactfil(tp)
