@@ -29,7 +29,8 @@ function s.spcon(e,c)
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.filter2(c)
-	return c.dark_calling
+	return c:IsMonster()
+	--c.dark_calling
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 local c=e:GetHandler()
@@ -41,9 +42,9 @@ local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_EXTRA)
 	e1:SetValue(SUMMON_TYPE_FUSION)
-	--e1:SetCondition(Fusion.ContactCon(group,condition))
-	--e1:SetTarget(Fusion.ContactTg(group))
-	--e1:SetOperation(Fusion.ContactOp(op))
+	e1:SetCondition(Fusion.ContactCon(s.contactfil,s.splimit))
+	--e1:SetTarget(Fusion.ContactTg(s.contactfil))
+	--e1:SetOperation(Fusion.ContactOp(s.contactop))
 	c:RegisterEffect(e1)
 end
 function s.contactfil(tp)
