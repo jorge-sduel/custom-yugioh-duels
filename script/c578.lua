@@ -51,7 +51,7 @@ function s.spcon(e,c)
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.filter2(c)
-	return c:IsMonster()
+	return c:IsType(TYPE_FUSION)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 local c=e:GetHandler()
