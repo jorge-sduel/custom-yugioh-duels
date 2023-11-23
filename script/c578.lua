@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e2:SetDescription(aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
-	e1:SetOperation(s.activate)
+	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
 	  --effect gain
 	--special summon
