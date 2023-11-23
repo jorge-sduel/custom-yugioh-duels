@@ -29,6 +29,7 @@ function s.spcon(e,c)
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
+local c=e:GetHandler()
 local tc=Duel.GetMatchingGroup(s.filter2,c:GetControler(),LOCATION_EXTRA,LOCATION_EXTRA,nil,e,c:GetControler())
 local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
