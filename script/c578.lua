@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
-	  --effect gain
+	  --[[effect gain
 	--special summon
 	local e7=Effect.CreateEffect(c)
 	e7:SetDescription(aux.Stringid(id,2))
@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	e24:SetTargetRange(LOCATION_EXTRA,0)
 	e24:SetTarget(s.eftg)
 	e24:SetLabelObject(e7)
-	c:RegisterEffect(e24)
+	c:RegisterEffect(e24)]]
 end
 function s.eftg(e,c)
 	return c:IsHasEffect(id)
