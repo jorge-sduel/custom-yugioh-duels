@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.damop)
 	c:RegisterEffect(e4)
 end
-function s.filter(c)
+function s.filter(e,c)
 	return c:IsSetCard(0x8) and c:IsAttackBelow(2000)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
