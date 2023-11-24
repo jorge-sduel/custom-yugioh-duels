@@ -25,7 +25,8 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_DARK_FUSION}
 function s.filter(c,e,tp)
-	return c.dark_calling
+	return c:IsType(TYPE_FUSION) and c.dark_calling
+		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and s.filter(chkc,e,tp) end
@@ -38,7 +39,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
+		Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)
 	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
