@@ -47,6 +47,7 @@ function s.initial_effect(c)
 	e24:SetLabelObject(e7)
 	c:RegisterEffect(e24)]]
 end
+s.listed_names={CARD_DARK_FUSION}
 function s.eftg(e,c)
 	return c:IsHasEffect(id)
 end
