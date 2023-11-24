@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_DIRECT_ATTACK)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
-	e2:SetTarget(s.filter))
+	e2:SetTarget(s.filter)
 	c:RegisterEffect(e2)
 --Send 1 card from hand to the GY and draw 1 card
 	local e3=Effect.CreateEffect(c)
