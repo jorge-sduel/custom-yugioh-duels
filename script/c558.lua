@@ -29,5 +29,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g2)
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.Destroy(tc,REASON_EFFECT)
+		end
 	end
 end
