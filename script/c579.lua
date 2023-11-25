@@ -25,12 +25,11 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_DARK_FUSION}
 function s.filter(c,e,tp)
-	return c:IsType(TYPE_FUSION)
-		and c:IsCanBeSpecialSummoned(c,0,tp,true,true)
+	return c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and s.filter(chkc,e,tp) end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE+LOCATION_REMOVED)>0
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_GRAVE+LOCATION_REMOVED)>0
 		and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil,e,tp)
