@@ -25,7 +25,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_DARK_FUSION}
 function s.filter(c,e,tp)
-	return c:IsType(TYPE_FUSION) and c.dark_calling
+	return c:IsType(TYPE_FUSION)
 		and c:IsCanBeSpecialSummoned(c,0,tp,true,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
