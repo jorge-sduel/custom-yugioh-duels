@@ -63,38 +63,19 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.copfilter,tp,LOCATION_GRAVE,0,1,nil) end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then
-		local te=e:GetLabelObject()
-		return tg and tg(e,tp,eg,ep,ev,re,r,rp,0,chkc)
-	end
-	if chk==0 then return Duel.IsExistingMatchingCard(s.copfilter,tp,LOCATION_REMOVED,0,1,nil) end
-	local g=Duel.SelectMatchingCard(tp,s.copfilter,tp,LOCATION_REMOVED,0,1,1,nil)
-	if not Duel.Remove(g,POS_FACEUP,REASON_COST) then return end
-	local te=g:GetFirst():CheckActivateEffect(true,true,false)
-	e:SetLabel(te:GetLabel())
-	e:SetLabelObject(te:GetLabelObject())
-	local tg=te:GetTarget()
-	if tg then
-		tg(e,tp,eg,ep,ev,re,r,rp,1)
-	end
-	te:SetLabel(e:GetLabel())
-	te:SetLabelObject(e:GetLabelObject())
-	e:SetLabelObject(te)
-	Duel.ClearOperationInfo(0)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.copfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local te=e:GetLabelObject()
-	if te then
-		e:SetLabel(te:GetLabel())
-		e:SetLabelObject(te:GetLabelObject())
-		local op=te:GetOperation()
-		if op then op(e,tp,eg,ep,ev,re,r,rp) end
-		te:SetLabel(e:GetLabel())
-		te:SetLabelObject(e:GetLabelObject())
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local g=Duel.SelectMatchingCard(tp,s.copfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	if #g>0 then
+		Duel.SendtoHand(g,nil,REASON_EFFECT)
+		Duel.ConfirmCards(1-tp,g)
 	end
 end
 function s.copfilter(c)
-	return c:IsAbleToRemoveAsCost() and (c:IsCode(48130397) or Card.ListsCode(c,CARD_DARK_FUSION)) and c:CheckActivateEffect(true,true,false)~=nil 
+	return c:IsAbleToRemoveAsCost() and (c:IsCode(48130397) or Card.ListsCode(c,CARD_DARK_FUSION)) 
 end
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
