@@ -26,7 +26,7 @@ end
 s.listed_names={CARD_DARK_FUSION}
 function s.filter(c,e,tp)
 	return c:IsType(TYPE_FUSION) and c.dark_calling
-		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false)
+		and c:IsCanBeSpecialSummoned(c,0,tp,true,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and s.filter(chkc,e,tp) end
