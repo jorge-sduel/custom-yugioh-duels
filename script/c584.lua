@@ -61,7 +61,8 @@ end
 
 function s.atkup(e,c)
 	return Duel.GetMatchingGroupCount(nil,c:GetControler(),LOCATION_REMOVED,0,nil)*300
-end
+end
+
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return bit.band(e:GetHandler():GetPreviousLocation(),LOCATION_ONFIELD)>0
 end
@@ -70,16 +71,21 @@ function s.filter(c)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then 
-		return   Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED,0,1,nil)
+		return  
+ Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED,0,1,nil)
 	end
 end
-function s.thop(e,tp,eg,ep,ev,re,r,rp)
+function s.thop(e,tp,eg,ep,ev,re,r,rp)
+
+
+
 	local g=Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED,0,1,nil)
 local sg=g:GetFirst()
 local mat=sg:Select(tp,1,2,nil)
 		Duel.SendtoHand(mat,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,mat)
-end
+end
+
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetTargetPlayer(1-tp)
@@ -87,5 +93,5 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	Duel.Damage(p,e:GetHandler():GetAttack()-e:GetHandler():GetbaseAttack()),REASON_EFFECT)
+	Duel.Damage(p,math.abs(e:GetHandler():GetAttack()-e:GetHandler():GetbaseAttack()),REASON_EFFECT)
 end
