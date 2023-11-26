@@ -67,7 +67,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(e:GetLabel())
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e1)
-Duel.Damage(tp,e:GetLabel(),REASON_EFFECT)
+Duel.Damage(1-tp,e:GetLabel(),REASON_EFFECT)
 		tc=g:GetNext()
 	end
 end
