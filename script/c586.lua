@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCode(EFFECT_ADD_ATTRIBUTE)
 	e3:SetValue(ATTRIBUTE_LIGHT)
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e3)
 end
 s.listed_series={0x6008}
 s.material_setcode={0x8,0x6008}
