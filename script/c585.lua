@@ -11,7 +11,8 @@ function s.initial_effect(c)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetCondition(s.lizcon)
 	e0:SetValue(1)
-	c:RegisterEffect(e0)
+	c:RegisterEffect(e0)
+
 	--Special Summon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -38,6 +39,10 @@ end
 s.listed_series={0x3008}
 s.listed_names={74711057}
 s.material_setcode={0x8,0x3008}
+function s.lizcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
+end
 function s.cfilter(c,tp)
 	return c:IsSetCard(0x3008) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,c)
 end
