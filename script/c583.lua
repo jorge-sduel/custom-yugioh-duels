@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTargetRange(0,LOCATION_MZONE)
-	e3:SetTarget(s.atktg)
+	e3:SetTarget(s.atktg1)
 	e3:SetValue(-1000)
 	c:RegisterEffect(e3)
 	--atk
@@ -47,7 +47,7 @@ function s.lizcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),EFFECT_SUPREME_CASTLE)
 end
-function s.atktg(e,c)
+function s.atktg1(e,c)
 	return not c:IsAttribute(ATTRIBUTE_FIRE)
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
