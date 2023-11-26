@@ -76,9 +76,6 @@ function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.thop(e,tp,eg,ep,ev,re,r,rp)
-
-
-
 	local g=Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED,0,1,nil)
 --local sg=g:GetFirst()
 local mat=g:Select(tp,1,2,nil)
