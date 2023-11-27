@@ -58,7 +58,7 @@ function s.initial_effect(c)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetValue(1)
 	c:RegisterEffect(e5)
-	--Inflict damage
+	--[[Inflict damage
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(id,1))
 	e6:SetCategory(CATEGORY_DAMAGE)
@@ -68,7 +68,7 @@ function s.initial_effect(c)
 	e6:SetCondition(aux.bdcon)
 	e6:SetTarget(s.damtg)
 	e6:SetOperation(s.damop)
-	c:RegisterEffect(e6)
+	c:RegisterEffect(e6)]]
 end
 s.material_setcode={0x8,0x6008,0x3008,0x9}
 s.dark_calling=true
@@ -118,17 +118,4 @@ end
 --Gains 300 ATK for each monster in your GY
 function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil)*300
-end
---Inflict damage
-function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
-	local dam=e:GetHandler():GetBattleTarget():GetBaseAttack()
-	if dam<0 then dam=0 end
-	Duel.SetTargetPlayer(1-tp)
-	Duel.SetTargetParam(dam)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,dam)
-end
-function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
-	Duel.Damage(p,d,REASON_EFFECT)
 end
