@@ -12,7 +12,6 @@ function s.initial_effect(c)
 	e0:SetCondition(s.lizcon)
 	e0:SetValue(1)
 	c:RegisterEffect(e0)
-
 	--Special Summon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -43,6 +42,17 @@ function s.initial_effect(c)
 	e4:SetCountLimit(1)
 	e4:SetValue(s.indct)
 	c:RegisterEffect(e4)
+	--atk up
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,0))
+	e5:SetCategory(CATEGORY_ATKCHANGE)
+	e5:SetType(EFFECT_TYPE_QUICK_O)
+	e5:SetCode(EVENT_FREE_CHAIN)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCountLimit(1)
+	e5:SetCondition(s.dacon)
+	e5:SetOperation(s.daop)
+	c:RegisterEffect(e5)
 end
 s.listed_series={0x8}
 s.listed_names={CARD_DARK_FUSION}
@@ -56,4 +66,17 @@ function s.aclimit(e,re,tp)
 end
 function s.indct(e,re,r,rp)
 	return (r&REASON_BATTLE+REASON_EFFECT)~=0
+end
+function s.dacon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetCurrentPhase()==PHASE_BATTLE_STEP and Duel.GetCurrentChain()==0
+end
+function s.daop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsFacedown() or not c:IsRelateToEffect(e) then return end
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+	e1:SetValue(c:GetBaseAttack()*2)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_BATTLE)
+	c:RegisterEffect(e1)
 end
