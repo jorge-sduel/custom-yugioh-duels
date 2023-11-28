@@ -8,6 +8,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetCode(EVENT_BE_MATERIAL)
+	e1:SetCountLimit(1,id)
 	e1:SetCondition(s.drcon)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
@@ -18,6 +19,7 @@ function s.initial_effect(c)
 	e3:SetCategory(CATEGORY_COUNTER)
 	e3:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
 	e3:SetCode(EVENT_BE_MATERIAL)
+	e3:SetCountLimit(1,id)
 	e3:SetCondition(s.drcon)
 	e3:SetOperation(s.ctop)
 	c:RegisterEffect(e3)
@@ -63,7 +65,8 @@ end
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetFieldGroup(tp,LOCATION_FZONE,LOCATION_FZONE)
-	--if c:IsRelateToEffect(e) then g:AddCard(c) end
+	local g2=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_MZONE,0,1,1,nil)
+	if g2:IsRelateToEffect(e) then g:AddCard(g2) end
 	for tc in aux.Next(g) do
 		if tc:IsCanAddCounter(0x1148,1) then
 			tc:AddCounter(0x1148,1)
