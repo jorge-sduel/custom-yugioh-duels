@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.listed_series={0x3008}
+s.listed_series={0x6008}
 function s.cfilter(c,code)
 	return c:IsCode(code) and c:IsAbleToRemoveAsCost()
 end
@@ -42,5 +42,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 		if #g>0 then
 			Duel.SpecialSummon(g,0,tp,tp,true,false,POS_FACEUP)
+		end
 	end
 end
