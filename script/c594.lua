@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_GRAVE)
-	e5:SetCost(s.cost)
+	e5:SetCost(s.cost1)
 	e5:SetTarget(s.thtg)
 	e5:SetOperation(s.thop)
 	c:RegisterEffect(e5)
@@ -56,7 +56,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToRemoveAsCost() end
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
 end
