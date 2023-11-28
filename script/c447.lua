@@ -69,7 +69,7 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	for tc in aux.Next(g) do
 		if tc:IsCanAddCounter(0x1148,1) then
 			tc:AddCounter(0x1148,1)
-		--end
+		end
 	end
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
