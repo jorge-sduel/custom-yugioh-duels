@@ -70,6 +70,9 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
+function s.drcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
+end
 function s.thfilter(c)
 	return (c:IsSpell() or c:IsTrap()) and c:IsAbleToHand()
 end
