@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
-	local e1=Fusion.CreateSummonEff(c,s.fusfilter,nil,s.fextra,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,s.extratg)
+	local e1=Fusion.CreateSummonEff{handler=c,fusfilter=s.fusfilter,nil,chkf=FUSPROC_NOLIMIT,nil,nil,nil,nil,nil,nil,nil,nil,nil,s.extratg}
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	c:RegisterEffect(e1)
 end
