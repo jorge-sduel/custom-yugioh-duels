@@ -1,4 +1,4 @@
---TG サイバー・マジシャン
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	--If sent to GY as synchro material, draw 1
