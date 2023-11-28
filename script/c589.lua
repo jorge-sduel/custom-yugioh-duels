@@ -2,8 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
-	local e1=Fusion.CreateSummonEff{handler=c,fusfilter=s.fusfilter,nil,chkf=FUSPROC_NOLIMIT,nil,nil,nil,nil,nil,nil,nil,nil,nil,s.extratg}
-	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
+	local e1=Fusion.CreateSummonEff{handler=c,fusfilter=s.fusfilter,nil,extrafil=s.fextra,nil,extratg=s.extratg,chkf=FUSPROC_NOLIMIT}
 	c:RegisterEffect(e1)
 end
 s.listed_names={CARD_DARK_FUSION}
