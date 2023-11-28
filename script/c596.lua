@@ -1,5 +1,4 @@
---バックアップ・セクレタリー
---Backup Secretary
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -22,14 +21,14 @@ function s.initial_effect(c)
 	e2:SetValue(21844576)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_DARK_FUSION,SUPREME_CASTLE,Avian}
+s.listed_names={CARD_DARK_FUSION,72043279,21844576}
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x6008),c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
 function s.filter(c,tp)
-	return c:IsCode(SUPREME_CASTLE) c:GetActivateEffect():IsActivatable(tp,true,true))
+	return c:IsCode(72043279) c:GetActivateEffect():IsActivatable(tp,true,true))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,tp) end
