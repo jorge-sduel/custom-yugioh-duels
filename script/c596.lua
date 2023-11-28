@@ -37,8 +37,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst()
-								local te=tc:GetActivateEffect()
-								return te:IsActivatable(tp,true,true)
-								Duel.ActivateFieldSpell(tc,e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst()				
+	local te=tc:GetActivateEffect()
+	return te:IsActivatable(tp,true,true)							
+	Duel.ActivateFieldSpell(tc,e,tp,eg,ep,ev,re,r,rp)
+ end
 end
