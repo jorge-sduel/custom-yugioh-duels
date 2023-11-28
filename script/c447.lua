@@ -65,12 +65,11 @@ end
 function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetFieldGroup(tp,LOCATION_FZONE,LOCATION_FZONE)
-	local g2=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
-	if c:IsRelateToEffect(e) then g:AddCard(g2) end
+	--if c:IsRelateToEffect(e) then g:AddCard(c) end
 	for tc in aux.Next(g) do
 		if tc:IsCanAddCounter(0x1148,1) then
 			tc:AddCounter(0x1148,1)
-		end
+		--end
 	end
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
