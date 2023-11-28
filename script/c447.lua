@@ -73,6 +73,9 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
+function s.sfilter(c)
+	return c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_WARRIOR)
+end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
 end
