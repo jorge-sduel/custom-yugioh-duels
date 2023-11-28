@@ -35,7 +35,7 @@ end
 s.listed_series={0x27}
 function s.synval(e,c,sc)
 	if (sc:IsRace(RACE_WARRIOR) or sc:IsRace(RACE_MACHINE)) and --c:IsNotTuner() 
-		(not c:IsType(TYPE_TUNER) or c:IsHasEffect(EFFECT_NONTUNER)) and (c:IsRace(RACE_WARRIOR) or c:IsRace(RACE_MACHINE)) and c:IsLocation(LOCATION_HAND) then
+		(not c:IsType(TYPE_TUNER) or c:IsHasEffect(EFFECT_NONTUNER)) and c:IsLocation(LOCATION_HAND) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
