@@ -28,7 +28,7 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,0x6008),c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
 function s.filter(c,tp)
-	return c:IsCode(72043279) and c:GetActivateEffect():IsActivatable(tp,true,true))
+	return c:IsCode(72043279) and c:GetActivateEffect():IsActivatable(tp,true,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil,tp) end
