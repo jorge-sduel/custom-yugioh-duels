@@ -72,6 +72,7 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 		tc:AddCounter(0x1148,1)
 		for tc2 in aux.Next(g2) do
 		tc2:AddCounter(0x1148,1)
+			end
 		end
 	end
 end
