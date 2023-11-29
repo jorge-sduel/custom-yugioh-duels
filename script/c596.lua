@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(LOCATION_HAND)
 	--e1:SetTarget(s.target)
-	e1:SetOperation(s.activate2)	e1:SetCountLimit(1,id)
+	e1:SetOperation(s.activate2)
 	e1:SetCondition(s.spcon)
 	c:RegisterEffect(e1)
 --Name
@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetValue(21844576)
 	c:RegisterEffect(e2)
 end
-s.listed_names={CARD_DARK_FUSION,72043279,21844576}
+s.listed_names={72043279,21844576}
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
