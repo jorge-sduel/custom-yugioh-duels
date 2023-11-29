@@ -41,7 +41,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsRelateToBattle()
 end
 function s.costfilter(c)
-	return c:GetAttack()>0
+	return c:GetAttack()>0 and not c:IsCode(id)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.costfilter,1,false,nil,nil) end
