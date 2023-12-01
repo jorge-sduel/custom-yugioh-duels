@@ -1,0 +1,37 @@
+--霞鳥クラウソラス
+local s,id=GetID()
+function s.initial_effect(c)
+	--synchro summon
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
+	c:EnableReviveLimit()
+--Special summon from the Graveyard
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e1:SetType(EFFECT_TYPE_QUICK_O)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetCountLimit(1,id)
+	e1:SetRange(LOCATION_MZONE)
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_ADD_RACE)
+	e2:SetValue(RACE_DRAGON)
+	c:RegisterEffect(e2)
+		local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_ATTACK_ALL)
+	e3:SetValue(1)
+	c:RegisterEffect(e3)
+	--removed
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e6:SetCode(EVENT_REMOVE)
+	e3:SetCountLimit(1,{id,1})
+	e6:SetOperation(s.rmop)
+	c:RegisterEffect(e6)
+end
+function s.rmop(e,tp,eg,ep,ev,re,r,rp)
+	if e:GetHandler():IsFacedown() then return end
