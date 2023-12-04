@@ -57,3 +57,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.RaiseSingleEvent(tc,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
 end
+function s.ntcon(e,c,minc)
+	if c==nil then return true end
+	return minc==0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+		and e:GetHandler():GetFlagEffect(id)~=0 and c:IsLevelAbove(5)
+end
