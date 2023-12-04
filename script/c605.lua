@@ -63,6 +63,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	e1:SetValue(SUMMON_TYPE_TRIBUTE)
 	tc:RegisterEffect(e1)
+	Duel.RaiseSingleEvent(tc,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
 		else
 			Duel.MSet(tp,tc,true,nil)
 			local e1=Effect.CreateEffect(e:GetHandler())
@@ -72,10 +73,9 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	e1:SetValue(SUMMON_TYPE_TRIBUTE)
 	tc:RegisterEffect(e1)
+	Duel.RaiseSingleEvent(tc,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
 			end
-	Duel.RaiseSingleEvent(tc,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
 		end
-	Duel.RaiseSingleEvent(tc,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
 end
 function s.ntcon(e,c,minc)
 	if c==nil then return true end
