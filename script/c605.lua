@@ -73,6 +73,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(SUMMON_TYPE_TRIBUTE)
 	tc:RegisterEffect(e1)
 			end
+	Duel.RaiseSingleEvent(tc,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
 		end
 end
 function s.ntcon(e,c,minc)
