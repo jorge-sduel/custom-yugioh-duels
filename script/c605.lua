@@ -87,8 +87,6 @@ function s.ntcon(e,c,minc)
 		and e:GetHandler():GetFlagEffect(id)~=0 and c:IsLevelAbove(5)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	local rc=e:GetOwner()
 	local c=e:GetHandler()
 	Duel.RaiseSingleEvent(c,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
-	e:Reset()
 end
