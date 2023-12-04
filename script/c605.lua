@@ -2,8 +2,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--summon with 1 tribute
-	local e2=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
-	local e2a=aux.AddNormalSetProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
+	local e1=aux.AddNormalSummonProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
+	local e1a=aux.AddNormalSetProcedure(c,true,true,1,1,SUMMON_TYPE_TRIBUTE,aux.Stringid(id,0),s.otfilter)
 	--summon/special summon success
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
@@ -14,6 +14,16 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
+	--decrease tribute
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(id,2))
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetCode(EFFECT_SUMMON_PROC)
+	e4:SetRange(LOCATION_FZONE)
+	e4:SetTargetRange(LOCATION_HAND,0)
+	e4:SetCountLimit(1)
+	e4:SetCondition(s.ntcon)
+	c:RegisterEffect(e4)
 end
 function s.otfilter(c)
 	return c:IsSummonType(SUMMON_TYPE_TRIBUTE)
