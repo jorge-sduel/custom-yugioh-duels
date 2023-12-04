@@ -37,50 +37,43 @@ end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if not e:GetHandler():IsStatus(STATUS_CHAINING) then
-			local ct=Duel.GetMatchingGroupCount(c74882900.filter2,tp,LOCATION_HAND+LOCATION_MZONE,0,nil)
+			local ct=Duel.GetMatchingGroupCount(s.filter2,tp,LOCATION_HAND+LOCATION_MZONE,0,nil)
 			e:SetLabel(ct)
 			return ct>0
 		else return e:GetLabel()>0 end
 	end
 	e:SetLabel(e:GetLabel()-1)
 	Duel.SetOperationInfo(0,CATEGORY_SUMMON,nil,1,0,0)
-	e:GetHandler():RegisterFlagEffect(74882900,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,1)
+	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,1)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SUMMON)
-	local g=Duel.SelectMatchingCard(tp,c74882900.filter2,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil)
 	local tc=g:GetFirst()
 	if tc then
 		local s1=tc:IsSummonable(true,nil)
 		local s2=tc:IsMSetable(true,nil)
 		if (s1 and s2 and Duel.SelectPosition(tp,tc,POS_FACEUP_ATTACK+POS_FACEDOWN_DEFENSE)==POS_FACEUP_ATTACK) or not s2 then
 			Duel.Summon(tp,tc,true,nil)
-		else
-			Duel.MSet(tp,tc,true,nil)
-			end
-		end
-end
-
-
-
-
-
-
-
-
-
-	
-		Duel.Summon(tp,tc,true,nil)
-	local e1=Effect.CreateEffect(c)
+			local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_SET_PROC)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	e1:SetValue(SUMMON_TYPE_TRIBUTE)
 	tc:RegisterEffect(e1)
-	end
-	Duel.RaiseSingleEvent(tc,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
+		else
+			Duel.MSet(tp,tc,true,nil)
+			local e1=Effect.CreateEffect(c)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SET_PROC)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	e1:SetValue(SUMMON_TYPE_TRIBUTE)
+	tc:RegisterEffect(e1)
+			end
+		end
 end
 function s.ntcon(e,c,minc)
 	if c==nil then return true end
