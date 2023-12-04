@@ -75,6 +75,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			end
 	Duel.RaiseSingleEvent(tc,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
 		end
+	Duel.RaiseSingleEvent(tc,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
 end
 function s.ntcon(e,c,minc)
 	if c==nil then return true end
