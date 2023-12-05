@@ -10,21 +10,15 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--less tributes
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e3:SetCode(EFFECT_ADD_EXTRA_TRIBUTE)
-	e3:SetTargetRange(LOCATION_GRAVE,0)
-	e3:SetTarget(function(e,_c)return c==_c end)
-	e3:SetValue(POS_FACEUP)
-	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_GRANT)
-	e4:SetRange(LOCATION_GRAVE)
-	e4:SetTargetRange(LOCATION_HAND,0)
-	e4:SetTarget(aux.TRUE)
-	e4:SetLabelObject(e3)
-	c:RegisterEffect(e4)
+	--Activate
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetType(EFFECT_TYPE_QUICK_O)
+	e1:SetRange(LOCATION_GRAVE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetTarget(s.target)
+	e1:SetOperation(s.activate)
+	c:RegisterEffect(e1)
 end
 function s.filter2(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -45,4 +39,42 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,chk)
 		if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 		Duel.PayLPCost(tp,tc:GetAttack())
 	end
+end
+function s.rmfilter(c)
+	return c:IsMonster() and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c)
+end
+function s.otcon(e,c,minc)
+	if c==nil then return true end
+	local tp=c:GetControler()
+	return minc<=2 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,nil)
+end
+function s.ottg(e,c)
+	local mi=c:GetTributeRequirement()
+	return mi>0
+end
+function s.sumtg(e,tp,eg,ep,ev,re,r,rp,c)
+	local mg1=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local mg2=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	::restart::
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELF)
+	local g1=mg1:Select(tp,1,1,true,nil)
+	if not g1 then return false end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPPO)
+	local tc=mg2:SelectUnselect(g1,tp,false,false,2,2)
+	if mg2:IsContains(tc) then
+		g1:AddCard(tc)
+		g1:KeepAlive()
+		e:SetLabelObject(g1)
+		return true
+	end
+	goto restart
+end
+function s.otop(e,tp,eg,ep,ev,re,r,rp,c)
+	local sg=e:GetLabelObject()
+	if not sg then return end
+	Duel.Remove(sg,POS_FACEUP,REASON_COST)
+	sg:DeleteGroup()
+	Duel.ResetFlagEffect(tp,id)
 end
