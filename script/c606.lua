@@ -90,7 +90,7 @@ function s.sumtg(e,tp,eg,ep,ev,re,r,rp,c)
 		e:SetLabelObject(g1)
 		return true
 	--end
-	goto restart
+	--goto restart
 end
 function s.otop(e,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
