@@ -38,4 +38,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(3)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
+	local i=0
+	repeat
+		local token=Duel.CreateToken(tp,22404676)
+		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
+		ft=ft-1
+		i=(i+1)%4
+	until ft<=0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1))
+	Duel.SpecialSummonComplete()
+end
 end
