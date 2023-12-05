@@ -47,4 +47,3 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	until ft<=0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1))
 	Duel.SpecialSummonComplete()
 end
-end
