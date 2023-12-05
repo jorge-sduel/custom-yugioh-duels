@@ -69,7 +69,7 @@ function s.otcon(e,c,minc)
 	local tp=c:GetControler()
 	return minc<=2 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil)
-		and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil)
+		--and Duel.IsExistingMatchingCard(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil)
 end
 function s.ottg(e,c)
 	local mi=c:GetTributeRequirement()
@@ -77,15 +77,15 @@ function s.ottg(e,c)
 end
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,c)
 	local mg1=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
-	local mg2=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	--local mg2=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
 	::restart::
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELF)
 	local g1=mg1:Select(tp,1,1,true,nil)
 	if not g1 then return false end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPPO)
-	local tc=mg2:SelectUnselect(g1,tp,false,false,2,2)
-	if mg2:IsContains(tc) then
-		g1:AddCard(tc)
+	--local tc=mg2:SelectUnselect(g1,tp,false,false,2,2)
+	--if mg2:IsContains(tc) then
+		--g1:AddCard(tc)
 		g1:KeepAlive()
 		e:SetLabelObject(g1)
 		return true
