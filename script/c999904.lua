@@ -1,4 +1,5 @@
 --Red Dragon Hatchling
+Duel.LoadScript("c420.lua")
 function c999904.initial_effect(c)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
