@@ -28,6 +28,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.negop)
 	c:RegisterEffect(e3)
 end
+function s.otfilter(c)
+	return c:IsSummonType(SUMMON_TYPE_TRIBUTE) and c:IsLevelAbove(8)
+end
 function s.filter(c)
 	return c:IsSetCard(0xbe) and c:IsAbleToHand()
 end
