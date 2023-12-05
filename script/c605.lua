@@ -14,7 +14,19 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	
+		--Negate
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
+	e3:SetType(EFFECT_TYPE_QUICK_O)
+	e3:SetCode(EVENT_CHAINING)
+	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetCountLimit(1,id)
+	e3:SetCondition(s.negcon)
+	e3:SetTarget(s.negtg)
+	e3:SetOperation(s.negop)
+	c:RegisterEffect(e3)
 end
 function s.filter(c)
 	return c:IsSetCard(0xbe) and c:IsAbleToHand()
@@ -50,4 +62,19 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		i=(i+1)%4
 	until ft<=0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1))
 	Duel.SpecialSummonComplete()
+end
+function s.negcon(e,tp,eg,ep,ev,re,r,rp)
+	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev)
+end
+function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
+	if re:GetHandler():IsDestructable() and re:GetHandler():IsRelateToEffect(re) then
+		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,0,0)
+	end
+end
+function s.negop(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re)then
+		Duel.Destroy(eg,REASON_EFFECT)
+	end
 end
