@@ -15,12 +15,12 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e3:SetCode(EFFECT_ADD_EXTRA_TRIBUTE)
-	e3:SetTargetRange(LOCATION_MZONE,0)
+	e3:SetTargetRange(LOCATION_GRAVE,0)
 	e3:SetTarget(function(e,_c)return c==_c end)
 	e3:SetValue(POS_FACEUP)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_GRANT)
-	e4:SetRange(LOCATION_MZONE)
+	e4:SetRange(LOCATION_GRAVE)
 	e4:SetTargetRange(LOCATION_HAND,0)
 	e4:SetTarget(aux.TRUE)
 	e4:SetLabelObject(e3)
@@ -41,7 +41,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) and Duel.CheckLPCost(tc:GetAttack()) then
+	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 		if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 		Duel.PayLPCost(tp,tc:GetAttack())
 	end
