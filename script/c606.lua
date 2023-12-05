@@ -89,7 +89,7 @@ function s.sumtg(e,tp,eg,ep,ev,re,r,rp,c)
 		g1:KeepAlive()
 		e:SetLabelObject(g1)
 		return true
-	end
+	--end
 	goto restart
 end
 function s.otop(e,tp,eg,ep,ev,re,r,rp,c)
