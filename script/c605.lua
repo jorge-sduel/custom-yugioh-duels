@@ -38,6 +38,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(3)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
+	local ft=5
+	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ft=1 end
+	ft=math.min(ft,Duel.GetLocationCount(tp,LOCATION_MZONE))
+	if ft<=0 or not Duel.IsPlayerCanSpecialSummonMonster(tp,22404676,0,TYPES_TOKEN,800,1000,1,RACE_THUNDER,ATTRIBUTE_LIGHT) then return end
 	local i=0
 	repeat
 		local token=Duel.CreateToken(tp,22404676)
