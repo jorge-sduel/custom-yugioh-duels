@@ -77,10 +77,11 @@ function s.ottg(e,c)
 end
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,c)
 	local mg1=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	local mi,ma=mg1:GetTributeRequirement()
 	--local mg2=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
 	::restart::
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELF)
-	local g1=mg1:Select(tp,mg1:GetTributeRequirement(),mg1:GetTributeRequirement(),true,nil)
+	local g1=mg1:Select(tp,mi,mi,true,nil)
 	if not g1 then return false end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPPO)
 	--local tc=mg2:SelectUnselect(g1,tp,false,false,2,2)
