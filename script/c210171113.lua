@@ -53,8 +53,7 @@ function c210171113.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c210171113.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) then
-		Duel.SendtoHand(tc,nil,REASON_EFFECT)
+	if tc:IsRelateToEffect(e) and Duel.SendtoHand(tc,nil,REASON_EFFECT)~=0 then
 	end
 end
 function c210171113.atkcon(e,tp,eg,ep,ev,re,r,rp)
