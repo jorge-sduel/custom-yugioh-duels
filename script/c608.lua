@@ -35,9 +35,8 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1)
-	e3:SetCondition(s.damcon)
-	e3:SetTarget(s.damtg2)
-	e3:SetOperation(s.damop2)
+	e3:SetTarget(s.damtg)
+	e3:SetOperation(s.damop)
 	c:RegisterEffect(e3)
 end
 s.listed_names={id}
