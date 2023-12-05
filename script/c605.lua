@@ -14,79 +14,20 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--decrease tribute
-	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(id,2))
-	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetCode(EFFECT_SUMMON_PROC)
-	e4:SetRange(LOCATION_MZONE)
-	e4:SetTargetRange(LOCATION_HAND,0)
-	e4:SetCountLimit(1)
-	e4:SetCondition(s.ntcon)
-	c:RegisterEffect(e4)
+	
 end
-function s.otfilter(c)
-	return c:IsSummonType(SUMMON_TYPE_TRIBUTE)
-end
-function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_TRIBUTE)
-end
-function s.filter2(c)
-	return c:IsType(TYPE_MONSTER) and c:IsSummonable(true,nil) or c:IsMSetable(true,nil)
+function s.filter(c)
+	return c:IsSetCard(0xbe) and c:IsAbleToHand()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		if not e:GetHandler():IsStatus(STATUS_CHAINING) then
-			local ct=Duel.GetMatchingGroupCount(s.filter2,tp,LOCATION_HAND+LOCATION_MZONE,0,nil)
-			e:SetLabel(ct)
-			return ct>0
-		else return e:GetLabel()>0 end
-	end
-	e:SetLabel(e:GetLabel()-1)
-	Duel.SetOperationInfo(0,CATEGORY_SUMMON,nil,1,0,0)
-	e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,1)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,3,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,3,tp,LOCATION_DECK)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	if not e:GetHandler():IsRelateToEffect(e) then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil)
-	local tc=g:GetFirst()
-	if tc then
-		local s1=tc:IsSummonable(true,nil)
-		local s2=tc:IsMSetable(true,nil)
-		if (s1 and s2 and Duel.SelectPosition(tp,tc,POS_FACEUP_ATTACK+POS_FACEDOWN_DEFENSE)==POS_FACEUP_ATTACK) or not s2 then
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-		e1:SetCode(EVENT_SUMMON_SUCCESS)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
-		e1:SetOperation(s.regop)
-		tc:RegisterEffect(e1)
-			Duel.Summon(tp,tc,true,nil)
-			local e2=Effect.CreateEffect(e:GetHandler())
-	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_SET_PROC)
-	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-	e2:SetValue(SUMMON_TYPE_TRIBUTE)
-	tc:RegisterEffect(e2)
-		else
-			Duel.MSet(tp,tc,true,nil)
-			local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SET_PROC)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-	e1:SetValue(SUMMON_TYPE_TRIBUTE)
-	tc:RegisterEffect(e1)
-			end
-		end
-end
-function s.ntcon(e,c,minc)
-	if c==nil then return true end
-	return minc==0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and e:GetHandler():GetFlagEffect(id)~=0 and c:IsLevelAbove(5)
-end
-function s.regop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	Duel.RaiseSingleEvent(c,EVENT_SUMMON_SUCCESS,e,r,rp,ep,0)
+	local sg=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK,0,nil)
+	if #sg<3 then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local g=sg:Select(tp,3,3,nil)
+	Duel.SendtoHand(g,nil,REASON_EFFECT)
+	Duel.ConfirmCards(1-tp,g)
 end
