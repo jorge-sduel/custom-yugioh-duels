@@ -35,7 +35,7 @@ function c999904.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsSetCard(0x344) 
 end
 function c999904.filter(c,e,tp)
-	return (c:IsSetCard(0x344) or c:IsCode(70902743)) and not c:IsCode(999904) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRed()  and not c:IsCode(999904) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c999904.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
