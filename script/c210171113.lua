@@ -47,7 +47,7 @@ end
 function c210171113.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and c210171113.filter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(c210171113.filter,tp,LOCATION_MZONE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOHAND)
+	--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOHAND)
 	Duel.SelectTarget(tp,c210171113.filter,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,g,1,0,0)
 end
