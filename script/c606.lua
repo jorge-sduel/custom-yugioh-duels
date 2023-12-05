@@ -40,6 +40,27 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.PayLPCost(tp,tc:GetAttack())
 	end
 end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
+end
+function s.activate(e,tp,eg,ep,ev,re,r,rp)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_SUMMON_PROC)
+	e1:SetTargetRange(LOCATION_HAND,0)
+	e1:SetCondition(s.otcon)
+	e1:SetTarget(aux.FieldSummonProcTg(s.ottg,s.sumtg))
+	e1:SetOperation(s.otop)
+	e1:SetCountLimit(1,0,EFFECT_COUNT_CODE_SINGLE)
+	e1:SetValue(SUMMON_TYPE_TRIBUTE)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e1,tp)
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_SET_PROC)
+	Duel.RegisterEffect(e2,tp)
+	Duel.RegisterFlagEffect(tp,id,RESET_PHASE+PHASE_END,0,1)
+end
 function s.rmfilter(c)
 	return c:IsMonster() and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c)
 end
