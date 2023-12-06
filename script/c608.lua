@@ -50,14 +50,13 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=c:GetCounter(0x581)
 	if chk==0 then return ct>0 end
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ct*500)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
+	local ct=e:GetHandler():GetCounter(0x581) 
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local ct=e:GetHandler():GetOverlayCount()
 	Duel.Damage(p,ct*500,REASON_EFFECT)
  c:RemoveCounter(tp,0x581,ct,REASON_COST)
 end
