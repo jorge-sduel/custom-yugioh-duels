@@ -61,14 +61,13 @@ end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g=Duel.SelectMatchingCard(tp,s.disfilter,tp,LOCATION_EXTRA,0,1,1,nil)
-local lv=g:GetLevel()
 	if Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)~=0 then
 		if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 			Duel.MoveToField(e:GetHandler(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CHANGE_LSCALE)
-	e1:SetValue(lv)
+	e1:SetValue(g:GetFirst():GetLevel())
 	e1:SetReset(RESET_EVENT+0x1ff0000+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
