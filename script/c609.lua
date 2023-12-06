@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsCode,id),LOCATION_MZONE)
 	--link summon
-	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsSummonType,SUMMON_TYPE_PENDULUM),2,2)
+	Link.AddProcedure(c,nil,2,2)
 	Pendulum.AddProcedure(c)
 	--fusion from the pendulum zone
 	local params = {aux.FilterBoolFunction(Card.IsRace,RACE_DRAGON)}
