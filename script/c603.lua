@@ -53,7 +53,7 @@ function s.matfilter(c,lc,sumtype,tp)
 	return c:IsRace(RACE_SPELLCASTER,lc,sumtype,tp)
 end
 function s.value(e,c)
-	return c:GetLevel()*500
+	return c:GetLevel()*400
 end
 function s.lvcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and e:GetHandler():IsLevelAbove(1) and e:GetHandler():IsLevelBelow(11)
