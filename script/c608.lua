@@ -59,7 +59,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetHandler():GetCounter(0x581) 
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.Damage(p,ct*500,REASON_EFFECT)
- c:RemoveCounter(tp,0x581,ct,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,0x581,ct,REASON_COST)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) end
