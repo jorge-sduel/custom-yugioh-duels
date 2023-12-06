@@ -50,6 +50,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
+local ct=e:GetHandler():GetCounter(0x581)
 	if chk==0 then return ct>0 end
 	Duel.SetTargetPlayer(1-tp)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ct*500)
