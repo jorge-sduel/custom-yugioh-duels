@@ -2,7 +2,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
-c:SetUniqueOnField(1,0,aux.FilterBoolFunction(Card.IsCode,id),LOCATION_MZONE)
 	--link summon
 	Link.AddProcedure(c,nil,2,2)
 	Pendulum.AddProcedure(c)
