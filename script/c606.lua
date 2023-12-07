@@ -38,7 +38,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 		if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)==0 then return end
-		Duel.PayLPCost(tp,tc:GetAttack()/2)
+		Duel.PayLPCost(tp,tc:GetBaseAttack()/2)
 	end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
