@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--link summon
-	Link.AddProcedure(c,nil,2,2)
+	Link.AddProcedure(c,s.matfilter,2,2)
 	Pendulum.AddProcedure(c)
 	--fusion from the pendulum zone
 	local params = {aux.FilterBoolFunction(Card.IsType,TYPE_MONSTER)}
@@ -42,6 +42,9 @@ function s.initial_effect(c)
 	e7:SetCode(EFFECT_IMMUNE_EFFECT)
 	e7:SetValue(s.efilter)
 	c:RegisterEffect(e7)
+end
+function s.matfilter(c)
+	return (c:IsLevelAbove(7) or c:IsRankAbove(7)) and c:IsType(TYPE_PENDULUM)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return re:GetHandler()~=e:GetHandler() and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
