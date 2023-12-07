@@ -59,7 +59,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.CheckPendulumZones(tp) then
 		for i=1,2 do
-			local token=Duel.CreateToken(tp,129+i)
+			local token=Duel.CreateToken(tp,id+i)
 Duel.MoveToField(token,tp,tp,LOCATION_PZONE,POS_FACEUP,true) 
 			--Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		end
