@@ -9,9 +9,16 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetRange(LOCATION_PZONE)
+	e2:SetCondition(s.drcon)
 	e2:SetTarget(s.drtg)
 	e2:SetOperation(s.drop)
 	c:RegisterEffect(e2)
+end
+function s.drfil(c,tp)
+	return c:IsSummonPlayer(tp) and c:GetSummonType()==SUMMON_TYPE_PENDULUM
+end
+function s.drcon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(s.drfil,1,nil,tp)
 end
 function s.thfilter(c)
 	return c:IsType(TYPE_TRAP) and c:IsAbleToHand()
