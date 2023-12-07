@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCost(s.cost)
-	e2:SetTarget(s.target)
+	--e2:SetTarget(s.target)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
 end
@@ -56,12 +56,12 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_PZONE)>2 then
+	--if Duel.GetLocationCount(tp,LOCATION_PZONE)>2 then
 		for i=1,2 do
 			local token=Duel.CreateToken(tp,129+i)
 Duel.MoveToField(token,tp,tp,LOCATION_PZONE,POS_FACEUP,true) 
 			--Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
-		end
+		--end
 		--Duel.SpecialSummonComplete()
 	end
 end
