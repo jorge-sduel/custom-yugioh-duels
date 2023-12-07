@@ -21,7 +21,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCost(s.cost)
-	--e2:SetTarget(s.target)
+	e2:SetTarget(s.target)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
 end
@@ -51,17 +51,17 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_PZONE)>2 end
+	if chk==0 then return Duel.CheckLocation(tp,LOCATION_PZONE,0) and Duel.CheckLocation(tp,LOCATION_PZONE,1) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	--if Duel.GetLocationCount(tp,LOCATION_PZONE)>2 then
+	if Duel.CheckPendulumZones(tp) then
 		for i=1,2 do
 			local token=Duel.CreateToken(tp,129+i)
 Duel.MoveToField(token,tp,tp,LOCATION_PZONE,POS_FACEUP,true) 
 			--Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
-		--end
+		end
 		--Duel.SpecialSummonComplete()
 	end
 end
