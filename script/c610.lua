@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetProperty(EFFECT_FLAG_DELAY)
-	e1:SetCountLimit(1,id)
+	e1:SetCountLimit(1)
 	e1:SetCondition(s.thcon)
 	e1:SetTarget(s.thtg)
 	e1:SetOperation(s.thop)
@@ -51,14 +51,12 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return  Duel.GetLocationCount(tp,LOCATION_PZONE)>2
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,130,0,0,0,0,1,RACE_FAIRY,ATTRIBUTE_FIRE) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_PZONE)>2 end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_PZONE)>2
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,130,0,0,0,0,1,RACE_FAIRY,ATTRIBUTE_FIRE) then
+	if Duel.GetLocationCount(tp,LOCATION_PZONE)>2 then
 		for i=1,2 do
 			local token=Duel.CreateToken(tp,129+i)
 Duel.MoveToField(token,tp,tp,LOCATION_PZONE,POS_FACEUP,true) 
