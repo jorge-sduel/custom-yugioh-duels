@@ -1,5 +1,6 @@
 --
-function s.initial_effect(c)
+local s,id=GetID()
+function s.initial_effect(c)
 	--activate
 	local e0=Effect.CreateEffect(c)
 	e0:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
