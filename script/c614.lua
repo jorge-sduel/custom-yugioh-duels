@@ -23,6 +23,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e3:SetCountLimit(1)
 	e3:SetCondition(s.drcon)
 	e3:SetTarget(s.drtg)
 	e3:SetOperation(s.drop)
@@ -30,7 +31,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x1047}
 function s.thfilter(c)
-	return c:IsSetCard(0x1047) and c:IsAbleToHand()
+	return (c:IsSetCard(0x1047) or c:IsCode(7394770)) and c:IsAbleToHand()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
