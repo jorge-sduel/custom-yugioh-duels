@@ -72,7 +72,7 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)>0
-		and not Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+		and not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsType,TYPE_MONSTER),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0xc008) and c:IsMonster() and c:IsAbleToHand()
