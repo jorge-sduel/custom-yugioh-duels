@@ -62,7 +62,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	local bc=e:GetHandler():GetBattleTarget()
-	return ep~=tp and bc and (not bc:IsAttackAbove(e:GetHandler():GetAttack()) and bc:IsControler(1-tp)
+	return ep~=tp and bc and (not bc:IsAttackAbove(e:GetHandler():GetAttack())) and bc:IsControler(1-tp)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ChangeBattleDamage(ep,ev*2)
