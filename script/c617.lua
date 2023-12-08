@@ -31,8 +31,9 @@ function s.con(e)
 	local tp=Duel.GetTurnPlayer()
 	return tp==e:GetHandlerPlayer() and ph>=PHASE_BATTLE_START and ph<=PHASE_BATTLE
 end
-function s.tg(c,e)
-	return c:IsLevelBelow(4) and c:IsSetCard(0xc008)
+function s.tg(e,c)
+	local lv=c:GetLevel()
+	return lv>0 and lv<=2 and c:IsSetCard(0xc008)
 end
 function s.thfilter(c)
 	return c:IsSpell() and c:IsAbleToHand()
