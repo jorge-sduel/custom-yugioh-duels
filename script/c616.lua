@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DISABLE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e1:SetCountLimit(1,id)
 	e1:SetTarget(s.negtg)
@@ -71,8 +71,8 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and not Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),c:GetControler(),LOCATION_MZONE,0,1,nil)
+	return Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)>0
+		and not Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsType,TYPE_MONSTER),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.thfilter(c)
 	return c:IsSetCard(0xc008) and c:IsMonster() and c:IsAbleToHand()
