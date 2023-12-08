@@ -34,7 +34,7 @@ function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function s.filter(c,e,tp,spchk)
-	return c:IsSetCard(0xc008) and c:IsMonster() and c:IsLevel(8) and (c:IsAbleToHand() or (spchk and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,1,tp,false,false)))
+	return c:IsSetCard(0xc008) and c:IsMonster() and c:IsLevel(8) and (c:IsAbleToHand() or (spchk and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsCanBeSpecialSummoned(e,1,tp,true,true)))
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -52,7 +52,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 				return 
 --g:GetCode()==40591390 and
  Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-					and g:IsCanBeSpecialSummoned(e,1,tp,false,false)
+					and g:IsCanBeSpecialSummoned(e,1,tp,true,true)
 			end,
 			function(c)
 				Duel.SpecialSummon(g,1,tp,tp,false,false,POS_FACEUP)
