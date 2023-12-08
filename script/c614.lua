@@ -6,6 +6,7 @@ function s.initial_effect(c)
 	e0:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
+	e0:SetCountLimit(1,id)
 	e0:SetOperation(s.activate)
 	c:RegisterEffect(e0)
 	--duel status
