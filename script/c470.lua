@@ -52,7 +52,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 				return 
 --g:GetCode()==40591390 and
  Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-					and g:IsCanBeSpecialSummoned(e,1,tp,true,true)
+		--			and g:IsCanBeSpecialSummoned(e,1,tp,true,true)
 			end,
 			function(c)
 				Duel.SpecialSummon(g,1,tp,tp,false,false,POS_FACEUP)
