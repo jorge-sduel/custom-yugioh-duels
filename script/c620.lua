@@ -59,7 +59,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then 
-		Duel.Remove(eg,eg:GetPosition(),REASON_EFFECT)
+		Duel.Remove(eg,POS_FACEUP,REASON_EFFECT)
 	end
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
