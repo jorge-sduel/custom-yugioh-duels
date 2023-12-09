@@ -35,6 +35,13 @@ function s.initial_effect(c)
 	e4:SetTarget(s.thtg)
 	e4:SetOperation(s.thop)
 	c:RegisterEffect(e4)
+	--tohand
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetRange(LOCATION_GRAVE+LOCATION_MZONE)
+	e5:SetCode(EFFECT_CHANGE_CODE)
+	e5:SetValue(41613948) 
+	c:RegisterEffect(e5)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsNegatable() and chkc:IsControler(1-tp) end
