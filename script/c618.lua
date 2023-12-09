@@ -32,8 +32,9 @@ e3:SetTarget(s.tg)
 	c:RegisterEffect(e4)
 end
 s.material_setcode=0xc008 
-function s.tg(c)
-	return c:IsLevelBelow(4) and c:IsSetCard(0xc008)
+function s.tg(e,c)
+	local lv=c:GetLevel()
+	return lv>0 and lv<=4 and c:IsSetCard(0xc008)
 end
 function s.ffilter(c,fc,sumtype,tp)
 	return c:IsSetCard(0xc008)
