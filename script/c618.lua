@@ -32,10 +32,13 @@ e3:SetTarget(s.tg)
 	e3:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e4)
 end
+s.material_setcode=0xc008 
+function s.tg(c)
+	return c:IsLevelBelow(4) and c:IsSetCard(0xc008)
+end
 function s.ffilter(c,fc,sumtype,tp)
 	return c:IsSetCard(0xc008)
 end
-s.material_setcode=0x1b
 function s.spfilter(c,e,tp)
 	return c:IsCode(40591390) and c:IsCanBeSpecialSummoned(e,1,tp,true,true)
 end
