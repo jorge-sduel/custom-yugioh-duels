@@ -9,7 +9,6 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetCode(EVENT_DESTROYED)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
@@ -28,8 +27,8 @@ function s.initial_effect(c)
 	e4:SetValue(1)
 	c:RegisterEffect(e4)
 	local e5=e3:Clone()
-	e3:SetCode(EFFECT_UPDATE_DEFENSE)
-	c:RegisterEffect(e4)
+	e5:SetCode(EFFECT_UPDATE_DEFENSE)
+	c:RegisterEffect(e5)
 	
 end
 s.material_setcode=0xc008 
