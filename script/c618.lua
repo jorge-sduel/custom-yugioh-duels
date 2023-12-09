@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTargetRange(LOCATION_MZONE,0)
-e3:SetTarget(s.tg)
+	e3:SetTarget(s.tg)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
 	e3:SetValue(400)
 	c:RegisterEffect(e3)
@@ -30,6 +30,7 @@ e3:SetTarget(s.tg)
 	local e5=e3:Clone()
 	e3:SetCode(EFFECT_UPDATE_DEFENSE)
 	c:RegisterEffect(e4)
+	
 end
 s.material_setcode=0xc008 
 function s.tg(e,c)
@@ -53,6 +54,6 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
-		Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP)
+		Duel.SpecialSummon(tc,1,tp,tp,true,true,POS_FACEUP)
 	end
 end
