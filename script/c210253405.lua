@@ -56,8 +56,7 @@ end
 
 -- Filter Level 1 LIGHT Tuner
 function s.discfilter(c)
-  return c:IsLevel(1) and c:IsType(TYPE_TUNER) and c:IsAttribute(ATTRIBUTE_LIGHT)
-    and c:IsDiscardable()
+  return c:IsDiscardable()
 end
 -- Filter "Blue-Eyes White Dragon"
 function s.bewdfilter(c,e,tp)
