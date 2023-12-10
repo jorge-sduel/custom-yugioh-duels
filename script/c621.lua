@@ -31,7 +31,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_BECOME_LINKED_ZONE)
- e3:IsRange(LOCATION_MZONE+LOCATION_PZONE) 
+	e3:SetRange(LOCATION_MZONE+LOCATION_PZONE) 
 	e3:SetValue(0xffffff)
 	c:RegisterEffect(e3)
 end
