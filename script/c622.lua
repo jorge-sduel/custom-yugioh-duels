@@ -1,6 +1,9 @@
---
+--
+
 local s,id=GetID()
 function s.initial_effect(c)
+	--Pendulum Summon
+	Pendulum.AddProcedure(c)
 	--effect
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(95492061,0))
@@ -34,7 +37,8 @@ function s.initial_effect(c)
 	e4:SetValue(s.repval)
 	e4:SetOperation(s.repop)
 	c:RegisterEffect(e4)
-end
+end
+
 function s.rvfilter(c)
 	return c:IsSetCard(SET_ABYSS_SCRIPT)
 end
