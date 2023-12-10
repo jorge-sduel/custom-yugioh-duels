@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
-	e1:SetTarget(s.target)
+	--e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 	--Pendulum Summon
@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetRange(LOCATION_PZONE)
+	e2:SetRange(LOCATION_MZONE)
 	e2:SetCondition(s.drcon)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
@@ -186,16 +186,16 @@ function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.drfil,1,nil,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct1=6-Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
+	local ct1=5-Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
 	local ct2=5-Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)
-	if chk==0 then return ct1>0 and Duel.IsPlayerCanDraw(tp,ct1)
-		and ct2>0 and Duel.IsPlayerCanDraw(1-tp,ct2) end
+	if chk==0 then return ct1>0
+		and ct2>0 end
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct1)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,1-tp,ct2)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ht=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
-	if ht<5 then 
+	if then 
 		Duel.Draw(tp,5-ht,REASON_EFFECT)
 	end
 	ht=Duel.GetFieldGroupCount(1-tp,LOCATION_HAND,0)
