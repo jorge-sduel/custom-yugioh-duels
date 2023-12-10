@@ -195,11 +195,11 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local ht=Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)
-	if then 
+	--if then 
 		Duel.Draw(tp,5-ht,REASON_EFFECT)
-	end
-	ht=Duel.GetFieldGroupCount(1-tp,LOCATION_HAND,0)
-	if ht<6 then 
+	--end
+	local ht=Duel.GetFieldGroupCount(1-tp,LOCATION_HAND,0)
+	--if ht<6 then 
 		Duel.Draw(1-tp,5-ht,REASON_EFFECT)
-	end
+	--end
 end
