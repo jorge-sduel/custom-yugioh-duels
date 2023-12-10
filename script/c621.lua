@@ -34,6 +34,16 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE+LOCATION_PZONE) 
 	e3:SetValue(0xffffff)
 	c:RegisterEffect(e3)
+		--pendulum
+	local e7=Effect.CreateEffect(c)
+	e7:SetDescription(aux.Stringid(id,5))
+	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e7:SetCode(EVENT_DESTROYED)
+	e7:SetProperty(EFFECT_FLAG_DELAY)
+	e7:SetCondition(s.pencon)
+	e7:SetTarget(s.pentg)
+	e7:SetOperation(s.penop)
+	c:RegisterEffect(e7)
 end
 s.listed_series={0x10ec}
 function s.matfilter(c,lc,sumtype,tp)
@@ -202,4 +212,18 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--if ht<6 then 
 		Duel.Draw(1-tp,5-ht,REASON_EFFECT)
 	--end
+end
+function s.pencon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return (r&REASON_EFFECT+REASON_BATTLE)~=0 and c:IsPreviousLocation(LOCATION_MZONE) and c:IsFaceup()
+end
+function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckPendulumZones(tp) end
+end
+function s.penop(e,tp,eg,ep,ev,re,r,rp)
+	if not Duel.CheckPendulumZones(tp) then return false end
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	end
 end
