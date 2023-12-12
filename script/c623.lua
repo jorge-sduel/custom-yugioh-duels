@@ -33,6 +33,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tcode=s.list[code]
 	if tc and tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,-2,REASON_RULE)>0 then
 		local token=Duel.CreateToken(tp,tcode)
+		Duel.ConfirmCards(1-tp,token)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		--[[local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
