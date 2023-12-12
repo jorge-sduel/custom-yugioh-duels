@@ -15,13 +15,14 @@ s.list={[70902743]=624}
 function s.filter(c,tp)
 	local code=c:GetCode()
 	local tcode=s.list[code]
-	return c:IsFaceup() and tcode and c:IsReleasableByEffect()
+	return c:IsFaceup() and tcode 
+	--and c:IsReleasableByEffect()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
+	--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0)
 end
@@ -30,7 +31,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local code=tc:GetCode()
 	local tcode=s.list[code]
-	if tc and tc:IsRelateToEffect(e) and Duel.Release(tc,REASON_EFFECT)>0 then
+	if tc and tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,-2,REASON_RULE)>0 then
 		local token=Duel.CreateToken(tp,tcode)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		--[[local e1=Effect.CreateEffect(e:GetHandler())
