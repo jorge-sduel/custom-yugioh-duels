@@ -8,7 +8,6 @@ function s.initial_effect(c)
 	-- Name becomes "Red Dragon Archfiend" while on the field on in the GY
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
-	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e0:SetCode(EFFECT_CHANGE_CODE)
 	e0:SetValue(CARD_RED_DRAGON_ARCHFIEND)
 	c:RegisterEffect(e0)
