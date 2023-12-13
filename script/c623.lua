@@ -54,5 +54,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		token:RegisterEffect(e3,true)]]
 	end
 	Duel.SpecialSummonComplete()
-	tc:SetStatus(STATUS_SUMMON_TURN,true)
+	tc:SetStatus(STATUS_PROC_COMPLETE,true)
 end
