@@ -35,6 +35,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local token=Duel.CreateToken(tp,tcode)
 		Duel.ConfirmCards(1-tp,token)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
+		token:SetStatus(STATUS_PROC_COMPLETE,true) 
 		--[[local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD)
 		e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
@@ -54,5 +55,4 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		token:RegisterEffect(e3,true)]]
 	end
 	Duel.SpecialSummonComplete()
-	token:SetStatus(STATUS_PROC_COMPLETE,true)
 end
