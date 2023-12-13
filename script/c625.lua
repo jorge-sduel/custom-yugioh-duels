@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(s.destg)
-	e1:SetOperation(s.activate)
+	e1:SetOperation(s.desop)
 	c:RegisterEffect(e1)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -22,10 +22,9 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc then return end
 	local dam=tc:GetAttack()
-	if tc:GetAttack() < tc:GetDefense() then dam=tc:GetDefense() end
-	--if dam<0 then dam=0 end
-	--if tc:IsFaceup() and tc:IsRelateToEffect(e) then
-		Duel.Destroy(tc,REASON_EFFECT)
-		Duel.Damage(1-tp,dam,REASON_EFFECT)
-	--end
+	if bc:GetAttack() < bc:GetDefense() then dam=bc:GetDefense() end
+	if dam<0 then dam=0 end
+	if tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT)~=0 then
+		Duel.Damage(1-tp,atk,REASON_EFFECT)
+	end
 end
