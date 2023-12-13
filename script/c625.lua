@@ -27,5 +27,5 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	--if tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		Duel.Destroy(tc,REASON_EFFECT)
 		Duel.Damage(1-tp,dam,REASON_EFFECT)
-	end
+	--end
 end
