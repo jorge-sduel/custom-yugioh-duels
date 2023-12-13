@@ -23,7 +23,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc then return end
 	local dam=tc:GetAttack()
 	if tc:GetAttack() < tc:GetDefense() then dam=tc:GetDefense() end
-	if dam<0 then dam=0 end
+	--if dam<0 then dam=0 end
 	if tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT)~=0 then
 		Duel.Damage(1-tp,dam,REASON_EFFECT)
 	end
