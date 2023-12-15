@@ -66,7 +66,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local d=Duel.GetAttackTarget()
-	if d:IsRelateToBattle() and d:IsFaceup() and d:IsPosition(DEFENSE_POSITION) then
+	if d:IsRelateToBattle() and d:IsFaceup() and d:IsDefensePos() then
 		Duel.Destroy(d,REASON_EFFECT)
 	end
 end
