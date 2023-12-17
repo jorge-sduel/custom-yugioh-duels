@@ -69,8 +69,19 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 			e2:SetCode(EFFECT_SET_ATTACK_FINAL)
 			e2:SetValue(hc:GetAttack()/2)
 			e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-			hc:RegisterEffect(e2)
-		hc:AddCounter(0x1038,1)
+			hc:RegisterEffect(e2)	
+			local e3=Effect.CreateEffect(e:GetHandler())
+			e3:SetType(EFFECT_TYPE_SINGLE)
+			e3:SetCode(EFFECT_CANNOT_ATTACK)
+			e3:SetCondition(s.disable)
+			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
+			hc:RegisterEffect(e3)
+			local e4=e3:Clone()
+			e4:SetCode(EFFECT_DISABLE)
+			hc:RegisterEffect(e4)
+			hc:AddCounter(0x1038,1)
 		end
 	end
+endfunction s.disable(e)
+	return e:GetHandler():GetCounter(0x1038)>0
 end
