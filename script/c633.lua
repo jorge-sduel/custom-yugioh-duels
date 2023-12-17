@@ -42,7 +42,7 @@ function s.matfilter(c,scard,sumtype,tp)
 	return c:IsSetCard(0xe3)
 end
 function s.thfilter(c)
-	return c:IsSpell() and c:IsSetCard(0xe3) and c:IsAbleToHand()
+	return c:IsSpellTrap() and c:IsSetCard(0xe3) and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
