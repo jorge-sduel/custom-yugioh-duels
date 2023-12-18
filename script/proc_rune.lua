@@ -781,7 +781,7 @@ function Auxiliary.AddRuneTuning(c,loc,loc1,loc2,loc3,loc4)
 end
 function Rune.NSML(e,c)
 	--local tc=e:GetHandler():GetCardTarget():GetFirst()
-	return c.Is_Runic and not c:IsLevelAbove(1)
+	return c:IsType(TYPE_RUNE) and not c:IsLevelAbove(1)
 end
 function Auxiliary.AddRuneTuning2(c,loc,loc3,loc4)
 	local e2=Effect.CreateEffect(c)
@@ -815,5 +815,5 @@ function Auxiliary.AddRuneTuning2(c,loc,loc3,loc4)
 end
 function Rune.NSML2(e,c)
 	--local tc=e:GetHandler():GetCardTarget():GetFirst()
-	return c.Is_Runic and not c:IsLevelAbove(1)
+	return c:IsType(TYPE_RUNE) and not c:IsLevelAbove(1)
 end
