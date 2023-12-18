@@ -739,7 +739,7 @@ function Card.IsCanBeRuneGroup(c,chain)
 	return c:IsFaceup() and (chain~=1 or not c:IsStatus(STATUS_LEAVE_CONFIRMED))
 end
 function Rune.Levelcon(c)
-	return  not c:IsHasEffect(999381000)
+	return  not c:GetEffect()==999381000
 end
 function Rune.synlimit(e,c)
 	if not c then return false end
