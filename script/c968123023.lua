@@ -1,13 +1,13 @@
 --Inscriber Tsuchimoji
 c968123023.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
+local s,id=GetID()
 function c968123023.initial_effect(c)
 	--pendulum summon
 	Pendulum.AddProcedure(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),c968123023.matfilter,1,1)
-	aux.AddRunicProcedure1(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),c968123023.matfilter,1,1)
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRace,RACE_SPELLCASTER),1,1,Rune.STFunctionEx(Card.IsSetCard,0xff0),1,1,LOCATION_EXTRA)
 	--tohand
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(968123023,0))
@@ -26,6 +26,7 @@ function c968123023.initial_effect(c)
 	e2:SetValue(c968123023.atkfilter)
 	c:RegisterEffect(e2)
 end
+c968123023.listed_series={0xff0}
 c968123023.pendulum_level=6
 function c968123023.matfilter(c)
 	return c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)
