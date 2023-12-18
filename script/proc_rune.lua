@@ -60,7 +60,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetCode(EFFECT_CHANGE_LEVEL)
-	e5:SetCondition(Rune.Levelcon)
+	e5:SetCondition(function(e) return not e:GetHandler():IsHasEffect(999381000) end)
 	e5:SetValue(0)
 	c:RegisterEffect(e5)
 --
@@ -68,7 +68,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e6:SetType(EFFECT_TYPE_SINGLE)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e6:SetCode(EFFECT_ALLOW_NEGATIVE)
-	e6:SetCondition(Rune.Levelcon)
+	e6:SetCondition(function(e) return not e:GetHandler():IsHasEffect(999381000) end)
 	c:RegisterEffect(e6)
 	end
 	
