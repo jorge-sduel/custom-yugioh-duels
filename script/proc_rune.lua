@@ -767,7 +767,7 @@ function Auxiliary.AddRuneState(c)
 	e9:SetType(EFFECT_TYPE_SINGLE)
 	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e9:SetCode(EFFECT_CHANGE_LEVEL)
-	e9:SetCondition(Rune.Levelcon)
+	--e9:SetCondition(Rune.Levelcon)
 	e9:SetValue(0)
 	c:RegisterEffect(e9)
 --
@@ -775,7 +775,7 @@ function Auxiliary.AddRuneState(c)
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
-	e10:SetCondition(Rune.Levelcon)
+	--e10:SetCondition(Rune.Levelcon)
 	c:RegisterEffect(e10)
 end
 --add Level Rune monster and is Synchronable
