@@ -60,7 +60,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e5:SetCode(EFFECT_CHANGE_LEVEL)
-	e5:SetCondition(function(e) return not e:GetHandler():IsHasEffect(999381000) end)
+	e5:SetCondition(Rune.Levelcon)
 	e5:SetValue(0)
 	c:RegisterEffect(e5)
 --
@@ -68,7 +68,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e6:SetType(EFFECT_TYPE_SINGLE)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e6:SetCode(EFFECT_ALLOW_NEGATIVE)
-	e6:SetCondition(function(e) return not e:GetHandler():IsHasEffect(999381000) end)
+	e6:SetCondition(Rune.Levelcon)
 	c:RegisterEffect(e6)
 	end
 	
@@ -738,8 +738,9 @@ function Card.IsCanBeRuneGroup(c,chain)
 	if not chain then chain=Duel.GetCurrentChain() end
 	return c:IsFaceup() and (chain~=1 or not c:IsStatus(STATUS_LEAVE_CONFIRMED))
 end
-function Rune.Levelcon(c)
-	return  not c:GetEffect()==999381000
+function Rune.Levelcon(e,c)
+	if not c then return false end
+	return  not c:IsHasEffect(999381000)
 end
 function Rune.synlimit(e,c)
 	if not c then return false end
