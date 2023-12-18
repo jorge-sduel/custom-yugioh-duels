@@ -1,5 +1,5 @@
 --Inscriber Denimoji
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c952342321.initial_effect(c)
 	--pendulum summon
 	Pendulum.AddProcedure(c)
