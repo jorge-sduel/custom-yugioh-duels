@@ -71,10 +71,10 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e6:SetCondition(Rune.Levelcon)
 	c:RegisterEffect(e6)]]
 	end
-	
+	Auxiliary.AddRuneState(c)
 	local e1=Rune.CreateProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,specialchk,customoperation,stage2)
 	c:RegisterEffect(e1)
-	--synchro custom
+	--[[synchro custom
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
@@ -101,11 +101,12 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e6:SetCode(EFFECT_ALLOW_NEGATIVE)
 	e6:SetCondition(Rune.Levelcon)
-	c:RegisterEffect(e6)
+	c:RegisterEffect(e6)]]
 	if loc then
+		Auxiliary.AddRuneState(c)
 		local e2=Rune.CreateSecondProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,excondition,specialchk,customoperation,stage2)
 		c:RegisterEffect(e2)
-		--synchro custom
+		--[[synchro custom
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
 	e7:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
@@ -132,7 +133,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
 	e10:SetCondition(Rune.Levelcon)
-	c:RegisterEffect(e10)
+	c:RegisterEffect(e10)]]
 	end
 end
 function Rune.AddSecondProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,excondition,specialchk,customoperation,stage2)
