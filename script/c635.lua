@@ -83,6 +83,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 			hc:AddCounter(0x1038,1)
 		end
 	end
-endfunction s.disable(e)
+end
+function s.disable(e)
 	return e:GetHandler():GetCounter(0x1038)>0
 end
