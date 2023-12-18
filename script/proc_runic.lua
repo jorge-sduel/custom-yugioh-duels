@@ -2,6 +2,9 @@ REASON_RUNIC		 = 0x128
 SUMMON_TYPE_RUNIC = 0x32
 HINTMSG_RNMATERIAL	 = 60100000000000
 RUNIC_IMPORTED    = true
+EFFECT_RUNE_MAT_RESTRICTION		=73941492+TYPE_RUNE
+EFFECT_CANNOT_BE_RUNE_MATERIAL	=500
+EFFECT_RUNE_SUBSTITUTE	= 900001031
 if not aux.RunicProcedure then
 	aux.RunicProcedure = {}
 	Runic = aux.RunicProcedure
@@ -540,4 +543,7 @@ end
 function Runic.NSML2(e,c)
 	--local tc=e:GetHandler():GetCardTarget():GetFirst()
 	return c.Is_Runic and not c:IsLevelAbove(1)
+end
+function Auxiliary.runiclimit(e,se,sp,st)
+	return aux.sumlimit(SUMMON_TYPE_RUNIC)(e,se,sp,st)
 end
