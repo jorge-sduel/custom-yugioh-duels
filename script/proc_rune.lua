@@ -52,7 +52,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e7:SetType(EFFECT_TYPE_SINGLE)
 	e7:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
 	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e7:SetValue(Runic.synlimit)
+	e7:SetValue(Rune.synlimit)
 	c:RegisterEffect(e7)
 --
        local e8=Effect.CreateEffect(c)
@@ -65,7 +65,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e9:SetType(EFFECT_TYPE_SINGLE)
 	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e9:SetCode(EFFECT_CHANGE_LEVEL)
-	e9:SetCondition(Runic.Levelcon)
+	e9:SetCondition(Rune.Levelcon)
 	e9:SetValue(0)
 	c:RegisterEffect(e9)
 --
@@ -73,7 +73,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
-	e10:SetCondition(Runic.Levelcon)
+	e10:SetCondition(Rune.Levelcon)
 	c:RegisterEffect(e10)
 	if loc then
 		local e2=Rune.CreateSecondProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,excondition,specialchk,customoperation,stage2)
@@ -83,7 +83,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e7:SetType(EFFECT_TYPE_SINGLE)
 	e7:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
 	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e7:SetValue(Runic.synlimit)
+	e7:SetValue(Rune.synlimit)
 	c:RegisterEffect(e7)
 --
        local e8=Effect.CreateEffect(c)
@@ -96,7 +96,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e9:SetType(EFFECT_TYPE_SINGLE)
 	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e9:SetCode(EFFECT_CHANGE_LEVEL)
-	e9:SetCondition(Runic.Levelcon)
+	e9:SetCondition(Rune.Levelcon)
 	e9:SetValue(0)
 	c:RegisterEffect(e9)
 --
@@ -104,7 +104,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
-	e10:SetCondition(Runic.Levelcon)
+	e10:SetCondition(Rune.Levelcon)
 	c:RegisterEffect(e10)
 	end
 end
@@ -711,21 +711,21 @@ function Card.IsCanBeRuneGroup(c,chain)
 	if not chain then chain=Duel.GetCurrentChain() end
 	return c:IsFaceup() and (chain~=1 or not c:IsStatus(STATUS_LEAVE_CONFIRMED))
 end
-function Runic.Levelcon(e,c)
+function Rune.Levelcon(e,c)
 	return  not e:GetHandler():IsHasEffect(999381000)
 end
-function Runic.synlimit(e,c)
+function Rune.synlimit(e,c)
 	if not c then return false end
 	return not c:IsHasEffect(999381001)
 end
---Runic Summon no Level
-function Auxiliary.AddRunicState(c)
+--Rune Summon no Level
+function Auxiliary.AddRuneState(c)
 	--synchro custom
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e2:SetValue(Runic.synlimit)
+	e2:SetValue(Rune.synlimit)
 	c:RegisterEffect(e2)
 --
        local e8=Effect.CreateEffect(c)
@@ -738,7 +738,7 @@ function Auxiliary.AddRunicState(c)
 	e9:SetType(EFFECT_TYPE_SINGLE)
 	e9:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e9:SetCode(EFFECT_CHANGE_LEVEL)
-	e9:SetCondition(Runic.Levelcon)
+	e9:SetCondition(Rune.Levelcon)
 	e9:SetValue(0)
 	c:RegisterEffect(e9)
 --
@@ -746,19 +746,19 @@ function Auxiliary.AddRunicState(c)
 	e10:SetType(EFFECT_TYPE_SINGLE)
 	e10:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e10:SetCode(EFFECT_ALLOW_NEGATIVE)
-	e10:SetCondition(Runic.Levelcon)
+	e10:SetCondition(Rune.Levelcon)
 	c:RegisterEffect(e10)
 end
---add Level Runic monster and is Synchronable
---[[loc=Location card loc1 and loc2= Runic monster affected loc3 and loc4=Synchro Monster can use Runic monster as material]]
-function Auxiliary.AddRunicTuning(c,loc,loc1,loc2,loc3,loc4)
+--add Level Rune monster and is Synchronable
+--[[loc=Location card loc1 and loc2= Rune monster affected loc3 and loc4=Synchro Monster can use Rune monster as material]]
+function Auxiliary.AddRuneTuning(c,loc,loc1,loc2,loc3,loc4)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
 	e2:SetRange(loc)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e2:SetTarget(Runic.NSML)
+	e2:SetTarget(Rune.NSML)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
 	--level
@@ -767,7 +767,7 @@ function Auxiliary.AddRunicTuning(c,loc,loc1,loc2,loc3,loc4)
 	e4:SetCode(999381000)
 	e4:SetRange(loc)
 	e4:SetTargetRange(loc1,loc2)
-	e4:SetTarget(aux.TargetBoolFunction(Card.IsRunic))
+	e4:SetTarget(aux.TargetBoolFunction(Card.IsRune))
 	c:RegisterEffect(e4)
 	--level
 	local e5=Effect.CreateEffect(c)
@@ -779,18 +779,18 @@ function Auxiliary.AddRunicTuning(c,loc,loc1,loc2,loc3,loc4)
 	--e5:SetValue(0x5sr)
 	c:RegisterEffect(e5)
 end
-function Runic.NSML(e,c)
+function Rune.NSML(e,c)
 	--local tc=e:GetHandler():GetCardTarget():GetFirst()
 	return c.Is_Runic and not c:IsLevelAbove(1)
 end
-function Auxiliary.AddRunicTuning2(c,loc,loc3,loc4)
+function Auxiliary.AddRuneTuning2(c,loc,loc3,loc4)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e2:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
 	e2:SetRange(loc)
 	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e2:SetTarget(Runic.NSML2)
+	e2:SetTarget(Rune.NSML2)
 	e2:SetValue(1)
 	c:RegisterEffect(e2)
 	--level
@@ -800,7 +800,7 @@ function Auxiliary.AddRunicTuning2(c,loc,loc3,loc4)
 	e4:SetCode(999381000)
 	e4:SetRange(loc)
 	--e4:SetTargetRange(loc1,loc2)
-	--e4:SetTarget(aux.TargetBoolFunction(Card.IsRunic))
+	--e4:SetTarget(aux.TargetBoolFunction(Card.IsRune))
 	c:RegisterEffect(e4)
 	--level
 	local e5=Effect.CreateEffect(c)
@@ -813,7 +813,7 @@ function Auxiliary.AddRunicTuning2(c,loc,loc3,loc4)
 	--e5:SetValue(0x5sr)
 	c:RegisterEffect(e5)
 end
-function Runic.NSML2(e,c)
+function Rune.NSML2(e,c)
 	--local tc=e:GetHandler():GetCardTarget():GetFirst()
 	return c.Is_Runic and not c:IsLevelAbove(1)
 end
