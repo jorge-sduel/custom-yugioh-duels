@@ -741,7 +741,7 @@ function Card.IsCanBeRuneGroup(c,chain)
 end
 function Rune.Levelcon(e,c)
 	if not c then return false end
-	return  not e:GetHandler():IsHasEffect(999381000)
+	return e:GetHandler():IsHasEffect(999381000)
 end
 function Rune.synlimit(e,c)
 	if not c then return false end
