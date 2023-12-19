@@ -71,7 +71,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e6:SetCondition(Rune.Levelcon)
 	c:RegisterEffect(e6)]]
 	end
-	Auxiliary.AddRuneState(c)
+	Auxiliary.AddRuneState(e,c)
 	local e1=Rune.CreateProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,specialchk,customoperation,stage2)
 	c:RegisterEffect(e1)
 	--[[synchro custom
@@ -103,7 +103,7 @@ function Rune.AddProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,ex
 	e6:SetCondition(Rune.Levelcon)
 	c:RegisterEffect(e6)]]
 	if loc then
-		Auxiliary.AddRuneState(c)
+		Auxiliary.AddRuneState(e,c)
 		local e2=Rune.CreateSecondProcedure(c,monf,mmin,mmax,stf,smin,smax,loc,group,condition,excondition,specialchk,customoperation,stage2)
 		c:RegisterEffect(e2)
 		--[[synchro custom
@@ -739,16 +739,15 @@ function Card.IsCanBeRuneGroup(c,chain)
 	if not chain then chain=Duel.GetCurrentChain() end
 	return c:IsFaceup() and (chain~=1 or not c:IsStatus(STATUS_LEAVE_CONFIRMED))
 end
-function Rune.Levelcon(c)
-	--if not c then return false end
-	return not c:IsHasEffect(999381000)
+function Runic.Levelcon(e,c)
+	return  not e:GetHandler():IsHasEffect(999381000)
 end
 function Rune.synlimit(e,c)
 	if not c then return false end
 	return not c:IsHasEffect(999381001)
 end
 --Rune Summon no Level
-function Auxiliary.AddRuneState(c)
+function Auxiliary.AddRuneState(e,c)
 	--synchro custom
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
