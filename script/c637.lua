@@ -47,7 +47,7 @@ function s.ffilter(c,fc,sumtype,tp)
 	return c:IsSetCard(0xe3,fc,sumtype,tp)
 end
 function s.matcheck(e,c)
-	local ct=c:GetMaterial()
+	local ct=c:GetMaterial():GetClassCount(Card.GetCode)
 	if ct>0 then
 		local ae=Effect.CreateEffect(c)
 		ae:SetType(EFFECT_TYPE_SINGLE)
