@@ -128,7 +128,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcfilter(c)
-	return c:IsSetCard(0xe3) and not c:IsCode(id)
+	return c:IsSetCard(0xe3) and not c:IsCode(id) and c:IsCanBeLinkMaterial()
 end
 function s.rescon(sg,e,tp,mg)
 	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
@@ -154,7 +154,7 @@ function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
 end
 function s.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	local sg=e:GetLabelObject()
-	Duel.Remove(sg,POS_FACEUP,REASON_COST)
+	Duel.SendtoGrave(sg,REASON_MATERIAL+REASON_LINK)
 	c:SetMaterial(sg)
 	sg:DeleteGroup()
 end
