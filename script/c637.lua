@@ -132,13 +132,13 @@ function s.spcfilter(c)
 end
 function s.rescon(sg,e,tp,mg)
 	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
-		--and sg:FilterCount(Card.IsLocation,nil,LOCATION_MZONE)==1
+		and sg:FilterCount(Card.IsLocation,nil,LOCATION_MZONE)==1
 end
 function s.hspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local g=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_MZONE,0,nil)
-	--if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_MZONE) then return false end
+	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_MZONE) then return false end
 	return #g>=1 and aux.SelectUnselectGroup(g,e,tp,1,99,s.rescon,0)
 end
 function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
