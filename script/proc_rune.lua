@@ -795,7 +795,7 @@ function Auxiliary.AddRuneTuning(c,loc,loc1,loc2,loc3,loc4)
 	e4:SetCode(999381000)
 	e4:SetRange(loc)
 	e4:SetTargetRange(loc1,loc2)
-	e4:SetTarget(aux.TargetBoolFunction(Card.IsRune))
+	e4:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_RUNE))
 	c:RegisterEffect(e4)
 	--level
 	local e5=Effect.CreateEffect(c)
