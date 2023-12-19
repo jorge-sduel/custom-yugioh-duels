@@ -151,6 +151,7 @@ end
 function s.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
+	e:GetHandler():SetMaterial(g)
 	Duel.SendtoGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
