@@ -132,7 +132,7 @@ function s.spcfilter(c)
 end
 function s.rescon(sg,e,tp,mg)
 	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
-		and sg:FilterCount(Card.IsLocation,nil,LOCATION_MZONE)==1
+		and sg:FilterCount(Card.IsLocation,nil,LOCATION_MZONE)>0
 end
 function s.hspcon(e,c)
 	if c==nil then return true end
