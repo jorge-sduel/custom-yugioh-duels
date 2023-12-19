@@ -138,7 +138,7 @@ function s.hspcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local g=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_MZONE,0,nil)
-	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_MZONE) then return false end
+	--if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_MZONE) then return false end
 	return #g>=1 and aux.SelectUnselectGroup(g,e,tp,1,99,s.rescon,0)
 end
 function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
