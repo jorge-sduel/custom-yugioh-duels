@@ -44,7 +44,7 @@ function s.initial_effect(c)
 	e6:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e6:SetRange(LOCATION_EXTRA)
 	e6:SetValue(SUMMON_TYPE_LINK)
-	--e6:SetCondition(s.hspcon)
+	e6:SetCondition(s.hspcon)
 	e6:SetTarget(s.hsptg)
 	e6:SetOperation(s.hspop)
 	c:RegisterEffect(e6)
@@ -127,22 +127,34 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-function s.hspfilter(c,tp,sc)
-	return c:IsSetCard(0xe3) and not c:IsCode(id) and Duel.GetLocationCountFromEx(tp,tp,c,sc)>0
+function s.spcfilter(c)
+	return c:IsSetCard(0xe3) and not c:IsCode(id)
+end
+function s.rescon(sg,e,tp,mg)
+	return Duel.GetLocationCountFromEx(tp,tp,sg,e:GetHandler())>0
+		and sg:FilterCount(Card.IsLocation,nil,LOCATION_MZONE)==1
+end
+function s.hspcon(e,c)
+	if c==nil then return true end
+	local tp=c:GetControler()
+	local g=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_MZONE,0,nil)
+	if #g==g:FilterCount(Card.IsLocation,nil,LOCATION_MZONE) then return false end
+	return #g>=1 and aux.SelectUnselectGroup(g,e,tp,1,99,s.rescon,0)
 end
 function s.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
-	local g=Duel.SelectReleaseGroup(tp,s.hspfilter,1,99,false,true,true,c,nil,nil,false,nil,tp,c)
-	if g then
-		g:KeepAlive()
-		e:SetLabelObject(g)
+	local g=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,nil)
+	local sg=aux.SelectUnselectGroup(g,e,tp,1,99,s.rescon,1,tp,HINTMSG_REMOVE,nil,nil,true)
+	if #sg>0 then
+		sg:KeepAlive()
+		e:SetLabelObject(sg)
 		return true
 	else
 		return false
 	end
 end
 function s.hspop(e,tp,eg,ep,ev,re,r,rp,c)
-	local g=e:GetLabelObject()
-	Duel.Release(g,REASON_COST+REASON_MATERIAL)
-	c:SetMaterial(g)
-	g:DeleteGroup()
+	local sg=e:GetLabelObject()
+	Duel.Remove(sg,POS_FACEUP,REASON_COST)
+	c:SetMaterial(sg)
+	sg:DeleteGroup()
 end
