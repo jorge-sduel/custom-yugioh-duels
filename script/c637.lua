@@ -127,8 +127,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-function s.tgfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xe3) and c:IsAbleToGraveAsCost()
+function tgfilter(c,tp,sc) 
+	return c:IsFaceup() and c:IsSetCard(0xe3) and c:IsCanBeLinkMaterial() and Duel.GetLocationCountFromEx(tp,tp,c,sc)>0
 end
 function s.spcon1(e,c)
 	if c==nil then return true end
