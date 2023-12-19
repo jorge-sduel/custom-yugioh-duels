@@ -739,7 +739,7 @@ function Card.IsCanBeRuneGroup(c,chain)
 	if not chain then chain=Duel.GetCurrentChain() end
 	return c:IsFaceup() and (chain~=1 or not c:IsStatus(STATUS_LEAVE_CONFIRMED))
 end
-function Runic.Levelcon(e,c)
+function Rune.Levelcon(e,c)
 	return  not e:GetHandler():IsHasEffect(999381000)
 end
 function Rune.synlimit(e,c)
