@@ -29,7 +29,7 @@ function s.initial_effect(c)
 end
 s.listed_names={39996157}
 function s.cfilter(c,tp)
-	return c:IsControler(tp) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
+	return c:IsControler(tp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,1-tp)
