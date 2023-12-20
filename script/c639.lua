@@ -28,11 +28,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={39996157}
-function s.desfilter(c)
-	return c:IsStatus(STATUS_SPSUMMON_TURN)
+function s.cfilter(c,tp)
+	return c:IsControler(tp) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return ep~=tp
+	return eg:IsExists(s.cfilter,1,nil,1-tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) end
