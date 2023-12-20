@@ -32,7 +32,7 @@ function s.desfilter(c)
 	return c:IsStatus(STATUS_SPSUMMON_TURN)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return ep~=tp and eg:IsControler(1-tp)
+	return ep~=tp and eg:GetSummonPlayer()~=tp
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) end
