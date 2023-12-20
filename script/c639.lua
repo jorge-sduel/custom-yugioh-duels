@@ -42,7 +42,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,#eg,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-		local sg=e:GetHandler()
+	local c=e:GetHandler()
 		local sg=eg:Select(tp,1,1,nil)
 		local sc=sg:GetFirst()
 	local atk=sc:GetAttack()
