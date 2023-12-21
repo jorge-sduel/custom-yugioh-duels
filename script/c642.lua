@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 	--Prevent activations
 	local e6=Effect.CreateEffect(c)
-	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e6:SetCode(EVENT_SUMMON_SUCCESS)
 	e6:SetOperation(s.regop)
 	c:RegisterEffect(e6)
@@ -75,7 +75,7 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.filter(c)
-	return c:IsType(TYPE_RITUAL) and c:IsAbleToHand()
+	return c:IsSpell() and c:IsType(TYPE_RITUAL) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
