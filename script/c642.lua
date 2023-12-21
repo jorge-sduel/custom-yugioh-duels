@@ -48,16 +48,16 @@ function s.recop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsSummonType(SUMMON_TYPE_RITUAL) then
+	--if c:IsSummonType(SUMMON_TYPE_RITUAL) then
 		--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,1))
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)2
 	e1:SetOperation(s.regop1)
 	c:RegisterEffect(e1) 
-	end
+	--end
 end
 function s.regop1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
