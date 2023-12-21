@@ -56,7 +56,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	e1:SetOperation(s.regop1)
-	Duel.RegisterEffect(e1) 
+	c:RegisterEffect(e1) 
 	end
 end
 function s.regop1(e,tp,eg,ep,ev,re,r,rp)
