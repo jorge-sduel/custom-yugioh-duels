@@ -59,14 +59,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)>0 then
-		if c:IsRelateToEffect(e) then
-	local e2=Effect.CreateEffect(e:GetHandler())
+		local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetCategory(CATEGORY_LVCHANGE)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_UPDATE_LEVEL)
 	e2:SetValue(tc:GetLevel())
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	e:GetHandler():RegisterEffect(e2)
+		--if c:IsRelateToEffect(e) then
 		end
 	end
 end
