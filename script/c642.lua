@@ -24,12 +24,15 @@ function s.initial_effect(c)
 	e4:SetTarget(s.thtg)
 	e4:SetOperation(s.thop)
 	c:RegisterEffect(e4)
-	--Prevent activations
-	local e6=Effect.CreateEffect(c)
-	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e6:SetCode(EVENT_SUMMON_SUCCESS)
-	e6:SetOperation(s.regop)
-	c:RegisterEffect(e6)
+	--spsummon
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,1))
+	e5:SetType(EFFECT_TYPE_IGNITION)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCountLimit(1)
+	e5:SetCondition(s.condition)
+	e5:SetOperation(s.regop1)
+	c:RegisterEffect(e5) 
 end
 s.listed_series={0x2093}
 function s.reccon(e,tp,eg,ep,ev,re,r,rp)
@@ -58,6 +61,9 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetOperation(s.regop1)
 	c:RegisterEffect(e1) 
 	--end
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL) and e:GetHandler():IsStatus(STATUS_SPSUMMON_TURN)
 end
 function s.regop1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
