@@ -107,6 +107,13 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetValue(-val*1000)
 		tc:RegisterEffect(e1)
+		local e2=Effect.CreateEffect(e:GetHandler())
+		e2:SetType(EFFECT_TYPE_FIELD)
+		e2:SetReset(RESET_EVENT|RESETS_STANDARD)
+		e2:SetTargetRange(LOCATION_MZONE,0)
+		e2:SetCode(EFFECT_UPDATE_ATTACK)
+		e2:SetValue(-val*1000)
+		Duel.RegisterEffect(e2)
 		if val*1000>atk then
 			Duel.Damage(1-tp,atk,REASON_EFFECT)
 		else
