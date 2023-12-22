@@ -115,7 +115,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetValue(-val*1000)
 		Duel.RegisterEffect(e2)
 		if val*1000>atk then
-			Duel.Damage(1-tp,atk,REASON_EFFECT)
+			Duel.Damage(1-tp,val*800,REASON_EFFECT)
 		else
 			Duel.Damage(1-tp,val*800,REASON_EFFECT)
 		end
