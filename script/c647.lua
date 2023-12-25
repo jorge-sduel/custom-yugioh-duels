@@ -37,7 +37,8 @@ function s.initial_effect(c)
     --attack time
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
-	e5:SetCode(EFFECT_EXTRA_ATTACK)
+	e5:SetCode(EFFECT_EXTRA_ATTACK)
+
 	e5:SetValue(s.val)
 	c:RegisterEffect(e5)
 	--Special summon
@@ -61,7 +62,8 @@ function s.atfilter(c)
 end
 function s.val(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(s.atfilter,e:GetHandlerPlayer(),0,LOCATION_MZONE,nil)-1
-    return ct
+    return ct
+
 end
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	local atg=Duel.GetAttackTarget()
@@ -112,6 +114,9 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 			c:RegisterEffect(e3)
 		end
 	end
+end
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.spfilter(c,e,tp)
 	return c:IsCode(69031175) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
