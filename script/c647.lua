@@ -61,7 +61,7 @@ function s.atfilter(c)
 	return c:IsAttack(0)
 end
 function s.val(e,tp,eg,ep,ev,re,r,rp)
-	local ct=Duel.GetMatchingGroupCount(s.atfilter,e:GetHandlerPlayer(),0,LOCATION_MZONE,nil)-1
+	local ct=Duel.GetMatchingGroupCount(s.atfilter,e:GetHandlerPlayer(),0,LOCATION_MZONE,nil)
     return ct
 
 end
