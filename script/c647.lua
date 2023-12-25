@@ -1,4 +1,4 @@
---BF－アーマード・ウィング/BUSTER MODE
+--BF－アーマード・ウィング/BOOSTER MODE
 --Blackwing Armor Master/ASSAULT MODE
 local s,id=GetID()
 function s.initial_effect(c)
@@ -108,7 +108,7 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 			t:RegisterEffect(e2)
 			local e3=Effect.CreateEffect(c)
 			e3:SetType(EFFECT_TYPE_SINGLE)
-			e3:SetCode(EFFECT_SET_DEFENSE_FINAL)
+			e3:SetCode(EFFECT_UPDATE_ATTACK)
 			e3:SetValue(val)
 			e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			c:RegisterEffect(e3)
