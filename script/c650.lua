@@ -48,7 +48,7 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetTargetCards(e)
 	local ct=#g
-	if ct==0 or ct>1 then return end
+	--if ct==0 or ct>1 then return end
 	Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 end
