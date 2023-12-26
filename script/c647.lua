@@ -38,7 +38,6 @@ function s.initial_effect(c)
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_EXTRA_ATTACK)
-
 	e5:SetValue(s.val)
 	c:RegisterEffect(e5)
 	--Special summon
