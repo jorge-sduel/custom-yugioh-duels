@@ -73,7 +73,7 @@ function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)
-	Duel.Remove(ev,POS_FACEUP,REASON_COST)
+	Duel.Remove(eg,POS_FACEUP,REASON_COST)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==1-tp
