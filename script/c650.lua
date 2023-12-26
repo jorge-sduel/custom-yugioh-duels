@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 end
 function s.thfilter(c)
-	return c:IsRitual() and c:IsSetCard(0xb4) and c:IsSpell and c:IsAbleToHand()
+	return c:IsType(TYPE_RITUAL) and c:IsSetCard(0xb4) and c:IsSpell and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_REMOVED+LOCATION_GRAVE) and chkc:IsControler(tp) and c256.thfilter(chkc) end
