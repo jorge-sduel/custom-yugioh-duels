@@ -56,6 +56,16 @@ function s.initial_effect(c)
 	e6:SetTarget(s.sptg2)
 	e6:SetOperation(s.spop2)
 	c:RegisterEffect(e6)
+		--Inflict damage
+	local e7=Effect.CreateEffect(c)
+	e7:SetDescription(aux.Stringid(id,0))
+	e8:SetCategory(CATEGORY_DESTROY+CATEGORY_DAMAGE)
+	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e7:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e7:SetCode(EVENT_BATTLE_DESTROYING)
+	e7:SetTarget(s.target)
+	e7:SetOperation(s.operation)
+	c:RegisterEffect(e7)
 	aux.DoubleSnareValidity(c,LOCATION_MZONE)
 end
 s.listed_series={0x27}
@@ -135,4 +145,17 @@ function s.spop2(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) end
+	if chk==0 then return Duel.IsExistingTarget(nil,tp,0,LOCATION_ONFIELD,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g=Duel.SelectTarget(tp,nil,tp,0,LOCATION_ONFIELD,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1000)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if not tc:IsRelateToEffect(e) or Duel.Destroy(tc,REASON_EFFECT)==0 then return end
+	Duel.Damage(1-tp,1000,REASON_EFFECT)
 end
