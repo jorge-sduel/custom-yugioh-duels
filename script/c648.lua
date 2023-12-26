@@ -73,12 +73,13 @@ function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)
+	Duel.Remove(ev,POS_FACEUP,REASON_COST)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==1-tp
 end
 function s.rmfilter(c)
-	return c:IsSetCard(0x27) and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
+	return c:IsMonster() and c:IsAbleToRemoveAsCost() and aux.SpElimFilter(c,true)
 end
 function s.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rmfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,1,e:GetHandler()) end
