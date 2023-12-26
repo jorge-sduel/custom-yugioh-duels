@@ -62,9 +62,9 @@ s.listed_series={0x27}
 s.listed_names={CARD_ASSAULT_MODE,51447164}
 s.assault_mode=51447164
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,0,LOCATION_MZONE+LOCATION_HAND,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,LOCATION_MZONE+LOCATION_HAND,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,0,LOCATION_MZONE+LOCATION_HAND,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGraveAsCost,tp,LOCATION_HAND,LOCATION_MZONE+LOCATION_HAND,1,1,nil)
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
