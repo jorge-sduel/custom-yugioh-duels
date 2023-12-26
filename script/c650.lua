@@ -26,7 +26,7 @@ s.listed_series={0xb4}
 function s.cfilter(c,e,tp,g,maxc)
 	--local tmax=maxc
 	return c:IsAbleToGraveAsCost()
-		and g:CheckWithSumEqual(Card.GetLevel,c:GetLevel(),1,maxc)
+		--and g:CheckWithSumEqual(Card.GetLevel,c:GetLevel(),1,99)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0xb4) and c:IsCanBeEffectTarget(e) and c:IsAbleToHand()
@@ -39,11 +39,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,spg,99)
 	end
 	local spg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local cg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,spg,99)
 	local lv=cg:GetFirst():GetLevel()
 	Duel.SendtoGrave(cg,REASON_EFFECT)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local sg=spg:SelectWithSumEqual(tp,Card.GetLevel,lv,1,99)
 	Duel.SetTargetCard(sg)
 end
