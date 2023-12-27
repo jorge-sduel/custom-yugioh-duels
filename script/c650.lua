@@ -47,8 +47,8 @@ end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	--local lv=e:GetLabel()
 	local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_DECK,0,nil)
-	local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_EXTRA,0,1,1,nil)
-	local lv2=g2:GetFirst():GetLevel()
+	--local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_EXTRA,0,1,1,nil)
+	local lv2=g:GetFirst():GetLevel()
 	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_EXTRA,0,1,nil) and g:CheckWithSumEqual(Card.GetLevel,lv2,1,99) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	e:SetLabel(g:GetFirst():GetLevel())
