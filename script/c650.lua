@@ -55,8 +55,10 @@ function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.thop2(e,tp,eg,ep,ev,re,r,rp)
 	local lv=e:GetLabel()
+	local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv)
 	local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_DECK,0,nil)
 	local sg=g:SelectWithSumEqual(tp,Card.GetLevel,lv,1,99)
+	Duel.SendtoGrave(g2,REASON_COST)
 	if sg and #sg>0 then
 		Duel.SendtoHand(sg,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,sg)
