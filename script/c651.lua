@@ -54,7 +54,7 @@ end
 function s.thfilter(c)
 	return c:IsSetCard(0xb4) and c:IsAbleToHand()
 end
-function c146.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:GetControler()==tp and chkc:GetLocation()==LOCATION_GRAVE and c146.filter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(s.thfilter,tp,LOCATION_GRAVE,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
