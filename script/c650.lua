@@ -31,7 +31,7 @@ function s.cfilter(c,e,tp,g,maxc)
 end
 function s.costfilter(c,lv)
 	local clv=c:GetLevel()
-	return c:IsLevelAbove(1) and c:IsLevelBelow(lv) and c:IsAbleToGraveAsCost()
+	return c:IsLevelAbove(lv) and c:IsAbleToGraveAsCost()
 end
 function s.lvcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lv=e:GetHandler():GetLevel()
@@ -49,12 +49,13 @@ function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_DECK,0,nil)
 	--local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 	local lv2=g:GetFirst():GetLevel()
-	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_EXTRA,0,1,nil,lv2) and g:CheckWithSumEqual(Card.GetLevel,lv2,1,99) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_EXTRA,0,1,nil,lv2) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	e:SetLabel(g:GetFirst():GetLevel())
 end
 function s.thop2(e,tp,eg,ep,ev,re,r,rp)
-	local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv)
+	local lv2=e:GetLabel()
+	local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv2)
 	local lv=g2:GetFirst():GetLevel()
 	local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_DECK,0,nil)
 	local sg=g:SelectWithSumEqual(tp,Card.GetLevel,lv,1,99)
