@@ -7,8 +7,8 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetTarget(s.target)
-	e1:SetOperation(s.activate)
+	e1:SetTarget(s.thtg2)
+	e1:SetOperation(s.thop2)
 	c:RegisterEffect(e1)
 	--salvage
 	local e3=Effect.CreateEffect(c)
@@ -28,30 +28,22 @@ function s.cfilter(c,e,tp,g,maxc)
 	return c:IsAbleToGraveAsCost()
 		--and g:CheckWithSumEqual(Card.GetLevel,c:GetLevel(),1,99)
 end
-function s.spfilter(c,e,tp)
+function s.thfilter2(c,e,tp)
 	return c:IsSetCard(0xb4) and c:IsCanBeEffectTarget(e) and c:IsAbleToHand()
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return false end
-	local maxc=99
-	--if maxc>1 and Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then maxc=1 end
-	if chk==0 then
-		local spg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
-		return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,spg,maxc)
-	end
-	local spg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
-	local cg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,spg,maxc)
-	local lv=cg:GetFirst():GetLevel()
-	Duel.SendtoGrave(cg,REASON_EFFECT)
-	local sg=spg:SelectWithSumEqual(tp,Card.GetLevel,lv,1,maxc)
-	Duel.SetTargetCard(sg)
+function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
+	local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_DECK,0,nil)
+	if chk==0 then return g:CheckWithSumEqual(Card.GetLevel,8,1,3) end
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetTargetCards(e)
-	local ct=#g
-	--if ct==0 or ct>1 then return end
-	Duel.SendtoHand(g,nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,g)
+function s.thop2(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_DECK,0,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local sg=g:SelectWithSumEqual(tp,Card.GetLevel,8,1,3)
+	if sg and #sg>0 then
+		Duel.SendtoHand(sg,nil,REASON_EFFECT)
+		Duel.ConfirmCards(1-tp,sg)
+	end
 end
 function s.thfilter(c)
 	return c:IsType(TYPE_RITUAL) and c:IsSetCard(0xb4) and c:IsSpell() and c:IsAbleToHand()
