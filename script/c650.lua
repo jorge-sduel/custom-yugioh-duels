@@ -31,7 +31,7 @@ function s.cfilter(c,e,tp,g,maxc)
 end
 function s.costfilter(c,lv)
 	local clv=c:GetLevel()
-	return clv>0 and clv~=lv and c:IsRace(RACE_WYRM) and c:IsAbleToGraveAsCost()
+	return c:IsAbleToGraveAsCost()
 end
 function s.lvcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lv=e:GetHandler():GetLevel()
