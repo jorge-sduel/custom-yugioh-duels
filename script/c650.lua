@@ -40,10 +40,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,spg,maxc)
 	end
 	local spg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK,0,nil,e,tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local cg=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,spg,maxc)
 	local lv=cg:GetFirst():GetLevel()
-	Duel.SendtoDeck(cg,nil,0,REASON_COST)
+	Duel.SendtoGrave(cg,REASON_EFFECT)
 	local sg=spg:SelectWithSumEqual(tp,Card.GetLevel,lv,1,maxc)
 	Duel.SetTargetCard(sg)
 end
