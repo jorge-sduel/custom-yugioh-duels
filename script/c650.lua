@@ -42,7 +42,7 @@ function s.lvcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(g:GetFirst():GetLevel())
 end
 function s.thfilter2(c)
-	return c:IsSetCard(0xb4) and c:IsAbleToHand()
+	return c:IsSetCard(0xb4) and c:IsLevelAbove(1) and c:IsAbleToHand()
 end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	--local lv=e:GetLabel()
