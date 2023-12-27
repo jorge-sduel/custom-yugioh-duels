@@ -7,8 +7,8 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetCost(s.lvcost)
-	--e1:SetTarget(s.thtg2)
+	--e1:SetCost(s.lvcost)
+	e1:SetTarget(s.thtg2)
 	e1:SetOperation(s.thop2)
 	c:RegisterEffect(e1)
 	--salvage
@@ -45,15 +45,17 @@ function s.thfilter2(c,e,tp)
 	return c:IsSetCard(0xb4) and c:IsCanBeEffectTarget(e) and c:IsAbleToHand()
 end
 function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
-	local lv=e:GetLabel()
+	--local lv=e:GetLabel()
 	local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_DECK,0,nil)
-	if chk==0 then return g:CheckWithSumEqual(Card.GetLevel,lv,1,99) end
+	local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_EXTRA,0,1,1,nil,0)
+	local lv2=g2:GetFirst():GetLevel()
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_EXTRA,0,1,nil,0) and g:CheckWithSumEqual(Card.GetLevel,lv2,1,99) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
+	e:SetLabel(g:GetFirst():GetLevel())
 end
 function s.thop2(e,tp,eg,ep,ev,re,r,rp)
 	local lv=e:GetLabel()
 	local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_DECK,0,nil)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local sg=g:SelectWithSumEqual(tp,Card.GetLevel,lv,1,99)
 	if sg and #sg>0 then
 		Duel.SendtoHand(sg,nil,REASON_EFFECT)
