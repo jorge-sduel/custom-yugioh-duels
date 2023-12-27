@@ -55,7 +55,7 @@ function s.thtg2(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.thop2(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_EXTRA,0,1,1,nil,lv)
-	local lv=g2:GetLevel()
+	local lv=g2:GetFirst():GetLevel()
 	local g=Duel.GetMatchingGroup(s.thfilter2,tp,LOCATION_DECK,0,nil)
 	local sg=g:SelectWithSumEqual(tp,Card.GetLevel,lv,1,99)
 	Duel.SendtoGrave(g2,REASON_COST)
