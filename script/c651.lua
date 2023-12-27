@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xb4}
 function s.filter(c)
-	return (c:IsSetCard(0xb4) or c:IsAttribute(ATTRIBUTE_WATER)) and c:IsAbleToDeck()
+	return (c:IsSetCard(0xb4) or (c:IsAttribute(ATTRIBUTE_WATER) and c:IsType(TYPE_RITUAL))) and c:IsAbleToDeck()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil) end
