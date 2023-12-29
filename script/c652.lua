@@ -1,12 +1,16 @@
---失楽の聖女
---Condemned Maiden
+--
 local s,id=GetID()
 function s.initial_effect(c)
+		--Activate
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_ACTIVATE)
+	e0:SetCode(EVENT_FREE_CHAIN)
+	c:RegisterEffect(e0)
 	--act qp in hand
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_QP_ACT_IN_NTPHAND)
-	e1:SetRange(LOCATION_MZONE)
+	e1:SetRange(LOCATION_SZONE)
 	e1:SetTargetRange(LOCATION_HAND,0)
 	e1:SetCountLimit(1,id)
 	e1:SetDescription(aux.Stringid(id,0))
