@@ -24,8 +24,10 @@ function s.initial_effect(c)
 								filter=s.ritfilter,
 								desc=aux.Stringid(id,1),
 								stage2=s.stage2})
-	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetType(EFFECT_TYPE_QUICK_O)
+	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetRange(LOCATION_SZONE)
+	e3:SetCondition(function()return Duel.IsMainPhase() end)
 	e3:SetCountLimit(1,{id,1})
 	c:RegisterEffect(e3)
 end
