@@ -16,9 +16,10 @@ function s.exfilter01(c)
 	return c:IsSummonLocation(LOCATION_EXTRA)
 end
 function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
-	if Duel.IsExistingMatchingCard(s.exfilter01,0,tp,LOCATION_MZONE,1,nil) then
-		return Duel.GetMatchingGroup(s.exfilter0,tp,LOCATION_DECK,0,nil)
+	if Duel.IsExistingMatchingCard(Card.IsSummonLocation,tp,0,LOCATION_MZONE,1,nil,LOCATION_EXTRA) then
+		return Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_DECK,0,nil)
 	end
+	return nil
 end
 function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
 	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_DECK)
