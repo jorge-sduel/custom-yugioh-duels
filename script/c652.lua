@@ -32,6 +32,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e3:SetCode(EFFECT_BECOME_QUICK)
+	e3:SetCondition(s.rmcon)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetTargetRange(0x3f,0)
 	e3:SetTarget(aux.TargetBoolFunction(Card.IsRitualSpell))
@@ -41,6 +42,9 @@ s.listed_series={0xb4}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer() and Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>0
 		and Duel.GetDrawCount(tp)>0
+end
+function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnPlayer()==1-tp
 end
 function s.filter(c)
 	return c:IsSetCard(0xb4) and c:IsRitualMonster() and c:IsAbleToHand()
