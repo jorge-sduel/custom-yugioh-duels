@@ -13,6 +13,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetTargetRange(LOCATION_HAND,0)
 	e1:SetCountLimit(1,id)
+	e1:SetTarget(aux.TargetBoolFunction(Card.IsRitualSpell))
 	e1:SetDescription(aux.Stringid(id,0))
 	c:RegisterEffect(e1)
 	--search
@@ -26,6 +27,15 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
+		--wut
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
+	e3:SetCode(EFFECT_BECOME_QUICK)
+	e3:SetRange(LOCATION_SZONE)
+	e3:SetTargetRange(0x3f,0x3f)
+	e3:SetTarget(aux.TargetBoolFunction(Card.IsRitualSpell))
+	c:RegisterEffect(e3)
 end
 s.listed_series={0xb4}
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
