@@ -44,7 +44,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.GetDrawCount(tp)>0
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==1-tp
+	return Duel.GetTurnPlayer()==1-e:GetHandlerPlayer()
 end
 function s.filter(c)
 	return c:IsSetCard(0xb4) and c:IsRitualMonster() and c:IsAbleToHand()
