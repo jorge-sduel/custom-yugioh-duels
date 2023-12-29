@@ -16,7 +16,7 @@ function s.exfilter01(c)
 	return c:IsSummonLocation(LOCATION_EXTRA)
 end
 function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
-	if Duel.GetMatchingGroup(s.exfilter01,tp,0,LOCATION_MZONE,nil) then
+	if Duel.IsExistingMatchingCard(s.exfilter01,0,c:GetControler(),LOCATION_MZONE,1,nil) then
 		return Duel.GetMatchingGroup(s.exfilter0,tp,LOCATION_DECK,0,nil)
 	end
 end
