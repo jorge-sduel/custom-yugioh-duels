@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 	e3:SetCode(EFFECT_BECOME_QUICK)
 	e3:SetRange(LOCATION_SZONE)
-	e3:SetTargetRange(0x3f,0x3f)
+	e3:SetTargetRange(0x3f,0)
 	e3:SetTarget(aux.TargetBoolFunction(Card.IsRitualSpell))
 	c:RegisterEffect(e3)
 end
