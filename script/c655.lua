@@ -16,8 +16,8 @@ function s.exfilter01(c)
 	return c:IsSummonLocation(LOCATION_EXTRA)
 end
 function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
-	if Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 then
-		return Duel.GetMatchingGroup(s.exfilter0,tp,LOCATION_DECK,0,nil) and Duel.GetMatchingGroup(s.exfilter01,tp,0,LOCATION_MZONE,nil)
+	if Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0 and Duel.GetMatchingGroup(s.exfilter01,tp,0,LOCATION_MZONE,nil) then
+		return Duel.GetMatchingGroup(s.exfilter0,tp,LOCATION_DECK,0,nil)
 	end
 end
 function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
