@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	local e3=Ritual.CreateProc({handler=c,
 								lvtype=RITPROC_EQUAL,
 								filter=s.ritfilter,
-								desc=aux.Stringid(id,1),extrafil=s.extrafil,extraop=s.extraop,matfilter=s.forcedgroup})
+								desc=aux.Stringid(id,1),extrafil=s.extrafil,extraop=s.extraop})
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetRange(LOCATION_SZONE)
