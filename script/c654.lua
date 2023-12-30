@@ -19,10 +19,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.thop)
 	c:RegisterEffect(e2)
 	--Ritual Summon 1 Ritual Monster
-	local e3=Ritual.CreateProc({handler=c,
-								lvtype=RITPROC_EQUAL,
-								filter=s.ritfilter,
-								desc=aux.Stringid(id,1),extrafil=s.extrafil,extraop=s.extraop})
+	local e3=Ritual.CreateProc({handler=c,lvtype=RITPROC_EQUAL,filter=s.ritualfil,extrafil=s.extrafil,extraop=s.extraop,matfilter=s.forcedgroup})
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetRange(LOCATION_SZONE)
@@ -70,7 +67,7 @@ function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
 end
 function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.IsExistingMatchingCard(Card.IsSummonLocation,tp,0,LOCATION_MZONE,1,nil,LOCATION_EXTRA) then
-		return Duel.GetMatchingGroup(Card.IsMonster,tp,0,LOCATION_DECK,nil)
+		return Duel.GetMatchingGroup(Card.IsMonster,tp,0,LOCATION_MZONE,nil)
 	end
 	return nil
 end
