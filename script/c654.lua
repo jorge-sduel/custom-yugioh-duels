@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	local e3=Ritual.CreateProc({handler=c,
 								lvtype=RITPROC_EQUAL,
 								filter=s.ritfilter,
-								desc=aux.Stringid(id,1)})
+								desc=aux.Stringid(id,1),extrafil=s.extrafil,extraop=s.extraop,matfilter=s.forcedgroup})
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetCode(EVENT_FREE_CHAIN)
 	e3:SetRange(LOCATION_SZONE)
@@ -61,4 +61,19 @@ function s.stage2(mat,e,tp,eg,ep,ev,re,r,rp,tc)
 	e1:SetValue(1)
 	e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 	tc:RegisterEffect(e1)
+end
+function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
+	local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_DECK)
+	mg:Sub(mat2)
+	Duel.ReleaseRitualMaterial(mg)
+	Duel.SendtoGrave(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
+end
+function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
+	if Duel.IsExistingMatchingCard(Card.IsSummonLocation,tp,0,LOCATION_MZONE,1,nil,LOCATION_EXTRA) then
+		return Duel.GetMatchingGroup(Card.IsMonster,tp,0,LOCATION_DECK,nil)
+	end
+	return nil
+end
+function s.forcedgroup(c,e,tp)
+	return (c:IsLocation(LOCATION_HAND+LOCATION_ONFIELD)) or (c:IsLocation(LOCATION_MZONE) and c:IsControler(1-tp))
 end
