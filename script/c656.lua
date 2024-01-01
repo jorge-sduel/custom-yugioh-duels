@@ -120,7 +120,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetOperation(s.desop)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	e1:SetCountLimit(1)
-	sg:RegisterEffect(e1)
+	sg:GetFirst():RegisterEffect(e1,true)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(e:GetHandler(),REASON_EFFECT)
