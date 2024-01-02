@@ -34,7 +34,7 @@ function c989512332.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c989512332.MonMatFilter(c)
-	return c:GetLevel()==7 and c:IsRace(RACE_DRAGON,rc,sumtyp,tp)
+	return c:GetLevel()==7 and c:IsRace(RACE_DRAGON)
 end
 function c989512332.MonMatFilter2(c)
 	return c:IsType(TYPE_PENDULUM) and (c:IsLocation(LOCATION_PZONE) or c:IsLocation(LOCATION_SZONE))
