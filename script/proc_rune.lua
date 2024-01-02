@@ -604,17 +604,17 @@ function Rune.Operation(monf,mmin,mmax,stf,smin,smax,group,customoperation,stage
 				end
 				if tdgroup then
 					g:Sub(tdgroup)
-			                Duel.ConfirmCards(1-tp,tdgroup)
+			                Duel.ConfirmCards(1-e:GetHandlerPlayer(),tdgroup)
 					Duel.Remove(tdgroup,POS_FACEUP,REASON_MATERIAL+REASON_RUNE)
 					Duel.SendtoDeck(tdgroup,nil,SEQ_DECKBOTTOM,REASON_MATERIAL+REASON_RUNE)
 				end
 				if thgroup then
 					g:Sub(thgroup)
-			  Duel.ConfirmCards(1-tp,thgroup)
+			  Duel.ConfirmCards(1-e:GetHandlerPlayer(),thgroup)
 					Duel.SendtoHand(thgroup,nil,REASON_MATERIAL+REASON_RUNE)
 				end
 				if not customoperation then
-			                Duel.ConfirmCards(1-tp,thgroup)
+			                Duel.ConfirmCards(1-e:GetHandlerPlayer(),thgroup)
 					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNE)
 					
 					if stage2 then
