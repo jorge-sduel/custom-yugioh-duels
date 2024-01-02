@@ -1,11 +1,11 @@
 --Lyrica (WIND)
 local ref=_G['c'..18917010]
 ref.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function ref.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_SPELLCASTER),ref.matfilter,1,1)
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRace,RACE_SPELLCASTER),1,1,Rune.STFunction(ref.matfilter),1,1)
 	--Cannot Target
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND)
