@@ -603,6 +603,7 @@ function Rune.Operation(monf,mmin,mmax,stf,smin,smax,group,customoperation,stage
 				end
 				if tdgroup then
 					g:Sub(tdgroup)
+			                Duel.ConfirmCards(1-tp,tdgroup)
 					Duel.Remove(tdgroup,POS_FACEUP,REASON_MATERIAL+REASON_RUNE)
 					Duel.SendtoDeck(tdgroup,nil,SEQ_DECKBOTTOM,REASON_MATERIAL+REASON_RUNE)
 				end
