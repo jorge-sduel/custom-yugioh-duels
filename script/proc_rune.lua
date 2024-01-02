@@ -614,7 +614,7 @@ function Rune.Operation(monf,mmin,mmax,stf,smin,smax,group,customoperation,stage
 					Duel.SendtoHand(thgroup,nil,REASON_MATERIAL+REASON_RUNE)
 				end
 				if not customoperation then
-			                Duel.ConfirmCards(1-e:GetHandlerPlayer(),thgroup)
+			                Duel.ConfirmCards(1-e:GetHandlerPlayer(),g)
 					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNE)
 					
 					if stage2 then
