@@ -4,7 +4,7 @@ c989512332.Is_Runic=true
 function c989512332.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Rune.AddProcedure(c,Rune.MonFunction(s.MonMatFilter),1,1,Rune.STFunctionEx(Card.IsType,TYPE_PENDULUM),1,1)
+	Rune.AddProcedure(c,Rune.MonFunction(c989512332.MonMatFilter),1,1,Rune.STFunctionEx(Card.IsType,TYPE_PENDULUM),1,1)
 	--search
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(989512332,1))
