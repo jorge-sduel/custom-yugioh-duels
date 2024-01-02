@@ -1,12 +1,12 @@
 --Shimzu Kujira
-local s,id=GetID()
 s.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
+local s,id=GetID()
 function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRace,RACE_AQUA),1,1,Rune.STFunctionEx(Card.IsSetCard,0xff1),1,99)
    aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_AQUA),aux.FilterBoolFunction(Card.IsSpellTrap),2,2)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(66141736,0))
