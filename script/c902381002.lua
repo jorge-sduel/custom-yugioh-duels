@@ -1,12 +1,12 @@
 --Shimzu Kurage
 local s,id=GetID()
 s.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsAttribute,ATTRIBUTE_WIND),1,1,Rune.STFunction(nil),1,1)
    aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_WIND),s.matfilter,1,1)
 	--summon success
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -30,11 +30,12 @@ function s.initial_effect(c)
 	e2:SetValue(s.efilter)
 	c:RegisterEffect(e2)
 end
+s.listed_names={902381000}
 function s.matfilter(c)
 	return c:IsType(TYPE_TRAP+TYPE_SPELL)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_RUNIC)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_RUNE)
 end
 function s.filter(c,e,tp)
 	return c:IsCode(902381000) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
