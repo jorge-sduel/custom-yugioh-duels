@@ -4,7 +4,7 @@ if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c979812053.initial_effect(c)
 	--rune procedure
 	c:EnableReviveLimit()
-	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRankAbove,5),1,1,Rune.STFunction(Card.IsType,TYPE_SPELL),2,2)
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRankAbove,5),1,1,Rune.STFunctionEx(Card.IsType,TYPE_SPELL),2,2)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
 	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
