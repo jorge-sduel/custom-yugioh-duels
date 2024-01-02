@@ -599,6 +599,7 @@ function Rune.Operation(monf,mmin,mmax,stf,smin,smax,group,customoperation,stage
 				end
 				if rmgroup then
 					g:Sub(rmgroup)
+			                Duel.ConfirmCards(rmgroup)
 					Duel.Remove(rmgroup,POS_FACEUP,REASON_MATERIAL+REASON_RUNE)
 				end
 				if tdgroup then
@@ -609,9 +610,11 @@ function Rune.Operation(monf,mmin,mmax,stf,smin,smax,group,customoperation,stage
 				end
 				if thgroup then
 					g:Sub(thgroup)
+			                Duel.ConfirmCards(thgroup)
 					Duel.SendtoHand(thgroup,nil,REASON_MATERIAL+REASON_RUNE)
 				end
 				if not customoperation then
+			                Duel.ConfirmCards(thgroup)
 					Duel.SendtoGrave(g,REASON_MATERIAL+REASON_RUNE)
 					
 					if stage2 then
