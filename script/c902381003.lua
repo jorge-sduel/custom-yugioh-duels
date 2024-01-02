@@ -1,12 +1,12 @@
 --Shimzu Iruka
 local s,id=GetID()
 s.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
+	Rune.AddProcedure(c,Rune.MonFunction(s.monfilter),1,1,Rune.STFunctionEx(Card.IsSetCard,0xff1),1,1)
    aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
-	Runic.AddProcedure(c,s.monfilter,s.matfilter,1,1)
 	--Non-tuner
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
