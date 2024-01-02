@@ -1,10 +1,10 @@
 --Blue Fairy in White
 c961423423.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
-function c961423423.initial_effect(c)
-	--Rune Summon
+if not Rune then Duel.LoadScript("proc_rune.lua") end
+function c989705312.initial_effect(c)
+	--rune procedure
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_FAIRY),aux.FilterBoolFunction(Card.IsType,TYPE_SPELL),2,2)
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRace,RACE_FAIRY),1,1,Rune.STFunctionEx(Card.IsType,TYPE_SPELL),1,1)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(961423423,0))
