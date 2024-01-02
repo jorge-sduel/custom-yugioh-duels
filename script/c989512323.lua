@@ -5,7 +5,7 @@ local s,id=GetID()
 function c989512323.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRace,RACE_MACHINE),1,1,Rune.STFunctionEx(Card.IsType,TYPE_EQUIP),1,1)
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRace,RACE_MACHINE),1,1,Rune.STFunctionEx(Card.IsType,TYPE_SPELL),1,1)
 	--Attack Up
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
