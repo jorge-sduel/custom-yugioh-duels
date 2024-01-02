@@ -1,10 +1,10 @@
 --Abyss Actor - Splendid Heroine
 c950231423.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c950231423.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsCode,24907044),c950231423.STMatFilter,1,1)
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsSetCard,0x10ec),1,1,Rune.STFunction(c950231423.STMatFilter),2,2)
 	--atk down
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(950231423,2))
@@ -24,6 +24,7 @@ function c950231423.initial_effect(c)
 	e3:SetOperation(c950231423.atkop)
 	c:RegisterEffect(e3)
 end
+s.listed_series={0x10ec,0x20ec}
 function c950231423.STMatFilter(c)
 	return c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)
 end
