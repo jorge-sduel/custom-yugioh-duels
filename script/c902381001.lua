@@ -1,12 +1,15 @@
 --Shimzu Gyogun
 local s,id=GetID()
 s.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
+local s,id=GetID()
 function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
+	Rune.AddProcedure(c,Rune.MonFunction(nil),1,1,Rune.STFunction(nil),1,1)
+	--rune
+	c:EnableReviveLimit()
    aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
-	Runic.AddProcedure(c,nil,s.matfilter,1,1)
 	--level change
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(84046493,0))
