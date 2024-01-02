@@ -438,7 +438,7 @@ function Rune.Condition(monf,mmin,mmax,stf,smin,smax,group,condition,excondition
 				local tp=c:GetControler()
 				--get usable group
 				local g
-				if not og then g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_ONFIELD,0,nil)
+				if not og then g=Duel.GetMatchingGroup(Rune.faceup,tp,LOCATION_ONFIELD,0,nil)
 				else g=og:Clone() end
 				--no extra materials if effect is negated
 				if group and not c:IsDisabled() then
@@ -487,7 +487,7 @@ function Rune.Target(monf,mmin,mmax,stf,smin,smax,group,excondition,specialchk)
 	return 	function(e,tp,eg,ep,ev,re,r,rp,chk,c,must,og,min,max)
 				--get usable group
 				local g
-				if not og then g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_ONFIELD,0,nil)
+				if not og then g=Duel.GetMatchingGroup(Rune.faceup,tp,LOCATION_ONFIELD,0,nil)
 				else g=og:Clone() end
 				--no extra materials if effect is negated
 				if group and not c:IsDisabled() then
@@ -844,4 +844,8 @@ end
 function Rune.NSML2(e,c)
 	--local tc=e:GetHandler():GetCardTarget():GetFirst()
 	return c:IsType(TYPE_RUNE) and not c:IsLevelAbove(1)
+end
+function Rune.faceup(c)
+	--local tc=e:GetHandler():GetCardTarget():GetFirst()
+	return (c:IsFaceup() and c:IsLocation(LOCATION_MZONE)) or not (c:IsFaceup() and c:IsLocation(LOCATION_MZONE))
 end
