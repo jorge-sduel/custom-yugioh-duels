@@ -1,11 +1,12 @@
 --Purmpince of Ghosts
 c923717524.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c923717524.initial_effect(c)
+	--rune procedure
+	c:EnableReviveLimit()
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRace,RACE_ZOMBIE),1,1,Rune.STFunction(c923717524.filter),1,1)
 	c:EnableCounterPermit(0x2f,LOCATION_MZONE)
 	--Rune Summon
-	c:EnableReviveLimit()
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_ZOMBIE),c923717524.filter,1,1)
 	--counter
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(17601919,1))
