@@ -1,10 +1,10 @@
 --Perfectly Apex Great Moth
 c934627890.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c934627890.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsRace,RACE_INSECT),aux.FilterBoolFunction(Card.IsType,TYPE_EQUIP),1,1)
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRuneCode,58192742),1,1,Rune.STFunctionEx(Card.IsRuneCode,40240595),1,1)
 	--direct attack
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(49121795,0))
