@@ -1,9 +1,11 @@
 --Tyranic Dragon
 c968713202.Is_runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c968713202.initial_effect(c)
-	--ignition summon
-	Runic.AddProcedure(c,c968713202.filter2,c968713202.filter1,1,1)	--Rune Summon
+	--rune procedure
+	c:EnableReviveLimit()
+	Rune.AddProcedure(c,Rune.MonFunction(nil),1,1,Rune.STFunctionEx(Card.IsType,TYPE_TRAP),1,1)
+	--Rune Summon
 	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(968713202,0))
