@@ -1,10 +1,10 @@
 --Haunted Bones' Call
 c958912340.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
-function c958912340.initial_effect(c)
-	--Rune Summon
+if not Rune then Duel.LoadScript("proc_rune.lua") end
+function c989705312.initial_effect(c)
+	--rune procedure
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,nil,aux.FilterBoolFunction(Card.IsCode,97077563),1,1)
+	Rune.AddProcedure(c,Rune.MonFunction(nil),1,1,Rune.STFunctionEx(Card.IsCode,97077563),1,1)
 	--spsummon
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(958912340,0))
