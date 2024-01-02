@@ -1,10 +1,19 @@
 --Advanced Rainbow Dragon
 c985210323.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c985210323.initial_effect(c)
+	--Rune Summon
 	c:EnableReviveLimit()
+Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsSetCard,0x1034),1,1,Rune.STFunction(c985210323.STfilter),4,99)
+		--cannot special summon
+	local e1=Effect.CreateEffect(c)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
+	e1:SetValue(aux.runlimit)
+	c:RegisterEffect(e1)
 	--ignition summon
-	Runic.AddProcedure(c,c985210323.filter2,c985210323.filter1,2,99)
+	--Runic.AddProcedure(c,c985210323.filter2,c985210323.filter1,2,99)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
 	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -32,8 +41,9 @@ function c985210323.initial_effect(c)
 	e5:SetValue(c985210323.atkval)
 	c:RegisterEffect(e5)
 end
-function c985210323.filter1(c)
-	return c:IsSetCard(0x34) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP))
+c985210323.listed_series={0x1034,0x34}
+function c985210323.STfilter(c,rc,sumtype,tp)
+	return c:IsSetCard(0x34,rc,sumtype,tp) and c:IsType(TYPE_SPELL)
 end
 function c985210323.filter2(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x2034)
