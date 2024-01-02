@@ -1,19 +1,11 @@
 --C-DQ Virtuakit-β
 c919832580.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c919832580.initial_effect(c)
-	--Rune Summon
+	--rune procedure
 	c:EnableReviveLimit()
-  aux.AddRunicState(c)
-	local r1=Effect.CreateEffect(c)
-	r1:SetType(EFFECT_TYPE_FIELD)
-	r1:SetCode(EFFECT_SPSUMMON_PROC)
-	r1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	r1:SetRange(LOCATION_HAND)
-	r1:SetCondition(c919832580.runcon)
-	r1:SetOperation(c919832580.runop)
-	r1:SetValue(SUMMON_TYPE_RUNIC)
-	c:RegisterEffect(r1)
+	Rune.AddProcedure(c,Rune.MonFunction(c919832580.matfilter1),1,1,Rune.STFunction(c919832580.matfilter2),1,1)
 	--equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(29071332,0))
@@ -66,7 +58,7 @@ function c919832580.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 function c919832580.matfilter1(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsAttribute(ATTRIBUTE_DARK)
+	return c:IsType(TYPE_MONSTER) and c:IsAttribute(ATTRIBUTE_DARK)
 end
 function c919832580.matfilter2(c)
 	return c:IsType(TYPE_SPELL)
