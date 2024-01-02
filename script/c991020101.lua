@@ -2,19 +2,18 @@
 local s,id=GetID()
 s.Is_Runic=true
 if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function s.initial_effect(c)
 	--rune procedure
 	c:EnableReviveLimit()
-	aux.AddRunicState(c)
-	local r1=Effect.CreateEffect(c)
-	r1:SetType(EFFECT_TYPE_FIELD)
-	r1:SetCode(EFFECT_SPSUMMON_PROC)
-	r1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	r1:SetRange(LOCATION_HAND)
-	r1:SetCondition(s.runcon)
-	r1:SetOperation(s.runop)
-	r1:SetValue(SUMMON_TYPE_RUNIC)
-	c:RegisterEffect(r1)
+	Rune.AddProcedure(c,Rune.MonFunction(nil),1,1,Rune.STFunctionEx(Card.IsType,TYPE_SPELL),2,99,nil,s.altG)
+	--cannot special summon
+	local e1=Effect.CreateEffect(c)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
+	e1:SetValue(aux.runlimit)
+	c:RegisterEffect(e1)
 	--cannot be target
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
@@ -65,6 +64,15 @@ function s.initial_effect(c)
 	e6:SetTarget(s.damtg1)
 	e6:SetOperation(s.damop1)
 	c:RegisterEffect(e6)
+end
+function s.altG(tp,ex,c)
+	local g
+	if Duel.IsPlayerAffectedByEffect(tp,54828837) then
+		g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,0,nil)
+	else
+		g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_ONFIELD,0,nil)
+	end
+	return g
 end
 function s.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsLocation(LOCATION_MZONE)
