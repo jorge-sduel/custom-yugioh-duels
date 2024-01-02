@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	Rune.AddProcedure(c,Rune.MonFunction(nil),1,1,Rune.STFunction(nil),1,1)
 	--rune
 	c:EnableReviveLimit()
-   aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
+   aux.AddRuneTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
 	--level change
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(84046493,0))
