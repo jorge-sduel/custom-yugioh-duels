@@ -1,8 +1,10 @@
 --Raviel Lord of Vengeful Spirits
-local s,id=GetID()
-s.Is_Runic=true
 if not Rune then Duel.LoadScript("proc_rune.lua") end
+local s,id=GetID()
 function s.initial_effect(c)
+	--rune procedure
+	c:EnableReviveLimit()
+	Rune.AddProcedure(c,Rune.MonFunction(nil),2,99,Rune.STFunction(nil),1,1)
 	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -44,6 +46,7 @@ function s.initial_effect(c)
 	e4:SetValue(s.atkval)
 	c:RegisterEffect(e4)
 end
+s.listed_names={69890968,69890967}
 function s.matfilter1(c)
 	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
 end
