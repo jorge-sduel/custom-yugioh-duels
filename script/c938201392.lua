@@ -1,9 +1,9 @@
 --Emblem-Eyes Restrict
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c938201392.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
-	Runic.AddProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x110),aux.FilterBoolFunction(Card.IsType,TYPE_EQUIP),1,1)
-	aux.AddRunicProcedure2(c,aux.FilterBoolFunction(Card.IsSetCard,0x110),aux.FilterBoolFunction(Card.IsType,TYPE_EQUIP),1,1,LOCATION_GRAVE)
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsSetCard,0x110),1,1,Rune.STFunctionEx(Card.IsType,TYPE_EQUIP),1,1,LOCATION_GRAVE)
 	--equip
     local e1=Effect.CreateEffect(c)
     e1:SetDescription(aux.Stringid(63519819,0))
