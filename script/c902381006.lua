@@ -1,6 +1,6 @@
 --Shimzu Aurora
 local s,id=GetID()
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
