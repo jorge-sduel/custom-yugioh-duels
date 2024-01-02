@@ -1,6 +1,6 @@
 --Shimzu Sewanin
 local s,id=GetID()
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function s.initial_effect(c)
  --aux.AddRunicTuning(c,LOCATION_MZONE,LOCATION_MZONE,0,LOCATION_EXTRA,0)
 	--search
@@ -47,7 +47,7 @@ end
 	--Check for RUne Summon
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	return tc:IsControler(tp) and tc:IsSetCard(0xff1) and tc:IsSummonType(SUMMON_TYPE_RUNIC)
+	return tc:IsControler(tp) and tc:IsSetCard(0xff1) and tc:IsSummonType(SUMMON_TYPE_RUNE)
 end
 	--If it ever happened
 --function s.spcon(e,tp,eg,ep,ev,re,r,rp)
