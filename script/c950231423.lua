@@ -24,7 +24,7 @@ function c950231423.initial_effect(c)
 	e3:SetOperation(c950231423.atkop)
 	c:RegisterEffect(e3)
 end
-s.listed_series={0x10ec,0x20ec}
+c950231423.listed_series={0x10ec,0x20ec}
 function c950231423.STMatFilter(c)
 	return c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)
 end
