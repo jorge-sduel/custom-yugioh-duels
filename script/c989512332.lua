@@ -1,10 +1,10 @@
 --Odd-Eyes Sign Dragon 
 c989512332.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+ if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c989512332.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
- Runic.AddProcedure(c,c989512332.MonMatFilter,c989512332.MonMatFilter2,1,1)
+	Rune.AddProcedure(c,Rune.MonFunction(s.MonMatFilter),1,1,Rune.STFunctionEx(Card.IsType,TYPE_PENDULUM),1,1)
 	--search
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(989512332,1))
@@ -34,7 +34,7 @@ function c989512332.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c989512332.MonMatFilter(c)
-	return c:GetLevel()==7 and c:IsRace(RACE_DRAGON)
+	return c:GetLevel()==7 and c:IsRace(RACE_DRAGON,rc,sumtyp,tp)
 end
 function c989512332.MonMatFilter2(c)
 	return c:IsType(TYPE_PENDULUM) and (c:IsLocation(LOCATION_PZONE) or c:IsLocation(LOCATION_SZONE))
