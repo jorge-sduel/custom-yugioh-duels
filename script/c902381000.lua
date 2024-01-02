@@ -29,6 +29,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
 end
+s.listed_series={0xff1}
 function s.filter(c)
 	return c:IsSetCard(0xff1) and c:IsAbleToHand()
 end
