@@ -1,10 +1,10 @@
 --Tiska Virtuakit-β
 c919789023.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c919789023.initial_effect(c)
+	--rune procedure
 	c:EnableReviveLimit()
-	--ignition summon
-	Runic.AddProcedure(c,c919789023.matfilter2,c919789023.matfilter1,1,1)
+	Rune.AddProcedure(c,Rune.MonFunction(c919789023.matfilter2),1,1,Rune.STFunction(c919789023.matfilter1),1,1)
 	--Rune Summon
 	c:EnableReviveLimit()
 	--local r1=Effect.CreateEffect(c)
@@ -73,7 +73,7 @@ function c919789023.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 function c919789023.matfilter2(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER)
+	return c:IsType(TYPE_MONSTER)
 end
 function c919789023.matfilter1(c)
 	return  c:IsType(TYPE_EQUIP) and c:IsType(TYPE_SPELL)
