@@ -1,7 +1,7 @@
 --Brotherhood of the Fire Fist - Ox
 c950129342.Is_Runic=true
 if not Rune then Duel.LoadScript("proc_rune.lua") end
-function c989705312.initial_effect(c)
+function c950129342.initial_effect(c)
 	--rune procedure
 	c:EnableReviveLimit()
 	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsAttribute,ATTRIBUTE_FIRE),1,1,Rune.STFunction(Card.IsLocation,LOCATION_SZONE),2,99)
