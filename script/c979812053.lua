@@ -1,19 +1,10 @@
 --Complete Release Virtuakit-X
 c979812053.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c979812053.initial_effect(c)
-	--Rune Summon
+	--rune procedure
 	c:EnableReviveLimit()
-  aux.AddRunicState(c)
-	local r1=Effect.CreateEffect(c)
-	r1:SetType(EFFECT_TYPE_FIELD)
-	r1:SetCode(EFFECT_SPSUMMON_PROC)
-	r1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	r1:SetRange(LOCATION_HAND)
-	r1:SetCondition(c979812053.runcon)
-	r1:SetOperation(c979812053.runop)
-	r1:SetValue(SUMMON_TYPE_RUNIC)
-	c:RegisterEffect(r1)
+	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRankAbove,5),1,1,Rune.STFunction(Card.IsType,TYPE_SPELL),2,2)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
 	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
