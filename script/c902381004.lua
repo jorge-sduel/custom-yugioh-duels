@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	--rune
 	c:EnableReviveLimit()
 	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsRace,RACE_AQUA),1,1,Rune.STFunctionEx(Card.IsSetCard,0xff1),1,99)
-   aux.AddRunicTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
+   aux.AddRuneTuning2(c,LOCATION_MZONE,LOCATION_EXTRA,LOCATION_EXTRA)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(66141736,0))
