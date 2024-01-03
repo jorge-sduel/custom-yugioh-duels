@@ -1,5 +1,5 @@
 --Transfigurer, Pyra
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c938926102.initial_effect(c)
 	--lv change
 	local e1=Effect.CreateEffect(c)
@@ -48,7 +48,7 @@ function c938926102.lvop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c938926102.descon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return  rc:IsSetCard(0xfe9) and e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
+	return rc:IsType(TYPE_RUNE) and rc:IsSummonType(SUMMON_TYPE_RUNE)
 end
 function c938926102.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:IsDestructable() end
