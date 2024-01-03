@@ -1,5 +1,5 @@
 --Transfigurer, Forah
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c986941012.initial_effect(c)
 	--summon
 	local e1=Effect.CreateEffect(c)
@@ -57,7 +57,7 @@ function c986941012.spop1(e,tp,eg,ep,ev,re,r,rp)
 end
 function c986941012.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return  rc:IsSetCard(0xfe9) and e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
+	return rc:IsType(TYPE_RUNE) and rc:IsSummonType(SUMMON_TYPE_RUNE)
 end
 function c986941012.filter2(c,e,tp)
 	return c:IsSetCard(0xfe9) and not c:IsCode(986941012) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
