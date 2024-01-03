@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c,e,tp)
-	return c:IsType(TYPE_RUNE) and c:IsLevelBelow(6)
+	return c:IsType(TYPE_RUNE) and c:IsRankBelow(6)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RUNE,tp,false,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
