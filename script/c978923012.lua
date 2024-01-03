@@ -1,5 +1,5 @@
 --Transfigurer, Breeze
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c978923012.initial_effect(c)
 	--set
 	local e1=Effect.CreateEffect(c)
