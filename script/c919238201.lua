@@ -5,13 +5,13 @@ function s.initial_effect(c)
 	--Rune Summon
 	c:EnableReviveLimit()
 	Rune.AddProcedure(c,Rune.MonFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),2,2,Rune.STFunction(s.STRunFilter),1,1)
-	--[[cannot special summon
+	--cannot special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetValue(aux.runlimit)
-	c:RegisterEffect(e1)]]
+	c:RegisterEffect(e1)
 	--negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
