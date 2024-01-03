@@ -1,5 +1,5 @@
 --Transfigure
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c982391022.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
