@@ -1,4 +1,5 @@
 --Protective Prince
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c996821023.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,11,2,c996821023.ovfilter,aux.Stringid(85115440,0),2)
@@ -26,7 +27,7 @@ function c996821023.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c996821023.ovfilter(c)
-	return c:IsFaceup() and c.Is_Runic and c:IsRankAbove(7)
+	return c:IsFaceup() and (c.Is_Runic or c:IsType(TYPE_RUNE)) and c:IsRankAbove(7)
 end
 function c996821023.matcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_XYZ
