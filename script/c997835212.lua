@@ -1,5 +1,5 @@
---Transfigurer, Foul
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+--Transfigurer, Fo
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c997835212.initial_effect(c)
 	--summon
 	local e1=Effect.CreateEffect(c)
