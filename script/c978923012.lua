@@ -45,7 +45,7 @@ function c978923012.setop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c978923012.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetHandler():GetReasonCard()
-	return  rc:IsSetCard(0xfe9) and e:GetHandler():IsPreviousLocation(LOCATION_MZONE) and rc:IsPreviousLocation(LOCATION_HAND) and e:GetHandler():GetTurnID()==Duel.GetTurnCount() and rc.Is_Runic
+	return rc:IsType(TYPE_RUNE) and rc:IsSummonType(SUMMON_TYPE_RUNE)
 end
 function c978923012.thfilter(c)
 	return c:IsSetCard(0xfe9) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
