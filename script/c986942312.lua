@@ -1,19 +1,10 @@
 --Transfigured, Zephyr Demon
 c986942312.Is_Runic=true
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c986942312.initial_effect(c)
-	--Rune Summon
+	--rune procedure
 	c:EnableReviveLimit()
-  aux.AddRunicState(c)
-	local r1=Effect.CreateEffect(c)
-	r1:SetType(EFFECT_TYPE_FIELD)
-	r1:SetCode(EFFECT_SPSUMMON_PROC)
-	r1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
-	r1:SetRange(LOCATION_HAND)
-	r1:SetCondition(c986942312.runcon)
-	r1:SetOperation(c986942312.runop)
-	r1:SetValue(SUMMON_TYPE_RUNIC)
-	c:RegisterEffect(r1)
+	Rune.AddProcedure(c,Rune.MonFunction(c986942312.matfilter1),2,2,Rune.STFunction(c986942312.matfilter2),2,2)
 	--cannot special summon
 	--local e1=Effect.CreateEffect(c)
 	--e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -56,7 +47,7 @@ function c986942312.aclimit(e,re,tp)
 	return not c:IsLocation(LOCATION_SZONE) or c:GetFlagEffect(986942312)>0
 end
 function c986942312.matfilter1(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:IsAttack(0) or c:IsDefense(0))
+	return c:IsType(TYPE_MONSTER) and (c:IsAttack(0) or c:IsDefense(0))
 end
 function c986942312.matfilter2(c)
 	return c:IsType(TYPE_SPELL+TYPE_TRAP)
