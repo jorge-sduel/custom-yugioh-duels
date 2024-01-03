@@ -1,5 +1,5 @@
 --Ancient Engraved Sword
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
 function c956891234.initial_effect(c)
 	aux.AddEquipProcedure(c)
 	--destroy sub
