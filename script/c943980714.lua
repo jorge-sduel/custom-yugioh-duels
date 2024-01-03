@@ -1,15 +1,16 @@
 --Runic Instantation
 local s,id=GetID()
-if not RUNIC_IMPORTED then Duel.LoadScript("proc_runic.lua") end
+if not Rune then Duel.LoadScript("proc_rune.lua") end
+local s,id=GetID()
 function s.initial_effect(c)
 	--activate
 	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetHintTiming(0,0x1c0)
-	e1:SetTarget(s.xyztg)
-	e1:SetOperation(s.xyzop)
+	e1:SetTarget(s.runtg)
+	e1:SetOperation(s.runop)
 	c:RegisterEffect(e1)
 	--replace
 	local e3=Effect.CreateEffect(c)
@@ -22,25 +23,25 @@ function s.initial_effect(c)
 	e3:SetOperation(s.repop)
 	c:RegisterEffect(e3)
 end
-function s.filter(c,e,tp)
-	return c.Is_Runic and c:IsSpecialSummonable()
+function s.runtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then
+		local mg=nil
+		if Duel.GetCurrentChain()>0 then mg=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_ONFIELD,0,nil):AddCard(e:GetHandler()) end
+		return Duel.IsExistingMatchingCard(Card.IsRuneSummonable,tp,0x3ff~LOCATION_MZONE,0,1,nil,nil,mg)
+	end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,0x3ff~LOCATION_MZONE)
 end
-function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
- if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
-	--local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil)
-end
-function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND,0,1,1,nil)
-	local tc=g:GetFirst()
-	if tc then
+function s.runop(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(Card.IsRuneSummonable,tp,0x3ff~LOCATION_MZONE,0,nil)
+	if g:GetCount()>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
+		local sc=g:Select(tp,1,1,nil):GetFirst()
 		e:GetHandler():CancelToGrave()
-	   Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_RUNIC)
+		Duel.RuneSummon(tp,sc)
 	end
 end
 function s.repfilter(c,tp)
-	return c:IsFaceup() and c.Is_Runic and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) 
+	return c:IsFaceup() and (c:IsType(TYPE_RUNE) or c.Is_Runic) and c:IsControler(tp) and c:IsLocation(LOCATION_MZONE) 
 		and not c:IsReason(REASON_REPLACE)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
