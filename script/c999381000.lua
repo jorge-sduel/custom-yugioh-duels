@@ -56,7 +56,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.thfilter(c,mc,tp)
 	return c:IsType(TYPE_RUNE) and c:IsAbleToHand()
-		and mc:IsCanBeRuneMaterial(c,tp)
+		and mc:IsCanBeRuneMaterial(c,nil,tp)
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
