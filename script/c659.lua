@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_TODECK)
-	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_FLIP+EFFECT_TYPE_TRIGGER_O)
 	e4:SetOperation(s.flipop)
 	c:RegisterEffect(e4)
 end
