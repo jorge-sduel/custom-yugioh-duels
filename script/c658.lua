@@ -61,7 +61,7 @@ end
 function s.thfilter(c)
 	return c:IsAttribute(ATTRIBUTE_WATER) and c:IsAbleToHand()
 end
-function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.thcon(e,tp,eg,ep,ev,re,r,rp,chk)
 		return Duel.IsExistingMatchingCard(Card.IsSummonLocation,tp,0,LOCATION_MZONE,1,nil,LOCATION_EXTRA)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
