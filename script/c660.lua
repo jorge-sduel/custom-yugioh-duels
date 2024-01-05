@@ -133,7 +133,7 @@ function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(g,REASON_COST)
 end
 function s.atkfilter(c)
-	return c:IsControler(p) and c:IsFaceup()
+	return c:IsFaceup() and not c:IsAttack(0)
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	--if chkc then return end
