@@ -132,8 +132,8 @@ function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.SelectReleaseGroupCost(tp,Card.IsMonster,1,1,false,nil,nil,1,tp)
 	Duel.Release(g,REASON_COST)
 end
-function s.atkfilter(c,p,e)
-	return c:IsControler(p) and c:IsFaceup() and c:IsCanBeEffectTarget(e)
+function s.atkfilter(c)
+	return c:IsControler(p) and c:IsFaceup()
 end
 function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	--if chkc then return end
