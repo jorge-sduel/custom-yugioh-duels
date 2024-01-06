@@ -46,7 +46,8 @@ function s.initial_effect(c)
 end
 s.listed_names={21082832}
 function s.valcheck(e,c)
-	if c:GetMaterial():IsType(TYPE_RITUAL) then
+	local g=c:GetMaterial()
+	if g:FilterCount(Card.IsType,nil,TYPE_RITUAL)==#g then
 local e2=Effect.CreateEffect(c)
     	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_IMMUNE_EFFECT)
