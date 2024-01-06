@@ -96,17 +96,6 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-function s.lpcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsAbleToEnterBP() end
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_CHANGE_DAMAGE)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	e1:SetTargetRange(1,1)
-	e1:SetValue(0)
-	c:RegisterEffect(e1)
-end
 function s.lptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLP(1-tp)>1 and Duel.GetLP(tp)>1 end
 	Duel.SetTargetPlayer(1-tp)
@@ -115,4 +104,12 @@ function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	Duel.SetLP(p,1)
 	Duel.SetLP(tp,1)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_CHANGE_DAMAGE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetTargetRange(1,1)
+	e1:SetValue(0)
+	e:GetHandler():RegisterEffect(e1) 
 end
