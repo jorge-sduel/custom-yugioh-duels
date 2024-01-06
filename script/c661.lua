@@ -46,7 +46,7 @@ function s.initial_effect(c)
 end
 s.listed_names={21082832}
 function s.valcheck(e,c)
-	if c:GetMaterial():GetType()==TYPE_RITUAL  then
+	if c:GetMaterial():IsType(TYPE_RITUAL) then
 local e2=Effect.CreateEffect(c)
     	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -107,9 +107,14 @@ function s.lpop(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CHANGE_DAMAGE)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	e1:SetTargetRange(1,1)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(1,0)
 	e1:SetValue(0)
-	e:GetHandler():RegisterEffect(e1) 
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e1,tp)
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_NO_EFFECT_DAMAGE)
+	e2:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e2,tp)
+	 
 end
