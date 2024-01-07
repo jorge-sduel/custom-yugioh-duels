@@ -37,7 +37,7 @@ end
 function s.filter1(c,e,tp)
 	local rk=c:GetRank()
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
-	return (#pg<=0 or (#pg==1 and pg:IsContains(c))) and c:IsFaceup() and c:GetOverlayGroup():IsExists(s.cffilter,1,nil)
+	return (#pg<=0 or (#pg==1 and pg:IsContains(c))) and c:IsFaceup() and (c:GetOverlayGroup():IsExists(s.cffilter,1,nil) or c:IsType(TYPE_RUNE))
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,e,tp,c,rk)
 end
 function s.filter2(c,e,tp,mc,rk)
