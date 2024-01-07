@@ -28,7 +28,14 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_EXTRA)
 	e2:SetCondition(s.rmcon)
 	e2:SetTargetRange(LOCATION_HAND,0)
-	e2:RegisterEffect(e2)
+	c:RegisterEffect(e2)
+	local e3=Effect.CreateEffect(e:GetHandler())
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetCode(EFFECT_SYNCHRO_MATERIAL)
+	e3:SetRange(LOCATION_EXTRA)
+	e3:SetTargetRange(0,LOCATION_MZONE)
+	e3:SetCondition(s.rmcon)
+	c:RegisterEffect(e3)
 end
 s.material={83295594}
 s.listed_names={83295594}
