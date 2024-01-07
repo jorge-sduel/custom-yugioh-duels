@@ -30,7 +30,7 @@ function s.tfilter(c,lc,stype,tp)
 	return c:IsSummonCode(lc,stype,tp,83295594) or c:IsHasEffect(20932152)
 end
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==1-tp
+	return Duel.GetTurnPlayer()==1-e:GetHandlerPlayer()
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
