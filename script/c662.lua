@@ -83,7 +83,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e4)
 end
 function s.sfilter(c,tp,sc)
-	local rg=Duel.GetMatchingGroup(s.pfilter,tp,LOCATION_MZONE,0,c)
+	local rg=Duel.GetMatchingGroup(s.pfilter,tp,LOCATION_MZONE+LOCATION_HAND,LOCATION_MZONE,c)
 	return c:IsCode(83295594) and c:IsLevelBelow(2147483647)
 		and rg:IsExists(s.filterchk,1,nil,rg,Group.CreateGroup(),tp,c,sc)
 end
