@@ -54,7 +54,7 @@ end
 function s.synval(e,mc,sc) --this effect, this card and the monster to be summoned
 	return sc:IsCode(id)
 end
-function s.rmcon(c)
+function s.sincronfilter(c)
 	return c:IsSetCard(0x1017) and c:IsAbleToDeck()
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
