@@ -5,13 +5,13 @@ function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,s.tfilter,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
-	--ATK Change
+	--[[ATK Change
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_SPSUMMON_COST)
 	e1:SetCondition(s.rmcon)
 	e1:SetOperation(s.atkop)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	--damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -22,6 +22,13 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1)
 	e1:SetOperation(s.drop)
 	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(EFFECT_SYNCHRO_MAT_FROM_HAND)
+	e2:SetRange(LOCATION_EXTRA)
+	e2:SetCondition(s.rmcon)
+	e2:SetTargetRange(LOCATION_HAND,0)
+	e2:RegisterEffect(e2)
 end
 s.material={83295594}
 s.listed_names={83295594}
