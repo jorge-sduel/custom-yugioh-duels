@@ -84,11 +84,11 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sfilter(c,tp,sc)
 	local rg=Duel.GetMatchingGroup(s.pfilter,tp,LOCATION_MZONE,0,c)
-	return c:IsCode(83295594) and c:IsReleasable() and c:IsLevelBelow(2147483647)
+	return c:IsCode(83295594) and c:IsLevelBelow(2147483647)
 		and rg:IsExists(s.filterchk,1,nil,rg,Group.CreateGroup(),tp,c,sc)
 end
 function s.pfilter(c)
-	return c:IsLevelBelow(2147483647) and (not c:IsType(TYPE_TUNER)) and c:IsReleasable()
+	return c:IsLevelBelow(2147483647) and (not c:IsType(TYPE_TUNER))
 end
 function s.filterchk(c,g,sg,tp,sync,sc)
 	sg:AddCard(c)
