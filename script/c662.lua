@@ -71,8 +71,9 @@ function s.sincronfilter(c)
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-		local g=Duel.SelectMatchingCard(tp,s.sincronfilter,tp,LOCATION_GRAVE,0,1,1,nil)
-		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
+	local g=Duel.SelectMatchingCard(tp,s.sincronfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	if g~=0 then
+	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -81,6 +82,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetReset(RESET_EVENT|RESETS_STANDARD)
 	e4:SetValue(300)
 	c:RegisterEffect(e4)
+ end
 end
 function s.sfilter(c,tp,sc)
 	local rg=Duel.GetMatchingGroup(s.pfilter,tp,LOCATION_MZONE+LOCATION_HAND,LOCATION_MZONE,c)
@@ -134,6 +136,7 @@ function s.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 	end
 	mg:Merge(g)
 	Duel.Release(mg,REASON_COST)
+	Duel.Draw(tp,1,REASON_EFFECT)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x1017) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
