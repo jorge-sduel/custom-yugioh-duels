@@ -20,7 +20,6 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
-	e1:SetTarget(s.drtg)
 	e1:SetOperation(s.drop)
 	c:RegisterEffect(e1)
 end
