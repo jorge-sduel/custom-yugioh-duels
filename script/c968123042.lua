@@ -48,6 +48,31 @@ function s.initial_effect(c)
 	e4:SetTarget(s.pentg)
 	e4:SetOperation(s.penop)
 	c:RegisterEffect(e4)
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetCode(EFFECT_ATTACK_ALL)
+	e5:SetCondition(s.atcon)
+	e5:SetValue(1)
+	c:RegisterEffect(e5)
+	--actlimit
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_FIELD)
+	e6:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e6:SetCode(EFFECT_CANNOT_ACTIVATE)
+	e6:SetRange(LOCATION_MZONE)
+	e6:SetTargetRange(0,1)
+	e6:SetValue(s.aclimit)
+	e6:SetCondition(s.actcon)
+	c:RegisterEffect(e6)
+	--atk up
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_SINGLE)
+	e7:SetCode(EFFECT_UPDATE_ATTACK)
+	e7:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e7:SetRange(LOCATION_MZONE)
+	e7:SetCondition(s.atkcon)
+	e7:SetValue(s.atkval)
+	c:RegisterEffect(e7)
 end
 s.pendulum_level=6
 s.listed_series={0xff0}
@@ -111,4 +136,23 @@ function s.penop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) then
 		Duel.MoveToField(c,tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 	end
+end
+function s.atcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:GetOverlayGroup():IsExists(Card.IsType,1,nil,TYPE_RUNE)
+end
+function s.aclimit(e,re,tp)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
+end
+function s.actcon(e)
+	local c=e:GetHandler() 
+	return Duel.GetAttacker()==e:GetHandler() and c:GetOverlayGroup():IsExists(Card.IsType,1,nil,TYPE_RUNE)
+end
+function s.atkcon(e)
+	local c=e:GetHandler()
+	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL
+		and e:GetHandler()==Duel.GetAttacker() and Duel.GetAttackTarget()~=nil and c:GetOverlayGroup():IsExists(Card.IsType,1,nil,TYPE_RUNE)
+end
+function s.atkval(e,c)
+	return Duel.GetAttackTarget():GetAttack()/2
 end
