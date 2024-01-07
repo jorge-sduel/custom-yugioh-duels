@@ -77,7 +77,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c,e,tp)
-	return (c:IsType(TYPE_SYNCHRO) and c:IsLevelBelow(8) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) and not c:IsCode(id)
+	return (c:IsType(TYPE_SYNCHRO) and c:IsLevelBelow(8) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:ListsCodeWithArchetype(0x1017)) and not c:IsCode(id)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return end
@@ -91,6 +91,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
 	if #g>0 then
+		Duel.SendtoDeck(e:GetHandler(),nil,2,REASON_COST)
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_ATTACK)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetDescription(3008)
@@ -101,6 +102,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		g:GetFirst():RegisterEffect(e1)
 	Duel.Draw(tp,1,REASON_EFFECT)
-	Duel.SendtoDeck(e:GetHandler(),nil,2,REASON_COST)
 	end
 end
