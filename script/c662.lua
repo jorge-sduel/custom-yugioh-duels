@@ -5,13 +5,6 @@ function s.initial_effect(c)
 	--synchro summon
 	Synchro.AddProcedure(c,s.tfilter,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
-	--[[ATK Change
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SPSUMMON_COST)
-	e1:SetCondition(s.rmcon)
-	e1:SetOperation(s.atkop)
-	c:RegisterEffect(e1)]]
 	--damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -22,23 +15,17 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1)
 	e1:SetOperation(s.drop)
 	c:RegisterEffect(e1)
+		--spsummon
 	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(80896940,1))
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetCode(EFFECT_SYNCHRO_MAT_FROM_HAND)
 	e2:SetRange(LOCATION_EXTRA)
-	e2:SetCondition(s.rmcon)
-	e2:SetValue(s.synval)
-	e2:SetTarget(s.tg)
-	e2:SetTargetRange(LOCATION_HAND,0)
+	e2:SetCode(EFFECT_SPSUMMON_PROC)
+	e2:SetValue(SUMMON_TYPE_SYNCHRO+82)
+	e2:SetCondition(s.sprcon)
+	e2:SetOperation(s.sprop)
 	c:RegisterEffect(e2)
-	local e3=Effect.CreateEffect(e:GetHandler())
-	e3:SetType(EFFECT_TYPE_FIELD)
-	e3:SetCode(EFFECT_SYNCHRO_MATERIAL)
-	e3:SetRange(LOCATION_EXTRA)
-	e3:SetTarget(s.tg)
-	e3:SetTargetRange(0,LOCATION_MZONE)
-	e3:SetCondition(s.rmcon)
-	c:RegisterEffect(e3)
 end
 s.material={83295594}
 s.listed_names={83295594}
@@ -87,6 +74,56 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	e4:SetValue(300)
 	c:RegisterEffect(e4)
 end
-function s.tg(e,c)
-	return not c:IsHasEffect(EFFECT_SYNCHRO_MAT_FROM_HAND)
+function s.sfilter(c,tp,sc)
+	local rg=Duel.GetMatchingGroup(s.pfilter,tp,LOCATION_MZONE,0,c)
+	return c:IsCode(83295594) and c:IsReleasable() and c:IsLevelBelow(2147483647)
+		and rg:IsExists(s.filterchk,1,nil,rg,Group.CreateGroup(),tp,c,sc)
+end
+function s.pfilter(c)
+	return c:IsLevelBelow(2147483647) and (c:IsHasEffect(not c:IsType(TYPE_TUNER)) and c:IsReleasable()
+end
+function s.filterchk(c,g,sg,tp,sync,sc)
+	sg:AddCard(c)
+	sg:AddCard(sync)
+	local res=Duel.GetLocationCountFromEx(tp,tp,sg,sc)>0 
+		and sg:CheckWithSumEqual(Card.GetLevel,e:GetHandler():GetLevel(),#sg,#sg)
+	sg:RemoveCard(sync)
+	if not res then
+		res=g:IsExists(s.filterchk,1,sg,g,sg,tp,sync,sc)
+	end
+	sg:RemoveCard(c)
+	return res
+end
+function s.sprcon(e,c)
+	if c==nil then return true end
+	local tp=c:GetControler()
+	return Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_MZONE,0,1,nil,tp,c)
+end
+function s.sprop(e,tp,eg,ep,ev,re,r,rp,c)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
+	local g=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_MZONE,0,1,1,nil,tp,c)
+	local sync=g:GetFirst()
+	local rg=Duel.GetMatchingGroup(s.pfilter,tp,LOCATION_MZONE,0,sync)
+	local tc
+	local mg=Group.CreateGroup()
+	while true do
+		local tg=rg:Filter(s.filterchk,mg,rg,mg,tp,sync,c)
+		if #tg<=0 then break end
+		mg:AddCard(sync)
+		local cancel=#mg>1 and Duel.GetLocationCountFromEx(tp,tp,mg,c)>0 
+			and mg:CheckWithSumEqual(Card.GetLevel,e:GetHandler():GetLevel(),#mg,#mg)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
+		tc=Group.SelectUnselect(tg,mg,tp,cancel,cancel)
+		if not tc then break end
+		mg:RemoveCard(sync)
+		if tc~=sync then
+			if mg:IsContains(tc) then
+				mg:RemoveCard(tc)
+			else
+				mg:AddCard(tc)
+			end
+		end
+	end
+	mg:Merge(g)
+	Duel.Release(mg,REASON_COST)
 end
