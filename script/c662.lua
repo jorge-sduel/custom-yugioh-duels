@@ -94,7 +94,7 @@ function s.filterchk(c,g,sg,tp,sync,sc)
 	sg:AddCard(c)
 	sg:AddCard(sync)
 	local res=Duel.GetLocationCountFromEx(tp,tp,sg,sc)>0 
-		and sg:CheckWithSumEqual(Card.GetLevel,e:GetHandler():GetLevel(),#sg,#sg)
+		and sg:CheckWithSumEqual(Card.GetLevel,7,#sg,#sg)
 	sg:RemoveCard(sync)
 	if not res then
 		res=g:IsExists(s.filterchk,1,sg,g,sg,tp,sync,sc)
@@ -119,7 +119,7 @@ function s.sprop(e,tp,eg,ep,ev,re,r,rp,c)
 		if #tg<=0 then break end
 		mg:AddCard(sync)
 		local cancel=#mg>1 and Duel.GetLocationCountFromEx(tp,tp,mg,c)>0 
-			and mg:CheckWithSumEqual(Card.GetLevel,e:GetHandler():GetLevel(),#mg,#mg)
+			and mg:CheckWithSumEqual(Card.GetLevel,7,#mg,#mg)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
 		tc=Group.SelectUnselect(tg,mg,tp,cancel,cancel)
 		if not tc then break end
