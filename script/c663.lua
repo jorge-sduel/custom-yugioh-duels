@@ -77,7 +77,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c,e,tp)
-	return (c:IsType(TYPE_SYNCHRO) and c:IsLevelBelow(8) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:ListsCodeWithArchetype(0x1017)) and not c:IsCode(id)
+	return (c:IsType(TYPE_SYNCHRO) and c:IsLevelBelow(8) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false)) and not c:IsCode(id)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return end
