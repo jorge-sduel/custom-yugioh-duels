@@ -13,6 +13,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
+	e1:SetTarget(s.tgtg)
 	e1:SetOperation(s.drop)
 	c:RegisterEffect(e1)
 		--spsummon
@@ -68,6 +69,9 @@ function s.synval(e,mc,sc) --this effect, this card and the monster to be summon
 end
 function s.sincronfilter(c)
 	return c:IsSetCard(0x1017) and c:IsAbleToDeck()
+end
+function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.sincronfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
 end
 function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
