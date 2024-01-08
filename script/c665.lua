@@ -38,6 +38,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.material_setcode=0x1017
+s.synchro_tuner_required=1
+s.synchro_nt_required=1
 function s.tfilter(c,lc,stype,tp)
 	return  c:IsSetCard(0x1017,lc,stype,tp) or c:IsHasEffect(20932152)
 end
