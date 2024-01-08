@@ -27,11 +27,11 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
-s.material={511010536}
-s.listed_names={511010536}
+s.material={100000348}
+s.listed_names={100000348}
 s.material_setcode=0x1017
 function s.tfilter(c,lc,stype,tp)
-	return c:IsSummonCode(lc,stype,tp,511010536) or c:IsHasEffect(20932152)
+	return c:IsSummonCode(lc,stype,tp,100000348) or c:IsHasEffect(20932152)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
