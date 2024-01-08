@@ -45,13 +45,13 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSummon,tp,0,LOCATION_MZONE,1,nil,SUMMON_TYPE_SPECIAL) end
-	local g=Duel.GetMatchingGroup(Card.IsSummon,tp,0,LOCATION_MZONE,nil,SUMMON_TYPE_SPECIAL)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsSummonType,tp,0,LOCATION_MZONE,1,nil,SUMMON_TYPE_SPECIAL) end
+	local g=Duel.GetMatchingGroup(Card.IsSummonType,tp,0,LOCATION_MZONE,nil,SUMMON_TYPE_SPECIAL)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,#g,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,#g*600)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsSummon,tp,0,LOCATION_MZONE,nil,SUMMON_TYPE_SPECIAL)
+	local g=Duel.GetMatchingGroup(Card.IsSummonType,tp,0,LOCATION_MZONE,nil,SUMMON_TYPE_SPECIAL)
 	local ct=Duel.Destroy(g,REASON_EFFECT)
 	if Duel.Damage(1-tp,ct*600,REASON_EFFECT)~=0 then
 	end
