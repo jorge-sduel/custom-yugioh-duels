@@ -59,11 +59,11 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.rfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 	local rg=Duel.GetMatchingGroup(s.rfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,rg,ct,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,rg,1,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rg=Duel.GetMatchingGroup(s.rfilter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
-	if #rg<ct then return end
+	if #rg<1 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 	local sg=rg:Select(tp,1,1,nil)
 	Duel.HintSelection(sg)
