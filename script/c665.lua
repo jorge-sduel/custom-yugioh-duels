@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--synchro summon
-	Synchro.AddProcedure(c,s.tfilter,1,1,Synchro.NonTuner(nil),1,99)
+	Synchro.AddProcedure(c,s.tfilter,1,1,Synchro.NonTuner(s.tfilter2),1,99)
 	--When normal summoned, destroy all of opponent's spells/traps
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -40,6 +40,9 @@ end
 s.material_setcode=0x1017
 function s.tfilter(c,lc,stype,tp)
 	return  c:IsSetCard(0x1017,lc,stype,tp) or c:IsHasEffect(20932152)
+end
+function s.tfilter2(c,lc,stype,tp)
+	return  c:IsType(TYPE_SYNCHRO)
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
