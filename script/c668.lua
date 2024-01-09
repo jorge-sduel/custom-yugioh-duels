@@ -57,10 +57,10 @@ function s.cfilter(c)
 	return ((pp==0x1 and np==0x4) or (pp==0x4 and np==0x1) or (pp==0x8 and np==0x1))
 end
 function s.accon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.cfilter,1,nil) and eg:IsControler(tp) 
+	return eg:IsExists(s.cfilter,1,nil,tp) 
 end
 function s.accon1(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.cfilter,1,nil) and eg:IsControler(1-tp)
+	return eg:IsExists(s.cfilter,1,nil,1-tp)
 end
 function s.acop(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
