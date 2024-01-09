@@ -62,8 +62,6 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		--end
 		local eg=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,tc)
 		if #eg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-			Duel.BreakEffect()
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sg=eg:Select(tp,1,1,nil)
 			Duel.SynchroSummon(tp,sg:GetFirst(),nil,tc)
 		end
