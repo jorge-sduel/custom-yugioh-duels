@@ -130,7 +130,7 @@ end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
  local g=Duel.GetMatchingGroup(s.synfilter,tp,LOCATION_MZONE,0,nil,TYPE_SYNCHRO)
 	if #g>0 then
-		local atk2=Duel.GetFieldGroup(tp,LOCATION_MZONE,0):Filter(s.synfilter,nil):GetSum(Card.GetAttack)
+		local atk=Duel.GetFieldGroup(tp,LOCATION_MZONE,0):Filter(s.synfilter,nil):GetSum(Card.GetAttack)
 		Duel.Recover(tp,atk,REASON_EFFECT)
 	end
 end
