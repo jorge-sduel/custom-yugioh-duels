@@ -72,8 +72,9 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(400)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
+	end 
 end
-function s.acop(e,tp,eg,ep,ev,re,r,rp)
+function s.acop1(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
@@ -83,6 +84,7 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(0)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
+	end
 end
 function s.acop2(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
@@ -94,6 +96,7 @@ function s.acop2(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(0)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
+	end
 end
 function s.postg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsCanChangePosition() end
