@@ -113,7 +113,8 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-		local tg=Duel.GetFirstMatchingCard(s.spfilter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA,0,nil,e,tp) 
+		local g=Duel.GetMatchingCard(s.spfilter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA,0,nil,e,tp) 
+		local tg=g:Select(tp,1,1,nil) 
 	if tg then
 		Duel.SpecialSummon(tg,0,tp,tp,true,true,POS_FACEUP)
 	end
