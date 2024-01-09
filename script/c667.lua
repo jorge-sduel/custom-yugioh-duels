@@ -119,23 +119,18 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tg,0,tp,tp,true,true,POS_FACEUP)
 	end
 end
+function s.synfilter(c)
+	return c:IsType(TYPE_SYNCHRO) and c:IsFaceup()
+end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_MZONE,0,1,nil,TYPE_SYNCHRO) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.synfilter,tp,LOCATION_MZONE,0,1,nil,TYPE_SYNCHRO) end
 	local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_MZONE,0,nil,TYPE_SYNCHRO)
 	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,1-tp,0)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
- local g=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_MZONE,0,nil,TYPE_SYNCHRO)
+ local g=Duel.GetMatchingGroup(s.synfilter,tp,LOCATION_MZONE,0,nil,TYPE_SYNCHRO)
 	if #g>0 then
-		local dg=Duel.GetOperatedGroup()
-		local atk=0
-		local tc=dg:GetFirst()
-		while tc do
-			if tc:IsPosition(POS_FACEUP) then
-				atk=atk+tc:GetAttack()
-			end
-			tc=dg:GetNext()
-		end
+		local atk2=Duel.GetFieldGroup(tp,LOCATION_MZONE,0):Filter(s.synfilter,nil):GetSum(Card.GetAttack)
 		Duel.Recover(tp,atk,REASON_EFFECT)
 	end
 end
