@@ -60,6 +60,7 @@ function s.initial_effect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e7:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e7:SetCode(EVENT_RELEASE)
+	e7:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e7:SetCountLimit(1,id)
 	e7:SetCondition(s.spcon)
 	e7:SetTarget(s.sptg)
@@ -105,7 +106,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return (r&REASON_EFFECT)~=0
 end
 function s.spfilter(c,e,tp)
-	return (c:IsCode(CARD_STARDUST_DRAGON) or c:ListsCode(CARD_STARDUST_DRAGON)) and (c:IsLocation(LOCATION_HAND) or c:IsLocation(LOCATION_GRAVE)) or (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return ((c:IsCode(CARD_STARDUST_DRAGON) or c:ListsCode(CARD_STARDUST_DRAGON)) and (c:IsLocation(LOCATION_HAND) or c:IsLocation(LOCATION_GRAVE)) or (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_HAND+LOCATION_EXTRA) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
