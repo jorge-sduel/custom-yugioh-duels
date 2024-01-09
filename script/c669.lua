@@ -32,6 +32,11 @@ e1:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_SYNCHRO))
 	e4:SetTarget(s.sptg)
 	e4:SetOperation(s.spop)
 	c:RegisterEffect(e4)
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCode(EFFECT_CANNOT_DISEFFECT)
+	c:RegisterEffect(e5)
 end
 s.material={52840598}
 s.listed_names={52840598,id}
