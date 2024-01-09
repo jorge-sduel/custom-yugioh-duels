@@ -106,7 +106,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return (r&REASON_EFFECT)~=0
 end
 function s.spfilter(c,e,tp)
-	return c:IsCode(CARD_STARDUST_DRAGON) or c:ListsCode(CARD_STARDUST_DRAGON) and (c:IsLocation(LOCATION_HAND+LOCATION_GRAVE) or (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return (c:IsCode(CARD_STARDUST_DRAGON) or c:ListsCode(CARD_STARDUST_DRAGON)) and (c:IsLocation(LOCATION_HAND) or c:IsLocation(LOCATION_GRAVE)) or (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_HAND+LOCATION_EXTRA) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
