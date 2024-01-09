@@ -45,7 +45,6 @@ end
 function s.mfilter(c,e,tp,mc)
 	local mg=Group.FromCards(c)
 	return (c:IsRace(RACE_WARRIOR) or c:IsRace(RACE_MACHINE)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.IsExistingMatchingCard(s.scfilter,tp,LOCATION_EXTRA,0,1,nil,mg,tp)
 end
 function s.scfilter(c,mg,tp)
 	return Duel.GetLocationCountFromEx(tp,tp,mg,c)>0 and c:IsSynchroSummonable(nil,mg)
@@ -67,7 +66,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not tc:IsRelateToEffect(e) or Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 	if not c:IsRelateToEffect(e) then return end
 	local mg=Group.FromCards(tc)
-	local g=Duel.GetMatchingGroup(s.scfilter,tp,LOCATION_EXTRA,0,nil,mg,tp)
+	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,mg,tp)
 	if #g>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:Select(tp,1,1,nil)
