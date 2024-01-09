@@ -108,12 +108,9 @@ end
 function s.spfilter(c,e,tp)
 	return ((c:IsCode(CARD_STARDUST_DRAGON) or c:ListsCode(CARD_STARDUST_DRAGON)) and ((c:IsLocation(LOCATION_HAND) or c:IsLocation(LOCATION_DECK)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0) or (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
-function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	--if chkc then return chkc:IsLocation(LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
-	if chk==0 then return Duel.IsExistingTarget(s.spfilter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA,0,1,nil,e,tp) end
-	--Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	--local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil,e,tp)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA)
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local tg=Duel.GetFirstMatchingCard(s.spfilter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_EXTRA,0,nil,e,tp) 
