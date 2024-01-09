@@ -60,14 +60,14 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and  tc:IsRelateToEffect(e) and Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
 		Duel.SpecialSummonComplete()
-		end
-		local eg=Duel.GetMatchingGroup(s.scfilter,tp,LOCATION_EXTRA,0,nil,c)
-		if #mg>0 and #eg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		local eg=Duel.GetMatchingGroup(s.scfilter,tp,LOCATION_EXTRA,0,nil,tc)
+		if #eg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local sg=eg:Select(tp,1,1,nil)
-			Duel.SynchroSummon(tp,sg:GetFirst(),nil,c)
-		end
+			Duel.SynchroSummon(tp,sg:GetFirst(),nil,tc)
+		 end
+	end
 end
 function s.indes(e,c)
 	return not c:IsCode(52840598)
