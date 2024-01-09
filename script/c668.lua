@@ -75,7 +75,7 @@ function s.acop(e,tp,eg,ep,ev,re,r,rp)
 	end 
 end
 function s.acop1(e,tp,eg,ep,ev,re,r,rp)
-		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
+		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())
@@ -87,7 +87,7 @@ function s.acop1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.acop2(e,tp,eg,ep,ev,re,r,rp)
-		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
+		local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())
