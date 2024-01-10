@@ -31,13 +31,17 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsSSetable() end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsTrap,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsTrap,tp,LOCATION_GRAVE,0,1,nil) and Duel.GetLocationCount(tp,LOCATION_SZONE)>1 end
 	local ct=e:GetHandler():GetMaterialCount()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,Card.IsTrap,tp,LOCATION_GRAVE,0,1,ct,nil)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetTargetCards(e)
+	local ct=e:GetHandler():GetMaterialCount()
+	local g=Duel.SelectTarget(tp,Card.IsTrap,tp,LOCATION_GRAVE,0,1,ct,nil)
+	if #g>0 then
+		local tg=g:Select(tp,1,ct,nil)
+		Duel.SSet(tp,tg)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetDescription(3300)
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -45,8 +49,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CLIENT_HINT)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e1:SetValue(LOCATION_REMOVED)
-		g:RegisterEffect(e1,true)
-	        Duel.SSet(tp,g) 
+		tg:RegisterEffect(e1,true) 
 end
 function s.thcfilter(c)
 	return c:IsAbleToRemoveAsCost() and c:IsSetCard(0x43)
@@ -62,21 +65,19 @@ function s.cfilter(c)
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_DECK) and s.cfilter(chkc) end
-	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
-	local g=Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) and Duel.GetLocationCount(tp,LOCATION_SZONE)>1 end
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and tc:IsSSetable() then
-		Duel.SSet(tp,tc)
+	local g=Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil)
+	if #g>0 then 
+		local tg=g:Select(tp,1,1,nil)
+		Duel.SSet(tp,tg)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
 		e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1:SetDescription(aux.Stringid(id,0))
-		tc:RegisterEffect(e1)
+		tg:RegisterEffect(e1)
 	end
 end
