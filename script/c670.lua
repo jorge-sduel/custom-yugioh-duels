@@ -77,6 +77,6 @@ end
 function s.adtg(e,c)
 	return c==e:GetHandler():GetBattleTarget()
 end
-function s.adtg(e,c)
+function s.adtg1(e,c)
 	return c==Duel.GetAttacker()
 end
