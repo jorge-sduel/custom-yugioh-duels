@@ -50,6 +50,8 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e1:SetValue(LOCATION_REMOVED)
 		tg:RegisterEffect(e1,true) 
+
+	end
 end
 function s.thcfilter(c)
 	return c:IsAbleToRemoveAsCost() and c:IsSetCard(0x43)
