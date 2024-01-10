@@ -68,7 +68,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) and Duel.GetLocationCount(tp,LOCATION_SZONE)>1 end
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(Card.IsTrap,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_DECK,0,nil)
 	if #g>0 then 
 		local tg=g:Select(tp,1,1,nil)
 		Duel.SSet(tp,tg)
