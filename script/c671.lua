@@ -33,12 +33,10 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsSSetable() end
 	if chk==0 then return Duel.IsExistingTarget(Card.IsTrap,tp,LOCATION_GRAVE,0,1,nil) and Duel.GetLocationCount(tp,LOCATION_SZONE)>1 end
 	local ct=e:GetHandler():GetMaterialCount()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,Card.IsTrap,tp,LOCATION_GRAVE,0,1,ct,nil)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetHandler():GetMaterialCount()
-	local g=Duel.SelectTarget(tp,Card.IsTrap,tp,LOCATION_GRAVE,0,1,ct,nil)
+	local g=Duel.GetMatchingGroup(Card.IsTrap,tp,LOCATION_GRAVE,0,nil)
 	if #g>0 then
 		local tg=g:Select(tp,1,ct,nil)
 		Duel.SSet(tp,tg)
@@ -49,7 +47,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CLIENT_HINT)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e1:SetValue(LOCATION_REMOVED)
-		tg:RegisterEffect(e1,true) 
+		tg:GetFirst():RegisterEffect(e1,true) 
 
 	end
 end
@@ -70,7 +68,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil) and Duel.GetLocationCount(tp,LOCATION_SZONE)>1 end
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.GetMatchingGroup(Card.IsTrap,tp,LOCATION_GRAVE,0,nil)
 	if #g>0 then 
 		local tg=g:Select(tp,1,1,nil)
 		Duel.SSet(tp,tg)
@@ -80,6 +78,6 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1:SetDescription(aux.Stringid(id,0))
-		tg:RegisterEffect(e1)
+		tg:GetFirst():RegisterEffect(e1)
 	end
 end
