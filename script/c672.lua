@@ -88,7 +88,7 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local bc=e:GetHandler():GetBattleTarget()
 	local dam=bc:GetBaseAttack()
-	if bc:IsRelateToBattle() Duel.Remove(bc,POS_FACEUP,REASON_EFFECT)>0 then
+	if bc:IsRelateToBattle() and Duel.Remove(bc,POS_FACEUP,REASON_EFFECT)>0 then
 		Duel.Damage(tp,dam,REASON_EFFECT)
 	end
 end
