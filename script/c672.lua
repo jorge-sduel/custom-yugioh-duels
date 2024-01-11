@@ -9,9 +9,10 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
-	e1:SetValue(s.op)
+	e1:SetValue(s.value)
 	c:RegisterEffect(e1)
 	--Inflict damage
 	local e2=Effect.CreateEffect(c)
@@ -48,10 +49,11 @@ function s.initial_effect(c)
 end
 s.material={37799519}
 s.synchro_nt_required=2
-function s.op(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsLevelBelow,2),tp,LOCATION_MZONE,0,nil)
-		local atk=g:GetSum(Card.GetAttack)
-	return atk
+function s.filter(c)
+	return c:IsFaceup() and c:IsLevelBelow(2)
+end
+function s.value(e,c)
+	return Duel.GetMatchingGroup(s.filter,c:GetControler(),LOCATION_MZONE,0,c):GetSum(Card.GetAttack)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
