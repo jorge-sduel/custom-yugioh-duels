@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetValue(s.value)
 	c:RegisterEffect(e1)
-	--Inflict damage
+	--[[Inflict damage
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,0))
 	e2:SetCategory(CATEGORY_DAMAGE)
@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.bdgcon)
 	e2:SetTarget(s.damtg)
 	e2:SetOperation(s.damop)
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e2)]]
 	--remove
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
@@ -87,8 +87,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local bc=e:GetHandler():GetBattleTarget()
-	if bc:IsRelateToBattle() then
-		Duel.Remove(bc,POS_FACEUP,REASON_EFFECT)
+	local dam=bc:GetBaseAttack()
+	if bc:IsRelateToBattle() Duel.Remove(bc,POS_FACEUP,REASON_EFFECT)>0 then
+		Duel.Damage(tp,dam,REASON_EFFECT)
 	end
 end
 function s.spfilter1(c,tp)
