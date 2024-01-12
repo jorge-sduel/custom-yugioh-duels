@@ -15,7 +15,7 @@ function s.exfilter0(c)
 end
 function s.fextra(e,tp,mg)
 	if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_ONFIELD,0,1,nil,15259703) and not Duel.IsPlayerAffectedByEffect(tp,CARD_SPIRIT_ELIMINATION) then
-		local eg=Duel.GetMatchingGroup(s.exfilter0,tp,LOCATION_MZONE|LOCATION_GRAVE,LOCATION_GRAVE,nil)
+		local eg=Duel.GetMatchingGroup(s.exfilter0,tp,LOCATION_MZONE|LOCATION_GRAVE|LOCATION_HAND,LOCATION_GRAVE,nil)
 		if #eg>0 then
 			return eg,s.fcheck
 		end
