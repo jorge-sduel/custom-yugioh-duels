@@ -45,3 +45,4 @@ function s.stage2(e,tc,tp,sg,chk)
 		e1:SetValue(TYPE_TOON)
 		tc:RegisterEffect(e1)
 	end
+end
