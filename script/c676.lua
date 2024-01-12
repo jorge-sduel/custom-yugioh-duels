@@ -1,9 +1,8 @@
---影依融合
---Shaddol Fusion
+--TOON FUSION
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
-	local e1=Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsRace,RACE_CYBERSE),
+	local e1=Fusion.CreateSummonEff({handler=c,fusfilter=aux.FilterBoolFunction(Card.IsType,TYPE_MONSTER),
 		extrafil=s.fextra,extraop=s.extraop,extratg=s.extratg})
 	c:RegisterEffect(e1)
 end
