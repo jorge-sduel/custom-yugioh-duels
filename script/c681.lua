@@ -49,7 +49,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummonComplete()
 end
 function s.tgfilter(c)
-	return c:IsFaceup() and ((c:GetOriginalType()&TYPE_TOON)~=0 and c:IsMonster()) or c:Iscode(15259703))
+	return c:IsFaceup() and (((c:GetOriginalType()&TYPE_TOON)~=0 and c:IsMonster()) or c:Iscode(15259703))
 end
 function s.tgcon(e)
 	return Duel.IsExistingMatchingCard(s.tgfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,e:GetHandler())
