@@ -58,6 +58,9 @@ end
 function s.val(e,c)
 	return Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_SZONE)*500
 end
+function s.atkfilter(c)
+	return c:IsSetCard(0x6008) and c:IsMonster()
+end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)
@@ -66,6 +69,6 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local ct=Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)
+	local ct=Duel.GetMatchingGroupCount(s.atkfilter,c:GetControler(),LOCATION_GRAVE,0,nil)
 	Duel.SetLP(tp,ct*300)
 end
