@@ -67,7 +67,7 @@ function c9999997.initial_effect(c)
 	e9:SetValue(c9999997.atkval)
 	c:RegisterEffect(e9)
 	local e10=e9:Clone()
-	e10:SetCode(EFFECT_SET_BASE_DEFENCE)
+	e10:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e10)
 	--Cannot be Material
 	local e11=Effect.CreateEffect(c)
