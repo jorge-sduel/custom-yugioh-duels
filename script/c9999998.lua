@@ -179,7 +179,7 @@ function c9999998.defop(e,tp,eg,ep,ev,re,r,rp)
 	local s=0
 	local tc=g:GetFirst()
 	while tc do
-		local a=tc:GetDefence()
+		local a=tc:GetDefense()
 		if a<0 then a=0 end
 		s=s+a
 		tc=g:GetNext()
