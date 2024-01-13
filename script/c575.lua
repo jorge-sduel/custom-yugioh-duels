@@ -67,5 +67,5 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local ct=Duel.GetFieldGroupCount(tp,LOCATION_GRAVE,0)
-	Duel.SetLp(p,ct*300,REASON_EFFECT)
+	Duel.SetLp(tp,ct*300)
 end
