@@ -94,7 +94,7 @@ function c9999996.initial_effect(c)
 	e21:SetCode(EFFECT_SYNCHRO_MAT_FROM_HAND)
 	e21:SetRange(LOCATION_MZONE)
 	e21:SetTargetRange(LOCATION_HAND,0) 
-	e21:SetValue(s.synval)
+	e21:SetValue(c9999996.synval)
 	c:RegisterEffect(e21)
 end
 function c9999996.splimit(e,se,sp,st)
@@ -191,6 +191,6 @@ function c9999996.defop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetReset(RESET_EVENT+0x1ff0000)
 	c:RegisterEffect(e1)
 end
-function s.synval(e,mc,sc) --this effect, this card and the monster to be summoned
+function c9999996.synval(e,mc,sc) --this effect, this card and the monster to be summoned
 	return sc:IsType(TYPE_SYNCHRO)
 end
