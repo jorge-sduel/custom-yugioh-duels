@@ -89,6 +89,13 @@ function c9999996.initial_effect(c)
 	e20:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e20:SetOperation(c9999996.defop)
 	c:RegisterEffect(e20)
+	local e21=Effect.CreateEffect(c)
+	e21:SetType(EFFECT_TYPE_FIELD)
+	e21:SetCode(EFFECT_SYNCHRO_MAT_FROM_HAND)
+	e21:SetRange(LOCATION_MZONE)
+	e21:SetTargetRange(LOCATION_HAND,0) 
+	e21:SetValue(s.synval)
+	c:RegisterEffect(e21)
 end
 function c9999996.splimit(e,se,sp,st)
 	return bit.band(st,SUMMON_TYPE_SYNCHRO)==SUMMON_TYPE_SYNCHRO
@@ -183,4 +190,7 @@ function c9999996.defop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(s)
 	e1:SetReset(RESET_EVENT+0x1ff0000)
 	c:RegisterEffect(e1)
+end
+function s.synval(e,mc,sc) --this effect, this card and the monster to be summoned
+	return sc:IsType(TYPE_SYNCHRO)
 end
