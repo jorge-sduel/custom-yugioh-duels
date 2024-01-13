@@ -78,7 +78,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsFaceup() and c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
+	if tc and tc:IsRelateToEffect(e) then
 		aux.ToHandOrElse(tc,tp,function(c)
 											return tc:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 										end,
