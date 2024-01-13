@@ -1,4 +1,4 @@
---Destroto
+--Demix Downfall Dragon
 function c9999996.initial_effect(c)
 	c:SetUniqueOnField(1,0,9999996)
 	c:EnableReviveLimit()
@@ -77,13 +77,18 @@ function c9999996.initial_effect(c)
 	local e18=e17:Clone()
 	e18:SetCode(EFFECT_UNRELEASABLE_NONSUM)
 	c:RegisterEffect(e18)
-	--synchro hand
+	--
 	local e19=Effect.CreateEffect(c)
-	e19:SetType(EFFECT_TYPE_FIELD)
-	e19:SetCode(EFFECT_HAND_SYNCHRO+EFFECT_SYNCHRO_CHECK)
-	e19:SetRange(LOCATION_MZONE)
-	e19:SetTargetRange(LOCATION_HAND,0)
+	e19:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e19:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e19:SetOperation(c9999996.atkop)
 	c:RegisterEffect(e19)
+	--def
+	local e20=Effect.CreateEffect(c)
+	e20:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e20:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e20:SetOperation(c9999996.defop)
+	c:RegisterEffect(e20)
 end
 function c9999996.splimit(e,se,sp,st)
 	return bit.band(st,SUMMON_TYPE_SYNCHRO)==SUMMON_TYPE_SYNCHRO
@@ -142,4 +147,40 @@ end
 function c9999996.imfilter(e,te)
 	if not te then return false end
 	return te:IsHasCategory(CATEGORY_TOHAND+CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_TODECK+CATEGORY_RELEASE+CATEGORY_TOGRAVE)
+end
+function c9999996.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local g=c:GetMaterial()
+	local s=0
+	local tc=g:GetFirst()
+	while tc do
+		local a=tc:GetAttack()
+		if a<0 then a=0 end
+		s=s+a
+		tc=g:GetNext()
+	end
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SET_BASE_ATTACK)
+	e1:SetValue(s)
+	e1:SetReset(RESET_EVENT+0x1ff0000)
+	c:RegisterEffect(e1)
+end
+function c9999996.defop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local g=c:GetMaterial()
+	local s=0
+	local tc=g:GetFirst()
+	while tc do
+		local a=tc:GetDefence()
+		if a<0 then a=0 end
+		s=s+a
+		tc=g:GetNext()
+	end
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SET_BASE_DEFENSE)
+	e1:SetValue(s)
+	e1:SetReset(RESET_EVENT+0x1ff0000)
+	c:RegisterEffect(e1)
 end
