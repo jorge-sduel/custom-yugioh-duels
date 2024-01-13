@@ -70,8 +70,8 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	for tc2 in aux.Next(g2) do
 	for tc in aux.Next(g) do
 		--if tc:IsCanAddCounter(0x1148,1) then
-		tc:AddCounter(0x1148,1)
-		tc2:AddCounter(0x1148,1)
+		tc2+tc:AddCounter(0x1148,1)
+		--tc2:AddCounter(0x1148,1)
 			--end
 		end
 	end
