@@ -71,8 +71,8 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	--for tc2 in aux.Next(g2) do
 	--for tc in aux.Next(g) do
 		--if tc:IsCanAddCounter(0x1148,1) then
-		g:GetFirst():AddCounter(0x1148,1)
 		g2:GetFirst():AddCounter(0x1148,1)
+		g:GetFirst():AddCounter(0x1148,1)
 			--end
 		--end
 	end
