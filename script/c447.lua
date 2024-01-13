@@ -66,7 +66,7 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetFieldGroup(tp,LOCATION_FZONE,LOCATION_FZONE)
 	local g2=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_MZONE,0,1,1,nil)
-		if #g>0 or #g2>0 then
+		if #g>0 or #g2>0 then g2:AddCard(g) end
 	--if then g:AddCard(g2) end
 	--for tc2 in aux.Next(g2) do
 	--for tc in aux.Next(g) do
@@ -75,7 +75,7 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 		g:AddCounter(0x1148,1)
 			--end
 		--end
-	end
+	--end
 end
 function s.sfilter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_WARRIOR)
