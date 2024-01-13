@@ -75,7 +75,7 @@ function s.ctop(e,tp,eg,ep,ev,re,r,rp)
 		g2:GetFirst():AddCounter(0x1148,1)
 			--end
 		--end
-	--end
+	end
 end
 function s.sfilter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsRace(RACE_WARRIOR)
