@@ -172,13 +172,13 @@ function c9999997.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) and c:GetAttackAnnouncedCount()==0 end
 	c:RemoveOverlayCard(tp,1,1,REASON_COST)
-	local e1=Effect.CreateEffect(c)
+	--[[local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_OATH)
 	e1:SetCode(EFFECT_CANNOT_ATTACK)
 	e1:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e1,true)
-	c:RegisterFlagEffect(9999997,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,1)
+	c:RegisterFlagEffect(9999997,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,1)]]
 end
 function c9999997.spfilter(c,e,tp)
 	return not c:IsCode(9999997)
