@@ -118,7 +118,7 @@ end
 function c9999997.xyzop(e,tp,chk,mc)
 	if chk==0 then return Duel.IsExistingMatchingCard(c9999997.cfilter,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DISCARD)
-	local tc=Duel.GetMatchingGroup(s.cfilter,tp,LOCATION_HAND,0,nil):SelectUnselect(Group.CreateGroup(),tp,false,Xyz.ProcCancellable)
+	local tc=Duel.GetMatchingGroup(c9999997.cfilter,tp,LOCATION_HAND,0,nil):SelectUnselect(Group.CreateGroup(),tp,false,Xyz.ProcCancellable)
 	if tc then
 		Duel.SendtoGrave(tc,REASON_DISCARD+REASON_COST)
 		return true
