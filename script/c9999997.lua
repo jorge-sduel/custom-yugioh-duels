@@ -218,8 +218,8 @@ function c9999997.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
 end
 function c9999997.atkval(e,c)
-	return c:GetOverlayCount()*1000
-end
+	local g=Duel.GetMatchingGroup(Card.IsFaceup,c:GetControler(),0,LOCATION_MZONE,nil)
+	return g:GetSum(Card.GetRank)*300
 function c9999997.xmcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:GetOverlayCount()==0
