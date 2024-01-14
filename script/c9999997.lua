@@ -144,7 +144,7 @@ function c9999997.xyzcon(e,c,og)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-1
 		and mg:IsExists(c9999997.xyzfilter1,1,nil,mg)
 end
-function c9999997.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og)
+--[[function c9999997.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og)
 	local mg=Duel.GetMatchingGroup(c9999997.mfilter,tp,LOCATION_MZONE,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	local g1=mg:FilterSelect(tp,c9999997.xyzfilter1,4,4,nil,mg)
@@ -163,7 +163,7 @@ function c9999997.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og)
 	Duel.SendtoGrave(sg1,REASON_RULE)
 	c:SetMaterial(g1)
 	Duel.Overlay(c,g1)
-end
+end]]
 function c9999997.sumsuc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():GetSummonType()~=SUMMON_TYPE_XYZ then return end
 	Duel.SetChainLimitTillChainEnd(aux.FALSE)
