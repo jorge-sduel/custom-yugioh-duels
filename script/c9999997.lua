@@ -208,7 +208,7 @@ function c9999997.spop(e,tp,eg,ep,ev,re,r,rp)
 			if sg:GetCount()>0 then
 				tc:SetMaterial(sg)
 				Duel.Overlay(tc,sg)
-			--end
+			end
 		end
 		--Duel.SpecialSummon(tc,SUMMON_TYPE_XYZ,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()
