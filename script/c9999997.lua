@@ -185,23 +185,23 @@ function c9999997.spfilter(c,e,tp)
 		and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_XYZ,tp,true,false)
 end
 function c9999997.sptg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_EXTRA) and c9999997.spfilter(chkc,e,tp) end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(c9999997.spfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,nil,e,tp) end
-	local tg=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
-	Duel.ConfirmCards(tp,tg)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,c9999997.spfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,1,nil,e,tp)
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,g:GetCount(),0,0)
+	if chk==0 then return Duel.IsExistingMatchingCard(c9999997.spfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function c9999997.xfilter(c,e)
 	return c:IsType(TYPE_MONSTER) and not c:IsImmuneToEffect(e) and not c:IsCode(9999996) and not c:IsCode(9999997)
 end
 function c9999997.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	local tc=Duel.GetFirstTarget()
+	local tg=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
+	Duel.ConfirmCards(tp,tg)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,c9999996.spfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,1,nil,e,tp)
+	local tc=g:GetFirst()
+	if not tc then return end
+	tc:SetMaterial(nil)
+	if Duel.SpecialSummon(tc,SUMMON_TYPE_XYZ,tp,tp,true,true,POS_FACEUP)~=0 then
 	local g2=Duel.GetMatchingGroup(c9999997.xfilter,tp,LOCATION_HAND,0,nil,e)
-	if tc:IsRelateToEffect(e) and tc:IsType(TYPE_XYZ) then
+	--if tc:IsRelateToEffect(e) and tc:IsType(TYPE_XYZ) then
 		if g2:GetCount()>0 and Duel.SelectYesNo(tp,aux.Stringid(9999997,2)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 			local sg=g2:Select(tp,2,2,nil,nil,2)
@@ -210,10 +210,42 @@ function c9999997.spop(e,tp,eg,ep,ev,re,r,rp)
 				Duel.Overlay(tc,sg)
 			end
 		end
-		Duel.SpecialSummon(tc,SUMMON_TYPE_XYZ,tp,tp,true,false,POS_FACEUP)
+		--Duel.SpecialSummon(tc,SUMMON_TYPE_XYZ,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
 end
+function c9999996.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(c9999996.spfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
+end
+function c9999996.spop(e,tp,eg,ep,ev,re,r,rp)
+	local tg=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
+	Duel.ConfirmCards(tp,tg)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,c9999996.spfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,1,nil,e,tp)
+	local tc=g:GetFirst()
+	if not tc then return end
+	tc:SetMaterial(nil)
+	if Duel.SpecialSummon(tc,SUMMON_TYPE_SYNCHRO,tp,tp,true,true,POS_FACEUP)~=0 then
+		--Cannot attack
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetDescription(3206)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_CANNOT_ATTACK)
+		e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_CLIENT_HINT)
+		e1:SetReset(RESET_PHASE+PHASE_END)
+		tc:RegisterEffect(e1,true)
+		tc:RegisterFlagEffect(9999996,RESET_PHASE+PHASE_END,0,1)
+		tc:CompleteProcedure()
+	end
+end
+
+
+
+
+
+
+
 function c9999997.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
 end
