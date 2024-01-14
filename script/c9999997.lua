@@ -1,9 +1,9 @@
 --Odelschwanck
 function c9999997.initial_effect(c)
 	c:SetUniqueOnField(1,0,9999997)
-	Xyz.AddProcedure(c,c9999997.xyzfilter,nil,4,c9999997.ovfilter,aux.Stringid(id,0),3,c9999997.xyzop,false)
+	--Xyz.AddProcedure(c,c9999997.xyzfilter,nil,4,c9999997.ovfilter,aux.Stringid(id,0),3,c9999997.xyzop,false)
 	c:EnableReviveLimit()
-	--[[xyzsummon condition
+	--xyzsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
@@ -13,7 +13,7 @@ function c9999997.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CANNOT_DISABLE_SPSUMMON)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	c:RegisterEffect(e2)]]
+	c:RegisterEffect(e2)
 	--xyz summon
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
