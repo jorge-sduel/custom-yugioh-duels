@@ -195,7 +195,7 @@ function c9999997.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetFieldGroup(tp,0,LOCATION_EXTRA)
 	Duel.ConfirmCards(tp,tg)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c9999996.spfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,1,nil,e,tp)
+	local g=Duel.SelectMatchingCard(tp,c9999997.spfilter,tp,LOCATION_EXTRA,LOCATION_EXTRA,1,1,nil,e,tp)
 	local tc=g:GetFirst()
 	if not tc then return end
 	tc:SetMaterial(nil)
