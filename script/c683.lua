@@ -36,7 +36,7 @@ function s.target(e,c)
 	return c:IsMonster()
 end
 function s.filter(c)
-	return c:IsRace(RACE_FIEND) and re:IsSetCard(0x45) and c:IsFaceup()
+	return c:IsRace(RACE_FIEND) and c:IsSetCard(0x45) and c:IsFaceup()
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil)
