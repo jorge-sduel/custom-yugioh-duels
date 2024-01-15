@@ -30,10 +30,9 @@ function s.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e5:SetCode(EVENT_DESTROYED)
-	e5:SetCondition(s.spcon)
-	e5:SetTarget(s.sptg)
-	e5:SetOperation(s.spop)
-	e5:SetLabelObject(e4)
+	e5:SetCondition(s.spcon1)
+	e5:SetTarget(s.sptg1)
+	e5:SetOperation(s.spop1)
 	c:RegisterEffect(e5)
 end
 function s.spfilter(c,tp)
@@ -71,18 +70,18 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Draw(tp,1,REASON_EFFECT)
 	end
 end
-function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsReason(REASON_EFFECT)
+function s.spcon1(e,tp,eg,ep,ev,re,r,rp)
+	return re:IsSetCard(0x45) and e:GetHandler():IsReason(REASON_EFFECT)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x45) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
-function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_REMOVED)
 end
-function s.spop(e,tp,eg,ep,ev,re,r,rp)
+function s.spop1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_REMOVED,0,1,1,nil,e,tp)
 	if #g>0 then
