@@ -71,7 +71,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spcon1(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsSetCard(0x45) and e:GetHandler():IsReason(REASON_EFFECT)
+	return e:GetHandler():IsReason(REASON_EFFECT)
 end
 function s.filter(c,e,tp)
 	return c:IsSetCard(0x45) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
