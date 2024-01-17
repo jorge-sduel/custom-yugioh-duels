@@ -56,10 +56,8 @@ end
 function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,0,LOCATION_MZONE,1,1,nil)
-	Duel.HintSelection(g)
-	local tc=g:GetFirst()
-	if tc then
+	local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE,0)
+			for tc in aux.Next(g) do
 			local e3=Effect.CreateEffect(c)
 			e3:SetType(EFFECT_TYPE_SINGLE)
 			e3:SetCode(EFFECT_UPDATE_ATTACK)
