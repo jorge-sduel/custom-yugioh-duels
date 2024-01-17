@@ -56,7 +56,7 @@ end
 function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE,0)
+	local g=Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_MZONE,c)
 			for tc in aux.Next(g) do
 			local e3=Effect.CreateEffect(c)
 			e3:SetType(EFFECT_TYPE_SINGLE)
