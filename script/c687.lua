@@ -11,6 +11,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,0)
 	e1:SetTarget(s.tgfilter)
+	e1:SetValue(1)
 	c:RegisterEffect(e1)
 	--Negate Effect/0 ATK
 	local e2=Effect.CreateEffect(c)
@@ -21,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetCountLimit(1)
 	e2:SetCost(s.cost)
 	e2:SetTarget(s.target)
-	e2:SetOperation(s.operation)
+	e2:SetOperation(s.operation1)
 	c:RegisterEffect(e2)
 	--attack up
 	local e3=Effect.CreateEffect(c)
@@ -44,7 +45,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
 function s.tgfilter(e,c)
-	return c:IsRace(RACE_FIEND) and c:GetLevel()<=6
+	return c:IsRace(RACE_FIEND) and c:IsLevelBelow(6)
 end
 function s.filter2(c,e,tp)
 	return c:IsFaceup()
@@ -52,7 +53,7 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,tp,0,LOCATION_MZONE,1,nil) end
 end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
+function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,0,LOCATION_MZONE,1,1,nil)
