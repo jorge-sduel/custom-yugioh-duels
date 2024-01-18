@@ -36,7 +36,7 @@ function cid.matfilter(c)
 	return c:IsType(TYPE_EFFECT) and not c:IsType(TYPE_LINK)
 end
 function cid.lcheck(g,lc)
-return g:IsExists(Card.IsType,1,nil,TYPE_PENDULUM) or c.IsEquilibrium
+return g:IsExists(Card.IsType,1,nil,TYPE_PENDULUM)
 end
 function cid.tefilter(c)
 	return c:IsSetCard(0x9b5) and not c:IsForbidden()
