@@ -68,7 +68,7 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
  local c=e:GetHandler()
- local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE,0,c)
+ local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE,0,nil)
 		local lc=g:GetFirst()
 		for lc in aux.Next(g) do
 			local e1=Effect.CreateEffect(e:GetHandler())
