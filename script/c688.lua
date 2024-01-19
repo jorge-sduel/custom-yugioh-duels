@@ -73,7 +73,6 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(6)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			lc:RegisterEffect(e1)
-		end
 	end
 end
 function s.filter(c)
