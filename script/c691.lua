@@ -73,7 +73,7 @@ function s.lvop2(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetCode(EFFECT_DISABLE_EFFECT)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		lc:RegisterEffect(e3)
-		end
+		--end
 	end
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
