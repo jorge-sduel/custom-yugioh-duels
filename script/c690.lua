@@ -22,12 +22,15 @@ function s.initial_effect(c)
 	e5:SetCode(EVENT_CHAINING)
 	e5:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e5:SetRange(LOCATION_MZONE)
-	e5:SetCountLimit(1)
+	e5:SetCountLimit(1,id)
 	e5:SetCondition(s.negcon)
 	e5:SetCost(s.cost)
 	e5:SetTarget(s.negtg)
 	e5:SetOperation(s.negop)
 	c:RegisterEffect(e5)
+	local e6=e5:Clone()
+	e6:SetCondition(s.negcon2)
+	c:RegisterEffect(e6)
 end
 s.material_setcode=0x10a2
 s.listed_names={CARD_DARK_MAGICIAN}
@@ -46,6 +49,11 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.GetChainInfo(ev-1,CHAININFO_TRIGGERING_EFFECT):IsHasType(EFFECT_TYPE_ACTIVATE) then return false end
 	local ex,tg,tc=Duel.GetOperationInfo(ev,CATEGORY_DESTROY)
 	return ex and tg~=nil and tc+tg:FilterCount(Card.IsOnField,nil)-#tg>0
+end
+function s.negcon2(e,tp,eg,ep,ev,re,r,rp)
+	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
+	local tg=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
+	return tg and #tg==1 and Duel.IsChainNegatable(ev)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
