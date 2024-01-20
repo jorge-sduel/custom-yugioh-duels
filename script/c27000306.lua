@@ -1,7 +1,7 @@
 ---CCG: Familiar-Possessed Radiant Charmer - Lyna
 function c27000306.initial_effect(c)
 	--link summon
-	Link.AddProcedure(c,aux.FilterBoolFunction(Card.IsLinkAttribute,ATTRIBUTE_LIGHT),2,2)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),2,2)
 	c:EnableReviveLimit()
 	--special summon condition
 	local e1=Effect.CreateEffect(c)
