@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
  e1:SetCost(aux.AND(aux.dxmcostgen(1,1,nil),s.cacost))
-	e1:SetTarget(s.lvtg2)
+	--e1:SetTarget(s.lvtg2)
 	e1:SetOperation(s.lvop2)
 	c:RegisterEffect(e1)
 	--attach
