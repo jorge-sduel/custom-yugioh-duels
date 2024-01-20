@@ -51,7 +51,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
-	e:SetLabel(g:GetFirst():GetRace())
+	e:SetLabel(g:GetFirst():GetAttribute())
 end
 function s.filter2(c,att)
 	return c:IsFaceup() and c:IsAttribute(att)
