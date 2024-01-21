@@ -22,7 +22,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(g,REASON_COST)
 end
 function s.spfilter(c,e,tp,rc)
-	return c:IsRace(rc) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsAttribute(rc) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.filter2(c,att)
 	return c:IsFaceup()
@@ -41,8 +41,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
 		end
  local g2=Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_MZONE,c,e:GetLabel())
-		local lc=g:GetFirst()
-		for lc in aux.Next(g) do
+		local lc=g2:GetFirst()
+		for lc in aux.Next(g2) do
 local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CHANGE_ATTRIBUTE)
