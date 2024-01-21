@@ -39,10 +39,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,e:GetLabel())
 		local g2=Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_MZONE,c,e:GetLabel()) 
 	if #g>0 or #g2>0 then
-			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
-		--[[end
+			Duel.SpecialSummon(g:GetFirst(),0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
+		--end
 		local lc=g2:GetFirst()
-		for lc in aux.Next(g2) do]]
+		for lc in aux.Next(g2) do
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CHANGE_ATTRIBUTE)
@@ -66,6 +66,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e5:SetTarget(s.etarget)
 	e5:SetValue(1)
 	Duel.RegisterEffect(e5)
+		end
 	end
 end
 function s.etarget(e,c)
