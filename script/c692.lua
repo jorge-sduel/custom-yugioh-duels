@@ -55,8 +55,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e3:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e3:SetTarget(s.etarget)
+	e3:SetReset(RESET_PHASE+PHASE_END)
 	e3:SetValue(1)
-	Duel.RegisterEffect(e3)
+	Duel.RegisterEffect(e3,tp)
 	--battle target
 	local e5=Effect.CreateEffect(e:GetHandler())
 	e5:SetType(EFFECT_TYPE_SINGLE)
@@ -65,7 +66,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e5:SetTargetRange(LOCATION_MZONE,0) 
 	e5:SetTarget(s.etarget)
 	e5:SetValue(1)
-	Duel.RegisterEffect(e5)
+	e5:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e5,tp)
 		end
 	end
 end
