@@ -31,8 +31,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATTRIBUTE)
 	local rc=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
-	e:GetLabelObject():SetLabel(rc)
-	e:GetHandler():SetHint(CHINT_ATTRIBUTE,rc)
+	e:SetLabel(rc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=-1 then return end
