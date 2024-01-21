@@ -4,6 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--pendulum summon
     Pendulum.AddProcedure(c)
+	aux.AddRuneTuning(c,LOCATION_PZONE,LOCATION_MZONE,0,LOCATION_EXTRA,LOCATION_EXTRA)
 	 --summon with no tribute
     local e1=Effect.CreateEffect(c)
     e1:SetDescription(aux.Stringid(id,0))
