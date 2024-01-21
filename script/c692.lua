@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,tp)
-	return Duel.GetMZoneCount(tp,c)>0 and c:IsSetCard(0x10c0)
+	return Duel.GetMZoneCount(tp,c)>0 and c:IsSetCard(0xc0)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
