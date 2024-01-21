@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
-	e1:SetOperation(s.operation)
+	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
 function s.cfilter(c,tp)
@@ -40,7 +40,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local g2=Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_MZONE,c,e:GetLabel()) 
 	if #g>0 or #g2>0 then
 			Duel.SpecialSummon(g:GetFirst(),0,tp,tp,false,false,POS_FACEDOWN_DEFENSE)
-		--end
+		end
 		local lc=g2:GetFirst()
 		for lc in aux.Next(g2) do
 	local e2=Effect.CreateEffect(e:GetHandler())
@@ -66,7 +66,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e5:SetTarget(s.etarget)
 	e5:SetValue(1)
 	Duel.RegisterEffect(e5)
-		end
+		--end
 	end
 end
 function s.etarget(e,c)
