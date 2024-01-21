@@ -22,7 +22,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(g,REASON_COST)
 end
 function s.spfilter(c,e,tp,rc)
-	return c:IsAttribute(rc) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsAttribute(rc) and c:IsSetCard(0xbf) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.filter2(c,att)
 	return c:IsFaceup()
