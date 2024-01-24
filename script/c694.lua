@@ -17,17 +17,17 @@ function s.filter(c,e,tp)
 	return c.Is_Cosmic and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.rescon1(sg,e,tp,mg)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,sg,e,tp)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,sg,e,tp)
 	return aux.ChkfMMZ(2)(sg,e,tp,mg) and sg:GetClassCount(Card.GetCode)==2 
 		and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon2,0)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,tp,LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
-	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE,0,nil,e,tp)
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon2,1,tp,HINTMSG_SPSUMMON)
 	for lc in aux.Next(sg) do
 		Duel.SpecialSummon(lc,0,tp,tp,false,false,POS_FACEUP)
@@ -52,10 +52,4 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			lc:RegisterEffect(e4,true)
 
 	end
-end
-function s.splimit(e,c)
-	return not c:IsType(TYPE_FUSION) and c:IsLocation(LOCATION_EXTRA)
-end
-function s.lizfilter(e,c)
-	return not c:IsOriginalType(TYPE_FUSION)
 end
