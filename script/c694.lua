@@ -30,6 +30,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon2,1,tp,HINTMSG_SPSUMMON)
 	if #sg==2 then
+		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_SET_ATTACK_FINAL)
@@ -49,7 +50,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e4:SetCode(EFFECT_DISABLE_EFFECT)
 			e4:SetReset(RESET_EVENT+RESETS_STANDARD)
 			sg:RegisterEffect(e4,true)
-		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 
 	end
 end
