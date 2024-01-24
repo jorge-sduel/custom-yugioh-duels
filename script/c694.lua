@@ -29,27 +29,27 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<2 or Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then return end
 	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.filter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
 	local sg=aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon2,1,tp,HINTMSG_SPSUMMON)
-	if #sg==2 then
-		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
+	for lc in aux.Next(sg) do
+		Duel.SpecialSummon(lc,0,tp,tp,false,false,POS_FACEUP)
 			local e1=Effect.CreateEffect(e:GetHandler())
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_SET_ATTACK_FINAL)
 			e1:SetValue(0)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-			sg:RegisterEffect(e1)
+			lc:RegisterEffect(e1)
 			local e2=e1:Clone()
 			e2:SetCode(EFFECT_SET_DEFENSE_FINAL)
-			sg:RegisterEffect(e2)
+			lc:RegisterEffect(e2)
 			local e3=Effect.CreateEffect(e:GetHandler())
 			e3:SetType(EFFECT_TYPE_SINGLE)
 			e3:SetCode(EFFECT_DISABLE)
 			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
-			sg:RegisterEffect(e3,true)
+			lc:RegisterEffect(e3,true)
 			local e4=Effect.CreateEffect(e:GetHandler())
 			e4:SetType(EFFECT_TYPE_SINGLE)
 			e4:SetCode(EFFECT_DISABLE_EFFECT)
 			e4:SetReset(RESET_EVENT+RESETS_STANDARD)
-			sg:RegisterEffect(e4,true)
+			lc:RegisterEffect(e4,true)
 
 	end
 end
