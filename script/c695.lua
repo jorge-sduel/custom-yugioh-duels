@@ -1,5 +1,6 @@
 --生贄の祭壇
 local s,id=GetID()
+s.Is_Cosmic=true
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
