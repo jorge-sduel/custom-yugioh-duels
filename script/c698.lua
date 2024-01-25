@@ -19,8 +19,8 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_REMOVED)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCountLimit(1,id)
-	e2:SetTarget(c12340417.xyztg)
-	e2:SetOperation(c12340417.xyzop)
+	e2:SetTarget(s.xyztg)
+	e2:SetOperation(s.xyzop)
 	c:RegisterEffect(e2)
 end
 function s.filter(c)
@@ -31,16 +31,16 @@ function s.spcon(e,c)
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.filter,c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
-function c12340417.xyzfil(c)
-	return c:IsType(TYPE_XYZ)
+function s.xyzfil(c)
+	return c:IsType(TYPE_XYZ) and c.Is_Cosmic and c:GetOverlay()==0
 end
-function c12340417.xyztg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and c12340417.xyzfil(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(c12340417.xyzfil,tp,LOCATION_MZONE,0,1,nil) end
+function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.xyzfil(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.xyzfil,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,c12340417.xyzfil,tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,s.xyzfil,tp,LOCATION_MZONE,0,1,1,nil)
 end
-function c12340417.xyzop(e,tp,eg,ep,ev,re,r,rp)
+function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
