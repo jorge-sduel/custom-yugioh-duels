@@ -26,7 +26,7 @@ end
 function s.filter(c,e,tp)
 	return c.Is_Cosmic and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
-function s.rescon1(sg,e,tp,mg)
+function s.rescon2(sg,e,tp,mg)
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,sg,e,tp)
 	return aux.ChkfMMZ(2)(sg,e,tp,mg) and sg:GetClassCount(Card.GetCode)==2 
 		and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon2,0)
