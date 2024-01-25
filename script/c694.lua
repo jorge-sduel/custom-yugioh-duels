@@ -27,9 +27,7 @@ function s.filter(c,e,tp)
 	return c.Is_Cosmic and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.rescon2(sg,e,tp,mg)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,sg,e,tp)
-	return aux.ChkfMMZ(2)(sg,e,tp,mg) and sg:GetClassCount(Card.GetCode)==2 
-		and aux.SelectUnselectGroup(g,e,tp,2,2,s.rescon2,0)
+	return sg:GetClassCount(Card.GetCode)==2
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) end
