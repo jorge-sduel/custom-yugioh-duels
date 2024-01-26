@@ -1,6 +1,7 @@
 --超巨大空中宮殿ガンガリディア
 --Skypalace Gangaridai
 local s,id=GetID()
+s.Is_Cosmic=true
 function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,9,2)
@@ -60,8 +61,7 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_MZONE,0,1,nil) then return end
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)>0 then
-		local xg=Duel.IsExistingMatchingCard(s.spfilter2,tp,LOCATION_REMOVED,0,1,nil)
-		if #xg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
+		if Duel.IsExistingMatchingCard(s.spfilter2,tp,LOCATION_REMOVED,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 			local cd=Duel.SelectMatchingCard(tp,s.spfilter2,tp,LOCATION_REMOVED,0,1,1,nil):GetFirst()
 			Duel.BreakEffect()
 			Duel.Overlay(e:GetHandler(),cd)
