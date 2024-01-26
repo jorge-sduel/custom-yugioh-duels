@@ -32,7 +32,7 @@ function s.spcon(e,c)
 		and Duel.IsExistingMatchingCard(s.filter,c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
 function s.xyzfil(c)
-	return c:IsType(TYPE_XYZ) and c.Is_Cosmic and c:GetOverlay()==0
+	return c:IsType(TYPE_XYZ) and c.Is_Cosmic and c:GetOverlayCount()==0
 end
 function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.xyzfil(chkc) end
