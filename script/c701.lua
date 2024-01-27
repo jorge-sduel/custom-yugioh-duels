@@ -25,8 +25,8 @@ end
 s.listed_names={id}
 function s.spcon(e,c)
 	if c==nil then return true end
-	return Duel.GetFieldGroupCount(c:GetControler(),LOCATION_MZONE,0)==0
-		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+	return Duel.GetFieldGroupCount(e:GetHandlerPlayer(),LOCATION_MZONE,0)==0
+		and Duel.GetLocationCount(e:GetHandlerPlayer(),LOCATION_MZONE)>0
 end
 function s.rmfilter(c,e,tp)
 	return c.Is_Cosmic and c:IsType(TYPE_MONSTER) and c:IsAbleToRemove()
