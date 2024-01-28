@@ -70,8 +70,8 @@ end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
- tc:AddCounter(0x1112c,1)
-		local g=Duel.GetMatchingGroup(s.filter2,tp,LOCATION_MZONE,0,tc)
+	tc:AddCounter(0x1112c,1)
+		local g=Duel.GetMatchingGroup(s.filter2,tp,0,LOCATION_MZONE,tc)
 		local lc=g:GetFirst()
 		for lc in aux.Next(g) do
 			local e1=Effect.CreateEffect(e:GetHandler())
