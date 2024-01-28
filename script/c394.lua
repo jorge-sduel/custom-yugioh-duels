@@ -49,9 +49,9 @@ function print_hand(e,tp,eg,ep,ev,re,r,rp)
 		--Duel.Remove(c,POS_FACEUP,REASON_RULE)
 	c394.announce_filter={210220076,210220077,210220078,210220079,469,132,OPCODE_ISCODE}
 	--local c1=Duel.AnnounceCard(tp,table.unpack(c394.announce_filter))
-		Duel.SendtoHand(c,1-tp,REASON_RULE)
-		Duel.RegisterFlagEffect(tp,4392470,0,99,99)
-	else
+		--Duel.SendtoHand(c,1-tp,REASON_RULE)
+		--Duel.RegisterFlagEffect(tp,4392470,0,99,99)
+	--else
 		Duel.SendtoHand(e:GetHandler(),nil,REASON_RULE)
 		Duel.Remove(c,POS_FACEUP,REASON_RULE)
 	local token01=Duel.CreateToken(tp,210220076)
