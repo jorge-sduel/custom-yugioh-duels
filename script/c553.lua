@@ -26,7 +26,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 function s.costfilter(c)
-	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(10) and c:IsType(TYPE_FUSION)
+	return c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelAbove(8) and c:IsType(TYPE_FUSION)
 end
 function s.filter(c)
 	return c:IsLocation(LOCATION_ONFIELD)
