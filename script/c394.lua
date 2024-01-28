@@ -48,7 +48,7 @@ if not Duel.SelectYesNo(1-tp,aux.Stringid(4010,0)) or not Duel.SelectYesNo(tp,au
 end]]
 function c394.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DisableShuffleCheck()
-	--Duel.SendtoDeck(e:GetHandler(),nil,-2,REASON_RULE)
+	Duel.SendtoDeck(e:GetHandler(),nil,-2,REASON_RULE)
 	e:Reset()
 end
 function print_hand(e,tp,eg,ep,ev,re,r,rp)
@@ -61,7 +61,7 @@ function print_hand(e,tp,eg,ep,ev,re,r,rp)
 	--	return
 	--end
 	--if n then
-		Duel.SendtoHand(e:GetHandler(),nil,REASON_RULE)
+		--Duel.SendtoHand(e:GetHandler(),nil,REASON_RULE)
 		--Duel.Remove(c,POS_FACEUP,REASON_RULE)
 	--c394.announce_filter={210220076,210220077,210220078,210220079,469,132,OPCODE_ISCODE}
 	--local c1=Duel.AnnounceCard(tp,table.unpack(c394.announce_filter))
