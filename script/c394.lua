@@ -1,6 +1,6 @@
 --over hundred xyz 
 function c394.initial_effect(c)
-	--Activate	
+	--[[Activate	
 	local e1=Effect.CreateEffect(c)	
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -17,9 +17,18 @@ e2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
   e2:SetRange(LOCATION_REMOVED)
 e2:SetCountLimit(1)
   e2:SetOperation(print_hand)
-  c:RegisterEffect(e2)
+  c:RegisterEffect(e2)]]
+	aux.GlobalCheck(s,function()
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e1:SetCode(EVENT_ADJUST)
+		e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
+		e1:SetOperation(c394.op)
+		Duel.RegisterEffect(e1,0)
+	end )
+	aux.EnableExtraRules(c,s,print_hand)
 end
-function c394.op(e,tp,eg,ep,ev,re,r,rp,chk)
+--[[function c394.op(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 if not Duel.SelectYesNo(1-tp,aux.Stringid(4010,0)) or not Duel.SelectYesNo(tp,aux.Stringid(4010,0)) then
         local sg=Duel.GetMatchingGroup(Card.IsCode,tp,0x7f,0x7f,nil,394)
@@ -36,7 +45,7 @@ if not Duel.SelectYesNo(1-tp,aux.Stringid(4010,0)) or not Duel.SelectYesNo(tp,au
 	if c:GetPreviousLocation()==LOCATION_HAND then
 		Duel.Draw(tp,1,REASON_RULE)
 	end
-end
+end]]
 function print_hand(e,tp,eg,ep,ev,re,r,rp)
 	local dg=Group.CreateGroup()
 	local dg2=Group.CreateGroup()
@@ -74,12 +83,12 @@ function print_hand(e,tp,eg,ep,ev,re,r,rp)
 	dg:AddCard(token04)
 	dg:AddCard(token05)
 	dg:AddCard(token06)
-	dg2:AddCard(token01)
-	dg2:AddCard(token02)
-	dg2:AddCard(token03)
-	dg2:AddCard(token04)
-	dg2:AddCard(token05)
-	dg2:AddCard(token06)
+	dg2:AddCard(token001)
+	dg2:AddCard(token002)
+	dg2:AddCard(token003)
+	dg2:AddCard(token004)
+	dg2:AddCard(token005)
+	dg2:AddCard(token006)
 	--local c2=Duel.AnnounceCard(1-tp,table.unpack(c394.announce_filter))
 	local c1=dg:Select(tp,1,1,nil)
 	local c2=dg2:Select(tp,1,1,nil)
