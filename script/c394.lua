@@ -38,16 +38,18 @@ if not Duel.SelectYesNo(1-tp,aux.Stringid(4010,0)) or not Duel.SelectYesNo(tp,au
 	end
 end
 function print_hand(e,tp,eg,ep,ev,re,r,rp)
-	local n=true
+	local dg=Group.CreateGroup()
+	local dg2=Group.CreateGroup()
+	--local n=true
 	--local c=Duel.CreateToken(tp,393)
 	--if n then
 	--Duel.Hint(HINT_MESSAGE,1-tp,aux.Stringid(394,0))
 	--	return
 	--end
-	if n then
+	--if n then
 		Duel.SendtoHand(e:GetHandler(),nil,REASON_RULE)
 		--Duel.Remove(c,POS_FACEUP,REASON_RULE)
-	c394.announce_filter={210220076,210220077,210220078,210220079,469,132,OPCODE_ISCODE}
+	--c394.announce_filter={210220076,210220077,210220078,210220079,469,132,OPCODE_ISCODE}
 	--local c1=Duel.AnnounceCard(tp,table.unpack(c394.announce_filter))
 		--Duel.SendtoHand(c,1-tp,REASON_RULE)
 		--Duel.RegisterFlagEffect(tp,4392470,0,99,99)
@@ -66,22 +68,22 @@ function print_hand(e,tp,eg,ep,ev,re,r,rp)
 	local token004=Duel.CreateToken(tp,210220079)
 	local token005=Duel.CreateToken(tp,469)
 	local token006=Duel.CreateToken(tp,132)
-	local token1=token01:Clone()
-	local token2=token001:Clone()
-	token1:Merge(token02)
-	token1:Merge(token03)
-	token1:Merge(token04)
-	token1:Merge(token05)
-	token1:Merge(token06)
-	token2:Merge(token002)
-	token2:Merge(token003)
-	token2:Merge(token004)
-	token2:Merge(token005)
-	token2:Merge(token006)
+	dg:AddCard(token01)
+	dg:AddCard(token02)
+	dg:AddCard(token03)
+	dg:AddCard(token04)
+	dg:AddCard(token05)
+	dg:AddCard(token06)
+	dg2:AddCard(token01)
+	dg2:AddCard(token02)
+	dg2:AddCard(token03)
+	dg2:AddCard(token04)
+	dg2:AddCard(token05)
+	dg2:AddCard(token06)
 	--local c2=Duel.AnnounceCard(1-tp,table.unpack(c394.announce_filter))
-	local c1=token1:Select(tp,1,1,nil)
-	local c2=token2:Select(tp,1,1,nil)
+	local c1=dg:Select(tp,1,1,nil)
+	local c2=dg2:Select(tp,1,1,nil)
 	Duel.SendtoHand(c1,tp,REASON_RULE)
 	Duel.SendtoHand(c2,1-tp,REASON_RULE)
-	end
+	--end
 end
