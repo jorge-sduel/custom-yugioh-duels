@@ -71,7 +71,7 @@ function s.ecfilter(e,c)
 	return e:GetHandler():GetLinkedGroup():IsContains(c) and c.Is_Cosmic and c:IsType(TYPE_XYZ)
 end
 function s.ecfilter2(e,c)
-	return e:GetHandler():GetLinkedGroup():IsContains(c)
+	return e:GetHandler():GetLinkedGroup():IsContains(c) and e:GetHandler():GetCounter(0x1112c)>=2
 end
 function s.atkvalue(e,c)
 	return e:GetHandler():GetCounter(0x1112c)*600
