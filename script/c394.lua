@@ -40,7 +40,7 @@ end
 function print_hand(e,tp,eg,ep,ev,re,r,rp)
 	local n=true
 	--local c=Duel.CreateToken(tp,393)
-	if n and (c:IsSetCard(0x2fff) or c:IsCode(99004583) or c:IsCode(35498188)) then
+	if n then
 	Duel.Hint(HINT_MESSAGE,1-tp,aux.Stringid(394,0))
 		return
 	end
