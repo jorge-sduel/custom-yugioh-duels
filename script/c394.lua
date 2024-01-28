@@ -53,7 +53,7 @@ function print_hand(e,tp,eg,ep,ev,re,r,rp)
 		--Duel.RegisterFlagEffect(tp,4392470,0,99,99)
 	--else
 		Duel.SendtoHand(e:GetHandler(),nil,REASON_RULE)
-		Duel.Remove(c,POS_FACEUP,REASON_RULE)
+		--Duel.Remove(c,POS_FACEUP,REASON_RULE)
 	local token01=Duel.CreateToken(tp,210220076)
 	local token02=Duel.CreateToken(tp,210220077)
 	local token03=Duel.CreateToken(tp,210220078)
