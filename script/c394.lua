@@ -46,6 +46,11 @@ if not Duel.SelectYesNo(1-tp,aux.Stringid(4010,0)) or not Duel.SelectYesNo(tp,au
 		Duel.Draw(tp,1,REASON_RULE)
 	end
 end]]
+function c394.op(e,tp,eg,ep,ev,re,r,rp)
+	Duel.DisableShuffleCheck()
+	Duel.SendtoDeck(e:GetHandler(),nil,-2,REASON_RULE)
+	e:Reset()
+end
 function print_hand(e,tp,eg,ep,ev,re,r,rp)
 	local dg=Group.CreateGroup()
 	local dg2=Group.CreateGroup()
