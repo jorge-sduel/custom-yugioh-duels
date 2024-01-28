@@ -40,13 +40,13 @@ end
 function print_hand(e,tp,eg,ep,ev,re,r,rp)
 	local n=true
 	--local c=Duel.CreateToken(tp,393)
-	if n then
-	Duel.Hint(HINT_MESSAGE,1-tp,aux.Stringid(394,0))
-		return
-	end
+	--if n then
+	--Duel.Hint(HINT_MESSAGE,1-tp,aux.Stringid(394,0))
+	--	return
+	--end
 	if n then
 		Duel.SendtoHand(e:GetHandler(),nil,REASON_RULE)
-		Duel.Remove(c,POS_FACEUP,REASON_RULE)
+		--Duel.Remove(c,POS_FACEUP,REASON_RULE)
 	c394.announce_filter={210220076,210220077,210220078,210220079,469,132,OPCODE_ISCODE}
 	local c=Duel.AnnounceCard(tp,c394.announce_filter)
 		Duel.SendtoHand(c,1-tp,REASON_RULE)
