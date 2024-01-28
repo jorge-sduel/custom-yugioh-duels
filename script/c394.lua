@@ -99,5 +99,7 @@ function print_hand(e,tp,eg,ep,ev,re,r,rp)
 	local c2=dg2:Select(1,1,1,nil)
 	Duel.SendtoDeck(c1,nil,2,REASON_RULE)
 	Duel.SendtoDeck(c2,nil,2,REASON_RULE)
+	Duel.ShuffleDeck(0)
+	Duel.ShuffleDeck(1)
 	--end
 end
