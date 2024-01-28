@@ -48,7 +48,7 @@ if not Duel.SelectYesNo(1-tp,aux.Stringid(4010,0)) or not Duel.SelectYesNo(tp,au
 end]]
 function c394.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.DisableShuffleCheck()
-	Duel.SendtoDeck(e:GetHandler(),nil,-2,REASON_RULE)
+	--Duel.SendtoDeck(e:GetHandler(),nil,-2,REASON_RULE)
 	e:Reset()
 end
 function print_hand(e,tp,eg,ep,ev,re,r,rp)
