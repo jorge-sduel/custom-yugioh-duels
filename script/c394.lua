@@ -97,7 +97,7 @@ function print_hand(e,tp,eg,ep,ev,re,r,rp)
 	--local c2=Duel.AnnounceCard(1-tp,table.unpack(c394.announce_filter))
 	local c1=dg:Select(0,1,1,nil)
 	local c2=dg2:Select(1,1,1,nil)
-	Duel.SendtoHand(c1,0,REASON_RULE)
-	Duel.SendtoHand(c2,1,REASON_RULE)
+	Duel.SendtoDeck(c1,nil,2,REASON_RULE)
+	Duel.SendtoDeck(c2,nil,2,REASON_RULE)
 	--end
 end
