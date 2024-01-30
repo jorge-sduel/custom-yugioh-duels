@@ -49,7 +49,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.filter(c,e,tp)
 	return c:IsLocation(LOCATION_GRAVE) and c:IsControler(tp) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and c:IsCanBeEffectTarget(e)
+		and c:IsCanBeEffectTarget(e) and c:IsAttribute(ATTRIBUTE_WATER)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return eg:IsContains(chkc) and s.filter(chkc,e,tp) end
@@ -66,7 +66,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(800)
+		e1:SetValue(1000)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e1)
 	end
