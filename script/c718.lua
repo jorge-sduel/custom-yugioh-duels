@@ -65,7 +65,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) then ct=1 end
 	ct=math.min(ct,aux.CheckSummonGate(tp) or ct)
 	if ct>0 then
-		local g1=Duel.GetMatchingGroup(s.filter,tp,LOCATION_EXTRA,0,nil,e,tp,rp)
+		local g1=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e,tp,rp)
 		if #g1>0 then
 			repeat
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -81,7 +81,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				e2:SetCode(EFFECT_DISABLE_EFFECT)
 				e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 				tc:RegisterEffect(e2)
-				g1:Match(s.tgfilter,nil,tp,rp,tc:GetRank())
+				g1:Match(s.tgfilter,nil,tp,rp,0)
 				ct=ct-1
 			until #g1==0 or ct==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1))
 			Duel.SpecialSummonComplete()
