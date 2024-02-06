@@ -38,6 +38,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetTargetRange(0,1)
 	e3:SetValue(s.aclimit)
+	e3:SetCondition(s.actcon)
 	e3:SetLabelObject(e3)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
@@ -98,6 +99,10 @@ function s.recop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:GetAttack()>0 then
 		Duel.Recover(tp,tc:GetBaseAttack()+tc:GetBaseDefense(),REASON_EFFECT)
 	end
+end
+function s.actcon(e)
+	local c=e:GetHandler() 
+	return Duel.GetAttacker()==e:GetHandler()
 end
 function s.aclimit(e,re,tp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
