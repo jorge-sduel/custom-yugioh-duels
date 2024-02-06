@@ -36,6 +36,13 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_RANKUP_EFFECT)
 	e4:SetLabelObject(e3)
 	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCode(EFFECT_IMMUNE_EFFECT)
+	e5:SetValue(s.efilter)
+	c:RegisterEffect(e5)
 end
 s.listed_series={0x48}
 s.xyz_number=93
@@ -73,7 +80,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 				Duel.SpecialSummonStep(tc,0,tp,tp,true,true,POS_FACEUP)
 				g1:Match(s.gfilter,nil,tp,rp,0)
 				ct=ct-1
-			until #g1==0 or ct==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,1))
+			until #g1==0 or ct==0 or not Duel.SelectYesNo(tp,aux.Stringid(id,0))
 			Duel.SpecialSummonComplete()
 			Duel.BreakEffect()
 		end
@@ -115,4 +122,7 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetTargetRange(1,0)
 	e2:SetReset(RESET_PHASE+PHASE_END+RESET_OPPO_TURN)
 	Duel.RegisterEffect(e2,tp)
+end
+function s.efilter(e,re)
+	return e:GetOwnerPlayer()~=re:GetOwnerPlayer()
 end
