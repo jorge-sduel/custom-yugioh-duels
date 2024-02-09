@@ -2,7 +2,7 @@
 --Number CXX - Infinity Dark Hope
 --Scripted by Eerie Code
 local s,id=GetID()
-Duel.LoadCardScript("c12744567.lua")
+Duel.LoadCardScript("c21858819.lua")
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	Xyz.AddProcedure(c,nil,11,3,nil,nil,99)
