@@ -74,7 +74,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToEffect(e) and #g==1 then
 		Duel.DisableShuffleCheck()
 		Duel.Overlay(c,g)
-	if g:IsSetCard(0x86) and g:IsMonster() then
+	if g:GetFirst():IsSetCard(0x86) and g:GetFirst():IsMonster() then
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g1=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,e,tp)
