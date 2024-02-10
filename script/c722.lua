@@ -30,7 +30,7 @@ function s.matfilter(c)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,Duel.GetMatchingGroupCount(nil,tp,LOCATION_HAND,0,nil),nil) end
+	if chk==0 then return c:CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	local rt=math.min(Duel.GetMatchingGroupCount(nil,tp,LOCATION_HAND,0,nil),c:GetOverlayCount())
 	local ct=c:RemoveOverlayCard(tp,1,rt,REASON_COST)
 	e:SetLabel(ct)
