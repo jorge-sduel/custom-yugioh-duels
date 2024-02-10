@@ -36,7 +36,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(ct)
 end
 function s.tdfilter(c)
-	return c:IsAbleToDeck()
+	return c:IsAbleToGrave()
 end
 function s.filter(c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsAbleToHand()
@@ -49,7 +49,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()
-	local tdg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_GRAVE,0,nil)
+	local tdg=Duel.GetMatchingGroup(s.tdfilter,tp,LOCATION_HAND,0,nil)
 	if #tdg>=ct then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 		local tdsg=tdg:Select(tp,ct,ct,nil)
