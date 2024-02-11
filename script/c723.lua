@@ -67,7 +67,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.xyzfilter(c)
-	return c:IsFaceup() and c:IsRank(4) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsType(TYPE_XYZ) and c:GetOverlayCount()==0
+	return c:IsRank(4) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsType(TYPE_XYZ) and c:GetOverlayCount()==0
 end
 function s.filter(c)
 	return c:IsMonster() and c:IsSetCard(0x86)
