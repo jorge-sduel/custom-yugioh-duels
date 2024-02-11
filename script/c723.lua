@@ -75,11 +75,11 @@ end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsType,TYPE_XYZ),tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingTarget(Card.IsMonster,tp,LOCATION_GRAVE,0,2,nil) end
+		and Duel.IsExistingTarget(Card.IsMonster,tp,LOCATION_HAND,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsType,TYPE_XYZ),tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	Duel.SelectTarget(tp,Card.IsMonster,tp,LOCATION_GRAVE,0,2,2,nil)
+	Duel.SelectTarget(tp,Card.IsMonster,tp,LOCATION_HAND,0,2,2,nil)
 end
 function s.activate1(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
