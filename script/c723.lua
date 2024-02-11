@@ -1,5 +1,4 @@
---早すぎた埋葬
---Premature Burial
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -23,8 +22,8 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCost(aux.bfgcost)
-	e3:SetTarget(s.target)
-	e3:SetOperation(s.activate)
+	e3:SetTarget(s.target1)
+	e3:SetOperation(s.activate1)
 	c:RegisterEffect(e3)
 end
 function s.spfilter(c,e,tp)
@@ -72,7 +71,7 @@ end
 function s.filter(c)
 	return c:IsMonster() and c:IsSetCard(0x86)
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function s.target1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(s.xyzfilter,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingTarget(s.filter,tp,LOCATION_HAND,0,2,nil) end
@@ -81,7 +80,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	Duel.SelectTarget(tp,s.filter,tp,LOCATION_HAND,0,2,2,nil)
 end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
+function s.activate1(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.GetTargetCards(e)
 	if #tg<3 then return end
 	local tc=tg:Filter(Card.IsLocation,nil,LOCATION_MZONE):GetFirst()
