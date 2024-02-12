@@ -66,28 +66,27 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end
-function s.xyzfilter(c)
-	return c:IsRank(4) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsType(TYPE_XYZ) and c:GetOverlayCount()==0
-end
 function s.filter(c)
+	return c:IsFaceup() and c:IsRank(4) and c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsType(TYPE_XYZ) and c:GetOverlayCount()==0
+end
+function s.xyzfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x86)
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsType,TYPE_XYZ),tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingTarget(Card.IsMonster,tp,LOCATION_HAND,0,2,nil) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_HAND,0,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsType,TYPE_XYZ),tp,LOCATION_MZONE,0,1,1,nil)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	Duel.SelectTarget(tp,Card.IsMonster,tp,LOCATION_HAND,0,2,2,nil)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,0,1,1,nil)
 end
 function s.activate1(e,tp,eg,ep,ev,re,r,rp)
-	local tg=Duel.GetTargetCards(e)
-	if #tg<3 then return end
-	local tc=tg:Filter(Card.IsLocation,nil,LOCATION_MZONE):GetFirst()
-	local mat=tg:Filter(Card.IsLocation,nil,LOCATION_HAND)
-	if tc and tc:IsRelateToEffect(e) and tc:IsType(TYPE_XYZ) and tc:IsFaceup() and not tc:IsImmuneToEffect(e)
-		and #mat==2 then
-		Duel.Overlay(tc,mat)
+	local tc=Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) and tc:IsFaceup() and not tc:IsImmuneToEffect(e) then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
+		local g=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_HAND,0,nil)
+		if #g>=2 then
+			local og=g:Select(tp,2,2,nil)
+			Duel.Overlay(tc,og)
+		end
 	end
 end
