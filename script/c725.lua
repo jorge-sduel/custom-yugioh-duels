@@ -66,6 +66,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	if tc:IsType(TYPE_XYZ) then
  Duel.Overlay(tc,e:GetHandler()) 
+		end
 	end
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
