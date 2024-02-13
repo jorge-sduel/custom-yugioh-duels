@@ -137,6 +137,14 @@ function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local tg=te:GetTarget()
 	if tg then tg(e,tp,eg,ep,ev,re,r,rp,1,chkc) end
 	te:UseCountLimit(tp)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(id)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
+	e1:SetLabel(Duel.GetCurrentChain())
+	e1:SetLabelObject(te)
+	e1:SetReset(RESET_CHAIN)
+	c:RegisterEffect(e1)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -153,6 +161,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsFaceup() and c:IsRelateToEffect(e) then
 		Duel.BreakEffect()
 	end
+	e:Reset()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
