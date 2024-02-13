@@ -65,6 +65,12 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	if tc:IsType(TYPE_XYZ) and tc~=e:GetHandler() then
  Duel.Overlay(tc,e:GetHandler()) 
+		local xg=Duel.GetFieldGroup(tp,LOCATION_GRAVE,0)
+		if #xg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
+			local cd=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
+			Duel.BreakEffect()
+			Duel.Overlay(tc,cd)
+			end
 		end
 	end
 end
