@@ -63,7 +63,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
-	if tc:IsType(TYPE_XYZ) and not tc~=e:GetHandler() then
+	if tc:IsType(TYPE_XYZ) and tc~=e:GetHandler() then
  Duel.Overlay(tc,e:GetHandler()) 
 		end
 	end
