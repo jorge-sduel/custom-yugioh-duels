@@ -18,6 +18,7 @@ function s.initial_effect(c)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e4:SetRange(LOCATION_SZONE)
 	e4:SetCountLimit(1)
+	e4:SetCondition(s.spcon)
 	e4:SetCost(s.cost)
 	e4:SetTarget(s.thtg2)
 	e4:SetOperation(s.thop2)
@@ -45,6 +46,9 @@ end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckLPCost(tp,1000) end
 	Duel.PayLPCost(tp,1000)
+end
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnPlayer()==tp
 end
 function s.thfilter2(c,e,tp)
 	return c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM) and c:IsType(TYPE_MONSTER) and c:IsFaceup() and c:IsAbleToHand()
