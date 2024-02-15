@@ -25,7 +25,6 @@ function s.initial_effect(c)
 end
 s.listed_names={id}
 s.listed_series={0x98}
-
 function s.thfilter(c)
 	return c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM)
 end
@@ -38,8 +37,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		g:Remove(Card.IsCode,nil,g1:GetFirst():GetCode())
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g2=g:Select(tp,1,1,nil)
-		g1:Merge(g2)
-		Duel.MoveToField(g1,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+		Duel.MoveToField(g1:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+		Duel.MoveToField(g2:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		end
 	end
 end
