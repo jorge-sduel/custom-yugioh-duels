@@ -1,5 +1,4 @@
 --ss King call
---Scripted by Secuter
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -10,7 +9,6 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
-
 	--spsummon
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,1))
@@ -33,14 +31,16 @@ function s.thfilter(c)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
-	if g:GetClassCount(Card.GetCode)>=2 and (not Duel.GetFieldCard(tp,LOCATION_PZONE,0) and Duel.GetFieldCard(tp,LOCATION_PZONE,1)) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	if g:GetClassCount(Card.GetCode)>=2 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+	if not (Duel.GetFieldCard(tp,LOCATION_PZONE,0) and Duel.GetFieldCard(tp,LOCATION_PZONE,1)) then
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g1=g:Select(tp,1,1,nil)
 		g:Remove(Card.IsCode,nil,g1:GetFirst():GetCode())
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g2=g:Select(tp,1,1,nil)
 		g1:Merge(g2)
 		Duel.MoveToField(g1,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+		end
 	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
