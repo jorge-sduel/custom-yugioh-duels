@@ -27,7 +27,7 @@ s.listed_names={id}
 s.listed_series={0x98}
 
 function s.thfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
+	return c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
