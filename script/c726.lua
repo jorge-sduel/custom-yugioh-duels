@@ -20,19 +20,20 @@ function s.initial_effect(c)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e4:SetRange(LOCATION_SZONE)
 	e4:SetCountLimit(1)
-	e1:SetCost(s.cost)
+	e4:SetCost(s.cost)
 	e4:SetTarget(s.thtg2)
 	e4:SetOperation(s.thop2)
 	c:RegisterEffect(e4)
 end
 s.listed_names={id}
-s.listed_series={0x98}
+s.listed_series={0x98}
+
 function s.thfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_EXTRA,0,nil)
-	if g:GetClassCount(Card.GetCode)>=2 and not (Duel.GetFieldCard(tp,LOCATION_PZONE,0) and not Duel.GetFieldCard(tp,LOCATION_PZONE,1)) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+	if g:GetClassCount(Card.GetCode)>=2 and not (Duel.GetFieldCard(tp,LOCATION_PZONE,0) and Duel.GetFieldCard(tp,LOCATION_PZONE,1)) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g1=g:Select(tp,1,1,nil)
 		g:Remove(Card.IsCode,nil,g1:GetFirst():GetCode())
