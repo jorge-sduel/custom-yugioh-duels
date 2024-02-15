@@ -32,7 +32,7 @@ function s.thfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x98) and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_EXTRA,0,nil)
+	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_DECK,0,nil)
 	if g:GetClassCount(Card.GetCode)>=2 and (not Duel.GetFieldCard(tp,LOCATION_PZONE,0) and Duel.GetFieldCard(tp,LOCATION_PZONE,1)) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g1=g:Select(tp,1,1,nil)
