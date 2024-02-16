@@ -166,9 +166,8 @@ if not Duel.CheckPendulumZones(tp) then return end
 	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,loc,0,nil,e,tp)
 	if #sg==0 then return end
 	local rg=aux.SelectUnselectGroup(sg,e,tp,1,ft,s.rescon(ft1,ft2,ft3,ft4,ft),1,tp,HINTMSG_SPSUMMON)
-	Duel.SpecialSummon(rg,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
-end
-	 end
+	Duel.SpecialSummon(rg,0,tp,tp,false,false,POS_FACEUP)
+		end
 	end
 end
 function s.spfilter(c,e,tp)
