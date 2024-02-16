@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	e2:SetCode(EVENT_BATTLE_DESTROYED)
+	e2:SetCode(EVENT_DESTROYED)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTarget(s.target1)
 	e2:SetOperation(s.activate1)
@@ -178,7 +178,7 @@ if not Duel.CheckPendulumZones(tp) then return end
 		ft4=math.min(ect,ft4)
 	end
 	local loc=0
-	if ft1>0 then loc=loc+LOCATION_DECK+LOCATION_GRAVE end
+	if ft1>0 then loc=loc+LOCATION_DECK+LOCATION_GRAVE+LOCATION_REMOVED+LOCATION_HAND end
 	if ft2>0 or ft3>0 or ft4>0 then loc=loc+LOCATION_EXTRA end
 	if loc==0 then return end
 	local sg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,loc,0,nil,e,tp)
@@ -189,7 +189,7 @@ if not Duel.CheckPendulumZones(tp) then return end
 	end
 end
 function s.spfilter(c,e,tp)
-	return c:IsSetCard(SET_SUPREME_KING_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+	return c:IsSetCard(SET_SUPREME_KING_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and c:IsLevelBelow(4)
 end
 function s.exfilter1(c)
 	return c:IsLocation(LOCATION_EXTRA) and c:IsFacedown() and c:IsType(TYPE_FUSION|TYPE_SYNCHRO|TYPE_XYZ)
