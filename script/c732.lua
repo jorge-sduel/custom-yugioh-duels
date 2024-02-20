@@ -56,6 +56,7 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local tlv=e:GetHandler():GetCounter(0x1000da)
 		--lvt[tlv]=tlv
 	end
+	local i=1
 	local pc=1
 	for i=1,12 do
 		if tlv>=i then lvt[pc]=i pc=pc+1 end
@@ -76,13 +77,13 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.sfilter,tp,LOCATION_MZONE,0,1,1,nil,lv,e,tp)
 	if #g>0 then
-				--Increase lv
+		--Increase lv
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_LEVEL)
 		e1:SetValue(lv)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
-		g:RegisterEffect(e1)
+		g:GetFirst():RegisterEffect(e1)
 	end
 end
 function s.rmfilter(c)
