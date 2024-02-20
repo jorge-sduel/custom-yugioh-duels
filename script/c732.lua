@@ -50,20 +50,20 @@ end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil,e:GetHandler(),e,tp) end
 	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_MZONE,0,nil,e:GetHandler(),e,tp)
-	local lvt={}
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
-		local tlv=e:GetHandler():GetCounter(0x1000da)
 		--lvt[tlv]=tlv
 	end
-	local i=1
-	local pc=1
+		local t={}
+	local lv=e:GetHandler():GetCounter(0x1000da) 
+		local i=1
+		local p=1
 	for i=1,12 do
-		if tlv>=i then lvt[pc]=i pc=pc+1 end
+		if lv<i then t[p]=i p=p+1 end
 	end
-	lvt[pc]=nil
+	t[p]=nil
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
-	local lv=Duel.AnnounceNumber(tp,table.unpack(lvt))
+	local lv=Duel.AnnounceNumber(tp,table.unpack(t))
 	e:GetHandler():RemoveCounter(tp,0x1000da,lv,REASON_COST)
 	e:SetLabel(lv)
 	Duel.SetOperationInfo(0,CATEGORY_LVCHANGE,nil,1,tp,LOCATION_MZONE)
