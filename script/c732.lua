@@ -37,15 +37,15 @@ function s.initial_effect(c)
 end
 function s.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0xdark)
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,1,0,0x1000da)
 end
 function s.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(0xdark,3)
+		e:GetHandler():AddCounter(0x1000dark,3)
 	end
 end
 function s.filter(c,cc,e,tp)
-	return c:IsFaceup() and c:HasLevel() and cc:IsCanRemoveCounter(tp,0xdark, 1,REASON_COST)
+	return c:IsFaceup() and c:HasLevel() and cc:IsCanRemoveCounter(tp,0x1000da,1,REASON_COST)
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil,e:GetHandler(),e,tp) end
@@ -63,7 +63,7 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	lvt[pc]=nil
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
 	local lv=Duel.AnnounceNumber(tp,table.unpack(lvt))
-	e:GetHandler():RemoveCounter(tp,0xdark,lv,REASON_COST)
+	e:GetHandler():RemoveCounter(tp,0x1000da,lv,REASON_COST)
 	e:SetLabel(lv)
 	Duel.SetOperationInfo(0,CATEGORY_LVCHANGE,nil,1,tp,LOCATION_MZONE)
 end
