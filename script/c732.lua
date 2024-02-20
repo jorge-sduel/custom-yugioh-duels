@@ -53,8 +53,8 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lvt={}
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
-		local tlv=tc:GetLevel()-1
-		lvt[tlv]=tlv
+		local tlv=tc:GetLevel()
+		lvt[tlv]<tlv
 	end
 	local pc=1
 	for i=1,12 do
@@ -80,7 +80,7 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_LEVEL)
-		e1:SetValue(ct)
+		e1:SetValue(lv)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 		g:RegisterEffect(e1)
 	end
