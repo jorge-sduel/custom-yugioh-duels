@@ -58,8 +58,8 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lv=e:GetHandler():GetCounter(0x1000da) 
 		local i=1
 		local p=1
-	for i=1,99 do
-		if lv>i+1 then t[p]=i p=p+1 end
+	for i=1,9999 do
+		if lv+1>i then t[p]=i p=p+1 end
 	end
 	t[p]=nil
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
