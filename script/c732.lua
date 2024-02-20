@@ -59,7 +59,7 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local i=1
 		local p=1
 	for i=1,12 do
-		if lv<i then t[p]=i p=p+1 end
+		if lv>i then t[p]=i p=p+1 end
 	end
 	t[p]=nil
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
