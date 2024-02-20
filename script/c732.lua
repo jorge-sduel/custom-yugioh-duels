@@ -45,7 +45,7 @@ function s.addc(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.filter(c,cc,e,tp)
-	return c:IsFaceup() and c:HasLevel() and cc:IsCanRemoveCounter(tp,0x1000da,1,REASON_COST)
+	return c:IsFaceup() and c:HasLevel() and cc:IsCanRemoveCounter(tp,0x1000da,1,REASON_COST) and cc:GetCounter(0x1000da)>0 
 end
 function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_MZONE,0,1,nil,e:GetHandler(),e,tp) end
@@ -58,8 +58,8 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lv=e:GetHandler():GetCounter(0x1000da) 
 		local i=1
 		local p=1
-	for i=1,12 do
-		if lv>i then t[p]=i p=p+1 end
+	for i=1,99 do
+		if lv>i+1 then t[p]=i p=p+1 end
 	end
 	t[p]=nil
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
