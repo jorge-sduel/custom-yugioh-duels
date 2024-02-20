@@ -53,12 +53,12 @@ function s.lvtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local lvt={}
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
-		local tlv=tc:GetLevel()
-		lvt[tlv]<tlv
+		local tlv=e:GetHandler():GetCounter(0x1000da)
+		--lvt[tlv]=tlv
 	end
 	local pc=1
 	for i=1,12 do
-		if lvt[i] then lvt[i]=nil lvt[pc]=i pc=pc+1 end
+		if tlv>=i then lvt[pc]=i pc=pc+1 end
 	end
 	lvt[pc]=nil
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,1))
