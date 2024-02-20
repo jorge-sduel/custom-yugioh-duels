@@ -41,7 +41,7 @@ function s.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.addc(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		e:GetHandler():AddCounter(0x1000dark,3)
+		e:GetHandler():AddCounter(0x1000da,3)
 	end
 end
 function s.filter(c,cc,e,tp)
