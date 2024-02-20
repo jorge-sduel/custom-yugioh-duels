@@ -2,6 +2,13 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableCounterPermit(0x1000da)
+	--synchro summon
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
+	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e0:SetValue(s.synlimit)
+	c:RegisterEffect(e0)
 	--summon success
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -34,6 +41,10 @@ function s.initial_effect(c)
 	e4:SetTarget(s.rmtg)
 	e4:SetOperation(s.rmop)
 	c:RegisterEffect(e4)
+end
+function s.synlimit(e,c)
+	if c==nil then return false end
+	return not c:IsSetCard(0x601)
 end
 function s.addct(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
