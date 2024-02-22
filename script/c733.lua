@@ -43,6 +43,7 @@ function s.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetCountLimit(1)
+	e5:SetCost(s.cost)
 	e5:SetOperation(s.op)
 	c:RegisterEffect(e5)
 end
@@ -75,6 +76,10 @@ function s.defcon(e)
 end
 function s.efilter(e,te)
 	return te:IsActiveType(TYPE_TRAP+TYPE_SPELL)
+end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,2,e:GetHandler()) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,2,2,REASON_COST+REASON_DISCARD)
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
