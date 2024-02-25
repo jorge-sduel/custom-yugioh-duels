@@ -35,7 +35,7 @@ Synchro.AddDarkSynchroProcedure(c,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),a
 	e6:SetTarget(s.lptg1)
 	e6:SetOperation(s.lpop1)
 	c:RegisterEffect(e6)
-		--indes
+	--indes
 	local e7=Effect.CreateEffect(c)
 	e7:SetType(EFFECT_TYPE_SINGLE)
 	e7:SetProperty(EFFECT_TYPE_SINGLE)
@@ -73,7 +73,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(EVENT_PHASE+PHASE_END)
 	e1:SetCountLimit(1)
 	e1:SetOperation(s.spop)
-	e1:SetReset(RESET_PHASE+PHASE_END)
+	--e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
