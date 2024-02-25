@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCondition(s.condition)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
---
+--[[
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DRAW)
@@ -27,7 +27,7 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetTarget(s.drtarg)
 	e3:SetOperation(s.drop)
-	c:RegisterEffect(e3)
+	c:RegisterEffect(e3)]]
 	--def
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
