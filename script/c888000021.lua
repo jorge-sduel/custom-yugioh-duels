@@ -40,10 +40,8 @@ function c888000021.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 function c888000021.synlimit(e,c)
-	if not c then return false end
-	local code=c:GetOriginalCode()
-	if code==100000150 or code==100000151 or code==100000152 or code==100000153 or code==100000154 or code==100000155 or code==100000156 then
-	return else return not c:IsSetCard(0x301) end
+	if c==nil then return false end
+	return not c:IsSetCard(0x601)
 end
 function c888000021.con(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE) and r==REASON_SYNCHRO
