@@ -1,7 +1,6 @@
 --
 local s,id=GetID()
 function s.initial_effect(c)
-	c:AddSetcodesRule(id,false,0x601)
 	--dark synchro summon
 	c:EnableReviveLimit()
 Synchro.AddDarkSynchroProcedure(c,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),aux.FilterBoolFunctionEx(Card.IsType,TYPE_SYNCHRO),2)
@@ -36,6 +35,13 @@ Synchro.AddDarkSynchroProcedure(c,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),a
 	e6:SetTarget(s.lptg1)
 	e6:SetOperation(s.lpop1)
 	c:RegisterEffect(e6)
+		--indes
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_SINGLE)
+	e7:SetProperty(EFFECT_TYPE_SINGLE)
+	e7:SetCode(EFFECT_ADD_SETCODE)
+	e7:SetValue(0x601)
+	c:RegisterEffect(e7)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsRelateToBattle()
@@ -59,7 +65,8 @@ end
 function s.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable() end
 	Duel.Destroy(e:GetHandler(),REASON_EFFECT+REASON_COST)
-end
+end
+
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
