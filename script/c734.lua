@@ -67,7 +67,7 @@ function s.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Destroy(e:GetHandler(),REASON_EFFECT+REASON_COST)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local sg=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_MZONE,LOCATION_MZONE,nil)
+	local sg=Duel.GetMatchingGroup(aux.TRUE,tp,0,LOCATION_ONFIELD,nil)
 	Duel.Destroy(sg,REASON_EFFECT) 
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
