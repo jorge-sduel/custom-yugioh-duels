@@ -103,6 +103,12 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetValue(s.synlimit)
 e3:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 	c:RegisterEffect(e3)
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_ADD_TYPE)
+		e1:SetValue(TYPE_TUNER)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
+		c:RegisterEffect(e1)
 	end
 end
 function s.synlimit(e,c)
