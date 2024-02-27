@@ -42,6 +42,7 @@ function s.initial_effect(c)
 	e4:SetOperation(s.rmop)
 	c:RegisterEffect(e4)
 end
+s.counter_place_list={0x1000da}
 function s.synlimit(e,c)
 	if c==nil then return false end
 	return not c:IsSetCard(0x601)
