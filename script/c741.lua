@@ -69,5 +69,5 @@ function s.efcon(e,c)
 	return c:IsAttackBelow(e:GetHandler():GetAttack()) 
 end
 function s.efcon2(e,c)
-	return c:HasEffect(EFFECT_CANNOT_CHANGE_POS_E) or c:IsType(TYPE_LINK)
+	return c:IsHasEffect(EFFECT_CANNOT_CHANGE_POS_E) or c:IsType(TYPE_LINK)
 end
