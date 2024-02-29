@@ -68,8 +68,6 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_EARTHBOUND_IMMORTAL}
 function s.sdcon(e)
-	local c=e:GetHandler()
-	if c:IsStatus(STATUS_BATTLE_DESTROYED) then return false end
 	return not Duel.IsExistingMatchingCard(Card.IsFaceup,0,LOCATION_FZONE,0,1,nil)
 end
 function s.efcon(e,c)
