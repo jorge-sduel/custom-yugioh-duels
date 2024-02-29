@@ -72,7 +72,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	return tc:IsControler(tp) and tc:IsAttribute(ATTRIBUTE_DARK)
+	return tc:IsControler(tp) and tc:IsAttribute(ATTRIBUTE_DARK) and Duel.CheckLPCost(c:GetControler(),1000)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -109,6 +109,7 @@ e3:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 		e1:SetValue(TYPE_TUNER)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 		c:RegisterEffect(e1)
+		Duel.PayLPCost(tp,1000)
 	end
 end
 function s.synlimit(e,c)
