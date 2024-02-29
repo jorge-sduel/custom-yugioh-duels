@@ -29,8 +29,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 	--disable
 	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetRange(LOCATION_MZONE)
+	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_PIERCE)
 	c:RegisterEffect(e4)
 	--poschange
@@ -58,6 +57,14 @@ function s.initial_effect(c)
 	e7:SetCode(EFFECT_CANNOT_ATTACK)
 	e7:SetTarget(s.efcon2)
 	c:RegisterEffect(e7)
+	--Cannot be targeted for attacks
+	local e8=Effect.CreateEffect(c)
+	e8:SetType(EFFECT_TYPE_SINGLE)
+	e8:SetCode(EFFECT_CANNOT_BE_BATTLE_TARGET)
+	e8:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e8:SetRange(LOCATION_MZONE)
+	e8:SetValue(aux.imval2)
+	c:RegisterEffect(e8)
 end
 s.listed_series={SET_EARTHBOUND_IMMORTAL}
 function s.sdcon(e)
