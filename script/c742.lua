@@ -7,7 +7,7 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetCode(EVENT_SUMMON_SUCCESS)
+	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetTarget(s.sumtg)
 	e1:SetOperation(s.sumop)
@@ -36,7 +36,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.filter(c,e,tp)
-	return c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
+	return c:IsMonster() and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_DECK) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
