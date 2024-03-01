@@ -84,6 +84,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+0x1fe0000)
 		e1:SetValue(Duel.GetLP(1-p))
 		e:GetHandler():RegisterEffect(e1)
-	end
 end
 
