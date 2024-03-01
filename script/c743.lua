@@ -34,12 +34,12 @@ ae:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(31833038,0))
 	e3:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
-	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetCountLimit(1)
-e3:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
-	e3:SetCost(s.cost)
+e3:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
+	e3:SetCost(s.cost)
 	e3:SetOperation(s.activate)
 	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
 	end
