@@ -16,7 +16,7 @@ function s.xyzcheck(g)
 end
 function s.matcheck(e,c)
 	local ct=c:GetMaterial()
-	if ct:IsType(TYPE_FUSION) then
+	if ct:IsExists(Card.IsType,1,nil,TYPE_FUSION) then
 		--atk
 	local ae=Effect.CreateEffect(c)
 	ae:SetType(EFFECT_TYPE_IGNITION)
@@ -29,7 +29,7 @@ ae:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
 	ae:SetOperation(s.atkop)
 	c:RegisterEffect(ae)
 	end
-	if ct:IsType(TYPE_XYZ) then
+	if ct:IsExists(Card.IsType,1,nil,TYPE_XYZ) then
 	--atk down
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(31833038,0))
