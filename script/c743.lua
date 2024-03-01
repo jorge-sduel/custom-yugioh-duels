@@ -55,7 +55,6 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 		while tc do
 			if tc:GetAttack()>0 then
 				atk=atk+tc:GetAttack()
-local code=tc:GetOriginalCode()
 			end
 			tc=g:GetNext()
 		end
@@ -65,8 +64,6 @@ local code=tc:GetOriginalCode()
 		e1:SetValue(atk)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
 		c:RegisterEffect(e1)
-c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,1)
-	end
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
@@ -81,14 +78,12 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p=e:GetHandler():GetControler()
 	Duel.SetLP(1-tp,Duel.GetLP(1-p)/2,REASON_EFFECT)
-	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetReset(RESET_EVENT+0x1fe0000)
 		e1:SetValue(Duel.GetLP(1-p))
-		tc:RegisterEffect(e1)
+		e:GetHandler():RegisterEffect(e1)
 	end
 end
 
