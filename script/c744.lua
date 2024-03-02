@@ -24,7 +24,7 @@ function s.matcheck(e,c)
 
 	local ae=Effect.CreateEffect(c)
 	ae:SetDescription(aux.Stringid(24882256,2))
-	e4:SetCategory(CATEGORY_DAMAGE)
+	ae:SetCategory(CATEGORY_DAMAGE)
 	ae:SetType(EFFECT_TYPE_SINGLE)
 	ae:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
 	ae:SetCountLimit(1)
