@@ -21,18 +21,17 @@ function s.matcheck(e,c)
 	local ct=c:GetMaterial()
 	if ct:IsExists(Card.IsType,1,nil,TYPE_FUSION) then
 		--special summon
-
 	local ae=Effect.CreateEffect(c)
 	ae:SetDescription(aux.Stringid(24882256,2))
 	ae:SetCategory(CATEGORY_DAMAGE)
-	ae:SetType(EFFECT_TYPE_SINGLE)
+	ae:SetType(EFFECT_TYPE_IGNITION)
 	ae:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
 	ae:SetCountLimit(1)
 	ae:SetRange(LOCATION_MZONE)
 	ae:SetOperation(s.spop)
 	c:RegisterEffect(ae)
 	end
-	if ct:IsExists(Card.IsType,1,nil,TYPE_FUSION) then
+	if ct:IsExists(Card.IsType,1,nil,TYPE_SYNCHRO) then
 	--atk down
 	
 local e1=Effect.CreateEffect(c)
