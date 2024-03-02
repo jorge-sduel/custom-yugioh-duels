@@ -19,8 +19,9 @@ function s.matfilter(g,sc,tp)
 end
 function s.matcheck(e,c)
 	local ct=c:GetMaterial()
-	if ct:IsType(TYPE_FUSION) then
-		--special summon
+	if ct:IsExists(Card.IsType,1,nil,TYPE_FUSION) then
+		--special summon
+
 	local ae=Effect.CreateEffect(c)
 	ae:SetDescription(aux.Stringid(24882256,2))
 	e4:SetCategory(CATEGORY_DAMAGE)
@@ -31,7 +32,7 @@ function s.matcheck(e,c)
 	ae:SetOperation(s.spop)
 	c:RegisterEffect(ae)
 	end
-	if ct:IsType(TYPE_SYNCHRO) then
+	if ct:IsExists(Card.IsType,1,nil,TYPE_FUSION) then
 	--atk down
 	
 local e1=Effect.CreateEffect(c)
@@ -48,7 +49,8 @@ e3:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
 end
 function s.afilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsFaceup()
-end
+end
+
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 local dam=Duel.GetMatchingGroup(s.afilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil):GetSum(Card.GetAttack)
