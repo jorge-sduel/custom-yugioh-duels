@@ -54,7 +54,7 @@ e3:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
 	c:RegisterEffect(e3)
 	--attack
 	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(0,LOCATION_MZONE)
@@ -84,16 +84,16 @@ function s.copyop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(code)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
 		c:RegisterEffect(e1)
+		if not tc:IsType(TYPE_TRAPMONSTER) then
+			c:CopyEffect(code,RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,1)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e2:SetCode(EFFECT_UPDATE_ATTACK)
 		e2:SetValue(tc:GetAttack())
 		e2:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END)
-		c:RegisterEffect(e2)
-		if not tc:IsType(TYPE_TRAPMONSTER) then
-			c:CopyEffect(code,RESET_EVENT|RESETS_STANDARD|RESET_PHASE|PHASE_END,1)
- Duel.Destroy(tc,REASON_EFFECT)
+		c:RegisterEffect(e2) 
+			Duel.Destroy(tc,REASON_EFFECT)
 		end
 	end
 end
