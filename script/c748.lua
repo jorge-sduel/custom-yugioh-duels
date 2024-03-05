@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--synchro summon
-	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),1,99,c217.sssmatfilter)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsType,TYPE_SYNCHRO),1,99,s.sssmatfilter)
 	c:EnableReviveLimit()
 	--summon success
 	local e2=Effect.CreateEffect(c)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e2:SetValue(s.matcheck)
 	c:RegisterEffect(e2)
 end
-function c217.sssmatfilter(c)
+function s.sssmatfilter(c)
 	return c:IsType(TYPE_XYZ)
 end
 function s.matcheck(e,c)
