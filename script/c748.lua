@@ -65,5 +65,5 @@ function s.actcon(e)
 end
 
 function s.val(e,c)
-	return Duel.GetMatchingGroup(Card.IsReason,e:GetHandlerPlayer(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,REASON_SYNCHRO)*500
+	return Duel.GetMatchingGroupCount(Card.IsReason,e:GetHandlerPlayer(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,REASON_SYNCHRO)*500
 end
