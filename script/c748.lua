@@ -88,18 +88,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 			e3:SetValue(tc:GetAttack()*2)
 			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 			tc:RegisterEffect(e3)
-		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1,fid)
 		local e4=Effect.CreateEffect(e:GetHandler())
-		e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e4:SetType(EFFECT_TYPE_SINGLE)
 		e4:SetCode(EVENT_PHASE+PHASE_END)
 		e4:SetCountLimit(1)
 		e4:SetRange(LOCATION_MZONE)
 		e4:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
-		e3:SetLabel(fid)
-		e3:SetLabelObject(tc)
-		e3:SetCondition(s.descon2)
 		e4:SetOperation(s.desop2)
-		Duel.RegisterEffect(e4,tp)
+		tc:RegisterEffect(e4)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
@@ -153,9 +149,9 @@ function s.descon2(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.desop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local tc=e:GetLabelObject()
-	if tc:IsRelateToEffect(e) then
-	local atk=tc:GetAttack()
+	--local tc=e:GetLabelObject()
+	--if c:IsRelateToEffect(e) then
+	local atk=c:GetAttack()
 	local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_DISABLE)
@@ -174,7 +170,7 @@ function s.desop2(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_CHAIN)
 		tc:RegisterEffect(e3,true)
 		Duel.AdjustInstantly(tc)
-	end
+	--end
 	Duel.Damage(1-tp,atk/2,REASON_EFFECT)
-	Duel.Destroy(tc,REASON_EFFECT)
+	Duel.Destroy(c,REASON_EFFECT)
 end
