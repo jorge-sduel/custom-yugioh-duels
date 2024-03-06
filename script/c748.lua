@@ -153,7 +153,8 @@ function s.descon2(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.desop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local tc=e:GetLabelObject():GetFirst()
+	local tc=e:GetLabelObject()
+	if tc:IsRelateToEffect(e) then
 	local atk=tc:GetAttack()
 	local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -173,6 +174,7 @@ function s.desop2(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_CHAIN)
 		tc:RegisterEffect(e3,true)
 		Duel.AdjustInstantly(tc)
+	end
 	Duel.Damage(1-tp,atk/2,REASON_EFFECT)
 	Duel.Destroy(tc,REASON_EFFECT)
 end
