@@ -143,10 +143,11 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_CHAIN)
 		tc:RegisterEffect(e3,true)
 		Duel.AdjustInstantly(c)
+		Duel.Damage(1-tp,atk,REASON_EFFECT)
 	end
-	Duel.Damage(1-tp,atk,REASON_EFFECT)
 	Duel.Destroy(tc,REASON_EFFECT)
 	e:SetProperty(e:GetProperty()&~EFFECT_FLAG_IGNORE_IMMUNE)
+	Duel.Damage(1-tp,atk,REASON_EFFECT) 
 end
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(Card.IsReason,e:GetHandlerPlayer(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,REASON_SYNCHRO)*500
