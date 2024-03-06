@@ -99,7 +99,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e4:SetCondition(s.descon2)
 		e4:SetOperation(s.desop2)
 		Duel.RegisterEffect(e4,tp)
-		local e2=Effect.CreateEffect(rc)
+		local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
 	e2:SetCountLimit(1)
@@ -182,7 +182,7 @@ function s.desop2(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e3,true)
 		Duel.AdjustInstantly(tc)
 	--end
-	Duel.Destroy(c,REASON_EFFECT)
+	Duel.Destroy(tc,REASON_EFFECT)
 end
 function s.damcon(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabelObject():GetFlagEffect(id)==0 then e:Reset() return false end
