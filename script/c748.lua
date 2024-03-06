@@ -18,24 +18,35 @@ end
 function s.matcheck(e,c)
 	local ct=c:GetMaterial()
 	if ct:IsExists(Card.IsType,1,nil,TYPE_XYZ) then
-	--actlimit
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e1:SetCode(EFFECT_CANNOT_ACTIVATE)
-	e1:SetRange(LOCATION_MZONE)
-e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
-	e1:SetTargetRange(0,1)
-	e1:SetValue(s.aclimit)
-	e1:SetCondition(s.actcon)
-	c:RegisterEffect(e1)
-	--PIERCE
+ 	--Negate Effect/0 ATK
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,1)) 
+	e2:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DISABLE)
+	e2:SetType(EFFECT_TYPE_IGNITION)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetCountLimit(1)
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
+	e2:SetTarget(s.target)
+	e2:SetOperation(s.operation)
+	c:RegisterEffect(e2)
+	--Destroy opponent's monster after battling
 	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_PIERCE)
-	e3:SetRange(LOCATION_MZONE)
+	e3:SetDescription(aux.Stringid(id,0))
+	e3:SetCategory(CATEGORY_DESTROY)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e3:SetCode(EVENT_DAMAGE_STEP_END)
 	e3:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
+	e3:SetCondition(s.descon)
+	e3:SetTarget(s.destg)
+	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
+	--PIERCE
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetCode(EFFECT_PIERCE)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
+	c:RegisterEffect(e4)
 	end
 	if ct:IsExists(Card.IsType,1,nil,TYPE_SYNCHRO) then
 	--ATK Up
@@ -57,13 +68,62 @@ e2:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
 	c:RegisterEffect(e3)
 	end
 end
-function s.aclimit(e,re,tp)
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
+function s.filter2(c,e,tp)
+	return c:IsFaceup()
 end
-function s.actcon(e)
-	return Duel.GetAttacker()==e:GetHandler()
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter2,tp,0,LOCATION_MZONE,1,nil) end
 end
-
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
+	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.HintSelection(g)
+	local tc=g:GetFirst()
+	if tc then
+			local e3=Effect.CreateEffect(c)
+			e3:SetType(EFFECT_TYPE_SINGLE)
+			e3:SetCode(EFFECT_SET_ATTACK)
+			e3:SetValue(tc:GetAttack()*2)
+			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
+			tc:RegisterEffect(e3)
+	end
+end
+function s.descon(e,tp,eg,ep,ev,re,r,rp)
+	local at=e:GetHandler():GetBattleTarget()
+	e:SetLabelObject(at)
+	return at
+end
+function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetLabelObject():IsRelateToBattle() end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetLabelObject(),1,0,0)
+end
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local tc=e:GetLabelObject()
+	if tc:IsRelateToBattle() then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_DISABLE)
+		e1:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_CHAIN)
+		tc:RegisterEffect(e1,true)
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_DISABLE_EFFECT)
+		e2:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_CHAIN)
+		tc:RegisterEffect(e2,true)
+		local e3=Effect.CreateEffect(c)
+		e3:SetType(EFFECT_TYPE_SINGLE)
+		e3:SetRange(LOCATION_MZONE)
+		e3:SetCode(EFFECT_IMMUNE_EFFECT)
+		e3:SetValue(function(e,te) return te:GetOwner()~=e:GetOwner() end)
+		e3:SetReset(RESET_EVENT|RESETS_STANDARD|RESET_CHAIN)
+		tc:RegisterEffect(e3,true)
+		Duel.AdjustInstantly(c)
+	end
+	Duel.Destroy(tc,REASON_EFFECT)
+	e:SetProperty(e:GetProperty()&~EFFECT_FLAG_IGNORE_IMMUNE)
+end
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(Card.IsReason,e:GetHandlerPlayer(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,REASON_SYNCHRO)*500
 end
