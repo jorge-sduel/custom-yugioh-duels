@@ -99,7 +99,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e4:SetLabelObject(tc)
 		e4:SetCondition(s.descon2)
 		e4:SetOperation(s.desop2)
-		Duel.RegisterEffect(e4,tp)]]
+		Duel.RegisterEffect(e4,tp)
 		local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e5:SetCode(EVENT_PHASE+PHASE_END)
