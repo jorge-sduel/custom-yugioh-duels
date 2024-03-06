@@ -154,8 +154,8 @@ end
 function s.desop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=e:GetLabelObject()
-	local atk=tc:GetAttack()
 	if tc:IsFaceup() then
+	local atk=tc:GetAttack()
 	local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_DISABLE)
