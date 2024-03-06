@@ -108,7 +108,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e5:SetLabelObject(tc)
 	e5:SetCondition(s.damcon)
 	e5:SetOperation(s.damop)
-	Duel.RegisterEffect(e5,tp)
+	Duel.RegisterEffect(e5,tp)]]
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
