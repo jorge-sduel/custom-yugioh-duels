@@ -122,8 +122,8 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e3,true)
 		Duel.AdjustInstantly(c)
 	end
-	Duel.Destroy(tc,REASON_EFFECT)
 	Duel.Damage(atk,REASON_EFFECT)
+	Duel.Destroy(tc,REASON_EFFECT)
 	e:SetProperty(e:GetProperty()&~EFFECT_FLAG_IGNORE_IMMUNE)
 end
 function s.val(e,c)
