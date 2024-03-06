@@ -81,20 +81,25 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.HintSelection(g)
 	local tc=g:GetFirst()
 	if tc then
+			local fid=c:GetFieldID()
 			local e3=Effect.CreateEffect(c)
 			e3:SetType(EFFECT_TYPE_SINGLE)
 			e3:SetCode(EFFECT_SET_ATTACK)
 			e3:SetValue(tc:GetAttack()*2)
 			e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 			tc:RegisterEffect(e3)
+		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1,fid)
 		local e4=Effect.CreateEffect(e:GetHandler())
-		e4:SetType(EFFECT_TYPE_SINGLE)
+		e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e4:SetCode(EVENT_PHASE+PHASE_END)
 		e4:SetCountLimit(1)
 		e4:SetRange(LOCATION_MZONE)
 		e4:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
+		e3:SetLabel(fid)
+		e3:SetLabelObject(tc)
+		e3:SetCondition(s.descon2)
 		e4:SetOperation(s.desop2)
-		tc:RegisterEffect(e4)
+		Duel.RegisterEffect(e4,tp)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
@@ -136,6 +141,15 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(Card.IsReason,e:GetHandlerPlayer(),LOCATION_GRAVE+LOCATION_REMOVED,0,nil,REASON_SYNCHRO)*500
+end
+function s.descon2(e,tp,eg,ep,ev,re,r,rp)
+	local tc=e:GetLabelObject()
+	if tc:GetFlagEffectLabel(id)==e:GetLabel() then
+		return true
+	else
+		e:Reset()
+		return false
+	end
 end
 function s.desop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
