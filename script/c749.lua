@@ -128,7 +128,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		--e10:SetCondition(function(tc) return tc:IsType(TYPE_FUSION) end)
 		e10:SetValue(TYPE_TUNER)
 		tc3:RegisterEffect(e10)	
-					end
 				end
 			end
 		end
