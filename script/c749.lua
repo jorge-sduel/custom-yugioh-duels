@@ -161,6 +161,6 @@ function s.synval(e,c)
 end
 function s.con(val)
 	return function(e)
-		return e:GetLabelObject():GetFlagEffect(id)~=0 and e:GetLabelObject():IsType(val)
+		return e:GetLabelObject():GetFlagEffect(id)==0 and e:GetLabelObject():IsType(val)
 	end
 end
