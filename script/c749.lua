@@ -77,7 +77,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e5:SetValue(TYPE_TUNER)
 		tc:RegisterEffect(e5)
 				end
-		local tc3=tc2:GetFirst()
 		if tc3 and tc3:IsRelateToEffect(e) and tc3:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		if tc3:IsType(TYPE_SYNCHRO) then
@@ -126,7 +125,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		--e10:SetCondition(function(tc) return tc:IsType(TYPE_FUSION) end)
 		e10:SetValue(TYPE_TUNER)
 		tc3:RegisterEffect(e10)
-							end		
+							end
+						end		
 					end
 				end
 			end
