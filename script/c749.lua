@@ -134,7 +134,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e10:SetCode(EFFECT_ADD_TYPE)
 		e10:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		e10:SetLabel(TYPE_FUSION)
-		e10:SetLabelObject(tc)
+		e10:SetLabelObject(tc3)
 		e10:SetCondition(s.con)
 		e10:SetValue(TYPE_TUNER)
 		Duel.RegisterEffect(e10,tp)
@@ -145,6 +145,5 @@ function s.synval(e,c)
 	return 2*65536+lv
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetLabelObject():GetFlagEffect(id)==0 then e:Reset() return false end
 	return e:GetLabelObject():IsType(e:GetLabel())
 end
