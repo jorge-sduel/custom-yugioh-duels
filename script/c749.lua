@@ -28,6 +28,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local tc3=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,tc):GetFirst()
+		tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)
+		tc3:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)
 		--local sc=tc2:Select(tp,1,1,nil)
 		--local tc3=tc2:GetFirst()
 		local e1=Effect.CreateEffect(e:GetHandler())
