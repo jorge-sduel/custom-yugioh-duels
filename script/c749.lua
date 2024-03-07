@@ -159,6 +159,8 @@ function s.synval(e,c)
 	local lv=e:GetHandler():GetLevel()
 	return 2*65536+lv
 end
-function s.con(e,c)
-	return e:GetLabelObject():GetFlagEffect(id)~=0 and e:GetLabelObject():IsType(e:GetLabel())
+function s.con(val)
+	return function(e)
+		return e:GetLabelObject():GetFlagEffect(id)~=0 and e:GetLabelObject():IsType(val)
+	end
 end
