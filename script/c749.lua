@@ -103,3 +103,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
+function s.synval(e,c)
+	local lv=e:GetHandler():GetLevel()
+	return 2*65536+lv
+end
