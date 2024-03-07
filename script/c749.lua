@@ -92,6 +92,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e10:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		e10:SetValue(TYPE_TUNER)
 		tc:RegisterEffect(e10)
+							end
+						end
+					end
+				end
+			end
 		end
 	end
 end
