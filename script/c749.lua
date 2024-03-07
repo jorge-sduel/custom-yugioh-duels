@@ -161,6 +161,6 @@ end
 function s.con(val)
 	return function(e)
 	--if e:GetLabelObject():GetFlagEffect(id)==0 then return false end
-	return e:GetLabelObject():IsType(val) and e:GetLabelObject():GetFlagEffect(id)==0
+	return e:GetLabelObject():IsType(val)
 	end
 end
