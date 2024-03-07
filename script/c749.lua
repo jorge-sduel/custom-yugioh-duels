@@ -25,7 +25,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	local tc=g:GetFirst()
 	if tc==hc then tc=g:GetNext() end
-	if hc:IsFaceup() and hc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsRelateToEffect(e) then
+	--if hc:IsFaceup() and hc:IsRelateToEffect(e) and tc:IsFaceup() and tc:IsRelateToEffect(e) then
 		if tc:IsType(TYPE_SYNCHRO) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -92,7 +92,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e10:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		e10:SetValue(TYPE_TUNER)
 		tc:RegisterEffect(e10)
-							end
+							--end
 						end
 					end
 				end
