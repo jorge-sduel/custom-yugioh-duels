@@ -27,7 +27,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-		local tc3=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,tc):GetFirst()
 		--local sc=tc2:Select(tp,1,1,nil)
 		--local tc3=tc2:GetFirst()
 		if tc:IsType(TYPE_SYNCHRO) then
@@ -79,6 +78,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 				end
 			end
 		end
+	end
+		local tc3=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,tc):GetFirst() 
 		if tc3 and tc3:IsRelateToEffect(e) and tc3:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		if tc3:IsType(TYPE_SYNCHRO) then
