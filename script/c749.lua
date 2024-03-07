@@ -146,5 +146,5 @@ function s.synval(e,c)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabelObject():GetFlagEffect(id)==0 then e:Reset() return false end
-	return e:GetLabelObject():IsType(e:GetLabel)
+	return e:GetLabelObject():IsType(e:GetLabel())
 end
