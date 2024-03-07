@@ -28,7 +28,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local tc2=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,tc):GetFirst()
-		--if tc:IsType(TYPE_SYNCHRO) then
+		if tc:IsExists(Card.IsType,1,nil,TYPE_SYNCHRO) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_CHANGE_LEVEL)
@@ -43,7 +43,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCondition(function(e,tc) return tc:IsType(TYPE_SYNCHRO) end)
 		e2:SetValue(s.synval)
 		tc:RegisterEffect(e2)
-		--if tc:IsType(TYPE_XYZ) then
+		if tc:IsExists(Card.IsType,1,nil,TYPE_XYZ) then
 		local e3=Effect.CreateEffect(e:GetHandler())
 		e3:SetType(EFFECT_TYPE_SINGLE)
 		e3:SetCode(EFFECT_RANK_LEVEL)
@@ -57,7 +57,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e12:SetValue(7)
 		e12:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e12)
-		--if tc:IsType(TYPE_FUSION) then
+		if tc:IsExists(Card.IsType,1,nil,TYPE_FUSION) then
 		local e4=Effect.CreateEffect(e:GetHandler())
 		e4:SetType(EFFECT_TYPE_SINGLE)
 		e4:SetCode(EFFECT_CHANGE_LEVEL)
@@ -73,7 +73,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e5:SetValue(TYPE_TUNER)
 		tc:RegisterEffect(e5)
 		local tc3=tc2:GetFirst()
-		--if tc3:IsType(TYPE_SYNCHRO) then
+		if tc3:IsExists(Card.IsType,1,nil,TYPE_SYNCHRO) then
 		local e6=Effect.CreateEffect(e:GetHandler())
 		e6:SetType(EFFECT_TYPE_SINGLE)
 		e6:SetCode(EFFECT_CHANGE_LEVEL)
@@ -88,7 +88,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e7:SetCondition(function(tc) return tc:IsType(TYPE_SYNCHRO) end)
 		e7:SetValue(s.synval)
 		tc3:RegisterEffect(e7)
-		--if tc3:IsType(TYPE_XYZ) then
+		if tc3:IsExists(Card.IsType,1,nil,TYPE_XYZ) then
 		local e8=Effect.CreateEffect(e:GetHandler())
 		e8:SetType(EFFECT_TYPE_SINGLE)
 		e8:SetCode(EFFECT_RANK_LEVEL)
@@ -102,7 +102,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e11:SetValue(7)
 		e11:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc3:RegisterEffect(e11)
-		--if tc3:IsType(TYPE_FUSION) then
+		if tc3:IsExists(Card.IsType,1,nil,TYPE_FUSION) then
 		local e9=Effect.CreateEffect(e:GetHandler())
 		e9:SetType(EFFECT_TYPE_SINGLE)
 		e9:SetCode(EFFECT_CHANGE_LEVEL)
@@ -117,12 +117,12 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e10:SetCondition(function(tc) return tc:IsType(TYPE_FUSION) end)
 		e10:SetValue(TYPE_TUNER)
 		tc3:RegisterEffect(e10)
-							--end
-						--end
-					--end
-				--end
-			--end
-		--end
+							end
+						end
+					end
+				end
+			end
+		end
 	end
 end
 function s.synval(e,c)
