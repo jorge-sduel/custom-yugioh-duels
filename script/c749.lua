@@ -159,5 +159,5 @@ function s.synval(e,c)
 	return 2*65536+lv
 end
 function s.con(e,c)
-	return e:GetLabelObject():IsType(e:GetLabel())
+	return e:GetLabelObject():GetFlagEffect(id)==0 and c:IsType(e:GetLabel())
 end
