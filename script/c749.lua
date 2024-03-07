@@ -28,6 +28,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local tc2=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,tc):GetFirst()
+		local sc=tc2:Select(tp,1,1,nil)
+		local tc3=sc:GetFirst()
 		if tc:IsType(TYPE_SYNCHRO) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -74,6 +76,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		--e5:SetCondition(function(tc) return tc:IsType(TYPE_FUSION) end)
 		e5:SetValue(TYPE_TUNER)
 		tc:RegisterEffect(e5)
+				end
 		local tc3=tc2:GetFirst()
 		if tc3 and tc3:IsRelateToEffect(e) and tc3:IsFaceup() then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
@@ -123,9 +126,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		--e10:SetCondition(function(tc) return tc:IsType(TYPE_FUSION) end)
 		e10:SetValue(TYPE_TUNER)
 		tc3:RegisterEffect(e10)
-								end
-							end
-						end
+								
 					end
 				end
 			end
