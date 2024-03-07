@@ -146,6 +146,6 @@ function s.synval(e,c)
 	local lv=e:GetHandler():GetLevel()
 	return 2*65536+lv
 end
-function s.con(e,tp,eg,ep,ev,re,r,rp)
+--[[function s.con(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetLabelObject():IsType(e:GetLabel())
-end
+end]]
