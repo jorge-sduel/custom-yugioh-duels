@@ -97,6 +97,14 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e8:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc3:RegisterEffect(e8)
 	end
+	local mg=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsType,TYPE_MONSTER),tp,LOCATION_MZONE,0,nil)
+		local eg=Duel.GetMatchingGroup(s.scfilter,tp,LOCATION_EXTRA,0,nil,mg)
+		if #mg>0 and #eg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+			Duel.BreakEffect()
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+			local sg=eg:Select(tp,1,1,nil)
+			Duel.SynchroSummon(tp,sg:GetFirst(),nil,mg)
+	end
 end
 function s.synval(e,c)
 	local lv=e:GetHandler():GetLevel()
@@ -104,4 +112,7 @@ function s.synval(e,c)
 end
 function s.con(e,c)
 	return c:IsType(e:GetLabel()) and c:IsHasEffect(id)
+end
+function s.scfilter(c,mg)
+	return c:IsSynchroSummonable(nil,mg)
 end
