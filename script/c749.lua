@@ -149,9 +149,15 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e10:SetLabel(TYPE_FUSION)
 		e10:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 		e10:SetLabelObject(tc3)
-		e10:SetTarget(s.con(TYPE_FUSION))
+		e10:SetTarget(s.con)
 		e10:SetValue(TYPE_TUNER)
 		Duel.RegisterEffect(e10,tp)
+		local e12=Effect.CreateEffect(e:GetHandler())
+		e12:SetType(EFFECT_TYPE_SINGLE)
+		e12:SetCode(id)
+		e12:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		tc:RegisterEffect(e12)
+		
 	end
 end
 function s.synval(e,c)
