@@ -13,14 +13,17 @@ function c228.initial_effect(c)
 	e1:SetTarget(c228.target)
 	e1:SetOperation(c228.operation)
 	c:RegisterEffect(e1)
-	--special summon
+	--special summon
+
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(24882256,2))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e4:SetRange(LOCATION_GRAVE)
-	e4:SetCost(c228.cost)
+	e4:SetCost(c228.cost)
+
+
 	e4:SetTarget(c228.sptg)
 	e4:SetOperation(c228.spop)
 	c:RegisterEffect(e4)
@@ -46,7 +49,8 @@ function c228.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsFaceup() and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
 		local atk=tc:GetAttack()
-		local code=tc:GetOriginalCode()
+		local code=tc:GetOriginalCode()
+
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
@@ -68,15 +72,18 @@ function c228.operation(e,tp,eg,ep,ev,re,r,rp)
 			local e4=Effect.CreateEffect(c)
 			e4:SetType(EFFECT_TYPE_SINGLE)
 			e4:SetCode(EFFECT_UPDATE_ATTACK)
-			e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+			--e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 			e4:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END)
 			e4:SetValue(math.ceil(atk))
 			c:RegisterEffect(e4)
 
-c:CopyEffect(code,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,1)
+c:CopyEffect(code,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,1)
+
 		end
 	end
-end
+end
+
+
 function c228.atfilter(c)
 	return (c:IsType(TYPE_XYZ) or c:IsType(TYPE_FUSION)) and not c:IsCode(288) and c:IsAbleToRemoveAsCost() 
 end
@@ -102,4 +109,4 @@ local dam=Duel.GetMatchingGroup(c228.filter,tp,LOCATION_MZONE,LOCATION_MZONE,nil
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	Duel.Damage(1-tp,dam,REASON_EFFECT)
 	end
-end
+end
