@@ -53,7 +53,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 local dam=Duel.GetMatchingGroup(s.afilter,tp,LOCATION_MZONE,LOCATION_MZONE,nil):GetSum(Card.GetAttack)
-	Duel.Damage(1-tp,dam,REASON_EFFECT)
+	Duel.Damage(1-tp,dam/2,REASON_EFFECT)
 end
 function s.filter(c)
 	return c:IsLocation(LOCATION_ONFIELD)
