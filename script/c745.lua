@@ -4,12 +4,30 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--Fusion materials
 	Fusion.AddProcMix(c,false,false,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),s.ffilter2)
+		--damage
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_RECOVER)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e1:SetCode(EVENT_BATTLE_CONFIRM)
+	e1:SetTarget(s.damtg)
+	e1:SetOperation(s.damop)
+	c:RegisterEffect(e1)
 	--summon success
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_MATERIAL_CHECK)
 	e2:SetValue(s.matcheck)
 	c:RegisterEffect(e2)
+	--set
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e4:SetCode(EVENT_BATTLE_DESTROYING)
+	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e4:SetCondition(aux.bdocon)
+	e4:SetTarget(s.settg)
+	e4:SetOperation(s.setop)
+	c:RegisterEffect(e4)
 end
 s.miracle_synchro_fusion=true
 function s.ffilter2(c)
@@ -128,4 +146,30 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(Card.IsMonster,c:GetControler(),0,LOCATION_GRAVE,nil)*-200
+end
+function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk ==0 then	return true end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,0)
+end
+function s.damop(e,tp,eg,ep,ev,re,r,rp)
+	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	local lp1=Duel.GetLP(p)
+	Duel.Recover(p,Duel.GetAttacker():GetAttack(),REASON_EFFECT)
+end
+function s.cfilter(c)
+	return c:IsSpell() or c:IsTrap() and c:IsSSetable()
+end
+function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE) and s.cfilter(chkc) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
+	local g=Duel.SelectTarget(tp,s.cfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,g,1,0,0)
+end
+function s.setop(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) and tc:IsSSetable() then
+		Duel.SSet(tp,tc)
+	end
 end
