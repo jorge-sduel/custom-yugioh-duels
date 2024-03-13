@@ -28,6 +28,18 @@ function s.initial_effect(c)
 	e4:SetTarget(s.settg)
 	e4:SetOperation(s.setop)
 	c:RegisterEffect(e4)
+		--pierce
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetCode(EFFECT_PIERCE)
+	c:RegisterEffect(e5)
+	--double pierce
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e6:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+	e6:SetCondition(s.damcon2)
+	e6:SetOperation(s.damop2)
+	c:RegisterEffect(e6)
 end
 s.miracle_synchro_fusion=true
 function s.ffilter2(c)
@@ -173,3 +185,11 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SSet(tp,tc)
 	end
 end
+function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return ep~=tp and c==Duel.GetAttacker() and Duel.GetAttackTarget() and Duel.GetAttackTarget():IsDefensePos()
+end
+function s.damop2(e,tp,eg,ep,ev,re,r,rp)
+	Duel.ChangeBattleDamage(ep,ev*2)
+end
+
