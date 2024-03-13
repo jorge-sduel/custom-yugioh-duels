@@ -68,7 +68,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 			c:RegisterEffect(e2)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroup(Card.IsReason,c:GetControler(),LOCATION_GRAVE,0,nil,REASON_BATTLE):GetSum(Card.GetAttack)/5
+	return Duel.GetMatchingGroup(Card.IsReason,c:GetControler(),LOCATION_GRAVE,0,nil,REASON_BATTLE):GetSum(Card.GetAttack)/2
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
