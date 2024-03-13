@@ -10,6 +10,17 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_MATERIAL_CHECK)
 	e2:SetValue(s.matcheck)
 	c:RegisterEffect(e2)
+		--halve battle damage
+	local e3=Effect.CreateEffect(c)
+	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
+	e3:SetRange(LOCATION_GRAVE)
+	e3:SetCost(s.cost)
+	e3:SetCondition(s.retcon)
+	e3:SetTarget(s.rettg)
+	e3:SetOperation(s.retop)
+	c:RegisterEffect(e3)
 end
 function s.ffilter2(c)
 	return c:IsRace(RACE_DRAGON) and (c:IsType(TYPE_FUSION) or c:IsType(TYPE_XYZ))
@@ -65,5 +76,32 @@ function s.atkop2(e,tp,eg,ep,ev,re,r,rp)
 	if c:IsRelateToBattle() and tc:IsRelateToEffect(e) and c:IsFaceup() then
 				c:CopyEffect(code,RESET_EVENT+RESETS_STANDARD,1)
 	end
+end
+function s.retcon(e,tp,eg,ev,ep,re,r,rp)
+	return Duel.GetBattleDamage(tp)>0
+end
+function s.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsMonster,tp,LOCATION_REMOVED,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,0,0)
+end
+function s.retop(e,tp,eg,ev,ep,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(48976825,0))
+	local g=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,LOCATION_REMOVED,0,1,1,nil)
+	local tc=g:GetFirst()
+	if aux.ToHandOrElse(tc,tp,
+			function(c)
+				return (tc:IsLevelAbove(5) or tc:IsRankAbove(5)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+					and tc:IsCanBeSpecialSummoned(e,0,tp,false,false)~=0 then
+		Duel.BreakEffect()
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+		e1:SetOperation(s.damop)
+		e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
+		Duel.RegisterEffect(e1,tp)
+	end
+end
+function s.damop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.ChangeBattleDamage(tp,0)
 end
 
