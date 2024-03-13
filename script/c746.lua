@@ -4,6 +4,15 @@ function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,7,2,nil,nil,nil,nil,nil,s.xyzcheck)
 	c:EnableReviveLimit()
+	--destroy
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_DESTROY)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e1:SetCode(EVENT_BATTLE_START)
+	e1:SetTarget(s.target)
+	e1:SetOperation(s.operation)
+	c:RegisterEffect(e2)
 	--summon success
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
@@ -27,7 +36,6 @@ function s.matcheck(e,c)
 	e1:SetCountLimit(1)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
 	e1:SetCost(aux.dxmcostgen(1,1,nil))
-	e1:SetTarget(s.atktg)
 	e1:SetOperation(s.atkop)
 	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
 	end
@@ -49,33 +57,18 @@ e4:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE-RESET_TOFIELD)
 	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
 	end
 end
-function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:HasNonZeroAttack() end
-	if chk==0 then return Duel.IsExistingTarget(Card.HasNonZeroAttack,tp,0,LOCATION_MZONE,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,Card.HasNonZeroAttack,tp,0,LOCATION_MZONE,1,1,nil)
-end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
-		local atk=tc:GetBaseAttack()
-		local e1=Effect.CreateEffect(c)
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e1:SetValue(0)
-		tc:RegisterEffect(e1)
-		if c:IsRelateToEffect(e) and c:IsFaceup() then
 			local e2=Effect.CreateEffect(c)
 			e2:SetType(EFFECT_TYPE_SINGLE)
 			e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 			e2:SetCode(EFFECT_UPDATE_ATTACK)
 			e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-			e2:SetValue(atk)
+			e2:SetValue(s.val)
 			c:RegisterEffect(e2)
-		end
-	end
+end
+function s.val(e,c)
+	return Duel.GetMatchingGroup(Card.IsReason,c:GetControler(),LOCATION_GRAVE,0,nil,REASON_BATTLE):GetSum(Card.GetAttack)/5
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -92,5 +85,17 @@ end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
 		Duel.Destroy(eg,REASON_EFFECT)
+	end
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	local d=Duel.GetAttackTarget()
+	if chk ==0 then return Duel.GetAttacker()==e:GetHandler()
+		and d and d:IsFaceup() and not d:IsType(TYPE_XYZ) end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,d,1,0,0)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local d=Duel.GetAttackTarget()
+	if d:IsRelateToBattle() then
+		Duel.Destroy(d,REASON_EFFECT)
 	end
 end
