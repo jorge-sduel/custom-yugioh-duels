@@ -13,12 +13,12 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
 	c:RegisterEffect(e2)
-	--summon success
+	--[[summon success
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_MATERIAL_CHECK)
 	e2:SetValue(s.matcheck)
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e2)]]
 end
 function s.xyzcheck(g)
 	return g:IsExists(Card.IsType,1,nil,TYPE_SYNCHRO) or g:IsExists(Card.IsType,1,nil,TYPE_XYZ) 
