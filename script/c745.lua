@@ -181,9 +181,9 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) then
+	--if tc:IsRelateToEffect(e) then
 		Duel.SSet(tp,tc)
-	end
+	--end
 end
 function s.damcon2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
