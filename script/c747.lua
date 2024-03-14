@@ -89,8 +89,10 @@ function s.retop(e,tp,eg,ev,ep,re,r,rp)
 	local tc=g:GetFirst()
 	if aux.ToHandOrElse(tc,tp,
 			function(c)
-				return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-					and tc:IsCanBeSpecialSummoned(e,0,tp,false,false) end,
+				return (tc:IsLevelAbove(5) or c:IsRankAbove(5)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+					and tc:IsCanBeSpecialSummoned(e,0,tp,false,false) end,function(c)
+				Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
+			end,
 		1152)~=0 then
 		Duel.BreakEffect()
 		local e1=Effect.CreateEffect(e:GetHandler())
