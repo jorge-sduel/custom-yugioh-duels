@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,7,2,nil,nil,nil,nil,nil,s.xyzcheck)
 	c:EnableReviveLimit()
-	--[[destroy
+	--destroy
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetCategory(CATEGORY_DESTROY)
@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCode(EVENT_BATTLE_START)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.operation)
-	c:RegisterEffect(e2)]]
+	c:RegisterEffect(e1)
 	--summon success
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
