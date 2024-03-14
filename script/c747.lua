@@ -87,20 +87,25 @@ function s.retop(e,tp,eg,ev,ep,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(48976825,0))
 	local g=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,LOCATION_REMOVED,0,1,1,nil)
 	local tc=g:GetFirst()
-	if aux.ToHandOrElse(tc,tp,
-			function(c)
-				return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-					and tc:IsCanBeSpecialSummoned(e,0,tp,true,false) end,function(c)
-				Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)
-			end,
-		1152)~=0 then
-		Duel.BreakEffect()
+	if (tc:IsLevelAbove(5) or tc:IsRankAbove(4)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
+			and (not tc:IsAbleToHand() or Duel.SelectYesNo(tp,aux.Stringid(id,0))) then
+			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
+			--Cannot attack
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_PRE_BATTLE_DAMAGE)
 		e1:SetOperation(s.damop)
 		e1:SetReset(RESET_PHASE+PHASE_DAMAGE)
 		Duel.RegisterEffect(e1,tp)
+		else
+			Duel.SendtoHand(tc,nil,REASON_EFFECT)
+		local e2=Effect.CreateEffect(e:GetHandler())
+		e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e2:SetCode(EVENT_PRE_BATTLE_DAMAGE)
+		e2:SetOperation(s.damop)
+		e2:SetReset(RESET_PHASE+PHASE_DAMAGE)
+		Duel.RegisterEffect(e2,tp)
+			end
 	end
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
