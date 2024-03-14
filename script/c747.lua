@@ -89,7 +89,7 @@ function s.retop(e,tp,eg,ev,ep,re,r,rp)
 	local tc=g:GetFirst()
 	if aux.ToHandOrElse(tc,tp,
 			function(c)
-				return (tc:IsLevelAbove(5) or c:IsRankAbove(4)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+				return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 					and tc:IsCanBeSpecialSummoned(e,0,tp,true,false) end,function(c)
 				Duel.SpecialSummon(tc,0,tp,tp,true,false,POS_FACEUP)
 			end,
