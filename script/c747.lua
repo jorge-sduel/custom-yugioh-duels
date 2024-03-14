@@ -105,7 +105,7 @@ function s.retop(e,tp,eg,ev,ep,re,r,rp)
 		e2:SetOperation(s.damop)
 		e2:SetReset(RESET_PHASE+PHASE_DAMAGE)
 		Duel.RegisterEffect(e2,tp)
-			end
+			--end
 	end
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
