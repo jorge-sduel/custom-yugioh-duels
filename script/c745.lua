@@ -157,7 +157,7 @@ function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(Card.IsMonster,c:GetControler(),0,LOCATION_GRAVE,nil)*-200
+	return Duel.GetMatchingGroupCount(Card.IsMonster,e:GetHandlerPlayer(),0,LOCATION_GRAVE,nil)*-200
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local bc=e:GetHandler():GetBattleTarget()
