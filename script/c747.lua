@@ -88,7 +88,7 @@ function s.retop(e,tp,eg,ev,ep,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,LOCATION_REMOVED,0,1,1,nil)
 	local tc=g:GetFirst()
 	if (tc:IsLevelAbove(5) or tc:IsRankAbove(4)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
-			and (not tc:IsAbleToHand() or Duel.SelectYesNo(tp,aux.Stringid(id,0))) then
+			and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 			--Cannot attack
 		local e1=Effect.CreateEffect(e:GetHandler())
