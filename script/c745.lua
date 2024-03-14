@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e4:SetTarget(s.settg)
 	e4:SetOperation(s.setop)
 	c:RegisterEffect(e4)
-		--pierce
+	--pierce
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_PIERCE)
@@ -160,15 +160,32 @@ function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(Card.IsMonster,c:GetControler(),0,LOCATION_GRAVE,nil)*-200
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk ==0 then	return true end
-	Duel.SetTargetPlayer(tp)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,0)
+	local bc=e:GetHandler():GetBattleTarget()
+	if chk==0 then return bc end
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,bc:GetAttack())
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local lp1=Duel.GetLP(p)
-	Duel.Recover(p,Duel.GetAttacker():GetAttack(),REASON_EFFECT)
+	local bc=e:GetHandler():GetBattleTarget()
+	local atk=bc:GetAttack()
+	if atk<0 then atk=0 end
+	Duel.Recover(tp,atk,REASON_EFFECT)
 end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	local d=Duel.GetAttackTarget()
+	if chk ==0 then return Duel.GetAttacker()==e:GetHandler()
+		and d and d:IsFaceup() and not d:IsType(TYPE_XYZ) end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,d,1,0,0)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local d=Duel.GetAttackTarget()
+	if d:IsRelateToBattle() then
+		Duel.Destroy(d,REASON_EFFECT)
+	end
+end
+
+
+
+
 function s.setfilter(c)
 	return (c:IsSpell() or c:IsTrap()) and c:IsSSetable()
 end
