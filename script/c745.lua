@@ -170,7 +170,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Recover(p,Duel.GetAttacker():GetAttack(),REASON_EFFECT)
 end
 function s.cfilter(c)
-	return (c:IsSpell() or c:IsTrap()) and c:IsSSetable()
+	return (c:IsSpell() or c:IsTrap())
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_DECK) and s.cfilter(chkc) end
@@ -181,7 +181,7 @@ function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and tc:IsSSetable() then
+	if tc:IsRelateToEffect(e) then
 		Duel.SSet(tp,tc)
 	end
 end
