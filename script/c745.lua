@@ -170,7 +170,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Recover(p,Duel.GetAttacker():GetAttack(),REASON_EFFECT)
 end
 function s.cfilter(c)
-	return c:IsSpell() or c:IsTrap() and c:IsSSetable()
+	return (c:IsSpell() or c:IsTrap()) and c:IsSSetable()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_DECK) and s.cfilter(chkc) end
