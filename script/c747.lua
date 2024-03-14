@@ -87,6 +87,7 @@ function s.retop(e,tp,eg,ev,ep,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(48976825,0))
 	local g=Duel.SelectMatchingCard(tp,Card.IsMonster,tp,LOCATION_REMOVED,0,1,1,nil)
 	local tc=g:GetFirst()
+	if tc:IsRelateToEffect(e) then
 	if (tc:IsLevelAbove(5) or tc:IsRankAbove(4)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
 			and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
@@ -105,7 +106,7 @@ function s.retop(e,tp,eg,ev,ep,re,r,rp)
 		e2:SetOperation(s.damop)
 		e2:SetReset(RESET_PHASE+PHASE_DAMAGE)
 		Duel.RegisterEffect(e2,tp)
-			--end
+			end
 	end
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
