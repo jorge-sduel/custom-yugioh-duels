@@ -29,8 +29,8 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCondition(s.condition)
-	e3:SetTarget(s.target)
-	e3:SetOperation(s.operation)
+	--e3:SetTarget(s.target)
+	--e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
 s.listed_names={CARD_GAIA_CHAMPION}
