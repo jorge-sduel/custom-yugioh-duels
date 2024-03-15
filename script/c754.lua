@@ -23,9 +23,8 @@ function s.initial_effect(c)
 	--search
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,0))
-	e3:SetCategory(CATEGORY_REMOVE)
-	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e3:SetCategory(CATEGORY_TOGRAVE)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetCondition(s.condition)
 	e3:SetTarget(s.target)
@@ -77,7 +76,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD) and e:GetHandler():IsPreviousControler(tp) and rp~=tp
+	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.tgfilter(c)
 	return (c:IsType(TYPE_SYNCHRO) and not c:IsType(TYPE_EFFECT)) and c:IsAbleToGrave()
