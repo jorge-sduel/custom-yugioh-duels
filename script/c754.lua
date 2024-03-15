@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCondition(s.condition)
-	e3:SetTarget(s.target)
+	--e3:SetTarget(s.target)
 	e3:SetOperation(s.operation)
 	c:RegisterEffect(e3)
 end
