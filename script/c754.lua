@@ -79,7 +79,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.tgfilter(c)
-	return (c:IsType(TYPE_SYNCHRO) and not c:IsType(TYPE_EFFECT)) and c:IsAbleToGrave()
+	return c:IsType(TYPE_SYNCHRO) and c:IsAbleToGrave()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.tgfilter,tp,LOCATION_EXTRA,0,1,nil) end
