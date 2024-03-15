@@ -26,7 +26,8 @@ function s.initial_effect(c)
 	e3:SetDescription(aux.Stringid(id,0))
 	e3:SetCategory(CATEGORY_TOGRAVE)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e3:SetCode(EVENT_TO_GRAVE)
+	e3:SetCode(EVENT_LEAVE_FIELD)
+	e3:SetRange(LOCATION_MZONE)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCondition(s.condition)
 	e3:SetTarget(s.target)
@@ -79,7 +80,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local loc=e:GetHandler():GetPreviousLocation()
-	return loc==LOCATION_ONFIELD
+	return loc==LOCATION_ONFIELD and e:GetHandler():IsLocation(LOCATION_GRAVE)
 end
 function s.tgfilter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsAbleToGrave()
