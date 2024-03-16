@@ -89,7 +89,7 @@ function s.dsfilter(c)
 	return c:IsMonster() and c:IsAbleToDeck()
 end
 function s.thfilter(c)
-	return c:IsSetCard(0xbd) and c:IsAbleToHand()
+	return (c:IsSetCard(0xbd) or c:IsSetCard(0x10cf)) and c:IsAbleToHand()
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
