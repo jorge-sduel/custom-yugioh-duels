@@ -102,7 +102,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.dsfilter,tp,LOCATION_GRAVE,0,nil)
 	if #g>=2 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-		local sg=g:Select(p,2,2,nil)
+		local sg=g:Select(tp,2,2,nil)
 		Duel.ConfirmCards(1-tp,sg)
 		Duel.SendtoDeck(sg,nil,2,REASON_EFFECT)
 		Duel.ShuffleDeck(tp)
