@@ -80,7 +80,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return not c:IsReason(REASON_REPLACE) and c:IsOnField() and c:IsFaceup()
 		and Duel.IsExistingMatchingCard(s.dsfilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
-	return Duel.SelectYesNo(tp,aux.Stringid(id,0))
+	return Duel.SelectYesNo(tp,aux.Stringid(id,2))
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseSingleEvent(e:GetHandler(),id,re,r,rp,0,0)
