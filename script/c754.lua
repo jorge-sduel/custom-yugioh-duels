@@ -80,7 +80,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local loc=e:GetHandler():GetPreviousLocation()
-	return loc==LOCATION_ONFIELD
+	return e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.tgfilter(c)
 	return c:IsType(TYPE_SYNCHRO) and c:IsAbleToGrave()
