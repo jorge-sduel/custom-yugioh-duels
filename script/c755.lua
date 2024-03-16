@@ -99,7 +99,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.dsfilter,p,LOCATION_HAND,0,nil)
+	local g=Duel.GetMatchingGroup(s.dsfilter,p,LOCATION_GRAVE,0,nil)
 	if #g>=2 then
 		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TODECK)
 		local sg=g:Select(p,2,2,nil)
