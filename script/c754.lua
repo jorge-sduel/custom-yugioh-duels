@@ -1,4 +1,4 @@
---創世者の化身
+--Master gaia
 local s,id=GetID()
 function s.initial_effect(c)
 	--special summon
@@ -42,7 +42,7 @@ end
 function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return ft>-1
+		if chk==0 then return ft>-1 and c:IsReleasable() and Duel.CheckReleaseGroupCost(tp,nil,1,false,nil,c)
 		and (ft>0 or Duel.CheckReleaseGroupCost(tp,s.mzfilter,1,false,nil,c,tp)) end
 	local rg=nil
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
