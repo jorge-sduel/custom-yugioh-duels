@@ -65,5 +65,5 @@ Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	end
 end
 function s.dircon(e)
-	return not e:GetHandler():GetOverlayCount()==0
+	return e:GetHandler():GetOverlayCount()>0
 end
