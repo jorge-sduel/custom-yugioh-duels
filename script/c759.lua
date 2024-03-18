@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--Fusion summon procedure
 	c:EnableReviveLimit()
-	Fusion.AddProcMixRep(c,true,true,s.matfilter2,2,2,aux.FilterBoolFunctionEx(Card.IsSetCard,0xbd))
+	Fusion.AddProcMixRep(c,true,true,s.matfilter,2,2,aux.FilterBoolFunctionEx(Card.IsSetCard,0xbd))
 	--Change name
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
