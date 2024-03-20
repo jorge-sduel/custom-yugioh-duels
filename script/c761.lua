@@ -57,7 +57,9 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return not c:IsReason(REASON_REPLACE) and c:IsOnField() and c:IsFaceup() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c,c:GetRank()) end
+	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
+	if chk==0 then return not c:IsReason(REASON_REPLACE) and c:IsOnField() and c:IsFaceup() and (#pg<=0 or (#pg==1 and pg:IsContains(c)))
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c,c:GetRank(),pg) end
 	return Duel.SelectYesNo(tp,aux.Stringid(id,2))
 end
 function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
