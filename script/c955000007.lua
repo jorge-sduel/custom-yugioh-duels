@@ -40,8 +40,12 @@ end
 s.listed_card_types={TYPE_GEMINI}
 --special summon
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsActiveType(TYPE_MONSTER) and eg:GetHandler():IsSetCard(0x1066)
+	return eg:IsExists(s.cfilter,1,nil,tp)
 end
+function s.cfilter(c)
+	return c:IsFaceup() and c:IsSetCard(0x1066) or c:IsCode(928190100)
+end
+
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
