@@ -40,7 +40,7 @@ end
 s.listed_card_types={TYPE_GEMINI}
 --special summon
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSetCard(0x1066)
+	return eg:IsActiveType(TYPE_MONSTER) and eg:GetHandler():IsSetCard(0x1066)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
