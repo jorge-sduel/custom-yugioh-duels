@@ -18,6 +18,8 @@ function s.initial_effect(c)
 	e2:SetOperation(s.lvop)
 	c:RegisterEffect(e2)
 end
+s.listed_names={1784686,6368038}
+s.material_setcode=6368038
 function s.ffilter(c,fc,sumtype,tp)
 	return c:IsRace(RACE_DRAGON,fc,sumtype,tp)
 end
