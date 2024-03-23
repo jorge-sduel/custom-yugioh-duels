@@ -58,5 +58,5 @@ function s.filter2(c)
 	return c:IsCode(id)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.filter2,c:GetControler(),LOCATION_GRAVE,0,nil)
+	return Duel.GetMatchingGroupCount(s.filter2,c:GetControler(),LOCATION_GRAVE,0,nil)*-1
 end
