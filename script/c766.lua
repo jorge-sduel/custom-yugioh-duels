@@ -50,7 +50,7 @@ Duel.SendtoGrave(g,REASON_DISCARD+REASON_COST)
 		e1:SetReset(RESET_EVENT+RESETS_REDIRECT)
 		e1:SetValue(LOCATION_REMOVED)
 		c:RegisterEffect(e1,true)
-Duel.SendtoGrave(g,REASON_DISCARD+REASON_COST)
+		end
 	end
 end
 function s.thfilter(c)
