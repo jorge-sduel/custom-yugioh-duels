@@ -54,10 +54,11 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	local code=eg:GetCode()
 	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	if #tg>0 then
 		Duel.Destroy(tg,REASON_EFFECT)
-	if tg:IsCode(eg:GetCode()) then
+	if tg:IsExists(Card.IsCode,1,nil,code) then
 Duel.NegateActivation(ev)
   end
 	end
