@@ -64,7 +64,7 @@ Duel.NegateActivation(ev)
 	end
 end
 function s.filter(c,e,tp)
-	return c:IsSetCard(0x27)
+	return c:IsSetCard(0x27) and c:IsFaceup()
 end
 function s.atkval(e,c)
 	local g=Duel.GetMatchingGroup(s.filter,e:GetHandlerPlayer(),LOCATION_MZONE,0,nil)
