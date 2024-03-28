@@ -58,7 +58,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	if #tg>0 then
 		Duel.Destroy(tg,REASON_EFFECT)
-	if tg:IsExists(Card.IsCode,1,nil,code) then
+	if g:IsExists(Card.IsCode,1,nil,code) then
 Duel.NegateActivation(ev)
   end
 	end
