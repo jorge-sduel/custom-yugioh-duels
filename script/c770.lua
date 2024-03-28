@@ -1,6 +1,4 @@
---コズミック・ブレイザー・ドラゴン
---Cosmic Blazar Dragon
---Scripted by Eerie Code
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	--synchro summon
