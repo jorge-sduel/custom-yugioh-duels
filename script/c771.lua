@@ -35,10 +35,20 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetSummonType()==SUMMON_TYPE_SYNCHRO
 end
 function s.filter(c)
-	return c:IsFaceup() and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
+	return c:IsFaceup() 
+	--and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 function s.spfilter(c,e,tp,mc)
 	return mc:GetColumnGroup():IsExists(nil,1,mc,e:GetHandlerPlayer())
+end
+function s.desfilter(c,e)
+	return s.colfilter(e,c)
+end
+function s.colfilter(e,cc)
+	local function filter(c,tp)
+		return c:IsFaceup() and c:IsMonster()
+	end
+	return cc:GetColumnGroup():IsExists(filter,1,cc,e:GetHandlerPlayer())
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
@@ -49,7 +59,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	local g=Duel.GetMatchingGroup(s.spfilter,tp,0,LOCATION_MZONE,nil,tc)
+	local g=Duel.GetMatchingGroup(s.desfilter,tp,0,LOCATION_MZONE,nil,e)
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.Destroy(tc,REASON_EFFECT)
 		Duel.Destroy(g,REASON_EFFECT)
