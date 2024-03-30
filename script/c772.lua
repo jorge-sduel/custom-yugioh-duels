@@ -62,7 +62,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA|LOCATION_GRAVE)
 end
 function s.spfilter(c,e,tp)
-	return (((c:IsCode(97836203) c:IsLocation(LOCATION_EXTRA)) or (c:IsSetCard(0x27) and c:IsLocation(LOCATION_GRAVE)) and not c:IsCode(id)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return ((c:IsCode(97836203) c:IsLocation(LOCATION_EXTRA)) or (c:IsSetCard(0x27) and c:IsLocation(LOCATION_GRAVE)) and not c:IsCode(id)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 		and ((c:IsLocation(LOCATION_GRAVE) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0)
 		or (c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0))
 end
