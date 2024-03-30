@@ -66,7 +66,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.tgfilter(c)
-	return c:IsSetCard(0x27) and c:IsFaceup()
+	return c:IsSetCard(0x27) and c:IsFaceup() and c:IsLevelBelow(5)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and chkc:IsFaceup() end
