@@ -55,19 +55,31 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and chkc~=e:GetHandler() end
-	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,e:GetHandler())
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
+function s.target(e,tp,ep,eg,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) then
-		Duel.Destroy(tc,REASON_EFFECT)
-	end
-end
+	local mg=Duel.GetMatchingGroupCount(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,e)
+	local rc=e:GetHandler():GetMaterialCount()
+	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
+	local ct=g:GetFirst()
+	if mg==0 or rc==0 then return end
+	repeat
+		local code=ct:GetCode()
+		Duel.Hint(HINT_CARD,0,code)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+		local tg=Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil,e)
+		local tc=tg:GetFirst()
+		if tc then
+			Duel.HintSelection(tg)
+			Duel.Destroy(tc,REASON_EFFECT)
+		else return
+		end
+		rc=rc-1
+		ct=g:GetNext()
+	until rc<=0 or not Duel.IsExistingMatchingCard(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,nil,e) 
+		or not Duel.SelectYesNo(tp,210)
+end 
 function s.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp
 end
