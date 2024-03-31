@@ -2,6 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
+	c:SetSPSummonOnce(id)
 		Link.AddProcedure(c,nil,2,3,s.lcheck)
 	--Increase ATK
 	local e1=Effect.CreateEffect(c)
