@@ -49,8 +49,10 @@ function s.lcheck(g,lc,sumtype,tp)
 	return g:IsExists(Card.IsSetCard,1,nil,0x27,lc,sumtype,tp)
 end
 function s.indcon(e)
+	local ph=Duel.GetCurrentPhase()
+	local tp=Duel.GetTurnPlayer()
 	local lg=e:GetHandler():GetLinkedGroup()
-	return lg and lg:IsExists(s.sfilter,1,nil)
+	return lg and lg:IsExists(s.sfilter,1,nil) and (tp==e:GetHandlerPlayer() and ph>=PHASE_BATTLE_START and ph<=PHASE_BATTLE)
 end
 function s.sfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO)
