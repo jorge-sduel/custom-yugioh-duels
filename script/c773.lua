@@ -56,7 +56,7 @@ function s.sfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetLinkedGroupCount()=>0
+	return e:GetHandler():GetLinkedGroupCount()>0
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
