@@ -58,11 +58,10 @@ function s.efop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=c:GetReasonCard()
 	local e1=Effect.CreateEffect(rc)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_DRAW)
+	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetCondition(s.drcon)
 	e1:SetTarget(s.tg)
 	e1:SetOperation(s.op)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
@@ -77,7 +76,7 @@ function s.efop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atkfilter(c)
-	return c:IsLevelAbove(5) and c:HasNonZeroAttack()
+	return c:HasNonZeroAttack()
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.atkfilter(chkc) end
@@ -93,9 +92,9 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		--Halve ATK
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
+		e1:SetCode(EFFECT_CHANGE_CODE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		e1:SetValue(val)
+		e1:SetValue(c:GetCode())
 		tc:RegisterEffect(e1)
 		if c:IsRelateToEffect(e) and c:IsFaceup() then
 			--Increase ATK
