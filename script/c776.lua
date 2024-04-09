@@ -20,6 +20,9 @@ function s.initial_effect(c)
 	e3:SetOperation(s.efop)
 	c:RegisterEffect(e3)
 end
+function s.target(e,c)
+	return c:IsType(TYPE_XYZ) and c:IsRace(RACE_PSYCHIC)
+end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=eg:GetFirst()
 	return ec:IsControler(tp) and (ec:IsRace(RACE_BEAST) or ec:IsRace(RACE_WINGEDBEAST))
