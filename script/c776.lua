@@ -68,14 +68,14 @@ function s.efop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTarget(s.tg)
 	e1:SetOperation(s.op)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-	rc:RegisterEffect(e1,true)
+	rc:RegisterEffect(e1,tp)
 	if not rc:IsType(TYPE_EFFECT) then
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_ADD_TYPE)
 		e2:SetValue(TYPE_EFFECT)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		rc:RegisterEffect(e2,true)
+		rc:RegisterEffect(e2,tp)
 	end
 end
 function s.atkfilter(c)
