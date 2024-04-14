@@ -58,10 +58,10 @@ function s.lvcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local hg=Duel.GetMatchingGroup(Card.IsLevelAbove,tp,LOCATION_HAND,LOCATION_HAND,nil,1)
+	local hg=Duel.GetMatchingGroup(Card.IsType,tp,LOCATION_MZONE,0,nil,TYPE_XYZ)
 	local tc=hg:GetFirst()
 	for tc in aux.Next(hg) do
-				local e1=Effect.CreateEffect(e:GetHandler())
+		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_XYZ_LEVEL)
 		e1:SetValue(4)
