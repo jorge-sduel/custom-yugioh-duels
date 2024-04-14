@@ -27,7 +27,7 @@ end
 s.listed_series={SET_NUMBER}
 s.xyz_number=8
 function s.efffilter(c)
-    	return c:IsNegatableMonster() and c:IsAttackPos()
+    	return c:IsAttackPos()
 end
 function s.efftg(e,tp,eg,ep,ev,re,r,rp,chk)
     	if chk==0 then return true end
@@ -59,16 +59,15 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
         	--Negate the effects of 1 opponent's Attack Position monster and this card gains those effects
         	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_NEGATE)
         	local sc=Duel.SelectMatchingCard(tp,s.efffilter,tp,0,LOCATION_MZONE,1,1,nil):GetFirst()
-        	local sc2=Duel.GetMatchingGroup(s.efffilter,tp,0,LOCATION_MZONE,nil)
-		if sc and not sc:IsStatus(STATUS_DISABLED) then
+		if sc then
             		local code=sc:GetOriginalCode()
-	sc:NegateEffects(c,RESETS_STANDARD_PHASE_END)
 	c:CopyEffect(code,RESETS_STANDARD_PHASE_END)
 		--disable
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetTargetRange(0,LOCATION_MZONE)
 	e1:SetCode(EFFECT_DISABLE)
+	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
         	end
    	elseif op==3 then
