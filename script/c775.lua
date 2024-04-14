@@ -3,7 +3,7 @@ Duel.LoadScript("rankup_functions.lua")
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,nil,4,3)
+	Xyz.AddProcedure(c,nil,5,4)
 	--Rank Up Check
 	aux.EnableCheckRankUp(c,nil,nil,2407234)
 	c:EnableReviveLimit()
