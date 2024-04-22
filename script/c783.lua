@@ -65,14 +65,14 @@ end
 function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	local phase=Duel.GetCurrentPhase()
 	if (phase==PHASE_DAMAGE and not Duel.IsDamageCalculated()) or phase==PHASE_DAMAGE_CAL then return end
-	local g1=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
+	local g1=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	local g2=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	local c=e:GetHandler()
 	if #g1==0 then
 		s[tp]=0
 	else
 		local rac=s.getrace(g1)
-		if not (rac&rac-1)~=0 then
+		if (rac&rac-1)~=0 then
 			if s[tp]==0 or (s[tp]&rac)==0 then
 				Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 				--rac=Duel.AnnounceRace(tp,1,rac)
