@@ -75,7 +75,7 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 		if (rac&rac-1)~=0 then
 			if s[tp]==0 or (s[tp]&rac)==0 then
 				Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-				rac=Duel.AnnounceRace(tp,1,rac)
+				--rac=Duel.AnnounceRace(tp,1,rac)
 			else rac=s[tp] end
 		end
 		g1:Remove(s.rmfilter,nil,rac)
