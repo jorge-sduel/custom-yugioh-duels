@@ -15,102 +15,93 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 		--Adjust
+	--adjust
 	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(id)
-	e2:SetRange(LOCATION_MZONE)
-	e2:SetCondition(function(e) return e:GetHandler():IsStatus(STATUS_EFFECT_ENABLED) end)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
+	e2:SetCode(EVENT_ADJUST)
+	e2:SetRange(LOCATION_SZONE)
+	e2:SetOperation(s.adjustop)
 	c:RegisterEffect(e2)
-	--Cannot Normal Summon, Special Summon or Flip Summon
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_FIELD)
-	e3:SetRange(LOCATION_MZONE)
-	e3:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
-	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e3:SetTargetRange(0,1)
-	e3:SetTarget(s.sumlimit)
-	e3:SetValue(POS_FACEDOWN)
-	c:RegisterEffect(e3)
-	local e4=e3:Clone()
-	e4:SetCode(EFFECT_CANNOT_SUMMON)
+	--cannot summon,spsummon,flipsummon
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetRange(LOCATION_SZONE)
+	e4:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
+	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e4:SetTargetRange(1,1)
+	e4:SetTarget(s.sumlimit)
+	e4:SetValue(POS_FACEDOWN)
 	c:RegisterEffect(e4)
-	local e5=e3:Clone()
-	e5:SetCode(EFFECT_CANNOT_FLIP_SUMMON)
+	local e5=e4:Clone()
+	e5:SetCode(EFFECT_CANNOT_SUMMON)
 	c:RegisterEffect(e5)
-	aux.GlobalCheck(s,function()
-		s.lastFieldId={}
-		s.lastFieldId[0]=nil
-		s.lastFieldId[1]=nil
-		local ge=Effect.GlobalEffect()
-		ge:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
-		ge:SetCode(EVENT_ADJUST)
-		ge:SetOperation(s.adjustop)
-		Duel.RegisterEffect(ge,0)
-	end)
+	local e6=e4:Clone()
+	e6:SetCode(EFFECT_CANNOT_FLIP_SUMMON)
+	c:RegisterEffect(e6)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
-	local tp=sump
-	if targetp then tp=targetp end
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,c:GetCode()),tp,LOCATION_MZONE,0,1,c)
+s[0]=0
+s[1]=0
+function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	s[0]=0
+	s[1]=0
 end
-function s.fidfilter(c,fid)
-	return c:GetFieldID()>fid
+function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
+	local rc=s.getrace(Duel.GetMatchingGroup(Card.IsFaceup,targetp or sump,LOCATION_MZONE,0,nil))
+	if rc==0 then return false end
+	return c:GetRace()~=rc
 end
-local faceupfil=aux.FaceupFilter(Card.IsHasEffect,id)
+function s.getrace(g)
+	local arc=0
+	for tc in g:Iter() do
+		arc=(arc|tc:GetRace())
+	end
+	return arc
+end
+function s.rmfilter(c,rc)
+	return c:GetRace()==rc
+end
 function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	local phase=Duel.GetCurrentPhase()
 	if (phase==PHASE_DAMAGE and not Duel.IsDamageCalculated()) or phase==PHASE_DAMAGE_CAL then return end
-	if not Duel.IsExistingMatchingCard(faceupfil,0,0,LOCATION_MZONE,1,nil) then
-		s.lastFieldId[0]=nil
-		s.lastFieldId[1]=nil
-		return
-	end
-	local sg=Group.CreateGroup()
-	for p=0,1 do
-		local g=Duel.GetMatchingGroup(Card.IsFaceup,p,LOCATION_MZONE,0,nil)
-		if #g==0 then
-			s.lastFieldId[p]=nil
-		else
-			local code=1
-			local update_fid=false
-			while code~=0 do
-				local rg=g:Filter(Card.IsCode,nil,code)
-				if s.lastFieldId[p] then
-					local forced
-					forced,rg=rg:Split(s.fidfilter,nil,s.lastFieldId[p])
-					if #rg==0 then
-						rg=forced
-						update_fid=true
-					else
-						sg:Merge(forced)
-					end
-				end
-				local rc=#rg
-				if rc>1 then
-					Duel.Hint(HINT_SELECTMSG,p,HINTMSG_TOGRAVE)
-					sg:Merge(rg:Select(p,rc-1,rc-1,nil))
-				end
-				race=race<<1
-			end
-			if update_fid or not s.lastFieldId[p] then
-				local maxg,maxid=g:Sub(sg):GetMaxGroup(Card.GetFieldID)
-				s.lastFieldId[p]=maxid
-			end
+	local g1=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
+	local g2=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
+	local c=e:GetHandler()
+	if #g1==0 then
+		s[tp]=0
+	else
+		local rac=s.getrace(g1)
+		if (rac&rac-1)~=0 then
+			if s[tp]==0 or (s[tp]&rac)==0 then
+				Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
+				rac=Duel.AnnounceRace(tp,1,rac)
+			else rac=s[tp] end
 		end
+		g1:Remove(s.rmfilter,nil,rac)
+		s[tp]=rac
 	end
-	local p=e:GetHandlerPlayer()
-	local g1,g2=Group.CreateGroup(),Group.CreateGroup()
+	if #g2==0 then
+		s[1-tp]=0
+	else
+		local rac=s.getrace(g2)
+		if (rac&rac-1)~=0 then
+			if s[1-tp]==0 or (s[1-tp]&rac)==0 then
+				Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(id,0))
+				rac=Duel.AnnounceRace(1-tp,1,rac)
+			else rac=s[1-tp] end
+		end
+		g2:Remove(s.rmfilter,nil,rac)
+		s[1-tp]=rac
+	end
 	local readjust=false
-	if #sg>0 then
-		g1,g2=sg:Split(Card.IsControler,nil,p)
-	end
 	if #g1>0 then
-		Duel.SendtoGrave(g1,REASON_RULE,PLAYER_NONE,p)
+		Duel.SendtoGrave(g1,REASON_RULE,PLAYER_NONE,tp)
 		readjust=true
 	end
 	if #g2>0 then
-		Duel.SendtoGrave(g2,REASON_RULE,PLAYER_NONE,1-p)
+		Duel.SendtoGrave(g2,REASON_RULE,PLAYER_NONE,1-tp)
 		readjust=true
 	end
 	if readjust then Duel.Readjust() end
