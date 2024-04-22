@@ -57,10 +57,10 @@ function s.getrace(g)
 	for tc in g:Iter() do
 		arc=(arc|tc:GetCode())
 	end
-	return not arc
+	return arc
 end
 function s.rmfilter(c,rc)
-	return not c:GetCode()==rc
+	return c:GetCode()==rc
 end
 function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	local phase=Duel.GetCurrentPhase()
