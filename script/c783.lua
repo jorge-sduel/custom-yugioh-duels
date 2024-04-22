@@ -20,16 +20,16 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
 	e2:SetCode(EVENT_ADJUST)
-	e2:SetRange(LOCATION_SZONE)
+	e2:SetRange(LOCATION_MZONE)
 	e2:SetOperation(s.adjustop)
 	c:RegisterEffect(e2)
 	--cannot summon,spsummon,flipsummon
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetRange(LOCATION_SZONE)
+	e4:SetRange(LOCATION_MZONE)
 	e4:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
 	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e4:SetTargetRange(1,1)
+	e4:SetTargetRange(0,1)
 	e4:SetTarget(s.sumlimit)
 	e4:SetValue(POS_FACEDOWN)
 	c:RegisterEffect(e4)
@@ -40,7 +40,6 @@ function s.initial_effect(c)
 	e6:SetCode(EFFECT_CANNOT_FLIP_SUMMON)
 	c:RegisterEffect(e6)
 end
-function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
 s[0]=0
 s[1]=0
 function s.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -51,17 +50,17 @@ end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
 	local rc=s.getrace(Duel.GetMatchingGroup(Card.IsFaceup,targetp or sump,LOCATION_MZONE,0,nil))
 	if rc==0 then return false end
-	return c:GetRace()~=rc
+	return c:GetCode()~=rc
 end
 function s.getrace(g)
 	local arc=0
 	for tc in g:Iter() do
-		arc=(arc|tc:GetRace())
+		arc=(arc|tc:GetCode())
 	end
 	return arc
 end
 function s.rmfilter(c,rc)
-	return c:GetRace()==rc
+	return c:GetCode()==rc
 end
 function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	local phase=Duel.GetCurrentPhase()
@@ -89,7 +88,7 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 		if (rac&rac-1)~=0 then
 			if s[1-tp]==0 or (s[1-tp]&rac)==0 then
 				Duel.Hint(HINT_SELECTMSG,1-tp,aux.Stringid(id,0))
-				rac=Duel.AnnounceRace(1-tp,1,rac)
+				--rac=Duel.AnnounceRace(1-tp,1,rac)
 			else rac=s[1-tp] end
 		end
 		g2:Remove(s.rmfilter,nil,rac)
