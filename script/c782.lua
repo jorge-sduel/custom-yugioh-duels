@@ -31,7 +31,6 @@ function s.initial_effect(c)
 	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e5:SetCountLimit(1)
 	e5:SetRange(LOCATION_MZONE)
-	e5:SetCondition(s.descon)
 	e5:SetCost(s.descost)
 	e5:SetTarget(s.destg)
 	e5:SetOperation(s.desop)
@@ -99,8 +98,7 @@ c:CopyEffect(code,RESETS_STANDARD_PHASE_END)
 	end
 end
 function s.condition2(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsSetCard,1,nil,0x10db)
-		and (Duel.GetCurrentPhase()~=PHASE_DAMAGE or not Duel.IsDamageCalculated())
+	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsCode,1,nil,47387961)
 end
 function s.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
