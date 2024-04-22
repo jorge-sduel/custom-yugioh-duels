@@ -50,17 +50,17 @@ end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp)
 	local rc=s.getrace(Duel.GetMatchingGroup(Card.IsFaceup,targetp or sump,LOCATION_MZONE,0,nil))
 	if rc==0 then return false end
-	return c:GetCode()~=rc
+	return not c:GetCode()~=rc
 end
 function s.getrace(g)
 	local arc=0
 	for tc in g:Iter() do
 		arc=(arc|tc:GetCode())
 	end
-	return arc
+	return not arc
 end
 function s.rmfilter(c,rc)
-	return c:GetCode()==rc
+	return not c:GetCode()==rc
 end
 function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 	local phase=Duel.GetCurrentPhase()
@@ -72,7 +72,7 @@ function s.adjustop(e,tp,eg,ep,ev,re,r,rp)
 		s[tp]=0
 	else
 		local rac=s.getrace(g1)
-		if (rac&rac-1)~=0 then
+		if not (rac&rac-1)~=0 then
 			if s[tp]==0 or (s[tp]&rac)==0 then
 				Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
 				--rac=Duel.AnnounceRace(tp,1,rac)
