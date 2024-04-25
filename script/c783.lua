@@ -99,7 +99,7 @@ function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_GRAVE+LOCATION_MZONE)
 end
 function s.rfilter(c,code)
-	return c:IsCode(code) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
+	return c:IsCode(code) and c:IsFaceup()
 end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
