@@ -103,8 +103,8 @@ function s.rfilter(c,code)
 end
 function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.Overlay(e:GetHandler(),tc) then
-		local rg=Duel.GetMatchingGroup(s.rfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,tc,tc:GetCode())
+	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) then
+		local rg=Duel.GetMatchingGroup(s.rfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil,tc:GetCode())
 		if #rg>0 then
 			Duel.BreakEffect()
 			Duel.Overlay(e:GetHandler(),rg)
