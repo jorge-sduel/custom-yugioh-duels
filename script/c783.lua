@@ -48,11 +48,12 @@ function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsCode,1,nil,23649496)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	local c=e:GetHandler()
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and s.filter1(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,0,LOCATION_MZONE,1,nil)
-		and Duel.IsExistingMatchingCard(s.filter2,tp,0,LOCATION_MZONE,2,nil) end
+	if chk==0 then return Duel.IsExistingTarget(s.filter1,tp,0,LOCATION_MZONE,1,c)
+		and Duel.IsExistingMatchingCard(s.filter2,tp,0,LOCATION_MZONE,2,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.filter1,tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.SelectTarget(tp,s.filter1,tp,0,LOCATION_MZONE,1,1,c)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
