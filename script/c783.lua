@@ -32,9 +32,9 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCost(s.cost)
-	e3:SetTarget(s.target)
-	e3:SetOperation(s.activate)
-	c:RegisterEffect(e3)
+	e3:SetTarget(s.target2)
+	e3:SetOperation(s.activate2)
+	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.filter1(c)
 	return c:IsFaceup()
@@ -84,5 +84,30 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tg=g:Filter(Card.IsRelateToEffect,nil,e)
 	if #tg>0 then
 		Duel.Destroy(tg,REASON_EFFECT)
+	end
+end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
+function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsAbleToRemove() end
+	if chk==0 then return Duel.IsExistingTarget(aux.FaceupFilter(Card.IsAbleToRemove),tp,0,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	local g=Duel.SelectTarget(tp,aux.FaceupFilter(Card.IsAbleToRemove),tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)
+	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,1-tp,LOCATION_GRAVE)
+end
+function s.rfilter(c,code)
+	return c:IsCode(code) and c:IsAbleToRemove() and aux.SpElimFilter(c,true)
+end
+function s.activate2(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.GetFirstTarget()
+	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)>0 then
+		local rg=Duel.GetMatchingGroup(s.rfilter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,tc,tc:GetCode())
+		if Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REMOVED) and #rg>0 then
+			Duel.BreakEffect()
+			Duel.Remove(rg,POS_FACEUP,REASON_EFFECT)
+		end
 	end
 end
