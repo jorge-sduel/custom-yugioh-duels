@@ -43,7 +43,7 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_QUICK_O)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetCost(s.cost)
+	e4:SetCost(s.cost2)
 	e4:SetOperation(s.operation)
 	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
 end
@@ -122,7 +122,7 @@ function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,5,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,5,5,REASON_COST)
 end
