@@ -37,6 +37,15 @@ function s.initial_effect(c)
 	e3:SetTarget(s.target2)
 	e3:SetOperation(s.activate2)
 	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
+		--Activate
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(id,0))
+	e4:SetType(EFFECT_TYPE_QUICK_O)
+	e4:SetCode(EVENT_FREE_CHAIN)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCost(s.cost)
+	e4:SetOperation(s.operation)
+	c:RegisterEffect(e4,false,REGISTER_FLAG_DETACH_XMAT)
 end
 function s.filter1(c)
 	return c:IsFaceup()
@@ -113,3 +122,18 @@ function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,5,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,5,5,REASON_COST)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(1,0)
+	e1:SetValue(1)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e1,tp)
+end
+
