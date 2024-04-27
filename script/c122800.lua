@@ -1,7 +1,8 @@
 function c122800.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcFunRep(c,aux.FilterBoolFunction(Card.IsSetCard,0x1049),2,true)
+	Fusion.AddProcMixN(c,true,true,c122800.matfilter,2)
+	--aux.AddFusionProcFunRep(c,aux.FilterBoolFunction(Card.IsSetCard,0x1049),2,true)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -67,7 +68,9 @@ function c122800.initial_effect(c)
 	c:RegisterEffect(e8)
 
 end
-	
+function c122800.matfilter(c)
+	return c:IsSetCard(0x1049)
+end	
 function c122800.valcon(e,re,r,rp)
 	return bit.band(r,REASON_BATTLE)~=0
 end
