@@ -44,11 +44,12 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.filter3,tp,LOCATION_DECK,0,1,1,nil)
 	local g2=Duel.SelectMatchingCard(tp,s.filter4,tp,LOCATION_DECK,0,1,1,nil)
-	if #g==0 then return end
+	if #g>0 then
 	Duel.SendtoGrave(g,REASON_EFFECT)
-	if #g2>0 and g:GetFirst():IsLocation(LOCATION_GRAVE) then
+	if #g2>0 then
 		Duel.SendtoHand(g2,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g2)
+		end
 	end
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
