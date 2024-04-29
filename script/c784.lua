@@ -33,7 +33,7 @@ function s.filter3(c)
 	return c:IsMonster() and c:IsSetCard(0x76) and c:IsAbleToGrave()
 end
 function s.filter4(c)
-	return c:IsSpellTrap() and c:IsSetCard(0x76) and c:IsAbleToHand()
+	return c:IsSpellTrap() and c:IsSetCard(0x92) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_DECK,0,1,nil) and Duel.IsExistingMatchingCard(s.filter4,tp,LOCATION_DECK,0,1,nil) end
