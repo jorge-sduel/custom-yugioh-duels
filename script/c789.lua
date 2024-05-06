@@ -25,6 +25,10 @@ local e1=Effect.CreateEffect(c)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_XYZ))
 	e2:SetValue(500)
 	c:RegisterEffect(e2)
+		--Def
+	local e3=e2:Clone()
+	e3:SetCode(EFFECT_UPDATE_DEFENSE)
+	c:RegisterEffect(e3)
 	--handes
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
