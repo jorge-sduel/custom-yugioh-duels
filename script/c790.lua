@@ -75,7 +75,7 @@ function s.initial_effect(c)
 end
 s.xyz_number=69
 function s.ovfilter(c,tp,xyzc)
-	return c:IsFaceup() and c:IsCode(2407234,xyzc,SUMMON_TYPE_XYZ,tp)
+	return c:IsFaceup() and c:IsCode(2407234)
 end
 function s.copfilter(c)
 	return c:IsFaceup() and c:IsStatus(STATUS_DISABLED) and c:GetFlagEffect(id)==0
