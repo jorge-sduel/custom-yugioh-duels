@@ -1,5 +1,4 @@
---No.8 紋章王ゲノム・ヘリター
---Number 8: Heraldic King Genom-Heritage
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
