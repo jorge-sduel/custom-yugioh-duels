@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 	--destroy
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(id,0))
+	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetCategory(CATEGORY_DESTROY)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetRange(LOCATION_MZONE)
@@ -65,17 +65,27 @@ function s.initial_effect(c)
 	--attack up
 	local e9=Effect.CreateEffect(c)
 	e9:SetCategory(CATEGORY_ATKCHANGE)
-	e9:SetDescription(aux.Stringid(id,0))
+	e9:SetDescription(aux.Stringid(id,2))
 	e9:SetType(EFFECT_TYPE_IGNITION)
 	e9:SetCountLimit(1)
 	e9:SetRange(LOCATION_MZONE)
 	e9:SetCost(s.cost)
 	e9:SetOperation(s.operation)
 	c:RegisterEffect(e9,false,REGISTER_FLAG_DETACH_XMAT)
+		--attack up
+	local e10=Effect.CreateEffect(c)
+	e10:SetCategory(CATEGORY_ATKCHANGE)
+	e10:SetDescription(aux.Stringid(id,3))
+	e10:SetType(EFFECT_TYPE_IGNITION)
+	e10:SetRange(LOCATION_MZONE)
+	e10:SetCost(s.atkcost)
+	e10:SetTarget(s.atktg)
+	e10:SetOperation(s.atkop)
+	c:RegisterEffect(e10,false,REGISTER_FLAG_DETACH_XMAT)
 end
 s.xyz_number=69
 function s.ovfilter(c,tp,xyzc)
-	return c:IsFaceup() and c:IsCode(2407234,xyzc,SUMMON_TYPE_XYZ,tp)
+	return c:IsFaceup() and c:IsCode(2407234)
 end
 function s.copfilter(c)
 	return c:IsFaceup() and c:IsStatus(STATUS_DISABLED) and c:GetFlagEffect(id)==0
@@ -134,5 +144,36 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(500)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE)
 		c:RegisterEffect(e1)
+	end
+end
+function s.atkcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
+function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsFaceup,tp,0,LOCATION_MZONE,1,nil) end
+end
+function s.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and c:IsFaceup() then
+		local e1=Effect.CreateEffect(c)
+		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_UPDATE_ATTACK)
+		e1:SetValue(500)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		c:RegisterEffect(e1)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+		local g=Duel.SelectMatchingCard(tp,Card.IsFaceup,tp,0,LOCATION_MZONE,1,1,nil)
+		local tc=g:GetFirst()
+		if tc then
+			Duel.HintSelection(g)
+			local e2=Effect.CreateEffect(c)
+			e2:SetType(EFFECT_TYPE_SINGLE)
+			e2:SetCode(EFFECT_UPDATE_ATTACK)
+			e2:SetValue(-1000)
+			e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+			tc:RegisterEffect(e2)
+		end
 	end
 end
