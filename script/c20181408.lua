@@ -57,7 +57,7 @@ function cid.cfilter(c,tp)
 		and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 end
 function cid.filter(c,code)
-	return c.IsType(TYPE_PENDULUM) and c:IsCode(code)
+	return c:IsType(TYPE_PENDULUM) and c:IsCode(code)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp)
@@ -65,12 +65,12 @@ function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil,tp)
-	local code=g1:GetCode()
+	local tc=g1:GetFirst()
+	if tc and Duel.SendtoGrave(tc,REASON_COST) and tc:IsLocation(LOCATION_REMOVED) then
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_DECK,0,1,1,nil,code)
+	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_DECK,0,1,1,nil,tc:GetCode())
 	if #g>0 then
-		Duel.SendtoGrave(g1,REASON_COST)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
