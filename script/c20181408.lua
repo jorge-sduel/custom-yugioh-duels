@@ -72,6 +72,7 @@ function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_DECK,0,1,1,nil,tc:GetCode())
 	if #g>0 then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+		end
 	end
 end
 function cid.tgcon(e,tp,eg,ep,ev,re,r,rp)
