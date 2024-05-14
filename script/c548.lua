@@ -4,11 +4,13 @@ function c548.initial_effect(c)
 	Pendulum.AddProcedure(c)
 local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
-	e0:SetCode(EFFECT_CANNOT_DISABLE)
+	e0:SetCode(EFFECT_CANNOT_DISABLE)
+
 	c:RegisterEffect(e0)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_CANNOT_DISEFFECT)
+	e1:SetCode(EFFECT_CANNOT_DISEFFECT)
+
 	c:RegisterEffect(e1)
 	--cannot negate effect
 	local e2=Effect.CreateEffect(c)
@@ -61,7 +63,8 @@ local e0=Effect.CreateEffect(c)
 local e8=Effect.CreateEffect(c)
 	e8:SetType(EFFECT_TYPE_SINGLE)
 	e8:SetCode(EFFECT_ADD_CODE)
-	e8:SetValue(511009004)
+	e8:SetValue(511009004)
+
 	c:RegisterEffect(e8)
 	--summon with 3 tribute
 	local e9=Effect.CreateEffect(c)
@@ -70,7 +73,7 @@ local e8=Effect.CreateEffect(c)
 	e9:SetCode(EFFECT_LIMIT_SUMMON_PROC)
 	e9:SetCondition(c548.ttcon)
 	e9:SetOperation(c548.ttop)
-	e9:SetValue(SUMMON_TYPE_ADVANCE)
+	e9:SetValue(SUMMON_TYPE_TRIBUTE)
 	c:RegisterEffect(e9)
 end
 function c548.rfilter(c)
@@ -97,7 +100,8 @@ function c548.spop(e,tp,eg,ep,ev,re,r,rp)
 		e0:SetCode(EFFECT_SET_BASE_ATTACK)
 		e0:SetReset(RESET_EVENT+0xff0000)
 		e0:SetValue(0)
-		tc:RegisterEffect(e0,true)
+		tc:RegisterEffect(e0,true)
+
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_IMMUNE_EFFECT)
@@ -118,14 +122,17 @@ function c548.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c548.spval(e,c,sump,sumtype,sumpos,targetp,se)
 	return sumtype==SUMMON_TYPE_PENDULUM
-end
+end
+
 function c548.spcon1(e,c)
 	if c==nil then return true end
 	return Duel.CheckReleaseGroup(c:GetControler(),c548.rfilter,1,nil)
 end
 function c548.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.SelectReleaseGroup(c:GetControler(),c548.rfilter,1,1,nil)
-	Duel.Release(g,REASON_COST)
+	Duel.Release(g,REASON_COST)
+
+
 	local c=e:GetHandler()
 	--atk/def
 	local e1=Effect.CreateEffect(c)
@@ -140,7 +147,8 @@ function c548.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 end
 function c548.efilter(e,te)
 	return te:GetOwnerPlayer()~=e:GetHandlerPlayer()
-end
+end
+
 function c548.ttcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>-3 and Duel.GetTributeCount(c)>=3
