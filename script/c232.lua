@@ -29,9 +29,9 @@ function c232.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(83303851,1))
 	e4:SetCategory(CATEGORY_DESTROY+CATEGORY_SPECIAL_SUMMON)
-	e4:SetType(EFFECT_TYPE_QUICK_O)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e4:SetCode(EVENT_ATTACK_ANNOUNCE)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetRange(LOCATION_EXTRA)
 	e4:SetCountLimit(1)
 	e4:SetCondition(c232.condition)
@@ -83,9 +83,9 @@ function c232.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og)
 		Duel.Overlay(c,g2:GetFirst())	
 	end
 end
-function c232.condition(e)
+function c232.condition(e,tp,eg,ep,ev,re,r,rp)
 	local at=Duel.GetAttacker()
-	return Duel.GetAttacker():GetControler()~=e:GetHandlerPlayer() and Duel.GetAttackTarget()==nil
+	return at:GetControler()~=tp and Duel.GetAttackTarget()==nil
 end
 function c232.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,2,REASON_COST) end
