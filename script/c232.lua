@@ -83,7 +83,7 @@ function c232.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og)
 		Duel.Overlay(c,g2:GetFirst())	
 	end
 end
-function c232.condition(e,tp,eg,ep,ev,re,r,rp)
+function c232.condition(e,c)
 	local at=Duel.GetAttacker()
 	return Duel.GetAttacker():GetControler()~=tp and Duel.GetAttackTarget()==nil
 end
