@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.thfilter(c)
-	return ((c:IsSetCard(0x46) or c:IsCode(751) or c:IsCode(750)) and not c:IsCode(id)) and c:IsAbleToHand()
+	return ((c:IsSetCard(0x46) or c:IsCode(751) or c:IsCode(749)) and not c:IsCode(id)) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
