@@ -83,9 +83,9 @@ function c232.xyzop(e,tp,eg,ep,ev,re,r,rp,c,og)
 		Duel.Overlay(c,g2:GetFirst())	
 	end
 end
-function c232.condition(e,tp)
+function c232.condition(e)
 	local at=Duel.GetAttacker()
-	return Duel.GetAttacker():GetControler()~=tp and Duel.GetAttackTarget()==nil
+	return Duel.GetAttacker():GetControler()~=e:GetHandlerPlayer() and Duel.GetAttackTarget()==nil
 end
 function c232.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,2,REASON_COST) end
