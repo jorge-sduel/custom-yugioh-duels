@@ -9,14 +9,14 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_GRAVE)
-	--e3:SetCondition(aux.exccon)
+	e3:SetCondition(aux.exccon)
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
 end
 function s.thfilter(c)
-	return (c:IsSetCard(0x46) or c:IsCode(751) or c:IsCode(750)) and not c:IsCode(id) and c:IsAbleToHand()
+	return ((c:IsSetCard(0x46) or c:IsCode(751) or c:IsCode(750)) and not c:IsCode(id)) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_DECK) and chkc:IsControler(tp) and s.thfilter(chkc) end
