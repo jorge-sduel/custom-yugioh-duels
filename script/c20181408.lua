@@ -17,7 +17,7 @@ function cid.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,{id,1})
-	e2:SetCost(cid.cost)
+	--e2:SetCost(cid.cost)
 	e2:SetTarget(cid.target)
 	e2:SetOperation(cid.operation)
 	c:RegisterEffect(e2)
@@ -54,35 +54,34 @@ function cid.teop(e,tp,eg,ep,ev,re,r,rp)
 end
 function cid.cfilter(c,tp)
 	return c:IsAbleToGraveAsCost() and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
-		and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c:GetOriginalCode())
+		and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 end
 function cid.filter(c,code)
 	return c.IsType(TYPE_PENDULUM) and c:isCode(code)
 end
-function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	e:SetLabel(100)
-	return true
+
+function s.pcfilter(c)
+	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
-function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		if e:GetLabel()~=100 then return false end
-		e:SetLabel(0)
-		return Duel.GetLocationCount(tp,LOCATION_PZONE)>0
-			and Duel.IsExistingMatchingCard(tp,cid.cfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nil)
-	end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil,tp)
-	e:SetLabel(g:GetFirst():GetOriginalCode())
-	Duel.SendtoGrave(g,REASON_COST)
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckPendulumZones(tp)
+		and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nil) end
 end
-function cid.operation(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_PZONE)<=0 then return end
-	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_DECK,0,1,1,nil,e:GetLabel())
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local g1=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil)
+	local code=g1:GetCode()
+	if not Duel.CheckPendulumZones(tp) then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil,code)
 	if #g>0 then
-		Duel.ConfirmCards(1-tp,g)
+		Duel.SendtoGrave(g1,REASON_COST)
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
+
+
+
+
 function cid.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return r&REASON_EFFECT~=0
 end
