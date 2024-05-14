@@ -53,11 +53,11 @@ function cid.teop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.cfilter(c,tp)
-	return c:IsAbleToGraveAsCost() and (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c.IsEquilibrium))
+	return c:IsAbleToGraveAsCost() and (c:IsLocation(LOCATION_HAND) or c:IsFaceup())
 		and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c:GetOriginalCode())
 end
 function cid.filter(c,code)
-	return c.IsType(TYPE_PENDULUM)
+	return c.IsType(TYPE_PENDULUM) and c:isCode(code)
 end
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(100)
@@ -87,7 +87,7 @@ function cid.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return r&REASON_EFFECT~=0
 end
 function cid.thfilter(c)
-	return c:IsFaceup() and c.IsEquilibrium and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
 end
 function cid.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cid.thfilter,tp,LOCATION_EXTRA,0,1,nil) end
