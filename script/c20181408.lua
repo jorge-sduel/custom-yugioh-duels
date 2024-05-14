@@ -66,7 +66,7 @@ end
 function cid.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.SelectMatchingCard(tp,cid.cfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,1,nil,tp)
 	local tc=g1:GetFirst()
-	if tc and Duel.SendtoGrave(tc,REASON_COST) and tc:IsLocation(LOCATION_REMOVED) then
+	if tc and Duel.SendtoGrave(tc,REASON_COST) then
 	if not Duel.CheckPendulumZones(tp) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_DECK,0,1,1,nil,tc:GetCode())
