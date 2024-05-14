@@ -57,7 +57,7 @@ function cid.cfilter(c,tp)
 		and Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_DECK,0,1,nil,c:GetCode())
 end
 function cid.filter(c,code)
-	return c.IsType(TYPE_PENDULUM) and c:isCode(code)
+	return c.IsType(TYPE_PENDULUM) and c:IsCode(code)
 end
 function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckPendulumZones(tp)
