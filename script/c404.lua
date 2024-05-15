@@ -1,8 +1,8 @@
---No.17 リバイス・ドラゴン
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,nil,3,2)
+	Xyz.AddProcedure(c,nil,5,2)
 	c:EnableReviveLimit()
 	--attack up
 	local e1=Effect.CreateEffect(c)
