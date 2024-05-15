@@ -50,7 +50,7 @@ end
 function c306.spcon(e,c)
 	if c==nil then return true end
 	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(aux.FilterFaceupFunction(Card.IsLevelBelow,3),c:GetControler(),LOCATION_MZONE,0,1,nil)
+		and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsLevelBelow,3),c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
 function c306.thfilter(c)
 	return c:IsType(TYPE_SPELL) and c:IsAbleToHand()
