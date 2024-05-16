@@ -67,8 +67,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e8)
 end
 s.listed_series={SET_EARTHBOUND_IMMORTAL}
-function s.sdcon(e)
-	return not Duel.IsExistingMatchingCard(Card.IsFaceup,0,LOCATION_FZONE,0,1,nil)
+function s.filter(c)
+	return c:IsFaceup()
+end
+function s.sdcon(e,tp,eg,ep,ev,re,r,rp)
+	return not Duel.IsExistingMatchingCard(s.filter,e:GetHandlerPlayer(),LOCATION_FZONE,0,1,nil)
 end
 function s.efcon(e,c)
 	return c:IsAttackBelow(e:GetHandler():GetAttack()) 
