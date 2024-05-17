@@ -40,7 +40,7 @@ c:AddSetcodesRule(id,false,0xbb109)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e4:SetCode(EFFECT_UPDATE_ATTACK)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetValue(s.val)
+	e4:SetValue(cid.val)
 	c:RegisterEffect(e4)
 	local e5=e4:Clone()
 	e5:SetCode(EFFECT_UPDATE_DEFENSE)
@@ -107,6 +107,6 @@ function cid.eqop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e1)
 	end
 end
-function s.val(e,c)
+function cid.val(e,c)
 	return c:GetEquipCount()*300
 end
