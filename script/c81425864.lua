@@ -34,6 +34,17 @@ c:AddSetcodesRule(id,false,0xbb109)
 	e1:SetTarget(cid.eqtg)
 	e1:SetOperation(cid.eqop)
 	c:RegisterEffect(e1)
+		--atkup
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_SINGLE)
+	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e4:SetCode(EFFECT_UPDATE_ATTACK)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetValue(s.val)
+	c:RegisterEffect(e4)
+	local e5=e4:Clone()
+	e5:SetCode(EFFECT_UPDATE_DEFENSE)
+	c:RegisterEffect(e5)
 end
 function cid.filter(c,tp)
 	return c:CheckUniqueOnField(tp) and not c:IsForbidden() and c:IsLevelBelow(3)
@@ -95,4 +106,7 @@ function cid.eqop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(cid.eqlimit)
 		tc:RegisterEffect(e1)
 	end
+end
+function s.val(e,c)
+	return c:GetEquipCount()*300
 end
