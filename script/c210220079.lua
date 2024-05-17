@@ -33,11 +33,11 @@ function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return e:GetLabelObject()~=se
 end
 function s.filter(c,g,tp)
-	local mg=g:Filter(Card.IsAttribute,nil,c:GetAttribute())
+	local mg=g:Filter(Card.IsLevel,nil,c:GetLevel())
 	return Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,mg)
 end
 function s.mfilter(c,g,tg,ct,tp)
-	local mg=g:Filter(Card.IsAttribute,nil,c:GetAttribute())
+	local mg=g:Filter(Card.IsLevel,nil,c:GetLevel())
 	local xct=ct+1
 	mg:RemoveCard(c)
 	tg:AddCard(c)
@@ -54,7 +54,7 @@ function s.xyzfilter(c,g,tg,ct,tp)
 	return c:IsXyzSummonable(nil,g,ct,ct)
 end
 function s.matcond(sg,e,tp)
-	return sg:GetClassCount(Card.GetAttribute)==1 and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,sg)
+	return sg:GetClassCount(Card.GetLevel)==1 and Duel.IsExistingMatchingCard(s.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,sg)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(s.xyzmatfilter,tp,LOCATION_HAND+LOCATION_MZONE+LOCATION_GRAVE,0,nil)
