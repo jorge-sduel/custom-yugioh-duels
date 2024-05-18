@@ -44,7 +44,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e7)
 end
 function s.matfilter(c)
-	return (c:IsLevelAbove(7) or c:IsRankAbove(7)) and c:IsType(TYPE_PENDULUM)
+	return (c:IsLevelAbove(7) or c:IsRankAbove(7)) and c:IsType(TYPE_PENDULUM) and c:IsRace(RACE_DRAGON)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
 	return re:GetHandler()~=e:GetHandler() and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
