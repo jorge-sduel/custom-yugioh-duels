@@ -4,7 +4,7 @@ function s.initial_effect(c)
 --Name
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_CHANGE_CODE)
+	e2:SetCode(EFFECT_ADD_CODE)
 	e2:SetRange(LOCATION_GRAVE+LOCATION_HAND+LOCATION_ONFIELD)
 	e2:SetValue(58932615)
 	c:RegisterEffect(e2)
