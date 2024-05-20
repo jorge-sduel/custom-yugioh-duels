@@ -1,17 +1,16 @@
 --Blue-Eyes White Dragon (DM)
 function c322.initial_effect(c)
-	--Survive
+	--Return
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(322,0))
 	e1:SetType(EFFECT_TYPE_QUICK_O)
-	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
-	e1:SetCode(EVENT_LP0)
+	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL+EFFECT_FLAG_DELAY)
+	e1:SetCode(511002521)
 	e1:SetRange(LOCATION_EXTRA)
 	e1:SetCountLimit(1)
 	e1:SetTarget(c322.tg)
 	e1:SetOperation(c322.op)
 	c:RegisterEffect(e1)
-	aux.LP0ActivationValidity(e1)
+	--aux.LP0ActivationValidity(e1)
 --remove
 local e2=Effect.CreateEffect(c)
 e2:SetType(EFFECT_TYPE_QUICK_O)
