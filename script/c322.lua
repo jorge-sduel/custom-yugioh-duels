@@ -12,7 +12,7 @@ function c322.initial_effect(c)
 	e1:SetOperation(c322.op)
 	c:RegisterEffect(e1)
 	--aux.LP0ActivationValidity(e1)
---remove
+--[[remove
 local e2=Effect.CreateEffect(c)
 e2:SetType(EFFECT_TYPE_QUICK_O)
 e2:SetDescription(aux.Stringid(322,0))
@@ -21,7 +21,7 @@ e2:SetCode(EVENT_FREE_CHAIN)
 e2:SetCountLimit(1)
 e2:SetTarget(c322.tg)
 e2:SetOperation(c322.op)
-c:RegisterEffect(e2)
+c:RegisterEffect(e2)]]
 aux.GlobalCheck(c322,function()
 		local ge1=Effect.CreateEffect(c)
 		ge1:SetType(EFFECT_TYPE_FIELD)
