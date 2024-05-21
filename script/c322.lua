@@ -34,11 +34,11 @@ aux.GlobalCheck(c322,function()
 		local ge2=ge1:Clone()
 		ge2:SetLabel(1)
 		Duel.RegisterEffect(ge2,1)
-		local ge3=Effect.CreateEffect(c)
+		--[[local ge3=Effect.CreateEffect(c)
 		ge3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		ge3:SetCode(EVENT_ADJUST)
 		ge3:SetOperation(c322.op)
-		Duel.RegisterEffect(ge3,0)
+		Duel.RegisterEffect(ge3,0)]]
 	end)
 end
 function c322.con2(e)
