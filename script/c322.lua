@@ -66,7 +66,7 @@ aux.GlobalCheck(c322,function()
 		Duel.RegisterEffect(ge3,0)
 	end)]]
 end
-function c322.con2(e)
+function c322.econ(e)
 	return e:GetLabelObject():IsActivatable(e:GetLabel())
 end
 function c322.op(e,tp,eg,ep,ev,re,r,rp)
