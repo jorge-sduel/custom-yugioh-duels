@@ -69,7 +69,7 @@ local e1=Effect.CreateEffect(e:GetHandler())
 end
 function c322.op(e,tp,eg,ep,ev,re,r,rp)
 	local sg=Duel.GetMatchingGroup(c322.filter,tp,LOCATION_ALL,0,nil)
-	Duel.Remove(sg,POS_FACEDOWN,REASON_EFFECT)
+	Duel.SendtoDeck(sg,nil,-2,REASON_RULE)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
