@@ -1,101 +1,40 @@
 --Blue-Eyes White Dragon (DM)
 function c322.initial_effect(c)
-	--Return
+		--attack
 	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_ACTIVATE)
-	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL+EFFECT_FLAG_DELAY)
-	e1:SetCode(511002521)
+	e1:SetCategory(CATEGORY_DESTROY)
+	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetType(EFFECT_TYPE_QUICK_O)
+	e1:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e1:SetRange(LOCATION_EXTRA)
-	e1:SetCountLimit(1)
-	e1:SetValue(LOCATION_EXTRA)
-	e1:SetCost(c322.cost)
+	e1:SetCondition(s.dmcon)
 	e1:SetTarget(c322.tg)
 	e1:SetOperation(c322.op)
+	e1:SetHintTiming(TIMING_DAMAGE_CAL) --credit's to keddy
 	c:RegisterEffect(e1)
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetTargetRange(1,0)
-	e2:SetCode(511000793)
-	e2:SetLabel(0)
-	e2:SetLabelObject(e1)
-	e2:SetCondition(c322.econ)
-	Duel.RegisterEffect(e2,0)
-	local e3=e2:Clone()
-	e3:SetLabel(1)
-	Duel.RegisterEffect(e3,1)
-	--aux.LP0ActivationValidity(e1)
---[[remove
-local e2=Effect.CreateEffect(c)
-e2:SetType(EFFECT_TYPE_QUICK_O)
-e2:SetDescription(aux.Stringid(322,0))
-e2:SetRange(LOCATION_EXTRA)
-e2:SetCode(EVENT_FREE_CHAIN)
-e2:SetCountLimit(1)
-e2:SetTarget(c322.tg)
-e2:SetOperation(c322.op)
-c:RegisterEffect(e2)
-local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetTargetRange(1,0)
-	e2:SetCode(511000793)
-	e2:SetLabel(0)
-	e2:SetLabelObject(e1)
-	e2:SetCondition(c322.econ)
-	Duel.RegisterEffect(e2,0)
-	local e3=e2:Clone()
-	e3:SetLabel(1)
-	Duel.RegisterEffect(e3,1)
-aux.GlobalCheck(c322,function()
-		local ge1=Effect.CreateEffect(c)
-		ge1:SetType(EFFECT_TYPE_FIELD)
-		ge1:SetCode(EFFECT_CANNOT_LOSE_LP)
-		ge1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-		ge1:SetTargetRange(1,0)
-		ge1:SetLabel(0)
-		ge1:SetCondition(c322.con2)
-		Duel.RegisterEffect(ge1,0)
-		local ge2=ge1:Clone()
-		ge2:SetLabel(1)
-		Duel.RegisterEffect(ge2,1)
-		--local ge3=Effect.CreateEffect(c)
-		ge3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		ge3:SetCode(EVENT_ADJUST)
-		ge3:SetOperation(c322.op)
-		Duel.RegisterEffect(ge3,0)
-	end)]]
+	--effect damage
+	local e2=e1:Clone()
+	e2:SetDescription(aux.Stringid(id,1))
+	e2:SetCode(EVENT_CHAINING)
+	e2:SetCondition(c322.edcon)
+	c:RegisterEffect(e2)
+--remove
+local e4=Effect.CreateEffect(c)
+e4:SetType(EFFECT_TYPE_QUICK_O)
+e4:SetDescription(aux.Stringid(322,0))
+e4:SetRange(LOCATION_EXTRA)
+e4:SetCode(EVENT_FREE_CHAIN)
+e4:SetCountLimit(1)
+e4:SetTarget(c322.tg)
+e4:SetOperation(c322.op)
+c:RegisterEffect(e4)
 end
-function c322.econ(e)
-	return e:GetLabelObject():IsActivatable(e:GetLabel())
-end
-function c322.op(e,tp,eg,ep,ev,re,r,rp)
-	local ph=Duel.GetCurrentPhase()
-	if Duel.GetLP(0)<=0 and ph~=PHASE_DAMAGE then
-		Duel.RaiseEvent(Duel.GetMatchingGroup(nil,1,0,LOCATION_ONFIELD,nil),511002521,e,0,0,0,0)
-		Duel.ResetFlagEffect(0,511002521)
-	end
-	if Duel.GetLP(1)<=0 and ph~=PHASE_DAMAGE then
-		Duel.RaiseEvent(Duel.GetMatchingGroup(nil,1,LOCATION_ONFIELD,0,nil),511002521,e,0,0,0,0)
-		Duel.ResetFlagEffect(1,511002521)
-	end
-	if Duel.GetLP(0)>0 and Duel.GetFlagEffect(0,511002521)==0 then
-		Duel.RegisterFlagEffect(0,511002521,0,0,1)
-	end
-	if Duel.GetLP(1)>0 and Duel.GetFlagEffect(1,511002521)==0 then
-		Duel.RegisterFlagEffect(1,511002521,0,0,1)
-	end
-end
-function c322.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return end
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e1:SetTargetRange(1,0)
-	e1:SetReset(RESET_CHAIN)
-	e1:SetCode(EFFECT_CANNOT_LOSE_LP)
-	Duel.RegisterEffect(e1,tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+function s.dmcon(e,tp,eg,ev,ep,re,r,rp)
+	local a=Duel.GetAttacker()
+	local lp=Duel.GetLP(tp)
+	e:SetLabelObject(a)
+	return Duel.GetBattleDamage(tp)>=lp
 end
 function c322.filter(c)
 	return c:IsAbleToRemove()
@@ -279,4 +218,29 @@ function c322.op(e,tp,eg,ep,ev,re,r,rp)
 Duel.SetLP(tp,8000)
 		Duel.ShuffleDeck(tp)
 	Duel.Draw(tp,5,REASON_EFFECT)
+end
+function c322.edcon(e,tp,eg,ev,ep,re,r,rp)
+	local e1=Duel.IsPlayerAffectedByEffect(tp,EFFECT_REVERSE_DAMAGE)
+	local e2=Duel.IsPlayerAffectedByEffect(tp,EFFECT_REVERSE_RECOVER)
+	local rd=e1 and not e2
+	local rr=not e1 and e2
+	local ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_DAMAGE)
+	if ex and (cp==tp or cp==PLAYER_ALL) and not rd 
+		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_NO_EFFECT_DAMAGE) and Duel.GetLP(tp)<=cv then 
+		return true 
+	end
+	ex,cg,ct,cp,cv=Duel.GetOperationInfo(ev,CATEGORY_RECOVER)
+	return ex and (cp==tp or cp==PLAYER_ALL) and rr 
+		and not Duel.IsPlayerAffectedByEffect(tp,EFFECT_NO_EFFECT_DAMAGE) and Duel.GetLP(tp)<=cv
+end
+function c322.edtg(e,tp,eg,ev,ep,re,r,rp,chk)
+	if chk==0 then return true end
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(1,0)
+	e1:SetReset(RESET_CHAIN)
+	e1:SetCode(EFFECT_CANNOT_LOSE_LP)
+	Duel.RegisterEffect(e1,tp)
+		Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,1,0,0)
 end
