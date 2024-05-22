@@ -1,7 +1,7 @@
 function c40933360.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	aux.AddFusionProcCodeFun(c,5975022,aux.FilterBoolFunction(Card.IsFusionSetCard,0x19),1,true,true)
+	Fusion.AddProcMixN(c,true,true,c40933360.ffilter,2)
 	--spsummon condition
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -50,6 +50,9 @@ function c40933360.initial_effect(c)
 	e5:SetRange(LOCATION_MZONE)
 	e5:SetValue(aux.tgoval)
 	c:RegisterEffect(e5)
+end
+function c40933360.ffilter(c,fc,sumtype,tp)
+	return c:IsSetCard(0x19)
 end
 function c40933360.splimit(e,se,sp,st)
 	return e:GetHandler():GetLocation()~=LOCATION_EXTRA
