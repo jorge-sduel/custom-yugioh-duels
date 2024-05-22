@@ -149,7 +149,7 @@ function c40933398.spop(e,tp,eg,ep,ev,re,r,rp)
 		g2:Remove(Card.IsCode,nil,sg1:GetFirst():GetCode())
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg2=g2:Select(tp,1,1,nil)
-		Duel.SendtoGrave(sg1,nil,REASON_EFFECT)
+		Duel.SendtoGrave(sg1,REASON_EFFECT)
 		local tc=sg2:GetFirst()
 		if tc then
 			Duel.SpecialSummon(tc,120,tp,tp,true,false,POS_FACEUP)
