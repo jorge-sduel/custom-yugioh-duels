@@ -59,11 +59,11 @@ function c40933345.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 function c40933345.spfilter1(c,tp)
-	return c:IsFusionCode(79580323) and c:IsAbleToDeckOrExtraAsCost() and c:IsCanBeFusionMaterial(nil,true)
+	return c:IsCode(79580323) and c:IsAbleToDeckOrExtraAsCost() and c:IsCanBeFusionMaterial(nil,true)
 		and Duel.IsExistingMatchingCard(c40933345.spfilter2,tp,LOCATION_ONFIELD,0,1,c)
 end
 function c40933345.spfilter2(c)
-	return c:IsFusionCode(29357956) and c:IsCanBeFusionMaterial() and c:IsAbleToDeckOrExtraAsCost()
+	return c:IsCode(29357956) and c:IsCanBeFusionMaterial() and c:IsAbleToDeckOrExtraAsCost()
 end
 function c40933345.sprcon(e,c)
 	if c==nil then return true end 
