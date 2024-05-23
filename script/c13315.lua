@@ -129,28 +129,28 @@ function c13315.spop2(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
-function s.filter(c)
+function c13415.filter(c)
 	return c:IsRace(RACE_SPELLCASTER) and c:IsPreviousLocation(LOCATION_ONFIELD)
 end
-function s.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function c13315.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
-	local atk=-Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)*500
-	if chk==0 then return c:GetFlagEffect(id)==0 and atk~=0
+	local atk=-Duel.GetMatchingGroupCount(c13315.filter,tp,LOCATION_GRAVE,0,nil)*500
+	if chk==0 then return c:GetFlagEffect(13315)==0 and atk~=0
 		and bc and bc:IsOnField() and bc:IsFaceup() and bc:IsCanBeEffectTarget(e) end
-	c:RegisterFlagEffect(id,RESET_CHAIN,0,1)
+	c:RegisterFlagEffect(13315,RESET_CHAIN,0,1)
 	Duel.SetTargetCard(bc)
 	Duel.SetOperationInfo(0,CATEGORY_ATKCHANGE,bc,1,1-tp,atk)
 end
-function s.atkop(e,tp,eg,ep,ev,re,r,rp)
+function c13315.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local bc=c:GetBattleTarget()
 	if bc and bc:IsFaceup() and bc:IsRelateToEffect(e) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(-Duel.GetMatchingGroupCount(s.filter,tp,LOCATION_GRAVE,0,nil)*500)
+		e1:SetValue(-Duel.GetMatchingGroupCount(c13315.filter,tp,LOCATION_GRAVE,0,nil)*500)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		bc:RegisterEffect(e1)
 	end
