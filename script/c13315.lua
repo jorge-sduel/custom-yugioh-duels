@@ -130,7 +130,7 @@ function c13315.spop2(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c13415.filter(c)
-	return c:IsRace(RACE_SPELLCASTER) and c:IsPreviousLocation(LOCATION_ONFIELD)
+	return c:IsType(TYPE_TUNER) and c:IsPreviousLocation(LOCATION_ONFIELD)
 end
 function c13315.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
