@@ -101,6 +101,7 @@ function c950231423.atkop2(e,tp,eg,ep,ev,re,r,rp)
 	--if #th>0 then
 		--local tc1=th:GetFirst()
 		--for tc1 in aux.Next(th) do
+		end 
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_UPDATE_ATTACK)
@@ -108,6 +109,5 @@ function c950231423.atkop2(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e:GetHandler():RegisterEffect(e2)
 --end
-		end
 	end
 end
