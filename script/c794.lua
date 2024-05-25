@@ -97,14 +97,14 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)
 	--if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=0 then return end
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) then
+	--if tc:IsRelateToEffect(e) then
 		local code=tc:GetCode()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil,e,tp,code)
 		if #g>0 then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 			Duel.SpecialSummon(g,0,1-tp,1-tp,false,false,POS_FACEUP)
-		end
+		--end
 	end
 end
 
