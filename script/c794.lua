@@ -39,13 +39,12 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_XYZ and eg:IsExists(Card.IsType,1,nil,TYPE_XYZ)
+	return r==REASON_XYZ
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=eg:Filter(Card.IsType,nil,TYPE_XYZ)
-	local rc=g:GetFirst()
-	if not rc then return end
+	local rc=c:GetReasonCard()
+	--if not rc then return end
 	--negate
 	local e1=Effect.CreateEffect(rc)
 	e1:SetDescription(aux.Stringid(id,1))
@@ -69,7 +68,7 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetValue(TYPE_EFFECT)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		rc:RegisterEffect(e2,true)
-	end
+	--end
 	rc:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,2))
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp,chk)
