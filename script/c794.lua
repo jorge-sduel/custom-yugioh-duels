@@ -68,7 +68,7 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetValue(TYPE_EFFECT)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 		rc:RegisterEffect(e2,true)
-	--end
+	end
 	rc:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,2))
 end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp,chk)
