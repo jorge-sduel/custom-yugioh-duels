@@ -85,26 +85,22 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	--if chkc then return chkc:IsLocation(LOCATION_DECK) and chkc:IsControler(tp) and chkc:IsCode(e:GetLabel()) end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 
-		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_DECK,0,1,nil,e,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_DECK,0,1,1,nil,e,tp)
-	e:SetLabel(g:GetFirst():GetCode())
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,LOCATION_DECK)
+	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE,eg,1,0,0)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)
 	--if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=0 then return end
-	local tc=Duel.GetFirstTarget()
-	--if tc:IsRelateToEffect(e) then
+	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_DECK,0,1,1,nil,e,tp)
+	local tc=g1:GetFirst()
+	if tc:IsRelateToEffect(e) then
 		local code=tc:GetCode()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil,e,tp,code)
 		if #g>0 then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 			Duel.SpecialSummon(g,0,1-tp,1-tp,false,false,POS_FACEUP)
-		--end
+		end
 	end
 end
 
