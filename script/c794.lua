@@ -39,11 +39,11 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.mtcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_XYZ and eg:IsExists(Card.IsHeraldic,1,nil)
+	return r==REASON_XYZ and eg:IsExists(Card.IsType,1,nil,TYPE_XYZ)
 end
 function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=eg:Filter(Card.IsHeraldic,nil)
+	local g=eg:Filter(Card.IsType,nil,TYPE_XYZ)
 	local rc=g:GetFirst()
 	if not rc then return end
 	--negate
