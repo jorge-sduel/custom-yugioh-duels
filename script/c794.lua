@@ -72,7 +72,7 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	rc:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,2))
 end
 function s.filter1(c,e,tp)
-	return c:IsFaceup() and c:IsSetCard(0x72)
+	return c:IsSetCard(0x72)
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK,0,1,nil,e,tp,c:GetCode())
 end
 function s.filter2(c,e,tp,code)
