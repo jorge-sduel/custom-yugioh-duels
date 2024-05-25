@@ -100,7 +100,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 		if #g>0 then
 			Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 			Duel.SpecialSummon(g,0,1-tp,1-tp,false,false,POS_FACEUP)
-		--end
+		end
 	end
 end
 
