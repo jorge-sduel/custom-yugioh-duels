@@ -94,7 +94,7 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local g1=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_DECK,0,1,1,nil,e,tp)
 	local tc=g1:GetFirst()
 	--if tc:IsRelateToEffect(e) then
-		local code=g1:GetCode()
+		local code=g1:GetOriginalCodeRule()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil,e,tp,code)
 		if #g>0 then
