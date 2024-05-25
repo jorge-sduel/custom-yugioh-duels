@@ -22,7 +22,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.mtop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={0xfe,0x11b}
+s.listed_series={0x76,0x92}
 function s.thfilter(c)
 	return c:IsSetCard(0x92) and c:IsSpellTrap() and c:IsAbleToHand()
 end
@@ -71,15 +71,41 @@ function s.mtop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	rc:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,2))
 end
+function s.filter1(c,e,tp)
+	return c:IsFaceup() and c:IsSetCard(0x72)
+		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK,0,1,nil,e,tp,c:GetCode())
+end
+function s.filter2(c,e,tp,code)
+	return c:IsCode(code) and c:IsCanBeSpecialSummoned(e,0,1-tp,false,false,POS_FACEUP)
+end
 function s.negcon(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and ep==1-tp
 		and Duel.IsChainDisablable(ev)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return true end
+	if chkc then return chkc:IsLocation(LOCATION_DECK) and chkc:IsControler(tp) and chkc:IsCode(e:GetLabel()) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 
+		and Duel.IsExistingTarget(s.filter1,tp,LOCATION_DECK,0,1,nil,e,tp) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
+	local g=Duel.SelectTarget(tp,s.filter1,tp,LOCATION_DECK,0,1,1,nil,e,tp)
+	e:SetLabel(g:GetFirst():GetCode())
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE,eg,1,0,0)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 and Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=0 then return end
+	local tc=Duel.GetFirstTarget()
+	if tc:IsFaceup() and tc:IsRelateToEffect(e) then
+		local code=tc:GetCode()
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil,e,tp,code)
+		if #g>0 then
+			Duel.SpecialSummon(tc,0,1-tp,1-tp,false,false,POS_FACEUP)
+			Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+		end
+	end
+end
+
 end
