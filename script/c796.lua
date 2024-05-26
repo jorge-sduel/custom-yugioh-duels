@@ -118,7 +118,8 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		Duel.SkipPhase(1-tp,PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)	
 	end
-endfunction s.scop(e,tp,eg,ep,ev,re,r,rp)
+end
+function s.scop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	local e1=Effect.CreateEffect(c)
