@@ -38,7 +38,7 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 end
 function s.penop(e,tp,eg,ep,ev,re,r,rp)
-if Duel.CheckPendulumZones(tp) and Duel.IsPlayerCanPendulumSummon(tp) then return end
+if (not Duel.CheckPendulumZones(tp)) and Duel.IsPlayerCanPendulumSummon(tp) then return end
 	Duel.PendulumSummon(tp)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
