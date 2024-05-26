@@ -35,16 +35,32 @@ e2:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
+function s.penfilter(c,e,tp,lscale,rscale,lvchk)
+	if lscale>rscale then lscale,rscale=rscale,lscale end
+	local lv=0
+	if c.pendulum_level then
+		lv=c.pendulum_level
+	else
+		lv=c:GetLevel()
+	end
+	return (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM)))
+		and (lvchk or (lv>lscale and lv<rscale) or (c:IsHasEffect(511004423) or c:IsLocation(LOCATION_HAND)) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
+		and not c:IsForbidden()
+end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 end
 function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerCanPendulumSummon(tp)
+	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
+	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
+	local lscale=tc1:GetLeftScale()
+	local rscale=tc2:GetRightScale()
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_PZONE,0,2,nil,TYPE_PENDULUM) and Duel.IsExistingMatchingCard(s.penfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nile,tp,lscale,rscale)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA+LOCATION_HAND)
 end
 function s.penop(e,tp,eg,ep,ev,re,r,rp)
-if Duel.IsPlayerCanPendulumSummon(tp) then return end
+--if Duel.IsPlayerCanPendulumSummon(tp) then return end
 	Duel.PendulumSummon(tp)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
