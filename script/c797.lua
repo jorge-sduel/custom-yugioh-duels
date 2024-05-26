@@ -53,8 +53,8 @@ end
 function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc1=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
 	local tc2=Duel.GetFieldCard(tp,LOCATION_PZONE,1)
-	local lscale=tc1:GetLeftScale()
-	local rscale=tc2:GetRightScale()
+	local lscale=tc1:GetFirst():GetLeftScale()
+	local rscale=tc2:GetFirst():GetRightScale()
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_PZONE,0,2,nil,TYPE_PENDULUM) and Duel.IsExistingMatchingCard(s.penfilter,tp,LOCATION_HAND+LOCATION_EXTRA,0,1,nile,tp,lscale,rscale)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA+LOCATION_HAND)
