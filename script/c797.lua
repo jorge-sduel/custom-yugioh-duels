@@ -69,7 +69,7 @@ function s.spfilter(c,e,tp)
 	return c:IsType(TYPE_PENDULUM) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(nil,tp,LOCATION_PZONE,LOCATION_PZONE,1,nil)
+	if chk==0 then return Duel.IsExistingMatchingCard(nil,tp,LOCATION_PZONE,LOCATION_PZONE,2,nil)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp) end
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_PZONE,LOCATION_PZONE,nil)
