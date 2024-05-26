@@ -67,8 +67,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if Duel.Destroy(tc,REASON_EFFECT)==2 and not Duel.CheckPendulumZones(tp) then end
-	local c=e:GetHandler()	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	if Duel.Destroy(tc,REASON_EFFECT)==2 then end
+	local c=e:GetHandler()
+	Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 end
 function s.thfilter1(c)
 	return (c:IsType(TYPE_PENDULUM) or c:IsLevel(10)) and c:IsAbleToHand()
