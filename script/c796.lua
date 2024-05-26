@@ -105,8 +105,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)>0 then
+	if c:IsRelateToEffect(e) then
 		Duel.BreakEffect()
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		Duel.SkipPhase(1-tp,PHASE_BATTLE,RESET_PHASE+PHASE_BATTLE_STEP,1)	
 	end
 end
