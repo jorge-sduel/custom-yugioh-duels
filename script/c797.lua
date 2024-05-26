@@ -49,7 +49,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e2=Effect.CreateEffect(e:GetHandler())
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(511004423)
-	e2:SetTargetRange(LOCATION_HAND,0)
+	e2:SetTargetRange(LOCATION_HAND,LOCATION_HAND)
 	e2:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e2,tp)
 	--if Duel.IsPlayerCanPendulumSummon(tp) then return end
