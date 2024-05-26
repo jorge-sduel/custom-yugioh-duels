@@ -44,7 +44,7 @@ function s.penfilter(c,e,tp,lscale,rscale,lvchk)
 		lv=c:GetLevel()
 	end
 	return (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM)))
-		and (lvchk or (lv>lscale and lv<rscale) or (c:IsHasEffect(511004423) or c:IsLocation(LOCATION_HAND)) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
+		and (lvchk or (lv>lscale and lv<rscale) or (c:IsHasEffect(511004423) or c:IsLocation(LOCATION_HAND))) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
 		and not c:IsForbidden()
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
