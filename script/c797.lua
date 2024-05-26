@@ -35,14 +35,14 @@ e2:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-function s.penfilter(c)
+function s.penfilter(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false) and not c:IsForbidden()
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_PZONE,0,2,nil,TYPE_PENDULUM) and (Duel.IsExistingMatchingCard(s.penfilter,tp,LOCATION_HAND,0,1,nil) or Duel.IsPlayerCanPendulumSummon(tp)) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_PZONE,0,2,nil,TYPE_PENDULUM) and (Duel.IsExistingMatchingCard(s.penfilter,tp,LOCATION_HAND,0,1,nil,e,tp) or Duel.IsPlayerCanPendulumSummon(tp)) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler() 
