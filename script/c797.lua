@@ -39,14 +39,12 @@ function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 end
 function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		local res=Duel.IsPlayerCanPendulumSummon(tp)
-		return res
+	if chk==0 then return Duel.IsPlayerCanPendulumSummon(tp)
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA+LOCATION_HAND)
 end
 function s.penop(e,tp,eg,ep,ev,re,r,rp)
-if (not Duel.CheckPendulumZones(tp)) and Duel.IsPlayerCanPendulumSummon(tp) then return end
+if Duel.IsPlayerCanPendulumSummon(tp) then return end
 	Duel.PendulumSummon(tp)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
