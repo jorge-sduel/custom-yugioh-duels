@@ -35,86 +35,25 @@ e2:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
 	e3:SetOperation(s.desop)
 	c:RegisterEffect(e3)
 end
-function s.penfilter(c,e,tp,lscale,rscale,lvchk)
-	if lscale>rscale then lscale,rscale=rscale,lscale end
-	local lv=0
-	if c.pendulum_level then
-		lv=c.pendulum_level
-	else
-		lv=c:GetLevel()
-	end
-	return (c:IsLocation(LOCATION_HAND) or (c:IsFaceup() and c:IsType(TYPE_PENDULUM)))
-		and (lvchk or (lv>lscale and lv<rscale) or (c:IsHasEffect(511004423) or c:IsLocation(LOCATION_HAND))) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false)
-		and not c:IsForbidden()
+function s.penfilter(c)
+	return c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_PENDULUM,tp,false,false) and not c:IsForbidden()
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetFlagEffect(tp,id+100)==0 and Duel.IsPlayerCanPendulumSummon(tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_PZONE,0,2,nil,TYPE_PENDULUM) and (Duel.IsExistingMatchingCard(s.penfilter,tp,LOCATION_HAND,0,1,nil) or Duel.IsPlayerCanPendulumSummon(tp)) end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler() 
+	local e2=Effect.CreateEffect(e:GetHandler())
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetCode(511004423)
+	e2:SetTargetRange(LOCATION_HAND,0)
+	e2:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e2,tp)
 	--if Duel.IsPlayerCanPendulumSummon(tp) then return end
-	local e1=Effect.CreateEffect(c) 
-	e1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
-	e1:SetCode(EVENT_ADJUST)
-	e1:SetOperation(s.checkop)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	Duel.RegisterEffect(e1,tp)
-	s.checkop(e,tp)
-	Duel.RegisterFlagEffect(tp,id+100,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
-	aux.RegisterClientHint(c,0,tp,1,0,aux.Stringid(id,0))
-	e2:Reset()
-end
-function s.checkop(e,tp)
-	local lpz=Duel.GetFieldCard(tp,LOCATION_PZONE,0)
-	if lpz~=nil and lpz:GetFlagEffect(id)<=0 then
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetDescription(aux.Stringid(id,1))
-		e1:SetType(EFFECT_TYPE_FIELD)
-		e1:SetCode(EFFECT_SPSUMMON_PROC_G)
-		e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetRange(LOCATION_PZONE)
-		e1:SetCondition(Pendulum.Condition())
-		e1:SetOperation(Pendulum.Operation())
-		e1:SetValue(SUMMON_TYPE_PENDULUM)
-		e1:SetReset(RESET_PHASE+PHASE_END)
-		lpz:RegisterEffect(e1)
-		local e3=Effect.CreateEffect(e:GetHandler())
-	e3:SetType(EFFECT_TYPE_FIELD)
-	e3:SetCode(511004423)
-	e3:SetTargetRange(LOCATION_HAND,0)
-	--e2:SetReset(RESET_PHASE+PHASE_END)
-	Duel.RegisterEffect(e3,tp)
-		lpz:RegisterFlagEffect(id,RESET_PHASE+PHASE_END,0,1)
-	end
-	local olpz=Duel.GetFieldCard(1-tp,LOCATION_PZONE,0)
-	local orpz=Duel.GetFieldCard(1-tp,LOCATION_PZONE,1)
-	if olpz~=nil and orpz~=nil and olpz:GetFlagEffect(id)<=0
-		and olpz:GetFlagEffectLabel(31531170)==orpz:GetFieldID()
-		and orpz:GetFlagEffectLabel(31531170)==olpz:GetFieldID() then
-		local e2=Effect.CreateEffect(e:GetHandler())
-		e2:SetDescription(aux.Stringid(id,1))
-		e2:SetType(EFFECT_TYPE_FIELD)
-		e2:SetCode(EFFECT_SPSUMMON_PROC_G)
-		e2:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_BOTH_SIDE)
-		e2:SetRange(LOCATION_PZONE)
-		e2:SetCondition(Pendulum.Condition())
-		e2:SetOperation(Pendulum.Operation())
-		e2:SetValue(SUMMON_TYPE_PENDULUM)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		olpz:RegisterEffect(e2)
-		local e4=Effect.CreateEffect(e:GetHandler())
-	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetCode(511004423)
-	e4:SetTargetRange(LOCATION_HAND,0)
-	--e2:SetReset(RESET_PHASE+PHASE_END)
-	Duel.RegisterEffect(e4,tp)
-		olpz:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
-	end
-	e3:Reset()
-	e4:Reset()
+	Duel.PendulumSummon(tp)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsType,tp,LOCATION_ONFIELD,0,2,nil,TYPE_PENDULUM) end
