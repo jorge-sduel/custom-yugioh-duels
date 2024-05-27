@@ -65,8 +65,6 @@ function s.Count(c)
     return 1
 end
 function s.spfilter(c)
-				local lscale=c:GetLeftScale()
-				local rscale=c:GetRightScale()
 	return c:IsMonster() and c:IsType(TYPE_PENDULUM)
 end
 function s.rescon(sg,e,tp,mg)
