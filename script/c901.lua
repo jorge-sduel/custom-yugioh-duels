@@ -57,8 +57,8 @@ function s.target(e,c)
 	return c:IsStatus(STATUS_SPSUMMON_TURN) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function s.Count(c)
-    if c:GetLeftScale()>=1 then return c:GetLevel()
-    elseif c:GetRightScale()>=1 then return c:GetRank() end
+    if c:GetLeftScale()>=1 then return c:GetLeftScale()
+    elseif c:GetRightScale()>=1 then return c:GetRightScale() end
     return 1
 end
 function s.spfilter(c)
