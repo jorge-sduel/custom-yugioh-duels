@@ -163,6 +163,7 @@ function s.valop(e,tp,eg,ep,ev,re,r,rp)
 	local s=g:GetFirst()
 	if s==o then s=g:GetNext() end
 	if s:IsFaceup() and o:IsFaceup() and s:IsRelateToEffect(e) and o:IsRelateToEffect(e) then
+		Duel.Release(s,REASON_COST)
 		local val=s:GetAttack()*-1
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
