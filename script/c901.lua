@@ -64,7 +64,7 @@ end
 function s.spfilter(c)
 				local lscale=c:GetLeftScale()
 				local rscale=c:GetRightScale()
-	return c:IsMonster() and c:IsType(TYPE_PENDULUM) and (lscale>0 or rscale>0) and c:IsReleasable()
+	return c:IsMonster() and c:IsType(TYPE_PENDULUM) and (lscale>0 or rscale>0)
 end
 function s.rescon(sg,e,tp,mg)
 	if #sg>1 then
