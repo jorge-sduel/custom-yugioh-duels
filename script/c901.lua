@@ -64,13 +64,13 @@ end
 function s.spfilter(c)
 				local lscale=c:GetLeftScale()
 				local rscale=c:GetRightScale()
-	return c:IsMonster() and c:IsType(TYPE_PENDULUM) and (lscale>0 or rscale>0)
+	return c:IsMonster() and c:IsType(TYPE_PENDULUM)
 end
 function s.rescon(sg,e,tp,mg)
 	if #sg>1 then
-		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(s.Count)>=26 and not sg:IsExists(s.spfilter,1,nil)
+		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(Card.GetScale)>=13 and not sg:IsExists(Card.IsScaleAbove,1,nil,13)
 	else
-		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(s.Count)>=26
+		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(Card.GetScale)>=13
 	end
 end
 function s.spcon(e,c)
@@ -80,7 +80,7 @@ function s.spcon(e,c)
 	return aux.SelectUnselectGroup(rg,e,tp,1,99,s.rescon,0)
 end
 function s.breakcon(sg,e,tp,mg)
-	return sg:GetSum(s.Count)>=26
+	return sg:GetSum(Card.GetScale)>=13
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,e:GetHandler())
