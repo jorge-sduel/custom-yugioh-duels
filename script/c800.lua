@@ -44,7 +44,7 @@ e4:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_MONSTER))
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_TRAP_ACT_IN_HAND)
-	--e5:SetCondition(s.handcon)
+	e5:SetCondition(s.handcon)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x48}
