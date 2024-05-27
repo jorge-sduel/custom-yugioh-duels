@@ -6,8 +6,8 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id)
-	--e1:SetCost(s.cost)
-	--e1:SetTarget(s.target)
+	e1:SetCost(s.cost)
+	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 	--indes
@@ -60,7 +60,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.thfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
+	return c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
