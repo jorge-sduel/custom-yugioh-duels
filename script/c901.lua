@@ -84,7 +84,7 @@ function s.breakcon(sg,e,tp,mg)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,e:GetHandler())
-	local mg=aux.SelectUnselectGroup(rg,e,tp,1,99,s.rescon,1,tp,HINTMSG_RELEASE,s.breakcon,s.breakcon,true)
+	local mg=aux.SelectUnselectGroup(rg,e,tp,1,99,s.rescon,1,tp,HINTMSG_TOGRAVE,s.breakcon,s.breakcon,true)
 	if #mg>0 then
 		mg:KeepAlive()
 		e:SetLabelObject(mg)
@@ -95,7 +95,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=e:GetLabelObject()
 	if not g then return end
-	Duel.Release(g,REASON_COST)
+	Duel.SendToGrave(g,REASON_COST)
 	g:DeleteGroup()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
