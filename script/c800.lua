@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
-	e1:SetOperation(s.activate)
+	--e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 	--indes
 	local e2=Effect.CreateEffect(c)
