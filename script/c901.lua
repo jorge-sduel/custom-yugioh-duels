@@ -68,7 +68,7 @@ function s.spfilter(c)
 end
 function s.rescon(sg,e,tp,mg)
 	if #sg>1 then
-		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(s.Count)>=26 and not sg:IsExists(s.Count,1,nil,26)
+		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(s.Count)>=26 and not sg:IsExists(s.spfilter,1,nil)
 	else
 		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(s.Count)>=26
 	end
