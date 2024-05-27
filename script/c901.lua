@@ -56,6 +56,9 @@ end
 function s.target(e,c)
 	return c:IsStatus(STATUS_SPSUMMON_TURN) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
+function s.IsScaleAbove(c,scale)
+	return c:GetLeftScale()>=scale
+end
 function s.Count(c)
     if c:GetLeftScale()>=1 then return c:GetLeftScale()
     elseif c:GetRightScale()>=1 then return c:GetRightScale() end
@@ -68,7 +71,7 @@ function s.spfilter(c)
 end
 function s.rescon(sg,e,tp,mg)
 	if #sg>1 then
-		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(Card.GetScale)>=13 and not sg:IsExists(Card.IsScaleAbove,1,nil,13)
+		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(Card.GetScale)>=13 and not sg:IsExists(s.IsScaleAbove,1,nil,13)
 	else
 		return aux.ChkfMMZ(1)(sg,e,tp,mg) and sg:GetSum(Card.GetScale)>=13
 	end
