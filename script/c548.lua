@@ -142,7 +142,7 @@ function c548.spop1(e,tp,eg,ep,ev,re,r,rp,c)
 	e1:SetValue(5000)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
-	e2:SetCode(EFFECT_SET_BASE_DEFENCE)
+	e2:SetCode(EFFECT_SET_BASE_DEFENSE)
 	c:RegisterEffect(e2)
 end
 function c548.efilter(e,te)
