@@ -153,7 +153,7 @@ function s.valtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 local at=Duel.GetAttacker()
 	if chkc then return false end
 	if chk==0 then return  Duel.IsExistingTarget(s.sfilter,tp,LOCATION_MZONE,0,1,e:GetHandler()) end
-	e:SetLabelObject(at:GetFirst())
+	e:SetLabelObject(at)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELF)
 	Duel.SelectTarget(tp,s.sfilter,tp,LOCATION_MZONE,0,1,1,e:GetHandler())
 end
