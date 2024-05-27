@@ -36,7 +36,7 @@ e3:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)	e3:SetTarget(aux.TargetBoolFunction(C
 	e4:SetCode(EFFECT_UNSTOPPABLE_ATTACK)
 	e4:SetRange(LOCATION_SZONE)
 	e4:SetTargetRange(LOCATION_MZONE,0)
-	e4:SetCondition(s.condition4)
+	e4:SetCondition(s.condition3)
 e4:SetTarget(aux.TargetBoolFunction(Card.IsType,TYPE_MONSTER))
 	c:RegisterEffect(e4)
 	--act in hand
