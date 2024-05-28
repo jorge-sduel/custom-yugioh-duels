@@ -130,8 +130,7 @@ tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 	end
 	local ct=Duel.GetMatchingGroupCount(s.copfilter,tp,0,LOCATION_MZONE,nil)
 	if chk==0 then return ct>0 end
-	Duel.SetTargetPlayer(1-tp)
-	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,ct*500)
+Duel.Damage(1-tp,ct*500,REASON_EFFECT)
 end
 function s.copfilter(c)
 	return c:IsFaceup() and c:IsStatus(STATUS_DISABLED) and c:GetFlagEffect(id)~=0
