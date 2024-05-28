@@ -127,7 +127,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	local ct=Duel.GetMatchingGroupCount(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
-	Duel.Damage(1-tp,ct*500,REASON_EFFECT)
+	Duel.SetLP(1-tp,Duel.GetLP(1-tp)-ct*500)
 end
 function s.copfilter(c)
 	return c:IsFaceup() and c:IsStatus(STATUS_DISABLED)
