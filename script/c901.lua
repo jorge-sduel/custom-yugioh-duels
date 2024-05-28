@@ -159,8 +159,8 @@ local at=Duel.GetAttacker()
 end
 function s.valop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	local o=Duel.GetAttacker()
-	local s=g:GetFirst()
+	local s=Duel.GetAttacker()
+	--local s=g:GetFirst()
 	if s==o then s=g:GetNext() end
 	if s:IsFaceup() and o:IsFaceup() and s:IsRelateToEffect(e) and o:IsRelateToEffect(e) then
 		Duel.Release(s,REASON_COST)
@@ -171,8 +171,5 @@ function s.valop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		e1:SetValue(val)
 		o:RegisterEffect(e1)
-		local e2=e1:Clone()
-		e2:SetCode(EFFECT_UPDATE_DEFENSE)
-		o:RegisterEffect(e2)
 	end
 end
