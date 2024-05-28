@@ -167,5 +167,9 @@ function s.valop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetValue(val)
 		o:RegisterEffect(e1) 
 	end
+		local tg=s:GetTarget()
+	if tg then tg(e,tp,eg,ep,ev,re,r,rp,1) end
+	local op=s:GetOperation()
+	if op then op(e,tp,eg,ep,ev,re,r,rp) end
 	Duel.Release(s,REASON_COST)
 end
