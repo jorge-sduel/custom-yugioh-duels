@@ -162,14 +162,14 @@ function s.valop(e,tp,eg,ep,ev,re,r,rp)
 	local o=Duel.GetAttacker()
 	local s=g:GetFirst()
 	if s==o then s=g:GetNext() end
-	if s:IsFaceup() and o:IsFaceup() and s:IsRelateToBattle() and o:IsRelateToBattle() then
-		Duel.Release(s,REASON_COST)
+	if s:IsFaceup() and o:IsFaceup() and s:IsRelateToEffect(e) and o:IsRelateToBattle() then
 		local val=s:GetAttack()*-1
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		e1:SetValue(val)
-		o:RegisterEffect(e1)
+		o:RegisterEffect(e1) 
 	end
+	Duel.Release(s,REASON_COST)
 end
