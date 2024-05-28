@@ -176,7 +176,6 @@ function s.valop(e,tp,eg,ep,ev,re,r,rp)
 		o:RegisterEffect(e1) 
 	end
 	Duel.Release(s,REASON_COST)
-     end
 end
 function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
