@@ -159,10 +159,10 @@ local at=Duel.GetAttacker()
 end
 function s.valop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	local s=Duel.GetAttacker()
-	--local s=g:GetFirst()
+	local o=Duel.GetAttacker()
+	local s=g:GetFirst()
 	if s==o then s=g:GetNext() end
-	if s:IsFaceup() and o:IsFaceup() and s:IsRelateToEffect(e) and o:IsRelateToEffect(e) then
+	if s:IsFaceup() and o:IsFaceup() and s:IsRelateToBattle() and o:IsRelateToBattle() then
 		Duel.Release(s,REASON_COST)
 		local val=s:GetAttack()*-1
 		local e1=Effect.CreateEffect(e:GetHandler())
