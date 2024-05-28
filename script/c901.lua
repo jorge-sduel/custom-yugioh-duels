@@ -40,7 +40,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_CANNOT_ATTACK)
 	e4:SetRange(LOCATION_PZONE)
 	e4:SetTargetRange(0,LOCATION_MZONE)
-	e4:SetTarget(s.target)
+	e4:SetTarget(s.target1)
 	c:RegisterEffect(e4)
 	--atkup
 	local e6=Effect.CreateEffect(c)
@@ -53,7 +53,7 @@ function s.initial_effect(c)
 	e6:SetOperation(s.atkop)
 	c:RegisterEffect(e6)
 end
-function s.target(e,c)
+function s.target1(e,c)
 	return c:IsStatus(STATUS_SPSUMMON_TURN) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function s.IsScaleAbove(c,scale)
