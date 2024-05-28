@@ -38,10 +38,18 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_CANNOT_ATTACK)
-	e4:SetRange(LOCATION_PZONE)
+	e4:SetRange(LOCATION_PZONE+LOCATION_MZONE)
 	e4:SetTargetRange(0,LOCATION_MZONE)
 	e4:SetTarget(s.target1)
 	c:RegisterEffect(e4)
+	--destroy replace
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_MZONE+LOCATION_PZONE)
+	e5:SetCode(EFFECT_DESTROY_REPLACE)
+	e5:SetTarget(s.desreptg)
+	c:RegisterEffect(e5)
 	--atkup
 	local e6=Effect.CreateEffect(c)
 	e6:SetDescription(aux.Stringid(99747800,0))
@@ -54,7 +62,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 function s.target1(e,c)
-	return c:IsStatus(STATUS_SPSUMMON_TURN) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
+	return c:IsStatus(STATUS_SPSUMMON_TURN) and c:IsSummonType(SUMMON_TYPE_PENDULUM) and e:GetHandler():IsType(TYPE_PENDULUM)
 end
 function s.IsScaleAbove(c,scale)
 	return c:GetLeftScale()>=scale
@@ -169,4 +177,14 @@ function s.valop(e,tp,eg,ep,ev,re,r,rp)
 	end
 	Duel.Release(s,REASON_COST)
      end
+end
+function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return c:IsType(TYPE_PENDULUM) and Duel.IsExistingMatchingCard(Card.IsAbleToGrave,tp,LOCATION_ONFIELD,0,1,c) end
+	if Duel.SelectEffectYesNo(tp,c,96) then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local g=Duel.SelectMatchingCard(tp,Card.IsAbleToGrave,tp,LOCATION_ONFIELD,0,1,1,c)
+		Duel.SendtoGrave(g,REASON_EFFECT+REASON_REPLACE)
+		return true
+	else return false end
 end
