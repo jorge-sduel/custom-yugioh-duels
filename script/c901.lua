@@ -131,9 +131,10 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--			if (tc:GetAttack()==0 or tc:GetDefense()==0) and c:GetMaterialCount()>=3 then dg:AddCard(tc)
 	if #dg==0 then return end
 	Duel.BreakEffect()
-	Duel.Damage(1-tp,dg*500,REASON_EFFECT)
+	dg:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)
 	end
-
+	local ct=Duel.GetMatchingGroupCount(s.copfilter,tp,0,LOCATION_MZONE,nil)
+	Duel.Damage(1-tp,ct*500,REASON_EFFECT)
 end
 function s.copfilter(c)
 	return c:IsFaceup() and c:IsStatus(STATUS_DISABLED)
