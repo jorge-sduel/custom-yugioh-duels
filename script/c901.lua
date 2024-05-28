@@ -107,7 +107,6 @@ end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(Card.IsNegatableMonster,tp,0,LOCATION_MZONE,nil)
 	local tc=g:GetFirst()
-	local dg=Group.CreateGroup()
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -119,21 +118,15 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetCode(EFFECT_DISABLE_EFFECT)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		tc:RegisterEffect(e2)
-		dg:AddCard(tc)
-		if tc:IsType(TYPE_TRAPMONSTER) then dg:AddCard(tc)
+		if tc:IsType(TYPE_TRAPMONSTER) then
 			local e3=Effect.CreateEffect(e:GetHandler())
 			e3:SetType(EFFECT_TYPE_SINGLE)
 			e3:SetCode(EFFECT_DISABLE_TRAPMONSTER)
 			e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			tc:RegisterEffect(e3)
-
 		end
-	--			if (tc:GetAttack()==0 or tc:GetDefense()==0) and c:GetMaterialCount()>=3 then dg:AddCard(tc)
-	if #dg==0 then return end
-	Duel.BreakEffect()
-	dg:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)
 	end
-	local ct=Duel.GetMatchingGroupCount(s.copfilter,tp,0,LOCATION_MZONE,nil)
+	local ct=Duel.GetMatchingGroupCount(nil,tp,0,LOCATION_MZONE,nil)
 	Duel.Damage(1-tp,ct*500,REASON_EFFECT)
 end
 function s.copfilter(c)
