@@ -82,6 +82,7 @@ function s.recop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() and tc:GetAttack()>0 then
 		Duel.Recover(tp,tc:GetBaseAttack(),REASON_EFFECT)
+		Duel.Damage(1-tp,tc:GetBaseAttack(),REASON_EFFECT)
 	end
 end
 function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
