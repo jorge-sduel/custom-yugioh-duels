@@ -39,7 +39,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		token:SetStatus(STATUS_PROC_COMPLETE,true) 
 		token:SetMaterial(tc)
+		Duel.Overlay(token,mg)
 	end
-	Duel.Overlay(token,mg)
 	Duel.SpecialSummonComplete()
 end
