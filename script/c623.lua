@@ -34,7 +34,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,-2,REASON_RULE)>0 then
 		local token=Duel.CreateToken(tp,tcode) 
 		Duel.ConfirmCards(1-tp,token)
-		local ov=tc:GetOverlay()
+		local ov=tc:GetOverlayGroup()
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		token:SetStatus(STATUS_PROC_COMPLETE,true) 
 		token:SetMaterial(tc)
