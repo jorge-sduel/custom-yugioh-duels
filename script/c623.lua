@@ -32,7 +32,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local code=tc:GetCode()
 	local mg=tc:GetOverlayGroup()
 	local tcode=s.list[code]
-	if tc and tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,-2,REASON_RULE)>0 and Duel.SendtoGrave(mg,REASON_COST) then
+	if tc and tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,-2,REASON_RULE)>0 then
+		Duel.SendtoGrave(mg,REASON_COST)
 		local token=Duel.CreateToken(tp,tcode)
 		Duel.ConfirmCards(1-tp,token)
 		Duel.Overlay(token,mg)
