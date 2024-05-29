@@ -32,10 +32,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local code=tc:GetCode()
 	local mg=tc:GetOverlayGroup()
 	local tcode=s.list[code]
-	Duel.SendtoGrave(mg,REASON_COST)
-	if tc and tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,-2,REASON_RULE)>0 then
+	if tc and tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,-2,REASON_RULE)>0 and Duel.SendtoGrave(mg,REASON_COST) then
 		local token=Duel.CreateToken(tp,tcode)
 		Duel.ConfirmCards(1-tp,token)
+		Duel.Overlay(token,mg)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		token:SetStatus(STATUS_PROC_COMPLETE,true) 
 		token:SetMaterial(tc)
@@ -57,6 +57,5 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		token:RegisterEffect(e3,true)]]
 	end
-	Duel.Overlay(token,mg)
 	Duel.SpecialSummonComplete()
 end
