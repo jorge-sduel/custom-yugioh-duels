@@ -57,6 +57,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		token:RegisterEffect(e3,true)]]
 	end
-	Duel.Overlay(token,ov,true)
+	--Duel.Overlay(token,ov,true)
 	Duel.SpecialSummonComplete()
 end
