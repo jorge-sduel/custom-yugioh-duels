@@ -30,7 +30,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<0 then return end
 	local tc=Duel.GetFirstTarget()
 	local code=tc:GetCode()
-	local mg=g:GetFirst():GetOverlayGroup()()
+	local mg=tc:GetFirst():GetOverlayGroup()()
 	local tcode=s.list[code]
 	Duel.SendtoGrave(mg,REASON_COST)
 	if tc and tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,-2,REASON_RULE)>0 then
