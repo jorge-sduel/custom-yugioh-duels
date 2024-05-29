@@ -30,11 +30,11 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<0 then return end
 	local tc=Duel.GetFirstTarget()
 	local code=tc:GetCode()
+	local ov=tc:GetOverlayGroup()
 	local tcode=s.list[code]
 	if tc and tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,-2,REASON_RULE)>0 then
-		local ov=tc:GetOverlayGroup()
 		local token=Duel.CreateToken(tp,tcode) 
-		Duel.Overlay(token,ov,true)
+		
 		Duel.ConfirmCards(1-tp,token)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP)
 		token:SetStatus(STATUS_PROC_COMPLETE,true) 
@@ -57,5 +57,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD)
 		token:RegisterEffect(e3,true)]]
 	end
+	Duel.Overlay(token,ov,true)
 	Duel.SpecialSummonComplete()
 end
