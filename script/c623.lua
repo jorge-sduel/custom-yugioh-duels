@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
-s.list={[70902743]=624,[70781052]=684}
+s.list={[70902743]=624,[70781052]=684,[67508932]=902}
 function s.filter(c,tp)
 	local code=c:GetCode()
 	local tcode=s.list[code]
