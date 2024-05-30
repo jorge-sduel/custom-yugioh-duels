@@ -62,8 +62,14 @@ s.listed_series={0x4a}
 function s.matfilter(c)
 	return c:IsType(TYPE_SYNCHRO) 
 end
+
 function s.discfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x4a) and c:IsAbleToRemoveAsCost()
+end
+function s.sprcon(e,c)
+	if c==nil then return true end
+	local tp=c:GetControler()
+	return Duel.IsExistingMatchingCard(s.discfilter,tp,LOCATION_GRAVE,0,3,nil)
 end
 function s.disop(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.discfilter,tp,LOCATION_GRAVE,0,3,nil) end
