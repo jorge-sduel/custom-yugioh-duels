@@ -37,6 +37,7 @@ function s.initial_effect(c)
 	e6:SetCode(EFFECT_SPSUMMON_PROC)
 	e6:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e6:SetRange(LOCATION_EXTRA)
+	e6:SetCondition(s.sprcon)
 	e6:SetOperation(s.disop)
 	c:RegisterEffect(e6)
 	--ATK Up
@@ -78,7 +79,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroup(Card.IsType,c:GetControler(),LOCATION_GRAVE,0,nil,TYPE_MONSTER):GetSum(Card.GetAttack)
+	return Duel.GetMatchingGroup(Card.IsType,c:GetControler(),0,LOCATION_MZONE,nil,TYPE_MONSTER):GetSum(Card.GetAttack)
 end
 function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
