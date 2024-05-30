@@ -1,54 +1,68 @@
---Ice Prison Necromancer, Cocytus
-function c904.initial_effect(c)
-	--special summon
+--幻魔帝トリロジーグ
+--Phantasm Emperor Trilojig
+--Scripted by AlphaKretin, manga version updated by Larry126
+local s,id=GetID()
+function s.initial_effect(c)
+	--Fusion material
+	c:EnableReviveLimit()
+	Fusion.AddProcMixN(c,false,false,aux.FilterBoolFunction(Card.IsLevel,10),3)
+	--Damage
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(904,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e1:SetCode(EVENT_SUMMON_SUCCESS)
-	e1:SetCost(c904.spcost)
-	e1:SetTarget(c904.sptg)
-	e1:SetOperation(c904.spop)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_DAMAGE)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CARD_TARGET)
+	e1:SetCountLimit(1,id)
+	e1:SetCondition(s.damcon)
+	e1:SetTarget(s.damtg)
+	e1:SetOperation(s.damop)
 	c:RegisterEffect(e1)
-	local e2=e1:Clone()
-	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
+	--atk
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(alias,0))
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e2:SetRange(LOCATION_MZONE)
+	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
+	e2:SetCode(EVENT_DAMAGE)
+	e2:SetCondition(s.atkcon)
+	e2:SetOperation(s.atkop)
 	c:RegisterEffect(e2)
-	--Limit Break
-	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(904,1))
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetCode(EFFECT_UPDATE_ATTACK)
-	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e3:SetRange(LOCATION_MZONE)
-	e3:SetCondition(c904.atcon)
-	e3:SetValue(500)
-	c:RegisterEffect(e3)
 end
-function c904.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,2,nil) end
-	Duel.DiscardHand(tp,Card.IsDiscardable,2,2,REASON_COST+REASON_DISCARD,nil)
+function s.filter(c,tp,hc)
+	return c:IsControler(tp) and (c:GetPreviousLocation()==LOCATION_GRAVE or c==hc)
 end
-function c904.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-	and Duel.IsExistingMatchingCard(c904.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+function s.damcon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(s.filter,1,nil,tp,e:GetHandler())
 end
-function c904.spfilter(c,e,tp)
-	return c:IsRace(RACE_ZOMBIE) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and chkc:HasNonZeroAttack() end
+	if chk==0 then return Duel.IsExistingTarget(Card.HasNonZeroAttack,tp,0,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+	local g=Duel.SelectTarget(tp,Card.HasNonZeroAttack,tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.SetTargetPlayer(1-tp)
+	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,#g,1-tp,g:GetFirst():GetBaseAttack()/2)
 end
-function c904.spop(e,tp,eg,ep,ev,re,r,rp,chk)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c904.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
-	local tc=g:GetFirst()
+function s.damop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+	local tc=Duel.GetFirstTarget()
 	if tc then
-		Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP)
+		local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+		Duel.Damage(p,tc:GetBaseAttack()//2,REASON_EFFECT)
 	end
 end
-function c904.atcon(e)
+function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
+	return ep==1-tp
+end
+function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ph=Duel.GetCurrentPhase()
-	return (ph==PHASE_DAMAGE or ph==PHASE_DAMAGE_CAL) and e:GetHandler()==Duel.GetAttacker()
-	and Duel.GetLP(e:GetHandlerPlayer())<4001
+	if c:IsFaceup() and c:IsRelateToEffect(e) then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetCode(EFFECT_UPDATE_ATTACK)
+		e1:SetValue(ev)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD_DISABLE+RESET_PHASE+PHASE_END)
+		c:RegisterEffect(e1)
+	end
 end
