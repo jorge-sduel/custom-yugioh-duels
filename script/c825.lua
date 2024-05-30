@@ -4,7 +4,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--Synchro Summon Procedure
-	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(s.matfilter),1,99)
 	--Cannot be destroyed battle or effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -50,7 +50,7 @@ function s.initial_effect(c)
 	-- Inflict Damage
 	local e8=Effect.CreateEffect(c)
 	e8:SetDescription(aux.Stringid(id,0))
-	e8:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_0)
+	e8:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e8:SetCode(EVENT_LEAVE_FIELD)
 	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e8:SetRange(LOCATION_MZONE)
@@ -59,6 +59,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e8)
 end
 s.listed_series={0x4a}
+function s.matfilter(c)
+	return c:IsType(TYPE_SYNCHRO) 
+end
 function s.discfilter(c)
 	return c:IsMonster() and c:IsSetCard(0x4a) and c:IsAbleToRemoveAsCost()
 end
