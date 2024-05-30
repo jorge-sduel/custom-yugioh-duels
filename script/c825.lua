@@ -55,7 +55,7 @@ function s.initial_effect(c)
 	e8:SetCode(EVENT_LEAVE_FIELD)
 	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e8:SetRange(LOCATION_MZONE)
-	e8:SetTarget(s.damtg)
+	--e8:SetTarget(s.damtg)
 	e8:SetOperation(s.damop)
 	c:RegisterEffect(e8)
 end
@@ -86,7 +86,6 @@ function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetFieldGroupCount(tp,0xc,0xc)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local ct=Duel.GetFieldGroupCount(tp,0xc,0xc)
 	Duel.SetLP(1-tp,Duel.GetLP(1-tp)-ct*300)
 end
