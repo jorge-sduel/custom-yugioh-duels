@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
-	e:SetCondition(s.poscon)
+	e1:SetCondition(s.poscon)
 	e1:SetTarget(s.atktarget)
 	c:RegisterEffect(e1)
 	--immune spell
