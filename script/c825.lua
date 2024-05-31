@@ -55,7 +55,7 @@ function s.initial_effect(c)
 	e8:SetCode(EVENT_LEAVE_FIELD)
 	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e8:SetRange(LOCATION_MZONE)
-	e8:SetTarget(s.damtg)
+	--e8:SetTarget(s.damtg)
 	e8:SetOperation(s.damop)
 	c:RegisterEffect(e8)
 end
