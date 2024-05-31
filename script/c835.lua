@@ -70,7 +70,7 @@ function s.atfilter(c,e)
 	return 	e:GetHandler():GetMaterial()
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroup(nil,c:GetControler(),LOCATION_ALL,LOCATION_ALL,nil,e):e:GetHandler():GetMaterial():GetSum(Card.GetLevel)*300
+	return e:GetHandler():GetMaterial():GetSum(Card.GetLevel)*300
 end
 function s.poscon(e,re,val,r,rp,rc)
 	return e:GetHandler():IsDefensePos()
