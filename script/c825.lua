@@ -48,15 +48,15 @@ function s.initial_effect(c)
 	e7:SetCode(EFFECT_UPDATE_ATTACK)
 	e7:SetValue(s.val)
 	c:RegisterEffect(e7)
-	-- Inflict Damage
+	--Destroy all monsters your opponent controls
 	local e8=Effect.CreateEffect(c)
-	e8:SetDescription(aux.Stringid(id,0))
+	e8:SetDescription(aux.Stringid(id,1))
+	e8:SetCategory(CATEGORY_DESTROY)
 	e8:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e8:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e8:SetCode(EVENT_LEAVE_FIELD)
-	e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e8:SetRange(LOCATION_MZONE)
-	--e8:SetTarget(s.damtg)
-	e8:SetOperation(s.damop)
+	e8:SetCondition(s.regcon)
+	e8:SetOperation(s.regop)
 	c:RegisterEffect(e8)
 end
 s.listed_series={0x4a}
@@ -81,11 +81,11 @@ end
 function s.val(e,c)
 	return Duel.GetMatchingGroup(Card.IsType,c:GetControler(),0,LOCATION_MZONE,nil,TYPE_MONSTER):GetSum(Card.GetAttack)
 end
-function s.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
-	local ct=Duel.GetFieldGroupCount(tp,0xc,0xc)
+function s.regcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:IsPreviousLocation(LOCATION_MZONE)
 end
-function s.damop(e,tp,eg,ep,ev,re,r,rp)
+function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetFieldGroupCount(tp,0xc,0xc)
 	Duel.SetLP(1-tp,Duel.GetLP(1-tp)-ct*300)
 end
