@@ -63,7 +63,7 @@ end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsFaceup() and c:IsRelateToEffect(e) and c:IsAttackPos() then
-		Duel.ChangePosition(c,0,0,POS_FACEUP_DEFENSE,0)
+		Duel.ChangePosition(c,POS_FACEUP_DEFENSE)
 	end
 end
 function s.atfilter(c,e)
