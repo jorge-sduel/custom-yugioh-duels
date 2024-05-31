@@ -1,6 +1,6 @@
 --
 --Updated by Larry126 and MLD
-local s,id,alias=GetID()
+local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
