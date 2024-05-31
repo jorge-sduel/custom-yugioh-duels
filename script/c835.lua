@@ -66,11 +66,11 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ChangePosition(c,0,0,POS_FACEUP_DEFENSE,0)
 	end
 end
-function s.cfilter(c)
+function s.atfilter(c,e)
 	return 	c:e:GetHandler():GetMaterial()
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroup(s.atfilter,c:GetControler(),LOCATION_ALL,LOCATION_ALL,nil):GetSum(Card.GetAttack)
+	return Duel.GetMatchingGroup(s.atfilter,c:GetControler(),LOCATION_ALL,LOCATION_ALL,nil,e):GetSum(Card.GetAttack)
 end
 function s.poscon(e,re,val,r,rp,rc)
 	return e:GetHandler():IsDefensePos()
