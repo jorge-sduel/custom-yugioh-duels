@@ -20,6 +20,7 @@ function s.initial_effect(c)
 	e2:SetCode(EFFECT_IMMUNE_EFFECT)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetRange(LOCATION_MZONE)
+	e2:SetCondition(s.poscon)
 	e2:SetValue(s.efilter)
 	c:RegisterEffect(e2)
 	--ATK Up
@@ -52,6 +53,15 @@ function s.initial_effect(c)
 	e4:SetTarget(s.sptg)
 	e4:SetOperation(s.spop)
 	c:RegisterEffect(e4)
+	--immune spell
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetCode(EFFECT_IMMUNE_EFFECT)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCondition(s.poscon1)
+	e5:SetValue(s.efilter1)
+	c:RegisterEffect(e5)
 end
 function s.atktarget(e,c)
 	return c:IsAttackBelow(e:GetHandler():GetDefense())
@@ -98,4 +108,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	end
+end
+function s.efilter1(e,te)
+	return te:IsActiveType(TYPE_TRAP)
 end
