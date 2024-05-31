@@ -67,10 +67,10 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.atfilter(c,e)
-	return 	c:e:GetHandler():GetMaterial()
+	return 	e:GetHandler():GetMaterial()
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroup(s.atfilter,c:GetControler(),LOCATION_ALL,LOCATION_ALL,nil,e):GetSum(Card.GetAttack)
+	return Duel.GetMatchingGroup(nil,c:GetControler(),LOCATION_ALL,LOCATION_ALL,nil,e):e:GetHandler():GetMaterial():GetSum(Card.GetLevel)*300
 end
 function s.poscon(e,re,val,r,rp,rc)
 	return e:GetHandler():IsDefensePos()
