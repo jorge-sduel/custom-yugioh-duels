@@ -10,7 +10,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e1:SetTargetRange(0,LOCATION_MZONE)
 	e1:SetCondition(s.poscon)
 	e1:SetTarget(s.atktarget)
 	c:RegisterEffect(e1)
@@ -54,10 +54,10 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.atktarget(e,c)
-	return c:IsAttackAbove(e:GetHandler():GetDefense())
+	return c:IsAttackBelow(e:GetHandler():GetDefense())
 end
 function s.postg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetTurnPlayer()==tp and e:GetHandler():IsAttackPos() end
+	if chk==0 then return Duel.GetTurnPlayer()==1-tp and e:GetHandler():IsAttackPos() end
 	Duel.SetOperationInfo(0,CATEGORY_POSITION,e:GetHandler(),1,0,0)
 end
 function s.posop(e,tp,eg,ep,ev,re,r,rp)
