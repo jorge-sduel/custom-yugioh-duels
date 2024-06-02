@@ -1,5 +1,6 @@
 --Valkyrion the Magna Warrior (Anime)
-function c54.initial_effect(c)
+local s,id=GetID()
+function s.initial_effect(c)
 	Fusion.AddProcMix(c,true,true,99785935,39256679,11549357)
 	c:EnableReviveLimit()
 	--spsummon condition
