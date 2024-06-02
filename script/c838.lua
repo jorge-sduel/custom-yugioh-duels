@@ -4,6 +4,7 @@ function s.initial_effect(c)
 		c:EnableReviveLimit()
 	--fusion material	
 Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK),aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK))
+	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	--indes
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -32,6 +33,12 @@ Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK),au
 	e4:SetTarget(s.sptg2)
 	e4:SetOperation(s.spop2)
 	c:RegisterEffect(e4)
+end
+function s.contactfil(tp)
+	return Duel.GetMatchingGroup(Card.IsAbleToGraveAsCost,tp,LOCATION_ONFIELD,0,nil)
+end
+function s.contactop(g)
+	Duel.SendtoGrave(g,REASON_COST+REASON_MATERIAL)
 end
 function s.target(e,c)
 	return c:IsFaceup() and c:IsRace(RACE_ROCK)
