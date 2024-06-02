@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 		c:EnableReviveLimit()
 	--fusion material	
-Fusion.AddProcMix(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK),aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK))
+Fusion.AddProcMix(c,true,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK),aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK),aux.FilterBoolFunctionEx(Card.IsRace,RACE_ROCK))
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	--indes
 	local e1=Effect.CreateEffect(c)
