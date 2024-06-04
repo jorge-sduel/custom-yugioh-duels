@@ -58,8 +58,8 @@ function s.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsReason(REASON_BATTLE)
 		or (rp~=tp and c:IsReason(REASON_EFFECT) and c:IsPreviousControler(tp))
 end
-function s.spfilter(c,e,tp,code)
-	return c:IsFaceup() and c:IsSetCard(0xe9) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+function s.filter(c,e,tp,code)
+	return c:IsSetCard(0xe9) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.sptg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:GetControler()==tp and s.filter(chkc,e,tp) end
