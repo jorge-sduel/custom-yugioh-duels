@@ -23,8 +23,8 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_BE_BATTLE_TARGET)
 	e3:SetCategory(CATEGORY_POSITION+CATEGORY_SPECIAL_SUMMON)
 	e3:SetCost(s.spcost)
-	e3:SetTarget(s.nattg)
-	e3:SetOperation(s.natop)
+	e3:SetTarget(s.natg)
+	e3:SetOperation(s.naop)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0xe9,0x2066}
