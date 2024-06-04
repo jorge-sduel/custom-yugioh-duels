@@ -44,7 +44,7 @@ function s.natg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.naop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) then
+	--if c:IsRelateToEffect(e) then
 		Duel.SkipPhase(1-tp,PHASE_BATTLE,RESET_PHASE|PHASE_BATTLE_STEP,1)
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 		local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.spfilter),tp,LOCATION_GRAVE,0,nil,e,tp)
@@ -53,6 +53,6 @@ function s.naop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 			local g1=g:Select(tp,1,1,nil)
 			Duel.SpecialSummon(g1,0,tp,tp,true,true,POS_FACEUP)
-		end
+		--end
 	end
 end
