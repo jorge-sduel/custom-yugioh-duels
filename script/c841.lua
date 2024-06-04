@@ -23,8 +23,8 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_BE_BATTLE_TARGET)
 	e3:SetCost(s.spcost)
-	e3:SetTarget(s.drawtg1)
-	e3:SetOperation(s.drawop1)
+	e3:SetTarget(s.sptg)
+	e3:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0xe9}
