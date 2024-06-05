@@ -73,7 +73,7 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 		local tc=Duel.GetFirstTarget()
 		if not tc:IsRelateToEffect(e) or Duel.GetLocationCountFromEx(tp)<=0 then return end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local sg=Duel.SelectMatchingCard(tp,cm.spfilter4,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc:GetLevel())
+		local sg=Duel.SelectMatchingCard(tp,cm.spfilter4,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc:GetLevel()+tc:GetRank())
 		if #sg>0 and Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)~=0 then
 			local g=Group.FromCards(tc)
 			if c then c:CancelToGrave(true) g:AddCard(c) end
