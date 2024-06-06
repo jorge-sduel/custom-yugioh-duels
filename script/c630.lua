@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	--fusion
 	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,s.ffilter,2)
-Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
+Fusion.AddContactProc(c,s.contactfil,s.contactop)
 	--send replace
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -75,7 +75,7 @@ function s.thfilter(c)
 	return c:IsSetCard(0x2034) and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) or c:IsSummonLocation(LOCATION_EXTRA)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
