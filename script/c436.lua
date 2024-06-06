@@ -24,15 +24,17 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
-	--confirm
-	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(id,1))
-	e3:SetType(EFFECT_TYPE_IGNITION)
-	e3:SetRange(LOCATION_MZONE)
-	e3:SetCountLimit(1,id)
-	--e3:SetCondition(s.condition)
-	e3:SetOperation(s.operation)
-	c:RegisterEffect(e3)
+	--Destroy
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,0))
+	e5:SetType(EFFECT_TYPE_IGNITION)
+	e5:SetCountLimit(1)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e5:SetCategory(CATEGORY_DESTROY)
+	e5:SetTarget(s.destg)
+	e5:SetOperation(s.desop)
+	c:RegisterEffect(e5)
 end
 s.material_setcode={0x1034}
 function s.contactfil(tp)
@@ -90,4 +92,25 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--if Duel.SelectOption(tp,aux.Stringid(id,1),aux.Stringid(id,2))==1 then
 	--	Duel.MoveToDeckBottom(3,tp)
 	--end
+end
+function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	local ct=e:GetHandler():GetMaterial()
+	if chkc then return false end
+	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_MZONE,0,1,nil)
+		and Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_SZONE,0,1,nil) and ct>0 and Duel.IsPlayerCanDraw(tp,ct) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g1=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+	local g2=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_SZONE,0,1,1,nil)
+	g1:Merge(g2)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g1,2,0,0)
+end
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	local ct=e:GetHandler():GetMaterial()
+	local tg=g:Filter(Card.IsRelateToEffect,nil,e) 
+	if #tg>0 then
+		Duel.Destroy(tg,REASON_EFFECT)
+	Duel.Draw(tp,ct,REASON_EFFECT)
+	end
 end
