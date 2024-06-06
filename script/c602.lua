@@ -39,3 +39,4 @@ function s.initial_effect(c)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsFacedown() then return end
+end
