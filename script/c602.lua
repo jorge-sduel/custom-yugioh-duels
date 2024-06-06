@@ -36,11 +36,19 @@ function s.initial_effect(c)
 	e4:SetCountLimit(1)
 	e4:SetCode(EVENT_PHASE+PHASE_STANDBY)
 	e4:SetCountLimit(1,{id,1})
-	e4:SetOperation(s.rmop)
+	e4:SetCondition(s.condition)
+	e4:SetTarget(s.target)
+	e4:SetOperation(s.operation)
 	c:RegisterEffect(e4)
+	--removed
+	local e6=Effect.CreateEffect(c)
+	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e6:SetCode(EVENT_REMOVE)
+	e6:SetOperation(s.rmop)
+	c:RegisterEffect(e6)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():IsFaceup() then return end
+	if e:GetHandler():IsFacedown() then return end
 end
 function s.datg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -50,5 +58,23 @@ function s.daop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.Remove(c,POS_FACEUP,REASON_EFFECT)~=0 then
 		Duel.Draw(tp,1,REASON_EFFECT)
+	end
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():GetFlagEffect(91)~=0
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():GetFlagEffect(3773197)==0 end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
+	e:GetHandler():RegisterFlagEffect(3773197,RESET_EVENT+0x4760000+RESET_PHASE+PHASE_END,0,1)
+end
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then
+			Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
+			return
+		end
+		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)
 	end
 end
