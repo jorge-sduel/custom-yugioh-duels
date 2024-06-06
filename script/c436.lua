@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--fusion material
-	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1034),2,2,435)
+	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1034),2,5)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop)
 	--send replace
 	local e1=Effect.CreateEffect(c)
@@ -98,7 +98,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=e:GetHandler():GetMaterial()
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_SZONE,0,1,nil) and ct>0 and Duel.IsPlayerCanDraw(tp,ct) end
+		and Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_SZONE,0,1,nil) and Duel.IsPlayerCanDraw(tp,ct) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g1=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
