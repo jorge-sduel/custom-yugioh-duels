@@ -4,7 +4,7 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--fusion material
 	Fusion.AddProcMixRep(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1034),2,2,435)
-Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit)
+	Fusion.AddContactProc(c,s.contactfil,s.contactop)
 	--send replace
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
