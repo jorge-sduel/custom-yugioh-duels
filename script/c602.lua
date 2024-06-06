@@ -38,5 +38,5 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetHandler():IsFacedown() then return end
+	if e:GetHandler():IsFaceup() then return end
 end
