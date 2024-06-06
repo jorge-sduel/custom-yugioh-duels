@@ -75,7 +75,7 @@ function s.thfilter(c)
 	return c:IsSetCard(0x2034) and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) or c:IsSummonLocation(LOCATION_EXTRA)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION) or e:GetHandler():GetSummonLocation()&LOCATION_EXTRA==LOCATION_EXTRA
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
