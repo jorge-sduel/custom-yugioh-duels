@@ -13,6 +13,8 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetCountLimit(1,id)
+	e1:SetTarget(s.datg)
+	e1:SetOperation(s.daop)
 	e1:SetRange(LOCATION_MZONE)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
@@ -39,4 +41,14 @@ function s.initial_effect(c)
 end
 function s.rmop(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsFaceup() then return end
+end
+function s.datg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	local c=e:GetHandler()
+	if chk==0 then return c:IsAbleToRemove() and Duel.IsPlayerCanDraw(tp,1) end
+end
+function s.daop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and Duel.Remove(c,POS_FACEUP,REASON_EFFECT)~=0 then
+		Duel.Draw(tp,1,REASON_EFFECT)
+	end
 end
