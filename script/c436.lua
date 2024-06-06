@@ -95,7 +95,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--end
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local ct=e:GetHandler():GetMaterial()
+	local ct=e:GetHandler():GetMaterialCount()
 	if chkc then return false end
 	if chk==0 then return Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingTarget(aux.TRUE,tp,LOCATION_SZONE,0,1,nil) and Duel.IsPlayerCanDraw(tp,ct) end
@@ -108,7 +108,7 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	local ct=e:GetHandler():GetMaterial()
+	local ct=e:GetHandler():GetMaterialCount()
 	local tg=g:Filter(Card.IsRelateToEffect,nil,e) 
 	if #tg>0 then
 		Duel.Destroy(tg,REASON_EFFECT)
