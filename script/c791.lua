@@ -70,7 +70,7 @@ function s.initial_effect(c)
 	e9:SetCountLimit(1)
 	e9:SetRange(LOCATION_MZONE)
 	e9:SetCost(s.cost)
-	e9:SetOperation(s.operation)
+	e9:SetOperation(s.operation2)
 	c:RegisterEffect(e9,false,REGISTER_FLAG_DETACH_XMAT)
 		--attack up
 	local e10=Effect.CreateEffect(c)
@@ -134,7 +134,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
-function s.operation(e,tp,eg,ep,ev,re,r,rp)
+function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and c:IsFaceup() then
 		local e1=Effect.CreateEffect(c)
