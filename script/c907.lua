@@ -1,7 +1,7 @@
 --Silver Thorn Dragon Queen, Luquier "Reverse"
 function c907.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.XyzFilterFunction(c,8),2)
+	Xyz.AddProcedure(c,nil,8,2)
 	c:EnableReviveLimit()
 	--cannot be destroyed
 	local e1=Effect.CreateEffect(c)
