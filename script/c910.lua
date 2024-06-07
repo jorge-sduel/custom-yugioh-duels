@@ -1,7 +1,7 @@
 --Blue Storm Karma Dragon, Maelstrom "Reverse"
 function c910.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.XyzFilterFunction(c,8),2,c910.ovfilter,aux.Stringid(910,1))
+	Xyz.AddProcedure(c,nil,8,2,c910.ovfilter,aux.Stringid(910,1))
 	c:EnableReviveLimit()
 	--cannot be destroyed
 	local e1=Effect.CreateEffect(c)
