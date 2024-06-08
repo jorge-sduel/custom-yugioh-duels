@@ -1,7 +1,7 @@
 --El Shaddoll Laestrygonians
 function c98441213.initial_effect(c)
 	c:EnableReviveLimit()
-Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9d),2,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),1)
+Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9d),2,c98441213.matfilter,1)
 	--[[fusion material
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -59,6 +59,9 @@ Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9d),2,a
 	e6:SetTarget(c98441213.thtg2)
 	e6:SetOperation(c98441213.thop2)
 	c:RegisterEffect(e6)
+end
+function c98441213.matfilter(c,lc,sumtype,tp)
+	return c:IsAttribute(ATTRIBUTE_LIGHT,lc,sumtype,tp) or c:IsHasEffect(4904633)
 end
 function c98441213.ffilter1(c)
 	return c:IsSetCard(0x9d)
