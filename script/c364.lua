@@ -97,8 +97,8 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local b2=def>0
 	if b1 and b2 then
 		op=Duel.SelectEffect(tp,
-			{b1,aux.Stringid(id,1)},
-			{b2,aux.Stringid(id,2)})
+			{b1,aux.Stringid(80161395,1)},
+			{b2,aux.Stringid(80161395,2)})
 	else
 		op=b1 and 1 or 2
 	end
