@@ -2,14 +2,14 @@
 function c98441213.initial_effect(c)
 	c:EnableReviveLimit()
 Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9d),2,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_LIGHT),1)
-	--fusion material
+	--[[fusion material
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_FUSION_MATERIAL)
 	e1:SetCondition(c98441213.fuscon)
 	e1:SetOperation(c98441213.fusop)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	--cannot spsummon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
