@@ -235,8 +235,8 @@ function c750.initial_effect(c)
 	
 	end
 	
-	function c750.sdcon(e)
-	return e:GetHandler():IsPosition(POS_FACEUP_DEFENCE)
+function c750.sdcon(e)
+	return e:GetHandler():IsPosition(POS_FACEUP_DEFENSE)
 end
 
 	function c750.lwcon(e)
