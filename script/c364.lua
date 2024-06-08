@@ -80,7 +80,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
 function s.costfilter(c)
-	return and c:IsType(TYPE_XYZ) and (c:GetAttack()>0 or c:GetDefense()>0)
+	return c:IsType(TYPE_XYZ) and (c:GetAttack()>0 or c:GetDefense()>0)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
