@@ -12,6 +12,7 @@ function c249000117.initial_effect(c)
 end
 function c249000117.filter(c,e)
 	return c:IsAbleToDeck() and c:IsCanBeEffectTarget(e) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_MONSTER)
+	and Duel.IsExistingMatchingCard(c249000117.filter2,e:GetHandlerPlayer(),LOCATION_GRAVE+LOCATION_REMOVED,0,1,c,e)
 end
 function c249000117.filter2(c,e)
 	return c:IsAbleToDeck() and c:IsCanBeEffectTarget(e) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_XYZ) and 
