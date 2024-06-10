@@ -14,7 +14,8 @@ function c249000117.filter(c,e)
 	return c:IsAbleToDeck() and c:IsCanBeEffectTarget(e) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_MONSTER)
 end
 function c249000117.filter2(c,e)
-	return c:IsAbleToDeck() and c:IsCanBeEffectTarget(e) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_XYZ)
+	return c:IsAbleToDeck() and c:IsCanBeEffectTarget(e) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_XYZ) and 
+	Duel.IsExistingMatchingCard(c249000117.filter,e:GetHandlerPlayer(),LOCATION_GRAVE+LOCATION_REMOVED,0,1,c,e) 
 end
 function c249000117.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
@@ -32,7 +33,7 @@ function c249000117.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g2=g:Select(tp,1,1,nil)
 	g:Remove(Card.IsCode,nil,g2:GetFirst():GetCode())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g3=Duel.SelectMatchingCard(tp,c249000117.filter2,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil,e)
+	local g3=Duel.SelectMatchingCard(tp,c249000117.filter2,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,g2,e)
 	g1:Merge(g2)
 	g1:Merge(g3)
 	Duel.SetTargetCard(g1)
