@@ -15,8 +15,7 @@ function c249000117.filter(c,e)
 	and Duel.IsExistingMatchingCard(c249000117.filter2,e:GetHandlerPlayer(),LOCATION_GRAVE+LOCATION_REMOVED,0,1,c,e)
 end
 function c249000117.filter2(c,e)
-	return c:IsAbleToDeck() and c:IsCanBeEffectTarget(e) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_XYZ) and 
-	Duel.IsExistingMatchingCard(c249000117.filter,e:GetHandlerPlayer(),LOCATION_GRAVE+LOCATION_REMOVED,0,1,c,e) 
+	return c:IsAbleToDeck() and c:IsCanBeEffectTarget(e) and c:IsType(TYPE_MONSTER) and (c:IsFaceup() or c:IsLocation(LOCATION_GRAVE)) and c:IsType(TYPE_XYZ) 
 end
 function c249000117.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
