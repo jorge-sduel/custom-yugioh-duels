@@ -101,6 +101,12 @@ function s.lvop(e,tp,eg,ep,ev,re,r,rp)
 		e5:SetCode(999381001)
 		e5:SetReset(RESET_EVENT+RESETS_STANDARD)
 		tc:RegisterEffect(e5)
+		local e6=Effect.CreateEffect(e:GetHandler())
+		e6:SetType(EFFECT_TYPE_SINGLE)
+		e6:SetCode(EFFECT_CHANGE_RANK_FINAL)
+		e6:SetValue(e:GetHandler():GetLevel())
+		e6:SetReset(RESET_EVENT+RESETS_STANDARD)
+		tc:RegisterEffect(e6)
 		tc=g:GetNext()
 	end
 end
