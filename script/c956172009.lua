@@ -36,7 +36,7 @@ end
 s.listed_series={0xfd7}
 function s.disfilter(c)
 	return (c:IsRace(RACE_FISH) and aux.disfilter1(c))
-		or aux.disfilter2(c)
+		or Card.IsNegatableSpellTrap(c)
 end
 function s.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
