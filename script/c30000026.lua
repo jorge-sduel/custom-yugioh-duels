@@ -26,7 +26,7 @@ end
 function c30000026.attg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
     Duel.Hint(HINT_SELECTMSG,tp,562)
-	local att=Duel.AnnounceAttribute(tp,1,0xffff)
+	local att=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
     e:SetLabel(att)
 end
 function c30000026.atfilter(c,att)
