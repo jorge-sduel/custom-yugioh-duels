@@ -94,7 +94,7 @@ function c30000003.operation(e,tp,eg,ep,ev,re,r,rp)
         catt=tc:GetAttribute()
     end
     Duel.Hint(HINT_SELECTMSG,tp,562)
-    local att=Duel.AnnounceAttribute(tp,1,0xffff - catt)
+    local att=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL- catt)
     while tc do
         local e1=Effect.CreateEffect(c)
         e1:SetType(EFFECT_TYPE_SINGLE)
