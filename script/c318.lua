@@ -37,14 +37,14 @@ e2:SetCountLimit(1,318)
 	e3:SetCondition(c318.lpcon2)
 	e3:SetOperation(c318.lpop2)
 	c:RegisterEffect(e3)
-	--Return
+	--[[Return
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(51,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetRange(LOCATION_HAND)
 	e4:SetOperation(c318.rop)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4)]]
 	--lose atk 2
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
