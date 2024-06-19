@@ -141,21 +141,24 @@ function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 			end
 			ft=ft-1
 		end
+		if not tc:IsMonster() then
 		local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			--e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
 			e1:SetValue(TYPE_MONSTER)
 			tc:RegisterEffect(e1)
 			local e2=Effect.CreateEffect(c)
 			e2:SetCode(EFFECT_REMOVE_TYPE)
 			e2:SetType(EFFECT_TYPE_SINGLE)
 			e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			--e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+			e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
 			e2:SetValue(TYPE_TRAP)
 			tc:RegisterEffect(e2)
-	--Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+			--Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_EVOLUTE)
+	Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
+		end
 	end
 	if #sg>0 then
 		Duel.RegisterFlagEffect(tp,29432356,RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,1)
