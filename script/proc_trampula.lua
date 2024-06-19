@@ -17,9 +17,9 @@ function(c,reg,desc)
 	e0:SetProperty(te:GetProperty())
 	e0:SetCode(te:GetCode())
 	e0:SetRange(LOCATION_HAND)
-	e0:SetCondition(trapendul.condition)
-	e0:SetCost(trapendul.cos) 
-	e0:SetTarget(trapendul.target)
+	e0:SetCondition(Trampula.con)
+	e0:SetCost(Trampula.cos) 
+	e0:SetTarget(Trampula.tar)
 	e0:SetOperation(te:GetOperation())
 	e0:SetValue(LOCATION_SZONE)
 	c:RegisterEffect(e0)
@@ -189,19 +189,19 @@ end
 function Trampula.Efpendulum(e,c)
 	return c:IsType(TYPE_PENDULUM)
 end
-function trapendul.con(e,tp,eg,ep,ev,re,r,rp)
+function Trampula.con(e,tp,eg,ep,ev,re,r,rp)
 	local te=e:GetHandler():GetActivateEffect()
 	local condition=te:GetCondition()
 	return (not condition or condition(e,tp,eg,ep,ev,re,r,rp)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 and c:IsHasEffect(EFFECT_TRAP_ACT_IN_HAND,tp)
 end
-function trapendul.cos(e,tp,eg,ep,ev,re,r,rp,chk)
+function Trampula.cos(e,tp,eg,ep,ev,re,r,rp,chk)
 	local te=e:GetHandler():GetActivateEffect()
 	local co=te:GetCost()
 	if chk==0 then return not co or co(e,tp,eg,ep,ev,re,r,rp,0) end
 	if co then co(e,tp,eg,ep,ev,re,r,rp,1) end
 end
-function trapendul.tar(e,tp,eg,ep,ev,re,r,rp,chk)
+function Trampula.tar(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local te=c:GetActivateEffect()
 	local tg=te:GetTarget()
