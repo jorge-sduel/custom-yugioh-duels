@@ -21,7 +21,7 @@ function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(s.filter),tp,0,LOCATION_MZONE,nil)
+	local g=Duel.GetMatchingGroup(aux.FaceupFilter(s.filter),tp,0,LOCATION_MZONE,nil)
 	local rc=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
