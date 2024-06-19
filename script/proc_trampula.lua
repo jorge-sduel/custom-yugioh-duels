@@ -142,11 +142,11 @@ function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 			ft=ft-1
 		end
 		if not tc:IsMonster() then
-		local e1=Effect.CreateEffect(c)
+			local e1=Effect.CreateEffect(c)
 			e1:SetCode(EFFECT_ADD_TYPE)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET-RESET_TOFIELD)
 			e1:SetValue(TYPE_MONSTER)
 			tc:RegisterEffect(e1)
 			local e2=Effect.CreateEffect(c)
