@@ -33,7 +33,7 @@ function c30000004.attcount(tp,loc1,loc2)
 	if Duel.IsExistingMatchingCard(c30000004.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_FIRE) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000004.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_EARTH) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000004.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_WIND) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000004.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DEVINE) then att=att+1 end
+	if Duel.IsExistingMatchingCard(c30000004.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DIVINE) then att=att+1 end
 	return att
 end
 
