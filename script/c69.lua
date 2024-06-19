@@ -27,7 +27,7 @@ function c69.initial_effect(c)
 
 	e4:SetOperation(c69.rop)
 	c:RegisterEffect(e4)]]
-	--place
+	--[[place
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(47408488,1))
 	e5:SetType(EFFECT_TYPE_IGNITION)
@@ -38,7 +38,7 @@ e5:SetCountLimit(1,10000000)
 	e5:SetTarget(c69.target3)
 	e5:SetOperation(c69.activate3)
 	e5:SetValue(SUMMON_TYPE_PENDULUM)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e5)]]
 	--indes
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
