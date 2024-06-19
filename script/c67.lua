@@ -33,7 +33,7 @@ function c67.initial_effect(c)
 	e3:SetCondition(c67.mtcon)
 	e3:SetOperation(c67.mtop)
 	c:RegisterEffect(e3)
-	--Return
+	--[[Return
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(51,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
@@ -41,7 +41,7 @@ function c67.initial_effect(c)
 	e4:SetRange(LOCATION_HAND)
 
 	e4:SetOperation(c67.rop)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4)]]
 	--place
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(47408488,1))
