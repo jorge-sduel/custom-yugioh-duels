@@ -13,13 +13,13 @@ function c318.initial_effect(c)
 	e0:SetTarget(c318.thtg)
 	e0:SetOperation(c318.thop)
 	c:RegisterEffect(e0)
-	--Activate
+	--[[Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_ATKCHANGE)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	--recover
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(318,0))
