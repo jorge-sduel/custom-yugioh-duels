@@ -42,7 +42,7 @@ function c67.initial_effect(c)
 
 	e4:SetOperation(c67.rop)
 	c:RegisterEffect(e4)]]
-	--place
+	--[[place
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(47408488,1))
 	e5:SetType(EFFECT_TYPE_IGNITION)
@@ -53,7 +53,7 @@ e5:SetCountLimit(1,10000000)
 	e5:SetTarget(c67.target3)
 	e5:SetOperation(c67.activate3)
 	e5:SetValue(SUMMON_TYPE_PENDULUM)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e5)]]
 	--indes
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
@@ -86,6 +86,14 @@ e5:SetCountLimit(1,10000000)
 	e9:SetCode(EFFECT_ADD_ATTRIBUTE)
 	e9:SetValue(ATTRIBUTE_LIGHT)
 	c:RegisterEffect(e9)
+	--indes
+	local e10=Effect.CreateEffect(c)
+	e10:SetType(EFFECT_TYPE_SINGLE)
+	e10:SetProperty(EFFECT_TYPE_SINGLE)
+	e10:SetRange(LOCATION_MZONE)
+	e10:SetCode(EFFECT_CHANGE_LEVEL)
+	e10:SetValue(6)
+	c:RegisterEffect(e10)
 end
 c67.pendulum_level=6
 function c67.ffilter(c,tp)
