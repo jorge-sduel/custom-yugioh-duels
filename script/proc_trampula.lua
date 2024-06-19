@@ -157,7 +157,6 @@ function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 			e2:SetValue(TYPE_TRAP)
 			tc:RegisterEffect(e2)
 			--Duel.SpecialSummonRule(tp,tc,SUMMON_TYPE_EVOLUTE)
-	Duel.SpecialSummonStep(tc,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 		end
 	end
 	if #sg>0 then
@@ -165,6 +164,7 @@ function Trampula.Operation(e,tp,eg,ep,ev,re,r,rp,c,sg,og)
 		Duel.HintSelection(Group.FromCards(c))
 		Duel.HintSelection(Group.FromCards(rpz))
 	end
+	Duel.SpecialSummon(sg,SUMMON_TYPE_PENDULUM,tp,tp,true,true,POS_FACEUP)
 end
 function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
