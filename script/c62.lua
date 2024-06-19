@@ -37,7 +37,7 @@ e4:SetCondition(c62.pencon)
 	e4:SetTarget(c62.pentg)
 	e4:SetOperation(c62.penop)
 	c:RegisterEffect(e4)
-	--place
+	--[[place
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(47408488,1))
 	e5:SetType(EFFECT_TYPE_IGNITION)
@@ -48,7 +48,7 @@ e5:SetCountLimit(1,10000000)
 	e5:SetTarget(c62.target3)
 	e5:SetOperation(c62.activate3)
 	e5:SetValue(SUMMON_TYPE_PENDULUM)
-	c:RegisterEffect(e5)
+	c:RegisterEffect(e5)]]
 	--indes
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
