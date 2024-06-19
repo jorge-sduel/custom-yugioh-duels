@@ -1,6 +1,8 @@
 --RUM p-force
+if not TRAMPULA_IMPORTED then Duel.LoadScript("proc_trampula.lua") end
 function c213.initial_effect(c)
---pendulum summon
+	--pendulum summon
+	Trampula.AddProcedure(c)
 	Pendulum.AddProcedure(c,false)
 	--Activate
 	local e0=Effect.CreateEffect(c)
