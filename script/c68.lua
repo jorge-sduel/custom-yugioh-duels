@@ -184,7 +184,7 @@ function c68.plcon(e,c,og)
 	if og then
 		return og:IsExists(c69.ffilter,1,nil,e,tp,lscale,rscale)
 	else
-		return Duel.IsExistingMatchingCard(c69.ffilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,lscale,rscale)
+		return Duel.IsExistingMatchingCard(c68.ffilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,lscale,rscale)
 	end
 end
 function c68.pltg(e,tp,eg,ep,ev,re,r,rp,chk)
