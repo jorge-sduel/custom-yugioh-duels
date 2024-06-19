@@ -72,7 +72,7 @@ function c68.initial_effect(c)
 	e9:SetCode(EFFECT_ADD_ATTRIBUTE)
 	e9:SetValue(ATTRIBUTE_LIGHT)
 	c:RegisterEffect(e9)
-	--place
+	--[[place
 	local e10=Effect.CreateEffect(c)
 	e10:SetDescription(aux.Stringid(47408488,1))
 	e10:SetType(EFFECT_TYPE_IGNITION)
@@ -94,7 +94,7 @@ e10:SetCountLimit(1,10000000)
 	e11:SetCondition(c68.plcon)
 	e11:SetOperation(c68.plop)
 	e11:SetValue(SUMMON_TYPE_PENDULUM)
-	c:RegisterEffect(e11)
+	c:RegisterEffect(e11)]]
 end
 c68.pendulum_level=4
 function c68.ffilter(c,e,tp,lscale,rscale,lvchk)
