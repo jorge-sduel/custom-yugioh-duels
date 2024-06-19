@@ -10,7 +10,7 @@ end
 Trampula.AddProcedure = aux.FunctionWithNamedArgs(
 function(c,reg,desc)
 		local ea=Effect.CreateEffect(c)
- 		ea:SetDescription(69,1)
+ 		ea:SetDescription(209,1)
  		ea:SetType(EFFECT_TYPE_IGNITION+EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
  		ea:SetRange(LOCATION_HAND)
  		ea:SetOperation(Trampula.SetOp)
