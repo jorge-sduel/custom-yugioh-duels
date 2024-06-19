@@ -86,7 +86,7 @@ e2:SetCountLimit(1,318)
 	e9:SetCode(EFFECT_ADD_ATTRIBUTE)
 	e9:SetValue(ATTRIBUTE_WATER)
 	c:RegisterEffect(e9)
-	--place
+	--[[place
 	local e10=Effect.CreateEffect(c)
 	e10:SetDescription(aux.Stringid(47408488,1))
 	e10:SetType(EFFECT_TYPE_IGNITION)
@@ -97,7 +97,7 @@ e10:SetCountLimit(1,10000000)
 	e10:SetTarget(c318.target3)
 	e10:SetOperation(c318.activate3)
 	e10:SetValue(SUMMON_TYPE_PENDULUM)
-	c:RegisterEffect(e10)
+	c:RegisterEffect(e10)]]
 end
 c318.pendulum_level=6
 function c318.ffilter(c,tp)
