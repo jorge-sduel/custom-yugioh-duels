@@ -9,24 +9,6 @@ end
 --add procedure to Pendulum monster, also allows registeration of activation effect
 Trampula.AddProcedure = aux.FunctionWithNamedArgs(
 function(c,reg,desc)
-	local te=c:GetActivateEffect()
-			--Return
-	local e0=Effect.CreateEffect(c)
-	e0:SetDescription(aux.Stringid(id,0))
-	e0:SetType(EFFECT_TYPE_ACTIVATE)
-	e0:SetProperty(te:GetProperty())
-				if c:GetType()==TYPE_TRAP then
-				e0:SetCode(EVENT_FREE_CHAIN)
-			else
-				e0:SetCode(te:GetCode())
-		end
-	e0:SetRange(LOCATION_HAND)
-	e0:SetCondition(Trampula.con)
-	e0:SetCost(Trampula.cos) 
-	e0:SetTarget(Trampula.tar)
-	e0:SetOperation(te:GetOperation())
-	e0:SetValue(LOCATION_SZONE)
-	c:RegisterEffect(e0)
 		local ea=Effect.CreateEffect(c)
  		ea:SetDescription(209,1)
  		ea:SetType(EFFECT_TYPE_IGNITION+EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -193,28 +175,3 @@ end
 function Trampula.Efpendulum(e,c)
 	return c:IsType(TYPE_PENDULUM)
 end
-function Trampula.con(e,tp,eg,ep,ev,re,r,rp)
-	local te=e:GetHandler():GetActivateEffect()
-	local condition=te:GetCondition()
-	return (not condition or condition(e,tp,eg,ep,ev,re,r,rp)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.GetLocationCount(tp,LOCATION_SZONE)>=1 and c:IsHasEffect(EFFECT_TRAP_ACT_IN_HAND)
-end
-function Trampula.cos(e,tp,eg,ep,ev,re,r,rp,chk)
-	local te=e:GetHandler():GetActivateEffect()
-	local co=te:GetCost()
-	if chk==0 then return not co or co(e,tp,eg,ep,ev,re,r,rp,0) end
-	if co then co(e,tp,eg,ep,ev,re,r,rp,1) end
-end
-function Trampula.tar(e,tp,eg,ep,ev,re,r,rp,chk)
-	local c=e:GetHandler()
-	local te=c:GetActivateEffect()
-	local tg=te:GetTarget()
-	local op=te:GetOperation()
-	if chk==0 then return (not tg or tg(e,tp,eg,ep,ev,re,r,rp,0)) and Duel.GetTurnPlayer()==tp
-		and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_GRAVE,0,1,nil,31829185)
-	end
-	c:CreateEffectRelation(e)
-	if tg then tg(e,tp,eg,ep,ev,re,r,rp,1,nil) end
-	e:SetOperation(op)
-end
-
