@@ -166,7 +166,7 @@ end
 function Trampula.SetOp(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEDOWN,true)
-	Duel.Hint(HINT_CARD,0,1)
+	--Duel.Hint(HINT_CARD,0,1)
 end
 function Trampula.Efpendulum(e,c)
 	return c:IsType(TYPE_PENDULUM)
