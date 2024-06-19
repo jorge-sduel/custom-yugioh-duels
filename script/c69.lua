@@ -18,7 +18,7 @@ function c69.initial_effect(c)
 	e2:SetTarget(c69.tg)
 	e2:SetOperation(c69.op)
 	c:RegisterEffect(e2)
-	--Return
+	--[[Return
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(51,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
@@ -26,7 +26,7 @@ function c69.initial_effect(c)
 	e4:SetRange(LOCATION_HAND)
 
 	e4:SetOperation(c69.rop)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4)]]
 	--place
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(47408488,1))
