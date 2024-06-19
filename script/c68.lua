@@ -32,14 +32,14 @@ function c68.initial_effect(c)
 	e3:SetCost(aux.bfgcost)
 	e3:SetOperation(c68.groperation)
 	c:RegisterEffect(e3)
-	--Return
+	--[[Return
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(51,2))
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetRange(LOCATION_HAND)
 	e4:SetOperation(c68.rop)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4)]]
 	--indes
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_SINGLE)
