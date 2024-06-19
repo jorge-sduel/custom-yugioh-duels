@@ -15,7 +15,11 @@ function(c,reg,desc)
 	e0:SetDescription(aux.Stringid(id,0))
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetProperty(te:GetProperty())
-	e0:SetCode(te:GetCode())
+				if tc:GetType()==TYPE_TRAP then
+				e0:SetCode(EVENT_FREE_CHAIN)
+			else
+				e0:SetCode(te:GetCode())
+		end
 	e0:SetRange(LOCATION_HAND)
 	e0:SetCondition(Trampula.con)
 	e0:SetCost(Trampula.cos) 
