@@ -19,7 +19,7 @@ function c62.initial_effect(c)
 	e2:SetCode(EVENT_DRAW)
 	e2:SetOperation(c62.recop)
 	c:RegisterEffect(e2)
-	--Return
+	--[[Return
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(51,2))
 	e3:SetType(EFFECT_TYPE_IGNITION)
@@ -27,7 +27,7 @@ function c62.initial_effect(c)
 	e3:SetRange(LOCATION_HAND)
 
 	e3:SetOperation(c62.rop)
-	c:RegisterEffect(e3)
+	c:RegisterEffect(e3)]]
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(90036274,0))
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
