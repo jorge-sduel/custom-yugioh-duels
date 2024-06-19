@@ -15,7 +15,7 @@ function(c,reg,desc)
 	e0:SetDescription(aux.Stringid(id,0))
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetProperty(te:GetProperty())
-				if tc:GetType()==TYPE_TRAP then
+				if c:GetType()==TYPE_TRAP then
 				e0:SetCode(EVENT_FREE_CHAIN)
 			else
 				e0:SetCode(te:GetCode())
@@ -197,7 +197,7 @@ function Trampula.con(e,tp,eg,ep,ev,re,r,rp)
 	local te=e:GetHandler():GetActivateEffect()
 	local condition=te:GetCondition()
 	return (not condition or condition(e,tp,eg,ep,ev,re,r,rp)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 and c:IsHasEffect(EFFECT_TRAP_ACT_IN_HAND,tp)
+		and Duel.GetLocationCount(tp,LOCATION_SZONE)>=1 and c:IsHasEffect(EFFECT_TRAP_ACT_IN_HAND)
 end
 function Trampula.cos(e,tp,eg,ep,ev,re,r,rp,chk)
 	local te=e:GetHandler():GetActivateEffect()
