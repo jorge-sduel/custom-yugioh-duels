@@ -1,7 +1,8 @@
 --fire balance
+if not TRAMPULA_IMPORTED then Duel.LoadScript("proc_trampula.lua") end
 function c319.initial_effect(c)
 	--pendulum summon
-	Pendulum.AddProcedure(c)
+	Trampula.AddProcedure(c)
 	--tohand
 	local e0=Effect.CreateEffect(c)
 	e0:SetCategory(CATEGORY_DESTROY+CATEGORY_TOHAND+CATEGORY_SEARCH)
