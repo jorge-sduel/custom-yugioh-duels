@@ -16,7 +16,7 @@ function c92834758.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetTargetRange(1,0)
-	e2:SetValue(c9012916.damval)
+	e2:SetValue(c92834758.damval)
 	c:RegisterEffect(e2)
 	local e4=e2:Clone()
 	e4:SetCode(EFFECT_NO_EFFECT_DAMAGE)
@@ -27,7 +27,7 @@ function c92834758.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
-	e3:SetValue(c9012916.atkval)
+	e3:SetValue(c92834758.atkval)
 	c:RegisterEffect(e3)
 	--atkdown
 	local e6=Effect.CreateEffect(c)
@@ -36,10 +36,10 @@ function c92834758.initial_effect(c)
 	e6:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e6:SetRange(LOCATION_MZONE)
 	e6:SetCountLimit(1)
-	e6:SetCondition(c9012916.atkcon)
-	e6:SetCost(c9012916.cost)
-	e6:SetTarget(c9012916.target)
-	e6:SetOperation(c9012916.operation)
+	e6:SetCondition(c92834758.atkcon)
+	e6:SetCost(c92834758.cost)
+	e6:SetTarget(c92834758.target)
+	e6:SetOperation(c92834758.operation)
 	c:RegisterEffect(e6)
 	--Special summon
 	local e5=Effect.CreateEffect(c)
@@ -55,20 +55,20 @@ function c92834758.initial_effect(c)
 end
 c92834758.listed_names={CARD_ASSAULT_MODE,9012916}
 c92834758.assault_mode=9012916
-function c9012916.damval(e,re,val,r,rp,rc)
+function c92834758.damval(e,re,val,r,rp,rc)
 	if bit.band(r,REASON_EFFECT)~=0 then
 		e:GetHandler():AddCounter(0x10,1)
 		return 0
 	end
 	return val
 end
-function c9012916.atkval(e,c)
+function c92834758.atkval(e,c)
 	return c:GetCounter(0x10)*-800
 end
-function c9012916.atkcon(e,tp,eg,ep,ev,re,r,rp)
+function c92834758.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_MAIN1
 end
-function c9012916.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+function c92834758.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():GetCounter(0x10)>0 end
 	local ct=e:GetHandler():GetCounter(0x10)
 	e:SetLabel(ct*800)
@@ -81,13 +81,13 @@ function c9012916.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e1:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e1,tp)
 end
-function c9012916.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function c92834758.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(1-tp) and chkc:IsFaceup() end
 	if chk==0 then return Duel.IsExistingTarget(aux.nzatk,tp,0,LOCATION_MZONE,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,aux.nzatk,tp,0,LOCATION_MZONE,1,1,nil)
 end
-function c9012916.operation(e,tp,eg,ep,ev,re,r,rp)
+function c92834758.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		local val=e:GetLabel()
