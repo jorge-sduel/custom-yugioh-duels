@@ -30,7 +30,7 @@ function c92834757.initial_effect(c)
 	e3:SetOperation(c92834757.posop)
 	c:RegisterEffect(e3)
 		--pierce
-	local me2=Effect.CreateEffect(c)
+	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_PIERCE)
 	c:RegisterEffect(e4)
