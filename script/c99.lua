@@ -1,7 +1,7 @@
 --Red Dragon Archfiend (Purple)
 function c99.initial_effect(c)
 	--synchro summon
-	Synchro.AddProcedure(c,nil,aux.NonTuner(nil),1)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--destroy1
 	local e1=Effect.CreateEffect(c)
