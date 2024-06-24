@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.xyz_number=102
 function s.ovfilter(c,tp,lc)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FAIRY)
+	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FAIRY) and c:IsType(TYPE_XYZ)
 end
 function s.matfilter(c)
 	return c:IsRace(RACE_FAIRY)
