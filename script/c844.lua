@@ -4,14 +4,6 @@ function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,s.matfilter,4,3,s.ovfilter,aux.Stringid(id,0))
 	c:EnableReviveLimit()
-	--recover
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_QUICK_O)
-	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetRange(LOCATION_MZONE)
-	e1:SetCountLimit(1,id)
-	e1:SetOperation(s.op)
-	c:RegisterEffect(e1,false,REGISTER_FLAG_DETACH_XMAT)
 	--banish from the GY and special summon itself
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
@@ -53,7 +45,7 @@ local e4=Effect.CreateEffect(c)
 end
 s.xyz_number=103
 function s.ovfilter(c,tp,lc)
-	return c:IsAttribute(ATTRIBUTE_LIGHT) and c:IsRace(RACE_FAIRY)
+	return c:IsType(TYPE_XYZ) and c:IsRace(RACE_FAIRY)
 end
 function s.matfilter(c)
 	return c:IsAttribute(ATTRIBUTE_WATER)
