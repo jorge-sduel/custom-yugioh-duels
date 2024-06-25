@@ -99,18 +99,19 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,tc,1,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local tc=eg:GetFirst()
+	local g=eg:GetFirst()
 	if Duel.Remove(g,POS_FACEUP,REASON_EFFECT)>0 then
 		local dg=Duel.GetOperatedGroup()
 		local atk=0
 		local tc=dg:GetFirst()
 		while tc do
 			if tc:IsPreviousPosition(POS_FACEUP) then
+				def=def+tc:GetPreviousDefenseOnField()
 				atk=atk+tc:GetPreviousAttackOnField()
 			end
 			tc=dg:GetNext()
 		end
-		Duel.Damage(1-tp,atk,REASON_EFFECT)
+		Duel.Damage(1-tp,atk-def,REASON_EFFECT)
 	end
 end
 function s.filter2(c,tp)
@@ -136,10 +137,11 @@ function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 		local tc=dg:GetFirst()
 		while tc do
 			if tc:IsPreviousPosition(POS_FACEUP) then
+				def=def+tc:GetPreviousDefenseOnField()
 				atk=atk+tc:GetPreviousAttackOnField()
 			end
 			tc=dg:GetNext()
 		end
-		Duel.Damage(1-tp,atk,REASON_EFFECT)
+		Duel.Damage(1-tp,atk-def,REASON_EFFECT)
 	end
 end
