@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,1))
 	e3:SetCategory(CATEGORY_DESTROY+CATEGORY_REMOVE+CATEGORY_SPECIAL_SUMMON)
-	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_TO_GRAVE)
 	e3:SetCondition(s.spcon)
 	e3:SetTarget(s.sptg)
@@ -17,7 +17,7 @@ function s.initial_effect(c)
 --
 local e4=Effect.CreateEffect(c)
 	e4:SetCategory(CATEGORY_DESTROY+CATEGORY_REMOVE)
-	e4:SetType(EFFECT_TYPE_QUICK_O)
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_SUMMON_SUCCESS)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetCost(s.cost)
@@ -59,8 +59,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local dg=Duel.GetFieldGroup(tp,LOCATION_MZONE,LOCATION_MZONE)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,dg,#dg,0,0)
+	local dg=Duel.GetFieldGroup(tp,LOCATION_GRAVE,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_REMOVE,nil,1,tp,LOCATION_GRAVE)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,tp,LOCATION_GRAVE)
 end
@@ -70,8 +69,7 @@ end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_GRAVE,0,c)
 	local c=e:GetHandler()
-	if #g>0 and c:IsLocation(LOCATION_GRAVE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
-		and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+	if #g>0 and c:IsLocation(LOCATION_GRAVE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) then
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 		local rg=g:Select(tp,1,1,nil)
@@ -81,8 +79,6 @@ if Duel.Remove(rg,POS_FACEUP,REASON_EFFECT)==0 then return end
 	local g2=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,LOCATION_GRAVE,c)
 	if #g2>0 and c:IsLocation(LOCATION_GRAVE)
 		and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
-		Duel.BreakEffect()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 		local rg2=g2:Select(tp,1,2,nil)
 			Duel.Overlay(c,rg2)
  end
