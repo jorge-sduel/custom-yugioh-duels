@@ -68,6 +68,7 @@ function s.rmfilter(c)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.rmfilter,tp,LOCATION_GRAVE,0,c)
+	local g2=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,LOCATION_GRAVE,c) 
 	local c=e:GetHandler()
 	if #g>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false) then
 		Duel.BreakEffect()
@@ -75,11 +76,10 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local rg=g:Select(tp,1,1,nil)
 		Duel.Remove(rg,POS_FACEUP,REASON_EFFECT)
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP) 
-	end
-	local g2=Duel.GetMatchingGroup(Card.IsMonster,tp,LOCATION_GRAVE,LOCATION_GRAVE,c)
 	if #g2>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 		local rg2=g2:Select(tp,1,2,nil)
 			Duel.Overlay(c,rg2)
+		end
  end
 end
 function s.filter(c,tp,ep)
