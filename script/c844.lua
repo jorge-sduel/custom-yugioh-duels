@@ -99,6 +99,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Remove(g,POS_FACEUP,REASON_EFFECT)>0 then
 		local dg=Duel.GetOperatedGroup()
 		local atk=0
+		local def=0
 		local tc=dg:GetFirst()
 		while tc do
 			if tc:IsPreviousPosition(POS_FACEUP) then
@@ -130,6 +131,7 @@ function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Remove(g,POS_FACEUP,REASON_EFFECT)>0 then
 		local dg=Duel.GetOperatedGroup()
 		local atk=0
+		local def=0
 		local tc=dg:GetFirst()
 		while tc do
 			if tc:IsPreviousPosition(POS_FACEUP) then
