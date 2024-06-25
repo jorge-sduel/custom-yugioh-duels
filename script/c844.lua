@@ -111,7 +111,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			end
 			tc=dg:GetNext()
 		end
-		Duel.Damage(1-tp,atk-def,REASON_EFFECT)
+		Duel.Damage(1-tp,math.abs(atk-def),REASON_EFFECT)
 	end
 end
 function s.filter2(c,tp)
@@ -142,6 +142,6 @@ function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 			end
 			tc=dg:GetNext()
 		end
-		Duel.Damage(1-tp,atk-def,REASON_EFFECT)
+		Duel.Damage(1-tp,math.abs(atk-def),REASON_EFFECT)
 	end
 end
