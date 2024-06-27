@@ -63,10 +63,10 @@ function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetDecktopGroup(tp,1):GetFirst() 
+	local g=Duel.GetDecktopGroup(1-tp,1):GetFirst() 
 	if c:IsRelateToEffect(e) then
 	Duel.DisableShuffleCheck()
-	if (not g:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,0))) then
+	if (not g:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,3))) then
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	else
 		Duel.Overlay(c,g)
@@ -78,12 +78,12 @@ function s.xyztg1(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.xyzop1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(Card.IsSequence,tp,0,LOCATION_DECK,nil,0)
-	if c:IsRelateToEffect(e) and #g==1 then
-	if (not g:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,0))) then
+	local g=Duel.GetMatchingGroup(Card.IsSequence,tp,0,LOCATION_DECK,nil,0):GetFirst()
+	if c:IsRelateToEffect(e) then
+	Duel.DisableShuffleCheck()
+	if (not g:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,3))) then
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 	else
-		Duel.DisableShuffleCheck()
 		Duel.Overlay(c,g)
 			end
 	end
