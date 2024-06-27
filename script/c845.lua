@@ -63,7 +63,7 @@ function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetDecktopGroup(1-tp,1)
+	local g=Duel.GetDecktopGroup(1-tp,1):GetFist()
 	if c:IsRelateToEffect(e) and #g==1 then
 	if (not g:IsAbleToRemove() or Duel.SelectYesNo(tp,aux.Stringid(id,0))) then
 		Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
