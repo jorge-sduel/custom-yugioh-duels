@@ -23,6 +23,16 @@ function s.initial_effect(c)
 	e2:SetTarget(s.tglimit)
 	e2:SetValue(aux.tgoval)
 	c:RegisterEffect(e2)
+		--atk down
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetCode(EFFECT_SET_ATTACK_FINAL)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetTargetRange(0,LOCATION_MZONE)
+	e3:SetCondition(s.adcon)
+	e3:SetTarget(s.adtg)
+	e3:SetValue(s.atkval)
+	c:RegisterEffect(e3)
 end
 s.xyz_number=102
 function s.ovfilter(c,tp,lc)
@@ -63,4 +73,13 @@ function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.repval(e,c)
 	return s.repfilter(c,e:GetHandlerPlayer())
+end
+function s.adcon(e)
+	return Duel.GetCurrentPhase()==PHASE_DAMAGE_CAL and e:GetHandler():GetBattleTarget()
+end
+function s.adtg(e,c)
+	return c==e:GetHandler():GetBattleTarget()
+end
+function s.atkval(e,c)
+	return 0
 end
