@@ -70,6 +70,7 @@ function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	else
 		Duel.DisableShuffleCheck()
 		Duel.Overlay(c,g)
+		end
 	end
 end
 function s.xyztg1(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -84,5 +85,6 @@ function s.xyzop1(e,tp,eg,ep,ev,re,r,rp)
 	else
 		Duel.DisableShuffleCheck()
 		Duel.Overlay(c,g)
+			end
 	end
 end
