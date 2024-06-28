@@ -85,20 +85,20 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.filter(c,e)
 	local g=e:GetHandler():GetMaterial():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
-	return c:IsFaceup() and c:IsType(TYPE_XYZ) and #g>0
+	return #g>0
 end
 function s.tfilter(c)
 	return not c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil,e)
+		local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
 		return #g>0 and not g:IsExists(s.tfilter,1,nil)
 	end
-	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil,e)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil,e)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 end
