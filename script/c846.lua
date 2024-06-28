@@ -26,6 +26,14 @@ function s.initial_effect(c)
 	e1:SetTarget(s.damtg)
 	e1:SetOperation(s.damop)
 	c:RegisterEffect(e1)
+		--Activate
+	local e2=Effect.CreateEffect(c)
+	e2:SetCategory(CATEGORY_REMOVE)
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e2:SetCode(EVENT_DESTROY)
+	e2:SetTarget(s.target)
+	e2:SetOperation(s.activate)
+	c:RegisterEffect(e2)
 end
 s.xyz_number=106
 function s.ovfilter(c,tp,lc)
@@ -73,4 +81,23 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Damage(p,d,REASON_EFFECT)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
+function s.filter(c,e)
+	local g=e:GetHandler():GetMaterial():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
+	return c:IsFaceup() and c:IsType(TYPE_XYZ) and #g>0
+end
+function s.tfilter(c)
+	return not c:IsAbleToRemove()
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then
+		local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil,e)
+		return #g>0 and not g:IsExists(s.tfilter,1,nil)
+	end
+	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil,e)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
+end
+function s.activate(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(s.filter,tp,0,LOCATION_MZONE+LOCATION_GRAVE,nil,e)
+	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 end
