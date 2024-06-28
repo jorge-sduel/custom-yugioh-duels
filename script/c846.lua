@@ -87,7 +87,7 @@ function s.filter(c,e)
 	return e:GetHandler():GetMaterial()
 end
 function s.tfilter(c)
-	return not c:IsAbleToRemove()
+	return not c:IsAbleToRemove() and e:GetHandler():GetMaterial()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
