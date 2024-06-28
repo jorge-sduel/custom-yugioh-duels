@@ -84,8 +84,7 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function s.filter(c,e)
-	local g=e:GetHandler():GetMaterial():Filter(Card.IsLocation,nil,LOCATION_GRAVE)
-	return #g>0
+	return e:GetHandler():GetMaterial()
 end
 function s.tfilter(c)
 	return not c:IsAbleToRemove()
