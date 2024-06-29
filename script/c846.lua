@@ -35,6 +35,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
+		--registration before leaving
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e3:SetCode(EVENT_LEAVE_FIELD_P)
+	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e3:SetOperation(s.regop)
+	c:RegisterEffect(e3)
 end
 s.xyz_number=106
 function s.ovfilter(c,tp,lc)
@@ -87,17 +94,23 @@ function s.filter(c,e)
 	return e:GetHandler():GetMaterial()
 end
 function s.tfilter(c)
-	return not c:IsAbleToRemove() and e:GetHandler():GetMaterial()
+	return c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
-		return #g>0 and not g:IsExists(s.tfilter,1,nil)
+		local g=e:GetLabelObject():GetLabelObject():Filter(s.tfilter,nil,e,tp)
+		return #g>0
 	end
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
+	local g=e:GetLabelObject():GetLabelObject():Filter(s.tfilter,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_GRAVE,0,nil,e)
+	local g=e:GetLabelObject():GetLabelObject():Filter(s.tfilter,nil,e,tp)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
+end
+function s.regop(e,tp,eg,ep,ev,re,r,rp)
+	local g=e:GetHandler():GetOverlayGroup()
+	if #g==0 then return end
+	g:KeepAlive()
+	e:SetLabelObject(g)
 end
