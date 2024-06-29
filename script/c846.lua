@@ -98,14 +98,15 @@ function s.tfilter(c)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
-		local g=e:GetLabelObject():GetLabelObject():Filter(s.tfilter,nil,e,tp)
+		local g=e:GetLabelObject():GetLabelObject()
+		g=g:Filter(s.tfilter,nil,e,tp)
 		return #g>0
 	end
-	local g=e:GetLabelObject():GetLabelObject():Filter(s.tfilter,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=e:GetLabelObject():GetLabelObject():Filter(s.tfilter,nil,e,tp)
+	local g=e:GetLabelObject()
+	g=g:Filter(s.tfilter,nil,e,tp)
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
