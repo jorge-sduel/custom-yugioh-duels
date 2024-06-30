@@ -94,21 +94,30 @@ end
 function s.filter(c,e)
 	return e:GetHandler():GetMaterial()
 end
-function s.tfilter(c)
+function s.tfilter(c,e,tp)
 	return c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
+	local g=e:GetLabelObject():GetLabelObject()
+	local g1,g2
+	if g then
+		g1=g:Filter(Card.IsMonster,nil)
+		g2=g:Filter(s.tfilter,nil,e,tp)
+	end
 		local g=e:GetLabelObject():GetLabelObject()
 		g=g:Filter(s.tfilter,nil,e,tp)
-		return #g>0
-	end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
+	if chk==0 then return g and g1 and g2 and #g1==#g2 and ft>=#g2 end
+	local loc=0
+	if g2:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then loc=LOCATION_GRAVE end
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g2,#g2,tp,loc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local g=e:GetLabelObject()
-	g=g:Filter(s.tfilter,nil,e,tp)
+	local g=e:GetLabelObject():GetLabelObject()
+	g=g:Filter(s.spfilter,nil,e,tp)
+	if #g then return end
+	for tc in aux.Next(g) do
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
+	end
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetOverlayGroup()
