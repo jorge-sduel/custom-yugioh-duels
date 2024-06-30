@@ -113,7 +113,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject():GetLabelObject()
-	g=g:Filter(s.spfilter,nil,e,tp)
+	g=g:Filter(s.tfilter,nil,e,tp)
 	if #g then return end
 	for tc in aux.Next(g) do
 	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
