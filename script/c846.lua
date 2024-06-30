@@ -116,7 +116,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	g=g:Filter(s.tfilter,nil,e,tp)
 	if #g then return end
 	for tc in aux.Next(g) do
-	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
+	Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 	end
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
