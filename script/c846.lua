@@ -33,9 +33,10 @@ function s.initial_effect(c)
 	e2:SetCode(EVENT_DESTROYED)
 	e2:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e2:SetTarget(s.target)
+	e2:SetLabelObject(e3)
 	e2:SetOperation(s.activate)
 	c:RegisterEffect(e2)
-		--registration before leaving
+	--registration before leaving
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e3:SetCode(EVENT_LEAVE_FIELD_P)
