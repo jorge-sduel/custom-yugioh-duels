@@ -106,7 +106,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 		local g=e:GetLabelObject():GetLabelObject()
 		g=g:Filter(s.tfilter,nil,e,tp)
-	if chk==0 then return g and g1 and g2 and #g1==#g2 and ft>=#g2 end
+	if chk==0 then return g and g1 and g2 and #g1==#g2 end
 	local loc=0
 	if g2:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then loc=LOCATION_GRAVE end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g2,#g2,tp,loc)
