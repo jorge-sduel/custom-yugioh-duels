@@ -109,19 +109,19 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		g=g:Filter(s.tfilter,nil,e,tp)
 	if chk==0 then return g and g1 and g2 and #g1==#g2 end
 	local loc=0
-	if g2:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) and Duel.GetLocationCount(tp,LOCATION_MZONE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) then loc=LOCATION_GRAVE end
+	if g2:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then loc=LOCATION_GRAVE end
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g2,#g2,tp,loc)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=e:GetLabelObject():GetLabelObject()
 	g=g:Filter(s.tfilter,nil,e,tp)
-	if #g and Duel.GetLocationCount(tp,LOCATION_MZONE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) then return end
+	if #g then return end
 	for tc in aux.Next(g) do
 	Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
-	Duel.SpecialSummonStep(c,0,tp,tp,false,false,POS_FACEUP)
+	--Duel.SpecialSummonStep(c,0,tp,tp,false,false,POS_FACEUP)
 	end
-	Duel.SpecialSummonComplete()
+	-Duel.SpecialSummonComplete()
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetOverlayGroup()
