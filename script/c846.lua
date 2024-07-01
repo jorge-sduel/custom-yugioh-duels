@@ -121,7 +121,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
 	--Duel.SpecialSummonStep(c,0,tp,tp,false,false,POS_FACEUP)
 	end
-	-Duel.SpecialSummonComplete()
+	--Duel.SpecialSummonComplete()
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetOverlayGroup()
