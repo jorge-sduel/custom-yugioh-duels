@@ -95,7 +95,7 @@ function s.filter(c,e)
 	return e:GetHandler():GetMaterial()
 end
 function s.tfilter(c,e,tp)
-	return c:IsAbleToRemove()
+	return c:IsAbleToRemove() and c:IsAttribute(ATTRIBUTE_FIRE)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
@@ -119,8 +119,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g2=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	--if #g then return end
 	for tc in aux.Next(g) do
-	Duel.SpecialSummon(g2,0,tp,tp,false,false,POS_FACEUP) 
-	Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
+		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT) 
+		Duel.SpecialSummon(g2,0,tp,tp,false,false,POS_FACEUP) 
 	end
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
