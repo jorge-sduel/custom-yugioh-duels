@@ -91,17 +91,17 @@ function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(p,d,REASON_EFFECT)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
-function s.filter(c,e)
-	return e:GetHandler():GetMaterial()
+function s.filter(c,e,tp)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsAttribute(ATTRIBUTE_FIRE) 
 end
 function s.tfilter(c,e,tp)
-	return c:IsAbleToRemove() and c:IsAttribute(ATTRIBUTE_FIRE)
+	return c:IsAbleToRemove()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local g=e:GetLabelObject():GetLabelObject()
 	--local g1,g2
-	if g and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,nil,e,tp) then
+	if g and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingTarget(s.filter,tp,LOCATION_GRAVE,0,1,g,e,tp) then
 		--g1=g:Filter(Card.IsMonster,nil)
 		local tg=g:Filter(s.tfilter,nil,e,tp)
 	end
@@ -116,7 +116,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetLabelObject():GetLabelObject()
 	g=g:Filter(s.tfilter,nil,e,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g2=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
+	local g2=Duel.SelectTarget(tp,s.filter,tp,LOCATION_GRAVE,0,1,1,g,e,tp)
 	--if #g then return end
 	for tc in aux.Next(g) do
 		Duel.Remove(tc,POS_FACEUP,REASON_EFFECT) 
