@@ -39,8 +39,8 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_DESTROYED)
 	e3:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
+	e3:SetLabelObject(e2) 
 	e3:SetTarget(s.target)
-	e3:SetLabelObject(e2)
 	e3:SetOperation(s.activate)
 	c:RegisterEffect(e3)	
 end
@@ -100,28 +100,25 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	local g=e:GetLabelObject():GetLabelObject()
-	local g1,g2
+	--local g1,g2
 	if g and Duel.GetLocationCount(tp,LOCATION_MZONE) then
-		g1=g:Filter(Card.IsMonster,nil)
-		g2=g:Filter(s.tfilter,nil,e,tp)
+		--g1=g:Filter(Card.IsMonster,nil)
+		local tg=g:Filter(s.tfilter,nil,e,tp)
 	end
-		local g=e:GetLabelObject():GetLabelObject()
-		g=g:Filter(s.tfilter,nil,e,tp)
-	if chk==0 then return g and g1 and g2 and #g1==#g2 end
+		--local g=e:GetLabelObject():GetLabelObject()
+		local tg=g:Filter(s.tfilter,nil,e,tp)
+	if chk==0 then return tg end
 	local loc=0
-	if g2:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then loc=LOCATION_GRAVE end
-	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g2,#g2,tp,loc)
+	if tg:IsExists(Card.IsLocation,1,nil,LOCATION_GRAVE) then loc=LOCATION_GRAVE end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=e:GetLabelObject():GetLabelObject()
 	g=g:Filter(s.tfilter,nil,e,tp)
-	if #g then return end
+	--if #g then return end
 	for tc in aux.Next(g) do
 	Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)
-	--Duel.SpecialSummonStep(c,0,tp,tp,false,false,POS_FACEUP)
 	end
-	--Duel.SpecialSummonComplete()
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local g=e:GetHandler():GetOverlayGroup()
