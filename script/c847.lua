@@ -15,7 +15,7 @@ s.xyz_number=106
 function s.xyzfilter(c,tp,xyzc)
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 		local ag=g:GetMaxGroup(Card.GetAttack)
-	return c:IsFaceup() and  c:IsType(TYPE_XYZ,xyzc,SUMMON_TYPE_XYZ,tp) and c:IsAttack(ag:GetAttack())
+	return c:IsFaceup() and  c:IsType(TYPE_XYZ,xyzc,SUMMON_TYPE_XYZ,tp) and c==ag
 end
 function s.dircon(e)
 	return e:GetHandler():GetOverlayCount()>0
