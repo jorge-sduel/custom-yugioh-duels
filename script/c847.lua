@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Xyz Summon
-	Xyz.AddProcedure(c,nil,4,3,s.xyzfilter,aux.Stringid(id,0))
+	Xyz.AddProcedure(c,s.matfilter,4,3,s.xyzfilter,aux.Stringid(id,0),3,s.xyzop)
 	c:EnableReviveLimit()
 --
 	local e2=Effect.CreateEffect(c)
@@ -24,9 +24,17 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.xyz_number=106
+function s.matfilter(c)
+	return c:IsRace(RACE_ROCK)
+end
 function s.xyzfilter(c,tp,xyzc)
 	local g=Duel.GetMatchingGroup(s.filterx,tp,LOCATION_MZONE,0,nil)
 	return #g>0 and g:GetMaxGroup(Card.GetAttack,nil):IsContains(c)
+end
+function s.xyzop(e,tp,chk)
+	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
+	Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
+	return true
 end
 function s.dircon(e)
 	return e:GetHandler():GetOverlayCount()>0
