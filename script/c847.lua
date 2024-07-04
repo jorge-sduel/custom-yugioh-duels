@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCondition(s.descon)
-	e3:SetCondition(s.negcon)
+	--e3:SetCondition(s.negcon)
 	e3:SetOperation(s.negop)
 	c:RegisterEffect(e3)
 end
@@ -43,7 +43,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) or Duel.GetCurrentChain()~=ev+1 or c:RemoveOverlayCard(tp,1,1,REASON_EFFECT)<1 then return end
+	if not c:IsRelateToEffect(e) or c:RemoveOverlayCard(tp,1,1,REASON_EFFECT)<1 then return end
 	local g=Duel.GetMatchingGroup(Card.IsNegatable,tp,0,LOCATION_ONFIELD,c)
 	g:ForEach(function(tc) tc:NegateEffects(c,RESET_PHASE|PHASE_END,true) end)
 end
