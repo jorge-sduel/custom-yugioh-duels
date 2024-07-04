@@ -45,6 +45,6 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or c:RemoveOverlayCard(tp,1,1,REASON_EFFECT)<1 then return end
 	local g=Duel.GetMatchingGroup(Card.IsNegatable,tp,0,LOCATION_ONFIELD,c)
-	g:ForEach(function(tc) tc:NegateEffects(c,RESET_PHASE|PHASE_END,true) end)
+	g:ForEach(function(tc) tc:NegateEffects(c,RESET_EVENT+RESETS_STANDARD,true) end)
 end
 	
