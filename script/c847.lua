@@ -13,10 +13,13 @@ function s.initial_effect(c)
 end
 s.xyz_number=106
 function s.xyzfilter(c,tp,xyzc)
-	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
-		local ag=g:GetMaxGroup(Card.GetAttack)
-	return c:IsFaceup() and  c:IsType(TYPE_XYZ,xyzc,SUMMON_TYPE_XYZ,tp) and c==ag
+	local g=Duel.GetMatchingGroup(s.filterx,tp,LOCATION_MZONE,0,nil)
+	return #g>0 and g:GetMaxGroup(Card.GetAttack,nil):IsContains(c)
 end
 function s.dircon(e)
 	return e:GetHandler():GetOverlayCount()>0
 end
+function s.filterx(c)
+	return c:IsFaceup() and c:IsType(TYPE_XYZ)
+end
+	
