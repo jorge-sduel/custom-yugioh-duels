@@ -20,6 +20,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1)
 	e2:SetCost(aux.dxmcostgen(2,2,nil))
+	e2:SetCondition(s.condition)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2,false,REGISTER_FLAG_DETACH_XMAT)
 end
@@ -50,6 +51,9 @@ function s.imop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.efilter(e,te)
 	return te:GetOwner()~=e:GetOwner()
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnPlayer()==tp
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
