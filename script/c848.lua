@@ -5,7 +5,6 @@ function s.initial_effect(c)
 	--Xyz Summon
 	Xyz.AddProcedure(c,nil,8,3,s.xyzfilter,aux.Stringid(id,0),3,s.xyzop)
 	c:EnableReviveLimit()
---
 	--Unaffected by other cards' effects
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
@@ -68,7 +67,7 @@ end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return Duel.GetAttacker()==c
-		and c:CanChainAttack() and c:IsAttackAbove(500)
+		and c:CanChainAttack(0) and c:IsAttackAbove(500)
 end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
