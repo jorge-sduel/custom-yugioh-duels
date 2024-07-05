@@ -67,7 +67,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return Duel.GetAttacker()==c and aux.bdocon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetAttacker()==c
 		and c:CanChainAttack() and c:IsAttackAbove(500)
 end
 function s.atop(e,tp,eg,ep,ev,re,r,rp)
@@ -77,7 +77,7 @@ function s.atop(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	e3:SetValue(-500)
 	c:RegisterEffect(e3)
 end
