@@ -54,8 +54,8 @@ function s.efilter(e,te)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) then return end
-			--Make a second attack in a row
+	--if not c:IsRelateToEffect(e) then return end
+	--Make a second attack in a row
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
