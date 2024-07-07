@@ -88,11 +88,11 @@ end
 function s.spfilter(c)
 	return c:IsAbleToRemoveAsCost()
 end
-function card.removefilter(c)
+function s.removefilter(c)
 	return c:IsType(TYPE_XYZ) and c:IsMonster() and c:IsAbleToRemove()
 end 
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.removefilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.removefilter,tp,LOCATION_GRAVE,0,1,nil) and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_GRAVE+LOCATION_ONFIELD,LOCATION_ONFIELD+LOCATION_GRAVE,7,nil) end
 	local g=Duel.GetMatchingGroup(s.removefilter,tp,LOCATION_GRAVE,0,nil)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,g:GetCount(),0,0)
 end
