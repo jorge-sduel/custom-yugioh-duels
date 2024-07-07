@@ -7,16 +7,14 @@ function s.initial_effect(c)
 	--Detach Xyz material
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_CHAINING)
-	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
 	--e1:SetCost(s.cost)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
-		--special summon
+	--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_SPSUMMON_PROC)
@@ -60,12 +58,13 @@ function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(1)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_SET_ATTACK)
+	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetReset(RESET_EVENT|RESETS_STANDARD_DISABLE&~RESET_TOFIELD)
 	e1:SetValue(tc:GetAttack())
+	e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 	e:GetHandler():RegisterEffect(e1)
+	e:GetHandler():CopyEffect(code,RESET_EVENT|RESETS_STANDARD,1)
 	else
-
 		e:SetLabel(0)
 	end
 	Duel.SendtoGrave(m,REASON_COST)
