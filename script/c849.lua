@@ -35,7 +35,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 		if mg1:GetCount()~=0 then
 			og:Merge(mg1)
 			Duel.Overlay(c,mg1)
-		end
+		end
 		c:SetMaterial(og)
 		Duel.Overlay(c,g1)
+	end
 end
