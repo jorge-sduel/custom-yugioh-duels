@@ -30,13 +30,13 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 	og=Group.CreateGroup()
 	og:Merge(g1)
-		if g1:GetCount()>0 then
-		local mg1=g1:GetOverlayGroup()
+		if #g1>0 then
+		--[[local mg1=g1:GetOverlayGroup()
 		if mg1:GetCount()~=0 then
 			og:Merge(mg1)
 			Duel.Overlay(c,mg1)
-		end
-		c:SetMaterial(og)
+		end]]
+		c:SetMaterial(g1)
 		Duel.Overlay(c,g1)
 	end
 end
