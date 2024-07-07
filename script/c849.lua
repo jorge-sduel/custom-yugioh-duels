@@ -4,6 +4,18 @@ function s.initial_effect(c)
 	--xyz summon
 	Xyz.AddProcedure(c,nil,7,3,nil,nil,99)
 	c:EnableReviveLimit()
+	--Detach Xyz material
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY)
+	e1:SetType(EFFECT_TYPE_QUICK_O)
+	e1:SetCode(EVENT_CHAINING)
+	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCountLimit(1)
+	--e1:SetCost(s.cost)
+	e1:SetOperation(s.op)
+	c:RegisterEffect(e1)
 		--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
@@ -39,4 +51,22 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 		c:SetMaterial(g1)
 		Duel.Overlay(c,g1)
 	end
+end
+function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	local m = e:GetHandler():GetOverlayGroup():Select(tp,1,1,nil)
+	local tc = m:GetFirst();
+	if tc:IsMonster() then
+	e:SetLabel(1)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SET_ATTACK)
+	e1:SetReset(RESET_EVENT|RESETS_STANDARD_DISABLE&~RESET_TOFIELD)
+	e1:SetValue(tc:GetAttack())
+	e:GetHandler():RegisterEffect(e1)
+	else
+
+		e:SetLabel(0)
+	end
+	Duel.SendtoGrave(m,REASON_COST)
 end
