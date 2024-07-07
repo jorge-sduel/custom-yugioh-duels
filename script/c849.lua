@@ -56,6 +56,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp,chk)
 	local tc = m:GetFirst();
 	if tc:IsMonster() then
 	e:SetLabel(1)
+	local code=tc:GetOriginalCodeRule()
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
