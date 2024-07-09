@@ -26,14 +26,14 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=e:GetHandlerPlayer()
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,c)
+	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_EXTRA,0,c)
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and #rg>0 and aux.SelectUnselectGroup(rg,e,tp,1,1,nil,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local c=e:GetHandler()
 	local g=nil
-	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND,0,c)
-	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,nil,1,tp,HINTMSG_TOGRAVE,nil,nil,true)
+	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_EXTRA,0,c)
+	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,nil,1,tp,HINTMSG_CONFIRM,nil,nil,true)
 	if #g>0 then
 		g:KeepAlive()
 		e:SetLabelObject(g)
@@ -121,6 +121,6 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.sumlimit(e,c,sump,sumtype,sumpos,targetp,se)
 local no=c.Number_xyz
-	return c:IsType(TYPE_XYZ) and no>100 and no<108
+	return c:IsType(TYPE_XYZ) and no>100 and no<108 and c:IsLocation(LOCATION_EXTRA)
 end
 
