@@ -9,7 +9,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_HAND)
 	e1:SetCountLimit(1)
 	e1:SetCondition(s.spcon)
-	e1:SetTarget(s.sptg)
+	--e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 	--effect gain
@@ -31,18 +31,18 @@ function s.spcon(e,c)
 	return #rg>0 and aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
-	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_EXTRA,0,nil)
-	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_CONFIRM,nil,nil,true)
-	if #g>0 then
-		g:KeepAlive()
-		e:SetLabelObject(g)
-		return true
-	end
-	return false
+	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_EXTRA,0,nil) 
+	--if #g>0 then
+		--g:KeepAlive()
+		--e:SetLabelObject(g)
+		--return true
+	--end
+	--return false
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local c=e:GetHandler()
-	local g=e:GetLabelObject()
+	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_EXTRA,0,nil)
+	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_CONFIRM,nil,nil,true)
 	if not g then return end
 	Duel.ConfirmCards(1-tp,g)
 	g:DeleteGroup()
