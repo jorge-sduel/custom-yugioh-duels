@@ -32,20 +32,20 @@ function s.spcon(e,c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_EXTRA,0,nil) 
-	--if #g>0 then
-		--g:KeepAlive()
-		--e:SetLabelObject(g)
-		--return true
-	--end
-	--return false
+	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_CONFIRM,nil,nil,true) 
+	if #g>0 then
+		g:KeepAlive()
+		e:SetLabelObject(g)
+		return true
+	end
+	return false
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local c=e:GetHandler()
 	local rg=Duel.GetMatchingGroup(s.spcfilter,tp,LOCATION_EXTRA,0,nil)
 	local g=aux.SelectUnselectGroup(rg,e,tp,1,1,aux.ChkfMMZ(1),1,tp,HINTMSG_CONFIRM,nil,nil,true)
-	if not g then return end
+	if #g>0 then
 	Duel.ConfirmCards(1-tp,g)
-	g:DeleteGroup()
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
@@ -66,6 +66,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	e3:SetValue(g:GetLevel())
 	e3:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
 	c:RegisterEffect(e3)
+	g:DeleteGroup() 
+	end
 end
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
 	return r==REASON_XYZ and e:GetHandler():GetReasonCard():GetMaterial():IsExists(Card.IsPreviousLocation,3,nil,LOCATION_MZONE)
