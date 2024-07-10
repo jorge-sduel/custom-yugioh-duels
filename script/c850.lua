@@ -75,7 +75,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.effcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_XYZ and e:GetHandler():GetReasonCard():GetMaterial():IsExists(Card.IsPreviousLocation,3,nil,LOCATION_MZONE)
+	return r==REASON_XYZ and e:GetHandler():GetReasonCard():GetMaterial()
 end
 function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,id)
@@ -102,7 +102,7 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_XYZ) and e:GetHandler():IsSetCard(SET_NUMBER)
 end
 function s.filter(c)
 	return (c:IsSetCard(0x177) or c:IsSetCard(0x1178)) and c:IsSpellTrap() and c:IsAbleToHand()
