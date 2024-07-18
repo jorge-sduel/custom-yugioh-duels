@@ -14,7 +14,8 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_IGNITION)
-	e2:SetRange(LOCATION_GRAVE)
+	e2:SetRange(LOCATION_GRAVE+LOCATION_HAND)
+	e2:SetCountLimit(1)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
@@ -23,7 +24,7 @@ s.listed_series={SET_NUMBER}
 function s.synlimit(e,c)
 local no=c.Number_xyz
 	if not c then return false end
-	return not (c:IsType(TYPE_XYZ) and c:IsSetCard(SET_NUMBER) and no>100 and no<108)
+	return not (c:IsType(TYPE_XYZ) and c:IsSetCard(SET_NUMBER) and c:IsLocation(LOCATION_EXTRA))
 end
 function s.filter(c)
 	return c:IsFaceup() and c:GetLevel()>=1
@@ -39,7 +40,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsFacedown() or not tc:GetLevel()<1 then return end
+	if tc:IsFacedown() or not tc:GetLevel()<0 then return end
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -48,13 +49,14 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetValue(tc:GetLevel())
 	c:RegisterEffect(e1)
 --
-local e2=Effect.CreateEffect(c)
+	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_CHANGE_RACE)
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
 	e2:SetValue(tc:GetRace())
 	c:RegisterEffect(e2)
-local e3=Effect.CreateEffect(c)
+--
+	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_CHANGE_ATTRIBUTE)
 	e3:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
