@@ -40,7 +40,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsFacedown() or not tc:IsLevelBelow(0) then return end
+	--if tc:IsFacedown() or not tc:IsLevelBelow(0) then return end
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
@@ -62,7 +62,7 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	e3:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
 	e3:SetValue(tc:GetAttribute())
 	c:RegisterEffect(e3)
-	if c:IsRelateToEffect(e) then
+	--if c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	end
 end
