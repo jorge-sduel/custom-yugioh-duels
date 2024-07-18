@@ -64,5 +64,5 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e3)
 	--if c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
-	end
+	--end
 end
