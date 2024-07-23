@@ -97,8 +97,8 @@ function s.effop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.actop(e,tp,eg,ep,ev,re,r,rp)
-	local rc=re:GetHandler()
-	if re:IsMonsterEffect() and rc:IsSetCard(SET_NUMBER) and ep==tp then
+	local rc=c:GetHandler()
+	if c:IsMonsterEffect() and rc:IsSetCard(SET_NUMBER) and ep==tp then
 		Duel.SetChainLimit(function(e,rp,tp) return tp==rp end)
 	end
 end
