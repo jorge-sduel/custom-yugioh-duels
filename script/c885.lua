@@ -19,6 +19,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.target)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
+	--effect gain
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e3:SetCode(EVENT_BE_MATERIAL)
+	e3:SetCondition(s.effcon)
+	e3:SetOperation(s.effop)
+	c:RegisterEffect(e3)
 end
 s.listed_series={SET_NUMBER}
 function s.synlimit(e,c)
@@ -65,4 +72,33 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	--if c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 	--end
+end
+function s.effcon(e,tp,eg,ep,ev,re,r,rp)
+	return r==REASON_XYZ and e:GetHandler():GetReasonCard():GetMaterial():IsExists(Card.IsPreviousLocation,3,nil,LOCATION_MZONE)
+end
+function s.effop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_CARD,0,id)
+	local c=e:GetHandler()
+	local rc=c:GetReasonCard()
+	--Your opponent cannot activate cards or effects in response to the activation of your monster effects this turn
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_CHAINING)
+	e1:SetOperation(s.actop)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	rc:RegisterEffect(e1,true)
+	if not rc:IsType(TYPE_EFFECT) then
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_ADD_TYPE)
+		e2:SetValue(TYPE_EFFECT)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+		rc:RegisterEffect(e2,true)
+	end
+end
+function s.actop(e,tp,eg,ep,ev,re,r,rp)
+	local rc=re:GetHandler()
+	if re:IsMonsterEffect() and rc:IsSetCard(SET_NUMBER) and ep==tp then
+		Duel.SetChainLimit(function(e,rp,tp) return tp==rp end)
+	end
 end
