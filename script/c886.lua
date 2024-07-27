@@ -54,7 +54,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(EFFECT_SET_ATTACK)
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 	e1:SetValue(7000)
-	tc:RegisterEffect(e1)
+	tc:GetFirst():RegisterEffect(e1)
 end
 function s.spfilter(c,e,tp)
 	return c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
