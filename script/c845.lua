@@ -44,7 +44,7 @@ function s.xyzop(e,tp,chk)
 	return true
 end
 function s.ovfilter(c,tp,lc)
-	return c:IsSetCard(SET_NUMBER)
+	return c:IsSetCard(SET_NUMBER) and c:IsType(TYPE_XYZ)
 end
 function s.matfilter(c)
 	return c:IsAttribute(ATTRIBUTE_LIGHT) or c:IsAttribute(ATTRIBUTE_DARK) 
