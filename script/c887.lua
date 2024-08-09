@@ -14,6 +14,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(s.xmtg)
 	e2:SetOperation(s.xmop)
 	c:RegisterEffect(e2)
@@ -71,7 +72,7 @@ function s.xmop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local tcc=Duel.SelectMatchingCard(tp,s.xmfil2,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,tc,tc):GetFirst()
 		if tcc and not tcc:IsImmuneToEffect(e) then
-			Duel.Overlay(tcc,tc,true)
+			Duel.Overlay(tc,tcc,true)
 		end
 	end
 end
