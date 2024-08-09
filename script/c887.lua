@@ -72,7 +72,7 @@ function s.xmop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local tcc=Duel.SelectMatchingCard(tp,s.xmfil2,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,tc,tc):GetFirst()
 		if tcc and not tcc:IsImmuneToEffect(e) then
-			Duel.Overlay(tcc,tc,true)
+			Duel.Overlay(tc,tcc,true)
 		end
 	end
 end
