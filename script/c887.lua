@@ -47,8 +47,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function s.splimit(e,c)
-	local no=c.Number_xyz 
-	return not (c:IsType(TYPE_XYZ) and no>100) and c:IsLocation(LOCATION_EXTRA)
+	local class=c:GetMetatable(true)
+	if class==nil then return false end
+	local no=class.xyz_number 
+	return not (c:IsType(TYPE_XYZ) and no>100 and c:IsSetCard(0x48)) and c:IsLocation(LOCATION_EXTRA)
 end
 function s.xmfil1(c,tp)
 	return c:IsType(TYPE_XYZ) and c:IsSetCard(SET_NUMBER) and Duel.IsExistingMatchingCard(s.xmfil2,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,c,c)
