@@ -25,13 +25,17 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	local g=Duel.GetMatchingGroup(s.thfilter,tp,LOCATION_GRAVE,0,nil)
-	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) and (local d=Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)>0) then
-		Duel.Draw(tp,1,REASON_EFFECT)
-	end
+	if  #g>0 then
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local sg=g:Select(tp,1,1,nil)
 		Duel.SendtoHand(sg,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,sg)
+	end
+	local d=Duel.GetMatchingGroup(Card.IsDiscardable,tp,LOCATION_HAND,0,nil)
+	if #d>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+		Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST+REASON_DISCARD)
+		Duel.Draw(tp,1,REASON_EFFECT)
+	end
 end
 function s.xmfil1(c,tp)
 	return c:IsType(TYPE_XYZ) and c:IsSetCard(SET_NUMBER) and Duel.IsExistingMatchingCard(s.xmfil2,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,c,c)
