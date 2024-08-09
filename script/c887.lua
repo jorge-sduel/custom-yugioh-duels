@@ -60,7 +60,7 @@ function s.xmfil2(c,xyzmat)
 	return c:IsType(TYPE_XYZ) and xyzmat:IsCanBeXyzMaterial(c)
 end
 function s.xmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and s.xmfil1(chkc,tp) end
+	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and s.xmfil1(chkc,tp) end
 	if chk==0 then return Duel.IsExistingTarget(s.xmfil1,tp,LOCATION_MZONE,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,s.xmfil1,tp,LOCATION_MZONE,0,1,1,nil,tp)
@@ -68,7 +68,7 @@ end
 function s.xmop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
+	if tc:IsRelateToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 		local tcc=Duel.SelectMatchingCard(tp,s.xmfil2,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,tc,tc):GetFirst()
 		if tcc and not tcc:IsImmuneToEffect(e) then
