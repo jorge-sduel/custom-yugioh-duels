@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetOperation(s.xmop)
 	c:RegisterEffect(e2)
 end
-s.listed_series={0x578}
+s.listed_series={SET_NUMBER,0x1178,0x177}
 function s.thfilter(c)
 	return c:IsMonster() and (c:IsSetCard(0x177) or c:IsSetCard(0x1178)) and c:IsAbleToHand()
 end
@@ -36,7 +36,7 @@ Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler
 		Duel.ConfirmCards(1-tp,sg)
 end
 function s.xmfil1(c,tp)
-	return c:IsType(TYPE_XYZ) and Duel.IsExistingMatchingCard(s.xmfil2,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,c,c)
+	return c:IsType(TYPE_XYZ) and c:IsSetCard(SET_NUMBER) and Duel.IsExistingMatchingCard(s.xmfil2,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,c,c)
 end
 function s.xmfil2(c,xyzmat)
 	return c:IsType(TYPE_XYZ) and xyzmat:IsCanBeXyzMaterial(c)
