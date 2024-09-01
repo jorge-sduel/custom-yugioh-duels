@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
 	e1:SetTarget(s.xyztg)
-	e1:SetOperation(s.xyzop1)
+	e1:SetOperation(s.xyzop2)
 	c:RegisterEffect(e1)
 	--Attach top deck card during the Standby Phase
 	local e2=Effect.CreateEffect(c)
@@ -66,7 +66,7 @@ end
 function s.xyztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsType(TYPE_XYZ) and Duel.GetFieldGroupCount(1-tp,LOCATION_DECK,0)>0 end
 end
-function s.xyzop(e,tp,eg,ep,ev,re,r,rp)
+function s.xyzop2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetDecktopGroup(1-tp,1):GetFirst() 
 	if c:IsRelateToEffect(e) then
