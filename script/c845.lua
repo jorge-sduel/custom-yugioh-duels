@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,s.matfilter,4,3,s.ovfilter,aux.Stringid(id,0),3,s.xyzop1)
+	Xyz.AddProcedure(c,s.matfilter,4,3,s.ovfilter,aux.Stringid(id,0),3,s.xyzop)
 	c:EnableReviveLimit()
 	--Attach top deck card during the Standby Phase
 	local e1=Effect.CreateEffect(c)
@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,id)
 	e1:SetTarget(s.xyztg)
-	e1:SetOperation(s.xyzop)
+	e1:SetOperation(s.xyzop1)
 	c:RegisterEffect(e1)
 	--Attach top deck card during the Standby Phase
 	local e2=Effect.CreateEffect(c)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	aux.DoubleSnareValidity(c,LOCATION_MZONE)
 end
 s.xyz_number=104
-function s.xyzop1(e,tp,chk)
+function s.xyzop(e,tp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
 	Duel.RegisterFlagEffect(tp,id,RESET_PHASE|PHASE_END,0,1)
 	return true
