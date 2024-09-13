@@ -10,8 +10,9 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_CHAINING)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCountLimit(1)
+	--e1:SetCountLimit(1)
 	--e1:SetCost(s.cost)
+	e1:SetCondition(s.codisable)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
 	--special summon
@@ -40,6 +41,9 @@ s.listed_series={SET_NUMBER}
 function s.cfilter(c)
 	return c:IsSetCard(SET_NUMBER) and c:IsCanBeXyzMaterial()
 end
+function s.codisable(e,tp,eg,ep,ev,re,r,rp)
+	return not e:GetHandler():IsStatus(STATUS_CHAINING)
+end 
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
