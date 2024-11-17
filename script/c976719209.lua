@@ -3,7 +3,7 @@ if not Rune then Duel.LoadScript("proc_rune.lua") end
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,nil,s.xyzfilter,2,nil,nil,99)
+	Xyz.AddProcedure(c,s.xyzfilter,nil,2,nil,nil,99)
 	c:EnableReviveLimit()
 	--Equip 1 face-up monster on field to this card
 	local e1=Effect.CreateEffect(c)
