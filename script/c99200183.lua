@@ -30,6 +30,6 @@ function c99200183.chainlimit(e,rp,tp)
 end
 function c99200183.activate(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local dam=Duel.GetFieldGroupCount(1-tp,0xe,0)*300
+	local dam=Duel.GetFieldGroupCount(1-tp,0xe,0)*200
 	Duel.Damage(p,dam,REASON_EFFECT)
 end
