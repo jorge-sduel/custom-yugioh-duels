@@ -1,4 +1,4 @@
---Nekroz of Leviathan
+9--Nekroz of Leviathan
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
@@ -32,7 +32,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.sptg)
 	e3:SetOperation(s.spop)
 	c:RegisterEffect(e3)
-	--cannot be target
+	--[[cannot be target
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
 	e4:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
@@ -41,7 +41,7 @@ function s.initial_effect(c)
 	e4:SetTargetRange(LOCATION_MZONE,0)
 	e4:SetTarget(s.tgtg)
 	e4:SetValue(aux.tgoval)
-	c:RegisterEffect(e4)
+	c:RegisterEffect(e4)]]
 end
 s.listed_series={0xb4}
 function s.mat_filter(c)
