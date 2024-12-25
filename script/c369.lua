@@ -1,4 +1,4 @@
-9--Nekroz of Leviathan
+--Nekroz of Leviathan
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
