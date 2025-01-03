@@ -24,7 +24,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 s.listed_names={CARD_BUSTER_BLADER}
-s.listed_series={SET_DESTRUCTION_SWORD}
+s.listed_series={SET_DESTRUCTION_SWORD,SET_BUSTER_BLADER}
 function s.tgfilter(c,e,tp)
 	return c:IsFaceup() and c:IsCode(78193831) and c:IsCanBeFusionMaterial()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
@@ -58,7 +58,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.spfilter2(c,e,tp)
-	return (c:IsCode(CARD_BUSTER_BLADER) or c:IsSetCard(SET_DESTRUCTION_SWORD)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsSetCard(SET_BUSTER_BLADER) or c:IsSetCard(SET_DESTRUCTION_SWORD)) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
