@@ -32,7 +32,7 @@ end
 function s.spfilter(c,e,tp,mc)
 	if Duel.GetLocationCountFromEx(tp,tp,mc,c)<=0 then return false end
 	local mustg=aux.GetMustBeMaterialGroup(tp,nil,tp,c,nil,REASON_FUSION)
-	return c:IsType(TYPE_FUSION) and c:ListsCodeAsMaterial(mc:GetCode()) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false)
+	return c:IsType(TYPE_FUSION) and c:ListsCodeAsMaterial(CARD_BUSTER_BLADER) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,false)
 		and (#mustg==0 or (#mustg==1 and mustg:IsContains(mc)))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
