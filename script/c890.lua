@@ -26,7 +26,7 @@ end
 s.listed_names={CARD_BUSTER_BLADER}
 s.listed_series={SET_DESTRUCTION_SWORD}
 function s.tgfilter(c,e,tp)
-	return c:IsFaceup() and c:IsCode(CARD_BUSTER_BLADER) and c:IsCanBeFusionMaterial()
+	return c:IsFaceup() and c:IsCode(78193831) and c:IsCanBeFusionMaterial()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
 
