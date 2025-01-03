@@ -29,11 +29,10 @@ function s.tgfilter(c,e,tp)
 	return c:IsFaceup() and c:IsCode(78193831) and c:IsCanBeFusionMaterial()
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp,c)
 end
-
 function s.spfilter(c,e,tp,mc)
 	if Duel.GetLocationCountFromEx(tp,tp,mc,c)<=0 then return false end
 	local mustg=aux.GetMustBeMaterialGroup(tp,nil,tp,c,nil,REASON_FUSION)
-	return c:IsType(TYPE_FUSION) and c:ListsCodeAsMaterial(78193831) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,true)
+	return c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,true,true)
 		and (#mustg==0 or (#mustg==1 and mustg:IsContains(mc)))
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
