@@ -68,7 +68,7 @@ function s.spcon(e,c)
 	if c==nil then return true end
 	local tp=c:GetControler()
 	local rg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,e:GetHandler())
-	return aux.SelectUnselectGroup(rg,e,tp,aux.ChkfMMZ(1),0)
+	return aux.SelectUnselectGroup(rg,e,tp,nil,0)
 end
 function s.breakcon(sg,e,tp,mg)
 	return sg:GetSum(Card.GetLevel)>=0
