@@ -58,7 +58,7 @@ end
 --search
 function s.thfilter(c)
 	return c:IsSetCard(0xf72) or c:IsSetCard(0xf73)
-	or c:IsCode(3954901,6075801,33460840,60681103,6853254,7935043,10485110,23931679,24857466,34230233,69868555) and c:IsAbleToHand()
+	or (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND))) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
