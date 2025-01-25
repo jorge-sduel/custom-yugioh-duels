@@ -47,7 +47,7 @@ function cid.initial_effect(c)
 	e3x:SetOperation(cid.eqop)
 	c:RegisterEffect(e3x)
 end
-cid.FELGRAND={1639384,3954901,6075801,33460840,60681103,0xf72}
+cid.FELGRAND={1639384,3954901,6075801,33460840,60681103}
 --HALVE STATS
 function cid.filter(c)
 	return c:IsFaceup() and (c:GetAttack()>0 or c:GetDefense()>0)
@@ -81,7 +81,7 @@ function cid.atkop(e,tp,eg,ep,ev,re,r,rp)
 end
 --SPECIAL SUMMON
 function cid.cfilter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)))
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72))
 		and c:IsAbleToGraveAsCost() and not c:IsCode(id)
 end
 ----------------
