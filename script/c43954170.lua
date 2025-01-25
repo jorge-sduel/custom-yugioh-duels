@@ -44,11 +44,11 @@ function cid.initial_effect(c)
 end
 --FILTERS
 function cid.matfilter(c)
-	return c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))
+	return c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)
 end
 --SPECIAL SUMMON
 function cid.spfilter(c,e,tp)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 -----------
 function cid.spcon(e,tp,eg,ep,ev,re,r,rp)
@@ -86,7 +86,7 @@ function cid.disop(e,tp,eg,ep,ev,re,r,rp)
 end
 --SPSUMMON (EQUIP)
 function cid.ssfilter(c,e,tp)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsLevelBelow(4)
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsType(TYPE_MONSTER) and c:IsLevelBelow(4)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 ------------------
