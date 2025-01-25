@@ -29,13 +29,13 @@ end
 cid.FELGRAND={1639384,3954901,6075801,33460840,60681103}
 --ACTIVATE
 function cid.filter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsDiscardable()
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsType(TYPE_MONSTER) and c:IsDiscardable()
 end
 function cid.counterfilter(c)
-	return c:IsRace(RACE_DRAGON) or c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND))
+	return c:IsRace(RACE_DRAGON) or c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND) or c:IsSetCard(0xf72))
 end
 function cid.splimit(e,c)
-	return not c:IsRace(RACE_DRAGON) and not c:IsSetCard(0xfe9) and not c:IsCode(table.unpack(cid.FELGRAND))
+	return not c:IsRace(RACE_DRAGON) and not c:IsSetCard(0xfe9) and not c:IsCode(table.unpack(cid.FELGRAND) or c:IsSetCard(0xf72))
 end
 ----------
 function cid.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -69,7 +69,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,p)
 end
 function cid.splimit(e,c)
-	return not (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and (not c:IsRace(RACE_DRAGON) or c:IsType(TYPE_LINK)) and c:IsLocation(LOCATION_EXTRA)
+	return not (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and (not c:IsRace(RACE_DRAGON) or c:IsType(TYPE_LINK)) and c:IsLocation(LOCATION_EXTRA)
 end
 --TO DECK
 function cid.tfilter(c)
