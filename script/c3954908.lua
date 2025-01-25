@@ -35,7 +35,7 @@ function s.matfilter(c,sc,st,tp)
 end
 --search
 function s.thfilter2(c)
-	return ((c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster()) and c:IsAbleToHand()
+	return ((c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster()) and c:IsAbleToHand()
 end
 function s.thfilter3(c)
 	return (c:IsSetCard(0xf73) and c:IsSpellTrap()) or c:IsCode(68532541,69868555,7935043) and c:IsAbleToHand()
@@ -72,7 +72,7 @@ function s.cbcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function s.filter(c,e,tp)
-	return ((c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster()) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return ((c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster()) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
