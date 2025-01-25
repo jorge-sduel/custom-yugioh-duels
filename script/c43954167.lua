@@ -52,7 +52,7 @@ function cid.atkcon(e)
 end
 --LEVEL CHANGE
 function cid.filter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_WARRIOR) and c:GetLevel()>0
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_WARRIOR) and c:GetLevel()>0
 end
 --------
 function cid.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -80,7 +80,7 @@ function cid.lvop(e,tp,eg,ep,ev,re,r,rp)
 end
 --EQUIP
 function cid.efilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)))
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72))
 end
 function cid.eqfilter(c,tp)
 	return c:IsRank(7,8) and c:CheckUniqueOnField(tp) and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_DRAGON) and not c:IsForbidden()
