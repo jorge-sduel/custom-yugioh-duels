@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return ((c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster()) or 
+	return ((c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster()) or 
 		(c:IsRace(RACE_DRAGON) and (c:GetLevel()==8 or c:GetLevel()==7)) and c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
