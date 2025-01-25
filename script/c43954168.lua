@@ -27,7 +27,7 @@ function cid.initial_effect(c)
 end
 --LEVEL CHANGE
 function cid.filter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:GetLevel()>0
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsFaceup() and c:IsType(TYPE_MONSTER) and c:GetLevel()>0
 end
 --------------
 function cid.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -53,7 +53,7 @@ function cid.lvop(e,tp,eg,ep,ev,re,r,rp)
 end
 --MILL
 function cid.tgfilter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsAbleToGrave() and not c:IsCode(id)
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsType(TYPE_MONSTER) and c:IsAbleToGrave() and not c:IsCode(id)
 end
 -------
 function cid.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
