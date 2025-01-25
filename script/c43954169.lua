@@ -30,7 +30,7 @@ function cid.initial_effect(c)
 end
 --SEARCH
 function cid.thfilter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsAbleToHand()
 end
 --------
 function cid.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -47,7 +47,7 @@ function cid.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 --MILL
 function cid.tgfilter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsAbleToGrave() and not c:IsCode(id)
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsType(TYPE_MONSTER) and c:IsAbleToGrave() and not c:IsCode(id)
 end
 -------
 function cid.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
