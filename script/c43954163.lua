@@ -107,7 +107,7 @@ function cid.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 --EQUIP
 function cid.efilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)))
+	return c:IsFaceup() and c:IsType(TYPE_MONSTER) and (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72))
 end
 function cid.eqfilter(c,tp)
 	return c:IsLevel(7,8) and c:CheckUniqueOnField(tp) and c:IsType(TYPE_MONSTER) and c:IsRace(RACE_DRAGON) and not c:IsForbidden()
