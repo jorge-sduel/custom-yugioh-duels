@@ -47,7 +47,7 @@ function cid.initial_effect(c)
 	e3x:SetOperation(cid.eqop)
 	c:RegisterEffect(e3x)
 end
-cid.FELGRAND={1639384,3954901,6075801,33460840,60681103}
+cid.FELGRAND={1639384,3954901,6075801,33460840,60681103,0xf72}
 --HALVE STATS
 function cid.filter(c)
 	return c:IsFaceup() and (c:GetAttack()>0 or c:GetDefense()>0)
