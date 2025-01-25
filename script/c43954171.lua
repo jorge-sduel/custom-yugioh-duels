@@ -47,7 +47,7 @@ function cid.afilter(c)
 	return c:GetAttack()>0
 end
 function cid.ffilter(c,fc)
-	return c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))
+	return c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)
 end
 --CHANGE ATK
 function cid.atkfilter(c)
@@ -125,7 +125,7 @@ function cid.caop2(e,tp,eg,ep,ev,re,r,rp)
 end
 --SPSUMMON (EQUIP)
 function cid.ssfilter(c,e,tp)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsAttackAbove(1800)
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsType(TYPE_MONSTER) and c:IsAttackAbove(1800)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 ------------------
