@@ -30,7 +30,7 @@ end
 cid.FELGRAND={1639384,3954901,6075801,33460840,60681103}
 --ATK/DEF
 function cid.valfilter(c)
-	return c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND))
+	return c:IsSetCard(0xfe9) or c:IsSetCard(0xf72) or c:IsCode(table.unpack(cid.FELGRAND))
 end
 ---------
 function cid.val(e,c)
