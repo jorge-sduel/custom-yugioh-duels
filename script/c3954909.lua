@@ -26,7 +26,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0xf72}
 function s.cfilter(c)
-	return (c:IsFaceup() and (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster())
+	return (c:IsFaceup() and (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster())
 end
 function s.filter(c,e,tp)
 	return (c:GetLevel()==7 or c:GetLevel()==8) and c:IsRace(RACE_DRAGON) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -51,7 +51,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.setfilter(c)
-	return ((c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster()) and c:IsAbleToDeck()
+	return ((c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster()) and c:IsAbleToDeck()
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
