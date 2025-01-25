@@ -14,9 +14,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.filter(c)
-	return (c:IsSetCard(0xf72) and c:IsMonster()) or 
-		(c:IsRace(RACE_DRAGON) and (c:GetLevel()==8 or c:GetLevel()==7)) or 
-		c:IsCode(3954901,6075801,33460840,60681103) and c:IsDiscardable()
+	return ((c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsMonster()) or 
+		(c:IsRace(RACE_DRAGON) and (c:GetLevel()==8 or c:GetLevel()==7)) and c:IsDiscardable()
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND,0,1,nil) end
