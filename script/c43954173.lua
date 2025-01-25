@@ -50,11 +50,11 @@ function cid.lcheck(g)
 	return g:IsExists(cid.ffilter,1,nil)
 end
 function cid.ffilter(c)
-	return c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))
+	return c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)
 end
 --NEGATE
 function cid.cfilter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeckAsCost()
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeckAsCost()
 end
 --------
 function cid.discon(e,tp,eg,ep,ev,re,r,rp)
@@ -148,7 +148,7 @@ function cid.disop2(e,tp,eg,ep,ev,re,r,rp)
 end
 --TOHAND (EQUIP)
 function cid.ssfilter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand() and c:IsLevelBelow(4)
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand() and c:IsLevelBelow(4)
 end
 ------------------
 function cid.sscon(e,tp,eg,ep,ev,re,r,rp)
