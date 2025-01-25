@@ -81,7 +81,7 @@ function s.spdop(e,tp,eg,ep,ev,re,r,rp)
 end
 --recover
 function s.thfilter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(cid.FELGRAND)) or c:IsSetCard(0xf72)) or c:IsSetCard(0xf73) and c:IsAbleToHand()
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) or c:IsSetCard(0xf73) and c:IsAbleToHand()
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_GRAVE,0,1,nil) end
