@@ -42,7 +42,7 @@ function cid.initial_effect(c)
 end
 --FILTERS
 function cid.ffilter(c)
-	return c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))
+	return c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)
 end
 --CHANGE POSITION
 function cid.filter(c,val)
@@ -104,7 +104,7 @@ function cid.dryop(e,tp,eg,ep,ev,re,r,rp)
 end
 --TOHAND
 function cid.thfilter(c)
-	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND))) and c:IsAbleToHand()
+	return (c:IsSetCard(0xfe9) or c:IsCode(table.unpack(c43954163.FELGRAND)) or c:IsSetCard(0xf72)) and c:IsAbleToHand()
 end
 --------
 function cid.sscost(e,tp,eg,ep,ev,re,r,rp,chk)
