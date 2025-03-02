@@ -32,10 +32,11 @@ function s.initial_effect(c)
 	e4:SetValue(s.efilter)
 	c:RegisterEffect(e4)
 end
-function s.atlimit(e,c)
-	return c~=e:GetHandler() or not c:IsSetCard(Guardian) 
-end
 s.listed_names={95515060}
+s.listed_series={0x52}
+function s.atlimit(e,c)
+	return c~=e:GetHandler() or not c:IsSetCard(0x52) 
+end
 function s.cfilter(c)
 	return c:IsFaceup() and c:IsCode(95515060)
 end
@@ -43,10 +44,10 @@ function s.efilter(e,te)
 	return te:IsActiveType(TYPE_SPELL)
 end
 function s.thfilter(c)
-	return c:IsCode(CARD_SALAMANGREAT_SANCTUARY) and c:IsAbleToHand()
+	return c:IsSetCard(0x52) and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
+	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil) end
