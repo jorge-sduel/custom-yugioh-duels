@@ -41,7 +41,7 @@ function s.cfilter(c)
 	return c:IsFaceup() and c:IsCode(95515060)
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_SPELL)
+	return te:IsActiveType(TYPE_SPELL) and e:GetHandlerPlayer()~=re:GetOwnerPlayer()
 end
 function s.thfilter(c)
 	return c:IsType(TYPE_SPELL+TYPE_EQUIP) and c:IsAbleToHand()
