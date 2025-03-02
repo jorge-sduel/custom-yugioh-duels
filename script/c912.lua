@@ -44,7 +44,7 @@ function s.efilter(e,te)
 	return te:IsActiveType(TYPE_SPELL)
 end
 function s.thfilter(c)
-	return c:IsSetCard(0x52) and c:IsAbleToHand()
+	return c:IsType(TYPE_SPELL+TYPE_EQUIP) and c:IsAbleToHand()
 end
 function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
