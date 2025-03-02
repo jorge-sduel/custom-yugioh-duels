@@ -33,7 +33,7 @@ s.listed_series={0x52}
 s.listed_names={511000453}
 s.material_setcode=0x52
 function s.spfilter(c,e,tp)
-	return (c:IsCode(511000453) or c:IsCode(34022290)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return (c:IsCode(18175965) or c:IsCode(34022290)) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
