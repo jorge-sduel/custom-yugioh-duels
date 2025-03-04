@@ -41,7 +41,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x52}
 function s.imfilter(e,re,r,rp)
-	return not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET)
+	return e:GetHandlerPlayer()~=te:GetOwnerPlayer() and not (re:IsHasProperty(EFFECT_FLAG_CARD_TARGET)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(0x52) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
