@@ -28,8 +28,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_IMMUNE_EFFECT)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(LOCATION_MZONE,0)
-	e4:SetCondition(cid.con)
-	e4:SetValue(cid.imfilter)
+	e4:SetValue(s.imfilter)
 	c:RegisterEffect(e4)
 	--cannot be target
 	local e5=Effect.CreateEffect(c)
@@ -41,7 +40,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e5)
 end
 s.listed_series={0x52}
-function cid.imfilter(e,re,r,rp)
+function s.imfilter(e,re,r,rp)
 	return not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET)
 end
 function s.spfilter(c,e,tp)
