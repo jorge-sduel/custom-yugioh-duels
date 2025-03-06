@@ -53,7 +53,11 @@ function s.initial_effect(c)
 end
 s.listed_series={0x52}
 function s.xyzcheck(g)
-	return not g:IsExists(Card.IsSummonableCard,1,nil)
+	return not g:IsExists(s.filters,1,nil,TYPE_MONSTER)
+end
+function s.filters(c,e,type)
+	return
+	c:IsType(type) or not c:IsSummonableCard() 
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsContains(e:GetHandler())
