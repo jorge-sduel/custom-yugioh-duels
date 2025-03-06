@@ -53,7 +53,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x52}
 function s.xyzcheck(g)
-	return not g:IsExists(Card.IsSummonableCard,1)
+	return not g:IsExists(Card.IsSummonableCard,1,nil,nil)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsContains(e:GetHandler())
@@ -76,7 +76,8 @@ function s.spfilter(c,e,tp)
 end
 function s.swfilter(c,e,tp)
 	return c:IsType(TYPE_EQUIP)
-end
+end
+
 function s.target2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.spfilter(chkc,e,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -94,8 +95,10 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) and tc:IsRelateToEffect(e) then
 		if Duel.SpecialSummon(tc,0,tp,tp,true,true,POS_FACEUP_ATTACK)==0 then return end
-	local ec=Duel.SelectMatchingCard(tp,s.swfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
-	Duel.Equip(tp,ec,tc)
+	local ec=Duel.SelectMatchingCard(tp,s.swfilter,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
+
+	Duel.Equip(tp,ec,tc)
+
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetProperty(EFFECT_FLAG_OWNER_RELATE)
@@ -103,6 +106,7 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1:SetValue(s.eqlimit)
 		e1:SetLabelObject(tc)
-		ec:RegisterEffect(e1)
+		ec:RegisterEffect(e1)
+
 	end
 end
