@@ -53,7 +53,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 s.listed_series={0x52}
-function s.xyzcheck(g)
+function s.lcheck(g,lc,sumtype,tp)
 	return not g:IsExists(Card.IsType,1,nil,TYPE_FRSX,lc,sumtype,tp)
 end
 function s.filters(c,e,type)
