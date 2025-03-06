@@ -58,6 +58,10 @@ s.listed_series={0x52}
 function s.lcheck(g,lc,sumtype,tp)
 	return not g:IsExists(Card.IsType,1,nil,TYPE_FRSX,lc,sumtype,tp)
 end
+function s.mtcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
+	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+end
 function s.filters(c,e,type)
 	return
 	not c:IsSummonableCard() 
