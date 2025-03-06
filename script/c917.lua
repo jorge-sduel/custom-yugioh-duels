@@ -53,7 +53,7 @@ function s.initial_effect(c)
 end
 s.listed_series={0x52}
 function s.xyzcheck(g)
-	return not g:IsExists(s.filters,1,nil,TYPE_MONSTER)
+	return not g:IsExists(Card.IsType,1,nil,TYPE_SPSUMMON+TYPE_EXTRA)
 end
 function s.filters(c,e,type)
 	return
