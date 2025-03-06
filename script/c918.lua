@@ -28,22 +28,24 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_EXTRA_ATTACK)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
-	--Special summon
+	--Special Summon monster
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
-	e4:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_LEAVE_FIELD)
+	e4:SetCondition(s.spcon)
 	e4:SetCountLimit(1,id)
 	e4:SetTarget(s.target2)
 	e4:SetOperation(s.operation2)
 	c:RegisterEffect(e4)
-	--Special summon
+	----Special Summon monster
 	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(id,1))
-	e5:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
+	e5:SetDescription(aux.Stringid(id,0))
 	e5:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetCode(EVENT_LEAVE_FIELD)
+	e5:SetCondition(s.spcon)
 	e5:SetCountLimit(1,id)
 	e5:SetTarget(s.target3)
 	e5:SetOperation(s.operation3)
@@ -51,6 +53,10 @@ function s.initial_effect(c)
 end
 s.listed_names={18175965,34022290}
 s.listed_series={0x52}
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:IsPreviousControler(tp)
+end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsRelateToBattle()
 end
