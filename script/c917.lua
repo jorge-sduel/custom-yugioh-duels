@@ -57,7 +57,7 @@ function s.xyzcheck(g)
 end
 function s.filters(c,e,type)
 	return
-	c:IsType(type) or not c:IsSummonableCard() 
+	not c:IsSummonableCard() 
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsContains(e:GetHandler())
