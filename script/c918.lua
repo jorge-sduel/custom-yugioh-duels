@@ -126,7 +126,7 @@ function s.operation2(e,tp,eg,ep,ev,re,r,rp)
 	local xyzg=Duel.GetMatchingGroup(s.xyzfilter,tp,LOCATION_EXTRA,0,nil,g,tp,true)
 	if #xyzg>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-		local xyz=xyzg:Select(tp,1,1,nil):GetFirst()
+		local xyz=xyzg:Select(tp,2,2,nil):GetFirst()
 		Duel.XyzSummon(tp,xyz,nil,g)
 	end
 end
