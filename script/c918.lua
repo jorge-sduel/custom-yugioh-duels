@@ -149,7 +149,7 @@ end
 function s.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	local mg=Duel.GetMatchingGroup(s.xfilter3,tp,LOCATION_GRAVE,0,nil,e,tp)
-	local exg=Duel.GetMatchingGroup(s.xyzfilter3,tp,LOCATION_EXTRA,0,nil,mg)
+	local exg=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
 	if chk==0 then return Duel.IsPlayerCanSpecialSummonCount(tp,2)
 		and not Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
@@ -173,7 +173,7 @@ function s.operation3(e,tp,eg,ep,ev,re,r,rp)
 	if #g<2 then return end
 	Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	Duel.BreakEffect()
-	local xyzg=Duel.GetMatchingGroup(s.xyzfilter3,tp,LOCATION_EXTRA,0,nil,g,tp,true)
+	local xyzg=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,g)
 	if #xyzg>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local xyz=xyzg:Select(tp,1,1,nil):GetFirst()
