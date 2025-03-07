@@ -28,7 +28,7 @@ function s.initial_effect(c)
 	e3:SetCode(EFFECT_EXTRA_ATTACK)
 	e3:SetValue(1)
 	c:RegisterEffect(e3)
-	--[[Special Summon monster
+	--Special Summon monster
 	local e4=Effect.CreateEffect(c)
 	e4:SetDescription(aux.Stringid(id,0))
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e4:SetCountLimit(1,id)
 	e4:SetTarget(s.target2)
 	e4:SetOperation(s.operation2)
-	c:RegisterEffect(e4)]]
+	c:RegisterEffect(e4)
 	----Special Summon monster
 	local e5=Effect.CreateEffect(c)
 	e5:SetDescription(aux.Stringid(id,1))
