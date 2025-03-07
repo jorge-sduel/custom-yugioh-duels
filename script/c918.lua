@@ -137,14 +137,14 @@ function s.xyzfilter3(c,mg,tp,chk)
 	return c:IsSynchroSummonable(nil,mg) and (not chk or Duel.GetLocationCountFromEx(tp,tp,mg,c)>0)
 end
 function s.mfilter13(c,mg,exg,tp)
-	return mg:IsExists(s.mfilter2,1,c,c,exg,tp)
+	return mg:IsExists(s.mfilter23,1,c,c,exg,tp)
 end
 function s.zonecheck3(c,tp,g)
 	return Duel.GetLocationCountFromEx(tp,tp,g,c)>0 and c:IsSynchroSummonable(nil,g)
 end
 function s.mfilter23(c,mc,exg,tp)
 	local g=Group.FromCards(c,mc)
-	return exg:IsExists(s.zonecheck,1,nil,tp,Group.FromCards(c,mc),tp)
+	return exg:IsExists(s.zonecheck3,1,nil,tp,Group.FromCards(c,mc),tp)
 end
 function s.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
