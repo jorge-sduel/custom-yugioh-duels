@@ -134,7 +134,7 @@ function s.xfilter3(c,e,tp)
 	return c:IsSetCard(0x52) and c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.xyzfilter3(c,mg,tp,chk)
-	return c:IsSynchroSummonable(nil,mg,2,2) and (not chk or Duel.GetLocationCountFromEx(tp,tp,mg,c)>0)
+	return c:IsSynchroSummonable(nil,mg) and (not chk or Duel.GetLocationCountFromEx(tp,tp,mg,c)>0)
 end
 function s.mfilter13(c,mg,exg,tp)
 	return mg:IsExists(s.mfilter2,1,c,c,exg,tp)
