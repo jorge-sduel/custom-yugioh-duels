@@ -83,7 +83,7 @@ function s.negcon(e,tp,eg,ep,ev,re,r,rp)
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return false end
 	local g=Duel.GetChainInfo(ev,CHAININFO_TARGET_CARDS)
 	if not g or not g:IsContains(c) then return false end
-	return re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return re:IsHasType(EFFECT_TYPE_ACTIVATE) or re:IsActiveType(TYPE_MONSTER)
 end
 function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
