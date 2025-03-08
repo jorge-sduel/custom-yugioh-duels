@@ -21,7 +21,7 @@ Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_EQUIP)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
-	e2:SetValue(c267.value)
+	e2:SetValue(s.value)
 	c:RegisterEffect(e2)
 	--equip
 	local e5=Effect.CreateEffect(c)
@@ -97,8 +97,11 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.value(e,c)
-	local g=Duel.GetMatchingGroup(Card.IsMonster,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil)
-		return g:GetSum(Card.GetAttack)
+	local g=Duel.GetMatchingGroup(Card.IsMonster,c:GetControler(),LOCATION_GRAVE,LOCATION_GRAVE,nil)
+
+
+		return g:GetSum(Card.GetAttack)
+
 end
 function s.filter(c,ec)
 	return c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)
