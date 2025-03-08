@@ -19,8 +19,9 @@ Fusion.AddContactProc(c,s.contactfil,s.contactop,true)
 	c:RegisterEffect(e1)
 	--Atk Change
 	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_EQUIP)
+	e2:SetType(EFFECT_TYPE_SINGLE)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
+	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(s.value)
 	c:RegisterEffect(e2)
 	--equip
