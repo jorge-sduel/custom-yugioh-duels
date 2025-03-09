@@ -48,7 +48,7 @@ function s.lfilter1(c,sg)
 	return sg:IsExists(s.lfilter2,1,c,c)
 end
 function s.lfilter2(c,tc)
-	return aux.IsCodeListed(c,tc:GetCode()) or c:IsType(TYPE_EQUIP)
+	return c:ListsCode(tc:GetCode()) or c:IsType(TYPE_EQUIP)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local mg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
