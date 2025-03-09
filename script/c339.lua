@@ -52,8 +52,7 @@ function s.lfilter2(c,tc)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local mg=Duel.GetMatchingGroup(s.spfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
-	if chk==0 then return not
-		and aux.SelectUnselectGroup(mg,e,tp,2,2,s.rescon,0) end
+	if chk==0 then return aux.SelectUnselectGroup(mg,e,tp,2,2,s.rescon,0) end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,0,LOCATION_DECK+LOCATION_GRAVE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
