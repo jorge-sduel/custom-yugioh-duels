@@ -84,7 +84,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.splimit(e,c)
-	return not c:IsSetCard(0x52) and c:IsLocation(LOCATION_EXTRA)
+	return not (c:IsSetCard(0x52) and c:IsLocation(LOCATION_EXTRA)) 
 end
 function s.lizfilter(e,c)
 	return not c:IsOriginalSetCard(0x52)
