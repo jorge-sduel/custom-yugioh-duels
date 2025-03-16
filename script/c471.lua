@@ -76,7 +76,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil,lv,e,tp)
 	if g:GetCount()>0 then
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
-		Duel.Equip(tp,c,g)
+		Duel.Equip(tp,e:GetHandler(),g)
 		g:GetFirst():CompleteProcedure()
 	end
 end
