@@ -55,10 +55,10 @@ function s.filter1(c,e,tp)
 	local lv=c:GetLevel()
 	return  c:IsSetCard(0x52) and  Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK,0,1,nil,lv,e,tp)
 end
-function c72.filter2(c,lv,e,tp)
+function s.filter2(c,lv,e,tp)
 	return c:IsSetCard(0x52) and c:IsLevel(lv) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
 end
-function c72.target(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()~=100 then return false end
 		e:SetLabel(0)
