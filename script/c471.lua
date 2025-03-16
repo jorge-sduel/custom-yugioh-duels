@@ -54,7 +54,6 @@ end
 function s.filter1(c,e,tp)
 	local lv=c:GetLevel()
 	return  c:IsSetCard(0x52) and  Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_DECK,0,1,nil,lv,e,tp)
-	and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 end
 function s.filter2(c,lv,e,tp)
 	return c:IsSetCard(0x52) and c:IsLevel(lv) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
