@@ -3,6 +3,16 @@
 --scripted by pyrQ
 local s,id=GetID()
 function s.initial_effect(c)
+	--Xyz summon
+	Xyz.AddProcedure(c,nil,4,2)
+	--Protect itself from destruction
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e0:SetCode(EFFECT_DESTROY_REPLACE)
+	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e0:SetRange(LOCATION_MZONE)
+	e0:SetTarget(s.reptg)
+	c:RegisterEffect(e0)
 	--Equip
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(1068)
@@ -177,4 +187,12 @@ function s.reffvalue(reff,eff,lc)
 	elseif not (type(eff:GetValue())=='function') and eff:GetValue()<0 then
 		return -eff:GetValue()*2
 	end
+end
+function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return not c:IsReason(REASON_REPLACE) and c:CheckRemoveOverlayCard(tp,1,REASON_EFFECT) end
+	if Duel.SelectEffectYesNo(tp,c,96) then
+		c:RemoveOverlayCard(tp,1,1,REASON_EFFECT)
+		return true
+	else return false end
 end
