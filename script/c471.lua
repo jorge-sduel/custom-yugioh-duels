@@ -70,7 +70,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then return end
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local lv=e:GetLabel()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil,lv,e,tp)
@@ -79,7 +79,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		g:GetFirst():CompleteProcedure()
 		--Duel.Equip(tp,e:GetHandler(),g)
 	end
-	--Duel.Equip(tp,e:GetHandler(),g)
+	Duel.Equip(tp,e:GetHandler(),g)
 end
 function s.eqlimit(e,c)
 	return e:GetLabelObject()==c
