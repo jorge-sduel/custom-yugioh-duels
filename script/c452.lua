@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e3:SetTarget(s.eqtg)
 	e3:SetOperation(s.eqop)
 	c:RegisterEffect(e3)
-	aux.AddEREquipLimit(c,nil,aux.FilterBoolFunction(Card.IsMonster),s.equipop,e1)
+	aux.AddEREquipLimit(c,nil,aux.FilterBoolFunction(Card.IsMonster),s.equipop,e3)
 end
 function s.uttg(e,c)
 	return e:GetHandler():GetEquipGroup():IsContains(c)
