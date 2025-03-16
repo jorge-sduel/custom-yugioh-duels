@@ -88,6 +88,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel()+1,tc:GetRace(),tc:GetAttribute(),e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
+	end
 		Duel.Equip(tp,c,g)
 		--Add Equip limit
 		local e1=Effect.CreateEffect(c)
@@ -97,8 +98,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		e1:SetValue(s.eqlimit)
 		e1:SetLabelObject(g)
-		c:RegisterEffect(e1)
-	end
+		c:RegisterEffect(e1) 
 end
 function s.eqlimit(e,c)
 	return e:GetLabelObject()==c
