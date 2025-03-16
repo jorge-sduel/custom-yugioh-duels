@@ -85,5 +85,5 @@ function s.eqlimit(e,c)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetPreviousEquipTarget()
-	return (ec and ec:IsReason(REASON_DESTROY)) or e:GetHandler():IsReason(REASON_DESTROY)
+	return (ec and ec:IsReason(REASON_DESTROY)) or e:GetHandler():IsReason(REASON_LOST_TARGET) or e:GetHandler():IsReason(REASON_DESTROY)
 end
