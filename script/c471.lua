@@ -22,6 +22,13 @@ function s.initial_effect(c)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
+			--Add Equip limit
+		local e3=Effect.CreateEffect(c)
+		e3:SetType(EFFECT_TYPE_SINGLE)
+		e3:SetCode(EFFECT_EQUIP_LIMIT)
+		e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+		e3:SetValue(1)
+		c:RegisterEffect(e3) 
 end
 s.material_setcode=0x52
 function s.spfilter2(c,e,tp)
@@ -83,22 +90,13 @@ end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local tc=Duel.GetFirstTarget()
-	if not tc or not tc:IsLocation(LOCATION_GRAVE) or not tc:IsRelateToEffect(e) then return end
+	if not tc or not tc:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel()+1,tc:GetRace(),tc:GetAttribute(),e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
+		Duel.Equip(tp,c,g) 
 	end
-		Duel.Equip(tp,c,g)
-		--Add Equip limit
-		local e1=Effect.CreateEffect(c)
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_EQUIP_LIMIT)
-		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e1:SetValue(s.eqlimit)
-		e1:SetLabelObject(g)
-		c:RegisterEffect(e1) 
 end
 function s.eqlimit(e,c)
 	return e:GetLabelObject()==c
