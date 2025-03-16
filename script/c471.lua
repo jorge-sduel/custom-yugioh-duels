@@ -79,7 +79,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		g:GetFirst():CompleteProcedure()
 		--Duel.Equip(tp,e:GetHandler(),g)
 	end
-	Duel.Equip(tp,e:GetHandler(),g)
+	--Duel.Equip(tp,e:GetHandler(),g)
 end
 function s.eqlimit(e,c)
 	return e:GetLabelObject()==c
