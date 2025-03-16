@@ -78,8 +78,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if g:GetCount()>0 then
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
 		g:GetFirst():CompleteProcedure()
-		Duel.Equip(tp,e:GetHandler(),g)
+		--Duel.Equip(tp,e:GetHandler(),g)
 	end
+	Duel.Equip(tp,e:GetHandler(),g)
 end
 function s.eqlimit(e,c)
 	return e:GetLabelObject()==c
