@@ -76,9 +76,9 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_DECK,0,1,1,nil,lv,e,tp)
 	if g:GetCount()>0 then
-		Duel.Equip(tp,e:GetHandler(),g)
 		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
 		g:GetFirst():CompleteProcedure()
+		Duel.Equip(tp,e:GetHandler(),g)
 	end
 end
 function s.eqlimit(e,c)
