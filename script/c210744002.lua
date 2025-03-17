@@ -117,7 +117,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.splimit(e,c)
-	return c:IsLocation(LOCATION_EXTRA)
+	return c:IsLocation(LOCATION_EXTRA) and not c:IsSetCard(0x52)
 end
 function s.quickcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsHasEffect(210744007)
