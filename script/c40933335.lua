@@ -63,7 +63,7 @@ function c40933335.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
 end
 function c40933335.filter1(c,g)
-	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x19) and c.material and g:IsExists(c40933335.filter2,1,nil,c)
+	return c:IsType(TYPE_FUSION) and c:IsSetCard(0x19) and c.material and Duel.IsExistingMatchingCard(c40933335.filter2,tp,LOCATION_DECK,0,1,nil,e,tp,c)
 end
 function c40933335.filter2(c,fc)
 	return c:IsCode(table.unpack(fc.material))
