@@ -15,7 +15,7 @@ function s.filter1(c,tp)
 		and Duel.IsExistingTarget(s.filter2,tp,LOCATION_MZONE,0,1,c,c:GetAttribute())
 end
 function s.filter2(c,rac)
-	return c:IsLevelAbove(1) and c:IsAttackBelow(1000) and c:IsAttribute(rac)
+	return c:IsLevelAbove(1) and c:IsAttribute(rac)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() end
