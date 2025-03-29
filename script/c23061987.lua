@@ -5,6 +5,14 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	Fusion.AddProcMix(c,true,true,23061993,23995346)
 	--atk
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e0:SetRange(LOCATION_MZONE)
+	e0:SetCode(EFFECT_UPDATE_DEFENSE)
+	e0:SetValue(s.atkval)
+	c:RegisterEffect(e0)
+		--atk
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -58,11 +66,11 @@ function s.initial_effect(c)
 end
 s.material_setcode={0xdd,0x10cf,0xcf}
 s.listed_names={23061993,23995346}
-function s.filter(c)
+function s.filter2(c)
 	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and (c:IsRace(RACE_DRAGON) or c:IsRace(RACE_SPELLCASTER) or c:IsRace(RACE_WARRIOR)) 
 end
 function s.atkval(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_MZONE+LOCATION_GRAVE+LOCATION_EXTRA,LOCATION_MZONE+LOCATION_GRAVE+LOCATION_EXTRA,c)*800
+	return Duel.GetMatchingGroupCount(s.filter2,c:GetControler(),LOCATION_MZONE+LOCATION_GRAVE+LOCATION_EXTRA,LOCATION_MZONE+LOCATION_GRAVE+LOCATION_EXTRA,c)*800
 end
 function s.indval(e,re,tp)
 	return tp~=e:GetHandlerPlayer()
