@@ -59,7 +59,7 @@ end
 s.material_setcode={0xdd,0x10cf,0xcf}
 s.listed_names={23061993,23995346}
 function s.filter(c)
-	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and (c:IsRace(RACE_DRAGON) or c:IsRace(RACE_SPELLCASTER) c:IsRace(RACE_WARRIOR)) 
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and (c:IsRace(RACE_DRAGON) or c:IsRace(RACE_SPELLCASTER) or c:IsRace(RACE_WARRIOR)) 
 end
 function s.atkval(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_MZONE+LOCATION_GRAVE+LOCATION_EXTRA,LOCATION_MZONE+LOCATION_GRAVE+LOCATION_EXTRA,c)*800
