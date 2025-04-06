@@ -139,7 +139,7 @@ function cm.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(3)
-	e1:SetCondition(function(e,tp) return not Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE,0,1,nil) end)
+	--e1:SetCondition(function(e,tp) return not Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE,0,1,nil) end)
 	e1:SetTarget(cm.sptg)
 	e1:SetOperation(cm.spop)
 	c:RegisterEffect(e1)
@@ -245,10 +245,10 @@ end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local zone1=bit.band(e:GetHandler():GetLinkedZone(tp),0x1f)
 	local zone2=bit.band(e:GetHandler():GetLinkedZone(1-tp),0x1f)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(1-tp) and cm.filter(chkc,e,tp,zone) end
-	if chk==0 then return Duel.IsExistingTarget(cm.filter,tp,0,LOCATION_GRAVE,1,nil,e,tp,zone1,zone2) end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and cm.filter(chkc,e,tp,zone) end
+	if chk==0 then return Duel.IsExistingTarget(cm.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,nil,e,tp,zone1,zone2) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectTarget(tp,cm.filter,tp,0,LOCATION_GRAVE,1,1,nil,e,tp,zone1,zone2)
+	local g=Duel.SelectTarget(tp,cm.filter,tp,LOCATION_GRAVE,LOCATION_GRAVE,1,1,nil,e,tp,zone1,zone2)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function cm.spop(e,tp,eg,ep,ev,re,r,rp)
