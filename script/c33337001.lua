@@ -37,7 +37,7 @@ function rsukv.UnLinkProcedure(c,...)
     e5:SetType(EFFECT_TYPE_SINGLE)
     e5:SetCode(EFFECT_FORCE_SPSUMMON_POSITION)
     e5:SetTarget(aux.TargetBoolFunction(Card.IsSummonType,SUMMON_TYPE_LINK))
-    e5:SetValue(POS_FACEUP_ATTACK)
+    e5:SetValue(POS_FACEUP_DEFENSE)
     c:RegisterEffect(e5)
 end
 function rsukv.indestg(e,c)
