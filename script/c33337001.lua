@@ -240,7 +240,7 @@ function cm.cfilter(c)
 	return c:GetSequence()<5
 end
 function cm.filter(c,e,tp,zone1,zone2)
-	return ((zone1>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp,zone1)) or (zone2>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp,zone2)))
+	return ((zone1>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,true,POS_FACEUP,tp,zone1)) or (zone2>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,1-tp,zone2)))
 end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local zone1=bit.band(e:GetHandler():GetLinkedZone(tp),0x1f)
@@ -266,7 +266,7 @@ function cm.spop(e,tp,eg,ep,ev,re,r,rp)
 	else
 		p=1-tp zone=zone2
 	end
-	if Duel.SpecialSummonStep(tc,0,tp,p,false,false,POS_FACEUP,zone) then
+	if Duel.SpecialSummonStep(tc,0,tp,p,true,true,POS_FACEUP,zone) then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_DISABLE)
