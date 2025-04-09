@@ -43,6 +43,7 @@ function s.initial_effect(c)
 	e4:SetHintTiming(TIMING_DAMAGE_STEP)
 	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e4:SetCondition(s.atkcon)
+	e4:SetCountLimit(1)
 	e4:SetCost(aux.dxmcostgen(1,1,nil))
 	e4:SetTarget(s.atktg)
 	e4:SetOperation(s.atkop)
@@ -56,7 +57,7 @@ function s.xyzop(e,tp,chk)
 	return true
 end
 function s.ovfilter(c,tp,lc)
-	return c:IsType(TYPE_XYZ) and c:IsRace(RACE_FAIRY)
+	return c:IsType(TYPE_XYZ) and c:IsAttribute(ATTRIBUTE_WATER)
 end
 function s.filter(c)
 	return c:IsPosition(POS_FACEUP_ATTACK) and c:IsAbleToChangeControler()
