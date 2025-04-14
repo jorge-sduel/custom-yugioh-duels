@@ -13,7 +13,7 @@ end
 function c12.filter(c,tp,mg,ec)
 	return c:IsType(TYPE_SYNCHRO) and Duel.GetLocationCountFromEx(tp,tp,mg,c)>0 and c:IsSynchroSummonable(ec,mg)
 end
-c12.matfilter=aux.FilterFaceupFunction(Card.IsCanBeSynchroMaterial)
+c12.matfilter=aux.FaceupFilter(Card.IsCanBeSynchroMaterial)
 function c12.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		local c=e:GetHandler()
