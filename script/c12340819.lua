@@ -32,7 +32,7 @@ function c12340819.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,tc,1,0,0)
 end
 function c12340819.spfilter(c,e,tp,atk)
-	return c:IsAttackBelow(atk) and c:IsAttribute(ATTRIBUTE_WIND) and c:IsRace(RACE_WINDBEAST)
+	return c:IsAttackBelow(atk) and c:IsAttribute(ATTRIBUTE_WIND) and c:IsRace(RACE_WINGEDBEAST)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c12340819.operation(e,tp,eg,ep,ev,re,r,rp)
