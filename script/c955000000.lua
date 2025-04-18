@@ -41,7 +41,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function s.cfilter(c)
-	return c:IsFacedown() or not (c:IsType(TYPE_RUNE) and c:IsRace(RACE_FISH))
+	return c:IsFacedown() or not (c:IsType(TYPE_RUNE) or c:IsRace(RACE_FISH))
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)
