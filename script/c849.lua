@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,nil,7,3,nil,nil,99)
+	Xyz.AddProcedure(c,nil,7,3,nil,nil,Xyz.InfiniteMats)
 	c:EnableReviveLimit()
 	--Detach Xyz material
 	local e1=Effect.CreateEffect(c)
