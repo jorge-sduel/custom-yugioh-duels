@@ -146,7 +146,7 @@ function cid.ssop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cid.seqcfilter(c,tp,lg)
-	return c:IsType(TYPE_SYNCHRO) and c:IsSetCard(0x412) and lg:IsContains(c)
+	return c:IsType(TYPE_SYNCHRO) and lg:IsContains(c)
 end
 function cid.syncon(e,tp,eg,ep,ev,re,r,rp)
 	local lg=e:GetHandler():GetLinkedGroup()
