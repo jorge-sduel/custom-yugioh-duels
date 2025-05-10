@@ -72,13 +72,13 @@ local e4=Effect.CreateEffect(c)
 	c:RegisterEffect(e6)
 end
 function cm.ntfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x412) and c:IsType(TYPE_XYZ)
+	return c:IsFaceup() and c:IsType(TYPE_XYZ)
 end
 function cm.ntcon(e)
 	return e:GetHandler():GetLinkedGroup():IsExists(cm.ntfilter,1,nil)
 end
 function cm.ntfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x412) and c:IsType(TYPE_XYZ)
+	return c:IsFaceup() and c:IsType(TYPE_XYZ)
 end
 function cm.imcon(e)
 	return e:GetHandler():GetLinkedGroup():IsExists(cm.ntfilter,1,nil)
