@@ -126,7 +126,7 @@ function cid.sscon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function cid.filter(c,e,tp,zone)
-	return c:IsSetCard(0x412) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp,zone)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp,zone)
 end
 function cid.sstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
