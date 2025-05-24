@@ -1,6 +1,6 @@
 --Frozen Mirror
 function c138.initial_effect(c)
-	e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_GREATER,location=LOCATION_EXTRA})
+	e2=Ritual.CreateProc({handler=c,lvtype=RITPROC_GREATER,location=LOCATION_EXTRA})
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
