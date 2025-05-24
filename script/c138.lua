@@ -14,7 +14,7 @@ function c138.filter(c,e,tp,m)
 	local cd=c:GetCode()
 	if 
 		--cd~=27000302 or 
-		not ((c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) or (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) and c:IsLocation(LOCATION_EXTRA))) and c:IsType(TYPE_RITUAL) and c:IsMonster()) then return false end
+		not ((c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) or (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) and c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp)>0)) and c:IsType(TYPE_RITUAL) and c:IsMonster()) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
 		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
