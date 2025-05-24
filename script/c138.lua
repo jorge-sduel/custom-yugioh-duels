@@ -12,7 +12,9 @@ end
 c138.fit_monster={27000302}
 function c138.filter(c,e,tp,m)
 	local cd=c:GetCode()
-	if cd~=27000302 or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
+	if 
+		--cd~=27000302 or 
+		not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
 		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
