@@ -1,14 +1,14 @@
 --Frozen Mirror
 function c138.initial_effect(c)
-	e2=Ritual.CreateProc({handler=c,lvtype=RITPROC_GREATER,location=LOCATION_EXTRA})
-	--Activate
+	e1=Ritual.CreateProc({handler=c,filter=s.ritualfil,lvtype=RITPROC_EQUAL,extraop=s.extraop,extrafil=s.extrafil,location=LOCATION_EXTRA|LOCATION_HAND,})
+	--[[Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(c138.target)
 	e1:SetOperation(c138.activate)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 end
 c138.fit_monster={27000302}
 function c138.filter(c,e,tp,m)
@@ -47,4 +47,23 @@ function c138.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
+end
+
+function s.ritualfil(c)
+    return c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER)
+end
+function s.mfilter(c)
+    return c:IsLocation(LOCATION_MZONE) or c:IsLocation(LOCATION_HAND)
+end
+function s.exfilter0(c)
+    return c:IsFaceup() and c:IsLevelAbove(1) and c:IsAbleToGrave()
+end
+function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
+	return Duel.GetMatchingGroup(s.exfilter0,tp,LOCATION_EXTRA,0,nil)
+end
+function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
+    local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_EXTRA)
+    mg:Sub(mat2)
+    Duel.ReleaseRitualMaterial(mg)
+    Duel.SendtoGrave(mat2,REASON_EFFECT+REASON_MATERIAL+REASON_RITUAL)
 end
