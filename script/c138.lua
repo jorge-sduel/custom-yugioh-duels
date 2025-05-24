@@ -1,6 +1,6 @@
 --Frozen Mirror
 function c138.initial_effect(c)
-	e1=Ritual.CreateProc({handler=c,filter=s.ritualfil,lvtype=RITPROC_EQUAL,extraop=s.extraop,extrafil=s.extrafil,location=LOCATION_EXTRA|LOCATION_HAND,})
+	e1=Ritual.CreateProc({handler=c,filter=c138.ritualfil,lvtype=RITPROC_EQUAL,extraop=c138.extraop,extrafil=c138.extrafil,location=LOCATION_EXTRA|LOCATION_HAND,})
 	--[[Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -49,19 +49,19 @@ function c138.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 
-function s.ritualfil(c)
+function c138.ritualfil(c)
     return c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER)
 end
-function s.mfilter(c)
+function c138.mfilter(c)
     return c:IsLocation(LOCATION_MZONE) or c:IsLocation(LOCATION_HAND)
 end
-function s.exfilter0(c)
+function c138.exfilter0(c)
     return c:IsFaceup() and c:IsLevelAbove(1) and c:IsAbleToGrave()
 end
-function s.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
+function c138.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetMatchingGroup(s.exfilter0,tp,LOCATION_EXTRA,0,nil)
 end
-function s.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
+function c138.extraop(mg,e,tp,eg,ep,ev,re,r,rp)
     local mat2=mg:Filter(Card.IsLocation,nil,LOCATION_EXTRA)
     mg:Sub(mat2)
     Duel.ReleaseRitualMaterial(mg)
