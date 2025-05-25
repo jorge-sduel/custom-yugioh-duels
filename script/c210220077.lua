@@ -18,7 +18,7 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.PayLPCost(tp,1500)
 end
 function s.filter(c,e,tp,m,m2,ft)
-	if not (c:IsType(TYPE_RITUAL) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true)) then return false end
+	if not (c:IsType(TYPE_RITUAL) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true)) then return false end
 	local mg=m:Filter(Card.IsCanBeRitualMaterial,c,c)
 	mg:Merge(m2)
 	if c.ritual_custom_condition then
@@ -45,9 +45,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		local mg=Duel.GetRitualMaterial(tp)
 		local mg2=Group.CreateGroup()
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		return ft>-1 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ALL+LOCATION_MZONE,0,1,nil,e,tp,mg,mg2,ft)
+		return ft>-1 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ALL-LOCATION_MZONE,0,1,nil,e,tp,mg,mg2,ft)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_ALL+LOCATION_MZONE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_ALL-LOCATION_MZONE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
@@ -59,7 +59,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local mg2=Group.CreateGroup()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_HAND+LOCATION_GRAVE+LOCATION_DECK,0,1,1,nil,e,tp,mg,mg2,ft)
+	local tg=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_ALL-LOCATION_MZONE,0,1,1,nil,e,tp,mg,mg2,ft)
 	local tc=tg:GetFirst()
 	if tc then
 		local mat=nil
@@ -87,8 +87,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.BreakEffect()
 		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,false,true,POS_FACEUP)
 		local e2=Effect.CreateEffect(e:GetHandler())
-		e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-		e2:SetCode(EFFECT_SET_ATTACK)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_SET_BASE_ATTACK)
 		e2:SetValue(tc:GetAttack()*2)
 		e2:SetReset(RESET_EVENT|RESETS_STANDARD)
 		tc:RegisterEffect(e2)
