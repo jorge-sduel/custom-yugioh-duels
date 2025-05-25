@@ -45,9 +45,9 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		local mg=Duel.GetRitualMaterial(tp)
 		local mg2=Group.CreateGroup()
 		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-		return ft>-1 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_HAND+LOCATION_GRAVE+LOCATION_DECK,0,1,nil,e,tp,mg,mg2,ft)
+		return ft>-1 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_ALL+LOCATION_MZONE,0,1,nil,e,tp,mg,mg2,ft)
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_GRAVE+LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_ALL+LOCATION_MZONE)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())
