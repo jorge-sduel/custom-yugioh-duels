@@ -27,7 +27,7 @@ function cid.initial_effect(c)
 end
 function cid.filter(c,e,tp,m)
 	local cd=c:GetCode()
-	if not (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) and (c:IsLocation(LOCATION_EXTRA+LOCATION_PZONE+LOCATION_HAND) or c:IsFaceup()) and (c:IsType(TYPE_RITUAL) and (c:IsMonster() or c:IsLocation(LOCATION_PZONE)))) then return false end
+	if not (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) and (c:IsLocation(LOCATION_EXTRA+LOCATION_PZONE+LOCATION_HAND) or c:IsFaceup()) and (c:IsType(TYPE_RITUAL) and (c:IsMonster() or c:IsLocation(LOCATION_PZONE)))) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
 		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
@@ -61,7 +61,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		tc:SetMaterial(mat)
 		Duel.ReleaseRitualMaterial(mat)
 		Duel.BreakEffect()
-		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,false,POS_FACEUP)
+		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,true,POS_FACEUP)
 		tc:CompleteProcedure()
 	end
 	e1:Reset()
