@@ -1,10 +1,18 @@
 --Tempovocazione di Zextra
 local cid,id=GetID()
 function cid.initial_effect(c)
-	--Activate
+	--[[Activate
 	local e1=Ritual.CreateProc({handler=c,lvtype=RITPROC_EQUAL,extrafil=cid.extrafil,extraop=cid.extraop,matfilter=cid.forcedgroup,location=LOCATION_HAND+LOCATION_EXTRA+LOCATION_PZONE})
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DECKDES)
 	e1:SetCountLimit(1,id,EFFECT_COUNT_CODE_OATH)
+	c:RegisterEffect(e1)]]
+	--Activate
+	local e1=Effect.CreateEffect(c)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetTarget(cid.target)
+	e1:SetOperation(cid.activate)
 	c:RegisterEffect(e1)
 	--spsummon
 	local e2=Effect.CreateEffect(c)
@@ -17,6 +25,48 @@ function cid.initial_effect(c)
 	e2:SetOperation(cid.spop)
 	c:RegisterEffect(e2)
 end
+function cid.filter(c,e,tp,m)
+	local cd=c:GetCode()
+	if not (((c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,false) and not c:IsLocation(LOCATION_EXTRA)) or (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) and c:IsLocation(LOCATION_EXTRA) and c:IsFaceup())) and c:IsType(TYPE_RITUAL) and c:IsMonster()) then return false end
+	if m:IsContains(c) then
+		m:RemoveCard(c)
+		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
+		m:AddCard(c)
+	else
+		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
+	end
+	return result
+end
+function cid.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then
+		local mg=Duel.GetRitualMaterial(tp)
+		return Duel.IsExistingMatchingCard(cid.filter,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_PZONE,0,1,nil,e,tp,mg)
+	end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_PZONE)
+end
+function cid.activate(e,tp,eg,ep,ev,re,r,rp)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_BECOME_LINKED_ZONE)
+	e1:SetValue(0xffffff)
+	Duel.RegisterEffect(e1,tp)
+	local mg=Duel.GetRitualMaterial(tp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local tg=Duel.SelectMatchingCard(tp,cid.filter,tp,LOCATION_HAND+LOCATION_EXTRA+LOCATION_PZONE,0,1,1,nil,e,tp,mg)
+	if tg:GetCount()>0 then
+		local tc=tg:GetFirst()
+		mg:RemoveCard(tc)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
+		local mat=mg:SelectWithSumGreater(tp,Card.GetRitualLevel,tc:GetLevel(),tc)
+		tc:SetMaterial(mat)
+		Duel.ReleaseRitualMaterial(mat)
+		Duel.BreakEffect()
+		Duel.SpecialSummon(tc,SUMMON_TYPE_RITUAL,tp,tp,true,true,POS_FACEUP)
+		tc:CompleteProcedure()
+	end
+	e1:Reset()
+end
+
 function cid.extrafil(e,tp,eg,ep,ev,re,r,rp,chk)
 	return Duel.GetFieldGroup(tp,LOCATION_ONFIELD+LOCATION_HAND,0)
 end
