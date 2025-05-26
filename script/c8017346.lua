@@ -27,7 +27,7 @@ function cid.initial_effect(c)
 end
 function cid.filter(c,e,tp,m)
 	local cd=c:GetCode()
-	if not (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) and c:IsType(TYPE_RITUAL) and (c:IsMonster() or c:IsLocation(LOCATION_PZONE))) then return false end
+	if not (c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,true,true) and (c:IsType(TYPE_RITUAL) and c:IsMonster()) or (c:IsLocation(LOCATION_PZONE) and c:GetOriginalLevel()>0)) then return false end
 	if m:IsContains(c) then
 		m:RemoveCard(c)
 		result=m:CheckWithSumGreater(Card.GetRitualLevel,c:GetLevel(),c)
