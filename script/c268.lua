@@ -1,7 +1,8 @@
 --chrono
 function c268.initial_effect(c)
 	c:EnableReviveLimit()
-	--recover
+	Chrono.AddProcedure(c,loc)
+	--[[recover
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(87102774,0))
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -14,7 +15,7 @@ function c268.initial_effect(c)
 	e1:SetCost(c268.reccost)
 	e1:SetTarget(c268.rectg)
 	e1:SetOperation(c268.recop)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
 	--special summon
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
