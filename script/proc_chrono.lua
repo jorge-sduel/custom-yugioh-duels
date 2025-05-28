@@ -1,4 +1,5 @@
---Constants
+
+--Constants
 --TYPE_CHRONO			= 0x80000000000
 --MATERIAL_CHRONO		= 0x40<<32
 --REASON_CHRONO			= 0x1600000000000
@@ -28,9 +29,9 @@ function Chrono.AddProcedure(c,loc)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
 	e1:SetRange(loc)
-	e1:SetCondition(Bigbang.Condition(loc))
-	e1:SetTarget(Bigbang.Target(loc))
-	e1:SetOperation(Bigbang.Operation(loc))
+	e1:SetCondition(Chrono.Condition(loc))
+	--e1:SetTarget(Chrono.Target(loc))
+	--e1:SetOperation(Chrono.Operation(loc))
     e1:SetValue(SUMMON_TYPE_CHRONO)
 	c:RegisterEffect(e1)
 	--recover
@@ -48,6 +49,12 @@ function Chrono.AddProcedure(c,loc)
 	e2:SetOperation(Chrono.recop)
 	c:RegisterEffect(e2)
 end
+function Bigbang.Condition(f,minc,maxc,specialchk,opp,loc,send)
+	return	function(e,c)
+	if c==nil then return true end
+	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and c:GetTurnCounter()>=e:GetHandler():GetLevel() and  c:IsPublic() 
+		end
+end		
 function Chrono.reccon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp
 end
