@@ -1,4 +1,6 @@
 --chrono
+c268.Is_Runic=true
+if not Rune then Duel.LoadScript("proc_chrono.lua") end
 function c268.initial_effect(c)
 	c:EnableReviveLimit()
 	Chrono.AddProcedure(c,loc)
