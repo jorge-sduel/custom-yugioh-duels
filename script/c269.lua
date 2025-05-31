@@ -72,7 +72,7 @@ function c269.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c269.sfilter),tp,LOCATION_HAND,0,1,1,nil,lv,e,tp)
 	if g:GetCount()>0 then
 		Duel.BreakEffect()
-		Duel.SpecialSummon(g,SUMMON_TYPE_CHRONO,tp,tp,false,false,POS_FACEUP)
-		--g:CompleteProcedure()
+		Duel.SpecialSummon(g,SUMMON_TYPE_CHRONO,tp,tp,true,true,POS_FACEUP)
+		g:CompleteProcedure()
 	end
 end
