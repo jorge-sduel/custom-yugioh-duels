@@ -32,7 +32,7 @@ function Chrono.AddProcedure(c,loc)
 	e1:SetCondition(Chrono.Condition(loc))
 	--e1:SetTarget(Chrono.Target(loc))
 	--e1:SetOperation(Chrono.Operation(loc))
-    e1:SetValue(SUMMON_TYPE_CHRONO)
+    --e1:SetValue(SUMMON_TYPE_CHRONO)
 	c:RegisterEffect(e1)
 	--recover
 	local e2=Effect.CreateEffect(c)
