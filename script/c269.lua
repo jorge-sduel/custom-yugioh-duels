@@ -69,10 +69,15 @@ function c269.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local lv=e:GetLabel()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c269.sfilter),tp,LOCATION_HAND,0,1,1,nil,lv,e,tp)
-	if g:GetCount()>0 then
+	local g=Duel.SelectMatchingCard(tp,c269.sfilter,tp,LOCATION_HAND,0,1,1,nil,lv,e,tp):GetFirst()
+	--[[if g:GetCount()>0 then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(g,SUMMON_TYPE_CHRONO,tp,tp,true,true,POS_FACEUP)
-		--g:CompleteProcedure()
+		g:CompleteProcedure()]] 
+				--local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp):GetFirst()
+			if g then
+				Duel.BreakEffect()
+				Duel.SpecialSummon(g,SUMMON_TYPE_SYNCHRO,tp,tp,true,true,POS_FACEUP)
+				g:CompleteProcedure() 
 	end
 end
