@@ -90,7 +90,7 @@ function Chrono.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	e3:SetOwnerPlayer(tp)
 	e3:SetOperation(Chrono.reset)
 	e3:SetReset(RESETS_STANDARD_PHASE_END|RESET_OPPO_TURN,99)
-	c:RegisterEffect(e3)
+	e:GetHandler():RegisterEffect(e3)
 end
 function Chrono.reset(e,tp,eg,ep,ev,re,r,rp)
 	Chrono.disop(e:GetLabelObject(),tp,eg,ep,ev,e,r,rp)
