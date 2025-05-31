@@ -1,10 +1,10 @@
 --chrono
 c268.Is_Chrono=true
---[[if not Rune then Duel.LoadScript("proc_chrono.lua") end]]
+if not Rune then Duel.LoadScript("proc_chrono.lua") end
 function c268.initial_effect(c)
 	c:EnableReviveLimit()
-	--Chrono.AddProcedure(c,nil)
-	--recover
+	Chrono.AddProcedure(c,nil)
+	--[[recover
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(87102774,0))
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
@@ -25,7 +25,7 @@ function c268.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e2:SetRange(LOCATION_HAND)
 	e2:SetCondition(c268.spcon)
-	c:RegisterEffect(e2)
+	c:RegisterEffect(e2)]]
 	--special summon
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(74875003,0))
