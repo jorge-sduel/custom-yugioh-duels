@@ -32,7 +32,7 @@ function Chrono.AddProcedure(c,loc)
 	e1:SetCondition(Chrono.Condition(loc))
 	--e1:SetTarget(Chrono.Target(loc))
 	--e1:SetOperation(Chrono.Operation(loc))
-    --e1:SetValue(SUMMON_TYPE_CHRONO)
+    e1:SetValue(SUMMON_TYPE_CHRONO)
 	c:RegisterEffect(e1)
 	--recover
 	local e2=Effect.CreateEffect(c)
@@ -56,7 +56,7 @@ function Chrono.Condition(loc)
 		end
 end		
 function Chrono.reccon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp and not e:GetHandler():IsPublic() 
+	return tp==Duel.GetTurnPlayer() and not e:GetHandler():IsPublic() 
 end
 function Chrono.reccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not e:GetHandler():IsPublic() end
