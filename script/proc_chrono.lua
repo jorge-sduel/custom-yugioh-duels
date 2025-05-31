@@ -3,7 +3,7 @@
 --TYPE_CHRONO			= 0x80000000000
 --MATERIAL_CHRONO		= 0x40<<32
 --REASON_CHRONO			= 0x1600000000000
-SUMMON_TYPE_CHRONO	= 0x16800000000000000000001
+SUMMON_TYPE_CHRONO	= SUMMON_TYPE_SPECIAL+33
 --EFFECT_CHRONO_MAT_RESTRICTION		=CODE EFFECT+TYPE_CHRONO
 --EFFECT_CANNOT_BE_CHRONO_MATERIAL	=1000
 --EFFECT_RUNE_SUBSTITUTE	= CODE EFFECT
@@ -32,7 +32,7 @@ function Chrono.AddProcedure(c,loc)
 	e1:SetCondition(Chrono.Condition(loc))
 	--e1:SetTarget(Chrono.Target(loc))
 	--e1:SetOperation(Chrono.Operation(loc))
-    --e1:SetValue(SUMMON_TYPE_CHRONO)
+    e1:SetValue(SUMMON_TYPE_CHRONO)
 	c:RegisterEffect(e1)
 	--recover
 	local e2=Effect.CreateEffect(c)
