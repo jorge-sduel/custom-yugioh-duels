@@ -100,7 +100,8 @@ function c268.spcon(e,c)
 end
 function c268.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:GetSummonType()==SUMMON_TYPE_SPECIAL and c:IsPreviousLocation(LOCATION_HAND)
+	return --c:GetSummonType()==SUMMON_TYPE_SPECIAL and 
+	c:IsPreviousLocation(LOCATION_HAND)
 end
 function c268.filter(c,e,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
