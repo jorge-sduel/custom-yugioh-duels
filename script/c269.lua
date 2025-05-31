@@ -73,6 +73,6 @@ function c269.spop(e,tp,eg,ep,ev,re,r,rp)
 	if g:GetCount()>0 then
 		Duel.BreakEffect()
 		Duel.SpecialSummon(g,SUMMON_TYPE_CHRONO,tp,tp,true,true,POS_FACEUP)
-		g:CompleteProcedure()
+		--g:CompleteProcedure()
 	end
 end
