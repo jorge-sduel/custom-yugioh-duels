@@ -27,7 +27,7 @@ function Chrono.AddProcedure(c,loc)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetDescription(268,0)
 	e1:SetCode(EFFECT_SPSUMMON_PROC)
-	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(loc)
 	e1:SetCondition(Chrono.Condition(loc))
 	--e1:SetTarget(Chrono.Target(loc))
@@ -56,7 +56,7 @@ function Chrono.Condition(loc)
 		end
 end		
 function Chrono.reccon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
+	return Duel.GetTurnPlayer()==tp and not e:GetHandler():IsPublic() 
 end
 function Chrono.reccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not e:GetHandler():IsPublic() end
