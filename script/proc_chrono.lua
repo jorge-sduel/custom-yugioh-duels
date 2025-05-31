@@ -52,7 +52,7 @@ end
 function Chrono.Condition(loc)
 	return	function(e,c)
 	if c==nil then return true end
-	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and c:GetTurnCounter()>=e:GetHandler():GetLevel() and  c:IsPublic() 
+	return Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 and c:GetTurnCounter()>=e:GetHandler():GetLevel() 
 		end
 end		
 function Chrono.reccon(e,tp,eg,ep,ev,re,r,rp)
