@@ -56,7 +56,7 @@ function Chrono.Condition(loc)
 		end
 end		
 function Chrono.reccon(e,tp,eg,ep,ev,re,r,rp)
-	return tp==Duel.GetTurnPlayer() and not e:GetHandler():IsPublic() 
+	return e:GetHandlerPlayer()==Duel.GetTurnPlayer() and not e:GetHandler():IsPublic() 
 end
 function Chrono.reccost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not e:GetHandler():IsPublic() end
