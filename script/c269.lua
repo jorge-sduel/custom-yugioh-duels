@@ -35,7 +35,7 @@ function c269.ctop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():AddCounter(0x5f,1)
 end
 function c269.filter(c,cc,e,tp)
-	return c:IsSetCard(0x5f) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return c:IsSetCard(0x5f) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL+33,tp,true,true)
 		and c:GetLevel()>0 and cc:IsCanRemoveCounter(tp,0x5f,c:GetLevel(),REASON_COST)
 end
 function c269.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -61,7 +61,7 @@ function c269.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function c269.sfilter(c,lv,e,tp)
-	return c:IsSetCard(0x5f) and c:IsCanBeSpecialSummoned(e,0,tp,true,true)
+	return c:IsSetCard(0x5f) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_SPECIAL+33,tp,true,true)
 		and c:IsLevel(lv)
 end
 function c269.spop(e,tp,eg,ep,ev,re,r,rp)
@@ -70,6 +70,6 @@ function c269.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c269.sfilter),tp,LOCATION_HAND,0,1,1,nil,lv,e,tp)
 	if g:GetCount()>0 then
-		Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP)
+		Duel.SpecialSummon(g,SUMMON_TYPE_SPECIAL+33,tp,tp,true,true,POS_FACEUP)
 	end
 end
