@@ -1,5 +1,5 @@
 --chronologyc sanctuary
-if not Rune then Duel.LoadScript("proc_chrono.lua") end
+if not Chrono then Duel.LoadScript("proc_chrono.lua") end
 function c269.initial_effect(c)
 	c:EnableCounterPermit(0x5f)
 	--Activate
