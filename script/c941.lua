@@ -26,9 +26,14 @@ function s.initial_effect(c)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
 end
+function s.LavaCheck(sg,e,tp,mg)
+	return Duel.GetMZoneCount(1-tp,sg,tp)>0
+end
 function s.spcon(e,c)
 	if c==nil then return true end
-	return Duel.CheckReleaseGroup(2,Card.Type,2,false,2,true,c,2,nil,false,nil,TYPE_MONSTER) and Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE)>=2 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 
+		local tp=c:GetControler()
+		local mg=Duel.GetMatchingGroup(Card.IsReleasable,tp,0,LOCATION_MZONE,nil)
+		return aux.SelectUnselectGroup(mg,e,tp,2,2,s.LavaCheck,0)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.SelectReleaseGroup(1-tp,Card.IsType,2,2,false,true,true,c,nil,nil,false,nil,TYPE_MONSTER)
