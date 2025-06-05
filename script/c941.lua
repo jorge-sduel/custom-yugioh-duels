@@ -28,7 +28,7 @@ function s.initial_effect(c)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	return Duel.CheckReleaseGroup(1,Card.Type,2,false,2,true,c,1-c:GetControler(),nil,false,nil,TYPE_MONSTER) and Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE)>=2 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 
+	return Duel.CheckReleaseGroup(1,Card.Type,2,false,2,true,c,1,nil,false,nil,TYPE_MONSTER) and Duel.GetFieldGroupCount(c:GetControler(),0,LOCATION_MZONE)>=2 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0 
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.SelectReleaseGroup(1-tp,Card.IsType,2,2,false,true,true,c,nil,nil,false,nil,TYPE_MONSTER)
