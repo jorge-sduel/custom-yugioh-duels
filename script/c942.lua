@@ -71,6 +71,6 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CLIENT_HINT)
 		e1:SetCode(EFFECT_CANNOT_TRIGGER)
 		e1:SetReset(RESETS_STANDARD_PHASE_END)
-		g:RegisterEffect(e1)
+		g:GetFirst():RegisterEffect(e1)
 	end
 end
