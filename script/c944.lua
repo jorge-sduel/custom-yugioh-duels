@@ -34,6 +34,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.operation2)
 	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
 end
+s.listed_series={SET_GALAXY}
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_GALAXY) and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 end
