@@ -1,6 +1,5 @@
 --
 local s,id=GetID()
-
 function s.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
@@ -16,6 +15,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetRange(LOCATION_GRAVE)
+	e2:SetCost(Cost.SelfBanish) 
 	e2:SetCondition(s.condition)
 	e2:SetOperation(s.operation)
 	c:RegisterEffect(e2)
