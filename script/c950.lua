@@ -62,7 +62,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.immval(e,te)
 	return te:IsActiveType(TYPE_MONSTER) and te:IsActivated()
-		and te:IsType(TYPE_EXTRA)
+		and te:IsActiveType(TYPE_EXTRA)
 end
 function s.atkcon(e)
 	local ph=Duel.GetCurrentPhase()
