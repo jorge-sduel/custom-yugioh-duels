@@ -60,8 +60,9 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
-function s.efilter(e,te)
-	return te:IsSummonLocation(LOCATION_EXTRA)
+function s.immval(e,te)
+	return te:IsActiveType(TYPE_MONSTER) and te:IsActivated()
+		and te:GetSummonLocation()~=LOCATION_GRAVE
 end
 function s.atkcon(e)
 	local ph=Duel.GetCurrentPhase()
