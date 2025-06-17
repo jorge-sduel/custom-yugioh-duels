@@ -1,7 +1,7 @@
 ---CCG: Familiar-Possessed Abyss Charmer - Dharc
 function c27000305.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),4,2,nil,nil,99)
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsAttribute,ATTRIBUTE_DARK),4,2,nil,nil,Xyz.InfiniteMats)
 	c:EnableReviveLimit()
 	--special summon condition
 	local e1=Effect.CreateEffect(c)
@@ -55,7 +55,8 @@ function c27000305.initial_effect(c)
 end
 -- {Material Filter: DARK Monsters}
 function c27000305.MatFilter1(c,xyz,sumtype,tp)
-	return c:IsAttribute(ATTRIBUTE_DARK,xyz,sumtype,tp)or c:IsSetCard(0xbf)
+	return c:IsAttribute(ATTRIBUTE_DARK,xyz,sumtype,tp)
+or c:IsSetCard(0xbf)
 end
 -- {Special Summon Proc: Familiar-Possessed}
 function c27000305.SPfilter1(c,tp)
