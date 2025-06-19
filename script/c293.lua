@@ -96,7 +96,7 @@ function c293.ctop(e,tp,c)
 	local c=e:GetHandler()
 	if not c:IsControler(Duel.GetTurnPlayer()) then return end
 	local ct=e:GetLabel()
-	if c:GetFlagEffect(c293)~=0 and ct==2 then 
+	if c:GetFlagEffect(293)~=0 and ct==2 then 
 		c:RegisterFlagEffect(100000111,RESET_EVENT+RESETS_STANDARD,0,1)
 	else
 		e:SetLabel(ct+1)
