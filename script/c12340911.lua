@@ -120,7 +120,7 @@ end
 function c12340911.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local attr=e:GetHandler():GetPreviousAttributeOnField()
 	if chk==0 and attr==0 then return false end
-	local ct:e:GetHandler():GetClassCount(Card.GetAttribute)
+	local ct=e:GetHandler():GetClassCount(Card.GetAttribute)
 	if ct>=1 then end
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,ct) end
 	Duel.SetTargetPlayer(tp)
