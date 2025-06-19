@@ -131,7 +131,7 @@ function c12340911.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct)
 end
 function c12340911.sumfilter(c)
-	return c:IsSetCard(SET_ASURA) and c:IsLevelAbove(7) and c:IsSummonable(true,nil)
+	return c:IsLevelAbove(7) and c:IsSummonable(true,nil)
 end
 function c12340911.spop(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
