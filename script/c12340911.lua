@@ -52,9 +52,9 @@ Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunction(Card.IsAttackAbove,2000),2
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_LEAVE_FIELD)
 	e4:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_CARD_TARGET)
-	e4:SetCondition(s.spcon)
-	e4:SetTarget(s.sptg)
-	e4:SetOperation(s.spop)
+	e4:SetCondition(c12340911.spcon)
+	e4:SetTarget(c12340911.sptg)
+	e4:SetOperation(c12340911.spop)
 	c:RegisterEffect(e4)
 end
 function c12340911.attval(e,c)
@@ -76,7 +76,7 @@ function c12340911.matcheck(e,c)
 	end
 end
 
-function s.immcost(e,tp,eg,ep,ev,re,r,rp,chk)
+function c12340911.immcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
 	local g=Duel.SelectMatchingCard(tp,Card.IsDiscardable,tp,LOCATION_HAND,0,1,1,nil)
 	local ct=0
@@ -86,14 +86,14 @@ function s.immcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(ct)
 	Duel.SendtoGrave(g,REASON_COST+REASON_DISCARD)
 end
-function s.immop(e,tp,eg,ep,ev,re,r,rp)
+function c12340911.immop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
-	e1:SetValue(s.immfilter)
+	e1:SetValue(c12340911.immfilter)
 	e1:SetLabel(e:GetLabel())
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 	c:RegisterEffect(e1,true)
@@ -112,12 +112,12 @@ function c12340911.val(e,c)
 	return -g:GetClassCount(Card.GetAttribute)*300
 end
 
-function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+function c12340911.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:GetReasonPlayer()~=tp and c:IsReason(REASON_EFFECT) and c:IsPreviousPosition(POS_FACEUP)
 		and c:GetPreviousControler()==c:GetOwner()
 end
-function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+function c12340911.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local attr=e:GetHandler():GetPreviousAttributeOnField()
 	if chk==0 and attr==0 then return false end
 	local ct=0
@@ -129,4 +129,19 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(ct)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,ct)
+end
+function c12340911.sumfilter(c)
+	return c:IsSetCard(SET_ASURA) and c:IsLevelAbove(7) and c:IsSummonable(true,nil)
+end
+function c12340911.spop(e,tp,eg,ep,ev,re,r,rp)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Draw(p,d,REASON_EFFECT)
+	local g=Duel.GetMatchingGroup(c12340911.sumfilter,tp,LOCATION_HAND,0,nil)
+	if #g>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+		Duel.BreakEffect()
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SUMMON)
+		local sc=g:Select(tp,1,1,nil):GetFirst()
+		Duel.ShuffleHand(tp)
+        Duel.Summon(tp,sc,true,nil)
+	end
 end
