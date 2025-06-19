@@ -1,6 +1,6 @@
 --Asura Reunion
 function c12340911.initial_effect(c)
-		c:EnableReviveLimit()
+	c:EnableReviveLimit()
 	--fusion material	
 Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunction(Card.IsAttackAbove,2000),2)
 	--remove fusion type
@@ -11,12 +11,21 @@ Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunction(Card.IsAttackAbove,2000),2
 	e0:SetCode(EFFECT_REMOVE_TYPE)
 	e0:SetValue(TYPE_FUSION)
 	c:RegisterEffect(e0)
-	--gain attributes
+	--Attribute change
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_ADD_ATTRIBUTE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetValue(c12340911.attval)
+	c:RegisterEffect(e1)
+	--[[gain attributes
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_MATERIAL_CHECK)
 	e1:SetValue(c12340911.matcheck)
-	c:RegisterEffect(e1)
+	c:RegisterEffect(e1)]]
+	
     --immune
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(12340111,0))
@@ -47,6 +56,10 @@ Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunction(Card.IsAttackAbove,2000),2
 	e4:SetTarget(c12340911.sptg)
 	e4:SetOperation(c12340911.spop)
 	c:RegisterEffect(e4)
+end
+function c12340911.attval(e,c)
+	local og=e:GetHandler():GetMaterial()
+	return og:GetBitwiseOr(Card.GetAttribute)
 end
 function c12340911.matcheck(e,c)
 	local g=c:GetMaterial()
