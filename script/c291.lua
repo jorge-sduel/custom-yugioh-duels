@@ -67,9 +67,9 @@ function c291.desop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=e:GetLabel()+1
 	e:GetHandler():SetTurnCounter(ct)
 	e:SetLabel(ct)
-	if not c:IsLocation(LOCATION_SZONE) then
+	if not e:GetHandler():IsLocation(LOCATION_SZONE) then
 			e:GetHandler():SetTurnCounter(0)
-		c:ResetFlagEffect(1082946)
+		e:GetHandler():ResetFlagEffect(1082946)
 		if re then re:Reset() end
 	end
 end
