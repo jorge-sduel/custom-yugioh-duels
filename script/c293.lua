@@ -84,7 +84,7 @@ function c293.endop(e,tp,c)
 			e1:SetLabel(0)
 			e1:SetOperation(c293.ctop)
 			rc:RegisterEffect(e1)
-			rc:RegisterFlagEffect(c293,RESET_EVENT+RESETS_STANDARD,0,1)
+			rc:RegisterFlagEffect(293,RESET_EVENT+RESETS_STANDARD,0,1)
 		end
 		rc=g:GetNext()
 	end
