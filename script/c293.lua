@@ -73,7 +73,7 @@ function c293.endop(e,tp,c)
 	local g=Duel.GetMatchingGroup(c293.spfilter1,Duel.GetTurnPlayer(),LOCATION_MZONE,0,nil)
 	local rc=g:GetFirst()
 	while rc do
-		if rc:GetFlagEffect(c293)==0 then
+		if rc:GetFlagEffect(293)==0 then
 			local e1=Effect.CreateEffect(rc)
 			e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 			e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
