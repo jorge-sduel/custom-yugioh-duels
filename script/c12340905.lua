@@ -34,7 +34,7 @@ function c12340905.filter(c,attr)
 end
 function c12340905.con(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return not Duel.IsExistingMatchingCard(c12340908.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c,c:GetOriginalAttribute())
+	return not Duel.IsExistingMatchingCard(c12340905.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,c,c:GetOriginalAttribute())
 end
 function c12340905.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
