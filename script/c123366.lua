@@ -21,6 +21,7 @@ function c123366.initial_effect(c)
 	e2:SetCountLimit(1,123366)
 	c:RegisterEffect(e2)
 end
+c123366.listed_names={70781052}
 function c123366.condition(e,tp,eg,ep,ev,re,r,rp)
 	local phase=Duel.GetCurrentPhase()
 	if phase~=PHASE_DAMAGE or Duel.IsDamageCalculated() then return false end
