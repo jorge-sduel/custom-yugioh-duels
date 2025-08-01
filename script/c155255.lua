@@ -40,6 +40,7 @@ function c155255.initial_effect(c)
 	e4:SetOperation(c155255.adop)
 	c:RegisterEffect(e4)
 end
+c155255.listed_names={70781052}
 function c155255.spfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_FIEND) and c:IsDestructable()
 end
