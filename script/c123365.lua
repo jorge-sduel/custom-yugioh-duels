@@ -33,7 +33,7 @@ function c123365.initial_effect(c)
 	e4:SetOperation(c123365.adop)
 	c:RegisterEffect(e4)
 end
-
+s.listed_names={70781052}
 function c123365.adcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsReason(REASON_EFFECT) and c:IsReason(REASON_DESTROY)
