@@ -20,6 +20,7 @@ function c155265.initial_effect(c)
 	e2:SetOperation(c155265.operation)
 	c:RegisterEffect(e2)
 end
+c155265.listed_names={70781052}
 function c155265.filter(c)
 	return c:IsCode(70781052) and c:IsAbleToRemoveAsCost()
 end
