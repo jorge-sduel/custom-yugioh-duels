@@ -18,7 +18,7 @@ end
 s.listed_names={78193831}
 s.listed_series={0xd6,0xd7}
 function s.matfilter(c)
-	return c:IsSetCard(0xd6) or c:IsSetCard(0xd7) or c:IsRace(RACE_DRAGON) or c:IsRace(RACE_WARRIOR)
+	return c:IsSetCard(0xd6) or c:IsSetCard(0xd7) or c:IsRace(RACE_DRAGON) or c:IsRace(RACE_WARRIOR) or c:IsRace(RACE_SPELLCASTER)
 end
 function s.fextra(e,tp,mg)
 	return Duel.GetMatchingGroup(aux.FaceupFilter(s.matfilter),tp,0,LOCATION_ONFIELD,nil)
