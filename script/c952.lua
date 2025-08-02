@@ -1,5 +1,6 @@
 --Quartz
-function s.initial_effect(c)
+local s,id=GetID()
+function s.initial_effect(c)
 	--special summon
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -27,3 +28,4 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.SelectReleaseGroup(c:GetControler(),Card.IsAttribute,1,1,nil,ATTRIBUTE_LIGHT)
 	Duel.Release(g,REASON_COST)
 end
+
