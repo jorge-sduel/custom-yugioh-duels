@@ -1,5 +1,7 @@
 --Quartz
-function s.initial_effect(c)
+local s,id=GetID()
+function s.initial_effect(c)
+
 	--Damage
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -46,6 +48,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.SelectReleaseGroup(c:GetControler(),Card.IsAttackAbove,1,1,nil,2000)
 	Duel.Release(g,REASON_COST)
 end
+
 function s.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
 	Duel.SetTargetPlayer(tp)
