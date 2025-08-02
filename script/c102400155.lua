@@ -47,7 +47,7 @@ function cid.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
 		e1:SetOperation(cid.operation3)
 		sc:RegisterEffect(e1)
-		Duel.XyzSummon(tp,sc,nil,mg,99,99)
+		Duel.XyzSummon(tp,sc,nil,mg)
 	end
 end
 function cid.regop(e,tp,eg,ep,ev,re,r,rp)
