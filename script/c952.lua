@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 	--Ritual Summon 1 LIGHT Warrior or Dragon Ritual Monster from your hand
-	local e2=Ritual.CreateProc(c,RITPROC_GREATER,
+	local e2=Ritual.CreateProc({handler=c,location=LOCATION_HAND|LOCATION_GRAVE},RITPROC_GREATER,
 		function(rit_c) return rit_c:IsAttribute(ATTRIBUTE_LIGHT) end,
 		nil,aux.Stringid(id,1))
 	e2:SetType(EFFECT_TYPE_IGNITION)
@@ -28,4 +28,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g=Duel.SelectReleaseGroup(c:GetControler(),Card.IsAttribute,1,1,nil,ATTRIBUTE_LIGHT)
 	Duel.Release(g,REASON_COST)
 end
+
 
