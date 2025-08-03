@@ -37,7 +37,7 @@ function s.con(e)
 	return not Duel.IsPlayerAffectedByEffect(e:GetHandlerPlayer(),CARD_SPIRIT_ELIMINATION)
 end
 function s.filter(c)
-	return c:IsSetCard(SET_GALAXY) and c:IsAbleToHand()
+	return c:IsSetCard(SET_GALAXY) and c:IsMonster() and c:IsAbleToHand()
 end
 function s.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -50,9 +50,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
+
 end
 function s.spcfilter(c,tp)
-	return c:IsFaceDown()
+	return c:IsFacedown()
 end
 function s.spcon(e,c)
 	if c==nil then return true end
