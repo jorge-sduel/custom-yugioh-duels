@@ -2,7 +2,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-		local fparams={}
+		local fparams={fusfilter=s.extrafil}
 	--Special summon monsters from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -75,4 +75,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(g,tp,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
+end
+function s.extrafil(c)
+	return c:IsType(TYPE_FUSION) and c:IsSetCard(SET_BUSTER_BLADER)
 end
