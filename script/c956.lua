@@ -54,17 +54,18 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
 		end
 		Duel.SpecialSummonComplete()
-		--[[if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_MZONE,0,1,nil,CARD_BUSTER_BLADER) 
-			fustg(e,tp,eg,ep,ev,re,r,rp,0) and Duel.SelectYesNo(tp,aux.Stringid(6205579,0)) then
+		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_MZONE,0,1,nil,CARD_BUSTER_BLADER) 
+		Fusion.RegisterSummonEff(c)	
+		--[[fustg(e,tp,eg,ep,ev,re,r,rp,0) and Duel.SelectYesNo(tp,aux.Stringid(6205579,0)) then
 			Duel.BreakEffect()
-			fusop(e,tp,eg,ep,ev,re,r,rp)]]
+			fusop(e,tp,eg,ep,ev,re,r,rp)
 		local chkf=tp|FUSPROC_NOTFUSION
 	local g=Duel.GetTargetCards(e):Filter(Card.IsCanBeFusionMaterial,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,g,chkf):GetFirst()
 	if tc then
 		Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
-		tc:CompleteProcedure()
+		tc:CompleteProcedure()]]
 		end
 end
 function s.filter(c,e,tp,m,chkf)
