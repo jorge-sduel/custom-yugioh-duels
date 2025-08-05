@@ -5,6 +5,16 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	--Synchro Summon procedure: 1 Tuner + 1+ non-Tuner monsters
 	Synchro.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_DESTRUCTION_SWORD),1,1,Synchro.NonTuner(nil),1,99)
+	--lv change
+	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_FIELD)
+	e0:SetCode(EFFECT_SYNCHRO_MAT_FROM_HAND)
+	e0:SetProperty(EFFECT_FLAG_SET_AVAILABLE+EFFECT_FLAG_IGNORE_IMMUNE)
+	e0:SetRange(LOCATION_EXTRA)
+	e0:SetTargetRange(LOCATION_MZONE,0)
+	e0:SetTarget(s.lvtg)
+	e0:SetValue(s.lvval)
+	c:RegisterEffect(e0)
 	--All monsters become Dragons
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -63,6 +73,13 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_BUSTER_BLADER}
 s.listed_series={SET_BUSTER_BLADER,SET_DESTRUCTION_SWORD}
+function s.lvtg(e,c)
+	return c:IsLevelAbove(1) and c:IsCode(CARD_BUSTER_BLADER)
+end
+function s.synval(e,mc,sc)
+	return sc:IsCode(id)
+end
+end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_BUSTER_BLADER),tp,LOCATION_MZONE,0,1,nil)
 end
