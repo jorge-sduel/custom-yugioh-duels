@@ -22,6 +22,7 @@ function s.initial_effect(c)
 	e3:SetCountLimit(1,{1,id})
 	e3:SetCode(EVENT_PHASE|PHASE_STANDBY)
 	e3:SetCost(Cost.SelfBanish)
+	e3:SetCondition(s.thcon)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
 	c:RegisterEffect(e3)
@@ -73,6 +74,9 @@ end
 function s.filter(c,e,tp,m,chkf)
 	return c:IsSetCard(SET_BUSTER_BLADER) and c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false)
 		and c:CheckFusionMaterial(m,nil,chkf)
+end
+function s.thcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsTurnPlayer(tp)
 end
 function s.thfilter(c)
 	return c:IsLevelBelow(4) and c:IsSetCard(SET_DESTRUCTION_SWORD) and c:IsAbleToHand()
