@@ -2,7 +2,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-		local fparams={fusfilter=s.extrafil}
+		--local fparams={fusfilter=s.extrafil}
 	--Special summon monsters from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -54,11 +54,22 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
 		end
 		Duel.SpecialSummonComplete()
-		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_MZONE,0,1,nil,CARD_BUSTER_BLADER) 
+		--[[if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_MZONE,0,1,nil,CARD_BUSTER_BLADER) 
 			fustg(e,tp,eg,ep,ev,re,r,rp,0) and Duel.SelectYesNo(tp,aux.Stringid(6205579,0)) then
 			Duel.BreakEffect()
-			fusop(e,tp,eg,ep,ev,re,r,rp)
+			fusop(e,tp,eg,ep,ev,re,r,rp)]]
+		local chkf=tp|FUSPROC_NOTFUSION
+	local g=Duel.GetTargetCards(e):Filter(Card.IsCanBeFusionMaterial,nil)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,g,chkf):GetFirst()
+	if tc then
+		Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
+		tc:CompleteProcedure()
 		end
+end
+function s.filter(c,e,tp,m,chkf)
+	return c:IsSetCard(SET_BUSTER_BLADER) and c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false)
+		and c:CheckFusionMaterial(m,nil,chkf)
 end
 function s.thfilter(c)
 	return c:IsLevelBelow(4) and c:IsSetCard(SET_DESTRUCTION_SWORD) and c:IsAbleToHand()
