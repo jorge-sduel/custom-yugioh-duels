@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetHintTiming(0,TIMING_END_PHASE)
 	e1:SetCountLimit(1,id)
 	e1:SetTarget(s.sptg)
-	e1:SetOperation(s.spop)
+	e1:SetOperation(s.spop(Fusion.SummonEffTG(fparams),Fusion.SummonEffOP(fparams)))
 	c:RegisterEffect(e1)
 	--level up
 	local e3=Effect.CreateEffect(c)
@@ -44,7 +44,8 @@ function s.scfilter(c,mg)
 	return c:IsSetCard(SET_BUSTER_BLADER)
 end
 	--Special summon 2 monsters (1 tuner, 1 winged beast) with their effects negated
-function s.spop(e,tp,eg,ep,ev,re,r,rp)
+function s.spop(fustg,fusop)
+	return function(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if Duel.IsPlayerAffectedByEffect(tp,CARD_BLUEEYES_SPIRIT) or Duel.GetLocationCount(tp,LOCATION_MZONE)<2 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
@@ -55,11 +56,11 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		end
 		Duel.SpecialSummonComplete()
 		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_MZONE,0,1,nil,CARD_BUSTER_BLADER) 
-		Fusion.RegisterSummonEff(c)	
-		--[[fustg(e,tp,eg,ep,ev,re,r,rp,0) and Duel.SelectYesNo(tp,aux.Stringid(6205579,0)) then
+		--Fusion.RegisterSummonEff(c)	
+		fustg(e,tp,eg,ep,ev,re,r,rp,0) and Duel.SelectYesNo(tp,aux.Stringid(6205579,0)) then
 			Duel.BreakEffect()
 			fusop(e,tp,eg,ep,ev,re,r,rp)
-		local chkf=tp|FUSPROC_NOTFUSION
+		--[[local chkf=tp|FUSPROC_NOTFUSION
 	local g=Duel.GetTargetCards(e):Filter(Card.IsCanBeFusionMaterial,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,g,chkf):GetFirst()
