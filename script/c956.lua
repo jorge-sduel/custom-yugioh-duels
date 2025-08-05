@@ -2,7 +2,7 @@
 --Substitute ID
 local s,id=GetID()
 function s.initial_effect(c)
-		--local fparams={fusfilter=s.extrafil}
+	local fparams={fusfilter=s.extrafil}
 	--Special summon monsters from deck
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
