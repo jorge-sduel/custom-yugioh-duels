@@ -44,8 +44,9 @@ function s.filter(c)
 	return c:IsAttribute(ATTRIBUTE_DARK) or c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
-	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED)
-		and Duel.GetCurrentChain(true)==0 and (re:IsAttribute(ATTRIBUTE_DARK) or c:IsAttribute(ATTRIBUTE_LIGHT))
+	if #eg~=1 then return false end
+	local tc=eg:GetFirst()
+	return tc~=e:GetHandler() and tc:IsFaceup() and (tc:IsAttribute(ATTRIBUTE_DARK) or tc:IsAttribute(ATTRIBUTE_LIGHT)) and tc:IsSummonPlayer(1-tp)
 end
 function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
@@ -53,10 +54,10 @@ function s.discost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	Duel.SetOperationInfo(0,CATEGORY_DISABLE_SUMMON,eg,#eg,0,0)
+	--Duel.SetOperationInfo(0,CATEGORY_DISABLE_SUMMON,eg,#eg,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,#eg,0,0)
 end
 function s.activate1(e,tp,eg,ep,ev,re,r,rp)
-	Duel.NegateSummon(eg)
+	--Duel.NegateSummon(eg)
 	Duel.Destroy(eg,REASON_EFFECT)
 end
