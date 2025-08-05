@@ -53,6 +53,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)]]
 	--act limit
 	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(id,1))
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e4:SetCountLimit(1,{1,id})
@@ -61,6 +62,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e4)
 	--Activate
 	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(id,2))
 	e5:SetCategory(CATEGORY_NEGATE+CATEGORY_DESTROY+CATEGORY_DRAW)
 	e5:SetType(EFFECT_TYPE_QUICK_O)
 	e5:SetCode(EVENT_CHAINING)
