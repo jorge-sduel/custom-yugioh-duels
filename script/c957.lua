@@ -100,7 +100,8 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local sc=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
 	if sc then
-		if not Duel.Equip(tp,sc,tc,true) then return end
+			Duel.Equip(tp,sc,tc,true)
+		--if not Duel.Equip(tp,sc,tc,true) then return end
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_EQUIP_LIMIT)
