@@ -68,7 +68,6 @@ function s.spop(fustg,fusop)
 		Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 		tc:CompleteProcedure()]]
 		end 
-    end
   end 
 end
 function s.filter(c,e,tp,m,chkf)
