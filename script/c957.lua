@@ -79,7 +79,6 @@ end
 function s.synval(e,mc,sc)
 	return sc:IsCode(id)
 end
-end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsSetCard,SET_BUSTER_BLADER),tp,LOCATION_MZONE,0,1,nil)
 end
