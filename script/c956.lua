@@ -67,7 +67,9 @@ function s.spop(fustg,fusop)
 	if tc then
 		Duel.SpecialSummon(tc,SUMMON_TYPE_FUSION,tp,tp,false,false,POS_FACEUP)
 		tc:CompleteProcedure()]]
-		end
+		end 
+    end
+  end 
 end
 function s.filter(c,e,tp,m,chkf)
 	return c:IsSetCard(SET_BUSTER_BLADER) and c:IsType(TYPE_FUSION) and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false)
