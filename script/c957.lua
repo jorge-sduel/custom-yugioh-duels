@@ -99,7 +99,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local sc=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
-	if sc then
+	--if sc then
 			Duel.Equip(tp,sc,tc,true)
 		--if not Duel.Equip(tp,sc,tc,true) then return end
 		local e1=Effect.CreateEffect(e:GetHandler())
@@ -126,7 +126,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local e5=e2:Clone()
 		e5:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
 		tc:RegisterEffect(e5)
-		end
+		--end
 	end
 end
 function s.cfilter(c)
