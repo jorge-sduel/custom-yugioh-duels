@@ -20,7 +20,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_CHANGE_RACE)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e1:SetTargetRange(LOCATION_GRAVE,LOCATION_GRAVE)
 	e1:SetValue(RACE_DRAGON)
 	c:RegisterEffect(e1)
 	--Special Summon 1 "Buster Blader" from the GY
