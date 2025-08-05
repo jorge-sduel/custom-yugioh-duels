@@ -76,7 +76,6 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectTarget(tp,s.spfilter,tp,LOCATION_GRAVE,0,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,0)
- end
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -110,6 +109,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		local e5=e2:Clone()
 		e5:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
 		tc:RegisterEffect(e5)
+		end
 	end
 end
 function s.cfilter(c)
