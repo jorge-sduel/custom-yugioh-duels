@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()
-	Fusion.AddProcMix(c,true,true,CARD_BUSTER_BLADER,aux.FilterBoolFunctionEx(s.ffilter))
+	Fusion.AddProcMix(c,true,true,CARD_BUSTER_BLADER,s.ffilter)
 	--negate
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(id,0))
@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 s.material_setcode=SET_BUSTER_BLADER
-function s.val(c)
+function s.ffilter(c,fc,sumtype,tp)
 	return c:IsAttribute(ATTRIBUTE_DARK) or c:IsAttribute(ATTRIBUTE_LIGHT)
 end
 function s.val(e,c)
