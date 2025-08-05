@@ -55,7 +55,7 @@ function s.spop(fustg,fusop)
 			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
 		end
 		Duel.SpecialSummonComplete()
-		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_MZONE,0,1,nil,CARD_BUSTER_BLADER) 
+		if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_MZONE,0,1,nil,CARD_BUSTER_BLADER) and 
 		--Fusion.RegisterSummonEff(c)	
 		fustg(e,tp,eg,ep,ev,re,r,rp,0) and Duel.SelectYesNo(tp,aux.Stringid(6205579,0)) then
 			Duel.BreakEffect()
