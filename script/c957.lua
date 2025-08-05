@@ -33,7 +33,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCountLimit(1,id)
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER_E)
-	e2:SetCondition(s.spcon)
+	--e2:SetCondition(s.spcon)
 	e2:SetTarget(s.sptg)
 	e2:SetOperation(s.spop)
 	c:RegisterEffect(e2)
@@ -95,7 +95,7 @@ function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then
+	if tc:IsRelateToEffect(e) then
 		Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local sc=Duel.SelectMatchingCard(tp,s.filter2,tp,LOCATION_GRAVE,0,1,1,nil):GetFirst()
@@ -128,9 +128,6 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		tc:RegisterEffect(e5)
 		--end
 	end
-end
-function s.cfilter(c)
-	return c:IsSetCard(SET_BUSTER_BLADER) and c:IsMonster() and c:IsFaceup()
 end
 function s.filter2(c)
 	return c:IsSetCard(SET_DESTRUCTION_SWORD) and c:IsMonster() and not c:IsForbidden()
