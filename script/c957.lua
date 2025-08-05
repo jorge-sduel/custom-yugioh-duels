@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e0:SetRange(LOCATION_EXTRA)
 	e0:SetTargetRange(LOCATION_HAND,0)
 	e0:SetTarget(s.lvtg)
-	e0:SetValue(s.lvval)
+	e0:SetValue(s.synval)
 	c:RegisterEffect(e0)
 	--All monsters become Dragons
 	local e1=Effect.CreateEffect(c)
