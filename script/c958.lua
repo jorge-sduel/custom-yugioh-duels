@@ -62,7 +62,7 @@ end
 function s.activate1(e,tp,eg,ep,ev,re,r,rp)
 	--Duel.NegateSummon(eg)
 	Duel.Destroy(eg,REASON_EFFECT)
-			if eg:GetAttack()>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+			if eg:IsAttackAbove(1) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.Damage(1-tp,eg:GetAttack()/2,REASON_EFFECT)
 	end
 end
