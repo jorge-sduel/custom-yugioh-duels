@@ -17,7 +17,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate1)
 	c:RegisterEffect(e1)
 	local e4=e1:Clone()
-	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e4:SetCode(EVENT_SUMMON_SUCCESS)
 	c:RegisterEffect(e4)
 	--atkup
 	local e2=Effect.CreateEffect(c)
