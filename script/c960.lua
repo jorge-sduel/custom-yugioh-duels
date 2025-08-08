@@ -46,22 +46,10 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,sg)
 	end
 end
-
-
 function s.sumfilter(c,e,tp)
 	return c:IsAbleToGraveAsCost()
 		and c:IsFaceup() and c:IsSetCard(SET_QLI) and c:IsType(TYPE_PENDULUM)
 end
-function s.tdcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.tdcostfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,s.tdcostfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
-	Duel.SendtoGrave(g,REASON_COST)
-	e:SetLabel(g:GetFirst():GetType()&(TYPE_EXTRA|TYPE_PENDULUM))
-end
-
-
-
 function s.sumcon(e,c,minc)
 	if c==nil then return true end
 	local mi,ma=c:GetTributeRequirement()
