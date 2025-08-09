@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	e0:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
 	e0:SetCode(EVENT_FREE_CHAIN)
-	e0:SetCountLimit(1,{id,1})
+	e0:SetCountLimit(1,id)
 	e0:SetTarget(s.pctg)
 	e0:SetOperation(s.pcop)
 	c:RegisterEffect(e0)
@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCondition(aux.exccon)
-	e3:SetCountLimit(1,{id,2})
+	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.thtg)
 	e3:SetOperation(s.thop)
@@ -94,6 +94,7 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.ConfirmCards(1-tp,g)
 	end
 end
+
 
 
 
