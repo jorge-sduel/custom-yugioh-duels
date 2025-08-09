@@ -1,7 +1,6 @@
 --Qli field
 local s,id=GetID()
 function s.initial_effect(c)
-	c:SetUniqueOnField(1,0,id)
 	--activate
 	local e0=Effect.CreateEffect(c)
 	e0:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -9,7 +8,7 @@ function s.initial_effect(c)
 	e0:SetCode(EVENT_FREE_CHAIN)
 	e0:SetTarget(s.pctg)
 	e0:SetOperation(s.pcop)
-	c:RegisterEffect(e0)
+	c:RegisterEffect(e0)
 end
 s.listed_series={SET_QLI}
 function s.pcfilter(c)
@@ -32,7 +31,7 @@ function s.pcop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.CheckReleaseGroupCost(tp,nil,1,true,nil,nil) and Duel.GetLocationCount(tp,LOCATION_SZONE)>-1
 		and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-local sg=Duel.SelectReleaseGroupCost(tp,nil,1,1,true,nil,nil)
+local sg=Duel.SelectReleaseGroupCost(tp,nil,1,1,true,nil,nil)
 		Duel.Release(sg,REASON_COST)
 	local tc=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,1,1,nil):GetFirst()
 	if tc then
