@@ -17,7 +17,6 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_GRAVE)
-	e3:SetCondition(aux.exccon)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.thtg)
@@ -93,7 +92,23 @@ function s.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetDescription(aux.Stringid(id,1))
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH+EFFECT_FLAG_CLIENT_HINT)
+	e1:SetCode(EFFECT_CANNOT_SUMMON)
+	e1:SetTargetRange(1,0)
+	e1:SetReset(RESET_PHASE|PHASE_END)
+	e1:SetTarget(s.splimit) 
+	Duel.RegisterEffect(e1,tp)
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_CANNOT_FLIP_SUMMON)
+	Duel.RegisterEffect(e2,tp)
+	local e3=e1:Clone()
+	e3:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+	Duel.RegisterEffect(e3,tp)
 end
+
 
 
 
