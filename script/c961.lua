@@ -45,5 +45,23 @@ local sg=Duel.SelectReleaseGroupCost(tp,nil,1,1,true,nil,nil)
 		tc:RegisterEffect(e1)
    end
 	 end
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,1))
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH+EFFECT_FLAG_CLIENT_HINT)
+	e1:SetCode(EFFECT_CANNOT_SUMMON)
+	e1:SetTargetRange(1,0)
+	e1:SetReset(RESET_PHASE|PHASE_END)
+	e1:SetTarget(s.splimit) 
+	Duel.RegisterEffect(e1,tp)
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_CANNOT_FLIP_SUMMON)
+	Duel.RegisterEffect(e2,tp)
+	local e3=e1:Clone()
+	e3:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+	Duel.RegisterEffect(e3,tp)
 	end
+end
+function s.splimit(e,c)
+	return not c:IsSetCard(SET_QLI)
 end
