@@ -1,5 +1,4 @@
---昇天の黒角笛
---Black Horn of Heaven
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
@@ -49,7 +48,7 @@ Duel.IsExistingMatchingCard(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,nil,
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,#eg,0,0)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp,chk)
-		local g=Duel.GetMatchingGroup(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,nil,e,tp,eg:GetAttack(),eg:GetLevel())
+		local g=Duel.GetMatchingGroup(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,nil,e,tp,eg:GetFirst():GetAttack(),eg:GetFirst():GetLevel())
 		if #g>0 then
 		local sg=g:Select(tp,1,1,nil)
 		local sc=sg:GetFirst()
@@ -69,7 +68,7 @@ Duel.IsExistingMatchingCard(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,nil,
 	end
 end
 function s.activate1(e,tp,eg,ep,ev,re,r,rp)
-		local g=Duel.GetMatchingGroup(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,nil,e,tp,eg:GetFirst():GetAttack(),eg:GetLevel())
+		local g=Duel.GetMatchingGroup(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,nil,e,tp,eg:GetFirst():GetAttack(),eg:GetFirst():GetLevel())
 		if #g>0 then
 		local sg=g:Select(tp,1,1,nil)
 		local sc=sg:GetFirst()
@@ -113,4 +112,5 @@ function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e1,tp)
 	end
 end
+
 
