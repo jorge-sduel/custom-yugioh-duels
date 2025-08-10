@@ -75,7 +75,7 @@ function s.activate1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.negfilter(c,e,tp,atk,lv)
-	return c:IsSetCard(SET_QLI) and (c:GetAttack()>ATK or c:GetLevel()>lv) 
+	return c:IsSetCard(SET_QLI) and (c:GetAttack()>atk or c:GetLevel()>lv) 
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_QLI) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
@@ -112,6 +112,7 @@ end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return (sumtype&SUMMON_TYPE_PENDULUM)~=SUMMON_TYPE_PENDULUM
 end
+
 
 
 
