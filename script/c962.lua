@@ -15,13 +15,16 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 		--salvage
 	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetDescription(aux.Stringid(id,2))
+
+	e3:SetType(EFFECT_TYPE_IGNITION)
+
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(aux.bfgcost)
 	e1:SetTarget(s.target1)
 	e1:SetOperation(s.activate1)
+
 	c:RegisterEffect(e3)
 end
 s.listed_series={SET_QLI}
@@ -52,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e1,tp)
 end
 function s.sfilter(c)
-	return (c:IsSummonable() or c:IsMSetable()) and c:IsSetCard(SET_QLI)
+	return (c:IsSummonable(true,nil) or c:IsMSetable(true,nil)) and c:IsSetCard(SET_QLI)
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.sfilter,tp,LOCATION_HAND|LOCATION_MZONE,0,1,nil,true,nil) end
