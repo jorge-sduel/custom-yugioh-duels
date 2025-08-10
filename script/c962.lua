@@ -16,15 +16,12 @@ function s.initial_effect(c)
 		--salvage
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-
 	e3:SetType(EFFECT_TYPE_IGNITION)
-
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,1})
 	e3:SetCost(aux.bfgcost)
-	e1:SetTarget(s.target1)
-	e1:SetOperation(s.activate1)
-
+	e3:SetTarget(s.target1)
+	e3:SetOperation(s.activate1)
 	c:RegisterEffect(e3)
 end
 s.listed_series={SET_QLI}
@@ -68,3 +65,4 @@ function s.activate1(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SummonOrSet(tp,tc,true,nil)
 	end
 end
+
