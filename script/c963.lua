@@ -52,6 +52,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Remove(sc,POS_FACEUP,REASON_EFFECT)
 	Duel.NegateSummon(eg)
 		Duel.SendtoDeck(eg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
+		Duel.Draw(tp,1,REASON_EFFECT)
 	end
 end
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
@@ -71,6 +72,7 @@ function s.activate1(e,tp,eg,ep,ev,re,r,rp)
 		local sc=sg:GetFirst()
 		Duel.Remove(sc,POS_FACEUP,REASON_EFFECT)
 		if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then 	Duel.SendtoDeck(eg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
+		Duel.Draw(tp,1,REASON_EFFECT)
   end
 	end
 end
@@ -112,6 +114,7 @@ end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return (sumtype&SUMMON_TYPE_PENDULUM)~=SUMMON_TYPE_PENDULUM
 end
+
 
 
 
