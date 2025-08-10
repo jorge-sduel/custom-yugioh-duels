@@ -26,15 +26,12 @@ e2:SetCountLimit(1,{1,id})
 		--salvage
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-
 	e3:SetType(EFFECT_TYPE_IGNITION)
-
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCost(aux.bfgcost)
-	e1:SetTarget(s.target1)
-	e1:SetOperation(s.activate1)
-
+	e1:SetTarget(s.target2)
+	e1:SetOperation(s.activate2)
 	c:RegisterEffect(e3)
 end
 s.listed_series={SET_QLI}
@@ -43,7 +40,7 @@ function s.condition(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-Duel.IsExistingMatchingCard(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,nil,e,tp,eg:GetAttack(),eg:GetLevel())
+Duel.IsExistingMatchingCard(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,nil,e,tp,eg:GetFirst():GetAttack(),eg:GetFirst():GetLevel())
 	Duel.SetOperationInfo(0,CATEGORY_DISABLE_SUMMON,eg,#eg,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,eg,#eg,0,0)
 end
@@ -58,13 +55,13 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
-	return re and Duel.IsChainNegatable(ev)
+	return re and re:IsMonster() and Duel.IsChainNegatable(ev)
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
 	if re:GetHandler():IsRelateToEffect(re) then
-Duel.IsExistingMatchingCard(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,nil,e,tp,eg:GetAttack(),eg:GetLevel())
+Duel.IsExistingMatchingCard(s.negfilter,tp,LOCATION_DECK+LOCATION_EXTRA,0,1,nil,e,tp,eg:GetFirst():GetAttack(),eg:GetFirst():GetLevel())
 	end
 end
 function s.activate1(e,tp,eg,ep,ev,re,r,rp)
@@ -112,5 +109,6 @@ function s.activate2(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e1,tp)
 	end
 end
+
 
 
