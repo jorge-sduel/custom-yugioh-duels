@@ -26,13 +26,16 @@ e2:SetCountLimit(1,{1,id})
 	c:RegisterEffect(e2)
 		--salvage
 	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetDescription(aux.Stringid(id,2))
+
+	e3:SetType(EFFECT_TYPE_IGNITION)
+
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCost(aux.bfgcost)
 	e1:SetTarget(s.target1)
 	e1:SetOperation(s.activate1)
+
 	c:RegisterEffect(e3)
 end
 s.listed_series={SET_QLI}
@@ -53,6 +56,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Remove(sc,POS_FACEUP,REASON_EFFECT)
 	Duel.NegateSummon(eg)
 		Duel.SendtoDeck(eg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
+	end
 end
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	return re and Duel.IsChainNegatable(ev)
