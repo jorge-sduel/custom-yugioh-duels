@@ -55,7 +55,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 end
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
-	return re and re:IsMonster() and Duel.IsChainNegatable(ev)
+	return re:IsMonster() and Duel.IsChainNegatable(ev)
 end
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -112,6 +112,7 @@ end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return (sumtype&SUMMON_TYPE_PENDULUM)~=SUMMON_TYPE_PENDULUM
 end
+
 
 
 
