@@ -30,8 +30,8 @@ e2:SetCountLimit(1,{1,id})
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,2})
 	e3:SetCost(aux.bfgcost)
-	e1:SetTarget(s.target2)
-	e1:SetOperation(s.activate2)
+	e3:SetTarget(s.target2)
+	e3:SetOperation(s.activate2)
 	c:RegisterEffect(e3)
 end
 s.listed_series={SET_QLI}
@@ -112,6 +112,7 @@ end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return (sumtype&SUMMON_TYPE_PENDULUM)~=SUMMON_TYPE_PENDULUM
 end
+
 
 
 
