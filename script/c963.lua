@@ -29,6 +29,7 @@ e2:SetCountLimit(1,{1,id})
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,2})
+	e3:SetCondition(s.condition2)
 	e3:SetCost(aux.bfgcost)
 	e3:SetTarget(s.target2)
 	e3:SetOperation(s.activate2)
@@ -79,6 +80,9 @@ end
 function s.negfilter(c,e,tp,atk,lv)
 	return c:IsSetCard(SET_QLI) and (c:GetAttack()>atk or c:GetLevel()>lv) 
 end
+function s.condition2(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0
+end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_QLI) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
@@ -114,6 +118,7 @@ end
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return (sumtype&SUMMON_TYPE_PENDULUM)~=SUMMON_TYPE_PENDULUM
 end
+
 
 
 
