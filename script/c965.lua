@@ -13,6 +13,16 @@ function s.initial_effect(c)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
+			--salvage
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,2))
+	e3:SetType(EFFECT_TYPE_IGNITION)
+	e3:SetRange(LOCATION_GRAVE)
+	e3:SetCountLimit(1,{id,2})
+	e3:SetCost(aux.bfgcost)
+	e3:SetTarget(s.target1)
+	e3:SetOperation(s.activate1)
+	c:RegisterEffect(e3)
 end
 s.listed_series={SET_QLI}
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -86,4 +96,17 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.pcfilter(c,lv,rc,att,e,tp)
 	return c:IsSetCard(SET_QLI) and c:IsLevel(lv) and not c:IsCode(rc) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+end
+function s.actfilter(c,tp)
+	return c:IsSetCard(SET_QLI) and c:IsType(TYPE_FIELD) and c:IsSpell() and c:GetActivateEffect():IsActivatable(tp,true,true)
+end
+function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.actfilter,tp,LOCATION_DECK,0,1,nil,tp) end
+end
+function s.activate1(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
+	local sc=Duel.SelectMatchingCard(tp,s.actfilter,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst()
+	--if not sc then return end
+	Duel.ActivateFieldSpell(sc,e,tp,eg,ep,ev,re,r,rp)
+--	end
 end
