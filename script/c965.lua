@@ -49,7 +49,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp,ft)
 	local tc=g:GetFirst()
-	Duel.Release(tc,REASON_EFFECT)
+	Duel.SendtoGrave(tc,REASON_COST)
 	Duel.SetTargetCard(tc)
 	local opt=0
 	if not Duel.CheckPendulumZones(tp) then
