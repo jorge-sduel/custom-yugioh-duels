@@ -79,7 +79,6 @@ if e:GetLabel()==0 then
 	local g=Duel.SelectMatchingCard(tp,s.pcfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel(),tc:GetCode(),tc:GetAttribute(),e,tp)
 	if #g>0 then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-			end
 		 end
         end
 	end
