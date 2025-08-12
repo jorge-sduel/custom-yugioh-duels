@@ -67,17 +67,17 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel(),tc:GetCode(),tc:GetAttribute(),e,tp)
-	if e:GetLabel()==0 then
+	if e:GetLabel()==1 then
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	if not tc or not tc:IsLocation(LOCATION_GRAVE) or not tc:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	if #g>0 then
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel(),tc:GetCode(),tc:GetAttribute(),e,tp)
+		if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	else
 	--local tc=Duel.GetFirstTarget()
-	--local g=Duel.SelectMatchingCard(tp,s.pcfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel(),tc:GetCode(),tc:GetAttribute(),e,tp)
-	--if #g>0 then
+	local g=Duel.SelectMatchingCard(tp,s.pcfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel(),tc:GetCode(),tc:GetAttribute(),e,tp)
+		if #g>0 then
 		Duel.MoveToField(g,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 		 --end
         end
