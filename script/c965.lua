@@ -32,11 +32,11 @@ function s.cfilter(c,e,tp,ft)
 		local val=te:GetValue()
 		if val and val(te,c,e,0) then att=val(te,c,e,1) end
 	end]]
-	return c:IsMonsterCard() and c:IsType(TYPE_PENDULUM) and c:IsSetCard(SET_QLI) and lv>0 and (c:IsLocation(LOCATION_DECK) or c:IsFaceup()) and c:IsReleasableByEffect(e) and (ft>0 or c:GetSequence()<5)
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,lv,c:GetCode(),att,e,tp)
+	return c:IsMonsterCard() and c:IsType(TYPE_PENDULUM) and c:IsSetCard(SET_QLI) and lv>0 and (c:IsLocation(LOCATION_DECK) or c:IsFaceup()) and c:IsAbleToGraveAsCost() and (ft>0 or c:GetSequence()<5)
+		and (Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,lv,c:GetCode(),att,e,tp) or Duel.IsExistingMatchingCard(s.pcfilter,tp,LOCATION_DECK,0,1,nil,lv,c:GetCode(),att,e,tp))
 end
 function s.spfilter(c,lv,rc,att,e,tp)
-	return c:IsLevel(lv) and not c:IsCode(rc) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(SET_QLI) and c:IsLevel(lv) and not c:IsCode(rc) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -75,12 +75,15 @@ if e:GetLabel()==0 then
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 	else
-		local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	local tc=Duel.GetFirstTarget()
+	local g=Duel.SelectMatchingCard(tp,s.pcfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel(),tc:GetCode(),tc:GetAttribute(),e,tp)
+	if #g>0 then
+		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 			end
-		end
+		 end
+        end
 	end
 end
-
+function s.pcfilter(c,lv,rc,att,e,tp)
+	return c:IsSetCard(SET_QLI) and c:IsLevel(lv) and not c:IsCode(rc) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 
