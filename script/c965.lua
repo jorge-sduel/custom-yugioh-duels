@@ -86,4 +86,5 @@ if e:GetLabel()==0 then
 end
 function s.pcfilter(c,lv,rc,att,e,tp)
 	return c:IsSetCard(SET_QLI) and c:IsLevel(lv) and not c:IsCode(rc) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+end
 
