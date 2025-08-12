@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetRange(LOCATION_GRAVE)
 	e3:SetCountLimit(1,{id,2})
-	e3:SetCost(Cost.AND(aux.bfgcost,s.descost))
+	e3:SetCost(Cost.AND(aux.bfgcost,s.hcost))
 	e3:SetTarget(s.target1)
 	e3:SetOperation(s.activate1)
 	c:RegisterEffect(e3)
@@ -96,6 +96,15 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.pcfilter(c,lv,rc,att,e,tp)
 	return c:IsSetCard(SET_QLI) and c:IsLevel(lv) and not c:IsCode(rc) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+end
+function s.costfilter(c)
+	return c:IsFaceup() and c:IsSetCard(SET_QLI) and c:IsAbleToHandAsCost()
+end
+function s.hcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_ONFIELD,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local g=Duel.SelectMatchingCard(tp,s.costfilter,tp,LOCATION_ONFIELD,0,1,1,e:GetHandler())
+	Duel.SendtoHand(g,nil,REASON_COST)
 end
 function s.actfilter(c,tp)
 	return c:IsSetCard(SET_QLI) and c:IsType(TYPE_FIELD) and c:IsSpell() and c:GetActivateEffect():IsActivatable(tp,true,true)
