@@ -6,7 +6,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
-	e1:SetLabel(0)
+	--e1:SetLabel(0)
 	e1:SetCountLimit(1,id)
 	e1:SetCost(s.cost)
 	e1:SetTarget(s.target)
@@ -22,7 +22,7 @@ function s.cfilter(c,e,tp,ft)
 	local lv=c:GetOriginalLevel()
 	local rc=c:GetOriginalRace()
 	local att=c:GetOriginalAttribute()
-	local eff4064256={Duel.GetPlayerEffect(tp,4064256)}
+	--[[local eff4064256={Duel.GetPlayerEffect(tp,4064256)}
 	for _,te in ipairs(eff4064256) do
 		local val=te:GetValue()
 		if val and val(te,c,e,0) then rc=val(te,c,e,1) end
@@ -31,7 +31,7 @@ function s.cfilter(c,e,tp,ft)
 	for _,te in ipairs(eff12644061) do
 		local val=te:GetValue()
 		if val and val(te,c,e,0) then att=val(te,c,e,1) end
-	end
+	end]]
 	return c:IsMonsterCard() and c:IsType(TYPE_PENDULUM) and c:IsSetCard(SET_QLI) and lv>0 and (c:IsLocation(LOCATION_DECK) or c:IsFaceup()) and c:IsReleasableByEffect(e) and (ft>0 or c:GetSequence()<5)
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_DECK,0,1,nil,lv,c:GetCode(),att,e,tp)
 end
@@ -41,11 +41,11 @@ end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	if chk==0 then
-		if e:GetLabel()~=100 then return false end
-		e:SetLabel(0)
+		--if e:GetLabel()~=100 then return false end
+		--e:SetLabel(0)
 		return ft>-1 and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_DECK,0,1,nil,e,tp,ft)
 	end
-	e:SetLabel(0)
+	--e:SetLabel(0)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.SelectMatchingCard(tp,s.cfilter,tp,LOCATION_DECK,0,1,1,nil,e,tp,ft)
 	local tc=g:GetFirst()
