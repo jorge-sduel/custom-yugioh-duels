@@ -79,8 +79,8 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,s.pcfilter,tp,LOCATION_DECK,0,1,1,nil,tc:GetLevel(),tc:GetCode(),tc:GetAttribute(),e,tp)
 		--if #g>0 then
 		Duel.MoveToField(g,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-		 end
-        end
+		-- end
+       --end
 	end
 end
 function s.pcfilter(c,lv,rc,att,e,tp)
