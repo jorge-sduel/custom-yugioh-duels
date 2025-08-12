@@ -63,6 +63,7 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
 	else
 		e:SetCategory(0)
+	end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 if e:GetLabel()==0 then
@@ -77,6 +78,8 @@ if e:GetLabel()==0 then
 		local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and tc:IsFaceup() then
 		Duel.MoveToField(tc,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+			end
+		end
 	end
 end
 
