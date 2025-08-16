@@ -25,7 +25,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_SUMMON_PROC)
 	e2:SetRange(LOCATION_FZONE)
-	e2:SetTargetRange(LOCATION_HAND,LOCATION_HAND)
+	e2:SetTargetRange(LOCATION_HAND,0)
 	e2:SetValue(SUMMON_TYPE_TRIBUTE)
 	e2:SetCondition(s.sumcon)
 	e2:SetOperation(s.sumop)
@@ -65,4 +65,5 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g1=g:Select(tp,mi,mi,true,nil)
 	Duel.SendtoGrave(g1,REASON_COST) 
 end
+
 
