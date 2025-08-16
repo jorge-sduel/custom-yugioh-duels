@@ -50,8 +50,18 @@ function s.initial_effect(c)
 	e5:SetTarget(s.target)
 	e5:SetOperation(s.operation)
 	c:RegisterEffect(e5)
+		--pendulum
+	local e6=Effect.CreateEffect(c)
+	e6:SetDescription(aux.Stringid(id,3))
+	e6:SetType(EFFECT_TYPE_IGNITION)
+	e6:SetRange(LOCATION_EXTRA)
+	e6:SetCost(s.cost)
+	e6:SetCondition(s.pencon)
+	e6:SetTarget(s.pentg)
+	e6:SetOperation(s.penop)
+	c:RegisterEffect(e6)
 end
-s.listed_names={21}
+s.listed_names={21,65646587}
 function s.val(e,re,dam,r,rp,rc)
 	return math.floor(dam/2)
 end
@@ -110,5 +120,28 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+function s.pencon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return c:IsFaceup()
+end
+function s.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckPendulumZones(tp) end
+end
+function s.penop(e,tp,eg,ep,ev,re,r,rp)
+	if not Duel.CheckPendulumZones(tp) then return end
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	end
+end
+function s.cfilter(c,ft,tp)
+	return (ft>0 or (c:IsControler(tp) and c:GetSequence()<5)) and c:IsType(TYPE_PENDULUM)
+end
+function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+	if chk==0 then return ft>-1 and Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,nil,nil,ft,tp) end
+	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,nil,ft,tp)
+	Duel.Release(g,REASON_COST)
+end 
 
 
