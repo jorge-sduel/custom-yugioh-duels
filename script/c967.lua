@@ -60,6 +60,16 @@ function s.initial_effect(c)
 	e6:SetTarget(s.pentg)
 	e6:SetOperation(s.penop)
 	c:RegisterEffect(e6)
+	--
+	local e7=Effect.CreateEffect(c)
+	e7:SetDescription(aux.Stringid(id,0))
+	e7:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e7:SetType(EFFECT_TYPE_IGNITION)
+	e7:SetRange(LOCATION_PZONE)
+	e7:SetCost(s.spcost)
+	e7:SetTarget(s.sptg)
+	e7:SetOperation(s.spop)
+	c:RegisterEffect(e7)
 end
 s.listed_names={21,65646587}
 function s.val(e,re,dam,r,rp,rc)
@@ -143,5 +153,21 @@ function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,nil,ft,tp)
 	Duel.Release(g,REASON_COST)
 end 
+function s.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,nil) end
+	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_COST|REASON_DISCARD,nil)
+end
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,true,false) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
+	e:GetHandler():ResetFlagEffect(id)
+end
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)
+	end
+end
 
 
