@@ -33,6 +33,15 @@ function s.initial_effect(c)
 	local e3=e2:Clone()
 	e3:SetCode(EFFECT_SET_PROC)
 	c:RegisterEffect(e3)
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(92001300,0))
+	e5:SetType(EFFECT_TYPE_FIELD)
+	e5:SetCode(EFFECT_ADD_EXTRA_TRIBUTE)
+	e5:SetRange(LOCATION_FZONE)
+	e5:SetTarget(function(e,_c)return c==_c end)
+	e5:SetTargetRange(LOCATION_EXTRA,0)
+	e5:SetValue(POS_FACEUP)
+	c:RegisterEffect(e5)
 end
 function s.thfilter(c)
 	return c:IsCode(27279764) and c:IsAbleToHand()
@@ -65,5 +74,6 @@ function s.sumop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g1=g:Select(tp,mi,mi,true,nil)
 	Duel.SendtoGrave(g1,REASON_COST) 
 end
+
 
 
