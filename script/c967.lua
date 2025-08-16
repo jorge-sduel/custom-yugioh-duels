@@ -37,7 +37,7 @@ function s.initial_effect(c)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(0,LOCATION_MZONE)
 	e4:SetTarget(s.disable)
-	e2:SetCode(EFFECT_DISABLE)
+	e4:SetCode(EFFECT_DISABLE)
 	c:RegisterEffect(e2)
 	--salvage
 	local e5=Effect.CreateEffect(c)
@@ -110,3 +110,4 @@ function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
