@@ -45,7 +45,7 @@ function s.initial_effect(c)
 	e5:SetCategory(CATEGORY_TOHAND)
 	e5:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e5:SetType(EFFECT_TYPE_IGNITION)
-	e5:SetRange(LOCATION_MZONE)
+	e5:SetRange(LOCATION_PZONE)
 	e5:SetCountLimit(1)
 	e5:SetTarget(s.target)
 	e5:SetOperation(s.operation)
@@ -172,6 +172,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)
 	end
 end
+
 
 
 
