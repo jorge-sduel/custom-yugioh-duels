@@ -144,13 +144,12 @@ function s.penop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end
-function s.cfilter(c,ft,tp)
-	return (ft>0 or (c:IsControler(tp) and c:GetSequence()<5)) and c:IsType(TYPE_PENDULUM)
+function s.cfilter1(c,ft,tp)
+	return c:IsType(TYPE_PENDULUM)
 end
 function s.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if chk==0 then return ft>-1 and Duel.CheckReleaseGroupCost(tp,s.cfilter,1,false,nil,nil,ft,tp) end
-	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter,1,1,false,nil,nil,ft,tp)
+	if chk==0 then return Duel.CheckReleaseGroupCost(tp,s.cfilter1,1,false,nil,nil) end
+	local g=Duel.SelectReleaseGroupCost(tp,s.cfilter1,1,1,false,nil,nil)
 	Duel.Release(g,REASON_COST)
 end 
 function s.cfilter(c)
@@ -172,6 +171,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)
 	end
 end
+
 
 
 
