@@ -39,7 +39,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1)
 	e1:SetCost(s.cost2)
-	e1:SetOperation(s.operation)
+	e1:SetOperation(s.damop)
 	c:RegisterEffect(e1)
 end
 s.listed_series={0x572}
@@ -86,4 +86,5 @@ end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Damage(tp,e:GetLabel(),REASON_EFFECT)
 end
+
 
