@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Synchro summon
-	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTunerEx(Card.IsAttribute,ATTRIBUTE_WIND),1,99)
+	Synchro.AddProcedure(c,nil,1,1,Synchro.NonTuner(nil),1,99)
 	c:EnableReviveLimit()
 	--Pendulum attributes
 	Pendulum.AddProcedure(c,false)
@@ -90,3 +90,4 @@ function s.operation1(e,tp,eg,ep,ev,re,r,rp)
 		g:GetFirst():RegisterEffect(e1)
 	end
 end
+
