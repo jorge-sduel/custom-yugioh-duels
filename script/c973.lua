@@ -84,7 +84,8 @@ function s.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabel(ct*500)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Damage(tp,e:GetLabel(),REASON_EFFECT)
+	Duel.Damage(1-tp,e:GetLabel(),REASON_EFFECT)
 end
+
 
 
