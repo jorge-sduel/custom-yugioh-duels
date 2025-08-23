@@ -72,6 +72,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.BreakEffect()
 	Duel.Draw(p,2,REASON_EFFECT)
 end
+
 function s.atktarget(e,c)
 	return c:IsAttackAbove(2000)
 end
@@ -80,9 +81,9 @@ function s.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
  end
 	local g=Duel.SelectReleaseGroupCost(tp,Card.IsType,1,10,false,nil,nil,TYPE_MONSTER)
 	local ct=Duel.Release(g,REASON_COST)
-	e:SetLabel(ct)
+	e:SetLabel(ct*500)
 end
 function s.damop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Damage(tp,e:GetLabel()*500,REASON_EFFECT)
+	Duel.Damage(tp,e:GetLabel(),REASON_EFFECT)
 end
 
