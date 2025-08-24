@@ -80,7 +80,7 @@ function s.initial_effect(c)
 	--Halve damage
 	local e6=Effect.CreateEffect(c)
 	e6:SetType(EFFECT_TYPE_FIELD)
-	e6:SetRange(LOCATION_MZONE)
+	e6:SetRange(LOCATION_SZONE)
 	e6:SetCode(EFFECT_CHANGE_DAMAGE)
 	e6:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e6:SetCondition(function(e) return s.PlayerIsAffectedByClearWorld(1-e:GetHandlerPlayer(),ATTRIBUTE_DIVINE) or not s.PlayerIsAffectedByClearWorld(1-e:GetHandlerPlayer(),ATTRIBUTE_ALL-ATTRIBUTE_DIVINE) end)
