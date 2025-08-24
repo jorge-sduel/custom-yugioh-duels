@@ -159,8 +159,8 @@ end
 function s.costop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.PayLPCost(tp,500)
 end
-function s.PlayerControlsAttributeOrIsAffectedByClearWall(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,attribute),tp,LOCATION_MZONE,0,1,nil)
+function s.PlayerControlsAttributeOrIsAffectedByClearWall(e,tp,eg,ep,ev,re,r,rp,att)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,attribute),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function s.PlayerIsAffectedByClearWorld(e,player,attribute)
 	return --s.PlayerControlsAttributeOrIsAffectedByClearWall(player,attribute)
