@@ -16,7 +16,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetTargetRange(1,0)
-	e1:SetTarget(function(e,c) return s.PlayerIsAffectedByClearWorld(e,c:GetControler(),ATTRIBUTE_LIGHT) end)
+	e1:SetTarget(s.PlayerIsAffectedByClearWorld)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
 	e2:SetCondition(function(e) return s.PlayerIsAffectedByClearWorld(e,1-e:GetHandlerPlayer(),ATTRIBUTE_DARK) end)
@@ -159,7 +159,7 @@ end
 function s.costop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.PayLPCost(tp,500)
 end
-function s.PlayerControlsAttributeOrIsAffectedByClearWall(e,tp,attribute)
+function s.PlayerControlsAttributeOrIsAffectedByClearWall(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,attribute),tp,LOCATION_MZONE,0,1,nil)
 end
 function s.PlayerIsAffectedByClearWorld(e,player,attribute)
