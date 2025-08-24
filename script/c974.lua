@@ -167,3 +167,6 @@ function s.PlayerIsAffectedByClearWorld(player,attribute)
 	return not Duel.IsPlayerAffectedByEffect(player,EFFECT_CLEAR_WORLD_IMMUNE)
 		and s.PlayerControlsAttributeOrIsAffectedByClearWall(player,attribute)
 end
+function s.val(e,re,dam,r,rp,rc)
+	return math.floor(dam/2)
+end
