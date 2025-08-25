@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e1:SetCondition(function(e) return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,ATTRIBUTE_LIGHT),e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil) end)
 	c:RegisterEffect(e1)
 	local e2=e1:Clone()
-	--e2:SetCondition(function(e) return s.PlayerIsAffectedByClearWorld(e,1-e:GetHandlerPlayer(),ATTRIBUTE_DARK) end)
+	e2:SetCondition(function(e) return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAttribute,ATTRIBUTE_LIGHT),1-e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil) end)
 	e2:SetTargetRange(0,1)
 	c:RegisterEffect(e2)
 	--DARK: Monsters you control cannot declare an attack
