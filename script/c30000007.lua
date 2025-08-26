@@ -96,7 +96,7 @@ function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 end
 function c30000007.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local att=e:GetLabelObject():GetLabel()
-	return eg:GetFirst()==e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():GetBattleTarget():IsAttribute(att)
+	return eg:GetFirst()==e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():GetBattleTarget():IsAttribute(e:GetLabel())
 end
 function c30000007.thfilter(c)
 	return ((c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0x306)) or c:IsCode(33900648)) and c:IsAbleToHand()
@@ -139,4 +139,5 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
