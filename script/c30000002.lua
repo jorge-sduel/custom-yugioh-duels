@@ -83,7 +83,7 @@ function c30000002.op(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_FIRE) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_EARTH) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_WIND) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_DEVINE) then att=att+1 end
+	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_DIVINE) then att=att+1 end
 	local c=e:GetHandler()
 	if not Duel.IsPlayerCanDiscardDeck(tp,att) then return end
 	Duel.ConfirmDecktop(tp,att)
@@ -114,4 +114,5 @@ function c30000002.sdfilter(c)
 end
 function c30000002.sdcon(e)
 	return Duel.IsExistingMatchingCard(c30000002.sdfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
+
 end
