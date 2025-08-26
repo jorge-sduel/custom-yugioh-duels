@@ -59,7 +59,7 @@ function c30000007.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	Duel.SelectTarget(tp,c30000007.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)	
 	Duel.Hint(HINT_SELECTMSG,tp,563)
-	local att=Duel.AnnounceAttribute(tp,1,0xff)
+	local att=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
 	e:SetLabel(att)
 	Duel.SetTargetParam(att)
 	e:GetHandler():SetHint(CHINT_ATTRIBUTE,att)
@@ -137,4 +137,5 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(c,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,c)
 	end
+
 end
