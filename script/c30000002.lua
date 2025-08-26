@@ -60,7 +60,7 @@ function c30000002.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_FIRE) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_EARTH) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_WIND) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_DEVINE) then att=att+1 end
+	if Duel.IsExistingMatchingCard(c30000002.attfilter,tp,0,0x54,1,nil,ATTRIBUTE_DIVINE) then att=att+1 end
 	if chk==0 then return Duel.IsPlayerCanDiscardDeck(tp,att) and att~=0 end
 end
 function c30000002.filter(c,con,e,tp)
@@ -116,3 +116,4 @@ function c30000002.sdcon(e)
 	return Duel.IsExistingMatchingCard(c30000002.sdfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 
 end
+
