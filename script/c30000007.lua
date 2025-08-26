@@ -95,7 +95,7 @@ function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c30000007.thcon(e,tp,eg,ep,ev,re,r,rp)
-	local att=e:GetLabelObject():GetLabel()
+	--local att=e:GetLabelObject():GetLabel()
 	return eg:GetFirst()==e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():GetBattleTarget():IsAttribute(e:GetLabel())
 end
 function c30000007.thfilter(c)
@@ -139,5 +139,6 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
