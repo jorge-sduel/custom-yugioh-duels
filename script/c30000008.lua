@@ -52,7 +52,7 @@ function c30000008.attcount(tp,loc1,loc2)
 	if Duel.IsExistingMatchingCard(c30000008.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_FIRE) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000008.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_EARTH) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000008.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_WIND) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000008.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DEVINE) then att=att+1 end
+	if Duel.IsExistingMatchingCard(c30000008.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DIVINE) then att=att+1 end
 	return att
 end
 
@@ -158,4 +158,5 @@ end
 function c30000008.retop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	Duel.ReturnToField(tc)
+
 end
