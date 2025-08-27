@@ -104,6 +104,7 @@ function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_PHASE+PHASE_DAMAGE_CAL)
 		e2:SetValue(700)
 		ec:RegisterEffect(e2)
+		e:GetLabelObject():SetLabel(att)
 	end
 end
 function c30000007.thcon(e,tp,eg,ep,ev,re,r,rp)
@@ -151,6 +152,7 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
 
