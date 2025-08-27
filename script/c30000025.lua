@@ -53,7 +53,7 @@ function c30000025.attcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function c30000025.attop(e,tp,eg,ep,ev,re,r,rp)
     Duel.Hint(HINT_SELECTMSG,tp,562)
-	local att=Duel.AnnounceAttribute(tp,1,0xffff)
+	local att=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
 	local e1=Effect.CreateEffect(e:GetHandler())
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
@@ -66,4 +66,5 @@ end
 function c30000025.disable(e,c)
     local att=e:GetLabel()
 	return bit.band(c:GetAttribute(),att)==att
+
 end
