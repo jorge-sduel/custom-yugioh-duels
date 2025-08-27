@@ -41,7 +41,7 @@ function c30000003.attop(e,tp,eg,ep,ev,re,r,rp)
 		if tc:IsFaceup() and tc:IsRelateToEffect(e) then
 			Duel.Hint(HINT_SELECTMSG,tp,562)
 			local catt=tc:GetAttribute()
-         -- if catt~=0x1 and catt~=0x2 and catt~=0x4 and catt~=0x8 and catt~=0x10 and catt~=0x20 and catt~=0x40 then catt=0x0 end
+          if catt~=0x1 and catt~=0x2 and catt~=0x4 and catt~=0x8 and catt~=0x10 and catt~=0x20 and catt~=0x40 then catt=0x0 end
 			local att=tc:AnnounceAnotherAttribute(tp,1,ATTRIBUTE_ALL)
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
@@ -90,7 +90,7 @@ function c30000003.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(c30000003.filter,nil,e,tp)
     local catt=0x0
     local tc=g:GetFirst()
-    if --[[c30000003.attcount(g)==1]] Duel.IsExistingMatchingCard(c30000003.cofilter,tp,LOCATION_ONFIELD,0,1,nil) then 
+    if c30000003.attcount(g)==1 then 
         catt=tc:GetAttribute()
     end
     Duel.Hint(HINT_SELECTMSG,tp,562)
@@ -124,6 +124,7 @@ function c30000003.attcount(g)
 	if g:Filter(c30000003.attfilter,nil,ATTRIBUTE_DIVINE)~=nil then att=att+1 end
 	return att
 end
+
 
 
 
