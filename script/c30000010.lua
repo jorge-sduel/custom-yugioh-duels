@@ -58,7 +58,7 @@ function c30000010.attcount(tp,loc1,loc2)
 	if Duel.IsExistingMatchingCard(c30000010.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_FIRE) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000010.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_EARTH) then att=att+1 end
 	if Duel.IsExistingMatchingCard(c30000010.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_WIND) then att=att+1 end
-	if Duel.IsExistingMatchingCard(c30000010.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DEVINE) then att=att+1 end
+	if Duel.IsExistingMatchingCard(c30000010.attfilter,tp,loc1,loc2,1,nil,ATTRIBUTE_DIVINE) then att=att+1 end
 	return att
 end
 
@@ -98,4 +98,5 @@ function c30000010.damop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c30000010.bdop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterFlagEffect(30000010,RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_END,0,1)
+
 end
