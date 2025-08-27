@@ -80,7 +80,7 @@ end
 function c30000007.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetEquipTarget()
 	local tc=ec:GetBattleTarget()
-	return ec and tc and tc:IsFaceup() and tc:IsControler(1-tp) and tc:IsAttribute(e:GetLabel())
+	return ec and tc and tc:IsFaceup() and tc:IsControler(1-tp) and tc:IsAttribute(e:GetLabelObject():GetLabel())
 end
 function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 	--[[local eqc=e:GetHandler():GetEquipTarget()
@@ -91,7 +91,7 @@ function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 		if not e:GetHandler():IsRelateToEffect(e) then return end
 	local ec=e:GetHandler():GetEquipTarget()
 	local tc=ec:GetBattleTarget()
-	if ec and tc and ec:IsFaceup() and tc:IsFaceup() and tc:IsAttribute(e:GetLabel()) then
+	if ec and tc and ec:IsFaceup() and tc:IsFaceup() and tc:IsAttribute(e:GetLabelObject():GetLabel()) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -109,7 +109,7 @@ function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 end
 function c30000007.thcon(e,tp,eg,ep,ev,re,r,rp)
 	--local att=e:GetLabelObject():GetLabel()
-	return eg:GetFirst()==e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():GetBattleTarget():IsAttribute(e:GetLabel())
+	return eg:GetFirst()==e:GetHandler():GetEquipTarget() and e:GetHandler():GetEquipTarget():GetBattleTarget():IsAttribute(e:GetLabelObject():GetLabel())
 end
 function c30000007.thfilter(c)
 	return ((c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0x306)) or c:IsCode(33900648)) and c:IsAbleToHand()
@@ -152,6 +152,7 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
 
