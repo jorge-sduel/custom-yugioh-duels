@@ -36,7 +36,7 @@ function c30000007.initial_effect(c)
 	e4:SetCondition(c30000007.thcon)
 	e4:SetTarget(c30000007.thtg)
 	e4:SetOperation(c30000007.thop)
-	e3:SetLabelObject(e4)
+	--e3:SetLabelObject(e4)
 	c:RegisterEffect(e4)
 	--tohand
 	local e5=Effect.CreateEffect(c)
@@ -104,7 +104,7 @@ function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_PHASE+PHASE_DAMAGE_CAL)
 		e2:SetValue(700)
 		ec:RegisterEffect(e2)
-		e:GetLabelObject():SetLabel(att)
+		--e:GetLabelObject():SetLabel(att)
 	end
 end
 function c30000007.thcon(e,tp,eg,ep,ev,re,r,rp)
@@ -152,6 +152,7 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
 
