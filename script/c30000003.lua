@@ -90,7 +90,7 @@ function c30000003.operation(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(c30000003.filter,nil,e,tp)
     local catt=0x0
     local tc=g:GetFirst()
-    if c30000003.attcount(g)==1 then 
+    if --[[c30000003.attcount(g)==1]] Duel.IsExistingMatchingCard(c30000003.cofilter,tp,LOCATION_ONFIELD,0,1,nil) then 
         catt=tc:GetAttribute()
     end
     Duel.Hint(HINT_SELECTMSG,tp,562)
@@ -124,6 +124,7 @@ function c30000003.attcount(g)
 	if g:Filter(c30000003.attfilter,nil,ATTRIBUTE_DIVINE)~=nil then att=att+1 end
 	return att
 end
+
 
 
 
