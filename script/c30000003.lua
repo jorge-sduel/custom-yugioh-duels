@@ -48,7 +48,7 @@ function c30000003.attop(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetProperty(EFFECT_FLAG_COPY_INHERIT)
 			e1:SetCode(EFFECT_CHANGE_ATTRIBUTE)
 			e1:SetValue(att)
-			e1:SetReset(RESET_EVENT+0x1ff0000)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 			tc:RegisterEffect(e1)
 		end
 	else
@@ -124,4 +124,5 @@ function c30000003.attcount(g)
 	if g:Filter(c30000003.attfilter,nil,ATTRIBUTE_DIVINE)~=nil then att=att+1 end
 	return att
 end
+
 
