@@ -56,7 +56,7 @@ function c30000009.op(e,tp,eg,ep,ev,re,r,rp)
 		if rg:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WATER) then att=att+ATTRIBUTE_WATER end
 		if rg:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_FIRE) then att=att+ATTRIBUTE_FIRE end
 		if rg:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_WIND) then att=att+ATTRIBUTE_WIND end
-		if rg:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DEVINE) then att=att+ATTRIBUTE_DEVINE end
+		if rg:IsExists(Card.IsAttribute,1,nil,ATTRIBUTE_DIVINE) then att=att+ATTRIBUTE_DEVINE end
 		--act limit
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD)
@@ -108,4 +108,5 @@ function c30000009.desop(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsRelateToEffect(e) then
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
+
 end
