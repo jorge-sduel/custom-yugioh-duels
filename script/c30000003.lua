@@ -121,6 +121,7 @@ function c30000003.attcount(g)
 	if g:Filter(c30000003.attfilter,nil,ATTRIBUTE_FIRE)~=nil then att=att+1 end
 	if g:Filter(c30000003.attfilter,nil,ATTRIBUTE_EARTH)~=nil then att=att+1 end
 	if g:Filter(c30000003.attfilter,nil,ATTRIBUTE_WIND)~=nil then att=att+1 end
-	if g:Filter(c30000003.attfilter,nil,ATTRIBUTE_DEVINE)~=nil then att=att+1 end
+	if g:Filter(c30000003.attfilter,nil,ATTRIBUTE_DIVINE)~=nil then att=att+1 end
 	return att
 end
+
