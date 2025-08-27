@@ -24,7 +24,7 @@ function c30000007.initial_effect(c)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCondition(c30000007.atkcon)
 	e3:SetOperation(c30000007.atkup)
-	e1:SetLabelObject(e3)
+	e3:SetLabelObject(e1)
 	c:RegisterEffect(e3)
 	--search
 	local e4=Effect.CreateEffect(c)
@@ -36,7 +36,7 @@ function c30000007.initial_effect(c)
 	e4:SetCondition(c30000007.thcon)
 	e4:SetTarget(c30000007.thtg)
 	e4:SetOperation(c30000007.thop)
-	--e3:SetLabelObject(e4)
+	e4:SetLabelObject(e1)
 	c:RegisterEffect(e4)
 	--tohand
 	local e5=Effect.CreateEffect(c)
@@ -62,7 +62,7 @@ function c30000007.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SelectTarget(tp,c30000007.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)	
 	Duel.Hint(HINT_SELECTMSG,tp,563)
 	local att=Duel.AnnounceAttribute(tp,1,ATTRIBUTE_ALL)
-	e:GetLabelObject():SetLabel(att)
+	e:SetLabel(att)
 	Duel.SetTargetParam(att)
 	e:GetHandler():SetHint(CHINT_ATTRIBUTE,att)
 	Duel.SetOperationInfo(0,CATEGORY_EQUIP,e:GetHandler(),1,0,0)
@@ -152,6 +152,7 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
 
