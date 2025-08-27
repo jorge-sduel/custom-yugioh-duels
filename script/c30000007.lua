@@ -76,23 +76,27 @@ function c30000007.atktg(e,c)
 	return Duel.GetAttacker()==ec or Duel.GetAttackTarge()==ec
 end
 function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
-	local eqc=e:GetHandler():GetEquipTarget()
-	--local att=e:GetLabelObject():GetLabel()
+	--[[local eqc=e:GetHandler():GetEquipTarget()
+	local att=e:GetLabelObject():GetLabel()
 	local tc=eqc:GetBattleTarget()
 	if not e:GetHandler():IsRelateToEffect(e) then return end 
-		if eqc and tc and tc:IsFaceup() --[[and tc:IsAttribute(e:GetLabel())]] then
+		if eqc and tc and tc:IsFaceup() and tc:IsAttribute(e:GetLabel()) then]] 
+		if not e:GetHandler():IsRelateToEffect(e) then return end
+	local ec=e:GetHandler():GetEquipTarget()
+	local tc=ec:GetBattleTarget()
+	if ec and tc and ec:IsFaceup() and tc:IsFaceup() then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
 		e1:SetReset(RESET_PHASE+PHASE_DAMAGE_CAL)
 		e1:SetValue(700)
-		eqc:RegisterEffect(e1)
+		ec:RegisterEffect(e1)
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_UPDATE_DEFENCE)
 		e2:SetReset(RESET_PHASE+PHASE_DAMAGE_CAL)
 		e2:SetValue(700)
-		eqc:RegisterEffect(e2)
+		ec:RegisterEffect(e2)
 	end
 end
 function c30000007.thcon(e,tp,eg,ep,ev,re,r,rp)
@@ -140,6 +144,7 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
 
