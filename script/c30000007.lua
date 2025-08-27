@@ -22,7 +22,7 @@ function c30000007.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_PRE_DAMAGE_CALCULATE)
 	e3:SetRange(LOCATION_SZONE)
-	e3:SetCondition(s.atkcon)
+	e3:SetCondition(c30000007.atkcon)
 	e3:SetOperation(c30000007.atkup)
 	e1:SetLabelObject(e3)
 	c:RegisterEffect(e3)
@@ -77,7 +77,7 @@ function c30000007.atktg(e,c)
 	local ec=e:GetHandler():GetEquipTarget()
 	return Duel.GetAttacker()==ec or Duel.GetAttackTarge()==ec
 end
-function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
+function c30000007.atkcon(e,tp,eg,ep,ev,re,r,rp)
 	local ec=e:GetHandler():GetEquipTarget()
 	local tc=ec:GetBattleTarget()
 	return ec and tc and tc:IsFaceup() and tc:IsControler(1-tp) and tc:IsAttribute(e:GetLabel())
@@ -151,6 +151,7 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
 
