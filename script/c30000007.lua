@@ -24,7 +24,7 @@ function c30000007.initial_effect(c)
 	e3:SetRange(LOCATION_SZONE)
 	e3:SetCondition(c30000007.atkcon)
 	e3:SetOperation(c30000007.atkup)
-	e1:SetLabelObject(e3,e4)
+	e1:SetLabelObject(e3+e4)
 	c:RegisterEffect(e3)
 	--search
 	local e4=Effect.CreateEffect(c)
@@ -151,6 +151,7 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
 
