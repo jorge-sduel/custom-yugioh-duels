@@ -42,7 +42,7 @@ function c30000003.attop(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Hint(HINT_SELECTMSG,tp,562)
 			local catt=tc:GetAttribute()
             if catt~=0x1 and catt~=0x2 and catt~=0x4 and catt~=0x8 and catt~=0x10 and catt~=0x20 and catt~=0x40 then catt=0x0 end
-			local att=tc:AnnounceAnotherAttribute(tp)
+			local att=tc:AnnounceAnotherAttribute(tp,1,ATTRIBUTE_ALL)
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetProperty(EFFECT_FLAG_COPY_INHERIT)
@@ -124,5 +124,6 @@ function c30000003.attcount(g)
 	if g:Filter(c30000003.attfilter,nil,ATTRIBUTE_DIVINE)~=nil then att=att+1 end
 	return att
 end
+
 
 
