@@ -80,7 +80,7 @@ function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 	--local att=e:GetLabelObject():GetLabel()
 	local tc=eqc:GetBattleTarget()
 	if not e:GetHandler():IsRelateToEffect(e) then return end 
-		if eqc and tc and tc:IsFaceup() and tc:IsAttribute(e:GetLabel()) then
+		if eqc and tc and tc:IsFaceup() --[[and tc:IsAttribute(e:GetLabel())]] then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -140,6 +140,7 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
 
