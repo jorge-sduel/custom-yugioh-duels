@@ -85,7 +85,7 @@ function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 		if not e:GetHandler():IsRelateToEffect(e) then return end
 	local ec=e:GetHandler():GetEquipTarget()
 	local tc=ec:GetBattleTarget()
-	if ec and tc and ec:IsFaceup() and tc:IsFaceup() then
+	if ec and tc and ec:IsFaceup() and tc:IsFaceup() and tc:IsAttribute(e:GetLabel()) then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
@@ -94,7 +94,7 @@ function c30000007.atkup(e,tp,eg,ep,ev,re,r,rp)
 		ec:RegisterEffect(e1)
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_SINGLE)
-		e2:SetCode(EFFECT_UPDATE_DEFENCE)
+		e2:SetCode(EFFECT_UPDATE_DEFENSE)
 		e2:SetReset(RESET_PHASE+PHASE_DAMAGE_CAL)
 		e2:SetValue(700)
 		ec:RegisterEffect(e2)
@@ -145,6 +145,7 @@ function c30000007.retop(e,tp,eg,ep,ev,re,r,rp)
 	end
 
 end
+
 
 
 
