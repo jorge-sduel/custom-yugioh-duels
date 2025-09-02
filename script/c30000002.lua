@@ -36,7 +36,7 @@ function c30000002.initial_effect(c)
 	e4:SetCondition(c30000002.sdcon)
 	c:RegisterEffect(e4)
 end
-s.listed_names={CARD_CLEAR_WORLD}
+c30000002.listed_names={CARD_CLEAR_WORLD}
 function c30000002.free(e,re,rp,val)
 	if Duel.GetCurrentPhase()==PHASE_END and re and re:GetHandler():IsCode(33900648) and re:IsHasType(EFFECT_TYPE_CONTINUOUS) then
 		return 0
@@ -117,5 +117,6 @@ function c30000002.sdcon(e)
 	return Duel.IsExistingMatchingCard(c30000002.sdfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 
 end
+
 
 
