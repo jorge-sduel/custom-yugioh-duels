@@ -30,6 +30,7 @@ function c30000013.initial_effect(c)
 	e3:SetOperation(c30000013.spop)
 	c:RegisterEffect(e3)
 end
+c30000013.listed_names={CARD_CLEAR_WORLD}
 function c30000013.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return c:IsDiscardable() end
@@ -87,4 +88,5 @@ function c30000013.spop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetReset(RESET_EVENT+0x1fe0000+RESET_PHASE+PHASE_STANDBY,2)
 		c:RegisterEffect(e2)
 	end
+
 end
