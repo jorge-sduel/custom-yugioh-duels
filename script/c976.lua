@@ -15,7 +15,7 @@ s.Fallen_Angel=true
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e3:SetCondition(s.syncon)
+	--e3:SetCondition(s.syncon)
 	e3:SetCode(EFFECT_HAND_SYNCHRO)
 	e3:SetLabel(id)
 	e3:SetValue(s.synval)
