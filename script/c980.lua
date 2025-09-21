@@ -44,7 +44,7 @@ function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsSynchroSummoned() then
 		local ct=c:GetMaterialCount()
-		c:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD_DISABLE,0,0,ct*200)
+		c:RegisterFlagEffect(id,RESET_EVENT|RESETS_STANDARD_DISABLE,0,0,ct*300)
 	end
 end
 function s.xyzfilter(c,mg)
