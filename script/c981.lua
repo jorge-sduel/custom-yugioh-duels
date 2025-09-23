@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 s.Fallen_Angel=true
 		--xyz summon
-	aux.AddXyzProcedure(c,nil,3,3)
+	Xyz.AddProcedure(c,nil,3,3)
 	c:EnableReviveLimit()
 	--spsummon
 	local e1=Effect.CreateEffect(c)
