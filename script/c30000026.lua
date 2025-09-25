@@ -80,5 +80,6 @@ function c30000026.actcon(e)
 	local a=Duel.GetAttacker()
 	local d=Duel.GetAttackTarget()
     local att=e:GetLabel()
-	return (a and c30000026.cfilter(a,tp,d,att)) or (d and c30000026.cfilter(d,tp,a,att))
+	return (a and a:IsRelateToBattle() and c30000026.cfilter(a,tp,d,att)) or (d and b:IsRelateToBattle() and c30000026.cfilter(d,tp,a,att))
 end
+
