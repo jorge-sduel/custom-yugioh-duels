@@ -46,32 +46,17 @@ function s.scop(e,tp,eg,ep,ev,re,r,rp)
 		local sg=g:Select(tp,1,1,nil)
 		local sc=sg:GetFirst()
 		Synchro.Send=2
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD-RESET_TOFIELD)
-		e1:SetOperation(s.regop)
-		sc:RegisterEffect(e1)
 		Duel.SynchroSummon(tp,sc,nil,mg)
 	end
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	local rc=e:GetOwner()
 	local c=e:GetHandler()
-	local e1=Effect.CreateEffect(rc)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_DISABLE)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-	c:RegisterEffect(e1,true)
-	local e2=Effect.CreateEffect(rc)
-	e2:SetType(EFFECT_TYPE_SINGLE)
-	e2:SetCode(EFFECT_DISABLE_EFFECT)
-	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-	c:RegisterEffect(e2,true)
+	
 	e:Reset()
 end
 function s.filter(c,e,tp)
-	return c:IsType(TYPE_TUNNER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsType(TYPE_TUNER) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.filter(chkc,e,tp) end
