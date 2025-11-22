@@ -6,7 +6,7 @@ function c246.initial_effect(c)
 	c:EnableReviveLimit()
 	--atk down
 	local e1=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(246,0))
+	e1:SetDescription(aux.Stringid(246,0))
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
