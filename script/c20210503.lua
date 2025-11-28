@@ -43,7 +43,7 @@ function s.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(s.filter),tp,LOCATION_MZONE,0,nil)
+	local g=Duel.GetMatchingGroup(aux.FaceupFilter(s.filter),tp,LOCATION_MZONE,0,nil)
 	local tc=g:GetFirst()
 	for tc in aux.Next(g) do
 		local e1=Effect.CreateEffect(e:GetHandler())
@@ -59,3 +59,4 @@ function s.negop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoGrave(g2,REASON_EFFECT+REASON_RETURN)
 	end
 end
+
