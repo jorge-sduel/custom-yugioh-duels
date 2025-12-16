@@ -48,7 +48,7 @@ function s.atktg(e,c)
 	return c:GetCounter(0x1041)>0
 end
 function s.atkval(e,c)
-	return Duel.GetCounter(0,1,1,0x1041)*200
+	return Duel.GetCounter(0,1,1,0x1041)*-200
 end
 function s.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,1,0x1041,2,REASON_COST) end
