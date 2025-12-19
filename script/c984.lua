@@ -26,7 +26,7 @@ function s.filter1(c,e,tp)
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
 	return #pg<=1 and c:IsFaceup() and (rk>0 or c:IsStatus(STATUS_NO_LEVEL))
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,rk+1,e,tp,c,pg)
-		--[[and not Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_MZONE,0,1,nil,rk)]]
+		and not Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_MZONE,0,1,nil,rk)
 end
 function s.filter2(c,rk,e,tp,mc,pg)
 	if c.rum_limit and not c.rum_limit(mc,e) then return false end
@@ -35,7 +35,7 @@ function s.filter2(c,rk,e,tp,mc,pg)
 		and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 end
 function s.filter3(c,rk)
-	return c:IsFaceup() and c:IsType(TYPE_XYZ) and c:GetRank()>rk
+	return c:IsFaceup() and c:IsType(TYPE_XYZ)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and s.filter1(chkc,e,tp) end
