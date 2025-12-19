@@ -26,7 +26,7 @@ function s.filter1(c,e,tp)
 	local pg=aux.GetMustBeMaterialGroup(tp,Group.FromCards(c),tp,nil,nil,REASON_XYZ)
 	return #pg<=1 and c:IsFaceup() and (rk>0 or c:IsStatus(STATUS_NO_LEVEL))
 		and Duel.IsExistingMatchingCard(s.filter2,tp,LOCATION_EXTRA,0,1,nil,rk,e,tp,c,pg)
-		and not Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_MZONE,0,1,nil,rk) 
+		--[[and not Duel.IsExistingMatchingCard(s.filter3,tp,LOCATION_MZONE,0,1,nil,rk)]]
 end
 function s.filter2(c,rk,e,tp,mc,pg)
 	if c.rum_limit and not c.rum_limit(mc,e) then return false end
