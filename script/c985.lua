@@ -29,7 +29,7 @@ s.Fallen_Angel=true
 	c:RegisterEffect(e5)
 end
 function s.chcon1(e,tp,eg,ep,ev,re,r,rp)
-	return ep==1-tp and re:IsActiveType(TYPE_TRAP)
+	return ep==1-tp and re:IsActiveType(TYPE_MONSTER)
 end
 function s.chop1(e,tp,eg,ep,ev,re,r,rp)
 	local g=Group.CreateGroup()
