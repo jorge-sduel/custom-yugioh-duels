@@ -45,7 +45,7 @@ function s.repop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_SET_ATTACK)
 		e1:SetReset(RESETS_STANDARD_DISABLE_PHASE_END)
 		e1:SetValue(0)
-		c:RegisterEffect(e1)
+		e:GetHandler():RegisterEffect(e1)
 	end
 end
 function s.spfilter(c,e,tp)
