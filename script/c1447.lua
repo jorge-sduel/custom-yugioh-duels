@@ -1,6 +1,7 @@
 --Dark Pendulum Angel Knight
 if not REVERSEPENDULUM_IMPORTED then Duel.LoadScript("proc_reverse_pendulum.lua") end
 function c1447.initial_effect(c)
+		c:EnableReviveLimit()
    RPendulum.AddProcedure(c)
 c:AddSetcodesRule(1447,false,0xbb00)
 --
@@ -101,4 +102,5 @@ function c1447.splimit(e,se,sp,st)
 	local sc=se:GetHandler()
 	return sc:IsType(TYPE_PENDULUM)
 end
+
 
