@@ -85,7 +85,7 @@ function c1447.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function c1447.atkval(e,c)
-	return Duel.GetMatchingGroupCount(c1447.dmfilter,tp,LOCATION_EXTRA,0,nil)*1000
+	return Duel.GetMatchingGroupCount(c1447.dmfilter,c:GetControler(),LOCATION_EXTRA,0,nil)*1000
 end
 function c1447.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
@@ -101,3 +101,4 @@ function c1447.splimit(e,se,sp,st)
 	local sc=se:GetHandler()
 	return sc:IsType(TYPE_PENDULUM)
 end
+
