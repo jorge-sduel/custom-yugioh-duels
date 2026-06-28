@@ -37,6 +37,11 @@ function s.initial_effect(c)
 	e4:SetTargetRange(1,0)
 	e4:SetValue(s.val)
 	c:RegisterEffect(e4)
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetCode(EFFECT_ATTACK_ALL)
+	e5:SetValue(1)
+	c:RegisterEffect(e5)
 end
 s.listed_series={0x10ec}
 function s.matfilter(c,lc,sumtype,tp)
