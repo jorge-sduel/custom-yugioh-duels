@@ -40,6 +40,7 @@ function s.initial_effect(c)
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
 	e5:SetCode(EFFECT_ATTACK_ALL)
+	e5:SetTarget(s.atktg)
 	e5:SetValue(1)
 	c:RegisterEffect(e5)
 end
@@ -72,4 +73,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
+end
+function s.atktg(e,c)
+	return c:IsType(TYPE_PENDULUM)
 end
