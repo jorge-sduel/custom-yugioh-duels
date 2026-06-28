@@ -84,8 +84,10 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetCode(EFFECT_DRAW_COUNT)
 	e1:SetTargetRange(1,0)
 	e1:SetReset(RESET_PHASE+PHASE_DRAW)
-	e1:SetValue(Duel.GetDrawCount(tp)+((5-Duel.GetDrawCount(tp))-Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)))
-	Duel.RegisterEffect(e1,tp)
+			if Duel.GetFieldGroupCount(tp,0,LOCATION_HAND)<5 then
+	e1:SetValue(5-Duel.GetFieldGroupCount(tp,LOCATION_HAND,0))
+	else e1:SetValue(Duel.GetDrawCount(tp)) end
+		Duel.RegisterEffect(e1,tp)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and chkc~=e:GetHandler() end
