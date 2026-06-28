@@ -85,7 +85,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	e1:SetTargetRange(1,0)
 	e1:SetReset(RESET_PHASE+PHASE_DRAW)
 			if Duel.GetDrawCount(tp)+Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)<5 then
-	e1:SetValue(5-(Duel.GetDrawCount(tp)+Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)))
+	e1:SetValue(5-Duel.GetFieldGroupCount(tp,LOCATION_HAND,0))
 	else e1:SetValue(Duel.GetDrawCount(tp)) end
 		Duel.RegisterEffect(e1,tp)
 end
