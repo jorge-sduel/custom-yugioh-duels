@@ -51,6 +51,16 @@ function s.initial_effect(c)
 	e6:SetTarget(s.atktg)
 	e6:SetValue(1)
 	c:RegisterEffect(e6)
+		--target
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_FIELD)
+	e7:SetRange(LOCATION_MZONE)
+	e7:SetTargetRange(LOCATION_MZONE,0)
+	e7:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
+	e7:SetCode(EFFECT_CANNOT_BE_BATTLE_TARGET)
+	e7:SetTarget(s.tglimit)
+	e7:SetValue(1)
+	c:RegisterEffect(e7)
 end
 s.listed_series={0x10ec}
 function s.matfilter(c,lc,sumtype,tp)
@@ -84,4 +94,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atktg(e,c)
 	return c:IsType(TYPE_PENDULUM)
+end
+function s.tglimit(e,c)
+	return c~=e:GetHandler()
 end
