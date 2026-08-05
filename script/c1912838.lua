@@ -129,7 +129,7 @@ function s.rmcon(e,c)
 	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,2061963),e:GetHandlerPlayer(),LOCATION_ONFIELD,0,1,nil)
 end
 function s.millcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:GetFirst():GetControler()==1-tp and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,2061963),tp,LOCATION_ONFIELD,0,1,nil)
+	return eg:GetFirst():GetControler()==1-tp and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,2061963),tp,LOCATION_ONFIELD,0,1,nil) and not (re and re:GetHandler():IsCode(id))
 end
 function s.milltg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
