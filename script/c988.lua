@@ -83,13 +83,13 @@ function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,1,0,0)
 	Duel.SetPossibleOperationInfo(0,CATEGORY_TOGRAVE,nil,1,1-tp,LOCATION_MZONE)
 end
-function s.rfilter(c,code)
-	return c:IsRace(code) and c:IsAbleToGrave()
+function s.rfilter(c,rc)
+	return c:IsRace(rc) and c:IsAbleToGrave()
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsFaceup() and tc:IsRelateToEffect(e) and Duel.Remove(tc,POS_FACEUP,REASON_EFFECT)>0 then
-		local rg=Duel.GetMatchingGroup(s.rfilter,tp,0,LOCATION_MZONE,tc,tc:GetRace())
+		local rg=Duel.GetMatchingGroup(s.rfilter,tp,0,LOCATION_MZONE|LOCATION_GRAVE,tc,tc:GetRace())
 		if Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_REMOVED) and #rg>0 then
 			Duel.BreakEffect()
 			Duel.SendtoGrave(rg,REASON_EFFECT)
