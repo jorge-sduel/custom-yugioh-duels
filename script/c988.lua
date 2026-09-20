@@ -37,6 +37,7 @@ function s.initial_effect(c)
 	local e4=Effect.CreateEffect(c)
 	e4:SetCategory(CATEGORY_REMOVE)
 	e4:SetType(EFFECT_TYPE_QUICK_O)
+	e4:SetCode(EVENT_FREE_CHAIN)
 	e4:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetCountLimit(1,id)
@@ -63,6 +64,9 @@ function s.contactop(g)
 end
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_MZONE|LOCATION_GRAVE,LOCATION_GRAVE|LOCATION_MZONE,nil)*500
+end
+function s.filter(c)
+	return c:IsRace(RACE_DRAGON) and (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup())
 end
 --cannot negate summon
 function s.effcon(e)
