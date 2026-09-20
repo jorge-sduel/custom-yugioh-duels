@@ -62,7 +62,7 @@ function s.contactop(g)
 	Duel.Release(g,REASON_COST|REASON_MATERIAL)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),c:GetControler()-1,LOCATION_GRAVE|LOCATION_MZONE,nil)*500
+	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),LOCATION_MZONE|LOCATION_GRAVE,LOCATION_GRAVE|LOCATION_MZONE,nil)*500
 end
 --cannot negate summon
 function s.effcon(e)
