@@ -42,7 +42,7 @@ function s.initial_effect(c)
 end
 s.listed_names={CARD_BUSTER_BLADER}
 function s.matcheck(g,lc,sumtype,tp)
-	return g:IsExists(Card.IsSummonCode,1,nil,CARD_BUSTER_BLADER,lc,sumtype,tp)
+	return g:IsExists(Card.IsSummonCode,1,nil,lc,sumtype,tp,CARD_BUSTER_BLADER)
 end
 function s.val(e,c)
 	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),0,LOCATION_GRAVE|LOCATION_MZONE,nil)*500
