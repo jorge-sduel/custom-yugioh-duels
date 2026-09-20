@@ -70,5 +70,5 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.efilter(e,te)
-	return te:IsActiveType(TYPE_MONSTER) and te:IsRace(RACE_DRAGON)
+	return te:IsActiveType(TYPE_MONSTER) and te:GetHandler():IsRace(RACE_DRAGON)
 end
