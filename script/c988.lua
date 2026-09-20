@@ -4,7 +4,14 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 	Fusion.AddProcMixN(c,true,true,aux.FilterBoolFunctionEx(Card.IsRace,RACE_DRAGON),2,aux.FilterBoolFunctionEx(Card.IsSetCard,SET_DESTRUCTION_SWORD),2)
 	Fusion.AddContactProc(c,s.contactfil,s.contactop,s.splimit,nil,nil,nil,false)
-		--atkup
+	local ea=Effect.CreateEffect(c)
+	ea:SetType(EFFECT_TYPE_SINGLE)
+	ea:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	ea:SetCode(EFFECT_UPDATE_DEFENSE)
+	ea:SetRange(LOCATION_MZONE)
+	ea:SetValue(s.val)
+	c:RegisterEffect(ea)
+	--atkup
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
@@ -55,7 +62,7 @@ function s.contactop(g)
 	Duel.Release(g,REASON_COST|REASON_MATERIAL)
 end
 function s.val(e,c)
-	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),1-c:GetControler(),LOCATION_GRAVE|LOCATION_MZONE,nil)*500
+	return Duel.GetMatchingGroupCount(s.filter,c:GetControler(),c:GetControler()-1,LOCATION_GRAVE|LOCATION_MZONE,nil)*500
 end
 --cannot negate summon
 function s.effcon(e)
