@@ -86,7 +86,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_CHANGE_ATTRIBUTE)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		e1:SetValue(tc:GetAttribute())
-		g:GetFirs():RegisterEffect(e1)
+		g:GetFirst():RegisterEffect(e1)
 	end
 end
 function s.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
