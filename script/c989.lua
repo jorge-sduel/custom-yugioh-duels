@@ -53,10 +53,10 @@ function s.cfilter(c,e,tp,ft)
 		if val and val(te,c,e,0) then att=val(te,c,e,1) end
 	end
 	return c:IsMonsterCard() and c:IsAbleToRemoveAsCost()
-		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil,rc,e,tp)
+		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,nil,e,tp)
 end
-function s.spfilter(c,rc,e,tp)
-	return c:IsRace(rc) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+function s.spfilter(c,e,tp)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
@@ -78,7 +78,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc or not tc:IsLocation(LOCATION_REMOVED) or not tc:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,1,nil,tc:GetRace(),e,tp)
+	local g=Duel.SelectMatchingCard(tp,s.spfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,1,nil,e,tp)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
 		local e1=Effect.CreateEffect(e:GetHandler())
@@ -86,7 +86,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_CHANGE_ATTRIBUTE)
 		e1:SetReset(RESET_EVENT|RESETS_STANDARD)
 		e1:SetValue(tc:GetAttribute())
-		g:RegisterEffect(e1)
+		g:GetFirs():RegisterEffect(e1)
 	end
 end
 function s.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
