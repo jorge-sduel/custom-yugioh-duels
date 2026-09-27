@@ -7,7 +7,7 @@ function s.initial_effect(c)
 end
 s.listed_series={SET_SHADDOLL}
 function s.fextra(e,tp,mg)
-if Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_FZONE,0,1,81788994) then
+if Duel.IsExistingMatchingCard(Card.IsSummonCode,tp,LOCATION_FZONE,0,1,81788994) then
 		return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsAbleToDeck),tp,LOCATION_GRAVE,LOCATION_GRAVE,nil)
 	end
 	return Duel.GetMatchingGroup(Fusion.IsMonsterFilter(Card.IsFaceup,Card.IsAbleToDeck),tp,LOCATION_REMOVED,0,nil)
