@@ -36,7 +36,7 @@ function s.posop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.repfilter(c,tp)
-	return c:IsFaceup() and c:IsCode(12341414) and c:IsOnField() and not c:IsReason(REASON_REPLACE) 
+	return c:IsFaceup() and c:IsOnField() and not c:IsReason(REASON_REPLACE) 
 		and c:IsControler(tp) and c:IsReason(REASON_EFFECT)
 end
 function s.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
