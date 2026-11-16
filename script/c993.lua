@@ -122,6 +122,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g==0 or Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)==0 then return end
 	local og=Duel.GetOperatedGroup()
 	if not og:IsExists(Card.IsLocation,1,nil,LOCATION_DECK|LOCATION_EXTRA) then return end
-	if then Duel.ShuffleDeck(p) end
+	Duel.ShuffleDeck(p)
 	Duel.BreakEffect()
 end
