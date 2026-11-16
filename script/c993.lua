@@ -103,9 +103,9 @@ function s.recop2(e,tp,eg,ep,ev,re,r,rp)
 		if #g>1 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 			g=g:Select(tp,1,1,nil)
-Duel.CheckLPCost(1-tp,g:GetAttack()/2)
+Duel.CheckLPCost(1-tp,g:GetFirst():GetAttack()/2)
 		end
-		Duel.PayLPCost(1-tp,g:GetAttack()/2)
+		Duel.PayLPCost(1-tp,g:GetFirst():GetAttack()/2)
 	end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -117,11 +117,11 @@ function s.filter2(c,p)
 	return c:IsLocation(LOCATION_DECK) and c:IsControler(p)
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
+	--local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,LOCATION_HAND|LOCATION_GRAVE,LOCATION_HAND|LOCATION_GRAVE,nil)
-	if #g==0 or Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)==0 then return end
-	local og=Duel.GetOperatedGroup()
-	if not og:IsExists(Card.IsLocation,1,nil,LOCATION_DECK|LOCATION_EXTRA) then return end
+	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
+	--local og=Duel.GetOperatedGroup()
+	--if not og:IsExists(Card.IsLocation,1,nil,LOCATION_DECK|LOCATION_EXTRA) then return end
 	Duel.ShuffleDeck(p)
-	Duel.BreakEffect()
+	--Duel.BreakEffect()
 end
