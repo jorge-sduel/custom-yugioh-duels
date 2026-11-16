@@ -47,7 +47,7 @@ function s.initial_effect(c)
 	--Activate
 	local e6=Effect.CreateEffect(c)
 	e6:SetCategory(CATEGORY_TODECK+CATEGORY_DRAW)
-	e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e6:SetCode(EVENT_SPSUMMON_SUCCESS)
 	--e6:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e6:SetCountLimit(1,id)
