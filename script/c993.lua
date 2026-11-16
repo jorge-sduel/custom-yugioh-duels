@@ -47,9 +47,9 @@ function s.initial_effect(c)
 	--Activate
 	local e6=Effect.CreateEffect(c)
 	e6:SetCategory(CATEGORY_TODECK+CATEGORY_DRAW)
- e6:SetType(EFFECT_TYPE_SINGLE)
+	e6:SetType(EFFECT_TYPE_SINGLE)
 	e6:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e6:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
+	--e6:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e6:SetCountLimit(1,id)
 	e6:SetTarget(s.target)
 	e6:SetOperation(s.activate)
@@ -103,9 +103,9 @@ function s.recop2(e,tp,eg,ep,ev,re,r,rp)
 		if #g>1 then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 			g=g:Select(tp,1,1,nil)
-Duel.CheckLPCost(1-tp,tc:GetAttack()/2)
+Duel.CheckLPCost(1-tp,g:GetAttack()/2)
 		end
-		Duel.PayLPCost(1-tp,rec)
+		Duel.PayLPCost(1-tp,g:GetAttack()/2)
 	end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -122,6 +122,6 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 	if #g==0 or Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)==0 then return end
 	local og=Duel.GetOperatedGroup()
 	if not og:IsExists(Card.IsLocation,1,nil,LOCATION_DECK|LOCATION_EXTRA) then return end
-	if og:IsExists(s.filter2,1,nil,p) then Duel.ShuffleDeck(p) end
+	if then Duel.ShuffleDeck(p) end
 	Duel.BreakEffect()
 end
