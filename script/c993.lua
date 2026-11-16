@@ -52,7 +52,7 @@ function s.initial_effect(c)
 	--e6:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
 	e6:SetCountLimit(1,id)
 	e6:SetTarget(s.target)
-	e6:SetOperation(s.activate)
+	e6:SetOperation(s.operation)
 	c:RegisterEffect(e6)
 end
 s.listed_series={SET_SHADDOLL}
