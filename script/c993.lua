@@ -109,19 +109,11 @@ Duel.CheckLPCost(1-tp,g:GetFirst():GetAttack()/2)
 	end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsAbleToDeck,tp,LOCATION_HAND|LOCATION_GRAVE,LOCATION_GRAVE|LOCATION_HAND,1,e:GetHandler()) end
-	Duel.SetTargetPlayer(tp)
-	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,tp,LOCATION_HAND|LOCATION_GRAVE)
+	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND|LOCATION_GRAVE,0)>0 end
+	local g=Duel.GetFieldGroup(tp,LOCATION_HAND|LOCATION_GRAVE,0)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
-function s.filter2(c,p)
-	return c:IsLocation(LOCATION_DECK) and c:IsControler(p)
-end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	--local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,LOCATION_HAND|LOCATION_GRAVE,LOCATION_HAND|LOCATION_GRAVE,nil)
+function s.operation(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetFieldGroup(tp,LOCATION_HAND|LOCATION_GRAVE,0)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
-	--local og=Duel.GetOperatedGroup()
-	--if not og:IsExists(Card.IsLocation,1,nil,LOCATION_DECK|LOCATION_EXTRA) then return end
-	Duel.ShuffleDeck(p)
-	--Duel.BreakEffect()
 end
