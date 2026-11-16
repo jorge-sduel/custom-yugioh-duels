@@ -109,11 +109,11 @@ Duel.CheckLPCost(1-tp,g:GetFirst():GetAttack()/2)
 	end
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND|LOCATION_GRAVE,0)>0 end
-	local g=Duel.GetFieldGroup(tp,LOCATION_HAND|LOCATION_GRAVE,0)
+	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_HAND|LOCATION_GRAVE,LOCATION_HAND|LOCATION_GRAVE)>0 end
+	local g=Duel.GetFieldGroup(tp,LOCATION_HAND|LOCATION_GRAVE,LOCATION_HAND|LOCATION_GRAVE)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,#g,0,0)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetFieldGroup(tp,LOCATION_HAND|LOCATION_GRAVE,0)
+	local g=Duel.GetFieldGroup(tp,LOCATION_HAND|LOCATION_GRAVE,LOCATION_HAND|LOCATION_GRAVE)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 end
