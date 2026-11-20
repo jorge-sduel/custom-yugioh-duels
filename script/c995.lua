@@ -51,6 +51,15 @@ function s.initial_effect(c)
 	e6:SetTarget(s.sptg)
 	e6:SetOperation(s.spop)
 	c:RegisterEffect(e6)
+		--indes
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_FIELD)
+	e7:SetCode(EFFECT_INDESTRUCTABLE)
+	e7:SetRange(LOCATION_MZONE)
+	e7:SetTargetRange(LOCATION_MZONE,0)
+	e7:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,SET_SHADDOLL))
+	e7:SetValue(s.indesval)
+	c:RegisterEffect(e7)
 end
 s.listed_series={SET_SHADDOLL}
 s.material_setcode=SET_SHADDOLL
