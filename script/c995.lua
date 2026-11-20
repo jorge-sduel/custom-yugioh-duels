@@ -67,7 +67,7 @@ function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
-	local rc=tc:GetReasonCard()
+	local rc=tc:GetFirst():GetReasonCard()
 	return rc:IsSetCard(SET_SHADDOLL) and tc:IsPreviousControler(1-tp)
 end
 function s.spfilter(c,e,tp)
