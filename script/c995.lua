@@ -68,8 +68,7 @@ end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	local rc=tc:GetReasonCard()
-	return #eg==1 and rc:IsControler(tp) and rc:IsSetCard(SET_SHADDOLL) and tc:IsPreviousControler(1-tp)
-		and tc:IsMonster() and tc:IsReason(REASON_BATTLE+REASON_EFFECT) and tc:IsLocation(LOCATION_GRAVE)
+	return rc:IsControler(tp) and rc:IsSetCard(SET_SHADDOLL) and tc:IsPreviousControler(1-tp)
 end
 function s.spfilter(c,e,tp)
 	return c:IsSetCard(SET_SHADDOLL) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
