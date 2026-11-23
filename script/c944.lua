@@ -30,7 +30,7 @@ function s.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1)
-	e3:SetCost(Cost.Detach(1,1,nil))
+	e3:SetCost(Cost.DetachFromSelf(1,1,nil))
 	e3:SetOperation(s.operation2)
 	c:RegisterEffect(e3,false,REGISTER_FLAG_DETACH_XMAT)
 end
