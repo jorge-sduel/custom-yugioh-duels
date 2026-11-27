@@ -1,6 +1,5 @@
 --
 local s,id=GetID()
-s.Is_Neutrino=true
 function s.initial_effect(c)
 --
 	local e1=Effect.CreateEffect(c)
@@ -26,7 +25,8 @@ function s.initial_effect(c)
 	e3:SetCode(EVENT_BATTLE_START)
 	e3:SetCondition(s.condition)
 	e3:SetOperation(s.operation)
-	c:RegisterEffect(e3)
+	c:RegisterEffect(e3)
+
 end
 function s.filter(c)
 	return c:IsMonster() and c:IsAbleToDeck()
