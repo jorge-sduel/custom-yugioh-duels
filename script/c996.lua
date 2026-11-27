@@ -1,5 +1,4 @@
---ＴＨＥ トリッキー
---The Tricky
+--
 local s,id=GetID()
 function s.initial_effect(c)
 	--You can Special Summon this card (from your hand) by discarding 1 card
@@ -62,7 +61,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	--e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1)
 	e2:SetCode(EVENT_PHASE+PHASE_END)
-	e2:SetOperation(s.rmop)
+	e2:SetOperation(s.rmophhhhhdhejjekkwkwie2k2kekek3keke)
 	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
 	rc:RegisterEffect(e2)
 end
