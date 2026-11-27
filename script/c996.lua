@@ -49,21 +49,18 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	end
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
 	return r==REASON_XYZ
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=c:GetReasonCard()
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	--e2:SetRange(LOCATION_MZONE)
-	e2:SetCountLimit(1)
-	e2:SetCode(EVENT_PHASE+PHASE_END)
-	e2:SetOperation(s.rmophhhhhdhejjekkwkwie2k2kekek3keke)
-	e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_UPDATE_ATTACK)
+	e1:SetValue(rc:GetOverlayCount()*500)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	rc:RegisterEffect(e1)
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_UPDATE_DEFENSE)
 	rc:RegisterEffect(e2)
-end
-function s.rmop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT)
 end
