@@ -52,7 +52,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp,c)
 end
 function s.con(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return c:IsLocation(LOCATION_GRAVE) and r==REASON_XYZ
+	return r==REASON_XYZ
 end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
