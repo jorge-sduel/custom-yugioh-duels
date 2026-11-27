@@ -22,6 +22,12 @@ function s.initial_effect(c)
 	e2:SetCondition(s.con)
 	e2:SetOperation(s.op)
 	c:RegisterEffect(e2)
+	--
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(511001225)
+	e3:SetValue(1)
+	c:RegisterEffect(e3)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
