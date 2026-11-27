@@ -19,7 +19,7 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e2:SetCode(EVENT_BE_MATERIAL)
 	e2:SetCondition(s.con)
-	e2:SetOperation(s.op)
+	e2:SetOperation(s.opjffhjkgcgh)
 	c:RegisterEffect(e2)
 	--
 	local e3=Effect.CreateEffect(c)
