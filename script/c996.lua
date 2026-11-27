@@ -69,3 +69,6 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetReset(RESETS_STANDARD_PHASE_END)
 	rc:RegisterEffect(e2)
 end
+function s.rmop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_EFFECT)
+end
